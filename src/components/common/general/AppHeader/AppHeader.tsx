@@ -106,7 +106,7 @@ const AppHeader = ({
                         </Link>
                         <Avatar<"a">
                             as="a"
-                            href="https://github.com/jkrishna31" target="_blank"
+                            href="https://github.com/jkrishna31/webkemy_react" target="_blank"
                             title="Source Code" aria-label="write"
                             className={styles.source_code}
                         >
