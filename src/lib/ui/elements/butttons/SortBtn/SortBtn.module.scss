@@ -1,0 +1,45 @@
+.btn {
+  padding: .8rem;
+  color: var(--fg-s-alt);
+
+  svg {
+    width: 1.7rem;
+    height: 1.7rem;
+    stroke-width: .2rem;
+  }
+
+  &[data-sort="+"] {
+
+    path:nth-child(1),
+    path:nth-child(2) {
+      color: var(--fg-t);
+    }
+
+    path:nth-child(3),
+    path:nth-child(4) {
+      color: var(--fg-p);
+    }
+  }
+
+  &[data-sort="-"] {
+
+    path:nth-child(1),
+    path:nth-child(2) {
+      color: var(--fg-p);
+    }
+
+    path:nth-child(3),
+    path:nth-child(4) {
+      color: var(--fg-t);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .btn {
+    & svg {
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+  }
+}

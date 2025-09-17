@@ -1,0 +1,31 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &>[data-avatar="true"]:not(:nth-of-type(1)) {
+    margin-left: -2rem;
+  }
+
+  &>[data-avatar="true"]:hover {
+    animation: bounce .3s ease-out forwards;
+  }
+
+  &:hover [data-avatar="true"] {
+    margin-left: 0;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    background-blend-mode: multiply;
+  }
+
+  50% {
+    z-index: 9999999;
+  }
+
+  100% {
+    background-blend-mode: normal;
+  }
+}

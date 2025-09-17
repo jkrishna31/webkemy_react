@@ -1,0 +1,69 @@
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--gray-11-70);
+  // box-shadow: inset 0 0 10rem 6rem var(--bg-p);
+  z-index: var(--zi-drawer);
+  animation: slide-fade-in .24s ease;
+}
+
+@keyframes slide-fade-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}
+
+.ctrl_btn {
+  border-radius: 50%;
+  min-width: 4rem;
+  min-height: 4rem;
+  padding: .6rem;
+
+  & svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+}
+
+.close_btn {
+  svg {
+    stroke-width: .175rem;
+  }
+}
+
+// .curr_zoom {
+//   background-color: var(--bg-p);
+//   padding: .4rem 1rem;
+//   border-radius: var(--br-pill);
+// }
+
+@media screen and (max-width: 768px) {
+  .controls {
+    top: unset;
+    bottom: 0rem;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .close_btn {
+    margin-left: auto;
+  }
+}

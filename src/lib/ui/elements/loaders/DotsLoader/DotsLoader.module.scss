@@ -1,0 +1,43 @@
+.loader {
+  position: relative;
+  width: .4rem;
+  height: .4rem;
+  background: var(--fg-p-alt);
+  border-radius: 50%;
+  animation: zoom-in-out .5s linear alternate infinite .25s;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: .4rem;
+    height: .4rem;
+    top: 50%;
+    background: var(--fg-p-alt);
+    border-radius: 50%;
+    transform: translate3d(0, -50%, 0);
+    animation: zoom-in-out .5s linear alternate infinite;
+  }
+
+  &::before {
+    left: 150%;
+  }
+
+  &::after {
+    right: 150%;
+  }
+}
+
+@keyframes zoom-in-out {
+  0% {
+    transform: translate3d(0, -50%, 0) scale(.25);
+  }
+
+  50% {
+    transform: translate3d(0, -50%, 0) scale(1.5);
+  }
+
+  100% {
+    transform: translate3d(0, -50%, 0);
+  }
+}

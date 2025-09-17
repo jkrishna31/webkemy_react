@@ -1,0 +1,167 @@
+.wrapper {
+  --active-hue: 0;
+  --active-hsl: hsl(0, 100%, 50%);
+  --active-hsla: hsla(0, 100%, 50%, 100%);
+  --color-area-size: 24rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  width: calc(var(--color-area-size) + 2.8rem + 2rem);
+
+  .color_area {
+    width: var(--color-area-size, 24rem);
+    height: var(--color-area-size, 24rem);
+
+    // border-radius: 1.2rem;
+
+    forced-color-adjust: none;
+    background: linear-gradient(to top, black, transparent), linear-gradient(to right, rgb(255, 255, 255), transparent), hsl(var(--active-hue), 100%, 50%);
+  }
+
+  .area_thumb {
+    border-width: .2rem;
+    border-color: var(--light-p);
+    border-radius: 50%;
+    width: 1.6rem;
+    height: 1.6rem;
+    background-color: var(--active-hsl);
+    box-shadow: 0 0 .1rem var(--shadow-s);
+  }
+
+  .color_input {
+    padding: .6rem;
+    font-size: 1.4rem;
+  }
+
+  .controls {
+    width: auto;
+    display: flex;
+    gap: 1.4rem;
+  }
+
+  .slider {
+    height: var(--color-area-size, 24rem);
+  }
+
+  .hue_slider {
+    forced-color-adjust: none;
+    background: linear-gradient(to bottom,
+        rgb(255, 0, 0),
+        rgb(255, 255, 0),
+        rgb(0, 255, 0),
+        rgb(0, 255, 255),
+        rgb(0, 0, 255),
+        rgb(255, 0, 255), rgb(255, 0, 0)),
+      repeating-conic-gradient(rgb(204, 204, 204) 0%, rgb(204, 204, 204) 25%, white 0%, white 50%) 50% center / 16px 16px;
+
+    &::-webkit-slider-thumb {
+      background-color: hsl(var(--active-hue), 100%, 50%);
+      box-shadow: 0 0 .1rem var(--shadow-s);
+    }
+
+    &::-moz-range-thumb {
+      background-color: hsl(var(--active-hue), 100%, 50%);
+      box-shadow: 0 0 .1rem var(--shadow-s);
+    }
+
+    &:hover,
+    &:focus {
+      &::-webkit-slider-thumb {
+        background-color: hsl(var(--active-hue), 100%, 50%);
+      }
+
+      &::-moz-range-thumb {
+        background-color: hsl(var(--active-hue), 100%, 50%);
+      }
+    }
+  }
+
+  .opacity_slider {
+    direction: rtl;
+    background-color: var(--fg-t);
+    background-image: linear-gradient(to top, transparent, var(--active-hsl)), repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)), repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+    background-position: 0 0, 0 0, 4px 4px;
+    background-size: auto, 8px 8px, 8px 8px;
+
+    &::-webkit-slider-thumb,
+    &:hover::-webkit-slider-thumb,
+    &:focus::-webkit-slider-thumb {
+      background-color: var(--active-hsla);
+      background-image: var(--active-hsla),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+      background-position: 0 0, 0 0, 4px 4px;
+      background-size: auto, 8px 8px, 8px 8px;
+    }
+
+    &::-moz-range-thumb,
+    &:hover::-moz-range-thumb,
+    &:focus::-moz-range-thumb {
+      background-color: var(--active-hsla);
+      background-image: var(--active-hsla),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+      background-position: 0 0, 0 0, 4px 4px;
+      background-size: auto, 8px 8px, 8px 8px;
+    }
+  }
+
+  .hue_slider,
+  .opacity_slider {
+
+    &[aria-orientation="vertical"] {
+      width: 1rem;
+      border-radius: var(--br-pill);
+
+      &::-webkit-slider-thumb {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+
+      &::-moz-range-thumb {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+    }
+
+    &::-webkit-slider-thumb {
+      border-radius: 50%;
+      border-width: .2rem;
+      border-color: var(--fg-p);
+    }
+
+    &::-moz-range-thumb {
+      border-radius: 50%;
+      border-width: .2rem;
+      border-color: var(--fg-p);
+    }
+  }
+
+  .active_color {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: .1rem solid var(--border-s);
+    background-color: var(--active-hsla);
+    flex-shrink: 0;
+  }
+
+  .result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .format_selector {
+    font-size: 1.5rem;
+    padding: .4rem .8rem .4rem 1rem;
+    min-height: 3rem;
+    gap: .2rem;
+
+    & svg {
+      width: 1.6rem;
+      height: 1.6rem;
+    }
+  }
+}

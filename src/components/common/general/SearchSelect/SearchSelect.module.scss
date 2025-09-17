@@ -1,0 +1,149 @@
+@use '@/lib/ui/styles/mixins/scrollbar' as *;
+
+.container {
+    min-width: 30rem;
+}
+
+.header {
+    padding-top: 1rem;
+}
+
+.close_btn {
+    padding: 1rem;
+    margin-right: -1rem;
+
+    svg {
+        width: 2.4rem;
+        height: 2.4rem;
+        stroke-width: .175rem;
+    }
+
+    &:hover {
+        color: var(--red-6);
+    }
+}
+
+.search_section {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    padding-inline: 2rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid var(--border-s);
+
+    &:focus-within {
+        border-color: var(--border-p);
+    }
+
+    .search_input {
+        width: 0;
+        flex: 1;
+        font-size: 1.6rem;
+        padding-block: 1rem;
+        border: none;
+        background: transparent;
+        outline-offset: 6px;
+        outline: none;
+        color: var(--fg-p);
+    }
+
+    .reset_btn,
+    .go_btn {
+        display: flex;
+        color: var(--fg-s);
+    }
+
+    .search_icon {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    .cross_icon {
+        width: 1.2rem;
+        height: 1.2rem;
+    }
+}
+
+.list_section {
+    padding-inline: 1rem;
+    padding-block: 1rem 2rem;
+    overflow: auto;
+
+    .list {
+        font-size: 1.6rem;
+    }
+
+    .list_item {
+        padding-inline: 1rem;
+        border-radius: .4rem;
+        color: var(--fg-p);
+
+        label {
+            flex: 1;
+            padding-block: .8rem;
+            line-height: 1.2;
+        }
+
+        &:hover,
+        &:focus-within {
+            background-color: var(--bg-hover);
+
+            label {
+                color: var(--fg-p);
+            }
+        }
+    }
+
+    .no_match {
+        font-size: 1.4rem;
+    }
+
+    @include scrollbar_y(1rem 0);
+}
+
+
+@media screen and (max-width: 768px) {
+    .container {
+        min-width: 28rem;
+    }
+
+    .header {
+        h3 {
+            font-size: 1.8rem;
+        }
+    }
+
+    .close_btn {
+        svg {
+            width: 2rem;
+            height: 2rem;
+        }
+    }
+
+    .search_section {
+        gap: 2rem;
+    }
+
+    .list_section {
+
+        .scroll_padding {
+            padding-right: 3rem;
+        }
+
+        .list_item {
+            .lang_check {
+                font-size: 1.6rem;
+            }
+        }
+
+        .no_match {
+            font-size: 1.4rem;
+        }
+
+        .item_radio {
+            &:checked::after {
+                font-size: 1.6rem;
+            }
+        }
+    }
+}

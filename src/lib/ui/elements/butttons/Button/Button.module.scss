@@ -1,0 +1,132 @@
+.btn {
+    text-align: center;
+    gap: .4rem;
+    background-color: transparent;
+    border-radius: var(--br-pill);
+    font-weight: 500;
+    transition: border-color .2s linear, background .2s linear, color .2s linear;
+
+    &:disabled {
+        opacity: .5;
+    }
+}
+
+.primary,
+.secondary,
+.tertiary {
+    min-height: 3.6rem;
+    padding: .7rem 1.6rem;
+    font-size: 1.6rem;
+    color: var(--fg-p-alt);
+    border: .1rem solid transparent;
+}
+
+.btn[data-variant="primary"],
+.primary {
+    background-color: var(--fg-p);
+    color: var(--bg-p);
+
+    &[data-color="red"] {
+        background-color: var(--red-6);
+    }
+
+    &[data-color="blue"] {
+        background-color: var(--blue-6);
+    }
+
+    &[data-color="green"] {
+        background-color: var(--green-2);
+    }
+
+    &[data-color="yellow"] {
+        background-color: var(--yellow-2);
+    }
+
+    &[data-color="orange"] {
+        background-color: var(--orange-2);
+    }
+
+    &:hover {
+        background-color: var(--fg-p-alt);
+    }
+}
+
+.btn[data-variant="secondary"],
+.secondary {
+    border-color: var(--border-s);
+    color: var(--fg-p-alt);
+
+    &[data-color="red"] {
+        color: var(--red-6);
+    }
+
+    &[data-color="blue"] {
+        color: var(--blue-1);
+    }
+
+    &[data-color="green"] {
+        color: var(--green-2);
+    }
+
+    &[data-color="yellow"] {
+        color: var(--yellow-2);
+    }
+
+    &[data-color="orange"] {
+        color: var(--orange-2);
+    }
+
+    &:hover {
+        color: var(--fg-p);
+        border-color: var(--border-p);
+        background-color: var(--bg-t);
+    }
+}
+
+.btn[data-variant="tertiary"],
+.tertiary {
+    background: var(--bg-s);
+
+    &[data-color="red"] {
+        color: var(--red-6);
+    }
+
+    &[data-color="blue"] {
+        color: var(--blue-1);
+    }
+
+    &[data-color="green"] {
+        color: var(--green-2);
+    }
+
+    &[data-color="yellow"] {
+        color: var(--yellow-2);
+    }
+
+    &[data-color="orange"] {
+        color: var(--orange-2);
+    }
+
+    &:hover {
+        background: var(--bg-t);
+    }
+}
+
+.btn[data-variant="text"],
+.text {
+    color: inherit;
+    padding-inline: 1rem;
+    font-size: 1.4rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .btn {
+        font-size: 1.4rem;
+    }
+
+    .btn[data-variant="text"],
+    .text {
+        font-size: 1.2rem;
+    }
+}

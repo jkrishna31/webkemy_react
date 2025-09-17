@@ -1,0 +1,158 @@
+.wrapper {
+  position: relative;
+  width: 30rem;
+  height: auto;
+  background-color: var(--bg-t);
+
+  & video {
+    width: 100%;
+    height: auto;
+    background-color: var(--bg-t);
+  }
+
+  .slider {
+    border-radius: var(--br-pill);
+    min-width: 6rem;
+
+    &::-webkit-slider-thumb {
+      border-radius: var(--br-pill);
+      width: 2rem;
+      height: 1.6rem;
+    }
+
+    &::-moz-range-thumb {
+      border-radius: var(--br-pill);
+      width: 1.8rem;
+    }
+  }
+}
+
+.controls_wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity .15s ease;
+}
+
+.all_controls {
+  margin-top: auto;
+  background-color: var(--gray-11-70);
+}
+
+.center {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.speed_dropdown {
+  padding: 1.2rem .4rem;
+  min-width: fit-content;
+}
+
+.prev_btn,
+.next_btn,
+.rewind_btn,
+.forward_btn,
+.main_play_btn {
+  padding: 1.4rem;
+  background-color: var(--gray-11-70);
+  border-radius: 50%;
+}
+
+.top {
+  width: 100%;
+  padding-inline: 1.2rem;
+  padding-top: 1rem;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .4rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.play_btn,
+.caption_btn,
+.fullscreen_btn,
+.pip_btn,
+.pace_btn,
+.vol_btn {
+  min-height: auto;
+  padding: .7rem;
+  background-color: transparent;
+  border-radius: .4rem;
+  color: var(--fg-p-alt);
+
+  &:hover {
+    color: var(--fg-p);
+  }
+}
+
+.vol_btn svg {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.duration_info {
+  margin-right: auto;
+  color: var(--fg-s);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: .6rem;
+  font-size: 1.4rem;
+}
+
+.separator {
+  color: var(--fg-s-alt);
+}
+
+.curr_timestamp,
+.total_duration {
+  color: var(--fg-s);
+}
+
+.wrapper {
+
+  &[data-overlay="true"],
+  &[data-overlay="true"]:hover:not(:fullscreen),
+  &:hover:not(:fullscreen),
+  &:focus {
+    & .controls_wrapper {
+      opacity: 1;
+      pointer-events: initial;
+    }
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+
+  .duration_info {
+    font-size: 1.3rem;
+  }
+}

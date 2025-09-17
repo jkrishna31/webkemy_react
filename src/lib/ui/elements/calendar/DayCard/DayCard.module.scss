@@ -1,0 +1,112 @@
+.card {
+  width: 100%;
+  height: 100%;
+  max-height: 15rem;
+  border-radius: .4rem;
+  background: var(--bg-s);
+  color: var(--fg-p);
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  padding: .4rem;
+  border: .1rem solid transparent;
+  transition: border-color .3s linear;
+}
+
+.pm_date_card,
+.nm_date_card {
+  background: var(--bg-t);
+}
+
+.cell_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.4rem;
+}
+
+.date_btn,
+.add_btn {
+  min-width: 2.6rem;
+  min-height: 2.6rem;
+  border-radius: .4rem;
+  padding: .2rem;
+  border: .1rem solid transparent;
+}
+
+.add_btn {
+  opacity: 0;
+  background-color: var(--bg-s);
+  transition: opacity .2s linear;
+}
+
+.add_icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.card:hover .add_btn,
+.card:focus .add_btn,
+.add_btn:focus {
+  opacity: 1;
+}
+
+.badges_wrapper,
+.dots_wrapper {
+  display: flex;
+  gap: .3rem;
+  overflow: auto;
+  flex: 1;
+  margin-top: .4rem;
+}
+
+.badges_wrapper {
+  flex-direction: column;
+}
+
+.dots_wrapper {
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card[data-selected="true"],
+.card[data-drag-over="true"] {
+  border-color: var(--border-p);
+}
+
+.card[data-off="true"] {
+  background-color: var(--bg-t);
+}
+
+.card[data-off="true"] .date_btn {
+  color: var(--fg-s);
+}
+
+.card[data-no-empty="true"] {
+  background: transparent;
+}
+
+.card[data-compact="true"] {
+  max-width: 4rem;
+}
+
+.card[data-compact="true"] .cell_header {
+  justify-content: center;
+}
+
+.card[data-day-state="today"] .date_btn {
+  background-color: var(--fg-p);
+  color: var(--bg-p);
+}
+
+.card[data-day-state="active"] .date_btn {
+  border-color: var(--border-p);
+}
+
+
+@media screen and (max-width: 700px) {
+  .cell_header {
+    justify-content: center;
+  }
+}

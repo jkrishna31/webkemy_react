@@ -1,0 +1,55 @@
+.loader {
+    height: 3.8rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .bars_wrapper {
+        width: auto;
+        height: 100%;
+        display: flex;
+        gap: .7rem;
+        transform-origin: bottom;
+        transform: scaleY(0);
+    }
+
+    .bar {
+        width: .1rem;
+        background: linear-gradient(to bottom, var(--fg-s), transparent);
+    }
+
+    .corner {
+        height: 72%;
+    }
+
+    .center {
+        height: 100%;
+    }
+}
+
+.active {
+    .bars_wrapper {
+        animation: animate 1s linear infinite;
+    }
+}
+
+@keyframes animate {
+    0% {
+        opacity: 100%;
+        transform-origin: bottom;
+        transform: scaleY(0);
+    }
+
+    60% {
+        opacity: 100%;
+        transform: none;
+    }
+
+    100% {
+        opacity: 0;
+        transform-origin: top;
+        transform: scaleY(0);
+    }
+}

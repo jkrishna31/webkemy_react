@@ -1,0 +1,102 @@
+@use '@/lib/ui/styles/mixins/scrollbar' as *;
+
+.wrapper {
+  display: grid;
+  width: 100%;
+}
+
+.count {
+  font-size: 1.4rem;
+  color: var(--fg-s);
+}
+
+.pc {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 1rem;
+  overflow: auto;
+  @include scrollbar_x();
+}
+
+.pi_img {
+  position: relative;
+  width: fit-content;
+  border-radius: .4rem;
+}
+
+.pi_file {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--bg-t);
+  border-radius: .6rem;
+  padding: .6rem 1rem;
+}
+
+.fn {
+  font-size: 1.5rem;
+  line-height: 1.5;
+  text-wrap: nowrap;
+  font-weight: 500;
+  color: var(--fg-p);
+}
+
+.fs {
+  font-size: 1.3rem;
+  color: var(--fg-s);
+  text-wrap: nowrap;
+}
+
+.img {
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+  border-radius: .4rem;
+  background-color: var(--bg-t);
+}
+
+.pii_db {
+  position: absolute;
+  top: .4rem;
+  right: .4rem;
+  min-width: 2.6rem;
+  min-height: 2.6rem;
+  border-radius: 50%;
+  padding-inline: 0;
+  padding-block: 0;
+  background-color: var(--bg-t);
+
+  &:hover {
+    color: var(--red-6);
+  }
+}
+
+.pif_db {
+  background-color: var(--bg-p);
+  min-width: 3.6rem;
+  min-height: 3.6rem;
+  margin-left: 1.2rem;
+
+  &:hover {
+    color: var(--red-6);
+  }
+}
+
+.del_icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke-width: .175rem;
+  flex-shrink: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+  .fn {
+    font-size: 1.4rem;
+  }
+
+  .fs {
+    font-size: 1.2rem;
+  }
+}

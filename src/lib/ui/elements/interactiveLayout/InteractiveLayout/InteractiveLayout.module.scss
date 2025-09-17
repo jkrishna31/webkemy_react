@@ -1,0 +1,34 @@
+.container {
+  --unit: 5rem;
+  --cols: 3;
+  --rows: "auto";
+
+  width: 100%;
+  height: fit-content;
+  max-width: 100rem;
+  padding: 1rem;
+  border-radius: .8rem;
+  // border: .1rem solid var(--border-t);
+
+  display: grid;
+  gap: .5rem;
+  grid-template-columns: repeat(var(--cols), var(--unit));
+
+  grid-auto-columns: var(--unit);
+  grid-auto-rows: var(--unit);
+}
+
+.container>div {
+  min-width: var(--unit);
+  min-height: var(--unit);
+  border-radius: .6rem;
+  border: 1px solid var(--border-s);
+
+  --cs: "auto";
+  --ce: "auto";
+  --rs: "auto";
+  --re: "auto";
+
+  grid-column: var(--cs) / span var(--ce);
+  grid-row: var(--rs) / span var(--re);
+}

@@ -1,0 +1,28 @@
+.data_point {
+  fill: var(--fg-p);
+  opacity: 80%;
+}
+
+.highlighted {
+  fill: var(--red-1);
+  stroke: var(--red-5);
+  opacity: 100%;
+  stroke-width: .3rem;
+}
+
+.active_point {
+  transition: transform .1s ease-out;
+
+  circle {
+    display: none;
+  }
+
+  text {
+    font-size: 1.4rem;
+    text-shadow: .1rem .1rem var(--bg-p);
+    fill: var(--fg-p);
+  }
+}
+
+
+@media screen and (max-width: 768px) {}

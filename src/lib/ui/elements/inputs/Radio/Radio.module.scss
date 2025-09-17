@@ -1,0 +1,39 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
+.input {
+    position: relative;
+    appearance: none;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: var(--br-pill);
+    background: var(--bg-s);
+    border: 1px solid var(--border-s);
+    overflow: hidden;
+    cursor: pointer;
+
+    &:checked {
+        border-color: var(--blue-1);
+        background: transparent;
+    }
+
+    &:checked~label {
+        color: var(--fg-p);
+    }
+
+    &:checked::after {
+        content: '';
+        display: block;
+        width: 50%;
+        height: 50%;
+        border-radius: var(--br-pill);
+        background-color: var(--blue-1);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+        transform: translate3d(-50%, -50%, 0);
+    }
+}
+
+
+@media screen and (max-width: 768px) {}

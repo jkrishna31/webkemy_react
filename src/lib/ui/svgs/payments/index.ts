@@ -1,0 +1,16 @@
+export { default as AmexIcon } from "./AmexIcon";
+export { default as ApplePayIcon } from "./ApplePayIcon";
+export { default as BitcoinIcon } from "./BitcoinIcon";
+export { default as DinersClubIcon } from "./DinersClubIcon";
+export { default as DiscoverIcon } from "./DiscoverIcon";
+export { default as EloIcon } from "./EloIcon";
+export { default as EtheriumIcon } from "./EtheriumIcon";
+export { default as GooglePayIcon } from "./GooglePayIcon";
+export { default as JcbIcon } from "./JcbIcon";
+export { default as MastercardIcon } from "./MastercardIcon";
+export { default as PaypalIcon } from "./PaypalIcon";
+export { default as SepaIcon } from "./SepaIcon";
+export { default as StripeIcon } from "./StripeIcon";
+export { default as UnionPayIcon } from "./UnionPayIcon";
+export { default as VisaIcon } from "./VisaIcon";
+export { default as WeChatIcon } from "./WeChatIcon";

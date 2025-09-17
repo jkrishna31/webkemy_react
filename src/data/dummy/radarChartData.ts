@@ -1,0 +1,32 @@
+export const radarChartData = [
+  [
+    { "axis": "Battery", "value": 0.22 },
+    { "axis": "Brand", "value": 0.28 },
+    { "axis": "Contract", "value": 0.29 },
+    { "axis": "Design", "value": 0.17 },
+    { "axis": "Internet", "value": 0.22 },
+    { "axis": "Screen", "value": 0.02 },
+    { "axis": "Price", "value": 0.21 },
+    { "axis": "Smartphone", "value": 0.5 },
+  ],
+  [
+    { "axis": "Battery", "value": 0.27 },
+    { "axis": "Brand", "value": 0.16 },
+    { "axis": "Contract", "value": 0.35 },
+    { "axis": "Design", "value": 0.13 },
+    { "axis": "Internet", "value": 0.2 },
+    { "axis": "Screen", "value": 0.13 },
+    { "axis": "Price", "value": 0.35 },
+    { "axis": "Smartphone", "value": 0.38 },
+  ],
+  [
+    { "axis": "Battery", "value": 0.26 },
+    { "axis": "Brand", "value": 0.1 },
+    { "axis": "Contract", "value": 0.3 },
+    { "axis": "Design", "value": 0.14 },
+    { "axis": "Internet", "value": 0.22 },
+    { "axis": "Screen", "value": 0.04 },
+    { "axis": "Price", "value": 0.41 },
+    { "axis": "Smartphone", "value": 0.3 },
+  ],
+];

@@ -1,0 +1,25 @@
+.active_point {
+  transition: transform .1s ease-out;
+
+  circle {
+    fill: var(--fg-p);
+  }
+
+  text {
+    font-size: 1.4rem;
+    text-shadow: .1rem .1rem var(--bg-p);
+    fill: var(--fg-p);
+    // stroke: var(--bg-p);
+    // stroke-width: .3rem;
+    // paint-order: stroke;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .active_point {
+    text {
+      // font-size: 1.2rem;
+    }
+  }
+}

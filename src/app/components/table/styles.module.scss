@@ -1,0 +1,62 @@
+.table {
+
+  & th,
+  & tr {
+    white-space: nowrap;
+  }
+
+  & tbody tr:hover td {
+    background-color: var(--bg-t);
+  }
+}
+
+.table_actions {
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+
+  button {
+    padding: .3rem 1rem;
+    min-height: fit-content;
+    border-color: transparent;
+    color: var(--fg-s);
+
+    svg {
+      width: 1.9rem;
+      height: 1.9rem;
+      stroke-width: .2rem;
+    }
+  }
+}
+
+.header_cell {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.6rem;
+}
+
+.col_more {
+  padding: .8rem;
+
+  &:hover {
+    color: var(--fg-p);
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.col_sort {
+  width: 1.6rem;
+  height: 1.6rem;
+  stroke-width: .2rem;
+}
+
+.all_select_check {
+  background-color: var(--bg-p);
+  border-color: var(--bg-p);
+}

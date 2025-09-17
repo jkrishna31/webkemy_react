@@ -1,0 +1,35 @@
+export const httpMethods = {
+    GET: "get",
+    POST: "post",
+    PUT: "put",
+    PATCH: "patch",
+    DELETE: "delete",
+    HEAD: "head",
+    OPTIONS: "options",
+    CONNECT: "connect",
+    TRACE: "trace",
+} as const;
+
+export const contentTypes = {
+    JSON: "application/json",
+    STREAM: "application/octet-stream",
+    ZIP: "application/zip",
+    FORM_URL_ENCODED: "application/x-www-form-urlencoded",
+    PDF: "application/pdf",
+    GIF: "image/gif",
+    JPG: "image/jpeg",
+    PNG: "image/png",
+    SVG: "image/svg+xml",
+    FORMDATA: "multipart/form-data",
+    MIXED: "multipart/mixed",
+    ALTERNATIVE: "multipart/alternative",
+    XML: "text/xml",
+    CSS: "text/css",
+    HTML: "text/html",
+    JS: "text/javascript",
+    PLAIN: "text/plain",
+    MPEG: "video/mpeg",
+    MP4: "video/mp4",
+    WEBM: "video/webm",
+    QUICKTIME: "video/quicktime"
+} as const;

@@ -1,0 +1,105 @@
+.pagination_bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+    height: auto;
+
+    .pagination_btn {
+        min-width: 8rem;
+        height: 3.4rem;
+        min-height: auto;
+        gap: .3rem;
+
+        &:first-of-type {
+            padding-inline: 1rem 1.8rem;
+        }
+
+        &:last-of-type {
+            padding-inline: 1.8rem 1rem;
+        }
+
+        .chevron_icon {
+            height: 1.8rem;
+            width: 1.8rem;
+            stroke-width: .2rem;
+        }
+    }
+
+    .page_boundary_btn {
+        font-size: 1.6rem;
+        min-width: 4rem;
+        width: fit-content;
+        min-height: auto;
+        padding-inline: .4rem;
+        height: 3.4rem;
+        border-radius: .4rem;
+
+        &:nth-of-type(2) {
+            padding-right: .8rem;
+        }
+
+        &:nth-of-type(3) {
+            padding-left: .8rem;
+        }
+
+        svg {
+            color: var(--fg-s);
+        }
+    }
+
+
+    .pagination_form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        height: fit-content;
+    }
+
+    .input {
+        height: 3.4rem;
+        width: 16rem;
+    }
+
+    .go_btn {
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        height: 100%;
+        min-height: auto;
+        padding: .8rem 1.6rem;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .pagination_bar {
+        width: 100%;
+        flex-wrap: wrap;
+        gap: .8rem;
+        justify-content: space-between;
+
+        .pagination_btn {
+            min-width: 4.8rem;
+            font-size: 1.6rem;
+        }
+
+        .page_boundary_btn {
+            font-size: 1.4rem;
+            min-width: 3.4rem;
+            height: 3.4rem;
+        }
+
+        .pagination_form {
+            gap: 1rem;
+            order: 3;
+            margin-inline: auto;
+        }
+
+        .go_btn {
+            font-size: 1.4rem;
+            height: 3.4rem;
+            border-radius: 4rem;
+        }
+    }
+}

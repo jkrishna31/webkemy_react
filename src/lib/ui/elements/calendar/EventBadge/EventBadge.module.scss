@@ -1,0 +1,102 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
+.badge {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  font-size: 1.4rem;
+  border: .1rem solid var(--fg-s);
+  background-color: var(--gray-8-30);
+  border-radius: .4rem;
+  padding: .3rem .5rem;
+  cursor: grab;
+
+  &:hover {
+    z-index: 1;
+    background-color: var(--bg-t);
+  }
+}
+
+.ev_dot {
+  width: .4rem;
+  height: .4rem;
+  border-radius: 50%;
+  background-color: var(--fg-s);
+  flex-shrink: 0;
+}
+
+.lc p {
+  @include line_clamp(1);
+  margin-bottom: .2rem
+}
+
+.time_wrapper {
+  @include line_clamp(1);
+  color: var(--fg-s);
+}
+
+.badge[data-clamp="true"] {
+  @include line_clamp(1);
+}
+
+.badge:hover {
+  opacity: 1;
+}
+
+.start {
+  border-left-width: .4rem;
+}
+
+.end {
+  border-right-width: .4rem;
+}
+
+.green {
+  border-color: var(--green-1);
+  background-color: var(--green-1-30);
+}
+
+.green_bg {
+  background-color: var(--green-1);
+}
+
+.red {
+  border-color: var(--red-1);
+  background-color: var(--red-1-30);
+}
+
+.red_bg {
+  background-color: var(--red-1);
+}
+
+.yellow {
+  border-color: var(--yellow-1);
+  background-color: var(--yellow-1-30);
+}
+
+.yellow_bg {
+  background-color: var(--yellow-1);
+}
+
+.orange {
+  border-color: var(--orange-2);
+  background-color: var(--orange-2-30);
+}
+
+.orange_bg {
+  background-color: var(--orange-1);
+}
+
+.blue {
+  border-color: var(--blue-1);
+  background-color: var(--blue-1-30);
+}
+
+.blue_bg {
+  background-color: var(--blue-1);
+}
+
+.time {
+  color: var(--fg-s);
+  white-space: preserve;
+}

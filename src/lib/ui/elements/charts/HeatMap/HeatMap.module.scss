@@ -1,0 +1,32 @@
+.tooltip {
+  border-radius: .4rem;
+  border: 1px solid var(--border-s);
+  background-color: var(--bg-s);
+  padding: 1rem;
+}
+
+.focus_elem {
+  transition: transform .1s ease-out;
+
+  circle {
+    fill: var(--red-5);
+  }
+
+  text {
+    font-size: 1.4rem;
+    fill: var(--fg-p);
+    text-shadow: .1rem .1rem var(--bg-p);
+    // stroke-width: .3rem;
+    // stroke: var(--bg-p);
+    // paint-order: stroke;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .focus_elem {
+    text {
+      // font-size: 1.2rem;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  transform: translate3d(0);
+  width: 100%;
+  height: var(--h-header);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--zi-headbar);
+  background: var(--bg-p);
+  color: var(--fg-p);
+  transition: transform 225ms cubic-bezier(0, 0, .2, 1);
+
+  &[data-invisible="true"] {
+    transform: translate3d(0, -100%, 0);
+  }
+}

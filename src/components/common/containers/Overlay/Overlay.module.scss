@@ -1,0 +1,36 @@
+.overlay {
+    position: fixed;
+    bottom: 100%;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    background: var(--bg-overlay);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    z-index: var(--zi-main-overlay);
+    // cursor: pointer;
+
+    &.open {
+        bottom: 0;
+        opacity: 1;
+        animation: animate-in .3s cubic-bezier(0, 0, .2, 1);
+    }
+}
+
+@keyframes animate-in {
+    from {
+        opacity: 0%;
+    }
+
+    to {
+        opacity: 100%;
+    }
+}
+
+
+@media screen and (max-width: 767px) {
+    .overlay {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}

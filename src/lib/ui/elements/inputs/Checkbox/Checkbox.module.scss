@@ -1,0 +1,64 @@
+.input {
+    flex-shrink: 0;
+    position: relative;
+    appearance: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: .4rem;
+    background: var(--bg-s);
+    color: var(--blue-1);
+    border: 1px solid var(--bg-s);
+    overflow: hidden;
+    cursor: pointer;
+    font-size: 2.2rem;
+
+    &:checked::after,
+    &[data-indeterminate="true"]::after {
+        font-size: inherit;
+        font-weight: 500;
+        color: inherit;
+        position: absolute;
+        top: 0;
+        left: 0;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &:checked::after {
+        content: '\2713';
+    }
+
+    &[data-indeterminate="true"]::after {
+        content: "";
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        width: 70%;
+        height: .2rem;
+        background-color: var(--fg-s);
+        border-radius: .2rem;
+    }
+
+    &:focus-visible {
+        outline: auto;
+    }
+
+    &:checked~label {
+        color: var(--fg-p);
+    }
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .input_field {
+        width: 1.8rem;
+        height: 1.8rem;
+        font-size: 1.4rem;
+    }
+}

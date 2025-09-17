@@ -1,0 +1,26 @@
+.focus_elem {
+  display: flex;
+  align-items: center;
+
+  text {
+    font-size: 3.4rem;
+    line-height: 1;
+    font-weight: 900;
+    fill: var(--fg-s);
+  }
+
+  .active {
+    font-size: 2.4rem;
+  }
+
+  .value {
+    // font-size: 1.6rem;
+    // font-weight: bold;
+    fill: var(--fg-t);
+  }
+}
+
+.arc_label {
+  font-size: 1.3rem;
+  color: var(--bg-p);
+}

@@ -1,0 +1,35 @@
+.wrapper {
+  width: 10rem;
+  height: 10rem;
+  border: .1rem solid var(--border-s);
+  border-radius: .4rem;
+  background-color: var(--bg-t);
+  transition: border .15s linear;
+
+  // transform-origin: center center;
+
+  position: relative;
+  user-select: none;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--border-p);
+  }
+
+  &:focus-within {
+    border-color: var(--blue-6);
+  }
+}
+
+.thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: .1rem solid var(--border-s);
+  background: var(--fg-p);
+  border-radius: .3rem;
+  cursor: move;
+  // transition: transform .1s ease;
+}

@@ -1,0 +1,25 @@
+.block {
+    // cursor: zoom-in;
+    // transition: height .5s linear;
+}
+
+.zoom {
+    cursor: zoom-out;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999999999;
+    background: var(--bg-p);
+
+    img {
+        width: auto;
+        object-fit: contain;
+        height: 100%;
+        max-height: 100%;
+        margin-inline: auto;
+    }
+}
+
+@media screen and (max-width: 768px) {}

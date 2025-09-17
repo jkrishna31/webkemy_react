@@ -1,0 +1,15 @@
+.title {
+  font-size: 4rem;
+  line-height: 1.13;
+  margin-bottom: 2.4rem;
+  color: var(--fg-p);
+}
+
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 3.4rem;
+    line-height: 1.13;
+    margin-bottom: 2rem;
+  }
+}

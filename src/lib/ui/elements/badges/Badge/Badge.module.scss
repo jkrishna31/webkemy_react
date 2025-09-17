@@ -1,0 +1,96 @@
+@use '@/lib/ui/styles/mixins/animations' as *;
+
+.badge {
+
+  &[data-variant="dot"],
+  &[data-variant="text"] {
+    &[data-animate="ripple"]::after {
+      @include ripple(1.5s, 0s);
+    }
+  }
+
+  &[data-variant="dot"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    padding: .2rem;
+    border-radius: 50%;
+    background: var(--bg-p);
+    border: .3rem solid var(--bg-p);
+    background: var(--fg-p-alt);
+
+    &[data-color="red"] {
+      background: var(--red-5);
+    }
+
+    &[data-color="green"] {
+      background: var(--green-1);
+    }
+
+    &[data-color="blue"] {
+      background: var(--blue-1);
+    }
+
+    &[data-color="yellow"] {
+      background: var(--yellow-1);
+    }
+  }
+
+  &[data-variant="text"] {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    width: fit-content;
+    min-height: 2rem;
+    padding: 0rem .6rem;
+    border: 1px solid var(--border-s);
+    background-color: var(--bg-p);
+    border-radius: 4rem;
+    color: inherit;
+    font-size: 1.3rem;
+
+    &[data-color="red"],
+    &[data-color="green"],
+    &[data-color="blue"],
+    &[data-color="yellow"] {
+      border-color: transparent;
+      color: var(--bg-p);
+    }
+
+    &[data-color="red"] {
+      background: var(--red-5);
+    }
+
+    &[data-color="green"] {
+      background: var(--green-1);
+    }
+
+    &[data-color="blue"] {
+      background: var(--blue-1);
+    }
+
+    &[data-color="yellow"] {
+      background: var(--yellow-1);
+    }
+  }
+}
+
+.tr {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate3d(50%, -50%, 0);
+}
+
+
+@media screen and (max-width: 768px) {
+  .badge {
+    &[data-variant="dot"] {
+      width: .9rem;
+      height: .9rem;
+    }
+
+    &[data-variant="text"] {
+      font-size: 1.2rem;
+    }
+  }
+}

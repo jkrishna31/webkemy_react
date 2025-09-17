@@ -1,0 +1,64 @@
+.wrapper {
+  .top {
+    margin-bottom: .8rem;
+    padding-inline: .6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    font-size: 1.4rem;
+
+    button {
+      min-height: fit-content;
+      padding: .3rem 1rem;
+    }
+  }
+
+  .common_pace {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    margin-top: .8rem;
+    padding-inline: .6rem;
+
+    button {
+      min-height: fit-content;
+      padding: .3rem 1rem;
+      font-size: 1.4rem;
+    }
+  }
+
+  .speed_controls {
+    width: fit-content;
+  }
+
+  .slider_controls {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .speed_slider {
+    flex: 1;
+    min-width: 10rem;
+    width: 100%;
+  }
+
+  .speed_ctrl_btn {
+    min-height: fit-content;
+    padding: .3rem 1rem;
+    font-size: 1.4rem;
+  }
+
+  .speed_inc_btn,
+  .speed_dec_btn {
+    padding-block: .6rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}

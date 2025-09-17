@@ -1,0 +1,27 @@
+{
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    // "source.fixAll.format": "explicit",
+    // "source.fixAll.stylelint": "explicit",
+    "source.fixAll.eslint": "explicit"
+    // "source.organizeImports": "explicit",
+    // "source.sortImports": "explicit",
+  },
+  "[css][html][markdown][yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.preferences.importModuleSpecifier": "non-relative",
+  "editor.hover.enabled": true,
+  "editor.colorDecorators": true,
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto",
+      "react-svg-viewer.paths": ["src/components/icons.jsx", "src/assets/svgs/**/*.tsx"]
+    }
+  ],
+  "playwright.reuseBrowser": true,
+  "i18n-ally.localesPaths": ["./src/i18n/locales"],
+  "i18n-ally.keystyle": "nested"
+}

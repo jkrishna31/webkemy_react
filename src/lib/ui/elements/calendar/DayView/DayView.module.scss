@@ -1,0 +1,209 @@
+.container {
+  width: 100%;
+  font-size: 1.4rem;
+  display: flex;
+  max-height: 60rem;
+  position: relative;
+  overflow: auto;
+  padding-bottom: 2rem;
+}
+
+.hr_col {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  position: sticky;
+  left: 0;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+.hour_marks {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  white-space: nowrap;
+}
+
+.days_wrapper,
+.day_cols_wrapper {
+  flex: 1;
+  display: flex;
+  height: fit-content;
+  position: relative;
+}
+
+.day_col {
+  position: relative;
+}
+
+.days_wrapper {
+  flex-direction: column;
+}
+
+.weekday_header_row {
+  display: flex;
+  align-items: centere;
+  width: 100%;
+  height: fit-content;
+  position: sticky;
+  top: 0;
+}
+
+.weekday_header_row,
+.week_number {
+  z-index: 2; // so that event badges will be below
+}
+
+.weekday_header_cell,
+.day_cell {
+  min-width: 10rem;
+}
+
+.day_col,
+.weekday_header_cell {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.week_number {
+  position: sticky;
+  top: 0;
+  left: 0;
+  text-align: end;
+  z-index: 3;
+  background-color: var(--bg-p);
+}
+
+.weekday_header_cell,
+.week_number {
+  font-size: 1.4rem;
+  font-weight: 500;
+  background-color: var(--bg-p);
+  color: var(--fg-s);
+  display: flex;
+  align-items: center;
+}
+
+.day_col:not(:last-child) {
+  border-right: .1rem solid var(--border-t);
+}
+
+.last_day_col {
+  border: none !important; // not working for some reason without !important
+}
+
+.week_number {
+  justify-content: flex-end;
+}
+
+.weekday_header_cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &[data-day-state="today"] button {
+    background: var(--fg-p);
+    color: var(--bg-p);
+  }
+
+  &[data-day-state="active"] button {
+    border-color: var(--border-p);
+  }
+}
+
+.weekday_header_cell button {
+  width: fit-content;
+  border-radius: .4rem;
+  padding: .4rem .8rem;
+  border: .1rem solid transparent;
+}
+
+.hr_cell,
+.day_cell {
+  flex-shrink: 0;
+}
+
+.week_number,
+.hr_cell {
+  padding-inline: .6rem 1rem;
+  background-color: var(--bg-p);
+}
+
+.hr_cell {
+  vertical-align: top;
+  text-align: end;
+  color: var(--fg-s);
+}
+
+.day_cell {
+  width: 100%;
+  border-top: .1rem solid var(--border-t);
+  transition: outline .2s linear;
+  outline: .1rem solid transparent;
+  outline-offset: -.1rem;
+}
+
+.day_cell[data-hour-state="active"] {
+  z-index: 1;
+  outline-color: var(--border-p);
+}
+
+.selection {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border: .1rem solid var(--border-p);
+  background-color: var(--bg-s);
+  opacity: .4;
+  border-radius: .4rem;
+  transform-origin: top;
+}
+
+.ev_wrapper {
+  position: absolute;
+}
+
+.ev_badge {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.time_crosshair {
+  position: absolute;
+  width: 100%;
+  top: 12rem;
+  height: .1rem;
+  background-color: var(--border-p);
+  transition: all .15s linear;
+}
+
+.time_badge {
+  display: grid;
+  place-items: center;
+  transform-origin: center;
+  transform: translate3d(0, -50%, 0);
+  background-color: var(--fg-p-alt);
+  color: var(--bg-p);
+  position: absolute;
+  top: 200px;
+  left: 0;
+  width: 100%;
+  border-radius: 2rem;
+  padding: .3rem .8rem;
+  z-index: 3;
+  transition: all .15s linear;
+}
+
+.hr_cell,
+.day_cell,
+.weekday_header_cell,
+.week_number {
+  height: 5rem;
+}

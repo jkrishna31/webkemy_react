@@ -1,0 +1,153 @@
+//  Resets
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans-serif);
+}
+
+*::placeholder {
+  color: var(--fg-q);
+  opacity: 1;
+}
+
+*:disabled {
+  cursor: not-allowed;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  // text-rendering: optimizeLegibility;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  color-scheme: light dark;
+  outline-color: var(--border-s);
+  scrollbar-gutter: stable;
+}
+
+body {
+  position: relative;
+  background-color: var(--bg-p);
+  color: var(--fg-p);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  html,
+  body {
+    color-scheme: dark light;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+hr {
+  border: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: inherit;
+}
+
+button,
+label,
+a {
+  cursor: pointer;
+}
+
+button {
+  background: none;
+  border: none;
+}
+
+input[type="number"] {
+  appearance: textfield;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  cursor: pointer;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+}
+
+input,
+button,
+textarea,
+select,
+fieldset,
+button {
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input,
+textarea {
+  outline: none;
+}
+
+// input[type="color" i] {
+//   border-radius: 50%;
+//   inline-size: 30px;
+//   block-size: 30px;
+//   border-width: 1px;
+//   border-style: solid;
+//   border-color: rgb(153, 153, 153);
+// }
+
+// input[type="color" i]::-webkit-color-swatch-wrapper {
+//   padding: 0;
+// }
+
+// input[type="color" i] {
+//   padding: 0;
+// }
+
+// input[type="color" i]::-webkit-color-swatch,
+// input[type="color" i]::-moz-color-swatch {
+//   border-radius: 50%;
+// }
+
+fieldset {
+  border: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+}
+
+::selection {
+  background: var(--bg-selection);
+  color: var(--fg-selection);
+}

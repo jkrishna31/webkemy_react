@@ -1,0 +1,140 @@
+@use '@/lib/ui/styles/mixins/scrollbar' as *;
+
+.wrapper {
+  width: 100%;
+  overflow: auto;
+  position: relative;
+  border-top-left-radius: .8rem;
+  border-top-right-radius: .8rem;
+  font-size: inherit;
+
+  @include scrollbar_x();
+}
+
+.table {
+  width: 100%;
+  padding-bottom: .4rem;
+  border-collapse: collapse;
+
+  .table_caption {
+    text-align: start;
+    width: fit-content;
+    margin-bottom: 1rem;
+  }
+
+  // tr:nth-of-type(even) {
+  //   background-color: var(--bg-t);
+  // }
+
+  // tr:nth-of-type(odd) {
+  //   background-color: var(--bg-s);
+  // }
+
+  thead tr {
+    border-bottom: .1rem solid var(--border-t);
+  }
+
+  th,
+  td {
+    padding-inline: 1.6rem;
+    padding-block: 1rem;
+    color: var(--fg-p);
+
+    font-size: 1.6rem;
+    line-height: 1.4;
+    background-color: inherit;
+  }
+
+  td {
+    border-bottom: .1rem solid var(--border-t);
+    background-color: var(--bg-p);
+  }
+
+  th {
+    font-weight: 500;
+    text-align: start;
+    padding-block: .8rem;
+    color: var(--fg-s);
+    background-color: var(--bg-s);
+
+    &>div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .2rem;
+      width: 100%;
+    }
+
+    // &:not(:last-child) {
+    //   border-right: .2rem solid var(--bg-p);
+    // }
+
+    &:first-child {
+      border-top-left-radius: .8rem;
+    }
+
+    &:last-child {
+      border-top-right-radius: .8rem;
+    }
+
+    &[draggable="true"] {
+      cursor: grab;
+    }
+
+    // .sort_btn:not([data-sort]) {
+    //   opacity: 0;
+    // }
+
+    // &:hover .sort_btn {
+    //   opacity: 1;
+    // }
+  }
+
+  .stick_btn {
+    flex-shrink: 0;
+    margin-left: auto;
+    padding: .4rem .6rem;
+
+    &:hover {
+      color: var(--fg-p);
+    }
+  }
+
+  .left_icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.sc_th {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+}
+
+.sc_td {
+  position: sticky;
+  z-index: 1;
+}
+
+.sc_left {
+  left: 0;
+}
+
+.sc_right {
+  right: 0;
+}
+
+
+@media screen and (max-width: 768px) {
+  .table {
+
+    th,
+    td {
+      font-size: 1.4rem;
+      padding-inline: 1.6rem;
+      padding-block: .6rem;
+      line-height: 1.4;
+    }
+  }
+}

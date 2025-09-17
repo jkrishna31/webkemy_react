@@ -1,0 +1,38 @@
+@use "@/lib/ui/styles/colors_light" as *;
+@use "@/lib/ui/styles/colors_dark" as *;
+@use "@/lib/ui/styles/variables";
+@use "@/lib/ui/styles/reset";
+@use "@/lib/ui/styles/common";
+
+// @import "tailwindcss";
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  @include colors_light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include colors_dark;
+  }
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  @include colors_light;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  @include colors_dark;
+}
+
+body {
+  font-size: 1.4rem;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}

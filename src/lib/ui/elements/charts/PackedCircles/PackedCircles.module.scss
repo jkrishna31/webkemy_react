@@ -1,0 +1,13 @@
+.focus {
+  transition: transform .1s ease-out;
+
+  circle {
+    fill: var(--fg-p);
+  }
+
+  text {
+    font-size: 1.4rem;
+    fill: var(--fg-p);
+    text-shadow: .1rem .1rem 0 var(--color-scheme-abs);
+  }
+}

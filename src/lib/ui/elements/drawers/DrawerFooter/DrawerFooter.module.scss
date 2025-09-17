@@ -1,0 +1,25 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+    border-top: 1px solid var(--border-t);
+}
+
+.close_btn {
+    width: 100%;
+    padding-block: .6rem;
+    color: var(--fg-s);
+
+    &:hover {
+        color: var(--fg-p);
+    }
+}
+
+.close_icon {
+    width: auto;
+    height: 1.4rem;
+}
+
+
+@media screen and (max-width: 768px) {}

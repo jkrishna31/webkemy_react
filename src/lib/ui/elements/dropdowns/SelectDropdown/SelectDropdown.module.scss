@@ -1,0 +1,133 @@
+.container {
+    position: relative;
+    flex-shrink: 0;
+}
+
+.dropdown_btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: var(--fg-p);
+    padding: .8rem 1rem .8rem 1.4rem;
+    background-color: var(--bg-s);
+    border-radius: 4rem;
+    min-height: 3.6rem;
+}
+
+.dropdown_label {
+    white-space: nowrap;
+}
+
+.dropdown_icon {
+    color: var(--fg-s);
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+.dd_list {
+    width: fit-content;
+    min-width: 100%;
+}
+
+.ul {
+    max-height: 25rem;
+    overflow: auto;
+    height: auto;
+    padding-inline: .4rem;
+}
+
+.list_item {
+    flex-shrink: 0;
+    text-wrap: nowrap;
+    margin-bottom: .2rem;
+
+    &:first-of-type {
+        margin-top: .4rem;
+    }
+
+    &:last-of-type {
+        margin-bottom: .4rem;
+    }
+}
+
+.item_btn {
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: left;
+    padding: .7rem .8rem;
+    color: var(--fg-p);
+    border-radius: .4rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 1rem;
+
+    transition: background .15s linear;
+
+    &:hover {
+        background-color: var(--ghost-1);
+        color: var(--fg-p);
+    }
+
+    &:disabled {
+        opacity: .5;
+    }
+}
+
+.item_selected {
+    // opacity: 50%;
+    background-color: var(--fg-p-alt);
+    color: var(--bg-p);
+}
+
+.search_wrapper {
+    padding-inline: .4rem;
+    margin-top: .4rem;
+    min-width: 14rem;
+    position: sticky;
+    top: .4rem;
+    z-index: 1;
+
+    .search_input_wrapper {
+        border-radius: .4rem;
+        padding-inline: 0;
+        // border-color: var(--border-s);
+    }
+
+    .search_input {
+        padding-inline: .8rem 0;
+    }
+}
+
+.info_text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--fg-s);
+    padding: 1rem;
+}
+
+
+@media screen and (max-width: 767px) {
+    .dropdown_btn {
+        min-height: 3.4rem;
+        width: 100%;
+        font-size: 1.4rem;
+    }
+
+    .item_btn {
+        font-size: 1.5rem !important;
+    }
+
+    .dropdown_icon {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}

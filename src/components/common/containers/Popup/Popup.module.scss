@@ -1,0 +1,29 @@
+.popup {
+    position: fixed;
+    top: var(--h-header);
+    left: 50%;
+    opacity: 1;
+    z-index: var(--zi-menu);
+    transform: translate3d(-50%, 0, 0);
+    transform-origin: center;
+    animation: move-in 340ms ease;
+}
+
+@keyframes move-in {
+    from {
+        transform: translate3d(-50%, -4rem, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .popup {
+        width: calc(100% - 4rem);
+    }
+}

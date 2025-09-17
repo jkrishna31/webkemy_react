@@ -1,0 +1,28 @@
+.wrapper {
+  position: fixed;
+  z-index: var(--zi-drawer);
+  max-width: calc(100vw - 4rem);
+
+  // transition: transform .2s ease, top .2s ease, left .2s ease, bottom .2s ease, right .2s ease;
+  animation: fade-in .2s ease;
+
+  &[data-popover="tooltip"] {
+    pointer-events: none;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-y {
+  from {
+    transform: translate3d(0, 2rem, 0);
+  }
+
+  to {
+    transform: none;
+  }
+}

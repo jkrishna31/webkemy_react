@@ -1,0 +1,27 @@
+.list {
+  width: auto;
+  max-width: 60rem;
+  height: auto;
+  max-height: fit-content;
+  overflow: auto;
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+}
+
+.scrollable {
+  display: flex;
+  gap: .8rem;
+  height: fit-content;
+}
+
+.item {
+  width: 16rem;
+  height: 16rem;
+  background-color: var(--bg-s);
+  border-radius: 1.2rem;
+
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}

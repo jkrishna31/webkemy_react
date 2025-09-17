@@ -1,0 +1,41 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--bg-q);
+  margin-bottom: 3rem;
+  position: relative;
+
+  .img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+  }
+}
+
+.pii_db {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  min-width: 3rem;
+  min-height: 3rem;
+  border-radius: 50%;
+  padding-inline: 0;
+  padding-block: 0;
+  color: var(--fg-p-alt);
+  background-color: var(--bg-t);
+
+  &:hover {
+    color: var(--red-6);
+  }
+}
+
+.del_icon {
+  width: 1.8rem;
+  height: 1.8rem;
+  stroke-width: .2rem;
+  flex-shrink: 0;
+}

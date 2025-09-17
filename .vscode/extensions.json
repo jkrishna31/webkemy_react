@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "kisstkondoros.vscode-gutter-preview",
+    "csstools.postcss",
+    "bradlc.vscode-tailwindcss",
+    "aljadan.react-svg-viewer",
+    "Lokalise.i18n-ally",
+    "inlang.vs-code-extension"
+  ]
+}

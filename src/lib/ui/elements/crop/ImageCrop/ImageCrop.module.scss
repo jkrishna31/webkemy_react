@@ -1,0 +1,31 @@
+.wrapper {
+  position: relative;
+  width: 26rem;
+  height: 15rem;
+  background-color: var(--bg-q);
+  overflow: hidden;
+  cursor: move;
+  user-select: none;
+}
+
+.selection {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  border: 1px solid var(--border-s);
+  background-color: transparent;
+  border-radius: 50%;
+  // border-radius: .8rem;
+  width: 12rem;
+  height: 12rem;
+  box-shadow: 0 0 0 9999px var(--bg-overlay);
+  z-index: 100;
+}
+
+.img {
+  object-fit: none;
+  width: 100%;
+  height: auto;
+  object-position: center center;
+}

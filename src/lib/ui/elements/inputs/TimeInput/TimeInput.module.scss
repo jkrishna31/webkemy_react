@@ -1,0 +1,56 @@
+.input_wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.input_field {
+    flex: 1;
+    width: 0;
+    height: 4rem;
+    color: var(--fg-p);
+    background: var(--bg-t);
+    border: 1px solid var(--border-s);
+    border-radius: .4rem;
+    padding: .8rem 1rem;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: border .15s linear;
+
+    &:hover {
+        border-color: var(--border-p);
+    }
+
+    &:focus {
+        border-color: var(--blue-6);
+    }
+}
+
+.time_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--bg-s);
+    padding: .6rem;
+    margin-right: 1rem;
+    border-radius: .4rem;
+    color: var(--fg-s);
+
+    &:hover {
+        color: var(--fg-p);
+    }
+}
+
+.clock_icon {
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .clock_icon {
+        width: 1.6rem;
+        height: 1.6rem;
+    }
+}

@@ -1,0 +1,111 @@
+.wrapper {
+  position: relative;
+
+  progress {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border: none;
+    opacity: 0;
+  }
+}
+
+.linear {
+  width: 10rem;
+  height: .6rem;
+  background-color: var(--border-t);
+  border-radius: var(--br-pill);
+
+  .progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: var(--br-pill);
+    background: var(--fg-p-alt);
+    transition: width .1s linear;
+  }
+
+  &:not([data-value="true"]) .progress {
+    width: var(--value);
+  }
+
+  &[data-value="true"] .progress {
+    width: 25%;
+    animation: indeterminate-linear 1s linear alternate infinite;
+  }
+
+  // &::after {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   border-radius: var(--br-pill);
+  //   transition: background;
+  // }
+
+  // &:not([data-value="true"])::after {
+  //   background: linear-gradient(to right, var(--fg-p-alt) var(--value), var(--border-t) var(--value));
+  // }
+
+  // &[data-value="true"]::after {
+  //   width: 20%;
+  //   background: var(--fg-p-alt);
+  //   transform: none;
+  //   animation: indeterminate-linear 1s linear alternate infinite;
+  // }
+}
+
+@keyframes indeterminate-linear {
+  from {
+    left: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    left: 100%;
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.circular {
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  background-color: var(--border-t);
+  transition: background;
+
+  &:not([data-value="true"]) {
+    background: conic-gradient(var(--fg-p-alt) var(--value), var(--border-t) var(--value));
+  }
+
+  &[data-value="true"] {
+    background: conic-gradient(var(--fg-p-alt) 25%, var(--border-t) 25%);
+    animation: indeterminate-circular 1s linear infinite;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: calc(100% - 1.2rem);
+    height: calc(100% - 1.2rem);
+    background: var(--bg-p);
+    border-radius: 50%;
+  }
+}
+
+@keyframes indeterminate-circular {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

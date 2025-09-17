@@ -1,0 +1,204 @@
+@use '@/lib/ui/styles/mixins/animations' as *;
+
+.sf {
+    max-width: 36rem;
+    width: 36rem;
+    margin-left: auto;
+    margin-right: 2rem;
+}
+
+.history_item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: .4rem;
+}
+
+.history_icon {
+    width: 2rem;
+    height: 2rem;
+    color: var(--fg-t);
+    flex-shrink: 0;
+}
+
+.query {
+    flex: 1;
+    font-size: 1.6rem;
+    color: var(--fg-s);
+    padding-block: .8rem;
+    padding-left: 1rem;
+    cursor: pointer;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 30rem;
+
+    &:hover {
+        color: var(--fg-p);
+    }
+}
+
+.delete_btn {
+    flex-shrink: 0;
+    padding: 1rem 1.1rem;
+    color: var(--fg-s-alt);
+
+    &:hover {
+        color: var(--red-6);
+    }
+}
+
+.delete_icon {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .175rem;
+    flex-shrink: 0;
+}
+
+.link_item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    padding-inline: 2rem;
+}
+
+.logo_container {
+    padding: 1rem;
+}
+
+.header_app_logo {
+    height: 1.6rem;
+    width: auto;
+}
+
+.hrc {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#search_logo_container {
+    padding: 1rem;
+    color: inherit;
+}
+
+#n_a_wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.hr_link {
+    padding: 1rem;
+}
+
+.source_code {
+    margin-inline: 1rem;
+}
+
+.search_link {
+    display: none;
+}
+
+.write_icon {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.github_icon {
+    width: 2.8rem;
+    height: 2.8rem;
+}
+
+.menu_btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    color: inherit;
+    padding: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+    .menu_btn {
+        display: none;
+    }
+}
+
+.header_search_icon {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.key_hint {
+    font-size: 1.4rem;
+    color: var(--fg-s);
+    margin-left: .6rem;
+}
+
+.menu_icon {
+    width: 2.4rem;
+    height: 2.4rem;
+}
+
+.wrapper [data-hide="true"] {
+    display: none !important;
+}
+
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        padding-inline: 1rem;
+    }
+
+    .search_link {
+        display: flex;
+    }
+
+    .sf,
+    .mob_hide,
+    .lang_btn,
+    .theme_btn {
+        display: none !important;
+    }
+
+    .hrc {
+        gap: 0rem;
+    }
+
+    .header_search_icon {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .key_hint {
+        display: none;
+    }
+
+    .write_icon,
+    .menu_icon {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
+
+    .github_icon {
+        width: 2.6rem;
+        height: 2.6rem;
+    }
+}
+
+@media screen and (max-width: 348px) {
+    .mob_hide {
+        display: none;
+    }
+}

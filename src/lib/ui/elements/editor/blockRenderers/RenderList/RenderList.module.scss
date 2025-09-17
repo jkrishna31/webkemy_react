@@ -1,0 +1,48 @@
+.data_list {
+    font-size: 1.8rem;
+    line-height: 1.8;
+    list-style-position: outside;
+    padding-left: 3.6rem;
+
+    p {
+        margin-left: .6rem;
+    }
+
+    ::marker {
+        color: var(--fg-t);
+    }
+
+    ol {
+        list-style-type: decimal;
+    }
+
+    ul {
+        list-style-type: disc;
+    }
+}
+
+.root_o_list {
+    list-style-type: decimal;
+}
+
+.root_u_list {
+    list-style-type: disc;
+}
+
+.data_nested_list {
+    margin-left: 3.6rem;
+    margin-bottom: 1rem;
+}
+
+
+@media screen and (max-width: 768px) {
+    .data_list {
+        font-size: 1.6rem;
+        line-height: 1.6;
+        padding-left: 2.6rem;
+    }
+
+    .data_nested_list {
+        margin-left: 2.4rem;
+    }
+}

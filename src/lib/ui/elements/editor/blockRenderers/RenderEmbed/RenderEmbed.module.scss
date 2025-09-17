@@ -1,0 +1,25 @@
+.data_iframe {
+    overflow: hidden;
+    position: relative;
+    height: 0;
+    padding-bottom: 56.25%;
+}
+
+.cp {
+    padding-bottom: 64%;
+}
+
+.iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+
+@media screen and (max-width: 768px) {
+    .cp {
+        padding-bottom: 80%;
+    }
+}

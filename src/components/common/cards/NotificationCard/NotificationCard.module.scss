@@ -1,0 +1,93 @@
+.popup {
+    border-radius: .8rem;
+}
+
+.card_wrapper {
+    max-width: 400px;
+    border-radius: .8rem;
+    overflow: hidden;
+    background: var(--fg-p);
+}
+
+.message_wrapper {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
+    color: var(--bg-p);
+    display: flex;
+    flex-direction: colu mn;
+    align-items: center;
+}
+
+.down_icon {
+    height: .5rem;
+    margin-top: 1rem;
+    animation: out .3s ease-out forwards;
+    color: var(--bg-t);
+}
+
+@keyframes out {
+    from {
+        height: 0;
+    }
+
+    to {
+        height: .5rem;
+    }
+}
+
+.controls_container {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--bg-t);
+    animation: in .3s ease-out forwards;
+}
+
+@keyframes in {
+    from {
+        max-height: 0;
+    }
+
+    to {
+        max-height: 200px;
+    }
+}
+
+.controls_wrapper {
+    flex: 1;
+    border: 1px solid var(--border-s);
+    border-bottom-left-radius: .8rem;
+    border-bottom-right-radius: .8rem;
+    transition: border-color .5s ease-out;
+}
+
+.card_btn {
+    width: 100%;
+    border: none;
+    background: none;
+    padding: 1.4rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--fg-p);
+
+    &:last-child {
+        border-top: 1px solid var(--border-s);
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .message_wrapper {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+
+    .card_btn {
+        font-size: 1.3rem;
+    }
+}

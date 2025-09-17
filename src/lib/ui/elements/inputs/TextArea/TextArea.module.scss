@@ -1,0 +1,19 @@
+.input {
+    width: 100%;
+    max-width: 100%;
+    height: fit-content;
+    border: none;
+    background-color: transparent;
+    color: inherit;
+    resize: none;
+    overflow-y: hidden;
+    flex-shrink: 0;
+    field-sizing: content;
+
+    border-radius: .4rem;
+    padding: 1rem;
+    font-size: 1.6rem;
+}
+
+
+@media screen and (max-width: 768px) {}

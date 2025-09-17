@@ -1,0 +1,9 @@
+import { SVGProps } from "@/types/prop.types";
+
+const MenuIcon = (props: SVGProps) => {
+    return (
+        <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg" {...props}><g stroke="currentColor" strokeWidth="1.5"><circle cx="17.75" cy="6.25" r="4.25" /><circle cx="6.25" cy="6.25" r="4.25" /><circle cx="17.75" cy="17.75" r="4.25" /><circle cx="6.25" cy="17.75" r="4.25" /></g></svg>
+    );
+};
+
+export default MenuIcon;

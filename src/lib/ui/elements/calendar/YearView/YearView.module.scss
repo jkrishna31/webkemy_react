@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.month_wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.month_wrapper>button {
+  font-weight: 500;
+  color: var(--fg-s);
+  margin-inline: auto;
+  padding-bottom: .6rem;
+
+  &:hover {
+    color: var(--fg-p);
+  }
+}

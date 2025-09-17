@@ -1,0 +1,67 @@
+.tab_btns_wrapper {
+    width: auto;
+    height: fit-content;
+    overflow: auto;
+    position: relative;
+    flex-shrink: 0;
+    flex: 1;
+}
+
+.scroll_btn {
+    min-width: 3.5rem;
+    min-height: 3.5rem;
+    color: var(--fg-s);
+    background: linear-gradient(to left, var(--bg-p) 75%, transparent);
+    border-radius: .4rem;
+    flex-shrink: 0;
+    position: sticky;
+    right: 0;
+    padding-inline: 1.6rem .6rem;
+
+    &:hover {
+        color: var(--fg-p);
+    }
+}
+
+.scroll_icon {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .2rem;
+}
+
+.tabs_wrapper {
+    display: flex;
+    gap: .4rem;
+}
+
+.tab_btn {
+    border-radius: 999rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    padding-block: .8rem;
+    padding-inline: 1.4rem;
+    color: var(--fg-s);
+    white-space: nowrap;
+    border: .1rem solid transparent;
+    scroll-margin: 4rem;
+
+    &:hover {
+        background-color: var(--bg-t);
+        color: var(--fg-p);
+    }
+}
+
+.tab_btn[tab-active="1"] {
+    // background-color: var(--bg-s);
+    background-color: var(--fg-p);
+    // color: var(--fg-p);
+    color: var(--bg-p);
+}
+
+@media screen and (max-width: 768px) {
+    .tab_btn {
+        padding-block: .8rem;
+        padding-inline: 1.1rem;
+        font-size: 1.4rem;
+    }
+}

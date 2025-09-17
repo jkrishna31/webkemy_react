@@ -1,0 +1,132 @@
+.container {
+  position: relative;
+}
+
+.content {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.re,
+.rc {
+  position: absolute;
+  user-select: none;
+  touch-action: none;
+  opacity: 0;
+  border-radius: var(--br-pill);
+  border: .1rem solid transparent;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ret,
+.reb,
+.rel,
+.rer,
+.rc {
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: var(--br-pill);
+    background: var(--bg-t);
+    border: .1rem solid var(--blue-3);
+    transition: background .2s linear, border .2s linear;
+  }
+}
+
+.ret,
+.reb {
+  left: 0;
+  width: 100%;
+  height: 1rem;
+  cursor: row-resize;
+
+  &::before {
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    height: 100%;
+    width: min(10rem, 50%);
+  }
+}
+
+.rer,
+.rel {
+  top: 0;
+  height: calc(100% - 1rem);
+  width: 1rem;
+  cursor: col-resize;
+
+  &::before {
+    top: 50%;
+    transform: translate3d(0, -50%, 0);
+    width: 100%;
+    height: min(10rem, 50%);
+  }
+}
+
+.ret {
+  top: 0;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.rer {
+  top: 50%;
+  right: 0;
+  transform: translate3d(50%, -50%, 0);
+}
+
+.reb {
+  bottom: 0;
+  left: 50%;
+  transform: translate3d(-50%, 50%, 0);
+}
+
+.rel {
+  top: 50%;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.rc {
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  border: .1rem solid transparent;
+
+  &::before {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.rctl {
+  top: 0;
+  left: 0;
+  transform: translate3d(-50%, -50%, 0);
+  cursor: nwse-resize;
+}
+
+.rctr {
+  top: 0;
+  right: 0;
+  transform: translate3d(50%, -50%, 0);
+  cursor: nesw-resize;
+}
+
+.rcbr {
+  bottom: 0;
+  right: 0;
+  transform: translate3d(50%, 50%, 0);
+  cursor: nwse-resize;
+}
+
+.rcbl {
+  bottom: 0;
+  left: 0;
+  transform: translate3d(-50%, 50%, 0);
+  cursor: nesw-resize;
+}

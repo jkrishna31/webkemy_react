@@ -1,0 +1,71 @@
+.container {
+  overflow: auto;
+}
+
+.scroll_btn {
+  min-width: 3.5rem;
+  min-height: fit-content;
+  height: 100%;
+  color: var(--fg-s);
+  flex-shrink: 0;
+  position: absolute;
+  z-index: 1;
+
+  &:hover {
+    color: var(--fg-p);
+  }
+}
+
+.btn_left {
+  top: 0;
+  left: 0;
+  padding-inline: .6rem 1.6rem;
+  background: linear-gradient(to right, var(--bg-p) 75%, transparent);
+  animation: fil .5s ease;
+}
+
+.btn_right {
+  top: 0;
+  right: 0;
+  padding-inline: 1.6rem .6rem;
+  background: linear-gradient(to left, var(--bg-p) 75%, transparent);
+  animation: fir .5s ease;
+}
+
+.scroll_icon {
+  width: 2rem;
+  height: 2rem;
+  stroke-width: .2rem;
+}
+
+@keyframes fil {
+  from {
+    transform: translate3d(0rem, 0, 0) scaleX(2);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes fir {
+  from {
+    transform: translate3d(-0rem, 0, 0) scaleX(2);
+    opacity: 0;
+  }
+
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .scroll_icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
