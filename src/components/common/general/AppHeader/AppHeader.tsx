@@ -15,30 +15,12 @@ import { AppMenu } from "..";
 import styles from "./AppHeader.module.scss";
 
 const history = [
-    "React 19 new features",
-    "chatgpt use cases",
-    "Django setup with aws sdk",
+    "lorem ipsum dolor sit amet",
+    "adipisci assumenda animi",
+    "corrupti vitae",
     "dynamodb basic concepts",
-    "introduction to machine learning",
-    "next13",
-    "React 19 new features",
-    "chatgpt use cases",
-    "Django setup with aws sdk",
-    "dynamodb basic concepts",
-    "introduction to machine learning",
-    "next13",
-    "React 19 new features",
-    "chatgpt use cases",
-    "Django setup with aws sdk",
-    "dynamodb basic concepts",
-    "introduction to machine learning",
-    "next13",
-    "React 19 new features",
-    "chatgpt use cases",
-    "Django setup with aws sdk",
-    "dynamodb basic concepts",
-    "introduction to machine learning",
-    "next13",
+    "magnam distinctio corrupti vitae",
+    "similique nesciunt",
 ];
 
 export interface AppHeaderProps extends ComponentProps<"div"> {
