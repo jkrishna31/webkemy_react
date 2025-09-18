@@ -109,7 +109,7 @@
   .opacity_slider {
 
     &[aria-orientation="vertical"] {
-      width: 1rem;
+      width: 1rem !important;
       border-radius: var(--br-pill);
 
       &::-webkit-slider-thumb {
@@ -134,6 +134,7 @@
       border-width: .2rem;
       border-color: var(--fg-p);
     }
+
   }
 
   .active_color {

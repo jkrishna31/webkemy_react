@@ -15,7 +15,7 @@
     border: .1rem solid var(--border-s);
   }
 
-  .input {
+  input {
     appearance: none;
     -webkit-appearance: none;
     border-radius: .4rem;
@@ -127,7 +127,7 @@
     background-color: var(--border-p) !important;
   }
 
-  .input {
+  input {
     border: none;
     background-color: transparent;
     position: relative;
