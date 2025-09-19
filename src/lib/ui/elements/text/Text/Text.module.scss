@@ -14,6 +14,12 @@
   &[data-normal="true"] {
     font-weight: normal;
   }
+
+  &:disabled,
+  &[aria-disabled="true"] {
+    opacity: .5;
+    cursor: not-allowed;
+  }
 }
 
 .p {
@@ -77,6 +83,12 @@
   color: var(--blue-1);
   text-decoration: underline;
   text-underline-offset: .2rem;
+}
+
+.mark,
+.code,
+.a {
+  width: fit-content;
 }
 
 @media screen and (max-width: 768px) {

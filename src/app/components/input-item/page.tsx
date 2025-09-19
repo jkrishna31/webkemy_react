@@ -33,7 +33,7 @@ const page = () => {
       </InputItem>
 
       <InputItem<"fieldset"> as="fieldset" inline className={styles.wrapper}>
-        <Text<"legend"> as="legend">{"Label 3 (fieldset)"}</Text>
+        <Text<"legend"> as="legend">{"Label 4 (fieldset)"}</Text>
         <InputItem inline className={styles.option}>
           <Radio name="option" id="1" value="1" />
           <Text<"label"> as="label" inline normal htmlFor="1">{"Option 1"}</Text>

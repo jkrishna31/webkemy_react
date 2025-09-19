@@ -2,6 +2,7 @@
 
 .code_wrapper {
   position: relative;
+  display: grid;
 
   .code_container {
     font-size: 1.4rem;
@@ -10,6 +11,7 @@
     overflow: auto;
     background-color: var(--bg-t);
     border-radius: .8rem;
+    height: fit-content;
 
     @include scrollbar_x();
 

@@ -2,9 +2,9 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-import { ToastCard } from "@/components/common/cards";
 import { useToastActions, useToasts } from "@/data/stores";
 import { useSwipe } from "@/lib/hooks";
+import { ToastCard } from "@/lib/ui/elements/toast";
 
 import styles from "./ToastManager.module.scss";
 

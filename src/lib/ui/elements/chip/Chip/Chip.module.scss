@@ -1,8 +1,10 @@
 .chip {
+  width: fit-content;
   background-color: var(--bg-t);
   border-radius: .4rem;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   font-size: 1.4rem;
   padding-left: .7rem;
   border: .1rem solid transparent;

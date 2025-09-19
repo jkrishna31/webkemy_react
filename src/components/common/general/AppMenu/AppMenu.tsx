@@ -319,6 +319,7 @@ export const menuItems = [
                 key: "geo-chart",
                 href: "/components/geo-chart",
                 primary: "Geo Chart",
+                disabled: true,
             },
         ],
     },

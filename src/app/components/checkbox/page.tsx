@@ -29,8 +29,8 @@ const Page = () => {
         </InputItem>
 
         <InputItem inline className={styles.option}>
-          <Checkbox name="option" id="3" value={3} />
-          <Text<"label"> as="label" inline normal htmlFor="3">{"Option 3"}</Text>
+          <Checkbox name="option" id="3" value={3} disabled />
+          <Text<"label"> as="label" inline normal htmlFor="3" disabled>{"Option 3"}</Text>
         </InputItem>
 
         <InputItem inline className={styles.option}>

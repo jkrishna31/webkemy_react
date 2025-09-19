@@ -17,6 +17,7 @@ const InputItem = <T extends ElementType>({
     return (
         <Tag
             className={`${styles.wrapper} ${inline ? styles.inline : null} ${className}`}
+            aria-disabled={props.disabled}
             {...props}
         >
             {children}

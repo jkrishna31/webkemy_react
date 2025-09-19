@@ -2,6 +2,7 @@
 
 .fig {
   overflow: auto;
+  max-width: 100%;
   @include scrollbar_x(.4rem);
 }
 

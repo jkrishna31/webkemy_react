@@ -9,10 +9,11 @@ export type TextProps<T extends ElementType> = {
   inline?: boolean;
   normal?: boolean;
   children?: ReactNode;
+  disabled?: boolean;
 } & ComponentProps<T>;
 
 const Text = <T extends ElementType = "p">({
-  as = "p", inline, normal,
+  as = "p", inline, normal, disabled,
   children, className,
   ...props
 }: TextProps<T>) => {
@@ -24,6 +25,7 @@ const Text = <T extends ElementType = "p">({
     <Element
       className={`${styles[as]} ${className}`}
       data-inline={inline} data-normal={normal}
+      aria-disabled={props["aria-disabled"] || disabled}
       {...props}
     >
       {children}

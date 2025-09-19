@@ -13,8 +13,11 @@
     width: 100%;
 
     display: grid;
-    align-items: center;
+    grid-auto-rows: auto;
+    grid-auto-columns: 1fr;
+    align-content: start;
     justify-items: center;
+    justify-content: center;
     gap: 2rem;
   }
 }
