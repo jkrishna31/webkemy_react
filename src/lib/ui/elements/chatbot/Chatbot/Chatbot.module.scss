@@ -27,6 +27,7 @@
 
 .previews_container {
   pointer-events: none;
+  touch-action: none;
 
   max-width: 20rem;
   width: 20rem;
@@ -42,7 +43,8 @@
 }
 
 .preview_clear_btn {
-  pointer-events: auto;
+  pointer-events: inherit;
+  touch-action: initial;
   border-radius: 50%;
   background-color: var(--bg-t);
   color: var(--fg-s);
@@ -63,7 +65,8 @@
 }
 
 .card {
-  pointer-events: auto;
+  pointer-events: initial;
+  touch-action: initial;
   width: auto;
   border-radius: .8rem;
   background-color: var(--bg-t);
@@ -84,6 +87,7 @@
 @media screen and (min-width: 768px) {
   .previews_container {
     pointer-events: none;
+    touch-action: none;
   }
 
   .preview_clear_btn {
@@ -93,7 +97,8 @@
   .wrapper_inner:hover,
   .wrapper_inner:focus-within {
     .previews_container {
-      pointer-events: auto;
+      pointer-events: initial;
+      touch-action: initial;
     }
 
     .preview_clear_btn {

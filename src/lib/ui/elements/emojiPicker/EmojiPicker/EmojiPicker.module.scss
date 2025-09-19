@@ -75,6 +75,7 @@
 .tablist[aria-hidden="true"] {
   opacity: .4;
   pointer-events: none;
+  touch-action: none;
 }
 
 .emojis_wrapper {

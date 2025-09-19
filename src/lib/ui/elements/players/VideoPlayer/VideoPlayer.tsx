@@ -66,6 +66,7 @@ const VideoPlayer = ({
     if (containerRect) {
       const xMid = containerRect.x + (containerRect.width / 2);
       updateCurrTime(currTime + (e.clientX < xMid ? -5 : 5), true);
+      hideOverlay();
     }
   };
 

@@ -16,6 +16,7 @@
   &[data-disabled="true"] {
     cursor: not-allowed;
     pointer-events: none;
+    touch-action: none;
     opacity: .6;
   }
 
