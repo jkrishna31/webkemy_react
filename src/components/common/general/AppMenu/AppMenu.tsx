@@ -173,6 +173,11 @@ export const menuItems = [
                 primary: "Banner",
             },
             {
+                key: "tablist",
+                href: "/components/tablist",
+                primary: "Tablist",
+            },
+            {
                 key: "breadcrumb",
                 href: "/components/breadcrumb",
                 primary: "Breadcrumb",
@@ -186,7 +191,6 @@ export const menuItems = [
                 key: "carousel",
                 href: "/components/carousel",
                 primary: "Carousel",
-                disabled: true,
             },
             {
                 key: "chatbot",

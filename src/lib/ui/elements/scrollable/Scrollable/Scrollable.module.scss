@@ -21,7 +21,7 @@
   left: 0;
   padding-inline: .6rem 1.6rem;
   background: linear-gradient(to right, var(--bg-p) 75%, transparent);
-  animation: fil .5s ease;
+  animation: fil .4s ease;
 }
 
 .btn_right {
@@ -29,7 +29,7 @@
   right: 0;
   padding-inline: 1.6rem .6rem;
   background: linear-gradient(to left, var(--bg-p) 75%, transparent);
-  animation: fir .5s ease;
+  animation: fir .4s ease;
 }
 
 .scroll_icon {
@@ -40,7 +40,7 @@
 
 @keyframes fil {
   from {
-    transform: translate3d(0rem, 0, 0) scaleX(2);
+    transform: translate3d(-.4rem, 0, 0);
     opacity: 0;
   }
 
@@ -52,7 +52,7 @@
 
 @keyframes fir {
   from {
-    transform: translate3d(-0rem, 0, 0) scaleX(2);
+    transform: translate3d(.4rem, 0, 0);
     opacity: 0;
   }
 

@@ -32,7 +32,7 @@
 }
 
 .slide_btns {
-  --slide-btn-size: 1.2rem;
+  --slide-btn-size: 1rem;
   position: absolute;
   bottom: 2rem;
 
@@ -49,13 +49,14 @@
   height: var(--slide-btn-size);
   background-color: var(--fg-t-alt);
   border-radius: var(--br-pill);
-  // box-shadow: 0 0 .2rem var(--shadow-p);
-  transition: width .3s ease;
-  border: .2rem solid var(--bg-p);
+  // box-shadow: 0 0 .1rem var(--shadow-p);
+  transition: width .4s ease, border-color .4s ease;
+  border: .2rem solid transparent;
 
   &[data-active="true"] {
     background-color: var(--fg-p-alt);
     width: calc(var(--slide-btn-size) * 2);
+    border-color: var(--bg-p);
   }
 }
 
@@ -77,6 +78,10 @@
   &:hover {
     background: var(--gray-13-70);
   }
+
+  &:disabled {
+    opacity: .5;
+  }
 }
 
 .btn_prev {
@@ -94,7 +99,7 @@
   }
 
   .slide_btns {
-    --slide-btn-size: 1rem;
+    --slide-btn-size: .8rem;
     bottom: .8rem;
   }
 

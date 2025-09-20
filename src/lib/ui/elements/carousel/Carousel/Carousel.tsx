@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useState } from "react";
+import React, { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
 
@@ -17,30 +17,66 @@ export interface CarouselProps extends ComponentProps<"div"> {
 }
 
 const Carousel = ({
-  children, className, slides,
+  children, className, slides = [],
   ...props
 }: CarouselProps) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
-  // focus on specific slide
-  // auto, looped scroll
-  // play progress
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // cons -  loop scroll, slide can be skipped
+  // todo - autoplay
+
+  useEffect(() => {
+    const targetSlide = containerRef.current?.querySelector(`[data-slide="${activeSlide}"]`);
+    targetSlide?.scrollIntoView({ behavior: "smooth", inline: "center" });
+  }, [activeSlide, slides.length]);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const slides = containerRef.current?.querySelectorAll("[data-slide]");
+      const observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          const activeSlide = entry.target.closest("[data-slide]");
+          if (activeSlide && entry.intersectionRatio === 1) {
+            setActiveSlide(Number(activeSlide?.getAttribute("data-slide")));
+          }
+        }
+      }, {
+        root: containerRef.current,
+        threshold: [0, 1],
+      });
+      slides?.forEach(slide => observer.observe(slide));
+      return () => observer.disconnect();
+    }
+  }, []);
 
   return (
-    <div role="region" className={`${styles.wrapper} ${className}`} {...props}>
+    <div
+      role="region"
+      className={`${styles.wrapper} ${className}`}
+      {...props}
+    >
       <button
         className={styles.btn_prev}
         aria-label="Prev Slide"
+        disabled={activeSlide === 0}
+        onClick={() => setActiveSlide(Math.max(0, activeSlide - 1))}
       >
         <ChevronLeftIcon />
       </button>
       <button
         className={styles.btn_next}
         aria-label="Next Slide"
+        disabled={activeSlide === (slides?.length ?? 0) - 1}
+        onClick={() => setActiveSlide(Math.min(slides.length - 1, activeSlide + 1))}
       >
         <ChevronRightIcon />
       </button>
-      <div className={`${styles.slides} scroll_invisible`}>
+      <div
+        ref={containerRef}
+        className={`${styles.slides} scroll_invisible`}
+      >
         {
           slides?.map((slide, idx) => {
             return (
