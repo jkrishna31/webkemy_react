@@ -5,7 +5,7 @@ import styles from "./page.module.scss";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <Button<"a"> variant="secondary" href="/components">{"Components"}</Button>
+      <Button<"a"> variant="primary" href="/components">{"Components"}</Button>
     </main>
   );
 }
