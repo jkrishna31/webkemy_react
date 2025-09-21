@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ComponentProps, useEffect } from "react";
 
 import { useActiveDay, useActiveMonth, useActiveYear, useCalendarActions, useWeekDayStart } from "@/data/stores";

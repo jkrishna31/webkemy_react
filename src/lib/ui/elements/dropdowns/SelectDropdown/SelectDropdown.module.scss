@@ -95,9 +95,8 @@
     z-index: 1;
 
     .search_input_wrapper {
-        border-radius: .4rem;
-        padding-inline: 0;
-        // border-color: var(--border-s);
+        border-radius: .4rem !important;
+        padding-inline: 0 !important;
     }
 
     .search_input {

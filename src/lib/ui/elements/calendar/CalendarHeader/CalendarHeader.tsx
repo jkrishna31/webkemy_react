@@ -51,6 +51,8 @@ const CalendarHeader = ({
   const showOutsideDays = useShowOutsideDays();
   const { setField, setStore } = useCalendarActions();
 
+  const daysInCurrentMonth = new Date(Date.UTC(activeYear, activeMonth + 1, 0)).getUTCDate();
+
   const calendarMoreOpts = [
     {
       label: "Toggle Start of Week", value: 0,
@@ -101,7 +103,7 @@ const CalendarHeader = ({
             <SelectDropdown
               selected={activeDay}
               options={
-                Array.from({ length: 31 }).map((_, idx: number) => ({
+                Array.from({ length: daysInCurrentMonth }).map((_, idx: number) => ({
                   label: String(idx + 1), value: idx + 1
                 }))
               }

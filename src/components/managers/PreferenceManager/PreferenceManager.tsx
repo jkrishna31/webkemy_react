@@ -33,7 +33,7 @@ const PreferenceManager = () => {
             options={themeModal ? themeData : langData}
             selected={themeModal ? theme : lang}
             keey={themeModal ? "theme" : "lang"}
-            title={themeModal ? "Pick Your Theme" : "Pick Your Language"}
+            title={themeModal ? "Theme" : "Language"}
             placeholder={themeModal ? "Search theme..." : "Search language..."}
             onSelect={manageSelection}
             onCancel={() => closeModal(themeModal ? "theme" : "lang")}

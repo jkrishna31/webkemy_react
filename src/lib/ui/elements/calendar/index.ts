@@ -1,6 +1,7 @@
 export * from "./CalendarBody";
 export * from "./CalendarHeader";
 export * from "./CalendarWrapper";
+export * from "./DatePicker";
 export * from "./DayCard";
 export * from "./DayView";
 export * from "./EventBadge";

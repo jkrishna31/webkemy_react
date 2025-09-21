@@ -1,3 +1,5 @@
+"use client";
+
 import React, { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
 
 import { ResizableContainer } from "@/components/common/containers";
