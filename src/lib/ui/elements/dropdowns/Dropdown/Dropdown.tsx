@@ -34,6 +34,7 @@ const Dropdown = ({
   const getClasses = () => {
     const classes: string[] = [];
     if (yPos) {
+
       classes.push(styles[y]);
     }
     if (xPos) {

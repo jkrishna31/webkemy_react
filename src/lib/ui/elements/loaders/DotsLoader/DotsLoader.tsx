@@ -10,7 +10,7 @@ export interface DotsLoaderProps extends ComponentProps<"div"> {
 
 const DotsLoader = (props: SVGProps) => {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" {...props}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" {...props}>
             <circle cx="4" cy="12" r="1.5" fill="currentColor">
                 <animate attributeName="r" dur="0.75s" repeatCount="indefinite" values="1.5;3;1.5" />
             </circle>

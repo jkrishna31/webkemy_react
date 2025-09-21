@@ -1,0 +1,118 @@
+.main {
+  padding-block: 1rem;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: min(90rem, 100%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  // justify-content: space-between;
+  gap: 2rem;
+  padding-block: 2rem;
+}
+
+.title {
+  width: fit-content;
+  font-size: 2.2rem;
+  line-height: 2rem;
+  font-weight: 500;
+  color: inherit;
+  padding-block: .6rem;
+}
+
+.editor_wrapper {
+  width: 100%;
+  width: 90rem;
+  min-height: 100vh;
+
+  padding-block: 4rem;
+  padding-inline: 4.9rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid var(--border-t);
+  border-radius: 1rem;
+  position: relative;
+}
+
+.toolbar {
+  width: fit-content;
+  margin-top: auto;
+  margin-inline: auto;
+  position: sticky;
+  bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+
+.icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.tool_icon {
+  color: var(--fg-s-alt);
+}
+
+.link_input_wrapper {
+  flex-direction: column;
+}
+
+.link_input {
+  height: fit-content !important;
+  padding: 1.2rem 1rem !important;
+
+  &:last-of-type {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top: .1rem solid var(--border-s) !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    padding-top: 0;
+  }
+
+  .header {
+    padding-block: 1rem 2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+    line-height: 1.5rem;
+  }
+
+  .editor_wrapper {
+    padding-block: 0 2rem;
+    padding-inline: 0;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+  }
+
+  .toolbar {
+    margin-inline: 0;
+    bottom: .2rem;
+  }
+
+  .link_input {
+    font-size: 1.4rem !important;
+  }
+
+  .icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .tool_icon {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}

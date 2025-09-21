@@ -29,7 +29,11 @@ const Carousel = ({
 
   useEffect(() => {
     const targetSlide = containerRef.current?.querySelector(`[data-slide="${activeSlide}"]`);
-    targetSlide?.scrollIntoView({ behavior: "smooth", inline: "center" });
+    targetSlide?.scrollIntoView({
+      behavior: "smooth",
+      block: "nearest",
+      inline: "nearest",
+    });
   }, [activeSlide, slides.length]);
 
   useEffect(() => {

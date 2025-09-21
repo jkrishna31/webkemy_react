@@ -98,6 +98,7 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
                     }
                 </ul>
             }
+            xPos="left"
         >
             <PlusIcon className={styles.plus_icon} />
         </Dropdown>

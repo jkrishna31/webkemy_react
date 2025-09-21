@@ -6,12 +6,12 @@
     display: flex;
 
     .selector {
-        height: 3.5rem;
-        width: 3.5rem;
+        height: 3rem;
+        width: 3rem;
         border-radius: 4rem;
-        background: var(--bg-p);
-        border: 1px solid var(--border-s);
-        color: var(--fg-p);
+        background: var(--fg-p-alt);
+        // border: 1px solid var(--border-s);
+        color: var(--bg-p);
         font-size: 2rem;
         padding: 0;
         display: flex;
@@ -22,7 +22,8 @@
 
     .plus_icon {
         width: 2.2rem;
-        height: auto;
+        height: 2.2rem;
+        stroke-width: .2rem;
     }
 
     .tools_list {
@@ -112,7 +113,7 @@
         }
 
         .plus_icon {
-            width: 1.8rem !important;
+            width: 1.8rem;
         }
 
         .kb {
