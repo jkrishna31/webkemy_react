@@ -82,12 +82,6 @@ export const menuItems = [
                 primary: "Radio",
             },
             {
-                key: "datetime",
-                href: "/components/datetime",
-                primary: "Datetime",
-                disabled: true,
-            },
-            {
                 key: "file-input",
                 href: "/components/file-input",
                 primary: "File Input",
@@ -141,6 +135,12 @@ export const menuItems = [
                 key: "emoji-picker",
                 href: "/components/emoji-picker",
                 primary: "Emoji Picker",
+            },
+            {
+                key: "date-picker",
+                href: "/components/date-picker",
+                primary: "Date Picker",
+                disabled: true,
             },
         ],
     },

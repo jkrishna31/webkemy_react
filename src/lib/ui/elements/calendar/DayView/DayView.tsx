@@ -5,9 +5,9 @@ import React, { ComponentProps, useCallback, useMemo, useRef, useState } from "r
 import { ResizableContainer } from "@/components/common/containers";
 import { Resizers } from "@/components/common/containers/ResizableContainer";
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useEvents, useTimeFormat, useWeekDayStart, useWindowSize } from "@/data/stores";
+import { useCalendarActions } from "@/data/stores";
 import { CalendarEvent, EventBadge } from "@/lib/ui/elements/calendar/EventBadge";
-import { getDaysInMonth, getRelativeMonth, getWeekOfTheMonth } from "@/lib/utils/datetime.utils";
+import { getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { debounce, isNullish } from "@/lib/utils/general.utils";
 import { CalendarDay } from "@/types/calendar.types";
 
@@ -16,8 +16,15 @@ import styles from "./DayView.module.scss";
 export const DAY_CELL_SIZE_IN_PX = 50;
 
 export interface DayViewProps extends ComponentProps<"div"> {
-  onAdd?: any
-  days?: number
+  day: number;
+  month: number;
+  year: number;
+  week?: number;
+  weekDayStart?: 0 | 1;
+  timeFormat?: "12h" | "24h";
+  days?: number;
+  onAdd?: any;
+  events?: CalendarEvent[];
 }
 
 const getCoords = (ev: Partial<CalendarEvent>) => {
@@ -109,17 +116,12 @@ const getDaysDetails = (
 };
 
 const DayView = ({
+  day, month, year, week, weekDayStart = 0, timeFormat = "12h",
+  events,
   onAdd,
   className,
   days = 1,
 }: DayViewProps) => {
-  const timeFormat = useTimeFormat();
-  const activeWeek = useActiveWeek();
-  const activeDay = useActiveDay();
-  const activeMonth = useActiveMonth();
-  const activeYear = useActiveYear();
-  const weekDayStart = useWeekDayStart();
-  const events = useEvents();
   const { setStore, setField, getSegregatedEvents } = useCalendarActions();
 
   const segregatedEvents = getSegregatedEvents();
@@ -140,9 +142,9 @@ const DayView = ({
   const [hideDraggable, setHideDraggable] = useState(false);
 
   const currDate = new Date();
-  const currMonthAndYear = (activeMonth) === currDate.getMonth() && activeYear === currDate.getFullYear();
+  const currMonthAndYear = month === currDate.getMonth() && year === currDate.getFullYear();
 
-  const weekDetails: CalendarDay[] = days > 1 ? getDaysDetails(new Date(activeYear, activeMonth, activeDay), weekDayStart) : [{ date: [activeYear, activeMonth, activeDay], monthType: "curr" }];
+  const weekDetails: CalendarDay[] = days > 1 ? getDaysDetails(new Date(year, month, day), weekDayStart) : [{ date: [year, month, day], monthType: "curr" }];
 
   const getTime = useCallback((idx: number) => {
     const integerPart = Math.floor(idx);
@@ -187,8 +189,8 @@ const DayView = ({
       if (selection[0]) {
         const [, sDay, sHr, sMonType] = selection[0].split(" ");
         const [, eDay, eHr, eMonType] = selection[1].split(" ");
-        const sDate = new Date(activeYear, getRelativeMonth(activeMonth, sMonType), Number(sDay), Number(sHr));
-        const eDate = new Date(activeYear, getRelativeMonth(activeMonth, eMonType), Number(eDay), Number(eHr));
+        const sDate = new Date(year, getRelativeMonth(month, sMonType), Number(sDay), Number(sHr));
+        const eDate = new Date(year, getRelativeMonth(month, eMonType), Number(eDay), Number(eHr));
         const earlierDate = sDate <= eDate ? sDate : eDate;
         const laterDate = sDate <= eDate ? eDate : sDate;
         laterDate.setHours(laterDate.getHours() + 1);
@@ -214,7 +216,7 @@ const DayView = ({
     const hrDetails = hrCellElem?.getAttribute("data-hour");
     if (hrDetails) {
       const [, cDay, cHr, cMonType] = hrDetails.split(" ");
-      const d = new Date(activeYear, getRelativeMonth(activeMonth, cMonType), Number(cDay), Number(cHr));
+      const d = new Date(year, getRelativeMonth(month, cMonType), Number(cDay), Number(cHr));
       const start = d.toUTCString();
       d.setHours(d.getHours() + 1);
       const end = d.toUTCString();
@@ -260,7 +262,7 @@ const DayView = ({
     if (dayTimeDropped) {
       const evId = e.dataTransfer.getData("text/plain");
       const [_, dayDropped, hourDropped, monthType] = dayTimeDropped.split(" ");
-      const relativeMonth = getRelativeMonth(activeMonth, monthType);
+      const relativeMonth = getRelativeMonth(month, monthType);
       if (evId === "new" && newEvSpan?.start) {
         const newDates = getUpdatedDatetime(newEvSpan.start, newEvSpan.end, {
           month: relativeMonth,
@@ -269,7 +271,7 @@ const DayView = ({
         });
         setNewEvSpan({ ...newDates });
       } else {
-        const newEvents = events.map(ev => {
+        const newEvents = events?.map(ev => {
           if (ev.id === evId) {
             const newDates = getUpdatedDatetime(ev.start ?? "", ev.end ?? "", {
               month: relativeMonth,
@@ -395,7 +397,7 @@ const DayView = ({
       return null;
     }
     const day = weekDetails[idx];
-    const mon = getRelativeMonth(activeMonth, day.monthType);
+    const mon = getRelativeMonth(month, day.monthType);
     const date = new Date(newEvSpan.start);
     if (!(date.getDate() === day.date[2] && date.getMonth() === mon)) {
       return null;
@@ -431,7 +433,7 @@ const DayView = ({
       <div className={`${styles.col} ${styles.hr_col}`}>
         {
           days > 1 ? (
-            <div className={styles.week_number}>{"W"}{activeWeek}</div>
+            <div className={styles.week_number}>{"W"}{week}</div>
           ) : null
         }
         <div className={styles.hour_marks}>
@@ -465,7 +467,7 @@ const DayView = ({
                       data-day-state={
                         (currMonthAndYear && currDate.getDate() === weekDetails[idx].date[2])
                           ? "today"
-                          : activeDay === weekDetails[idx].date[2]
+                          : day === weekDetails[idx].date[2]
                             ? "active"
                             : ""
                       }
@@ -494,8 +496,8 @@ const DayView = ({
         >
           {
             Array.from({ length: days }).map((_, idx) => {
-              const mon = getRelativeMonth(activeMonth, weekDetails[idx].monthType);
-              const yr = activeYear;
+              const mon = getRelativeMonth(month, weekDetails[idx].monthType);
+              const yr = year;
               return (
                 <div
                   key={idx}

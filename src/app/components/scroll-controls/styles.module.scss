@@ -1,6 +1,6 @@
 .list {
   width: auto;
-  max-width: 60rem;
+  max-width: min(100%, 60rem);
   height: auto;
   max-height: fit-content;
   overflow: auto;

@@ -1,1 +1,1 @@
-export { default as YearView } from "./YearView";
+export { default as YearView, type YearViewProps } from "./YearView";

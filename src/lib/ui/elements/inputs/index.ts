@@ -1,7 +1,6 @@
 export * from "./Checkbox";
 export * from "./ColorPicker";
 export * from "./DateInput";
-export * from "./DatePicker";
 export * from "./FileInput";
 export * from "./GeneralInput";
 export * from "./InputFieldWrapper";
@@ -16,4 +15,3 @@ export * from "./Switch";
 export * from "./TagsInput";
 export * from "./TextArea";
 export * from "./TimeInput";
-export * from "./TimePicker";

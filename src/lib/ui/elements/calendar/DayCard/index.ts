@@ -1,1 +1,1 @@
-export { default as DayCard } from "./DayCard";
+export { default as DayCard, type DayCardProps } from "./DayCard";

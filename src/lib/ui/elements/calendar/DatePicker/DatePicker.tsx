@@ -1,24 +1,160 @@
-import React, { ComponentProps } from "react";
+"use client";
+
+import React, { ComponentProps, useEffect, useState } from "react";
+
+import { months, monthsOrder } from "@/data/general/datetime";
+import { Button } from "@/lib/ui/elements/butttons";
+import { MonthView } from "@/lib/ui/elements/calendar/MonthView";
+import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, CrossIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./DatePicker.module.scss";
+
+const monthsOptions = monthsOrder.map(month => months[month]);
+
+const dateFieldMapping = {
+  year: 0,
+  month: 1,
+  day: 2,
+};
+
+const getInitialDate = (range?: boolean) => {
+  const date = new Date();
+  const day = date.getUTCDate();
+  const month = date.getUTCMonth();
+  const year = date.getUTCFullYear();
+  return range ? [[year, month, day], [year, month, day]] : [[year, month, day]];
+};
 
 export interface DatePickerProps extends ComponentProps<"input"> {
   range?: boolean
 }
 
 const DatePicker = ({
-  range,
+  range, value, onInput, onChange,
   min, max,
   ...props
 }: DatePickerProps) => {
+  const [_value, setValue] = useState<Array<number[]>>([]);
+  const [activeType, setActiveType] = useState<"start" | "end">("start");
+
+  const activeMonth = ((range && activeType === "end") ? _value?.[1]?.[1] : _value?.[0]?.[1]) || 0;
+  const activeYear = ((range && activeType === "end") ? _value?.[1]?.[0] : _value?.[0]?.[0]) || 2025;
+
+  const startDateSelected = _value?.[0]?.filter(Boolean)?.length === 3;
+  const endDateSelected = _value?.[1]?.filter(Boolean)?.length === 3;
+
+  const updateDateField = (newDateField: number, type: "month" | "year" | "day") => {
+    if (range) {
+      setValue(currValue => {
+        const newValue = [
+          [...(currValue[0] ?? [])],
+          [...(currValue[1] ?? [])],
+        ];
+        const idx = activeType === "end" ? 1 : 0;
+        newValue[idx][dateFieldMapping[type]] = newDateField;
+        return newValue;
+      });
+    } else {
+      setValue(currValue => [[
+        type === "year" ? newDateField : currValue[0]?.[0],
+        type === "month" ? newDateField : currValue[0]?.[1],
+        type === "day" ? newDateField : currValue[0]?.[2],
+      ]]);
+    }
+  };
+
+  const clearDate = (type: "start" | "end") => {
+    if (range) {
+      setValue(currValue => {
+        const newValue = [[...(currValue[0] ?? [])], [...(currValue[1] ?? [])]];
+        const idx = type === "end" ? 1 : 0;
+        newValue[idx] = [];
+        return newValue;
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (startDateSelected || endDateSelected) {
+      onInput?.({ target: { value: _value } } as any);
+      onChange?.({ target: { value: _value } } as any);
+    }
+  }, [_value, endDateSelected, onChange, onInput, startDateSelected]);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-
+        <Button variant="tertiary" className={styles.nav_btn}>
+          <ChevronLeftIcon />
+        </Button>
+        <div>
+          <SelectDropdown
+            selected={activeMonth}
+            onOptionSelect={(item) => updateDateField(item.value as number, "month")}
+            transformSelected={op => op?.label.slice(0, 3)}
+            options={monthsOptions}
+            allowSearch
+            xPos="left"
+          />
+          <SelectDropdown
+            selected={activeYear}
+            onOptionSelect={(item) => updateDateField(item.value as number, "year")}
+            options={[{ label: "2020", value: 2020 }, { label: "2025", value: 2025 }, { label: "2030", value: 2030 },]}
+            allowSearch
+            xPos="left"
+          />
+        </div>
+        <Button variant="tertiary" className={styles.nav_btn}>
+          <ChevronRightIcon />
+        </Button>
       </div>
-      <div className={styles.footer}>
 
-      </div>
+      <MonthView mode="mini" month={activeMonth} year={activeYear} />
+
+      {
+        range ? (
+          <div className={styles.footer}>
+            <div className={styles.entry} data-active={activeType === "start"} data-value={startDateSelected}>
+              <button
+                onClick={() => setActiveType("start")}
+                className={styles.date_value}
+              >
+                {startDateSelected ? _value[0].join("-") : "Start Date"}
+              </button>
+              {
+                startDateSelected ? (
+                  <button
+                    className={styles.clear_btn}
+                    onClick={() => clearDate("start")}
+                  >
+                    <CrossIcon />
+                  </button>
+                ) : null
+              }
+            </div>
+            <ChevronsRightIcon />
+            <div className={styles.entry} data-active={activeType === "end"} data-value={endDateSelected}>
+              <button
+                onClick={() => setActiveType("end")}
+                className={styles.date_value}
+              >
+                {endDateSelected ? _value[1].join("-") : "End Date"}
+              </button>
+              {
+                endDateSelected ? (
+                  <button
+                    className={styles.clear_btn}
+                    onClick={() => clearDate("end")}
+                  >
+                    <CrossIcon />
+                  </button>
+                ) : null
+              }
+            </div>
+          </div>
+        ) : null
+      }
     </div>
   );
 };

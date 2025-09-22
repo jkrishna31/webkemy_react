@@ -95,20 +95,20 @@ const AppHeader = ({
                             <GithubLogo className={styles.github_icon} />
                         </Avatar>
                         <button
-                            aria-label="change language"
-                            className={`${styles.hr_link} ${styles.lang_btn}`}
-                            title="Change Language"
-                            onClick={() => updateModalField("lang", true)}
-                        >
-                            <GlobeIcon className={styles.write_icon} />
-                        </button>
-                        <button
                             aria-label="change theme"
                             className={`${styles.hr_link} ${styles.theme_btn}`}
                             title="Change Theme"
                             onClick={() => updateModalField("theme", true)}
                         >
                             <ThemeIcon className={styles.write_icon} />
+                        </button>
+                        <button
+                            aria-label="change language"
+                            className={`${styles.hr_link} ${styles.lang_btn}`}
+                            title="Change Language"
+                            onClick={() => updateModalField("lang", true)}
+                        >
+                            <GlobeIcon className={styles.write_icon} />
                         </button>
                         <button
                             className={styles.menu_btn}

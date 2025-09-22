@@ -1,1 +1,1 @@
-export { default as WeekView } from "./WeekView";
+export { default as WeekView, type WeekViewProps } from "./WeekView";

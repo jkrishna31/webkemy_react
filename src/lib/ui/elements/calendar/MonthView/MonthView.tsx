@@ -1,23 +1,26 @@
 "use client";
 
-import React, { ComponentProps, useMemo, useRef, useState } from "react";
+import React, { ComponentProps, useRef, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { useActiveDay, useActiveMonth, useActiveYear, useCalendarActions, useEvents, useShowOutsideDays, useWeekDayStart, useWindowSize } from "@/data/stores";
+import { useCalendarActions, useWindowSize } from "@/data/stores";
 import { useMounted } from "@/lib/hooks";
 import { PlusIcon } from "@/lib/ui/svgs/icons";
 import { getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";
-import { throttle } from "@/lib/utils/general.utils";
 import { CalendarDay } from "@/types/calendar.types";
 
-import { DayCard } from "..";
+import { CalendarEvent, DayCard } from "..";
 import styles from "./MonthView.module.scss";
 
 export interface MonthViewProps extends ComponentProps<"div"> {
-  onAdd?: any
-  mode?: "full" | "mini"
-  month?: number
-  hideEmptyCells?: boolean
+  day?: number;
+  month: number;
+  year: number;
+  weekDayStart?: 0 | 1;
+  onAdd?: any;
+  mode?: "full" | "mini";
+  hideEmptyCells?: boolean;
+  events?: CalendarEvent[];
 }
 
 const daysInWeek = 7;
@@ -68,28 +71,21 @@ const getMonthDetails = (
 };
 
 const MonthView = ({
-  className, onAdd, mode, month, hideEmptyCells,
+  month, day, year, weekDayStart = 0,
+  className, onAdd, mode, hideEmptyCells, events,
 }: MonthViewProps) => {
   const windowSize = useWindowSize();
-  const activeDay = useActiveDay();
-  const activeMonth = useActiveMonth();
-  const activeYear = useActiveYear();
-  const weekDayStart = useWeekDayStart();
-  const showOutsideDays = useShowOutsideDays();
-  const events = useEvents();
-  const { setStore, setField, getSegregatedEvents } = useCalendarActions();
-
   const isMounted = useMounted();
+
+  const { setStore, setField, getSegregatedEvents } = useCalendarActions();
 
   const [dragOverDay, setDragOverDay] = useState<string>();
   const [selection, setSelection] = useState<[string, string]>(["", ""]);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const monthToUse = month ?? activeMonth;
-
-  const daysInCurrMonth = getDaysInMonth(activeYear, monthToUse);
-  const firstDayOfCurrMonth = (getFirstDayOfMonth(activeYear, monthToUse) + weekDayStart * 6) % 7;
+  const daysInCurrMonth = getDaysInMonth(year, month);
+  const firstDayOfCurrMonth = (getFirstDayOfMonth(year, month) + weekDayStart * 6) % 7;
 
   const date = new Date();
   const totalCells = daysInWeek * ((firstDayOfCurrMonth > 4 && daysInCurrMonth > 29) ? 6 : 5);
@@ -111,7 +107,7 @@ const MonthView = ({
     if (dayDropped) {
       const [y, m, d] = dayDropped.split("-").map(Number);
       const eventId = e.dataTransfer.getData("text/plain");
-      const newEvents = events.map(ev => {
+      const newEvents = events?.map(ev => {
         if (eventId === ev.id) {
           const newStart = new Date(ev.start || "");
           const newEnd = new Date(ev.end || "");
@@ -167,16 +163,14 @@ const MonthView = ({
     }
   };
 
-  const daysDetails = getMonthDetails(
-    activeYear, monthToUse, totalCells, weekDayStart,
-  );
+  const daysDetails = getMonthDetails(year, month, totalCells, weekDayStart);
 
   const getDayState = (dayDetail: CalendarDay) => {
     const d = new Date();
     if (d.getFullYear() === dayDetail.date[0] && d.getMonth() === dayDetail.date[1] && date.getDate() === dayDetail.date[2]) {
       return "today";
     }
-    if (monthToUse === dayDetail.date[1] && activeDay === dayDetail.date[2]) {
+    if (month === dayDetail.date[1] && day === dayDetail.date[2]) {
       return "active";
     }
     return "";
@@ -195,8 +189,8 @@ const MonthView = ({
       const earlierDate = sDate <= eDate ? sDate : eDate;
       const laterDate = sDate > eDate ? sDate : eDate;
 
-      const cMon = getRelativeMonth(monthToUse, dayDetail.monthType);
-      const cDate = new Date(activeYear, cMon, Number(dayDetail.date[2]));
+      const cMon = getRelativeMonth(month, dayDetail.monthType);
+      const cDate = new Date(year, cMon, Number(dayDetail.date[2]));
       if (cDate >= earlierDate && cDate <= laterDate) {
         return true;
       }
@@ -272,8 +266,8 @@ const MonthView = ({
               isDragOver={isDragOver(dayDetail)}
               data-off={candidate === 0 || candidate === Math.abs(1 - 7 * weekDayStart) || dayDetail.monthType !== "curr"}
               // data-selected={true}
-              hideOutsideDays={!showOutsideDays || hideEmptyCells}
-              data-no-empty={dayDetail.monthType !== "curr" ? (!showOutsideDays || hideEmptyCells) : false}
+              hideOutsideDays={hideEmptyCells}
+              data-no-empty={dayDetail.monthType !== "curr" ? hideEmptyCells : false}
             />
           );
         })

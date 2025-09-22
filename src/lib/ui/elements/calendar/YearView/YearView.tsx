@@ -7,10 +7,15 @@ import { MonthView } from "..";
 import styles from "./YearView.module.scss";
 
 export interface YearViewProps extends ComponentProps<"div"> {
-  onAdd?: any
+  day?: number;
+  month?: number;
+  year: number;
+  weekDayStart?: 0 | 1;
+  onAdd?: any;
 }
 
 const YearView = ({
+  day, month, year, weekDayStart,
   onAdd,
 }: YearViewProps) => {
   const { setStore } = useCalendarActions();
@@ -28,7 +33,10 @@ const YearView = ({
             >
               {months[monthsOrder[idx]].label}
             </button>
-            <MonthView mode="mini" month={idx} onAdd={onAdd} hideEmptyCells />
+            <MonthView
+              day={day} month={idx} year={year}
+              mode="mini" onAdd={onAdd} weekDayStart={weekDayStart} hideEmptyCells
+            />
           </div>
         ))
       }

@@ -2,38 +2,42 @@
 
 import React, { ComponentProps, useEffect } from "react";
 
-import { useActiveDay, useActiveMonth, useActiveYear, useCalendarActions, useWeekDayStart } from "@/data/stores";
 import { getWeekOfTheMonth } from "@/lib/utils/datetime.utils";
 
 import { DayView } from "..";
 import styles from "./WeekView.module.scss";
 
 export interface WeekViewProps extends ComponentProps<"div"> {
-  onAdd?: any
+  onAdd?: any;
+  day: number;
+  month: number;
+  year: number;
+  week: number;
+  weekDayStart?: 0 | 1;
+  timeFormat?: "12h" | "24h";
+  setWeek?: (val: number) => void;
 }
 
 const WeekView = ({
+  day, month, year, week, weekDayStart = 0, setWeek, timeFormat,
   onAdd,
 }: WeekViewProps) => {
-  const activeDay = useActiveDay();
-  const activeMonth = useActiveMonth();
-  const activeYear = useActiveYear();
-  const weekDayStart = useWeekDayStart();
-  const { setStore } = useCalendarActions();
-
-  const activeWeek = getWeekOfTheMonth(activeYear, activeMonth, activeDay, weekDayStart);
+  const activeWeek = getWeekOfTheMonth(year, month, day, weekDayStart);
 
   // on activeWeekChange
   // find the nth week based on today's date
   // back/forth navigation - first day - 1 or last day + 1 in the weekDetails array
 
   useEffect(() => {
-    setStore({ activeWeek });
-  }, [activeWeek, setStore]);
+    setWeek?.(activeWeek);
+  }, [activeWeek, setWeek]);
 
   return (
     <div className={styles.wrapper}>
-      <DayView days={7} onAdd={onAdd} />
+      <DayView
+        day={day} month={month} year={year} week={week} timeFormat={timeFormat} weekDayStart={weekDayStart}
+        days={7} onAdd={onAdd}
+      />
     </div>
   );
 };

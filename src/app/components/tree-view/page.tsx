@@ -69,6 +69,7 @@ const Page = () => {
       <PageSetup pageKey="tree-view" />
 
       <TreeView
+        className={styles.tree}
         expandedIds={activeTreeSection}
         tree={[
           {

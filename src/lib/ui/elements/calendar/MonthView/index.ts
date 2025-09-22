@@ -1,1 +1,1 @@
-export { default as MonthView } from "./MonthView";
+export { default as MonthView, type MonthViewProps } from "./MonthView";

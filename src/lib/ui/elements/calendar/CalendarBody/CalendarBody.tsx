@@ -1,12 +1,8 @@
 import React, { ComponentProps } from "react";
 
-import { useCalendarMode } from "@/data/stores";
-import { DayViewProps } from "@/lib/ui/elements/calendar/DayView/DayView";
-import { MonthViewProps } from "@/lib/ui/elements/calendar/MonthView/MonthView";
-import { WeekViewProps } from "@/lib/ui/elements/calendar/WeekView/WeekView";
-import { YearViewProps } from "@/lib/ui/elements/calendar/YearView/YearView";
+import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useEvents, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
 
-import { DayView, MonthView, WeekView, YearView } from "..";
+import { DayView, DayViewProps, MonthView, MonthViewProps, WeekView, WeekViewProps, YearView, YearViewProps } from "..";
 import styles from "./CalendarBody.module.scss";
 
 export interface CalendarBodyProps extends ComponentProps<"div"> {
@@ -22,12 +18,30 @@ const CalendarBody = ({
   dayViewProps, weekViewProps, monthViewProps, yearViewProps,
 }: CalendarBodyProps) => {
   const calendarMode = useCalendarMode();
+  const weekDayStart = useWeekDayStart();
+  const timeFormat = useTimeFormat();
+  const showOutsideDays = useShowOutsideDays();
+  const events = useEvents();
+
+  const activeDay = useActiveDay();
+  const activeMonth = useActiveMonth();
+  const activeYear = useActiveYear();
+  const activeWeek = useActiveWeek();
+
+  const { setStore } = useCalendarActions();
+
+  const updateWeek = (week?: number) => {
+    setStore({ activeWeek: week });
+  };
 
   return (
     <div className={`${styles.wrapper} ${className}`}>
       {
         calendarMode === "day" ? (
           <DayView
+            day={activeDay} month={activeMonth} year={activeYear} week={activeWeek}
+            weekDayStart={weekDayStart} timeFormat={timeFormat}
+            events={events}
             onAdd={onAdd}
             {...dayViewProps}
           />
@@ -36,7 +50,9 @@ const CalendarBody = ({
       {
         calendarMode === "week" ? (
           <WeekView
-            onAdd={onAdd}
+            day={activeDay} month={activeMonth} year={activeYear} week={activeWeek}
+            weekDayStart={weekDayStart} timeFormat={timeFormat}
+            onAdd={onAdd} setWeek={updateWeek}
             {...weekViewProps}
           />
         ) : null
@@ -44,7 +60,10 @@ const CalendarBody = ({
       {
         calendarMode === "month" ? (
           <MonthView
-            onAdd={onAdd}
+            day={activeDay} month={activeMonth} year={activeYear}
+            weekDayStart={weekDayStart}
+            onAdd={onAdd} hideEmptyCells={!showOutsideDays}
+            events={events}
             {...monthViewProps}
           />
         ) : null
@@ -52,6 +71,8 @@ const CalendarBody = ({
       {
         calendarMode === "year" ? (
           <YearView
+            day={activeDay} month={activeMonth} year={activeYear}
+            weekDayStart={weekDayStart}
             onAdd={onAdd}
             {...yearViewProps}
           />
