@@ -1,6 +1,11 @@
 import "./globals.scss";
 
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
+
+import { FrontendObservability } from "@/components/managers";
 
 export const metadata: Metadata = {
   title: "Webkemy React",
@@ -29,12 +34,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html
+      lang="en"
+    // suppressHydrationWarning
+    >
+      <GoogleAnalytics gaId="" />
       <body
         className="antialiased"
       >
+        <FrontendObservability />
         {children}
       </body>
+      <SpeedInsights />
+      <Analytics />
+      <GoogleTagManager gtmId="" />
     </html>
   );
 }

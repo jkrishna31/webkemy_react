@@ -40,6 +40,8 @@ const DatePicker = ({
   const startDateSelected = _value?.[0]?.filter(Boolean)?.length === 3;
   const endDateSelected = _value?.[1]?.filter(Boolean)?.length === 3;
 
+  // if start or end date selected then updathe disable range
+
   const updateDateField = (newDateField: number, type: "month" | "year" | "day") => {
     if (range) {
       setValue(currValue => {

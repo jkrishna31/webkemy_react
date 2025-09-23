@@ -21,6 +21,7 @@ export interface MonthViewProps extends ComponentProps<"div"> {
   mode?: "full" | "mini";
   hideEmptyCells?: boolean;
   events?: CalendarEvent[];
+  disable?: Array<[string?, string?]>;
 }
 
 const daysInWeek = 7;
