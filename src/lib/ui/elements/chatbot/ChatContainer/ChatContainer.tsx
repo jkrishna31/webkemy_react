@@ -252,6 +252,7 @@ const ChatContainer = ({
               onInput={(e: any) => setQuery(e.target.value)}
               ref={inputRef}
               className={styles.input}
+              enterKeyHint="send"
             />
             <div className={styles.controls}>
               <FileInput

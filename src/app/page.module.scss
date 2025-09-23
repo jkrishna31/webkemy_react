@@ -2,5 +2,33 @@
   width: 100%;
   min-height: 100vh;
   display: grid;
+  grid-auto-rows: auto;
   place-items: center;
+  align-content: center;
+  gap: 1rem;
+}
+
+.title {
+  font-size: 4rem;
+  background: linear-gradient(to bottom, var(--fg-p), var(--fg-p-alt), var(--fg-s), var(--fg-t));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.desc {
+  color: var(--fg-s);
+  margin-bottom: 2rem;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 3.4rem;
+  }
+
+  .desc {
+    font-size: 1.4rem;
+  }
 }

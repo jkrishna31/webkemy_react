@@ -18,13 +18,7 @@ const dateFieldMapping = {
   day: 2,
 };
 
-const getInitialDate = (range?: boolean) => {
-  const date = new Date();
-  const day = date.getUTCDate();
-  const month = date.getUTCMonth();
-  const year = date.getUTCFullYear();
-  return range ? [[year, month, day], [year, month, day]] : [[year, month, day]];
-};
+const today = new Date();
 
 export interface DatePickerProps extends ComponentProps<"input"> {
   range?: boolean
@@ -37,9 +31,11 @@ const DatePicker = ({
 }: DatePickerProps) => {
   const [_value, setValue] = useState<Array<number[]>>([]);
   const [activeType, setActiveType] = useState<"start" | "end">("start");
+  const [disableRange, setDisableRange] = useState<Array<number>>([]);
 
-  const activeMonth = ((range && activeType === "end") ? _value?.[1]?.[1] : _value?.[0]?.[1]) || 0;
-  const activeYear = ((range && activeType === "end") ? _value?.[1]?.[0] : _value?.[0]?.[0]) || 2025;
+  const activeDay = ((range && activeType === "end") ? _value?.[1]?.[2] : _value?.[0]?.[2]);
+  const activeMonth = ((range && activeType === "end") ? _value?.[1]?.[1] : _value?.[0]?.[1]);
+  const activeYear = ((range && activeType === "end") ? _value?.[1]?.[0] : _value?.[0]?.[0]);
 
   const startDateSelected = _value?.[0]?.filter(Boolean)?.length === 3;
   const endDateSelected = _value?.[1]?.filter(Boolean)?.length === 3;
@@ -52,13 +48,17 @@ const DatePicker = ({
           [...(currValue[1] ?? [])],
         ];
         const idx = activeType === "end" ? 1 : 0;
-        newValue[idx][dateFieldMapping[type]] = newDateField;
+        const finalFieldValue = newDateField + (type === "month" ? 1 : 0);
+        newValue[idx][dateFieldMapping[type]] = finalFieldValue;
+        if (!idx && !endDateSelected && (type === "month" || type === "year")) {
+          newValue[1][dateFieldMapping[type]] = finalFieldValue;
+        }
         return newValue;
       });
     } else {
       setValue(currValue => [[
         type === "year" ? newDateField : currValue[0]?.[0],
-        type === "month" ? newDateField : currValue[0]?.[1],
+        type === "month" ? (newDateField + 1) : currValue[0]?.[1],
         type === "day" ? newDateField : currValue[0]?.[2],
       ]]);
     }
@@ -69,11 +69,23 @@ const DatePicker = ({
       setValue(currValue => {
         const newValue = [[...(currValue[0] ?? [])], [...(currValue[1] ?? [])]];
         const idx = type === "end" ? 1 : 0;
-        newValue[idx] = [];
+        newValue[idx] = [today.getUTCFullYear(), today.getUTCMonth() + 1,];
         return newValue;
       });
     }
   };
+
+  useEffect(() => {
+    if (!startDateSelected && !endDateSelected) {
+      const year = today.getUTCFullYear();
+      const month = today.getUTCMonth() + 1;
+      if (range) {
+        setValue([[year, month], [year, month]]);
+      } else {
+        setValue([[year, month,]]);
+      }
+    }
+  }, [endDateSelected, range, startDateSelected]);
 
   useEffect(() => {
     if (startDateSelected || endDateSelected) {
@@ -90,7 +102,7 @@ const DatePicker = ({
         </Button>
         <div>
           <SelectDropdown
-            selected={activeMonth}
+            selected={activeMonth - 1}
             onOptionSelect={(item) => updateDateField(item.value as number, "month")}
             transformSelected={op => op?.label.slice(0, 3)}
             options={monthsOptions}
@@ -100,7 +112,7 @@ const DatePicker = ({
           <SelectDropdown
             selected={activeYear}
             onOptionSelect={(item) => updateDateField(item.value as number, "year")}
-            options={[{ label: "2020", value: 2020 }, { label: "2025", value: 2025 }, { label: "2030", value: 2030 },]}
+            options={Array.from({ length: 10 }).map((_, idx: number) => ({ label: `${2020 + idx}`, value: 2020 + idx }))}
             allowSearch
             xPos="left"
           />
@@ -110,7 +122,15 @@ const DatePicker = ({
         </Button>
       </div>
 
-      <MonthView mode="mini" month={activeMonth} year={activeYear} />
+      <MonthView
+        mode="mini"
+        day={activeDay} month={activeMonth - 1} year={activeYear}
+        onAdd={(item: any) => {
+          updateDateField(item.year as number, "year");
+          updateDateField(item.month as number, "month");
+          updateDateField(item.day as number, "day");
+        }}
+      />
 
       {
         range ? (

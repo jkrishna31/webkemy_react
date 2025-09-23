@@ -28,6 +28,7 @@ const eslintConfig = [
       "@typescript-eslint/no-this-alias": "off",
       "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
       "eol-last": ["error", "always"],
+      // "comma-dangle": "error",
     }
   },
   {

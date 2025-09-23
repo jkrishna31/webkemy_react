@@ -7,18 +7,19 @@ import { EventBadge } from "..";
 import styles from "./DayCard.module.scss";
 
 export interface DayCardProps extends ComponentProps<"div"> {
-  monthType: "prev" | "curr" | "next"
-  date?: number
-  events?: CalendarEvent[]
-  onAdd?: any
-  onDayClick?: any
-  compact?: boolean
-  loading?: boolean
-  isDragOver?: boolean
-  day?: number
-  month?: number
-  year?: number
-  hideOutsideDays?: boolean
+  monthType: "prev" | "curr" | "next";
+  date?: number;
+  events?: CalendarEvent[];
+  onAdd?: any;
+  onDayClick?: any;
+  compact?: boolean;
+  loading?: boolean;
+  isDragOver?: boolean;
+  day?: number;
+  month?: number;
+  year?: number;
+  hideOutsideDays?: boolean;
+  disabled?: boolean;
 }
 
 const DayCard = ({
@@ -77,7 +78,10 @@ const DayCard = ({
       data-adjacent={monthType !== "curr"}
     >
       <div className={styles.cell_header}>
-        <button className={styles.date_btn} onClick={() => onDayClick({ day, month, year })}>
+        <button
+          className={styles.date_btn}
+          onClick={() => onDayClick({ day, month, year })}
+        >
           {day}
         </button>
         {

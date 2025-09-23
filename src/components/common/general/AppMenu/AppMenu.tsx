@@ -140,7 +140,6 @@ export const menuItems = [
                 key: "date-picker",
                 href: "/components/date-picker",
                 primary: "Date Picker",
-                disabled: true,
             },
         ],
     },
@@ -207,6 +206,12 @@ export const menuItems = [
                 key: "crop",
                 href: "/components/crop",
                 primary: "Crop",
+                disabled: true,
+            },
+            {
+                key: "framer",
+                href: "/components/framer",
+                primary: "Framer",
                 disabled: true,
             },
             {
