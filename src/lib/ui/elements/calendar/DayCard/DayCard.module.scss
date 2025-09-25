@@ -11,6 +11,12 @@
   padding: .4rem;
   border: .1rem solid transparent;
   transition: border-color .3s linear;
+
+  &[data-disabled="true"] {
+    opacity: .5;
+    pointer-events: none;
+    touch-action: none;
+  }
 }
 
 .pm_date_card,

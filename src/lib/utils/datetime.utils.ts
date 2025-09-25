@@ -21,14 +21,6 @@ const gettersUTC: Record<DateTimeField, (d: Date) => number> = {
     ms: d => d.getUTCMilliseconds(),
 };
 
-export const getDateTimeZone = () => {
-
-};
-
-export const getLocalTimezone = () => {
-    const tzOffset = new Date().getTimezoneOffset();
-};
-
 export const getTimezoneOffset = () => {
     const date = new Date().getTimezoneOffset();
 };
@@ -97,10 +89,6 @@ export const getWeekOfTheMonth = (year: number, month: number, day: number, week
     return Math.ceil((firstWeekDayOfMonth + day) / 7);
 };
 
-export const getTimestamp = () => {
-    return new Date().toUTCString();
-};
-
 export const compareDateByPrecision = (ds1: string | Date, ds2: string | Date, precision?: [DateTimeField, DateTimeField]) => {
     const date1 = typeof ds1 === "string" ? new Date(ds1) : ds1;
     const date2 = typeof ds2 === "string" ? new Date(ds2) : ds2;
@@ -127,10 +115,6 @@ export const compareDateByPrecision = (ds1: string | Date, ds2: string | Date, p
     }
 
     return 0;
-};
-
-const isDateFallBetween = () => {
-
 };
 
 export const isLeapYear = (year: number) => {

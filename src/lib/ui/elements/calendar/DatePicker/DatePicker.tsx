@@ -7,6 +7,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { MonthView } from "@/lib/ui/elements/calendar/MonthView";
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, CrossIcon } from "@/lib/ui/svgs/icons";
+import { updateDatetime } from "@/lib/utils/datetime.utils";
 
 import styles from "./DatePicker.module.scss";
 
@@ -31,7 +32,6 @@ const DatePicker = ({
 }: DatePickerProps) => {
   const [_value, setValue] = useState<Array<number[]>>([]);
   const [activeType, setActiveType] = useState<"start" | "end">("start");
-  const [disableRange, setDisableRange] = useState<Array<number>>([]);
 
   const activeDay = ((range && activeType === "end") ? _value?.[1]?.[2] : _value?.[0]?.[2]);
   const activeMonth = ((range && activeType === "end") ? _value?.[1]?.[1] : _value?.[0]?.[1]);
@@ -39,8 +39,6 @@ const DatePicker = ({
 
   const startDateSelected = _value?.[0]?.filter(Boolean)?.length === 3;
   const endDateSelected = _value?.[1]?.filter(Boolean)?.length === 3;
-
-  // if start or end date selected then updathe disable range
 
   const updateDateField = (newDateField: number, type: "month" | "year" | "day") => {
     if (range) {
@@ -77,6 +75,14 @@ const DatePicker = ({
     }
   };
 
+  const navPrevNext = (offset: number) => {
+    const newDatetime = updateDatetime(new Date(activeYear, activeMonth), offset, "month");
+    const newMonth = newDatetime.getUTCMonth();
+    const newYear = newDatetime.getUTCFullYear();
+    updateDateField(newMonth, "month");
+    updateDateField(newYear, "year");
+  };
+
   useEffect(() => {
     if (!startDateSelected && !endDateSelected) {
       const year = today.getUTCFullYear();
@@ -96,10 +102,15 @@ const DatePicker = ({
     }
   }, [_value, endDateSelected, onChange, onInput, startDateSelected]);
 
+  console.log("==== val ====", range ? [[
+    (endDateSelected && activeType === "start") ? _value[1].join("-") : undefined,
+    (startDateSelected && activeType === "end") ? _value[0].join("-") : undefined,
+  ]] : undefined);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <Button variant="tertiary" className={styles.nav_btn}>
+        <Button variant="tertiary" className={styles.nav_btn} onClick={() => navPrevNext(-1)}>
           <ChevronLeftIcon />
         </Button>
         <div>
@@ -119,7 +130,7 @@ const DatePicker = ({
             xPos="left"
           />
         </div>
-        <Button variant="tertiary" className={styles.nav_btn}>
+        <Button variant="tertiary" className={styles.nav_btn} onClick={() => navPrevNext(1)}>
           <ChevronRightIcon />
         </Button>
       </div>
@@ -132,6 +143,10 @@ const DatePicker = ({
           updateDateField(item.month as number, "month");
           updateDateField(item.day as number, "day");
         }}
+        disable={range ? [[
+          (endDateSelected && activeType === "start") ? _value[1].join("-") : undefined,
+          (startDateSelected && activeType === "end") ? _value[0].join("-") : undefined,
+        ]] : undefined}
       />
 
       {

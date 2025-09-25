@@ -18,6 +18,7 @@
 
   overflow: auto;
   scroll-snap-type: x mandatory;
+  overscroll-behavior: contain;
 }
 
 .item {

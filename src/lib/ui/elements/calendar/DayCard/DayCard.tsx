@@ -1,9 +1,8 @@
 import React, { ComponentProps } from "react";
 
-import { CalendarEvent } from "@/lib/ui/elements/calendar/EventBadge/EventBadge";
 import { PlusIcon } from "@/lib/ui/svgs/icons";
 
-import { EventBadge } from "..";
+import { CalendarEvent, EventBadge } from "..";
 import styles from "./DayCard.module.scss";
 
 export interface DayCardProps extends ComponentProps<"div"> {
@@ -24,7 +23,7 @@ export interface DayCardProps extends ComponentProps<"div"> {
 
 const DayCard = ({
   day, month, year, monthType,
-  events, onAdd, onDayClick, isDragOver,
+  events, onAdd, onDayClick, isDragOver, disabled,
   children, className, compact, loading, hideOutsideDays,
   ...props
 }: DayCardProps) => {
@@ -76,11 +75,13 @@ const DayCard = ({
       data-day={`${year}-${month}-${day}`}
       data-drag-over={isDragOver}
       data-adjacent={monthType !== "curr"}
+      data-disabled={disabled}
     >
       <div className={styles.cell_header}>
         <button
           className={styles.date_btn}
           onClick={() => onDayClick({ day, month, year })}
+          disabled={disabled}
         >
           {day}
         </button>
@@ -89,6 +90,7 @@ const DayCard = ({
             <button
               className={styles.add_btn}
               onClick={() => onAdd?.({ day, month, year })}
+              disabled={disabled}
             >
               <PlusIcon className={styles.add_icon} />
             </button>

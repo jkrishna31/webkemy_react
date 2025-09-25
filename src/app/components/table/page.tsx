@@ -27,38 +27,93 @@ const tableData = [
   {
     id: "1", name: "Miles Calvin", age: 24,
     rank: 1, duration: 30, address: "777 Brockton Avenue, Abington MA 2351",
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(731) 346-4107",
   },
   {
     id: "2", name: "Lucille Guadalupe", age: 31,
     rank: 2, duration: 30, address: "30 Memorial Drive, Avon MA 2322",
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(250) 549-7396",
   },
   {
     id: "3", name: "Lopez Tucker", age: 27,
     rank: 3, duration: 30, address: "250 Hartford Avenue, Bellingham MA 2019",
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(335) 885-1577",
   },
   {
     id: "4", name: "Yvonne Roosevelt", age: 21,
     rank: 4, duration: 30, address: "700 Oak Street, Brockton MA 2301",
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(889) 467-6295",
   },
   {
     id: "5", name: "Lela Glover", age: 46,
     rank: 5, duration: 30, address: "66-4 Parkhurst Rd, Chelmsford MA 1824",
-    startDate: new Date().toISOString(),
-    endDate: new Date().toISOString(),
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(378) 738-1047",
   },
+  {
+    id: "6", name: "Carlos Rivera", age: 34,
+    rank: 6, duration: 12, address: "12 Elm St, Austin TX 73301",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(512) 467-2039",
+  },
+  {
+    id: "7", name: "Sophia Patel", age: 29,
+    rank: 7, duration: 18, address: "88 Maple Ave, Edison NJ 08817",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(908) 451-7765",
+  },
+  {
+    id: "8", name: "Henry Thompson", age: 52,
+    rank: 8, duration: 45, address: "220 Cedar Ln, Richmond VA 23220",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(804) 330-4820",
+  },
+  {
+    id: "9", name: "Mia Chen", age: 41,
+    rank: 9, duration: 24, address: "731 Willow St, San Jose CA 95125",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(408) 590-1144",
+  },
+  {
+    id: "10", name: "Daniel O'Connor", age: 38,
+    rank: 10, duration: 36, address: "67 Broad St, Boston MA 02109",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(617) 742-6651",
+  },
+  {
+    id: "11", name: "Ava Martinez", age: 27,
+    rank: 11, duration: 10, address: "440 Palm Dr, Miami FL 33101",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(305) 983-2240",
+  },
+  {
+    id: "12", name: "Liam Anderson", age: 33,
+    rank: 12, duration: 20, address: "501 King St, Seattle WA 98104",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(206) 399-7721",
+  },
+  {
+    id: "13", name: "Emma Wilson", age: 45,
+    rank: 13, duration: 50, address: "29 Market Sq, Pittsburgh PA 15222",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(412) 254-6330",
+  },
+  {
+    id: "14", name: "Noah Smith", age: 39,
+    rank: 14, duration: 14, address: "1020 Olive St, St. Louis MO 63101",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(314) 209-8429",
+  },
+  {
+    id: "15", name: "Isabella Rossi", age: 31,
+    rank: 15, duration: 22, address: "5 Sunset Blvd, Los Angeles CA 90026",
+    startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+    phone: "(213) 745-1188",
+  }
 ];
 
 const Page = () => {
@@ -285,6 +340,7 @@ const Page = () => {
         sort={sort}
         onSort={setSort}
         className={styles.table}
+        rootClass={styles.table_wrapper}
       />
     </main>
   );

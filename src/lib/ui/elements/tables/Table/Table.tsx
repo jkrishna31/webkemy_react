@@ -52,11 +52,11 @@ const getStickyClasses = (sticky?: StickType) => {
 };
 
 const getCellStyle = (
-  totalCols: number, index: number, stick?: StickType,
+  totalCols: number, index: number, stick?: StickType, header?: boolean,
 ): React.CSSProperties => {
   const style: React.CSSProperties = {};
-  if (stick === "left" || stick === "both") style.zIndex = totalCols - index;
-  if (stick === "right") style.zIndex = index;
+  if (stick === "left" || stick === "both") style.zIndex = totalCols - index + (header ? 1 : 0);
+  if (stick === "right") style.zIndex = index + (header ? 1 : 0);
   return style;
 };
 
@@ -108,7 +108,7 @@ const Table = <T extends { id: string }>({
                     draggable={column?.draggable}
                     key={column.key}
                     className={`${styles.cell} ${styles.header_cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
-                    style={getCellStyle(columns.length, index, column.sticky)}
+                    style={getCellStyle(columns.length, index, column.sticky, true)}
                   >
                     <div>
                       {column.renderHeadLeft}

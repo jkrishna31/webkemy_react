@@ -6,7 +6,7 @@ import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions, useWindowSize } from "@/data/stores";
 import { useMounted } from "@/lib/hooks";
 import { PlusIcon } from "@/lib/ui/svgs/icons";
-import { getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";
+import { compareDateByPrecision, getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { CalendarDay } from "@/types/calendar.types";
 
 import { CalendarEvent, DayCard } from "..";
@@ -21,7 +21,7 @@ export interface MonthViewProps extends ComponentProps<"div"> {
   mode?: "full" | "mini";
   hideEmptyCells?: boolean;
   events?: CalendarEvent[];
-  disable?: Array<[string?, string?]>;
+  disable?: Array<[string?, string?] | string>;
 }
 
 const daysInWeek = 7;
@@ -71,8 +71,22 @@ const getMonthDetails = (
   return days;
 };
 
+const isDisabled = (date: Date, disable?: Array<[string?, string?] | string>) => {
+  if (!disable) return false;
+  for (const entry of disable) {
+    if (typeof entry === "string") {
+      if (!compareDateByPrecision(date, new Date(entry), ["year", "day"])) return true;
+    } else {
+      if (entry[0] && !entry[1] && compareDateByPrecision(date, new Date(entry[0]), ["year", "day"]) !== -1) return true;
+      else if (entry[1] && !entry[0] && compareDateByPrecision(date, new Date(entry[1]), ["year", "day"]) !== 1) return true;
+      else if (entry[0] && entry[1] && compareDateByPrecision(date, new Date(entry[0]), ["year", "day"]) !== -1 && compareDateByPrecision(date, new Date(entry[1])) !== 1) return true;
+    }
+  }
+  return false;
+};
+
 const MonthView = ({
-  month, day, year, weekDayStart = 0,
+  month, day, year, weekDayStart = 0, disable,
   className, onAdd, mode, hideEmptyCells, events,
 }: MonthViewProps) => {
   const windowSize = useWindowSize();
@@ -254,6 +268,7 @@ const MonthView = ({
       {
         daysDetails.map((dayDetail, idx: number) => {
           const candidate = (idx + 1) % 7;
+          const disabled = isDisabled(new Date(dayDetail.date[0], dayDetail.date[1], dayDetail.date[2]), disable);
           return (
             <DayCard
               day={dayDetail.date[2]} month={dayDetail.date[1]} year={dayDetail.date[0]}
@@ -269,6 +284,7 @@ const MonthView = ({
               // data-selected={true}
               hideOutsideDays={hideEmptyCells}
               data-no-empty={dayDetail.monthType !== "curr" ? hideEmptyCells : false}
+              disabled={disabled}
             />
           );
         })
