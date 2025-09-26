@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { ComponentProps, ElementType, ReactNode } from "react";
 
+import { Color } from "@/types/general.types";
+
 import styles from "./Button.module.scss";
 
 export type Variant = "primary" | "secondary" | "tertiary" | "text" | "link";
-export type Color = "red" | "blue" | "green" | "yellow" | "orange"
 
 export type ButtonProps<T extends ElementType> = {
     as?: T

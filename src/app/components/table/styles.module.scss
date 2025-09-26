@@ -64,3 +64,16 @@
   background-color: var(--bg-p);
   border-color: var(--bg-p);
 }
+
+.rate {
+  gap: 0;
+
+  button {
+    padding: .2rem;
+  }
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}

@@ -1,15 +1,14 @@
 import React, { ComponentProps } from "react";
 
 import { CrossIcon } from "@/lib/ui/svgs/icons";
+import { Color } from "@/types/general.types";
 
 import styles from "./Chip.module.scss";
-
-export type Color = "red" | "blue" | "green" | "yellow" | "orange";
 
 export interface ChipProps extends ComponentProps<"div"> {
   onRemove?: () => void;
   label?: string;
-  color?: Color
+  color?: Color;
 }
 
 const Chip = ({
@@ -19,14 +18,19 @@ const Chip = ({
 }: ChipProps) => {
   return (
     <div
-      className={`${styles.chip} ${className}`}
+      className={`${styles.chip} ${onRemove ? "" : styles.static} ${className}`}
       data-color={color}
+      data-removable={!!onRemove}
       {...props}
     >
       {children ?? <span>{label}</span>}
-      <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove Key">
-        <CrossIcon className={styles.cross_icon} />
-      </button>
+      {
+        onRemove ? (
+          <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove Key">
+            <CrossIcon className={styles.cross_icon} />
+          </button>
+        ) : null
+      }
     </div>
   );
 };

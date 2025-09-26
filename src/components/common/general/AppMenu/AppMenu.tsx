@@ -209,6 +209,12 @@ export const menuItems = [
                 disabled: true,
             },
             {
+                key: "splitter",
+                href: "/components/splitter",
+                primary: "Splitter",
+                disabled: true,
+            },
+            {
                 key: "framer",
                 href: "/components/framer",
                 primary: "Framer",
@@ -328,6 +334,12 @@ export const menuItems = [
                 key: "geo-chart",
                 href: "/components/geo-chart",
                 primary: "Geo Chart",
+                disabled: true,
+            },
+            {
+                key: "hierarchy-chart",
+                href: "/components/hierarchy-chart",
+                primary: "Hierarchy Chart",
                 disabled: true,
             },
         ],

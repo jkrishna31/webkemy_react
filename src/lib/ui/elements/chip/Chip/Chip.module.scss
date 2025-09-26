@@ -9,6 +9,10 @@
   padding-left: .7rem;
   border: .1rem solid transparent;
 
+  &[data-removable="false"] {
+    padding-inline: .7rem;
+  }
+
   &>span {
     padding-block: .5rem;
     max-width: 20rem;

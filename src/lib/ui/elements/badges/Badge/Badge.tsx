@@ -1,8 +1,8 @@
 import React, { ComponentProps } from "react";
 
-import styles from "./Badge.module.scss";
+import { Color } from "@/types/general.types";
 
-export type Color = "red" | "blue" | "green" | "yellow" | "orange";
+import styles from "./Badge.module.scss";
 
 export interface BadgeProps extends ComponentProps<"div"> {
   color?: Color;

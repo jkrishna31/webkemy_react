@@ -2,16 +2,29 @@
 
 import React, { ComponentProps, useState } from "react";
 
-import { EmojiAngryIcon, EmojiLaughIcon, EmojiNeutralIcon, EmojiSadIcon, EmojiSmileIcon } from "@/lib/ui/svgs/emojis";
+import { StarIcon } from "@/lib/ui/svgs/icons";
+import { Color } from "@/types/general.types";
 
 import styles from "./Rate.module.scss";
 
 export interface RateProps extends ComponentProps<"div"> {
-
+  color?: Color;
+  rating?: number;
+  min?: number;
+  max?: number;
+  step?: number;
+  readonly?: boolean;
+  disabled?: boolean;
 }
 
-const Rate = () => {
-  const [rated, setRated] = useState<number>(0);
+const Rate = ({
+  rating = 0, color,
+  min = 1, max = 5, step = 1,
+  readonly, disabled,
+  className, children,
+  ...props
+}: RateProps) => {
+  const [rated, setRated] = useState<number>(rating);
 
   const handleRating = (e: React.MouseEvent) => {
     const selectedRating = (e.target as HTMLElement).closest("[data-rating]");
@@ -22,34 +35,28 @@ const Rate = () => {
 
   return (
     <div
-      className="flex items-center gap-3 rounded-full p-3"
-      onClick={handleRating}
+      className={`${styles.wrapper} ${className}`}
+      onClick={(readonly || disabled) ? undefined : handleRating}
+      aria-readonly={readonly}
+      aria-disabled={disabled}
+      data-color={color}
     >
-      <button
-        className={styles.rate_btn} data-rating="1" data-selected={rated === 1}
-      >
-        <EmojiAngryIcon className={`${styles.emoji}`} />
-      </button>
-      <button
-        className={styles.rate_btn} data-rating="2" data-selected={rated === 2}
-      >
-        <EmojiSadIcon className={`${styles.emoji}`} />
-      </button>
-      <button
-        className={styles.rate_btn} data-rating="3" data-selected={rated === 3}
-      >
-        <EmojiNeutralIcon className={`${styles.emoji}`} />
-      </button>
-      <button
-        className={styles.rate_btn} data-rating="4" data-selected={rated === 4}
-      >
-        <EmojiSmileIcon className={`${styles.emoji}`} />
-      </button>
-      <button
-        className={styles.rate_btn} data-rating="5" data-selected={rated === 5}
-      >
-        <EmojiLaughIcon className={`${styles.emoji}`} />
-      </button>
+      {
+        Array.from({ length: (max - min + 1) / step }).map((_, idx: number) => {
+          const rating = min + (step * idx);
+          return (
+            <button
+              key={rating}
+              data-rating={rating} data-selected={rating <= rated}
+              disabled={disabled}
+              aria-disabled={disabled}
+              data-readonly={readonly}
+            >
+              <StarIcon className={`${styles.icon}`} />
+            </button>
+          );
+        })
+      }
     </div>
   );
 };

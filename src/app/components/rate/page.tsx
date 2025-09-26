@@ -11,6 +11,9 @@ const page = () => {
       <PageSetup pageKey="rate" />
 
       <Rate />
+      <Rate max={7} color="blue" />
+      <Rate rating={4} max={5} color="green" readonly />
+      <Rate rating={3} max={5} color="red" disabled />
     </main>
   );
 };

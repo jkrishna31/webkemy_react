@@ -1,68 +1,66 @@
-.rate_btn {
+.wrapper {
+  --rate-color: var(--yellow-2);
+
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: .4rem;
-  border-radius: var(--br-pill);
-  border: .1rem solid transparent;
-  background: transparent;
-  transition: transform .3s ease-out;
+  gap: .2rem;
 
-  &:hover {
-    transform: scale(1.25);
+  &[aria-readonly="true"],
+  &[aria-disabled="true"] {
+    pointer-events: none;
   }
 
-  &[data-selected="true"] {
-    border-color: var(--fg-p);
+  &[aria-disabled="true"] {
+    opacity: .6;
   }
 
-  &[data-rating="1"] {
-    color: var(--red-5);
+  &>button {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4rem;
+    border-radius: var(--br-pill);
+    border: .1rem solid transparent;
+    background: transparent;
+    color: var(--fg-s-alt);
+    transition: transform .3s ease, color .3s ease, background .3s ease;
+
+    &:not(:disabled),
+    &:not([aria-disabled="true"]),
+    &:not([data-readonly="true"]) {
+      &:hover {
+        transform: scale(1.25);
+        color: var(--fg-p-alt);
+      }
+    }
+
+    &[data-selected="true"] {
+      svg {
+        color: var(--rate-color);
+        fill: var(--rate-color);
+      }
+    }
   }
 
-  &[data-rating="1"][data-selected="true"] {
-    border-color: var(--red-5);
-    background-color: var(--red-1-30);
+  & svg {
+    width: 3rem;
+    height: 3rem;
   }
 
-  &[data-rating="2"] {
-    color: var(--orange-2);
+  &[data-color="red"] {
+    --rate-color: var(--red-5);
   }
 
-  &[data-rating="2"][data-selected="true"] {
-    border-color: var(--orange-2);
-    background-color: var(--orange-1-30);
+  &[data-color="blue"] {
+    --rate-color: var(--blue-1);
   }
 
-  &[data-rating="3"] {
-    color: var(--yellow-2);
+  &[data-color="green"] {
+    --rate-color: var(--green-1);
   }
 
-  &[data-rating="3"][data-selected="true"] {
-    border-color: var(--yellow-2);
-    background-color: var(--yellow-1-30);
+  &[data-color="orange"] {
+    --rate-color: var(--orange-2);
   }
-
-  &[data-rating="4"] {
-    color: var(--blue-1);
-  }
-
-  &[data-rating="4"][data-selected="true"] {
-    border-color: var(--blue-1);
-    background-color: var(--blue-1-30);
-  }
-
-  &[data-rating="5"] {
-    color: var(--green-3);
-  }
-
-  &[data-rating="5"][data-selected="true"] {
-    border-color: var(--green-3);
-    background-color: var(--green-1-30);
-  }
-}
-
-.emoji {
-  width: 3rem;
-  height: 3rem;
 }
