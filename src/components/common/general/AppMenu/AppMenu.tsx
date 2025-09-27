@@ -203,9 +203,9 @@ export const menuItems = [
                 disabled: true,
             },
             {
-                key: "crop",
-                href: "/components/crop",
-                primary: "Crop",
+                key: "image-crop",
+                href: "/components/image-crop",
+                primary: "Image Crop",
                 disabled: true,
             },
             {

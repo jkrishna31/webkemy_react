@@ -9,6 +9,7 @@
   font-size: inherit;
 
   @include scrollbar_x();
+  @include scrollbar_y();
 }
 
 .table {

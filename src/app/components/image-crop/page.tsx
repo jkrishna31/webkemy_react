@@ -6,7 +6,7 @@ import { ImageCrop } from "@/lib/ui/elements/crop";
 const Page = () => {
   return (
     <main>
-      <PageSetup pageKey="crop" />
+      <PageSetup pageKey="image-crop" />
       <ImageCrop />
     </main>
   );
