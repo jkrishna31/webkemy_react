@@ -38,7 +38,7 @@ export default function RootLayout({
       lang="en"
     // suppressHydrationWarning
     >
-      <GoogleAnalytics gaId="" />
+      <GoogleAnalytics gaId="G-RTNS9WR6PR" />
       <body
         className="antialiased"
       >
