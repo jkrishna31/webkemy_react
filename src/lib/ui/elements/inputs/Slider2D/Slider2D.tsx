@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef } from "react";
+import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { usePointerFlow } from "@/lib/hooks";
 import { clampNumber } from "@/lib/utils/math.utils";
@@ -24,7 +24,7 @@ export interface Props extends ComponentProps<any> {
 const Slider2D = ({
   min,
   max,
-  step,
+  step = [1, 1],
   disabled,
   className,
   thumbClass,
@@ -37,35 +37,52 @@ const Slider2D = ({
   const areaRef = useRef<HTMLDivElement>(null);
   const thumbRef = useRef<HTMLDivElement>(null);
 
-  const updateValue = useCallback((event?: MouseEvent | PointerEvent, by?: [number, number]) => {
-    if (!thumbRef.current || !areaRef.current) return;
+  const [_value, setValue] = useState<[number, number]>();
 
-    const areaRect = areaRef.current.getBoundingClientRect();
-    const thumbRect = thumbRef.current.getBoundingClientRect();
+  // todo : min and max support; step support in pointer update; default value
 
-    let leftPercent = value ? value[0] : 50;
-    let topPercent = value ? value[1] : 50;
+  const updateValue = useCallback((fromLeftPercent: number, fromBottomPercent: number) => {
+    if (!areaRef.current || !thumbRef.current) return;
 
-    if (event) {
-      leftPercent = clampNumber(((event.clientX - areaRect.left) / areaRect.width) * 100, 0, 100);
-      topPercent = clampNumber(((event.clientY - areaRect.top) / areaRect.height) * 100, 0, 100);
-      topPercent = 100 - topPercent;
-    } else if (by) {
-      leftPercent = clampNumber(leftPercent + by[0], 0, 100);
-      topPercent = clampNumber(topPercent + -by[1], 0, 100);
-    }
+    const areaRect = areaRef.current?.getBoundingClientRect();
+    const thumbRect = thumbRef.current?.getBoundingClientRect();
 
-    const fromLeft = (leftPercent / 100) * areaRect.width;
-    const fromTop = ((100 - topPercent) / 100) * areaRect.height;
+    const fromLeftPx = (fromLeftPercent / 100) * areaRect.width;
+    const fromTop = ((100 - fromBottomPercent) / 100) * areaRect.height;
 
-    const transformX = clampNumber(fromLeft - thumbRect.width / 2, 0, areaRect.width - thumbRect.width);
-    const transformY = clampNumber(fromTop - thumbRect.height / 2, 0, areaRect.height - thumbRect.height);
+    const transformX = clampNumber(fromLeftPx - thumbRect.width / 2, 0, areaRect.width - thumbRect.width - 2);
+    const transformY = clampNumber(fromTop - thumbRect.height / 2, 0, areaRect.height - thumbRect.height - 2);
 
     thumbRef.current.style.transform = `translate3d(${transformX}px, ${transformY}px, 0)`;
 
-    onInput?.([leftPercent, topPercent]);
-    onChange?.([leftPercent, topPercent]);
-  }, [onChange, onInput, value]);
+    setValue([fromLeftPercent, fromBottomPercent]);
+    onInput?.([fromLeftPercent, fromBottomPercent]);
+    onChange?.([fromLeftPercent, fromBottomPercent]);
+  }, [onChange, onInput]);
+
+  const updateValueBy = useCallback((by: [number, number]) => {
+    updateValue(
+      clampNumber((value?.[0] ?? 0) + by[0], 0, 100),
+      clampNumber((value?.[1] ?? 0) + -by[1], 0, 100)
+    );
+  }, [updateValue, value]);
+
+  const handlePointerUpdate = useCallback((event: MouseEvent | PointerEvent) => {
+    if (!areaRef.current || !thumbRef.current) return;
+
+    const areaRect = areaRef.current?.getBoundingClientRect();
+
+    const fromLeftPercent = clampNumber(((event.clientX - areaRect.left) / areaRect.width) * 100, 0, 100);
+    const fromBottomPercent = 100 - clampNumber(((event.clientY - areaRect.top) / areaRect.height) * 100, 0, 100);
+
+    updateValue(fromLeftPercent, fromBottomPercent);
+  }, [updateValue]);
+
+  useEffect(() => {
+    if (value && (!_value?.length || _value[0] !== value[0] || _value[1] !== value[1])) {
+      updateValue(...value);
+    }
+  }, [_value, updateValue, value]);
 
   useEffect(() => {
     if (areaRef.current) {
@@ -75,18 +92,18 @@ const Slider2D = ({
       const keyDownHandler = (e: KeyboardEvent) => {
         switch (e.key) {
           case "ArrowLeft":
-            updateValue(undefined, [-1, 0]);
+            updateValueBy([-1 * step[0], 0]);
             break;
           case "ArrowRight":
-            updateValue(undefined, [1, 0]);
+            updateValueBy([1 * step[0], 0]);
             break;
           case "ArrowUp":
             e.preventDefault();
-            updateValue(undefined, [0, -1]);
+            updateValueBy([0, -1 * step[1]]);
             break;
           case "ArrowDown":
             e.preventDefault();
-            updateValue(undefined, [0, 1]);
+            updateValueBy([0, 1 * step[1]]);
             break;
         }
       };
@@ -97,16 +114,16 @@ const Slider2D = ({
         abortController.abort();
       };
     }
-  }, [updateValue]);
+  }, [step, updateValueBy]);
 
-  usePointerFlow(areaRef, updateValue);
+  usePointerFlow(areaRef, handlePointerUpdate);
 
   return (
     <div
       ref={areaRef}
       className={`${styles.wrapper} ${className}`}
       tabIndex={0}
-      onClick={updateValue}
+      onClick={handlePointerUpdate}
       {...props}
     >
       <div

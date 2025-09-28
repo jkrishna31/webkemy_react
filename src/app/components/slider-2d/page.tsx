@@ -8,8 +8,10 @@ import { Text } from "@/lib/ui/elements/text";
 
 import styles from "./styles.module.scss";
 
+const defaultValue: [number, number] = [0, 0];
+
 const Page = () => {
-  const [value, setValue] = useState<[number, number]>([0, 0]);
+  const [value, setValue] = useState<[number, number]>(defaultValue);
 
   return (
     <main className={styles.main}>
