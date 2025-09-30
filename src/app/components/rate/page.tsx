@@ -12,8 +12,10 @@ const page = () => {
 
       <Rate />
       <Rate max={7} color="blue" />
-      <Rate rating={4} max={5} color="green" readonly />
-      <Rate rating={3} max={5} color="red" disabled />
+      <Rate max={3} noStroke />
+      <Rate rating={2.5} color="orange" noStroke readonly />
+      <Rate rating={4.35} color="green" readonly />
+      <Rate rating={3} color="red" disabled />
     </main>
   );
 };

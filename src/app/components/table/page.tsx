@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
@@ -42,7 +41,7 @@ const tableData = [
     rank: 1, duration: 30, address: "777 Brockton Avenue, Abington MA 2351",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(731) 346-4107",
-    rating: 4, status: "active",
+    rating: 4.2, status: "active",
   },
   {
     id: "2", name: "Lucille Guadalupe", age: 31,
@@ -56,7 +55,7 @@ const tableData = [
     rank: 3, duration: 30, address: "250 Hartford Avenue, Bellingham MA 2019",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(335) 885-1577",
-    rating: 2, status: "rejected",
+    rating: 2.5, status: "rejected",
   },
   {
     id: "4", name: "Yvonne Roosevelt", age: 21,
@@ -70,7 +69,7 @@ const tableData = [
     rank: 5, duration: 30, address: "66-4 Parkhurst Rd, Chelmsford MA 1824",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(378) 738-1047",
-    rating: 1, status: "active",
+    rating: 1.7, status: "active",
   },
   {
     id: "6", name: "Carlos Rivera", age: 34,
@@ -310,7 +309,7 @@ const Page = () => {
       ),
       renderBodyCell: (row) => {
         return (
-          <Rate rating={row.rating} className={styles.rate} readonly />
+          <Rate rating={row.rating} className={styles.rate} readonly noStroke key={row.id} />
         );
       },
       allowSort: true,
