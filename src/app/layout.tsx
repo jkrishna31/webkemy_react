@@ -20,7 +20,7 @@ export const viewport: Viewport = {
     },
     {
       media: "(prefers-color-scheme: dark)",
-      color: "rgb(26, 28, 29)"
+      color: "rgb(22, 23, 24)"
     },
   ],
   width: "device-width",
