@@ -31,14 +31,29 @@
   }
 
   .number_col {
-    padding-inline: 2rem 2.4rem;
     text-align: end;
     vertical-align: top;
     color: var(--fg-t);
+    background-color: var(--bg-t);
     user-select: none;
     position: sticky;
     left: 0;
-    background-color: var(--bg-t);
+
+    &>div {
+      padding-inline: 2rem 2.4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: .8rem;
+    }
+  }
+
+  .highlight {
+    margin-right: auto;
+  }
+
+  .line {
+    margin-left: auto;
   }
 
   .pl {
@@ -102,6 +117,18 @@
     justify-content: center;
   }
 
+  & tr[data-highlight="true"] td {
+    background-color: var(--bg-s);
+  }
+
+  & tr[data-highlight="+"] td {
+    background-color: var(--green-10);
+  }
+
+  & tr[data-highlight="-"] td {
+    background-color: var(--red-9);
+  }
+
   .copy_icon {
     width: 1.8rem;
     height: 1.8rem;
@@ -144,7 +171,7 @@
       font-size: 1.3rem;
       line-height: 1.8;
 
-      .number_col {
+      .number_col>div {
         padding-inline: 2rem;
       }
 

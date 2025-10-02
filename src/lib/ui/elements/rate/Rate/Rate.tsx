@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useId, useState } from "react";
+import React, { ComponentProps, ReactNode, useId, useState } from "react";
 
 import { StarIcon } from "@/lib/ui/svgs/icons";
 import { SVG } from "@/lib/ui/svgs/misc";
@@ -17,12 +17,13 @@ export interface RateProps extends ComponentProps<"div"> {
   readonly?: boolean;
   disabled?: boolean;
   noStroke?: boolean;
+  icon?: ReactNode;
 }
 
 const Rate = ({
   rating = 0, color,
   min = 1, max = 5, step = 1,
-  readonly, disabled, noStroke,
+  readonly, disabled, noStroke, icon,
   className, children,
   ...props
 }: RateProps) => {
@@ -35,7 +36,10 @@ const Rate = ({
   const handleRating = (e: React.MouseEvent) => {
     const selectedRating = (e.target as HTMLElement).closest("[data-rating]");
     if (selectedRating) {
-      setRated(Number(selectedRating?.getAttribute("data-rating")));
+      setRated(currRated => {
+        const newRated = Number(selectedRating?.getAttribute("data-rating"));
+        return currRated === newRated ? 0 : newRated;
+      });
     }
   };
 
@@ -61,6 +65,7 @@ const Rate = ({
               data-readonly={readonly}
               data-nostroke={noStroke}
               type="button"
+              style={isPartial ? { fill: `url(#${id})` } : {}}
             >
               {
                 isPartial ? (
@@ -74,9 +79,7 @@ const Rate = ({
                   </SVG>
                 ) : null
               }
-              <StarIcon
-                style={isPartial ? { fill: `url(#${id})` } : {}}
-              />
+              {icon ?? <StarIcon />}
             </button>
           );
         })

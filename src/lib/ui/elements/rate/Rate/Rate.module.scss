@@ -57,7 +57,11 @@
       stroke-width: 0;
     }
 
+    &[data-state="partial"] svg {
+      fill: inherit;
+    }
   }
+
 
   & svg {
     fill: var(--bg-s);

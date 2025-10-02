@@ -1,1 +1,1 @@
-export { default as CodeView } from "./CodeView";
+export { default as CodeView, type LineHighlight } from "./CodeView";

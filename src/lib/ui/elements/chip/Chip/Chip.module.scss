@@ -23,18 +23,27 @@
 
   &[data-color="red"] {
     border-color: var(--red-5);
+    background-color: var(--red-1-30);
+  }
+
+  &[data-color="orange"] {
+    border-color: var(--orange-3);
+    background-color: var(--orange-2-30);
   }
 
   &[data-color="green"] {
     border-color: var(--green-1);
+    background-color: var(--green-1-30);
   }
 
   &[data-color="blue"] {
     border-color: var(--blue-1);
+    background-color: var(--blue-1-30);
   }
 
   &[data-color="yellow"] {
     border-color: var(--yellow-1);
+    background-color: var(--yellow-1-30);
   }
 }
 

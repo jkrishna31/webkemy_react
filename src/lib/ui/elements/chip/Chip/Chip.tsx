@@ -6,13 +6,14 @@ import { Color } from "@/types/general.types";
 import styles from "./Chip.module.scss";
 
 export interface ChipProps extends ComponentProps<"div"> {
+  variant?: "solid" | "outlined" | "ghost";
   onRemove?: () => void;
   label?: string;
   color?: Color;
 }
 
 const Chip = ({
-  onRemove, label, color,
+  onRemove, label, color, variant,
   children, className,
   ...props
 }: ChipProps) => {

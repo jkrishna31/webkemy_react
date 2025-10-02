@@ -10,17 +10,47 @@ import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 import styles from "./CodeView.module.scss";
 
+export type LineHighlight = number | [number?, number?] | {
+  line: number | [number?, number?];
+  type: "+" | "-";
+};
+
 export interface CodeViewProps {
-  controls?: boolean
-  title?: string
-  numbered?: boolean
-  data?: string[] | string
-  className?: string
+  controls?: boolean;
+  title?: string;
+  numbered?: boolean;
+  data?: string[] | string;
+  className?: string;
+  highlights?: LineHighlight[];
 }
+
+const getHighlight = (line: number, highlights?: Array<[LineHighlight?, LineHighlight?] | LineHighlight>): "+" | "-" | true | undefined => {
+  if (!highlights?.length) return;
+  // todo: sorted hightlights for improved performance
+  for (const highlight of highlights) {
+    if (typeof highlight === "number" && line === highlight) {
+      return true;
+    } else if (Array.isArray(highlight)) {
+      let highlighted = true;
+      if (highlight[0] && line < (highlight[0] as number)) highlighted = false;
+      if (highlight[1] && line > (highlight[1] as number)) highlighted = false;
+      if (highlighted) return true;
+    } else if (typeof highlight === "object") {
+      if (typeof highlight.line === "number" && highlight.line === line) return highlight.type;
+      if (Array.isArray(highlight.line)) {
+        let highlighted: string | boolean = highlight.type;
+        if (highlight.line[0] && line < (highlight.line[0] as number)) highlighted = false;
+        if (highlight.line[1] && line > (highlight.line[1] as number)) highlighted = false;
+        if (highlighted) return highlight.type;
+      }
+    }
+  }
+  return;
+};
 
 const CodeView = ({
   className,
-  controls = true, numbered = true,
+  controls = true, numbered = true, highlights,
   title, data,
 }: CodeViewProps) => {
   const { addToast } = useToastActions();
@@ -91,22 +121,32 @@ const CodeView = ({
         <table className={styles.code_table} role="presentation">
           <tbody>
             {
-              code?.map((item: string, idx: number) => (
-                <tr className={`${styles.code_row} `} key={idx}>
-                  {
-                    numbered ? (
-                      <td className={`${styles.number_col} ${styles.number_cell}`} contentEditable={false}>
-                        <span>{idx + 1}</span>
-                      </td>
-                    ) : null
-                  }
-                  <td className={`${styles.code_col} ${styles.code_cell} ${!numbered ? styles.pl : ""}`}>
-                    <pre className={`${styles.pre} ${wrap ? styles.wrap : null} `}>
-                      <span>{item}</span>
-                    </pre>
-                  </td>
-                </tr>
-              ))
+              code?.map((item: string, idx: number) => {
+                const highlight = getHighlight(idx + 1, highlights);
+                return (
+                  <tr
+                    key={idx}
+                    className={`${styles.code_row} `}
+                    data-highlight={highlight}
+                  >
+                    {
+                      (numbered || highlights?.length) ? (
+                        <td className={styles.number_col}>
+                          <div>
+                            {highlight === "+" || highlight === "-" ? <span className={styles.highlight}>{highlight}</span> : null}
+                            {numbered ? <span className={styles.line}>{idx + 1}</span> : null}
+                          </div>
+                        </td>
+                      ) : null
+                    }
+                    <td className={`${styles.code_col} ${styles.code_cell} ${(!numbered && !highlights?.length) ? styles.pl : ""}`}>
+                      <pre className={`${styles.pre} ${wrap ? styles.wrap : null} `}>
+                        <span>{item}</span>
+                      </pre>
+                    </td>
+                  </tr>
+                );
+              })
             }
           </tbody>
         </table>
