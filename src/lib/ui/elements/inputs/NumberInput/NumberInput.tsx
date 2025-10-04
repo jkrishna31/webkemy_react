@@ -8,15 +8,17 @@ import { GeneralInput, InputFieldWrapper } from "..";
 import styles from "./NumberInput.module.scss";
 
 export interface NumberInputProps extends ComponentProps<"input"> {
-  defaultValue?: number
-  value?: number
-  max?: number
-  min?: number
-  step?: number
+  defaultValue?: number;
+  value?: number;
+  max?: number;
+  min?: number;
+  step?: number;
+  hideControls?: boolean;
+  enclosedControls?: boolean;
 }
 
 const NumberInput = ({
-  value, min, max, onInput, step = 1,
+  value, min, max, onInput, step = 1, hideControls, enclosedControls,
   className,
   ...props
 }: NumberInputProps) => {
@@ -33,26 +35,54 @@ const NumberInput = ({
     }
   };
 
+  const renderInput = () => {
+    return (
+      <GeneralInput
+        type="number"
+        inputMode="decimal"
+        value={String(value)}
+        onInput={e => {
+          // logic to allow only number
+          onInput?.(e);
+        }}
+        {...props}
+      />
+    );
+  };
+
   return (
-    <div className={`${styles.wrapper} ${className}`}>
-      <button type="button" onClick={() => handleValueUpdation("dec")}>
-        <MinusIcon />
-      </button>
-      <InputFieldWrapper className={styles.input_wrapper}>
-        <GeneralInput
-          type="number"
-          inputMode="decimal"
-          value={String(value)}
-          onInput={e => {
-            // logic to allow only number
-            onInput?.(e);
-          }}
-          {...props}
-        />
-      </InputFieldWrapper>
-      <button type="button" onClick={() => handleValueUpdation("inc")}>
-        <PlusIcon />
-      </button>
+    <div className={`${enclosedControls ? "input_like" : ""} ${styles.wrapper} ${className}`}>
+      {
+        !hideControls ? (
+          <button
+            type="button"
+            disabled={!!min && value === min}
+            onClick={() => handleValueUpdation("dec")}
+          >
+            <MinusIcon />
+          </button>
+        ) : null
+      }
+      {
+        enclosedControls ? (
+          renderInput()
+        ) : (
+          <InputFieldWrapper className={styles.input_wrapper}>
+            {renderInput()}
+          </InputFieldWrapper>
+        )
+      }
+      {
+        !hideControls ? (
+          <button
+            type="button"
+            disabled={!!max && value === max}
+            onClick={() => handleValueUpdation("inc")}
+          >
+            <PlusIcon />
+          </button>
+        ) : null
+      }
     </div>
   );
 };

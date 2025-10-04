@@ -1,14 +1,24 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, ElementType } from "react";
 
 import styles from "./SkeletonLoader.module.scss";
 
-interface Props extends ComponentProps<"div"> { }
+export type SkeletonLoaderProps<T extends ElementType> = {
+  as?: T;
+  loading?: boolean;
+} & ComponentProps<T>;
 
-const SkeletonLoader = ({ className, children }: Props) => {
+const SkeletonLoader = <T extends ElementType = "div">({
+  as = "div",
+  loading,
+  className, children,
+  ...props
+}: SkeletonLoaderProps<T>) => {
+  const Element = as;
+
   return (
-    <div className={`${styles.loader} ${className}`}>
+    <Element className={`${false ? "skeleton" : ""} ${loading ? styles.loader : ""} ${className}`} {...props}>
       {children}
-    </div>
+    </Element>
   );
 };
 

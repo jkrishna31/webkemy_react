@@ -18,6 +18,16 @@ const Page = () => {
         value={value}
         onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
       />
+
+      <NumberInput
+        value={value} enclosedControls
+        onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
+      />
+
+      <NumberInput
+        value={value} hideControls
+        onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
+      />
     </main>
   );
 };

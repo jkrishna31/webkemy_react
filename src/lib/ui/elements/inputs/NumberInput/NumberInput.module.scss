@@ -2,30 +2,29 @@
   display: flex;
   align-items: center;
   gap: .4rem;
-}
+  width: fit-content;
 
-.wrapper button {
-  min-width: 4rem;
-  min-height: 4rem;
-  border-radius: 50%;
-  color: var(--fg-s);
+  & button {
+    min-width: 4rem;
+    min-height: 4rem;
+    border-radius: 50%;
+    color: var(--fg-s);
 
-  &:hover {
-    color: var(--fg-p);
-    background-color: var(--bg-t);
+    &:hover {
+      color: var(--fg-p);
+      background-color: var(--bg-t);
+    }
   }
-}
 
-.wrapper svg {
-  width: 2rem;
-  height: 2rem;
-  stroke-width: .2rem;
-}
+  & svg {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .2rem;
+  }
 
-.input_wrapper {
-  width: 10rem;
-}
-
-.input_wrapper input {
-  text-align: center;
+  & input {
+    text-align: center;
+    width: 8rem;
+    min-width: 0;
+  }
 }

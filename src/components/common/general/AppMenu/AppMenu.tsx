@@ -9,61 +9,6 @@ import styles from "./AppMenu.module.scss";
 
 export const menuItems = [
     {
-        group: "General",
-        children: [
-            {
-                key: "avatar",
-                href: "/components/avatar",
-                primary: "Avatar",
-            },
-            {
-                key: "text",
-                href: "/components/text",
-                primary: "Text",
-            },
-            {
-                key: "badge",
-                href: "/components/badge",
-                primary: "Badge",
-            },
-            {
-                key: "button",
-                href: "/components/button",
-                primary: "Button",
-            },
-            {
-                key: "chip",
-                href: "/components/chip",
-                primary: "Chip",
-            },
-            {
-                key: "collapsible",
-                href: "/components/collapsible",
-                primary: "Collapsible",
-            },
-            {
-                key: "drawer",
-                href: "/components/drawer",
-                primary: "Drawer",
-            },
-            {
-                key: "modal",
-                href: "/components/modal",
-                primary: "Modal",
-            },
-            {
-                key: "scroll-controls",
-                href: "/components/scroll-controls",
-                primary: "Scroll Controls",
-            },
-            {
-                key: "loader",
-                href: "/components/loader",
-                primary: "Loader",
-            },
-        ],
-    },
-    {
         group: "Input",
         children: [
             {
@@ -161,6 +106,56 @@ export const menuItems = [
     {
         group: "Others",
         children: [
+            {
+                key: "avatar",
+                href: "/components/avatar",
+                primary: "Avatar",
+            },
+            {
+                key: "text",
+                href: "/components/text",
+                primary: "Text",
+            },
+            {
+                key: "badge",
+                href: "/components/badge",
+                primary: "Badge",
+            },
+            {
+                key: "button",
+                href: "/components/button",
+                primary: "Button",
+            },
+            {
+                key: "chip",
+                href: "/components/chip",
+                primary: "Chip",
+            },
+            {
+                key: "collapsible",
+                href: "/components/collapsible",
+                primary: "Collapsible",
+            },
+            {
+                key: "drawer",
+                href: "/components/drawer",
+                primary: "Drawer",
+            },
+            {
+                key: "modal",
+                href: "/components/modal",
+                primary: "Modal",
+            },
+            {
+                key: "scroll-controls",
+                href: "/components/scroll-controls",
+                primary: "Scroll Controls",
+            },
+            {
+                key: "loader",
+                href: "/components/loader",
+                primary: "Loader",
+            },
             {
                 key: "accordion",
                 href: "/components/accordion",

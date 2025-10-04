@@ -16,8 +16,6 @@
 
     &:focus-within {
         border-color: var(--blue-6);
-        // outline: .2rem solid var(--blue-6);
-        // outline-offset: .1rem;
     }
 
     &[data-invalid="true"] {

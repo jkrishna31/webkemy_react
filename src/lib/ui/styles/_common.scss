@@ -15,14 +15,12 @@
 
 .input_like {
   width: 100%;
-  height: 100%;
-  flex: 1;
-  flex-basis: 1;
-  flex-shrink: 0;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   border-radius: .4rem;
-  color: inherit;
-  font: inherit;
-  font-size: 1.6rem;
+  border: .1rem solid var(--border-s);
   background-color: var(--bg-t);
   color: var(--fg-p);
   transition: border .15s linear;
@@ -31,9 +29,10 @@
     border-color: var(--border-p);
   }
 
-  &:focus-within,
-  &:focus {
+  &:focus-within {
     border-color: var(--blue-6);
+    // outline: .2rem solid var(--blue-6);
+    // outline-offset: .1rem;
   }
 
   &[data-invalid="true"] {
@@ -43,5 +42,51 @@
   &:disabled {
     opacity: .5;
     cursor: not-allowed;
+  }
+}
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    inset: 0;
+    content: '';
+  }
+
+  &::before {
+    background-color: var(--bg-t);
+  }
+
+  &::after {
+    transform: translate3d(-100%, 0, 0);
+    background-image: linear-gradient(90deg,
+        rgba(#43484b, 0) 0,
+        rgba(#43484b, 0.2) 20%,
+        rgba(#43484b, 0.5) 60%,
+        rgba(#43484b, 0));
+    animation: shimmer 2s linear infinite;
+  }
+
+  @media (prefers-color-scheme: light) {
+    &::after {
+      background-image: linear-gradient(90deg,
+          rgba(#c3ccd2, 0) 0,
+          rgba(#c3ccd2, 0.2) 20%,
+          rgba(#c3ccd2, 0.5) 60%,
+          rgba(#c3ccd2, 0));
+    }
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translate3d(100%, 0, 0);
+    }
   }
 }

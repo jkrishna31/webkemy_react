@@ -1,16 +1,26 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Pagination } from "@/lib/ui/elements/pagination";
 
 import styles from "./styles.module.scss";
 
+const totalRecords = 1500;
+const recordsPerPage = 10;
+
 const Page = () => {
+  const [currPage, setCurrPage] = useState(1);
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="pagination" />
 
-      <Pagination currentPage={4} totalRecords={1500} recordsPerPage={10} />
+      <Pagination
+        currentPage={currPage} totalRecords={totalRecords} recordsPerPage={recordsPerPage}
+        onPageChange={setCurrPage}
+      />
     </main>
   );
 };
