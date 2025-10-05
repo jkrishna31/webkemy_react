@@ -10,7 +10,7 @@ import { Timeline } from "@/lib/ui/elements/timeline";
 import styles from "./styles.module.scss";
 
 const Page = () => {
-  const [timelineFlow, setTimelineFlow] = useState<"x" | "y">("x");
+  const [timelineFlow, setTimelineFlow] = useState<"x" | "y">("y");
 
   return (
     <main className={styles.main}>

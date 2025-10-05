@@ -12,6 +12,9 @@ const PageSetup = ({ pageKey }: { pageKey?: string }) => {
   useEffect(() => {
     setField("activePage", pageKey);
     updateScrollStore("dir", edges.TOP);
+    return () => {
+      setField("activePage", undefined);
+    };
   }, [pageKey, setField, updateScrollStore]);
 
   return null;

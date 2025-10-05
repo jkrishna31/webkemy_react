@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { AvatarList } from "@/lib/ui/elements/avatar";
+import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
 
 import styles from "./styles.module.scss";
 
@@ -10,6 +10,14 @@ const page = () => {
   return (
     <main className={styles.main}>
       <PageSetup pageKey="avatar" />
+
+      <Avatar>
+        <Image
+          src="https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D"
+          width={50} height={50} alt="avatar"
+          style={{ width: "4rem", height: "4rem" }}
+        />
+      </Avatar>
 
       <AvatarList
         avatars={[

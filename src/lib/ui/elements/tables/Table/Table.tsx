@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode } from "react";
+import React, { ComponentProps, CSSProperties, ReactNode } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 
@@ -17,6 +17,10 @@ export interface TableCol<T> {
   sticky?: StickType;
   allowSort?: boolean;
   draggable?: boolean;
+  thClass?: string;
+  tdClass?: string;
+  thStyle?: CSSProperties;
+  tdStyle?: CSSProperties;
 }
 
 export interface TableProps<T> extends ComponentProps<"div"> {
@@ -108,7 +112,7 @@ const Table = <T extends { id: string }>({
                     draggable={column?.draggable}
                     key={column.key}
                     className={`${styles.cell} ${styles.header_cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
-                    style={getCellStyle(columns.length, index, column.sticky, true)}
+                    style={{ ...getCellStyle(columns.length, index, column.sticky, true), ...(column.thStyle ?? {}) }}
                   >
                     <div>
                       {column.renderHeadLeft}
@@ -139,8 +143,8 @@ const Table = <T extends { id: string }>({
                       return (
                         <td
                           key={row.id + column.key}
-                          className={`${styles.cell} ${column.sticky ? styles.sc_td : ""} ${getStickyClasses(column.sticky)}`}
-                          style={getCellStyle(columns.length, index, column.sticky)}
+                          className={`${styles.cell ?? ""} ${column.sticky ? styles.sc_td : ""} ${column.tdClass ?? ""} ${getStickyClasses(column.sticky)}`}
+                          style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.tdStyle ?? {}) }}
                         >
                           {column.renderBodyCell(row)}
                         </td>

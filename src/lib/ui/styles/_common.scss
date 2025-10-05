@@ -16,13 +16,16 @@
 .input_like {
   width: 100%;
   height: auto;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   border-radius: .4rem;
   border: .1rem solid var(--border-s);
   background-color: var(--bg-t);
   color: var(--fg-p);
+
   transition: border .15s linear;
 
   &:hover {
@@ -45,9 +48,11 @@
   }
 }
 
-.skeleton {
+.skeleton[data-loading="true"] {
   position: relative;
   overflow: hidden;
+
+  padding: .2rem;
 
   &::before,
   &::after {

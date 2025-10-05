@@ -16,7 +16,11 @@ const SkeletonLoader = <T extends ElementType = "div">({
   const Element = as;
 
   return (
-    <Element className={`${false ? "skeleton" : ""} ${loading ? styles.loader : ""} ${className}`} {...props}>
+    <Element
+      className={`skeleton ${styles.loader} ${className}`}
+      data-loading={loading}
+      {...props}
+    >
       {children}
     </Element>
   );
