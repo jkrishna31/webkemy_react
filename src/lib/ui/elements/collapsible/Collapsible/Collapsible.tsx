@@ -5,17 +5,19 @@ import React, { ComponentProps, ElementType, ReactNode, useCallback, useEffect, 
 import styles from "./Collapsible.module.scss";
 
 export type CollapsibleProps<T extends ElementType, K extends ElementType> = {
-    wrapperAs?: T
-    detailsAs?: K
-    open: boolean
-    summary: ReactNode
-    detailsClass?: string
-    renderWhileClosed?: boolean
+    wrapperAs?: T;
+    detailsAs?: K;
+    open: boolean;
+    summary: ReactNode;
+    detailsClass?: string;
+    renderWhileClosed?: boolean;
+    detailsPanelId?: string;
 } & ComponentProps<T>;
 
 const Collapsible = <T extends ElementType = "div", K extends ElementType = "div">({
     children, className, detailsClass,
     open, summary, renderWhileClosed = true,
+    detailsPanelId,
     wrapperAs = "div", detailsAs = "div",
     ...props
 }: CollapsibleProps<T, K>) => {
@@ -108,6 +110,8 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
                 className={`${styles.details} ${detailsClass}`}
                 ref={ref}
                 onTransitionEnd={updateHeight}
+                role="region"
+                id={detailsPanelId ?? ""}
             >
                 {children}
             </DetailsElement>

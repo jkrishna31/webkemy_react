@@ -1,0 +1,45 @@
+.handle {
+  padding: .4rem;
+  position: relative;
+  opacity: 0;
+  flex-shrink: 0;
+
+  transition: opacity .2s linear;
+
+  &::before {
+    content: '';
+    position: absolute;
+    border-radius: var(--br-pill);
+    background-color: var(--blue-2);
+  }
+
+  &[data-handle="h"] {
+    cursor: w-resize;
+
+    &::before {
+      top: 0;
+      left: 50%;
+      width: .2rem;
+      height: 100%;
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  &[data-handle="v"] {
+    cursor: n-resize;
+
+    &::before {
+      width: 100%;
+      height: .2rem;
+      top: 50%;
+      left: 0;
+      transform: translate3d(0, -50%, 0);
+    }
+  }
+
+  &:hover,
+  &:focus,
+  &[data-active="true"] {
+    opacity: 1;
+  }
+}

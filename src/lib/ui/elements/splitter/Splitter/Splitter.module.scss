@@ -1,0 +1,35 @@
+.splitter {
+  width: 100%;
+  height: 80vh;
+  max-width: min(100%, 80rem);
+  display: flex;
+
+  &[data-layout="h"] {
+    & [data-handle] {
+
+      &::before {
+        top: 0;
+        left: 50%;
+        width: .2rem;
+        height: 100%;
+        transform: translate3d(-50%, 0, 0);
+      }
+    }
+  }
+
+  &[data-layout="v"] {
+    flex-direction: column;
+
+    & [data-handle] {
+      cursor: n-resize;
+
+      &::before {
+        width: 100%;
+        height: .2rem;
+        top: 50%;
+        left: 0;
+        transform: translate3d(0, -50%, 0);
+      }
+    }
+  }
+}

@@ -38,6 +38,7 @@ const Drawer = ({
                 ref={ref}
                 className={`${styles.container} ${className} ${open ? styles.open : null}`}
                 role="dialog"
+                aria-modal
                 {...props}
             >
                 {children}

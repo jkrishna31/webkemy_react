@@ -39,6 +39,7 @@ const Breadcrumb = ({
                                     data-active={crumb.active}
                                     data-disabled={crumb.disabled}
                                     className={styles.item}
+                                    aria-current={crumb.active}
                                 >
                                     {crumb.label}
                                 </Link>
@@ -52,6 +53,7 @@ const Breadcrumb = ({
                                     data-disabled={crumb.disabled}
                                     disabled={crumb.disabled}
                                     className={styles.item}
+                                    aria-current={crumb.active}
                                 >
                                     {crumb.label}
                                 </button>

@@ -1,42 +1,36 @@
 "use client";
 
-import React, { ComponentProps, memo, useCallback, useRef } from "react";
+import React, { ComponentProps, ElementType, memo, useCallback, useRef, useState } from "react";
 
 import styles from "./ResizableContainer.module.scss";
 
 export type Resizers = "l" | "r" | "t" | "b" | "tl" | "tr" | "bl" | "br";
 
-export interface ResizableContainerProps extends ComponentProps<"div"> {
-  allowedResizers?: Resizers[]
-  contentClass?: string
-  handleMove?: (e: PointerEvent, payload?: any) => void
-  handleUp?: (e: PointerEvent, payload?: any) => void
-  xStep?: number
-  yStep?: number
-  payload?: any
-}
+export type ResizableContainerProps<T extends ElementType> = {
+  as?: T;
+  allowedResizers?: Resizers[];
+  contentClass?: string;
+  handleMove?: (e: PointerEvent, payload?: any) => void;
+  handleUp?: (e: PointerEvent, payload?: any) => void;
+  xStep?: number;
+  yStep?: number;
+  payload?: any;
+} & ComponentProps<T>;
 
-const ResizableContainer = ({
+const ResizableContainer = <T extends ElementType = "div">({
+  as = "div",
   children, className, allowedResizers, contentClass,
   handleMove, handleUp, payload, xStep = 1, yStep = 1,
   ...props
-}: ResizableContainerProps) => {
-  const elRef = useRef<HTMLDivElement>(null);
+}: ResizableContainerProps<T>) => {
+  const Element = as;
 
-  // const resizeRight = (e: MouseEvent) => {
-  //   if (e.target instanceof HTMLElement && elRef.current) {
-  //     elRef.current.style.width = elRef.current.getBoundingClientRect().width + e.movementX + "px";
-  //   }
-  // };
+  const elRef = useRef<T>(null);
 
-  // const resizeBottom = (e: MouseEvent) => {
-  //   if (e.target instanceof HTMLElement && elRef.current) {
-  //     elRef.current.style.height = elRef.current.getBoundingClientRect().height + e.movementY + "px";
-  //   }
-  // };
+  const [activeResize, setActiveResize] = useState<Resizers>();
 
   const handleResize = useCallback((e: PointerEvent, dir: Resizers) => {
-    const elem = elRef.current;
+    const elem = elRef.current as unknown as HTMLElement;
     if (!elem) return;
 
     const startX = e.clientX;
@@ -70,12 +64,14 @@ const ResizableContainer = ({
         elem.style.height = `${startHeight - fdy}px`;
         elem.style.top = `${startTop + fdy}px`;
       }
+      setActiveResize(dir);
     };
 
     const onUp = () => {
       handleUp?.(payload);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
+      setActiveResize(undefined);
     };
 
     window.addEventListener("pointermove", onMove);
@@ -87,29 +83,6 @@ const ResizableContainer = ({
     handleResize(e.nativeEvent, dir);
   };
 
-  // another approach ---
-  // use mouseenter event
-  // on mouse enter add mouse move event
-  // on mouse leave remove mouse move event
-  // on mouse move detect which edge or corner the mouse is currently near
-  // add the respective class which will update cursor style and show the pill resizer
-  // also add the pointerdown, pointermove, and pointerup listeners for rest behaviour
-
-  // const handlePointerMove = () => {
-  //   console.log("*** pointer move ***",);
-  // };
-
-  // const handlePointerLeave = () => {
-  //   console.log("==== handle pointer leave ====",);
-  //   window.removeEventListener("pointermove", handlePointerMove);
-  // };
-
-  // const handlePointerEnter = () => {
-  //   console.log("---- HANDLE POINTER ENTER ----",);
-  //   window.addEventListener("pointermove", handlePointerMove);
-  //   window.addEventListener("pointerleave", handlePointerLeave, { once: true });
-  // };
-
   const renderResizer = (dir: Resizers, className: string) => {
     if (!allowedResizers?.includes(dir)) {
       return null;
@@ -117,15 +90,17 @@ const ResizableContainer = ({
     return (
       <div
         className={className}
+        data-active={activeResize === dir}
         onPointerDown={startResize(dir)}
       ></div>
     );
   };
 
   return (
-    <div
-      className={`${styles.container} ${className}`} ref={elRef} {...props}
-    // onPointerEnter={handlePointerEnter}
+    <Element
+      ref={elRef}
+      className={`${styles.container} ${className}`}
+      {...props}
     >
       <div className={`${styles.content} ${contentClass}`}>
         {children}
@@ -140,7 +115,7 @@ const ResizableContainer = ({
       {renderResizer("tr", `rc rctr ${styles.rc} ${styles.rctr}`)}
       {renderResizer("br", `rc rcbr ${styles.rc} ${styles.rcbr}`)}
       {renderResizer("bl", `rc rcbl ${styles.rc} ${styles.rcbl}`)}
-    </div>
+    </Element>
   );
 };
 

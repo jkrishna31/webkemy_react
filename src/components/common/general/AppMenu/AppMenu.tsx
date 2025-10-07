@@ -216,6 +216,11 @@ export const menuItems = [
                 disabled: true,
             },
             {
+                key: "resizable",
+                href: "/components/resizable",
+                primary: "Resizable",
+            },
+            {
                 key: "lightbox",
                 href: "/components/lightbox",
                 primary: "Lightbox",
