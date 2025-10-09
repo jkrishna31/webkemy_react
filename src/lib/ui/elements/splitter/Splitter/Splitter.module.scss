@@ -6,6 +6,7 @@
 
   &[data-layout="h"] {
     & [data-handle] {
+      cursor: ew-resize;
 
       &::before {
         top: 0;
@@ -21,7 +22,7 @@
     flex-direction: column;
 
     & [data-handle] {
-      cursor: n-resize;
+      cursor: ns-resize;
 
       &::before {
         width: 100%;

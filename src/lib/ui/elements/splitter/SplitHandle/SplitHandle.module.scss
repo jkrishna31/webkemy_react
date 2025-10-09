@@ -14,7 +14,7 @@
   }
 
   &[data-handle="h"] {
-    cursor: w-resize;
+    cursor: ew-resize;
 
     &::before {
       top: 0;
@@ -26,7 +26,7 @@
   }
 
   &[data-handle="v"] {
-    cursor: n-resize;
+    cursor: ns-resize;
 
     &::before {
       width: 100%;

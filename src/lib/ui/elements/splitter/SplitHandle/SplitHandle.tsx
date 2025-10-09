@@ -1,9 +1,11 @@
 "use client";
 
-import React, { ComponentProps, FormEvent, useState } from "react";
+import React, { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 
 import styles from "./SplitHandle.module.scss";
 
+
+const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 export interface SplitHandleProps extends ComponentProps<"div"> {
   layout?: "v" | "h";
   value?: number;
@@ -18,6 +20,8 @@ const SplitHandle = ({
   ...props
 }: SplitHandleProps) => {
   const [active, setActive] = useState(false);
+
+  const handleRef = useRef<HTMLDivElement>(null);
 
   const handlePointerDown = (e: React.PointerEvent) => {
     e.preventDefault();
@@ -51,12 +55,54 @@ const SplitHandle = ({
     }
   };
 
-  // todo: consider direction
-  // todo: on focus add keydown listener for arrow key resize
+  // todo: direction aware
+
+  useEffect(() => {
+    const handleElem = handleRef.current;
+    const splitter = handleElem?.closest("[data-splitter]");
+    if (handleElem && splitter) {
+      const abortController = new AbortController();
+
+      const _layout = splitter.getAttribute("data-layout");
+      const splitterRect = splitter.getBoundingClientRect();
+
+      const keyDownHandler = (keyDownEvent: KeyboardEvent) => {
+        if (!ALLOWED_KEYS.includes(keyDownEvent.key)) return;
+
+        const handleRect = (handleElem as HTMLElement).getBoundingClientRect();
+
+        const dy = _layout === "v" ? Math.round(((handleRect.y - splitterRect.y) / splitterRect.height) * 100) : 0;
+        const dx = _layout === "h" ? Math.round(((handleRect.x - splitterRect.x) / splitterRect.width) * 100) : 0;
+
+        let newValue = _layout === "v" ? dy : dx;
+        switch (keyDownEvent.key) {
+          case "ArrowLeft":
+            newValue -= 2;
+            break;
+          case "ArrowRight":
+            newValue += 2;
+            break;
+          case "ArrowUp":
+            keyDownEvent.preventDefault();
+            newValue -= 2;
+            break;
+          case "ArrowDown":
+            keyDownEvent.preventDefault();
+            newValue += 2;
+            break;
+        }
+        onChange?.({ target: { value: newValue } } as unknown as FormEvent);
+      };
+      handleElem.addEventListener("keydown", keyDownHandler, { signal: abortController.signal });
+      return () => {
+        abortController.abort();
+      };
+    }
+  }, [onChange]);
 
   return (
     <div
-      className={styles.handle}
+      ref={handleRef}
       data-handle={layout}
       data-active={active}
       tabIndex={0}
@@ -64,6 +110,7 @@ const SplitHandle = ({
       aria-valuemin={min}
       aria-valuemax={max}
       onPointerDown={handlePointerDown}
+      className={styles.handle}
       {...props}
     >
     </div>
