@@ -21,5 +21,6 @@ export { default as usePointerFlow } from "./usePointerFlow";
 export { default as useQueryParams } from "./useQueryParams";
 export { default as useScroll } from "./useScroll";
 export { default as useScrollLock } from "./useScrollLock";
+export { default as useSplitter } from "./useSplitter";
 export { default as useSwipe } from "./useSwipe";
 export { default as useWindowResize } from "./useWindowResize";

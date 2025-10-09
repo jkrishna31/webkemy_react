@@ -6,18 +6,23 @@ import styles from "./Splitter.module.scss";
 
 export interface SplitterProps extends ComponentProps<"div"> {
   layout?: "v" | "h";
+  value?: number;
 }
 
 const Splitter = ({
-  layout = "h",
-  className, children,
+  layout = "h", value = 100,
+  className, children, style,
   ...props
 }: SplitterProps) => {
   return (
     <div
-      className={`${styles.splitter} ${className}`}
+      data-splitter
       data-layout={layout}
-      onPointerDown={() => console.log("==== pointer down ====",)}
+      className={`${styles.splitter} ${className}`}
+      style={{
+        flex: value / 100,
+        ...(style ?? {}),
+      }}
       {...props}
     >
       {children}

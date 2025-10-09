@@ -39,6 +39,9 @@ const ResizableContainer = <T extends ElementType = "div">({
     const startHeight = elem.offsetHeight;
     const startTop = parseFloat(getComputedStyle(elem).top || "0");
 
+    const cursorStyle = document.body.style.cursor;
+    document.body.style.cursor = window.getComputedStyle(e.target as any).cursor;
+
     const onMove = (moveEv: PointerEvent) => {
       if (!elem) return;
 
@@ -69,6 +72,7 @@ const ResizableContainer = <T extends ElementType = "div">({
 
     const onUp = () => {
       handleUp?.(payload);
+      document.body.style.cursor = cursorStyle;
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       setActiveResize(undefined);

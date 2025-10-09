@@ -3,15 +3,25 @@ import React, { ComponentProps } from "react";
 import styles from "./SplitSection.module.scss";
 
 export interface SplitSectionProps extends ComponentProps<"div"> {
-
+  value?: number
 }
 
 const SplitSection = ({
-  children, className,
+  value = 100,
+  children, className, style,
   ...props
 }: SplitSectionProps) => {
   return (
-    <div className={`${styles.section} ${className}`} data-section>
+    <div
+      data-section
+      className={`${styles.section} ${className}`}
+      style={{
+        flex: value / 100,
+        // flexGrow: 1,
+        // flexShrink: 1,
+        ...(style ?? {})
+      }}
+      {...props}>
       {children}
     </div>
   );

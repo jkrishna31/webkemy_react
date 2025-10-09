@@ -207,7 +207,6 @@ export const menuItems = [
                 key: "splitter",
                 href: "/components/splitter",
                 primary: "Splitter",
-                disabled: true,
             },
             {
                 key: "framer",
