@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, useRef, useState } from "react";
 
 import styles from "./Splitter.module.scss";
 
@@ -14,6 +14,15 @@ const Splitter = ({
   className, children, style,
   ...props
 }: SplitterProps) => {
+  const ref = useRef<HTMLElement>(null);
+
+  const [sizes, setSizes] = useState<number[]>();
+
+  // pass to split handle
+  const handleResize = () => {
+    // get all the immediate split-section child
+  };
+
   return (
     <div
       data-splitter

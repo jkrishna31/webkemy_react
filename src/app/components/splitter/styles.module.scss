@@ -1,0 +1,15 @@
+.root_splitter {
+  max-width: min(100%);
+  height: calc(100vh - 4rem - var(--h-header));
+
+  .split_section {
+    border-radius: .8rem;
+    background-color: var(--bg-s);
+
+    display: grid;
+    place-items: center;
+    font-size: 8rem;
+    font-weight: bolder;
+    color: var(--fg-t-alt);
+  }
+}

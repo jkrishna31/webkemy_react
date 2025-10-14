@@ -3,11 +3,11 @@ import React, { ComponentProps } from "react";
 import styles from "./SplitSection.module.scss";
 
 export interface SplitSectionProps extends ComponentProps<"div"> {
-  value?: number
+  size?: number
 }
 
 const SplitSection = ({
-  value = 100,
+  size,
   children, className, style,
   ...props
 }: SplitSectionProps) => {
@@ -16,9 +16,8 @@ const SplitSection = ({
       data-section
       className={`${styles.section} ${className}`}
       style={{
-        flex: value / 100,
-        // flexGrow: 1,
-        // flexShrink: 1,
+        flexBasis: size !== undefined ? `${size}%` : "auto",
+        flexGrow: size !== undefined ? 0 : 1,
         ...(style ?? {})
       }}
       {...props}>

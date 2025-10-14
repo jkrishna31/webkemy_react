@@ -6,6 +6,7 @@ import styles from "./SplitHandle.module.scss";
 
 
 const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+
 export interface SplitHandleProps extends ComponentProps<"div"> {
   layout?: "v" | "h";
   value?: number;
@@ -40,6 +41,7 @@ const SplitHandle = ({
         const dy = _layout === "v" ? Math.round(((moveEv.y - splitterRect.y) / splitterRect.height) * 100) : 0;
         const dx = _layout === "h" ? Math.round(((moveEv.x - splitterRect.x) / splitterRect.width) * 100) : 0;
 
+        // set the aria-valuenow attribute here only
         onChange?.({ target: { value: _layout === "v" ? dy : dx } } as unknown as FormEvent);
       };
 
@@ -57,12 +59,13 @@ const SplitHandle = ({
 
   // todo: direction aware
 
+  // todo: cancel on Esc (CAN'T DO WITH CURRENT APPROACH; NEED INTERNAL VALUE)
+
   useEffect(() => {
     const handleElem = handleRef.current;
     const splitter = handleElem?.closest("[data-splitter]");
-    if (handleElem && splitter) {
-      const abortController = new AbortController();
 
+    if (handleElem && splitter) {
       const _layout = splitter.getAttribute("data-layout");
       const splitterRect = splitter.getBoundingClientRect();
 
@@ -91,11 +94,14 @@ const SplitHandle = ({
             newValue += 2;
             break;
         }
+
         onChange?.({ target: { value: newValue } } as unknown as FormEvent);
       };
-      handleElem.addEventListener("keydown", keyDownHandler, { signal: abortController.signal });
+
+      handleElem.addEventListener("keydown", keyDownHandler);
+
       return () => {
-        abortController.abort();
+        handleElem.removeEventListener("keydown", keyDownHandler);
       };
     }
   }, [onChange]);

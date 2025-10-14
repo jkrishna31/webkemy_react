@@ -1,9 +1,11 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
+
+import useEvent from "@/lib/hooks/useEvent";
 
 export default function useSplitter(initSizes: number[] = []) {
   const [sizes, setSizes] = useState<number[]>(initSizes);
 
-  const onResize = useCallback((newSize: number, idx: number = 0) => {
+  const onResize = useEvent((newSize: number, idx: number = 0) => {
     const total = sizes.reduce((acc: number, curr: number) => acc + curr, 0);
     const ratio = sizes.map(item => (item / total) * 100);
     const prefixSum: number[] = [];
@@ -18,7 +20,7 @@ export default function useSplitter(initSizes: number[] = []) {
     ratio[idx + 1] = (currSize - finalSize) + ratio[idx + 1];
 
     setSizes(ratio);
-  }, [sizes]);
+  });
 
   return { sizes, onResize };
 }
