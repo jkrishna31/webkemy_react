@@ -15,6 +15,13 @@ export const radToDeg = (rad: number) => {
     return rad / (Math.PI / 180);
 };
 
-export const clampNumber = (value: number, min: number, max: number) => {
-    return Math.min(Math.max(value, min), max);
+export const clampNumber = (value: number, min: number, max: number, step?: number) => {
+    let clamped = Math.min(Math.max(value, min), max);
+
+    if (typeof step === "number" && step > 0) {
+        clamped = Math.round((clamped - min) / step) * step + min;
+        clamped = Math.min(Math.max(clamped, min), max);
+    }
+
+    return clamped;
 };

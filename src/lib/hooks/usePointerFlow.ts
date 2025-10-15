@@ -29,7 +29,11 @@ export default function usePointerFlow(
       // adding to the window, by default, so that we will be able to listen to pointer up, even if are out of the target area while pointer move
       window.addEventListener("pointerup", handlePointerUp);
 
-      return handlePointerUp;
+      return () => {
+        elem.removeEventListener("pointerdown", handlePointerDown);
+        window.removeEventListener("pointerup", handlePointerUp);
+        handlePointerUp();
+      };
     }
   }, [onEnd, onFlow, onStart, target]);
 }

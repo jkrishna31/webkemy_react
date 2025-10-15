@@ -6,11 +6,10 @@
   background-color: var(--bg-t);
   transition: border .15s linear;
 
-  // transform-origin: center center;
-
   position: relative;
-  user-select: none;
   cursor: pointer;
+  user-select: none;
+  touch-action: none;
 
   &:hover {
     border-color: var(--border-p);
@@ -31,5 +30,5 @@
   background: var(--fg-p);
   border-radius: .3rem;
   cursor: move;
-  // transition: transform .1s ease;
+  // transition: transform 100ms ease;
 }

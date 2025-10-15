@@ -3,6 +3,7 @@
 import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
 import { usePointerFlow } from "@/lib/hooks";
+import useEvent from "@/lib/hooks/useEvent";
 import { clampNumber } from "@/lib/utils/math.utils";
 
 import styles from "./Slider2D.module.scss";
@@ -21,10 +22,12 @@ export interface Props extends ComponentProps<any> {
   className?: string;
 }
 
+const DEFAULT_STEP: [number, number] = [1, 1];
+
 const Slider2D = ({
   min,
   max,
-  step = [1, 1],
+  step = DEFAULT_STEP,
   disabled,
   className,
   thumbClass,
@@ -39,7 +42,7 @@ const Slider2D = ({
 
   const [_value, setValue] = useState<[number, number]>();
 
-  // todo : min and max support; step support in pointer update; default value
+  // todo : min and max support
 
   const updateValue = useCallback((fromLeftPercent: number, fromBottomPercent: number) => {
     if (!areaRef.current || !thumbRef.current) return;
@@ -60,23 +63,23 @@ const Slider2D = ({
     onChange?.([fromLeftPercent, fromBottomPercent]);
   }, [onChange, onInput]);
 
-  const updateValueBy = useCallback((by: [number, number]) => {
+  const updateValueBy = useEvent((by: [number, number]) => {
     updateValue(
       clampNumber((value?.[0] ?? 0) + by[0], 0, 100),
       clampNumber((value?.[1] ?? 0) + -by[1], 0, 100)
     );
-  }, [updateValue, value]);
+  });
 
-  const handlePointerUpdate = useCallback((event: MouseEvent | PointerEvent) => {
+  const handlePointerUpdate = useEvent((event: MouseEvent | PointerEvent) => {
     if (!areaRef.current || !thumbRef.current) return;
 
     const areaRect = areaRef.current?.getBoundingClientRect();
 
-    const fromLeftPercent = clampNumber(((event.clientX - areaRect.left) / areaRect.width) * 100, 0, 100);
-    const fromBottomPercent = 100 - clampNumber(((event.clientY - areaRect.top) / areaRect.height) * 100, 0, 100);
+    const fromLeftPercent = clampNumber(((event.clientX - areaRect.left) / areaRect.width) * 100, 0, 100, step[0]);
+    const fromBottomPercent = 100 - clampNumber(((event.clientY - areaRect.top) / areaRect.height) * 100, 0, 100, step[1]);
 
     updateValue(fromLeftPercent, fromBottomPercent);
-  }, [updateValue]);
+  });
 
   useEffect(() => {
     if (value && (!_value?.length || _value[0] !== value[0] || _value[1] !== value[1])) {

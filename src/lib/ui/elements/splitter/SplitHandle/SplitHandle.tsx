@@ -9,6 +9,7 @@ const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
 
 export interface SplitHandleProps extends ComponentProps<"div"> {
   layout?: "v" | "h";
+  passive?: boolean;
   value?: number;
   min?: number;
   max?: number;
@@ -16,7 +17,8 @@ export interface SplitHandleProps extends ComponentProps<"div"> {
 }
 
 const SplitHandle = ({
-  layout = "h", value, min, max, onChange,
+  layout = "h", passive,
+  value, min, max, onChange,
   className,
   ...props
 }: SplitHandleProps) => {
@@ -41,7 +43,6 @@ const SplitHandle = ({
         const dy = _layout === "v" ? Math.round(((moveEv.y - splitterRect.y) / splitterRect.height) * 100) : 0;
         const dx = _layout === "h" ? Math.round(((moveEv.x - splitterRect.x) / splitterRect.width) * 100) : 0;
 
-        // set the aria-valuenow attribute here only
         onChange?.({ target: { value: _layout === "v" ? dy : dx } } as unknown as FormEvent);
       };
 
@@ -58,8 +59,11 @@ const SplitHandle = ({
   };
 
   // todo: direction aware
-
-  // todo: cancel on Esc (CAN'T DO WITH CURRENT APPROACH; NEED INTERNAL VALUE)
+  // todo: cancel on Esc for passive mode
+  // todo: passive mode
+  // - use another ghost handle or use psuedo-element
+  // - render at the same position by default
+  // - and based on move offset add the transform
 
   useEffect(() => {
     const handleElem = handleRef.current;
@@ -101,6 +105,7 @@ const SplitHandle = ({
       handleElem.addEventListener("keydown", keyDownHandler);
 
       return () => {
+        console.log("---- unmount ---",);
         handleElem.removeEventListener("keydown", keyDownHandler);
       };
     }
@@ -111,6 +116,7 @@ const SplitHandle = ({
       ref={handleRef}
       data-handle={layout}
       data-active={active}
+      data-passive={passive}
       tabIndex={0}
       aria-valuenow={value}
       aria-valuemin={min}
