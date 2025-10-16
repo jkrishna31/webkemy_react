@@ -11,7 +11,7 @@ import { clampNumber } from "@/lib/utils/math.utils";
 import styles from "./styles.module.scss";
 
 const Page = () => {
-  const [scale, setScale] = useState(1.5);
+  const [scale, setScale] = useState(1);
   const [rotate, setRotate] = useState(0);
   const [xFlipped, setXFlipped] = useState(false);
   const [yFlipped, setYFlipped] = useState(false);
@@ -24,7 +24,11 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="image-crop" />
 
-      <ImageCrop scale={scale} />
+      <ImageCrop
+        scale={scale} onScaleChange={setScale}
+        src="https://images.unsplash.com/photo-1743247299142-8f1c919776c4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735"
+      // src="https://images.unsplash.com/photo-1742201949659-ce186667aaaf?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      />
       <div className={styles.controls}>
         <Button
           variant="tertiary"

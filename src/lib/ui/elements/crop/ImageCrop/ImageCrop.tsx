@@ -15,27 +15,32 @@ export const imageCropDefaultProps = {
 export interface ImageCropProps extends ComponentProps<"div"> {
   frame?: "fixed" | "dynamic";
   scale?: number;
+  rotate?: number;
+  src: string;
+  flipX?: boolean;
+  flipY?: boolean;
+  onScaleChange?: (newScale: number) => void;
 }
 
-const getTransform = (translate: number[], scale: number) => {
-  return `translate3d(${translate[0]}px, ${translate[1]}px, 0) scale(${scale}) rotate(${0}) `;
+const getTransform = (translate: number[], scale: number, rotate: number[]) => {
+  return `translate3d(${translate[0]}px, ${translate[1]}px, 0) scale(${scale}) rotateX(${rotate[0]}) rotateY(${rotate[1]}) rotateZ(${rotate[2]})`;
 };
 
 const ImageCrop = ({
   frame = imageCropDefaultProps.FRAME,
   scale = imageCropDefaultProps.SCALE,
+  src,
+  flipX, flipY, rotate,
+  onScaleChange,
   className,
   ...props
 }: ImageCropProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const translate = useRef<number[]>([0, 0, 0]);
-  const rotate = useRef<number[]>([0, 0, 0]);
+  const _rotate = useRef<number[]>([0, 0, 0]);
 
-  // pinch for zoom
-  // drag to move the image
   // free rotation; flip (h/v)
-
   // keyboard support for translate
 
   useEffect(() => {
@@ -57,14 +62,13 @@ const ImageCrop = ({
           clampNumber(translate.current[1] + change[1], -imgDim.height + frameDim.height, 0),
           0
         ];
-        // console.log("+++ move +++", translate.current, change, newTranslate);
         translate.current = newTranslate;
-        (img as HTMLElement).style.transform = getTransform(newTranslate, scale);
+        (img as HTMLElement).style.transform = getTransform(newTranslate, scale, _rotate.current);
+        startCoords = [e.pageX, e.pageY];
       };
 
       const handlePointerUp = (e: PointerEvent) => {
         e.preventDefault();
-        // console.log("--- UP ---",);
         window.removeEventListener("pointermove", handlePointerMove);
       };
 
@@ -78,15 +82,23 @@ const ImageCrop = ({
         window.addEventListener("pointerup", handlePointerUp, { once: true });
       };
 
+      const handleScroll = (e: WheelEvent) => {
+        e.preventDefault();
+        const zoomSpeed = .01;
+        onScaleChange?.(clampNumber(scale + (e.deltaY * zoomSpeed), .5, 3));
+      };
+
       container.addEventListener("pointerdown", handlePointerDown);
+      container.addEventListener("wheel", handleScroll);
 
       return () => {
         container.removeEventListener("pointerdown", handlePointerDown);
         window.removeEventListener("pointerup", handlePointerUp);
         window.removeEventListener("pointermove", handlePointerMove);
+        container.removeEventListener("wheel", handleScroll);
       };
     }
-  }, [scale]);
+  }, [onScaleChange, scale]);
 
   return (
     <div
@@ -96,13 +108,13 @@ const ImageCrop = ({
       <div className={styles.box}>
         <div data-frame className={`${styles.selection} selection`}></div>
         <Image
-          src="https://images.unsplash.com/photo-1742201949659-ce186667aaaf?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src={src}
           alt="image to crop"
           width={200} height={200}
           data-crop
           className={`${styles.img}`}
           style={{
-            transform: getTransform([...translate.current], scale),
+            transform: getTransform([...translate.current], scale, _rotate.current),
           }}
         />
       </div>
