@@ -138,6 +138,8 @@ export { default as FiltersIcon } from "./FiltersIcon";
 export { default as FingerprintIcon } from "./FingerprintIcon";
 export { default as FlagIcon } from "./FlagIcon";
 export { default as FlameIcon } from "./FlameIcon";
+export { default as FlipHorizontalIcon } from "./FlipHorizontalIcon";
+export { default as FlipVerticalIcon } from "./FlipVerticalIcon";
 export { default as FolderIcon } from "./FolderIcon";
 export { default as FolderOpenIcon } from "./FolderOpenIcon";
 export { default as FontIcon } from "./FontIcon";

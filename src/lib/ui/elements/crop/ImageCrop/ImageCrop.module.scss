@@ -1,31 +1,48 @@
 .wrapper {
-  position: relative;
   width: 30rem;
   height: 18rem;
-  background-color: var(--bg-q);
+  background-color: var(--bg-s);
   overflow: hidden;
   cursor: move;
   user-select: none;
+
+  display: grid;
+  place-items: center;
+
+  touch-action: none;
+}
+
+.box {
+  width: 14rem;
+  height: 14rem;
+
+  position: relative;
+  overflow: visible;
+  border-radius: 50%;
 }
 
 .selection {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  border: 1px solid var(--border-s);
-  background-color: transparent;
+  top: 0;
+  left: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
-  width: 14rem;
-  height: 14rem;
+  border: 1px solid var(--fg-t);
+  background-color: transparent;
   box-shadow: 0 0 0 9999px var(--bg-overlay);
   z-index: 100;
 }
 
 .img {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  transform: translate3d(0%, 0%, 0);
+  transform-origin: top left;
   display: block;
-  object-fit: none;
-  width: 100%;
   height: auto;
-  object-position: center;
+  width: auto;
+  object-fit: none;
 }

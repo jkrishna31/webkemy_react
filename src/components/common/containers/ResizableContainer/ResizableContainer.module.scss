@@ -17,6 +17,8 @@
   border-radius: var(--br-pill);
   border: .1rem solid transparent;
 
+  touch-action: none;
+
   &:hover,
   &[data-active="true"] {
     opacity: 1;

@@ -13,6 +13,7 @@ import { ClosedCaptionIcon, EllipsisHIcon, FastForwardIcon, MaximizeIcon, PauseI
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { breakdownTime, TimeField } from "@/lib/utils/datetime.utils";
 import { getFormattedTime } from "@/lib/utils/format.utils";
+import { clampNumber } from "@/lib/utils/math.utils";
 
 import styles from "./VideoPlayer.module.scss";
 
@@ -65,7 +66,7 @@ const VideoPlayer = ({
     const containerRect = (containerRef.current)?.getBoundingClientRect();
     if (containerRect) {
       const xMid = containerRect.x + (containerRect.width / 2);
-      updateCurrTime(currTime + (e.clientX < xMid ? -5 : 5), true);
+      updateCurrTime(clampNumber(currTime + (e.clientX < xMid ? -5 : 5), 0, duration), true);
       hideOverlay();
     }
   };
@@ -140,47 +141,6 @@ const VideoPlayer = ({
     }
   }, [overlay]);
 
-  // useEffect(() => {
-  //   if (containerRef.current) {
-  //     const elem = containerRef.current;
-  //     const abortController = new AbortController();
-
-  //     const handleMouseEnter = () => {
-  //       const handleMouseMove = () => {
-  //         showOverlay();
-  //         debouncedHideOverlay();
-  //       };
-
-  //       const handleMouseLeave = (e?: PointerEvent) => {
-  //         if (!elem.contains(e?.target as HTMLElement)) {
-  //           hideOverlay();
-  //           elem.removeEventListener("pointermove", handleMouseMove);
-  //           elem.removeEventListener("pointerleave", handleMouseLeave);
-  //           elem.removeEventListener("touchstart", handleTouchStart);
-  //         }
-  //       };
-
-  //       const handleTouchStart = (e: TouchEvent) => {
-  //         if (elem.contains(e.target as HTMLElement)) {
-  //           handleMouseMove();
-  //         } else {
-  //           handleMouseLeave();
-  //         }
-  //       };
-
-  //       elem.addEventListener("pointermove", handleMouseMove, { signal: abortController.signal });
-  //       elem.addEventListener("touchstart", handleTouchStart, { signal: abortController.signal });
-  //       elem.addEventListener("pointerleave", handleMouseLeave, { signal: abortController.signal });
-  //     };
-
-  //     elem.addEventListener("pointerenter", handleMouseEnter, { signal: abortController.signal });
-
-  //     return () => {
-  //       abortController.abort();
-  //     };
-  //   }
-  // }, [debouncedHideOverlay]);
-
   return (
     <div
       className={`${styles.wrapper} ${rootClass}`}
@@ -215,7 +175,7 @@ const VideoPlayer = ({
           </button> */}
           <button
             className={styles.rewind_btn}
-            onClick={() => updateCurrTime(currTime - 5, true)}
+            onClick={() => updateCurrTime(clampNumber(currTime - 5, 0, duration), true)}
           >
             <RewindIcon />
           </button>
@@ -229,7 +189,7 @@ const VideoPlayer = ({
           </button>
           <button
             className={styles.forward_btn}
-            onClick={() => updateCurrTime(currTime + 5, true)}
+            onClick={() => updateCurrTime(clampNumber(currTime + 5, 0, duration), true)}
           >
             <FastForwardIcon />
           </button>

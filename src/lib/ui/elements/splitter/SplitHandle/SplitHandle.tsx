@@ -105,7 +105,6 @@ const SplitHandle = ({
       handleElem.addEventListener("keydown", keyDownHandler);
 
       return () => {
-        console.log("---- unmount ---",);
         handleElem.removeEventListener("keydown", keyDownHandler);
       };
     }
