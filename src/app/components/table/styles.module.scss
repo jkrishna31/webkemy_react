@@ -1,5 +1,6 @@
 .table_wrapper {
-  max-height: 80vh;
+  height: calc(100vh - 4rem - var(--h-header));
+  max-width: 100%;
 }
 
 .table {

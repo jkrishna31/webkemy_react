@@ -4,11 +4,11 @@
   background-color: var(--bg-s);
   overflow: hidden;
   cursor: move;
-  user-select: none;
 
   display: grid;
   place-items: center;
 
+  user-select: none;
   touch-action: none;
 }
 
@@ -40,9 +40,10 @@
   top: 0%;
   left: 0%;
   transform: translate3d(0%, 0%, 0);
-  transform-origin: top left;
+  transform-origin: center;
   display: block;
   height: auto;
   width: auto;
   object-fit: none;
+  transition: transform 50ms linear;
 }

@@ -112,6 +112,11 @@
     &:hover {
         background: var(--bg-t);
     }
+
+    &[aria-pressed="true"] {
+        background-color: var(--fg-p);
+        color: var(--bg-p);
+    }
 }
 
 .btn[data-variant="text"],

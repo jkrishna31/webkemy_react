@@ -1,6 +1,6 @@
 .root_splitter {
-  max-width: min(100%);
   height: calc(100vh - 4rem - var(--h-header));
+  max-width: 100%;
 
   .split_section {
     border-radius: .8rem;

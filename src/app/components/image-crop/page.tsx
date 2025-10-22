@@ -26,8 +26,8 @@ const Page = () => {
 
       <ImageCrop
         scale={scale} onScaleChange={setScale}
-        src="https://images.unsplash.com/photo-1743247299142-8f1c919776c4?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=735"
-      // src="https://images.unsplash.com/photo-1742201949659-ce186667aaaf?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+        xFlip={xFlipped} yFlip={yFlipped}
+        src="https://images.unsplash.com/photo-1742201949659-ce186667aaaf?q=80&w=765&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
       />
       <div className={styles.controls}>
         <Button
@@ -39,6 +39,9 @@ const Page = () => {
         >
           <ZoomOutIcon />
         </Button>
+        <div className={styles.curr_zoom}>
+          {`${Math.round(scale * 100)}%`}
+        </div>
         <Button
           variant="tertiary"
           className={styles.ctrl_btn}

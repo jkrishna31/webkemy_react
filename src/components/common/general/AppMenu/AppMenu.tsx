@@ -201,7 +201,6 @@ export const menuItems = [
                 key: "image-crop",
                 href: "/components/image-crop",
                 primary: "Image Crop",
-                disabled: true,
             },
             {
                 key: "splitter",
