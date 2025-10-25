@@ -1,6 +1,7 @@
 @use '@/lib/ui/styles/mixins/animations' as *;
 
 .badge {
+  position: relative;
 
   &[data-variant="dot"],
   &[data-variant="text"] {
@@ -79,6 +80,17 @@
   top: 0;
   right: 0;
   transform: translate3d(50%, -50%, 0);
+  animation: scale-in .5s cubic-bezier(0.175, 0.885, 0.32, 1.275); // cubic-bezier(.47, 1.64, .41, .8)
+}
+
+@keyframes scale-in {
+  from {
+    transform: translate3d(50%, -50%, 0) scale(0);
+  }
+
+  to {
+    transform: translate3d(50%, -50%, 0);
+  }
 }
 
 

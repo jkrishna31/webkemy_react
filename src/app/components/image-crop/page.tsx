@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/ui/elements/butttons";
 import { ImageCrop } from "@/lib/ui/elements/crop";
-import { FlipHorizontalIcon, FlipVerticalIcon, ZoomInIcon, ZoomOutIcon } from "@/lib/ui/svgs/icons";
+import { ClockwiseIcon, CounterClockwiseIcon, FlipHorizontalIcon, FlipVerticalIcon, ZoomInIcon, ZoomOutIcon } from "@/lib/ui/svgs/icons";
 import { clampNumber } from "@/lib/utils/math.utils";
 
 import styles from "./styles.module.scss";
@@ -51,6 +51,8 @@ const Page = () => {
         >
           <ZoomInIcon />
         </Button>
+      </div>
+      <div className={styles.controls}>
         <Button
           variant="tertiary"
           className={styles.ctrl_btn}
@@ -68,6 +70,22 @@ const Page = () => {
           onClick={() => setYFlipped(!yFlipped)}
         >
           <FlipVerticalIcon />
+        </Button>
+        <Button
+          variant="tertiary"
+          className={styles.ctrl_btn}
+          aria-label="Rotate Counter-Clockwise" title="Rotate Counter-Clockwise"
+        // onClick={() => setYFlipped(!yFlipped)}
+        >
+          <CounterClockwiseIcon />
+        </Button>
+        <Button
+          variant="tertiary"
+          className={styles.ctrl_btn}
+          aria-label="Rotate Clockwise" title="Rotate Clockwise"
+        // onClick={() => setYFlipped(!yFlipped)}
+        >
+          <ClockwiseIcon />
         </Button>
       </div>
     </main>

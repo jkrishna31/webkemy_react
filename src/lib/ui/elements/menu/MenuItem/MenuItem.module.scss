@@ -13,26 +13,49 @@
   gap: 1.8rem;
   color: inherit;
 
-  // transition: background .3s ease;
-
-  &:hover,
-  &:focus {
-    background: var(--bg-hover);
-  }
-
-  &[data-active="true"] {
-    color: var(--bg-p);
-    background-color: var(--fg-p-alt);
-
-    svg {
-      color: inherit;
-    }
-  }
-
   & svg {
     width: 2rem;
     height: 2rem;
     color: var(--fg-s);
+    flex-shrink: 0;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: var(--bg-hover);
+  }
+
+  &[data-minimized="true"] {
+    .content {
+      display: none;
+    }
+
+    &:not([data-active="true"]) {
+
+      &:hover,
+      &:focus-visible {
+
+        & svg {
+          color: var(--fg-p);
+        }
+      }
+    }
+  }
+
+  &[data-active="true"] {
+    // color: var(--bg-p);
+    // background-color: var(--fg-p-alt);
+    background-color: var(--gray-30);
+
+    &[data-minimized="true"] {
+      & svg {
+        color: var(--fg-p);
+      }
+    }
+
+    // .secondary {
+    //   color: var(--bg-s);
+    // }
   }
 
   &:disabled,
@@ -42,6 +65,13 @@
     pointer-events: none;
     touch-action: none;
   }
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1.8rem;
 }
 
 .details {

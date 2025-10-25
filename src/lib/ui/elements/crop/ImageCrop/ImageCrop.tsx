@@ -57,6 +57,10 @@ const ImageCrop = ({
   // double tap zoom cycle
   // touch zoom
 
+  // fix: jitter on first swipe after changing zoom/flip
+  // fix: min size allowed = the stencil size
+  // fix: refactor
+
   useEffect(() => {
     const container = containerRef.current;
 
@@ -69,10 +73,10 @@ const ImageCrop = ({
 
       let imgDim = img.getBoundingClientRect();
       let frameDim = frame.getBoundingClientRect();
-      const imgOgDim = [(img as HTMLElement).offsetWidth, (img as HTMLElement).offsetHeight];
-      let prevOffset = [0, 0];
+      let prevOffset = [0, 0]; // will to used to remove the offset addition on each move; we only need to add offset once
 
       const handlePointerMove = (e: PointerEvent) => {
+        const imgOgDim = [(img as HTMLElement).offsetWidth, (img as HTMLElement).offsetHeight];
         const change = [e.pageX - startCoords[0], e.pageY - startCoords[1]];
         const offset = [
           (imgOgDim[0] - imgDim.width) / 2,
@@ -134,20 +138,27 @@ const ImageCrop = ({
 
     if (!container || !img || !frame) return;
 
-    const imgDim = img.getBoundingClientRect();
     const frameDim = frame.getBoundingClientRect();
+    let prevOffset = [0, 0];
 
     const translateBy = (by: number[]) => {
+      const imgOgDim = [(img as HTMLElement).offsetWidth, (img as HTMLElement).offsetHeight];
+      const imgDim = img.getBoundingClientRect();
       const currTranslate = translate.current;
+      const offset = [
+        (imgOgDim[0] - imgDim.width) / 2,
+        (imgOgDim[1] - imgDim.height) / 2,
+      ];
 
       const spanWidth = (imgDim.width) - frameDim.width;
       const spanHeight = (imgDim.height) - frameDim.height;
 
       const newTranslate = [
-        clampNumber(currTranslate[0] + by[0], -spanWidth, 0),
-        clampNumber(currTranslate[1] + by[1], -spanHeight, 0),
+        clampNumber(currTranslate[0] + by[0] - offset[0] + prevOffset[0], -spanWidth - offset[0], 0 - offset[0]),
+        clampNumber(currTranslate[1] + by[1] - offset[1] + prevOffset[1], -spanHeight - offset[1], 0 - offset[1]),
         0
       ];
+      prevOffset = offset;
 
       (img as HTMLElement).style.transform = getTransform(newTranslate, scale, [yFlip ? 180 : 0, xFlip ? 180 : 0, 0]);
       translate.current = newTranslate;

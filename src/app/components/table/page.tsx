@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
 import { Avatar } from "@/lib/ui/elements/avatar";
+import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
@@ -168,7 +169,15 @@ const Page = () => {
       ),
       renderBodyCell: (row) => {
         return row.status ? (
-          <Chip color={statusColorMap[row.status]} style={{ textTransform: "capitalize", borderRadius: "var(--br-pill)" }}>
+          <Chip
+            color={statusColorMap[row.status]}
+            style={{
+              textTransform: "capitalize",
+              borderRadius: "var(--br-pill)",
+              // paddingLeft: ".4rem"
+            }}
+          >
+            {/* <Badge color={statusColorMap[row.status]} style={{ flexShrink: 0, marginRight: ".4rem" }} float={null} /> */}
             {row.status}
           </Chip>
         ) : "N/A";
@@ -195,7 +204,7 @@ const Page = () => {
       ),
       renderBodyCell: (row) => {
         return (
-          <Rate rating={row.rating} className={styles.rate} readonly noStroke key={row.id} />
+          <Rate rating={row.rating} className={styles.rate} readonly key={row.id} />
         );
       },
       allowSort: true,
@@ -258,7 +267,7 @@ const Page = () => {
 
       <Table<TableData>
         columns={tableColumns}
-        data={tableData}
+        data={tableData.slice(0, 25)}
         stickyHeader
         sort={sort}
         onSort={setSort}

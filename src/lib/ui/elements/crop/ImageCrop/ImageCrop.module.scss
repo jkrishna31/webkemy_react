@@ -39,11 +39,11 @@
   position: absolute;
   top: 0%;
   left: 0%;
-  transform: translate3d(0%, 0%, 0);
+  transform: translate3d(0, 0, 0);
   transform-origin: center;
   display: block;
   height: auto;
   width: auto;
   object-fit: none;
-  transition: transform 50ms linear;
+  transition: transform 75ms linear;
 }

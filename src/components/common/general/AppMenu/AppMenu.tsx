@@ -162,6 +162,11 @@ export const menuItems = [
                 primary: "Accordion",
             },
             {
+                key: "menu",
+                href: "/components/menu",
+                primary: "Menu",
+            },
+            {
                 key: "banner",
                 href: "/components/banner",
                 primary: "Banner",
@@ -206,12 +211,6 @@ export const menuItems = [
                 key: "splitter",
                 href: "/components/splitter",
                 primary: "Splitter",
-            },
-            {
-                key: "framer",
-                href: "/components/framer",
-                primary: "Framer",
-                disabled: true,
             },
             {
                 key: "resizable",
@@ -264,6 +263,12 @@ export const menuItems = [
                 key: "virtualizer",
                 href: "/components/virtualizer",
                 primary: "Virtualizer",
+                disabled: true,
+            },
+            {
+                key: "framer",
+                href: "/components/framer",
+                primary: "Framer",
                 disabled: true,
             },
             {

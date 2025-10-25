@@ -27,7 +27,6 @@
     animation-delay: $delay;
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(.65, 0, .34, 1);
-    z-index: -1;
 }
 
 @keyframes ripple {

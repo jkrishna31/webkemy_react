@@ -15,12 +15,13 @@ export type MenuItemProps<T extends ElementType> = {
   parent?: boolean
   active?: boolean
   disabled?: boolean
+  minimized?: boolean
   // subItems?: Array<MenuItemProps<K>>
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
 
 const MenuItem = <T extends ElementType = "button">({
   as = "button",
-  icon, primary, secondary, badge,
+  icon, primary, secondary, badge, minimized,
   custom, parent, active,
   // subItems,
   className, children, disabled,
@@ -36,19 +37,29 @@ const MenuItem = <T extends ElementType = "button">({
         data-active={active}
         disabled={disabled}
         aria-disabled={disabled}
+        data-minimized={minimized}
       >
         {!custom ? (
           <>
             {icon}
-            <div className={styles.details}>
-              <p className={`${styles.primary} primary`}>{primary}</p>
-              {
-                secondary ? (
-                  <p className={styles.secondary}>{secondary}</p>
-                ) : null
-              }
+            <div className={styles.content}>
+              <div className={styles.details}>
+                <p className={`${styles.primary} primary`}>{primary}</p>
+                {
+                  secondary ? (
+                    <p className={styles.secondary}>{secondary}</p>
+                  ) : null
+                }
+              </div>
+              {typeof badge === "function" ? badge?.() : badge}
             </div>
-            {badge}
+            {
+              minimized
+                ? typeof badge === "function"
+                  ? badge(minimized)
+                  : badge
+                : null
+            }
           </>
         ) : null}
         {children}

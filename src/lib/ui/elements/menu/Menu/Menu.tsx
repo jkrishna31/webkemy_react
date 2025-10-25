@@ -9,9 +9,14 @@ export interface MenuProps {
 const Menu = ({
   ...props
 }: MenuProps) => {
+  // on pointer enter/leave
+  // use one popper component
+  // if there is a closest menuitem then add to the reference 
+
   return (
-    <>
-    </>
+    <div>
+
+    </div>
   );
 };
 

@@ -3,6 +3,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
+import { Badge } from "@/lib/ui/elements/badges";
 import { Chip } from "@/lib/ui/elements/chip";
 
 import styles from "./styles.module.scss";
@@ -21,7 +22,10 @@ const Page = () => {
       <Chip color="blue" label="Processing" onRemove={handleRemove} />
       <Chip color="red" label="Cancelled" onRemove={handleRemove} />
       <Chip color="green" label="Successful" onRemove={handleRemove} />
-      <Chip color="yellow" label="Pending" onRemove={handleRemove} />
+      <Chip color="yellow" style={{ padding: ".5rem 1rem .5rem .7rem", borderRadius: "var(--br-pill)" }}>
+        <Badge color="yellow" float={null} animate="ripple" style={{ marginRight: ".5rem" }} />
+        {"Pending"}
+      </Chip>
     </main>
   );
 };
