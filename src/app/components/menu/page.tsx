@@ -5,34 +5,17 @@ import React, { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
-import { MenuItem } from "@/lib/ui/elements/menu";
-import { CircleIcon, DiamondIcon, RectangleVerticalIcon, SquareIcon, StarIcon, TriangleIcon } from "@/lib/ui/svgs/icons";
+import { Menu, MenuItem } from "@/lib/ui/elements/menu";
+import { CircleIcon, ConeIcon, CubeIcon, CuboidIcon, CylinderIcon, DiamondIcon, HexagonIcon, OctagonIcon, PentagonIcon, RectangleVerticalIcon, SquareIcon, StarIcon, TriangleIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./styles.module.scss";
 
 const menuItems = [
   {
-    key: "1",
+    key: "3",
     href: "#",
-    primary: "Triangle",
-    icon: <TriangleIcon className={styles.icon} />,
-    subMenu: [
-      {
-        key: "11",
-        href: "#",
-        primary: "Equilateral Triangle",
-      },
-      {
-        key: "12",
-        href: "#",
-        primary: "Isosceles Triangle",
-      },
-      {
-        key: "13",
-        href: "#",
-        primary: "Scalene Triangle",
-      },
-    ]
+    primary: "Infinite Circle",
+    icon: <CircleIcon className={styles.icon} />,
   },
   {
     key: "2",
@@ -41,11 +24,32 @@ const menuItems = [
     icon: <RectangleVerticalIcon className={styles.icon} />,
   },
   {
-    key: "3",
+    key: "1",
     href: "#",
-    primary: "Infinite Circle",
-    icon: <CircleIcon className={styles.icon} />,
+    primary: "Triangle",
+    icon: <TriangleIcon className={styles.icon} />,
     badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="blue" style={{ marginLeft: "auto" }}>{"37"}</Badge>,
+    menu: [
+      {
+        key: "11",
+        href: "#",
+        icon: <PentagonIcon className={styles.icon} />,
+        primary: "Equilateral Triangle",
+      },
+      {
+        key: "12",
+        href: "#",
+        icon: <ConeIcon className={styles.icon} />,
+        primary: "Isosceles Triangle",
+      },
+      {
+        key: "13",
+        href: "#",
+        icon: <CylinderIcon className={styles.icon} />,
+        badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="yellow" style={{ marginLeft: "auto" }}>{"66"}</Badge>,
+        primary: "Scalene Triangle",
+      },
+    ]
   },
   {
     key: "4",
@@ -70,13 +74,18 @@ const menuItems = [
 ];
 
 const Page = () => {
-  const [active, setActive] = useState<string>();
+  const [activeItem, setActiveItem] = useState<string>();
   const [open, setOpen] = useState(true);
+  const [openMenu, setOpenMenu] = useState<string>();
 
   // cascade menu (outside, or overlap or replace with back btn)
   // collapsible
-  // tooltip on cpllapse
+  // tooltip on collapse
   // nested menu items ()
+
+  const handleMenuToggle = (menuId: string) => {
+    setOpenMenu(menuId === openMenu ? undefined : menuId);
+  };
 
   return (
     <main>
@@ -89,25 +98,24 @@ const Page = () => {
       >
         {open ? "Collapse" : "Expand"}
       </Button>
-      <div className={styles.menu_section}>
+      <Menu minimized={!open}>
         {
           menuItems?.map((menuItem: any) => {
             return (
               <MenuItem<"button">
+                {...menuItem}
                 key={menuItem.key}
-                primary={menuItem.primary}
-                secondary={menuItem.secondary}
-                disabled={menuItem.disabled}
-                icon={menuItem.icon}
-                badge={menuItem.badge}
+                id={menuItem.key}
                 minimized={!open}
-                active={menuItem.key === active}
-                onClick={() => setActive(menuItem.key)}
+                activeItem={activeItem}
+                open={openMenu === menuItem.key}
+                onMenuToggle={handleMenuToggle}
+                onClick={setActiveItem}
               />
             );
           })
         }
-      </div>
+      </Menu>
     </main>
   );
 };

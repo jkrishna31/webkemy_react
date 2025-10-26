@@ -1,30 +1,34 @@
 import Link, { LinkProps } from "next/link";
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
+import { Button } from "@/lib/ui/elements/butttons";
 import { Collapsible } from "@/lib/ui/elements/collapsible";
+import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./MenuItem.module.scss";
 
 export type MenuItemProps<T extends ElementType> = {
+  id: string
   as?: T
   icon?: ReactNode
   primary?: ReactNode
   secondary?: ReactNode
   badge?: ReactNode
   custom?: boolean
-  parent?: boolean
-  active?: boolean
+  activeItem?: string | number
   disabled?: boolean
   minimized?: boolean
-  // subItems?: Array<MenuItemProps<K>>
+  open?: boolean
+  menu?: Array<MenuItemProps<T>>
+  onMenuToggle?: (id: string) => void;
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
 
 const MenuItem = <T extends ElementType = "button">({
-  as = "button",
-  icon, primary, secondary, badge, minimized,
-  custom, parent, active,
-  // subItems,
-  className, children, disabled,
+  as = "button", id,
+  icon, primary, secondary, badge,
+  minimized, custom, activeItem, disabled,
+  menu, onMenuToggle, open,
+  className, children, onClick,
   ...props
 }: MenuItemProps<T>) => {
   const Element = as === "a" ? Link : as;
@@ -34,7 +38,8 @@ const MenuItem = <T extends ElementType = "button">({
       <Element
         className={`${styles.item} ${className}`}
         {...props}
-        data-active={active}
+        onClick={onClick ? () => onClick(id) : undefined}
+        data-active={activeItem === id}
         disabled={disabled}
         aria-disabled={disabled}
         data-minimized={minimized}
@@ -67,13 +72,42 @@ const MenuItem = <T extends ElementType = "button">({
     );
   };
 
-  if (parent) {
+  if (menu?.length) {
     return (
       <Collapsible
-        open={false}
-        summary={renderElement()}
+        open={open}
+        summary={
+          <div className={styles.root_item}>
+            {renderElement()}
+            <Button variant="tertiary" className={styles.toggle_btn} onClick={() => onMenuToggle(id)}>
+              <ChevronRightIcon />
+            </Button>
+          </div>
+        }
+        className={styles.collapsible}
+        data-minimized={minimized}
       >
-        {children}
+        <div className={styles.sub_menu_wrapper}>
+          <div>
+            {
+              menu.map((item: MenuItemProps<T>) => {
+                return (
+                  <MenuItem<T>
+                    {...item}
+                    {...props}
+                    key={item.key}
+                    id={item.key}
+                    minimized={minimized}
+                    activeItem={activeItem}
+                    open={open}
+                    onMenuToggle={onMenuToggle}
+                    onClick={onClick}
+                  />
+                );
+              })
+            }
+          </div>
+        </div>
       </Collapsible>
     );
   }

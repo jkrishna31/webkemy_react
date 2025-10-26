@@ -58,7 +58,8 @@ const AppSidebar = ({
                       <MenuItem<"a">
                         as="a"
                         key={menuItem.key}
-                        active={page === menuItem.key}
+                        id={menuItem.key}
+                        activeItem={page}
                         href={menuItem.href}
                         primary={menuItem.primary}
                         secondary={menuItem.secondary}

@@ -1,18 +1,16 @@
-.wrapper[data-expanded="false"] .details {
-    max-height: 0;
+.wrapper {
+
+    .details {
+        overflow: hidden;
+        max-height: 0;
+        transition: height 500ms ease, max-height 500ms ease, opacity 500ms ease;
+    }
+
+    // &[data-expanded="true"] .details {
+    //     overflow: initial;
+    // }
+
+    &[data-expanded="false"] .details {
+        max-height: 0;
+    }
 }
-
-.details {
-    // appearance: none;
-    overflow-y: hidden;
-    max-height: 0;
-    transition: height 500ms ease, max-height 500ms ease;
-}
-
-// .details>summary {
-//     list-style: none;
-// }
-
-// .details>summary::-webkit-details-marker {
-//     display: none;
-// }

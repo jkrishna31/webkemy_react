@@ -437,7 +437,8 @@ const AppMenu = ({ open }: AppMenuProps) => {
                                                 <MenuItem<"a">
                                                     as="a"
                                                     key={menuItem.key}
-                                                    active={page === menuItem.key}
+                                                    id={menuItem.key}
+                                                    activeItem={page}
                                                     href={menuItem.href}
                                                     primary={menuItem.primary}
                                                     disabled={menuItem.disabled}

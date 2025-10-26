@@ -26,6 +26,8 @@
   }
 
   &[data-minimized="true"] {
+    width: fit-content;
+
     .content {
       display: none;
     }
@@ -43,8 +45,6 @@
   }
 
   &[data-active="true"] {
-    // color: var(--bg-p);
-    // background-color: var(--fg-p-alt);
     background-color: var(--gray-30);
 
     &[data-minimized="true"] {
@@ -52,10 +52,6 @@
         color: var(--fg-p);
       }
     }
-
-    // .secondary {
-    //   color: var(--bg-s);
-    // }
   }
 
   &:disabled,
@@ -89,6 +85,67 @@
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.root_item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: .2rem;
+}
+
+.toggle_btn {
+  background-color: transparent;
+  min-height: fit-content;
+  padding-inline: .7rem;
+  border-radius: .6rem;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--bg-hover);
+  }
+
+  & svg {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .2rem;
+    color: var(--fg-s);
+    transition: transform .5s ease;
+  }
+}
+
+.collapsible {
+  &[data-expanded="true"] .toggle_btn svg {
+    transform: rotate(90deg);
+  }
+
+  &[data-minimized="true"] {
+
+    & .root_item {
+      grid-template-columns: auto;
+      place-items: center;
+    }
+
+    & .toggle_btn svg {
+      transform: rotate(90deg);
+    }
+
+    &[data-expanded="true"] .toggle_btn svg {
+      transform: rotate(-90deg);
+    }
+  }
+}
+
+.sub_menu_wrapper {
+  padding-top: .2rem;
+
+  &>div {
+    display: grid;
+    gap: .2rem;
+    padding-block: .8rem;
+    padding-inline: .8rem;
+    border-radius: .8rem;
+    background-color: var(--bg-s);
+  }
 }
 
 @media screen and (max-width: 768px) {
