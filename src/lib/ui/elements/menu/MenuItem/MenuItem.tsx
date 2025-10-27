@@ -18,7 +18,7 @@ export type MenuItemProps<T extends ElementType> = {
   activeItem?: string | number
   disabled?: boolean
   minimized?: boolean
-  open?: boolean
+  openItems?: string[]
   menu?: Array<MenuItemProps<T>>
   onMenuToggle?: (id: string) => void;
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
@@ -27,7 +27,7 @@ const MenuItem = <T extends ElementType = "button">({
   as = "button", id,
   icon, primary, secondary, badge,
   minimized, custom, activeItem, disabled,
-  menu, onMenuToggle, open,
+  menu, onMenuToggle, openItems,
   className, children, onClick,
   ...props
 }: MenuItemProps<T>) => {
@@ -76,7 +76,7 @@ const MenuItem = <T extends ElementType = "button">({
   if (menu?.length) {
     return (
       <Collapsible
-        open={open}
+        open={openItems.includes(id)}
         summary={
           <div className={styles.root_item}>
             {renderElement()}
@@ -95,13 +95,13 @@ const MenuItem = <T extends ElementType = "button">({
               menu.map((item: MenuItemProps<T>) => {
                 return (
                   <MenuItem<T>
-                    {...item}
                     {...props}
+                    {...item}
                     key={item.key}
                     id={item.key}
                     minimized={minimized}
                     activeItem={activeItem}
-                    open={open}
+                    openItems={openItems}
                     onMenuToggle={onMenuToggle}
                     onClick={onClick}
                   />

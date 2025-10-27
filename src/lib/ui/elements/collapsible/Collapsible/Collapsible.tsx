@@ -49,6 +49,14 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
         }
     }, [adjustOverflow, open]);
 
+    const handleTransitionStart = () => {
+        const elem = ref.current;
+        if (elem && open) {
+            clearTimeout(timeoutRef.current ?? undefined);
+            elem.style.overflow = "hidden";
+        }
+    };
+
     useLayoutEffect(() => {
         updateHeight();
     }, [open, updateHeight]);
@@ -59,6 +67,7 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
             <DetailsElement
                 className={`${styles.details} ${detailsClass}`}
                 ref={ref}
+                onTransitionStart={handleTransitionStart}
                 onTransitionEnd={updateHeight}
                 role="region"
                 id={detailsPanelId ?? ""}

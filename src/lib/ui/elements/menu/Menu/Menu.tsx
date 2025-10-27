@@ -65,7 +65,6 @@ const Menu = ({
           isTooltip
           placement="right"
           alignment="center"
-        // delayCloseOnEsc
         >
           <div className={styles.popover}>
             {tooltip}

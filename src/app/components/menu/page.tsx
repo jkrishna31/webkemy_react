@@ -41,6 +41,21 @@ const menuItems = [
         href: "#",
         icon: <ConeIcon className={styles.icon} />,
         primary: "Isosceles Triangle",
+        menu: [
+          {
+            key: "121",
+            href: "#",
+            icon: <HexagonIcon className={styles.icon} />,
+            primary: "Hexagon",
+          },
+          {
+            key: "122",
+            href: "#",
+            icon: <OctagonIcon className={styles.icon} />,
+            primary: "Octagon",
+            badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />,
+          },
+        ]
       },
       {
         key: "13",
@@ -76,11 +91,19 @@ const menuItems = [
 const Page = () => {
   const [activeItem, setActiveItem] = useState<string>();
   const [open, setOpen] = useState(true);
-  const [openMenu, setOpenMenu] = useState<string>();
+  const [openMenu, setOpenMenu] = useState<string[]>([]);
 
   const handleMenuToggle = (menuId: string) => {
-    setOpenMenu(menuId === openMenu ? undefined : menuId);
+    if (openMenu.includes(menuId)) {
+      setOpenMenu([...openMenu.filter(item => item !== menuId)]);
+    } else {
+      setOpenMenu([...openMenu, menuId]);
+    }
   };
+
+  // issues with current approach where the everything is inside the menuitem
+  // issue: manually passing everything again and again
+  // issue: openMenu issue need to pass the array (level-wise open, only one at one level)
 
   return (
     <main>
@@ -103,7 +126,7 @@ const Page = () => {
                 id={menuItem.key}
                 minimized={!open}
                 activeItem={activeItem}
-                open={openMenu === menuItem.key}
+                openItems={openMenu}
                 onMenuToggle={handleMenuToggle}
                 onClick={setActiveItem}
               />
