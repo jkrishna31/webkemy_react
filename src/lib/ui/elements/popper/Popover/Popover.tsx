@@ -40,6 +40,29 @@ const getLocation = (
   const topSpace = anchorBoundingRect.y;
   const bottomSpace = window.innerHeight - (anchorBoundingRect.y + anchorBoundingRect.height);
 
+  // if (placement === "left" || placement === "right") {
+  //   const hasEnoughLeftSpace = leftSpace >= (targetBoundingRect.width + 20);
+  //   const hasEnoughRightSpace = rightSpace >= (targetBoundingRect.width + 20);
+
+  //   const position: { [key: string]: number } = {};
+
+  //   if (hasEnoughLeftSpace && hasEnoughRightSpace) {
+  //     position.left = (leftSpace + anchorBoundingRect.width / 2) - targetBoundingRect.width / 2;
+  //   } else if (!hasEnoughLeftSpace) {
+  //     position.left = 20;
+  //   } else {
+  //     position.left = window.innerWidth - 20 - targetBoundingRect.width;
+  //   }
+
+  //   if (topSpace > bottomSpace) {
+  //     position.top = (topSpace) - targetBoundingRect.height - offset;
+  //   } else {
+  //     position.top = (anchorBoundingRect.y + anchorBoundingRect.height) + offset;
+  //   }
+
+  //   return position;
+  // }
+
   const hasEnoughLeftSpace = leftSpace >= targetBoundingRect.width / 2;
   const hasEnoughRightSpace = rightSpace >= targetBoundingRect.width / 2;
 

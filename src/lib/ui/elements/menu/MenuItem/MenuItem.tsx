@@ -74,13 +74,21 @@ const MenuItem = <T extends ElementType = "button">({
   };
 
   if (menu?.length) {
+    const isOpen = openItems.includes(id);
     return (
       <Collapsible
-        open={openItems.includes(id)}
+        open={isOpen}
         summary={
           <div className={styles.root_item}>
             {renderElement()}
-            <Button variant="tertiary" className={styles.toggle_btn} onClick={() => onMenuToggle(id)}>
+            <Button
+              variant="tertiary"
+              className={styles.toggle_btn}
+              onClick={() => onMenuToggle(id)}
+              aria-pressed={isOpen}
+              aria-label={isOpen ? "Close Sub-Menu" : "Open Sub-Menu"}
+              title={isOpen ? "Close Sub-Menu" : "Open Sub-Menu"}
+            >
               <ChevronRightIcon />
             </Button>
           </div>

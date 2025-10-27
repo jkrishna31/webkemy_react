@@ -128,8 +128,16 @@
     }
   }
 
-  &[data-expanded="true"] .toggle_btn svg {
-    transform: rotate(90deg);
+  &[data-expanded="true"] .toggle_btn[aria-pressed="true"] {
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--bg-hover);
+    }
+
+    & svg {
+      transform: rotate(90deg);
+    }
   }
 
   &[data-minimized="true"] {
@@ -147,7 +155,7 @@
       transform: rotate(90deg);
     }
 
-    &[data-expanded="true"] .toggle_btn svg {
+    &[data-expanded="true"] .toggle_btn[aria-pressed="true"] svg {
       transform: rotate(-90deg);
     }
   }

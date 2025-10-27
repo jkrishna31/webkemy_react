@@ -47,13 +47,13 @@ const menuItems = [
             href: "#",
             icon: <HexagonIcon className={styles.icon} />,
             primary: "Hexagon",
+            badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />,
           },
           {
             key: "122",
             href: "#",
             icon: <OctagonIcon className={styles.icon} />,
             primary: "Octagon",
-            badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />,
           },
         ]
       },
