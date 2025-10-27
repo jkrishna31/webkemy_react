@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ElementType, ReactNode, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import React, { ComponentProps, ElementType, ReactNode, useCallback, useLayoutEffect, useRef } from "react";
 
 import styles from "./Collapsible.module.scss";
 
@@ -12,27 +12,42 @@ export type CollapsibleProps<T extends ElementType, K extends ElementType> = {
     detailsClass?: string;
     renderWhileClosed?: boolean;
     detailsPanelId?: string;
+    adjustOverflow?: boolean;
 } & ComponentProps<T>;
 
 const Collapsible = <T extends ElementType = "div", K extends ElementType = "div">({
     children, className, detailsClass,
-    open, summary, renderWhileClosed = true,
+    open, summary, renderWhileClosed = true, adjustOverflow,
     detailsPanelId,
     wrapperAs = "div", detailsAs = "div",
     ...props
 }: CollapsibleProps<T, K>) => {
     const ref = useRef<HTMLUListElement>(null);
+    const timeoutRef = useRef<NodeJS.Timeout>(null);
 
     const WrapperElement = wrapperAs;
     const DetailsElement = detailsAs;
 
     const updateHeight = useCallback(() => {
-        if (ref.current) {
-            const contentHeight = (ref.current as HTMLElement).scrollHeight;
-            ref.current.style.height = "fit-content";
-            ref.current.style.maxHeight = `${open ? contentHeight : 0}px`;
+        const elem = ref.current;
+        if (elem) {
+            const contentHeight = (elem as HTMLElement).scrollHeight;
+            elem.style.height = "fit-content";
+            elem.style.maxHeight = `${open ? contentHeight : 0}px`;
+            clearTimeout(timeoutRef.current ?? undefined);
+            if (open) {
+                elem.style.opacity = "100%";
+                if (adjustOverflow) {
+                    timeoutRef.current = setTimeout(() => {
+                        elem.style.overflow = "initial";
+                    }, .6 * 500);
+                }
+            } else {
+                elem.style.overflow = "hidden";
+                elem.style.opacity = "0%";
+            }
         }
-    }, [open]);
+    }, [adjustOverflow, open]);
 
     useLayoutEffect(() => {
         updateHeight();

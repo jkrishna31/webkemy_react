@@ -78,11 +78,6 @@ const Page = () => {
   const [open, setOpen] = useState(true);
   const [openMenu, setOpenMenu] = useState<string>();
 
-  // cascade menu (outside, or overlap or replace with back btn)
-  // collapsible
-  // tooltip on collapse
-  // nested menu items ()
-
   const handleMenuToggle = (menuId: string) => {
     setOpenMenu(menuId === openMenu ? undefined : menuId);
   };

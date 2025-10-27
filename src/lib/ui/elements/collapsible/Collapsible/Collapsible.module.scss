@@ -3,12 +3,10 @@
     .details {
         overflow: hidden;
         max-height: 0;
-        transition: height 500ms ease, max-height 500ms ease, opacity 500ms ease;
+        transition-timing-function: ease;
+        transition-duration: 500ms;
+        transition-property: height, max-height, opacity;
     }
-
-    // &[data-expanded="true"] .details {
-    //     overflow: initial;
-    // }
 
     &[data-expanded="false"] .details {
         max-height: 0;

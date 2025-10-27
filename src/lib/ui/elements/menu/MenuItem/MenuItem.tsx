@@ -36,7 +36,8 @@ const MenuItem = <T extends ElementType = "button">({
   const renderElement = () => {
     return (
       <Element
-        className={`${styles.item} ${className}`}
+        className={`${styles.item} ${className} menu_item`}
+        aria-label={typeof primary === "string" ? primary : ""}
         {...props}
         onClick={onClick ? () => onClick(id) : undefined}
         data-active={activeItem === id}
@@ -86,6 +87,7 @@ const MenuItem = <T extends ElementType = "button">({
         }
         className={styles.collapsible}
         data-minimized={minimized}
+        adjustOverflow
       >
         <div className={styles.sub_menu_wrapper}>
           <div>

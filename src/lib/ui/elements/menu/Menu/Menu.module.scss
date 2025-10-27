@@ -10,3 +10,11 @@
     place-items: center;
   }
 }
+
+.popover {
+  color: var(--fg-p);
+  background-color: var(--bg-t);
+  border-radius: .8rem;
+  padding: .8rem;
+  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+}
