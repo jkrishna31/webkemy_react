@@ -30,6 +30,8 @@ const Menu = ({
       };
 
       const handlePointerLeave = () => {
+        setAnchor(undefined);
+        setTooltip("");
         menuElem.removeEventListener("pointermove", handlePointerMove);
         menuElem.removeEventListener("pointerleave", handlePointerLeave);
       };
@@ -43,8 +45,7 @@ const Menu = ({
 
       return () => {
         menuElem.removeEventListener("pointerenter", handlePointerEnter);
-        menuElem.removeEventListener("pointerleave", handlePointerLeave);
-        menuElem.removeEventListener("pointermove", handlePointerMove);
+        handlePointerLeave();
       };
     }
   }, [minimized]);
