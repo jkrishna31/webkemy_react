@@ -16,6 +16,7 @@ const Menu = ({
   ...props
 }: MenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   const [anchor, setAnchor] = useState<HTMLElement>();
   const [tooltip, setTooltip] = useState<string>();
@@ -25,8 +26,17 @@ const Menu = ({
     if (menuElem && minimized) {
       const handlePointerMove = (e: PointerEvent) => {
         const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
-        setAnchor(menuItem || undefined);
-        setTooltip(menuItem?.getAttribute("aria-label") ?? "");
+        const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
+        clearTimeout(timeoutRef.current ?? undefined);
+        if (!menuItem) {
+          timeoutRef.current = setTimeout(() => {
+            setAnchor(undefined);
+            setTooltip("");
+          }, 100);
+        } else {
+          setAnchor(menuItem);
+          setTooltip(tooltipContent);
+        }
       };
 
       const handlePointerLeave = () => {
