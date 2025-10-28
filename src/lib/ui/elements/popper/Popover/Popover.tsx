@@ -40,28 +40,22 @@ const getLocation = (
   const topSpace = anchorBoundingRect.y;
   const bottomSpace = window.innerHeight - (anchorBoundingRect.y + anchorBoundingRect.height);
 
-  // if (placement === "left" || placement === "right") {
-  //   const hasEnoughLeftSpace = leftSpace >= (targetBoundingRect.width + 20);
-  //   const hasEnoughRightSpace = rightSpace >= (targetBoundingRect.width + 20);
+  if (placement === "left" || placement === "right") {
+    const hasEnoughLeftSpace = leftSpace >= (targetBoundingRect.width + 20 + offset);
+    const hasEnoughRightSpace = rightSpace >= (targetBoundingRect.width + 20 + offset);
 
-  //   const position: { [key: string]: number } = {};
+    const position: { [key: string]: number } = {};
 
-  //   if (hasEnoughLeftSpace && hasEnoughRightSpace) {
-  //     position.left = (leftSpace + anchorBoundingRect.width / 2) - targetBoundingRect.width / 2;
-  //   } else if (!hasEnoughLeftSpace) {
-  //     position.left = 20;
-  //   } else {
-  //     position.left = window.innerWidth - 20 - targetBoundingRect.width;
-  //   }
-
-  //   if (topSpace > bottomSpace) {
-  //     position.top = (topSpace) - targetBoundingRect.height - offset;
-  //   } else {
-  //     position.top = (anchorBoundingRect.y + anchorBoundingRect.height) + offset;
-  //   }
-
-  //   return position;
-  // }
+    if (hasEnoughLeftSpace && placement === "left") {
+      position.left = anchorBoundingRect.x - targetBoundingRect.width - offset;
+      position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+      return position;
+    } else if (hasEnoughRightSpace && placement === "right") {
+      position.left = anchorBoundingRect.x + anchorBoundingRect.width + offset;
+      position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+      return position;
+    }
+  }
 
   const hasEnoughLeftSpace = leftSpace >= targetBoundingRect.width / 2;
   const hasEnoughRightSpace = rightSpace >= targetBoundingRect.width / 2;
@@ -77,7 +71,7 @@ const getLocation = (
   }
 
   if (topSpace > bottomSpace) {
-    position.top = (topSpace) - targetBoundingRect.height - offset;
+    position.top = topSpace - targetBoundingRect.height - offset;
   } else {
     position.top = (anchorBoundingRect.y + anchorBoundingRect.height) + offset;
   }
