@@ -34,7 +34,7 @@ const AppSidebar = ({
 
   return (
     <div className={`${styles.sidebar} ${className}`}>
-      <button className={styles.close_btn} onClick={toggleSidebar}>
+      {/* <button className={styles.close_btn} onClick={toggleSidebar}>
         {
           sidebar === "expanded" ? (
             <ChevronsLeftIcon />
@@ -42,7 +42,7 @@ const AppSidebar = ({
             <ChevronsRightIcon />
           )
         }
-      </button>
+      </button> */}
 
       <div className={styles.wrapper}>
         {

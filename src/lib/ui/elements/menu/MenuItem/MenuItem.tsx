@@ -21,6 +21,7 @@ export type MenuItemProps<T extends ElementType> = {
   openItems?: string[]
   menu?: Array<MenuItemProps<T>>
   onMenuToggle?: (id: string) => void;
+  group?: ReactNode;
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
 
 const MenuItem = <T extends ElementType = "button">({
@@ -34,6 +35,7 @@ const MenuItem = <T extends ElementType = "button">({
   const Element = as === "a" ? Link : as;
 
   const renderElement = () => {
+    // render group if present, otherwise render element
     return (
       <Element
         className={`${styles.item} ${className} menu_item`}

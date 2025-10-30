@@ -19,7 +19,7 @@ const MenuGroup = ({
       <div className={`${styles.header} ${headerClass}`}>
         <p>{title}</p>
       </div>
-      <div className={styles.body}>
+      <div className={`${styles.body} body`}>
         {children}
       </div>
     </div>

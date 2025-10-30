@@ -3,8 +3,7 @@
   z-index: var(--zi-drawer);
   max-width: calc(100vw - 4rem);
 
-  // transition: transform .2s ease, top .2s ease, left .2s ease, bottom .2s ease, right .2s ease;
-  animation: fade-in .2s ease;
+  animation: fade-in .5s ease;
 
   &[data-popover="tooltip"] {
     pointer-events: none;

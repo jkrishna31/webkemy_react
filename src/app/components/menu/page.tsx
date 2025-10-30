@@ -14,13 +14,13 @@ const menuItems = [
   {
     key: "3",
     href: "#",
-    primary: "Infinite Circle",
+    primary: "Circle",
     icon: <CircleIcon className={styles.icon} />,
   },
   {
     key: "2",
     href: "#",
-    primary: "Long Rectangle",
+    primary: "Rectangle",
     icon: <RectangleVerticalIcon className={styles.icon} />,
   },
   {
@@ -69,20 +69,20 @@ const menuItems = [
   {
     key: "4",
     href: "#",
-    primary: "Far Star",
+    primary: "Star",
     secondary: "Lorem Ipsum Dolor Sit",
     icon: <StarIcon className={styles.icon} />,
   },
   {
     key: "5",
     href: "#",
-    primary: "Bright Diamond",
+    primary: "Diamond",
     icon: <DiamondIcon className={styles.icon} />,
   },
   {
     key: "6",
     href: "#",
-    primary: "Equal Square",
+    primary: "Square",
     icon: <SquareIcon className={styles.icon} />,
     badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="red" animate="ripple" style={{ marginLeft: "auto" }} />,
   },
