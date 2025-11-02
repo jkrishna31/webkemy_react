@@ -22,23 +22,50 @@ export type MenuItemProps<T extends ElementType> = {
   menu?: Array<MenuItemProps<T>>
   onMenuToggle?: (id: string) => void;
   group?: ReactNode;
+  collapsible?: boolean;
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
 
 const MenuItem = <T extends ElementType = "button">({
   as = "button", id,
   icon, primary, secondary, badge,
   minimized, custom, activeItem, disabled,
-  menu, onMenuToggle, openItems,
-  className, children, onClick,
+  menu, onMenuToggle, openItems, group,
+  className, children, onClick, collapsible = true,
   ...props
 }: MenuItemProps<T>) => {
   const Element = as === "a" ? Link : as;
 
-  const renderElement = () => {
-    // render group if present, otherwise render element
+  const renderSubMenu = () => {
     return (
+      <div className={styles.sub_menu_wrapper}>
+        {
+          menu.map((item: MenuItemProps<T>) => {
+            return (
+              <MenuItem
+                {...props}
+                {...item}
+                key={item.key}
+                id={item.key}
+                as={item.href ? "a" : "button"}
+                minimized={minimized}
+                activeItem={activeItem}
+                openItems={openItems}
+                onMenuToggle={onMenuToggle}
+                onClick={onClick}
+              />
+            );
+          })
+        }
+      </div>
+    );
+  };
+
+  const renderElement = () => {
+    return group ? (
+      <div className={`${styles.group_header} ${styles.sticky} group_header`}>{group}</div>
+    ) : (
       <Element
-        className={`${styles.item} ${className} menu_item`}
+        className={`${styles.item} ${className} ${collapsible ? styles.sticky : ""} menu_item`}
         aria-label={typeof primary === "string" ? primary : ""}
         {...props}
         onClick={onClick ? () => onClick(id) : undefined}
@@ -76,8 +103,8 @@ const MenuItem = <T extends ElementType = "button">({
   };
 
   if (menu?.length) {
-    const isOpen = openItems.includes(id);
-    return (
+    const isOpen = openItems?.includes(id);
+    return collapsible ? (
       <Collapsible
         open={isOpen}
         summary={
@@ -95,32 +122,20 @@ const MenuItem = <T extends ElementType = "button">({
             </Button>
           </div>
         }
-        className={styles.collapsible}
-        data-minimized={minimized}
         adjustOverflow
+        className={styles.container}
+        data-minimized={minimized}
       >
-        <div className={styles.sub_menu_wrapper}>
-          <div>
-            {
-              menu.map((item: MenuItemProps<T>) => {
-                return (
-                  <MenuItem<T>
-                    {...props}
-                    {...item}
-                    key={item.key}
-                    id={item.key}
-                    minimized={minimized}
-                    activeItem={activeItem}
-                    openItems={openItems}
-                    onMenuToggle={onMenuToggle}
-                    onClick={onClick}
-                  />
-                );
-              })
-            }
-          </div>
-        </div>
+        {renderSubMenu()}
       </Collapsible>
+    ) : (
+      <div
+        className={`${styles.container} ${group ? styles.group_container : ""}`}
+        data-minimized={minimized}
+      >
+        {renderElement()}
+        {renderSubMenu()}
+      </div>
     );
   }
 

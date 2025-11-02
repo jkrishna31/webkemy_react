@@ -31,17 +31,17 @@
         min-width: 4rem;
         width: fit-content;
         min-height: auto;
-        padding-inline: .4rem;
+        padding-inline: .6rem;
         height: 3.4rem;
         border-radius: .4rem;
 
-        &:nth-of-type(2) {
-            padding-right: .8rem;
-        }
+        // &:nth-of-type(2) {
+        //     padding-right: .8rem;
+        // }
 
-        &:nth-of-type(3) {
-            padding-left: .8rem;
-        }
+        // &:nth-of-type(3) {
+        //     padding-left: .8rem;
+        // }
 
         svg {
             color: var(--fg-s);

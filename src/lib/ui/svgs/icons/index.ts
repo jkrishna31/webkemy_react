@@ -137,6 +137,7 @@ export { default as FileDownloadIcon } from "./FileDownloadIcon";
 export { default as FileEditIcon } from "./FileEditIcon";
 export { default as FileIcon } from "./FileIcon";
 export { default as FileSearchIcon } from "./FileSearchIcon";
+export { default as FilesIcon } from "./FilesIcon";
 export { default as FileSignIcon } from "./FileSignIcon";
 export { default as FileUploadIcon } from "./FileUploadIcon";
 export { default as FilterIcon } from "./FilterIcon";

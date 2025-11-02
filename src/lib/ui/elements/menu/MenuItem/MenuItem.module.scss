@@ -1,3 +1,23 @@
+.group_header {
+  font-weight: 500;
+  font-size: 1.4rem;
+  color: var(--fg-s-alt);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  background: var(--bg-t);
+  z-index: 1;
+
+  transition: justify-content .5s ease;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
 .item {
   position: relative;
   width: 100%;
@@ -12,6 +32,8 @@
   align-items: center;
   gap: 1.8rem;
   color: inherit;
+
+  transition: width .5s ease;
 
   & svg {
     width: 2rem;
@@ -45,7 +67,7 @@
   }
 
   &[data-active="true"] {
-    background-color: var(--gray-30);
+    background: var(--gray-30);
 
     &[data-minimized="true"] {
       & svg {
@@ -94,14 +116,14 @@
 }
 
 .toggle_btn {
-  background-color: transparent;
+  background: transparent;
   min-height: fit-content;
   padding-inline: .7rem;
   border-radius: .6rem;
 
   &:hover,
   &:focus-visible {
-    background-color: var(--bg-hover);
+    background: var(--bg-hover);
   }
 
   & svg {
@@ -113,26 +135,21 @@
   }
 }
 
-.collapsible {
+.container {
 
   .sub_menu_wrapper {
-    padding-top: .2rem;
-
-    &>div {
-      display: grid;
-      gap: .2rem;
-      padding-block: .8rem;
-      padding-inline: .8rem;
-      border-radius: .8rem;
-      background-color: var(--bg-s);
-    }
+    display: grid;
+    gap: .2rem;
+    // padding-block: .8rem;
+    padding-inline: .8rem;
+    border-radius: .8rem;
   }
 
   &[data-expanded="true"] .toggle_btn[aria-pressed="true"] {
-    background-color: transparent;
+    background: transparent;
 
     &:hover {
-      background-color: var(--bg-hover);
+      background: var(--bg-hover);
     }
 
     & svg {
@@ -142,7 +159,11 @@
 
   &[data-minimized="true"] {
 
-    & .sub_menu_wrapper>div {
+    .group_header {
+      justify-content: center;
+    }
+
+    & .sub_menu_wrapper {
       place-items: center;
     }
 

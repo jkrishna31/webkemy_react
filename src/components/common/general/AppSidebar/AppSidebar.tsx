@@ -4,8 +4,8 @@ import React, { ComponentProps, useEffect } from "react";
 
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
-import { MenuGroup, MenuItem } from "@/lib/ui/elements/menu";
-import { ChevronsLeftIcon, ChevronsRightIcon } from "@/lib/ui/svgs/icons";
+import { Menu, MenuItem } from "@/lib/ui/elements/menu";
+import { ChevronsLeftIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./AppSidebar.module.scss";
 
@@ -33,48 +33,27 @@ const AppSidebar = ({
   }, [setField, windowSize]);
 
   return (
-    <div className={`${styles.sidebar} ${className}`}>
-      {/* <button className={styles.close_btn} onClick={toggleSidebar}>
-        {
-          sidebar === "expanded" ? (
-            <ChevronsLeftIcon />
-          ) : (
-            <ChevronsRightIcon />
-          )
-        }
-      </button> */}
+    <div className={`${styles.sidebar} ${className}`} style={{ width: sidebar === "collapsed" ? "fit-content" : "32rem" }}>
+      <button className={styles.close_btn} aria-pressed={sidebar === "collapsed"} onClick={toggleSidebar}>
+        <ChevronsLeftIcon />
+      </button>
 
-      <div className={styles.wrapper}>
+      <Menu minimized={sidebar === "collapsed"} className={styles.wrapper}>
         {
           menuItems.map((item: any) => {
             return (
-              <MenuGroup
-                key={item.group} title={item.group}
-                headerClass={styles.menu_group}
-              >
-                {
-                  item.children?.map((menuItem: any) => {
-                    return (
-                      <MenuItem<"a">
-                        as="a"
-                        key={menuItem.key}
-                        id={menuItem.key}
-                        activeItem={page}
-                        href={menuItem.href}
-                        primary={menuItem.primary}
-                        secondary={menuItem.secondary}
-                        icon={menuItem.icon}
-                        badge={menuItem.badge}
-                        disabled={menuItem.disabled}
-                      />
-                    );
-                  })
-                }
-              </MenuGroup>
+              <MenuItem
+                as={item.group ? "button" : "a"}
+                {...item}
+                key={item.key}
+                id={item.key}
+                activeItem={page}
+                minimized={sidebar === "collapsed"}
+              />
             );
           })
         }
-      </div>
+      </Menu>
     </div>
   );
 };

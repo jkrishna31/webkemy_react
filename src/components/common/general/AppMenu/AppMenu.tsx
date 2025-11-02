@@ -2,17 +2,19 @@ import { faro, LogLevel } from "@grafana/faro-web-sdk";
 
 import { useActivePage, useLayoutActions, useModalActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
-import { MenuGroup, MenuItem } from "@/lib/ui/elements/menu";
+import { MenuItem } from "@/lib/ui/elements/menu";
 import { BarChartIcon, BubbleChartIcon, LineChartIcon, PieChartIcon, RadarChartIcon, ScatterChartIcon } from "@/lib/ui/svgs/charts";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { AppLogo, BellIcon, BlockCodeIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, EastWestArrowCircleIcon, FileIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, SliderIcon, SplitHorizontalIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UserIcon, VerifiedBadgeIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
+import { AppLogo, BellIcon, BlockCodeIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, SliderIcon, SplitHorizontalIcon, SquareIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VerifiedBadgeIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./AppMenu.module.scss";
 
 export const menuItems = [
     {
+        key: "input",
         group: "Input",
-        children: [
+        collapsible: false,
+        menu: [
             {
                 key: "input",
                 href: "/components/input",
@@ -106,8 +108,10 @@ export const menuItems = [
         ],
     },
     {
+        key: "media",
         group: "Media",
-        children: [
+        collapsible: false,
+        menu: [
             {
                 key: "audio-player",
                 href: "/components/audio-player",
@@ -123,8 +127,10 @@ export const menuItems = [
         ],
     },
     {
+        key: "others",
         group: "Others",
-        children: [
+        collapsible: false,
+        menu: [
             {
                 key: "avatar",
                 href: "/components/avatar",
@@ -171,6 +177,7 @@ export const menuItems = [
                 key: "modal",
                 href: "/components/modal",
                 primary: "Modal",
+                icon: <SquareIcon />,
             },
             {
                 key: "scroll-controls",
@@ -212,6 +219,7 @@ export const menuItems = [
                 key: "breadcrumb",
                 href: "/components/breadcrumb",
                 primary: "Breadcrumb",
+                icon: <ChevronsRightIcon />,
             },
             {
                 key: "calendar",
@@ -260,11 +268,13 @@ export const menuItems = [
                 key: "lightbox",
                 href: "/components/lightbox",
                 primary: "Lightbox",
+                icon: <SquareIcon />,
             },
             {
                 key: "pagination",
                 href: "/components/pagination",
                 primary: "Pagination",
+                icon: <FilesIcon />,
             },
             {
                 key: "progress",
@@ -302,6 +312,7 @@ export const menuItems = [
                 key: "timeline",
                 href: "/components/timeline",
                 primary: "Timeline",
+                icon: <UnorderedListIcon />,
             },
             {
                 key: "virtualizer",
@@ -345,8 +356,10 @@ export const menuItems = [
         ],
     },
     {
+        key: "charts",
         group: "Charts",
-        children: [
+        collapsible: false,
+        menu: [
             {
                 key: "line-chart",
                 href: "/components/line-chart",
@@ -487,26 +500,13 @@ const AppMenu = ({ open }: AppMenuProps) => {
                     {
                         menuItems.map((item: any) => {
                             return (
-                                <MenuGroup
-                                    key={item.group} title={item.group}
-                                >
-                                    {
-                                        item.children?.map((menuItem: any) => {
-                                            return (
-                                                <MenuItem<"a">
-                                                    as="a"
-                                                    key={menuItem.key}
-                                                    id={menuItem.key}
-                                                    activeItem={page}
-                                                    href={menuItem.href}
-                                                    primary={menuItem.primary}
-                                                    icon={menuItem.icon}
-                                                    disabled={menuItem.disabled}
-                                                />
-                                            );
-                                        })
-                                    }
-                                </MenuGroup>
+                                <MenuItem
+                                    as={item.group ? "button" : "a"}
+                                    {...item}
+                                    key={item.key}
+                                    id={item.key}
+                                    activeItem={page}
+                                />
                             );
                         })
                     }

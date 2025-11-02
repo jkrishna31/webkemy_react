@@ -9,6 +9,11 @@ import { hasDOM } from "@/lib/utils/client.utils";
 
 import styles from "./Scrollable.module.scss";
 
+const SCROLL_OPTIONS = {
+  leading: true,
+  trailing: true,
+};
+
 export interface ScrollableProps extends ComponentProps<"div"> {
   vertical?: boolean
   scrollStep?: number
@@ -44,6 +49,7 @@ const Scrollable = ({
       }
     },
     50,
+    SCROLL_OPTIONS
   );
 
   const performScroll = (dir: "left" | "right") => {
@@ -60,9 +66,8 @@ const Scrollable = ({
   useEffect(() => {
     if (hasDOM() && listRef.current) {
       const elem = listRef.current;
-      // make it debounce (since on fast scroll btn not getting removed)
-      elem.addEventListener("scroll", updateScrollArea);
-      elem.addEventListener("wheel", updateScrollArea);
+      elem.addEventListener("scroll", updateScrollArea, { passive: true });
+      elem.addEventListener("wheel", updateScrollArea, { passive: true });
       return () => {
         elem.removeEventListener("wheel", updateScrollArea);
         elem.removeEventListener("scroll", updateScrollArea);

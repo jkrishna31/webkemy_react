@@ -52,7 +52,7 @@ const Pagination = ({
                 onClick={() => handleChange(1)}
                 disabled={currentPage === 1}
             >
-                <ChevronsLeftIcon className={styles.chevron_icon} />
+                {/* <ChevronsLeftIcon className={styles.chevron_icon} /> */}
                 {1}
             </Button>
             <form
@@ -65,6 +65,7 @@ const Pagination = ({
                 <NumberInput
                     value={value} onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
                     className={styles.input_wrapper} min={1} max={totalPages}
+                    enclosedControls
                 />
                 <Button
                     variant="primary" type="submit" disabled={currentPage === value}
@@ -79,7 +80,7 @@ const Pagination = ({
                 disabled={currentPage === totalPages}
             >
                 {totalPages}
-                <ChevronsRightIcon className={styles.chevron_icon} />
+                {/* <ChevronsRightIcon className={styles.chevron_icon} /> */}
             </Button>
             <Button
                 variant="primary" className={styles.pagination_btn} title="Next"
