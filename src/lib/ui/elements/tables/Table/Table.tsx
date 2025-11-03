@@ -87,6 +87,8 @@ const Table = <T extends { id: string }>({
   // sort
   // column order
 
+  // ADD RESIZE HANDLE AT THE END OF EACH RESIZABLE COLUMN
+
   const handleSort = (columnKey: string) => {
     let newSort = "";
     if (!sort || !sort.includes(columnKey)) {

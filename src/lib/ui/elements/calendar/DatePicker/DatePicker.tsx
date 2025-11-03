@@ -102,11 +102,6 @@ const DatePicker = ({
     }
   }, [_value, endDateSelected, onChange, onInput, startDateSelected]);
 
-  console.log("==== val ====", range ? [[
-    (endDateSelected && activeType === "start") ? _value[1].join("-") : undefined,
-    (startDateSelected && activeType === "end") ? _value[0].join("-") : undefined,
-  ]] : undefined);
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>

@@ -126,7 +126,9 @@ const MenuItem = <T extends ElementType = "button">({
         className={styles.container}
         data-minimized={minimized}
       >
-        {renderSubMenu()}
+        <div className={styles.details_wrapper}>
+          {renderSubMenu()}
+        </div>
       </Collapsible>
     ) : (
       <div

@@ -12,7 +12,7 @@ import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
 import { Table, TableCol } from "@/lib/ui/elements/tables";
-import { DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
+import { ContactIcon, DeleteIcon, EditIcon, EllipsisHIcon, EmailIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { Color } from "@/types/general.types";
 
@@ -35,6 +35,7 @@ type TableData = {
   startDate?: string;
   endDate?: string;
   phone?: string;
+  email?: string;
   rating?: number;
   status?: string;
   profile: string;
@@ -85,11 +86,6 @@ const Page = () => {
     },
     {
       key: "rank",
-      renderHeadLeft: (
-        <div className={styles.header_cell}>
-          {/* {"Rank"} */}
-        </div>
-      ),
       renderBodyCell: (row) => {
         return (
           <span style={{ color: "var(--fg-s-alt)" }}>{row.rank}</span>
@@ -97,7 +93,6 @@ const Page = () => {
       },
       draggable: true,
       tdStyle: { paddingInline: "1rem" },
-      // thStyle: { paddingInline: 0 },
     },
     {
       key: "name",
@@ -106,17 +101,20 @@ const Page = () => {
           {"Name"}
         </div>
       ),
-      renderBodyCell: (row) => {
+      renderBodyCell: (row: any) => {
         return (
           <div
             style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
           >
-            <Avatar>
-              <Image
-                src={row.profile ?? ""} alt={row.name} width={40} height={40}
-                style={{ width: "2.6rem", height: "2.6rem" }}
-              />
-            </Avatar>
+            <div style={{ position: "relative" }}>
+              <Avatar>
+                <Image
+                  src={row.profile ?? ""} alt={row.name} width={40} height={40}
+                  style={{ width: "2.6rem", height: "2.6rem" }}
+                />
+              </Avatar>
+              <Badge color={statusColorMap[row.status]} float="br" style={{ transform: "translate3d(7%, 7%, 0)" }} />
+            </div>
             <div>
               <p style={{ fontWeight: 500 }}>{row.name}</p>
               <p style={{ color: "var(--fg-s)" }}>{row.role}</p>
@@ -147,20 +145,6 @@ const Page = () => {
       draggable: true,
     },
     {
-      key: "phone",
-      renderHeadLeft: (
-        <div className={styles.header_cell}>
-          {"Phone Number"}
-        </div>
-      ),
-      renderBodyCell: (row) => {
-        return (
-          row.phone
-        );
-      },
-      draggable: true,
-    },
-    {
       key: "status",
       renderHeadLeft: (
         <div className={styles.header_cell}>
@@ -186,11 +170,24 @@ const Page = () => {
       draggable: true,
     },
     {
-      key: "address",
-      renderHeadLeft: "Address",
+      key: "contact",
+      renderHeadLeft: (
+        <div className={styles.header_cell}>
+          {"Contact"}
+        </div>
+      ),
       renderBodyCell: (row) => {
         return (
-          <p style={{ width: "20rem", whiteSpace: "wrap" }}>{row.address}</p>
+          <>
+            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+              {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+              <a href={`tel:${row.phone}`} style={{ color: "var(--blue-1)" }}>{row.phone}</a>
+            </p>
+            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+              {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+              <a href="mailto:example@gmail.com" style={{ color: "var(--blue-1)" }}>{row.email ?? "N/A"}</a>
+            </p>
+          </>
         );
       },
       draggable: true,
@@ -208,6 +205,16 @@ const Page = () => {
         );
       },
       allowSort: true,
+      draggable: true,
+    },
+    {
+      key: "address",
+      renderHeadLeft: "Address",
+      renderBodyCell: (row) => {
+        return (
+          <p style={{ width: "20rem", whiteSpace: "wrap" }}>{row.address}</p>
+        );
+      },
       draggable: true,
     },
     {

@@ -11,13 +11,11 @@
   }
 
   &[data-variant="dot"] {
-    width: 1.2rem;
-    height: 1.2rem;
-    padding: .2rem;
+    width: 1rem;
+    height: 1rem;
     border-radius: 50%;
     background: var(--bg-p);
-    border: .3rem solid var(--bg-p);
-    background: var(--fg-p-alt);
+    border: .2rem solid var(--bg-p);
 
     &[data-color="red"] {
       background: var(--red-5);
@@ -33,6 +31,10 @@
 
     &[data-color="yellow"] {
       background: var(--yellow-1);
+    }
+
+    &[data-color="orange"] {
+      background: var(--orange-2);
     }
   }
 
@@ -75,12 +77,21 @@
   }
 }
 
-.tr {
+.float {
   position: absolute;
+}
+
+.tr {
   top: 0;
   right: 0;
   transform: translate3d(50%, -50%, 0);
   animation: scale-in .5s cubic-bezier(0.175, 0.885, 0.32, 1.275); // cubic-bezier(.47, 1.64, .41, .8)
+}
+
+.br {
+  bottom: 0;
+  right: 0;
+  transform: translate3d(50%, 50%, 0);
 }
 
 @keyframes scale-in {
@@ -96,11 +107,6 @@
 
 @media screen and (max-width: 768px) {
   .badge {
-    &[data-variant="dot"] {
-      // width: 1.1rem;
-      // height: 1.1rem;
-    }
-
     &[data-variant="text"] {
       font-size: 1.2rem;
     }

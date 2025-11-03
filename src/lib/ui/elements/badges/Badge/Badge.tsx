@@ -17,7 +17,7 @@ const Badge = ({
 }: BadgeProps) => {
   return (
     <div
-      className={`${styles.badge} ${float ? styles[float] : ""} ${className}`}
+      className={`${styles.badge} ${float ? styles.float : ""} ${float ? styles[float] : ""} ${className}`}
       data-variant={children ? "text" : "dot"}
       data-color={color}
       data-animate={animate}
