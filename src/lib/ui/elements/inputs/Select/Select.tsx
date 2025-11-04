@@ -13,10 +13,13 @@ export interface SelectProps extends ComponentProps<"select"> {
     options: any[]
     showDopdown?: boolean
     labelKey?: string
+    variant?: "combobox" | "select"
 }
 
 const Select = ({
-    label, id, className, options, showDopdown, labelKey = "label",
+    variant = "select",
+    label, options, showDopdown, labelKey = "label",
+    id, className,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
@@ -31,12 +34,14 @@ const Select = ({
     // if single input -> then close on click inside as well
     // if multiple input -> then prevent propagation on inside dd click
 
+    // if combobox
+    // show an add btn as well for input, so that can be added
+
     return (
         <Dropdown
             className={styles.wrapper}
             open={dd}
             onClose={() => {
-                setQuery("");
                 setDd(false);
             }}
             isCustomSelector
@@ -69,6 +74,7 @@ const Select = ({
                     ) : null
                 }
                 <button
+                    aria-pressed={dd}
                     className={styles.dd_btn}
                     onClick={(e) => {
                         e.stopPropagation();

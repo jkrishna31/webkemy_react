@@ -8,9 +8,6 @@
   border-top-right-radius: .8rem;
   font-size: inherit;
   scrollbar-width: thin;
-
-  // @include scrollbar_x();
-  // @include scrollbar_y();
 }
 
 .table {
@@ -24,17 +21,34 @@
     margin-bottom: 1rem;
   }
 
-  // tr:nth-of-type(even) {
-  //   background-color: var(--bg-t);
-  // }
-
-  // tr:nth-of-type(odd) {
-  //   background-color: var(--bg-s);
-  // }
-
   thead tr {
     border-bottom: .1rem solid var(--border-t);
   }
+
+  // tr:nth-of-type(even)>td {
+  //   background-color: var(--bg-t);
+  // }
+
+  // tr:nth-of-type(odd)>td {
+  //   background-color: var(--bg-s);
+  // }
+
+  // tbody tr {
+  //   transition: opacity .3s ease;
+  //   animation: tr-animate .5s ease;
+  // }
+
+  // @keyframes tr-animate {
+  //   from {
+  //     opacity: 0;
+  //     transform: translate3d(0, 2rem, 0);
+  //   }
+
+  //   to {
+  //     opacity: 1;
+  //     transform: none;
+  //   }
+  // }
 
   th,
   td {
@@ -59,18 +73,6 @@
     color: var(--fg-s);
     background-color: var(--bg-s);
 
-    &>div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .2rem;
-      width: 100%;
-    }
-
-    // &:not(:last-child) {
-    //   border-right: .2rem solid var(--bg-p);
-    // }
-
     &:first-child {
       border-top-left-radius: .8rem;
     }
@@ -82,14 +84,6 @@
     &[draggable="true"] {
       cursor: grab;
     }
-
-    // .sort_btn:not([data-sort]) {
-    //   opacity: 0;
-    // }
-
-    // &:hover .sort_btn {
-    //   opacity: 1;
-    // }
   }
 
   .stick_btn {
@@ -106,6 +100,14 @@
     width: 1.8rem;
     height: 1.8rem;
   }
+}
+
+.header_cell_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .2rem;
+  width: 100%;
 }
 
 .sc_th {
@@ -125,6 +127,43 @@
 
 .sc_right {
   right: 0;
+}
+
+.resize_handle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: .7rem;
+  height: 100%;
+  cursor: ew-resize;
+  opacity: 0;
+
+  transition: opacity .3s ease;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate3d(0, -50%, 0);
+    width: 100%;
+    height: 100%;
+    border-inline: .2rem solid var(--blue-3);
+    background-color: var(--bg-p);
+  }
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+  }
+}
+
+.table tr[data-expanded="false"]>td {
+  border-bottom-color: transparent;
+}
+
+.collapsible_row>td {
+  padding: 0;
 }
 
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
@@ -9,10 +9,10 @@ import { Avatar } from "@/lib/ui/elements/avatar";
 import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
-import { Checkbox } from "@/lib/ui/elements/inputs";
+import { Checkbox, Switch } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
 import { Table, TableCol } from "@/lib/ui/elements/tables";
-import { ContactIcon, DeleteIcon, EditIcon, EllipsisHIcon, EmailIcon } from "@/lib/ui/svgs/icons";
+import { ChevronDownIcon, ChevronRightIcon, ContactIcon, DeleteIcon, EditIcon, EllipsisHIcon, EmailIcon, PlusIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { Color } from "@/types/general.types";
 
@@ -46,6 +46,7 @@ type TableData = {
 const Page = () => {
   const [sort, setSort] = useState<string>();
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const [expandedRows, setExpandedRows] = useState<string[]>([]);
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
@@ -58,6 +59,18 @@ const Page = () => {
       }
     }
   };
+
+  const isRowCollapsible = useCallback((_: TableData) => {
+    return true;
+  }, []);
+
+  const renderDetails = useCallback((record: TableData) => {
+    return (
+      <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap" }}>
+        {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti fuga provident unde, voluptatibus architecto iure corporis? Quod alias temporibus fuga delectus veniam nulla, labore, earum pariatur cupiditate quo, placeat ullam voluptates non totam. Recusandae eligendi, officia deleniti ratione voluptatum soluta magnam asperiores quae nesciunt ullam esse saepe delectus pariatur eum tempore fuga id quo reiciendis ex aliquam. Odit architecto nostrum, inventore minima possimus ratione non dicta quo explicabo quam. Perferendis at officiis consequuntur earum enim esse mollitia ad optio atque voluptas? Voluptatum quos est, corrupti veniam a dolore minima dolorum ratione maxime quod, eveniet accusamus repudiandae molestiae reprehenderit maiores! Eaque."}
+      </div>
+    );
+  }, []);
 
   const tableColumns: TableCol<TableData>[] = [
     {
@@ -84,16 +97,16 @@ const Page = () => {
       },
       sticky: "left",
     },
-    {
-      key: "rank",
-      renderBodyCell: (row) => {
-        return (
-          <span style={{ color: "var(--fg-s-alt)" }}>{row.rank}</span>
-        );
-      },
-      draggable: true,
-      tdStyle: { paddingInline: "1rem" },
-    },
+    // {
+    //   key: "rank",
+    //   renderBodyCell: (row) => {
+    //     return (
+    //       <span style={{ color: "var(--fg-s-alt)" }}>{row.rank}</span>
+    //     );
+    //   },
+    //   draggable: true,
+    //   tdStyle: { paddingInline: "1rem" },
+    // },
     {
       key: "name",
       renderHeadLeft: (
@@ -102,10 +115,18 @@ const Page = () => {
         </div>
       ),
       renderBodyCell: (row: any) => {
+        const isExpanded = expandedRows.includes(row.id);
         return (
           <div
             style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
           >
+            <button
+              className={styles.expand_btn}
+              aria-pressed={isExpanded}
+              onClick={() => setExpandedRows(currRows => isExpanded ? [...currRows.filter(key => key !== row.id)] : [...currRows, row.id])}
+            >
+              <ChevronRightIcon />
+            </button>
             <div style={{ position: "relative" }}>
               <Avatar>
                 <Image
@@ -125,6 +146,7 @@ const Page = () => {
       // sticky: "both",
       allowSort: true,
       draggable: true,
+      resizable: true,
     },
     {
       key: "age",
@@ -134,7 +156,6 @@ const Page = () => {
         </div>
       ),
       renderBodyCell: (row) => {
-        const age = new Date().getFullYear() - new Date(row.dob).getFullYear();
         return (
           <>
             {formatDate(row.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{row.age}{" Years"}{")"}</span>
@@ -143,6 +164,7 @@ const Page = () => {
       },
       allowSort: true,
       draggable: true,
+      resizable: true,
     },
     {
       key: "status",
@@ -168,6 +190,7 @@ const Page = () => {
       },
       allowSort: true,
       draggable: true,
+      resizable: true,
     },
     {
       key: "contact",
@@ -191,6 +214,7 @@ const Page = () => {
         );
       },
       draggable: true,
+      resizable: true,
     },
     {
       key: "rating",
@@ -206,6 +230,7 @@ const Page = () => {
       },
       allowSort: true,
       draggable: true,
+      resizable: true,
     },
     {
       key: "address",
@@ -216,6 +241,7 @@ const Page = () => {
         );
       },
       draggable: true,
+      resizable: true,
     },
     {
       key: "startDate",
@@ -226,6 +252,7 @@ const Page = () => {
         );
       },
       allowSort: true,
+      resizable: true,
     },
     {
       key: "endDate",
@@ -236,6 +263,7 @@ const Page = () => {
         );
       },
       allowSort: true,
+      resizable: true,
     },
     {
       key: "actions",
@@ -249,7 +277,7 @@ const Page = () => {
           <EllipsisHIcon />
         </button>
       ),
-      renderBodyCell: (row) => {
+      renderBodyCell: () => {
         return (
           <div className={`${styles.table_actions}`}>
             {/* <Switch className="mr-[8px]" /> */}
@@ -280,6 +308,9 @@ const Page = () => {
         onSort={setSort}
         className={styles.table}
         rootClass={styles.table_wrapper}
+        isRowCollapsible={isRowCollapsible}
+        renderDetails={renderDetails}
+        expandedRows={expandedRows}
       />
     </main>
   );

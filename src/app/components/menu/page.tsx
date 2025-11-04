@@ -10,89 +10,91 @@ import { CircleIcon, ConeIcon, CylinderIcon, DiamondIcon, HexagonIcon, OctagonIc
 
 import styles from "./styles.module.scss";
 
+// [
+//   {
+//     key: "shapes",
+//     group: "Shapes",
+//     collapsible: false,
+//     menu: 
+//   }
+// ];
 const menuItems = [
   {
-    key: "shapes",
-    group: "Shapes",
-    collapsible: false,
+    key: "3",
+    href: "#",
+    primary: "Circle",
+    icon: <CircleIcon className={styles.icon} />,
+    badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" style={{ marginLeft: "auto", zIndex: 1 }}>{"NEW"}</Badge>,
+  },
+  {
+    key: "2",
+    href: "#",
+    primary: "Rectangle",
+    icon: <RectangleVerticalIcon className={styles.icon} />,
+  },
+  {
+    key: "1",
+    href: "#",
+    primary: "Triangle",
+    icon: <TriangleIcon className={styles.icon} />,
+    badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="blue" style={{ marginLeft: "auto" }}>{"37"}</Badge>,
     menu: [
       {
-        key: "3",
+        key: "11",
         href: "#",
-        primary: "Circle",
-        icon: <CircleIcon className={styles.icon} />,
+        icon: <PentagonIcon className={styles.icon} />,
+        primary: "Equilateral Triangle",
       },
       {
-        key: "2",
+        key: "12",
         href: "#",
-        primary: "Rectangle",
-        icon: <RectangleVerticalIcon className={styles.icon} />,
-      },
-      {
-        key: "1",
-        href: "#",
-        primary: "Triangle",
-        icon: <TriangleIcon className={styles.icon} />,
-        badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="blue" style={{ marginLeft: "auto" }}>{"37"}</Badge>,
+        icon: <ConeIcon className={styles.icon} />,
+        primary: "Isosceles Triangle",
         menu: [
           {
-            key: "11",
+            key: "121",
             href: "#",
-            icon: <PentagonIcon className={styles.icon} />,
-            primary: "Equilateral Triangle",
+            icon: <HexagonIcon className={styles.icon} />,
+            primary: "Hexagon",
+            badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />,
           },
           {
-            key: "12",
+            key: "122",
             href: "#",
-            icon: <ConeIcon className={styles.icon} />,
-            primary: "Isosceles Triangle",
-            menu: [
-              {
-                key: "121",
-                href: "#",
-                icon: <HexagonIcon className={styles.icon} />,
-                primary: "Hexagon",
-                badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />,
-              },
-              {
-                key: "122",
-                href: "#",
-                icon: <OctagonIcon className={styles.icon} />,
-                primary: "Octagon",
-              },
-            ]
-          },
-          {
-            key: "13",
-            href: "#",
-            icon: <CylinderIcon className={styles.icon} />,
-            badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="yellow" style={{ marginLeft: "auto" }}>{"66"}</Badge>,
-            primary: "Scalene Triangle",
+            icon: <OctagonIcon className={styles.icon} />,
+            primary: "Octagon",
           },
         ]
       },
       {
-        key: "4",
+        key: "13",
         href: "#",
-        primary: "Star",
-        secondary: "Lorem Ipsum Dolor Sit",
-        icon: <StarIcon className={styles.icon} />,
-      },
-      {
-        key: "5",
-        href: "#",
-        primary: "Diamond",
-        icon: <DiamondIcon className={styles.icon} />,
-      },
-      {
-        key: "6",
-        href: "#",
-        primary: "Square",
-        icon: <SquareIcon className={styles.icon} />,
-        badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="red" animate="ripple" style={{ marginLeft: "auto" }} />,
+        icon: <CylinderIcon className={styles.icon} />,
+        badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="yellow" style={{ marginLeft: "auto" }}>{"66"}</Badge>,
+        primary: "Scalene Triangle",
       },
     ]
-  }
+  },
+  {
+    key: "4",
+    href: "#",
+    primary: "Star",
+    secondary: "Lorem Ipsum Dolor Sit",
+    icon: <StarIcon className={styles.icon} />,
+  },
+  {
+    key: "5",
+    href: "#",
+    primary: "Diamond",
+    icon: <DiamondIcon className={styles.icon} />,
+  },
+  {
+    key: "6",
+    href: "#",
+    primary: "Square",
+    icon: <SquareIcon className={styles.icon} />,
+    badge: (minimized: boolean) => <Badge float={minimized ? "tr" : null} color="red" animate="ripple" style={{ marginLeft: "auto" }} />,
+  },
 ];
 
 const Page = () => {

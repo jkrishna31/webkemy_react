@@ -13,7 +13,6 @@ const ChevronDownIcon = (props: SVGProps) => {
             strokeWidth={0}
             strokeMiterlimit={4}
             strokeDasharray="none"
-
             {...props}
         >
             <path

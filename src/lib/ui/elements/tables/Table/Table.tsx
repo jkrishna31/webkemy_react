@@ -1,8 +1,9 @@
 "use client";
 
-import React, { ComponentProps, CSSProperties, ReactNode } from "react";
+import React, { ComponentProps, CSSProperties, Fragment, ReactNode } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
+import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
 
 import styles from "./Table.module.scss";
 
@@ -17,6 +18,7 @@ export interface TableCol<T> {
   sticky?: StickType;
   allowSort?: boolean;
   draggable?: boolean;
+  resizable?: boolean;
   thClass?: string;
   tdClass?: string;
   thStyle?: CSSProperties;
@@ -32,6 +34,9 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   rootClass?: string;
   colDrag?: boolean;
   rowDrag?: boolean;
+  isRowCollapsible?: (record: T) => boolean;
+  renderDetails?: (record: T) => ReactNode;
+  expandedRows?: string[];
 }
 
 const getSort = (columnKey: string, sort?: string): "+" | "-" | undefined => {
@@ -71,6 +76,7 @@ const Table = <T extends { id: string }>({
   sort, onSort,
   className, rootClass,
   colDrag, rowDrag,
+  isRowCollapsible, renderDetails, expandedRows,
   ...props
 }: TableProps<T>) => {
 
@@ -116,7 +122,7 @@ const Table = <T extends { id: string }>({
                     className={`${styles.cell} ${styles.header_cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
                     style={{ ...getCellStyle(columns.length, index, column.sticky, true), ...(column.thStyle ?? {}) }}
                   >
-                    <div>
+                    <div className={styles.header_cell_container}>
                       {column.renderHeadLeft}
                       {
                         column.allowSort ? (
@@ -129,31 +135,51 @@ const Table = <T extends { id: string }>({
                       }
                       {column.renderHeadRight}
                     </div>
+                    {column.resizable && (
+                      <button className={styles.resize_handle}></button>
+                    )}
                   </th>
                 );
               })
             }
+            {/* column resize indicator */}
           </tr>
         </thead>
         <tbody>
           {
             data?.map((row) => {
+              const hasCollapsibleContent = isRowCollapsible?.(row);
+              const isExpanded = hasCollapsibleContent && expandedRows?.includes(row.id);
+              const parentRowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
               return (
-                <tr key={row.id}>
-                  {
-                    columns?.map((column, index) => {
-                      return (
-                        <td
-                          key={row.id + column.key}
-                          className={`${styles.cell ?? ""} ${column.sticky ? styles.sc_td : ""} ${column.tdClass ?? ""} ${getStickyClasses(column.sticky)}`}
-                          style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.tdStyle ?? {}) }}
+                <Fragment key={row.id}>
+                  <tr {...parentRowAttrs}>
+                    {
+                      columns?.map((column, index) => {
+                        return (
+                          <td
+                            key={row.id + column.key}
+                            className={`${styles.cell ?? ""} ${column.sticky ? styles.sc_td : ""} ${column.tdClass ?? ""} ${getStickyClasses(column.sticky)}`}
+                            style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.tdStyle ?? {}) }}
+                          >
+                            {column.renderBodyCell(row)}
+                          </td>
+                        );
+                      })
+                    }
+                  </tr>
+                  {hasCollapsibleContent && (
+                    <tr className={styles.collapsible_row}>
+                      <td colSpan={columns.length}>
+                        <CollapsibleContainer
+                          open={isExpanded ?? false}
                         >
-                          {column.renderBodyCell(row)}
-                        </td>
-                      );
-                    })
-                  }
-                </tr>
+                          {renderDetails?.(row)}
+                        </CollapsibleContainer>
+                      </td>
+                    </tr>
+                  )}
+                </Fragment>
               );
             })
           }
