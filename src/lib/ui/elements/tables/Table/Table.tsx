@@ -14,6 +14,7 @@ export interface TableCol<T> {
   accessor?: string | number;
   renderHeadLeft?: ReactNode;
   renderHeadRight?: ReactNode;
+  renderFooterCell?: ReactNode;
   renderBodyCell: (record: T) => ReactNode;
   sticky?: StickType;
   allowSort?: boolean;
@@ -23,6 +24,7 @@ export interface TableCol<T> {
   tdClass?: string;
   thStyle?: CSSProperties;
   tdStyle?: CSSProperties;
+  footerCellSpan?: [number, number];
 }
 
 export interface TableProps<T> extends ComponentProps<"div"> {
@@ -184,6 +186,25 @@ const Table = <T extends { id: string }>({
             })
           }
         </tbody>
+        <tfoot>
+          <tr>
+            {
+              columns?.map((column, index) => {
+                return column.renderFooterCell ? (
+                  <td
+                    key={column.key}
+                    className={`${styles.cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
+                    style={{ ...getCellStyle(columns.length, index, column.sticky, true), ...(column.thStyle ?? {}) }}
+                    rowSpan={column.footerCellSpan?.[0]}
+                    colSpan={column.footerCellSpan?.[1]}
+                  >
+                    {column.renderFooterCell}
+                  </td>
+                ) : null;
+              })
+            }
+          </tr>
+        </tfoot>
       </table>
     </div>
   );

@@ -66,7 +66,7 @@ const Page = () => {
 
   const renderDetails = useCallback((record: TableData) => {
     return (
-      <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap" }}>
+      <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap", borderBottom: ".1rem solid var(--border-t)", background: "var(--bg-t)" }}>
         {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti fuga provident unde, voluptatibus architecto iure corporis? Quod alias temporibus fuga delectus veniam nulla, labore, earum pariatur cupiditate quo, placeat ullam voluptates non totam. Recusandae eligendi, officia deleniti ratione voluptatum soluta magnam asperiores quae nesciunt ullam esse saepe delectus pariatur eum tempore fuga id quo reiciendis ex aliquam. Odit architecto nostrum, inventore minima possimus ratione non dicta quo explicabo quam. Perferendis at officiis consequuntur earum enim esse mollitia ad optio atque voluptas? Voluptatum quos est, corrupti veniam a dolore minima dolorum ratione maxime quod, eveniet accusamus repudiandae molestiae reprehenderit maiores! Eaque."}
       </div>
     );
@@ -95,6 +95,10 @@ const Page = () => {
           </div>
         );
       },
+      // renderFooterCell: (
+      //   <p>{"Total"}</p>
+      // ),
+      // footerCellSpan: [1, 9],
       sticky: "left",
     },
     // {
@@ -292,6 +296,9 @@ const Page = () => {
           </div>
         );
       },
+      // renderFooterCell: (
+      //   <p style={{ textAlign: "right" }}>{"15"}</p>
+      // ),
       sticky: "right",
     }
   ];
@@ -302,7 +309,7 @@ const Page = () => {
 
       <Table<TableData>
         columns={tableColumns}
-        data={tableData.slice(0, 25)}
+        data={tableData.slice(0, 15)}
         stickyHeader
         sort={sort}
         onSort={setSort}
