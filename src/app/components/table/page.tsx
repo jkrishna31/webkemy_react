@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
@@ -12,7 +12,7 @@ import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox, Switch } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
 import { Table, TableCol } from "@/lib/ui/elements/tables";
-import { ChevronDownIcon, ChevronRightIcon, ContactIcon, DeleteIcon, EditIcon, EllipsisHIcon, EmailIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { Color } from "@/types/general.types";
 
@@ -44,13 +44,14 @@ type TableData = {
 }
 
 const Page = () => {
+  const [data, setData] = useState<TableData[]>(() => tableData.slice(0, 15));
   const [sort, setSort] = useState<string>();
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
-      setSelectedRows(checked ? [...tableData.map(item => item.id)] : []);
+      setSelectedRows(checked ? [...data.map(item => item.id)] : []);
     } else {
       if (checked) {
         setSelectedRows(currSelectedRows => [...currSelectedRows, row.id]);
@@ -64,10 +65,10 @@ const Page = () => {
     return true;
   }, []);
 
-  const renderDetails = useCallback((record: TableData) => {
+  const renderDetails = useCallback((_: TableData) => {
     return (
       <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap", borderBottom: ".1rem solid var(--border-t)", background: "var(--bg-t)" }}>
-        {"Lorem ipsum dolor sit amet consectetur, adipisicing elit. Corrupti fuga provident unde, voluptatibus architecto iure corporis? Quod alias temporibus fuga delectus veniam nulla, labore, earum pariatur cupiditate quo, placeat ullam voluptates non totam. Recusandae eligendi, officia deleniti ratione voluptatum soluta magnam asperiores quae nesciunt ullam esse saepe delectus pariatur eum tempore fuga id quo reiciendis ex aliquam. Odit architecto nostrum, inventore minima possimus ratione non dicta quo explicabo quam. Perferendis at officiis consequuntur earum enim esse mollitia ad optio atque voluptas? Voluptatum quos est, corrupti veniam a dolore minima dolorum ratione maxime quod, eveniet accusamus repudiandae molestiae reprehenderit maiores! Eaque."}
+        {"Lorem ipsum dolor, sit amet elit. Odit numquam consequuntur, commodi ipsum consectetur tenetur natus, aliquam omnis in necessitatibus earum? Inventore voluptatum cupiditate et. Dolorum unde voluptas est dicta consectetur officia ut?"}
       </div>
     );
   }, []);
@@ -79,8 +80,8 @@ const Page = () => {
         <div className={styles.header_cell}>
           <Checkbox
             className={styles.all_select_check}
-            data-indeterminate={!!selectedRows.length && selectedRows.length !== tableData.length}
-            checked={!!selectedRows.length && selectedRows.length === tableData.length}
+            data-indeterminate={!!selectedRows.length && selectedRows.length !== data.length}
+            checked={!!selectedRows.length && selectedRows.length === data.length}
             onChange={e => handleSelection(e.target.checked)}
           />
         </div>
@@ -166,7 +167,6 @@ const Page = () => {
           </>
         );
       },
-      allowSort: true,
       draggable: true,
       resizable: true,
     },
@@ -255,7 +255,6 @@ const Page = () => {
           formatDate(row.startDate)
         );
       },
-      allowSort: true,
       resizable: true,
     },
     {
@@ -266,7 +265,6 @@ const Page = () => {
           formatDate(row.endDate)
         );
       },
-      allowSort: true,
       resizable: true,
     },
     {
@@ -303,13 +301,33 @@ const Page = () => {
     }
   ];
 
+  useEffect(() => {
+    if (sort) {
+      const isAsc = sort.startsWith("-");
+      setData(currData => [
+        ...currData.sort((a, b) => {
+          const fieldKey = (isAsc ? sort.slice(1) : sort) as keyof TableData;
+          if (a[fieldKey]! < b[fieldKey]!) {
+            return isAsc ? 1 : -1;
+          } else if (a[fieldKey] === b[fieldKey]) {
+            return 0;
+          } else {
+            return isAsc ? -1 : 1;
+          }
+        })
+      ]);
+    } else {
+      setData(tableData.slice(0, 15));
+    }
+  }, [sort]);
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="table" />
 
       <Table<TableData>
         columns={tableColumns}
-        data={tableData.slice(0, 15)}
+        data={data}
         stickyHeader
         sort={sort}
         onSort={setSort}

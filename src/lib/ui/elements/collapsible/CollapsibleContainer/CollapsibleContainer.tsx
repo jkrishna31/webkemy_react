@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, ElementType, useCallback, useLayoutEffect, useRef } from "react";
+import React, { ComponentProps, ElementType, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 
 import styles from "./CollapsibleContainer.module.scss";
 
@@ -18,6 +18,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const Element = as === "a" ? Link : as;
 
   const ref = useRef<HTMLElement>(null);
+  const innerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
   const updateHeight = useCallback(() => {
@@ -51,6 +52,28 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     updateHeight();
   }, [open, updateHeight]);
 
+  useEffect(() => {
+    const innerElem = innerRef.current;
+    if (open && innerElem) {
+      const observer = new ResizeObserver(() => {
+        updateHeight();
+      });
+      observer.observe(innerElem);
+      return () => observer.disconnect();
+    }
+  }, [open, updateHeight]);
+
+  // useEffect(() => {
+  //   const innerElem = ref.current;
+  //   if (innerElem && open) {
+  //     const observer = new MutationObserver(() => {
+  //       updateHeight();
+  //     });
+  //     observer.observe(innerElem, { attributes: true, subtree: true, childList: true });
+  //     return () => observer.disconnect();
+  //   }
+  // }, [open, updateHeight]);
+
   // if (!renderWhileClosed && !open) return;
 
   return (
@@ -58,12 +81,14 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       {...props}
       ref={ref}
       className={`${styles.container} ${className}`}
-      onTransitionStart={handleTransitionStart}
-      onTransitionEnd={updateHeight}
+      onTransitionStart={open ? handleTransitionStart : undefined}
+      onTransitionEnd={open ? updateHeight : undefined}
       role="region"
       data-expanded={open}
     >
-      {children}
+      <div className="inner_container" ref={innerRef}>
+        {children}
+      </div>
     </Element>
   );
 };
