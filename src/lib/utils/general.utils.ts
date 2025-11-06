@@ -1,4 +1,4 @@
-export const debounce = <T extends (...args: any[]) => any>(
+export const debounce = <T extends (...args: any) => any>(
     callback: T,
     delay: number = 200,
     options: { leading?: boolean, trailing?: boolean } = { leading: false, trailing: true },
@@ -55,7 +55,7 @@ export const debounce = <T extends (...args: any[]) => any>(
     return debounced;
 };
 
-export const throttle = <T extends (...args: any[]) => void>(callback: T, delay: number = 200) => {
+export const throttle = <T extends (...args: any) => void>(callback: T, delay: number = 200) => {
     let lastCallTime = 0;
     let timeoutId: ReturnType<typeof setTimeout> | null = null;
     let lastArgs: Parameters<T> | null = null;

@@ -5,18 +5,20 @@ export interface UseDebouncedValueOptions {
 }
 
 export default function useDebouncedValue<T>(defaultValue: T, delay: number, options: UseDebouncedValueOptions = { leading: false }) {
+  const { leading } = options;
+
   const [value, setValue] = useState<T>(defaultValue);
 
   const timeoutRef = useRef<number | null>(null);
   const leadingRef = useRef(true);
 
-  const clearTimeout = () => window.clearTimeout(timeoutRef.current!);
-  useEffect(() => clearTimeout, []);
+  const _clearTimeout = () => window.clearTimeout(timeoutRef.current!);
+  useEffect(() => _clearTimeout, []);
 
   const debouncedSetValue = useCallback(
     (newValue: T) => {
-      clearTimeout();
-      if (leadingRef.current && options.leading) {
+      _clearTimeout();
+      if (leadingRef.current && leading) {
         setValue(newValue);
       } else {
         timeoutRef.current = window.setTimeout(() => {
@@ -26,7 +28,7 @@ export default function useDebouncedValue<T>(defaultValue: T, delay: number, opt
       }
       leadingRef.current = false;
     },
-    [delay, options.leading]
+    [delay, leading]
   );
 
   return [value, debouncedSetValue] as const;

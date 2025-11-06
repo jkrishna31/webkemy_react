@@ -5,7 +5,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { MenuItem } from "@/lib/ui/elements/menu";
 import { BarChartIcon, BubbleChartIcon, LineChartIcon, PieChartIcon, RadarChartIcon, ScatterChartIcon } from "@/lib/ui/svgs/charts";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { AppLogo, BellIcon, BlockCodeIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, SliderIcon, SplitHorizontalIcon, SquareIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VerifiedBadgeIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
+import { AppLogo, BellIcon, BlockCodeIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, SquareIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VerifiedBadgeIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./AppMenu.module.scss";
 
@@ -419,6 +419,34 @@ export const menuItems = [
             },
         ],
     },
+    {
+        key: "templates",
+        group: "Templates",
+        collapsible: false,
+        menu: [
+            {
+                key: "ecommerce",
+                href: "/templates/ecommerce",
+                primary: "Ecommerce",
+                icon: <ShopIcon />,
+                disabled: true,
+            },
+            {
+                key: "chat",
+                href: "/templates/chat",
+                primary: "Chat",
+                icon: <CommentIcon />,
+                disabled: true,
+            },
+            {
+                key: "dashboard",
+                href: "/templates/dashboard",
+                primary: "Dashboard",
+                icon: <DashboardIcon />,
+                disabled: true,
+            },
+        ],
+    }
 ];
 
 export interface AppMenuProps {

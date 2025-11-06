@@ -50,7 +50,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
 
   useLayoutEffect(() => {
     updateHeight();
-  }, [open, updateHeight]);
+  }, [updateHeight]);
 
   useEffect(() => {
     const innerElem = innerRef.current;
@@ -63,17 +63,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     }
   }, [open, updateHeight]);
 
-  // useEffect(() => {
-  //   const innerElem = ref.current;
-  //   if (innerElem && open) {
-  //     const observer = new MutationObserver(() => {
-  //       updateHeight();
-  //     });
-  //     observer.observe(innerElem, { attributes: true, subtree: true, childList: true });
-  //     return () => observer.disconnect();
-  //   }
-  // }, [open, updateHeight]);
-
   // if (!renderWhileClosed && !open) return;
 
   return (
@@ -82,7 +71,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       ref={ref}
       className={`${styles.container} ${className}`}
       onTransitionStart={open ? handleTransitionStart : undefined}
-      onTransitionEnd={open ? updateHeight : undefined}
+      onTransitionEnd={open ? (e: TransitionEvent) => {
+        if (e.propertyName === "max-height") {
+          updateHeight();
+        }
+      } : undefined}
       role="region"
       data-expanded={open}
     >

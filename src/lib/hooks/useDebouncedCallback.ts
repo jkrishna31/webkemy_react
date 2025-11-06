@@ -7,7 +7,9 @@ export interface UseDebouncedCallbackOptions {
   trailing: boolean
 }
 
-export default function useDebouncedCallback<T extends (...args: any[]) => any>(cb: T, delay: number, options: UseDebouncedCallbackOptions = { leading: false, trailing: true }) {
+export default function useDebouncedCallback<T extends (...args: any) => any>(cb: T, delay: number, options: UseDebouncedCallbackOptions = { leading: false, trailing: true }) {
+  const { leading, trailing } = options;
+
   const cbRef = useRef(cb);
 
   useEffect(() => {
@@ -17,8 +19,8 @@ export default function useDebouncedCallback<T extends (...args: any[]) => any>(
   const memoizedCallback = useMemo(() => {
     return debounce((...args: Parameters<T>) => {
       cbRef.current(...args);
-    }, delay, { leading: options.leading, trailing: options.trailing });
-  }, [delay, options.leading, options.trailing]);
+    }, delay, { leading, trailing });
+  }, [delay, leading, trailing]);
 
   useEffect(() => {
     return () => {

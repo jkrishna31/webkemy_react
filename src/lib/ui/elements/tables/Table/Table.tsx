@@ -63,11 +63,11 @@ const getStickyClasses = (sticky?: StickType) => {
 };
 
 const getCellStyle = (
-  totalCols: number, index: number, stick?: StickType, header?: boolean,
+  totalCols: number, index: number, stick?: StickType, headerOrFooter?: boolean,
 ): React.CSSProperties => {
   const style: React.CSSProperties = {};
-  if (stick === "left" || stick === "both") style.zIndex = totalCols - index + (header ? 1 : 0);
-  if (stick === "right") style.zIndex = index + (header ? 1 : 0);
+  if (stick === "left" || stick === "both") style.zIndex = totalCols - index + (headerOrFooter ? 1 : 0);
+  if (stick === "right") style.zIndex = index + (headerOrFooter ? 1 : 0);
   return style;
 };
 
@@ -194,7 +194,7 @@ const Table = <T extends { id: string }>({
                   <td
                     key={column.key}
                     className={`${styles.cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
-                    style={{ ...getCellStyle(columns.length, index, column.sticky, true), ...(column.thStyle ?? {}) }}
+                    style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.thStyle ?? {}) }}
                     rowSpan={column.footerCellSpan?.[0]}
                     colSpan={column.footerCellSpan?.[1]}
                   >

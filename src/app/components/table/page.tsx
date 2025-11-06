@@ -96,10 +96,10 @@ const Page = () => {
           </div>
         );
       },
-      // renderFooterCell: (
-      //   <p>{"Total"}</p>
-      // ),
-      // footerCellSpan: [1, 9],
+      renderFooterCell: (
+        <p>{"Total"}</p>
+      ),
+      footerCellSpan: [1, 2],
       sticky: "left",
     },
     // {
@@ -148,6 +148,10 @@ const Page = () => {
           </div>
         );
       },
+      renderFooterCell: (
+        <p></p>
+      ),
+      footerCellSpan: [1, 7],
       // sticky: "both",
       allowSort: true,
       draggable: true,
@@ -294,9 +298,9 @@ const Page = () => {
           </div>
         );
       },
-      // renderFooterCell: (
-      //   <p style={{ textAlign: "right" }}>{"15"}</p>
-      // ),
+      renderFooterCell: (
+        <p style={{ textAlign: "right" }}>{"15"}</p>
+      ),
       sticky: "right",
     }
   ];
