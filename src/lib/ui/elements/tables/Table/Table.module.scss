@@ -136,7 +136,7 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: .7rem;
+  width: 1rem;
   height: 100%;
   cursor: ew-resize;
   opacity: 0;
@@ -147,12 +147,12 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 0;
-    transform: translate3d(0, -50%, 0);
-    width: 100%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    width: .2rem;
     height: 100%;
-    border-inline: .2rem solid var(--blue-3);
-    background-color: var(--bg-p);
+    // border-inline: .2rem solid var(--blue-3);
+    background-color: var(--border-p);
   }
 
   &:hover,

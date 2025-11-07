@@ -8,7 +8,7 @@
   padding-top: 1rem;
   position: sticky;
   top: var(--h-header);
-  z-index: var(--zi-menu);
+  z-index: var(--zi-headbar);
 }
 
 @media screen and (max-width: 768px) {

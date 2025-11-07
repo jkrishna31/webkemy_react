@@ -8,24 +8,11 @@
   }
 
   &>[data-avatar="true"]:hover {
-    animation: bounce .3s ease-out forwards;
+    z-index: 1;
   }
 
-  &:hover [data-avatar="true"] {
-    margin-left: 0;
-  }
 }
 
-@keyframes bounce {
-  0% {
-    background-blend-mode: multiply;
-  }
-
-  50% {
-    z-index: 9999999;
-  }
-
-  100% {
-    background-blend-mode: normal;
-  }
+.expandable:hover [data-avatar="true"] {
+  margin-left: 0;
 }

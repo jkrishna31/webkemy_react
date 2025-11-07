@@ -4,15 +4,16 @@ import { Avatar, AvatarProps } from "..";
 import styles from "./AvatarList.module.scss";
 
 export interface AvatarsListProps<T extends ElementType> extends ComponentProps<"div"> {
-  avatars?: AvatarProps<T>[]
+  avatars?: AvatarProps<T>[];
+  expandable?: boolean;
 }
 
 const AvatarList = <T extends ElementType>({
-  avatars, className,
+  avatars, className, expandable = true,
   ...props
 }: AvatarsListProps<T>) => {
   return (
-    <div className={`${styles.list} ${className}`} {...props}>
+    <div className={`${styles.list} ${expandable ? styles.expandable : ""} ${className}`} {...props}>
       {
         avatars?.map((avatar) => {
           return (

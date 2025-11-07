@@ -5,11 +5,11 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
-import { Avatar } from "@/lib/ui/elements/avatar";
+import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
 import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
-import { Checkbox, Switch } from "@/lib/ui/elements/inputs";
+import { Checkbox } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
 import { Table, TableCol } from "@/lib/ui/elements/tables";
 import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
@@ -41,6 +41,7 @@ type TableData = {
   profile: string;
   role: string;
   dob: string;
+  peers?: { name: string; profile: string; }[];
 }
 
 const Page = () => {
@@ -48,6 +49,13 @@ const Page = () => {
   const [sort, setSort] = useState<string>();
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
+
+  // useTable hook
+  // column order
+  // sort
+  // selected rows
+  // expanded rows
+  // data
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
@@ -68,7 +76,7 @@ const Page = () => {
   const renderDetails = useCallback((_: TableData) => {
     return (
       <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap", borderBottom: ".1rem solid var(--border-t)", background: "var(--bg-t)" }}>
-        {"Lorem ipsum dolor, sit amet elit. Odit numquam consequuntur, commodi ipsum consectetur tenetur natus, aliquam omnis in necessitatibus earum? Inventore voluptatum cupiditate et. Dolorum unde voluptas est dicta consectetur officia ut?"}
+        {"Lorem ipsum dolor, sit amet elit. Odit numquam consequuntur, commodi ipsum consectetur tenetur natus, aliquam omnis in necessitatibus earum? Inventore voluptatum cupiditate et. Dolorum unde voluptas est dicta consectetur officia?"}
       </div>
     );
   }, []);
@@ -233,7 +241,10 @@ const Page = () => {
       ),
       renderBodyCell: (row) => {
         return (
-          <Rate rating={row.rating} className={styles.rate} readonly key={row.id} />
+          <div style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
+            <Rate rating={(row.rating ?? 0) / 5} className={styles.rate} readonly key={row.id} max={1} />
+            <p>{row.rating}</p>
+          </div>
         );
       },
       allowSort: true,
@@ -251,6 +262,27 @@ const Page = () => {
       draggable: true,
       resizable: true,
     },
+    // {
+    //   key: "peers",
+    //   renderHeadLeft: "Peers",
+    //   renderBodyCell: (row) => {
+    //     return row.peers?.length ? (
+    //       <AvatarList
+    //         expandable={false}
+    //         avatars={row.peers?.map(avatar => (
+    //           {
+    //             id: avatar.name,
+    //             children: (
+    //               <Image src={avatar.profile} width={26} height={26} alt={avatar.name} style={{ width: "2.6rem", height: "2.6rem" }} />
+    //             )
+    //           }
+    //         ))}
+    //       />
+    //     ) : "N/A";
+    //   },
+    //   draggable: true,
+    //   resizable: true,
+    // },
     {
       key: "startDate",
       renderHeadLeft: "Started On",
@@ -286,13 +318,10 @@ const Page = () => {
       renderBodyCell: () => {
         return (
           <div className={`${styles.table_actions}`}>
-            {/* <Switch className="mr-[8px]" /> */}
             <Button variant="secondary">
-              {/* {"Edit"} */}
               <EditIcon />
             </Button>
             <Button variant="secondary">
-              {/* {"Delete"} */}
               <DeleteIcon />
             </Button>
           </div>
@@ -340,6 +369,7 @@ const Page = () => {
         isRowCollapsible={isRowCollapsible}
         renderDetails={renderDetails}
         expandedRows={expandedRows}
+        renderWhileCollapsed={false}
       />
     </main>
   );

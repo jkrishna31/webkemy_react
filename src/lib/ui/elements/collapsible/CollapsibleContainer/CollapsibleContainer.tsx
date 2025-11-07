@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, ElementType, useCallback, useEffect, useLayoutEffect, useRef } from "react";
+import React, { ComponentProps, ElementType, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import styles from "./CollapsibleContainer.module.scss";
 
@@ -19,7 +19,10 @@ const CollapsibleContainer = <T extends ElementType = "div">({
 
   const ref = useRef<HTMLElement>(null);
   const innerRef = useRef<HTMLDivElement>(null);
-  const timeoutRef = useRef<NodeJS.Timeout>(null);
+  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
+  const destroyContentRef = useRef<NodeJS.Timeout>(undefined);
+
+  const [destroyContent, setDestroyContent] = useState(false);
 
   const updateHeight = useCallback(() => {
     const elem = ref.current;
@@ -27,7 +30,9 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       const contentHeight = (elem as HTMLElement).scrollHeight;
       elem.style.height = "fit-content";
       elem.style.maxHeight = `${open ? contentHeight : 0}px`;
-      clearTimeout(timeoutRef.current ?? undefined);
+      clearTimeout(timeoutRef.current);
+      clearTimeout(destroyContentRef.current);
+      setDestroyContent(false);
       if (open) {
         elem.style.opacity = "100%";
         timeoutRef.current = setTimeout(() => {
@@ -36,9 +41,14 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       } else {
         elem.style.overflow = "hidden";
         elem.style.opacity = "0%";
+        if (!renderWhileClosed) {
+          destroyContentRef.current = setTimeout(() => {
+            setDestroyContent(true);
+          }, 500);
+        }
       }
     }
-  }, [open]);
+  }, [open, renderWhileClosed]);
 
   const handleTransitionStart = () => {
     const elem = ref.current;
@@ -63,8 +73,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     }
   }, [open, updateHeight]);
 
-  // if (!renderWhileClosed && !open) return;
-
   return (
     <Element
       {...props}
@@ -79,9 +87,13 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       role="region"
       data-expanded={open}
     >
-      <div className="inner_container" ref={innerRef}>
-        {children}
-      </div>
+      {
+        (destroyContent && !open) ? null : (
+          <div className="inner_container" ref={innerRef}>
+            {children}
+          </div>
+        )
+      }
     </Element>
   );
 };

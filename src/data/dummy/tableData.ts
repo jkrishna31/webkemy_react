@@ -6,8 +6,15 @@ export const tableData = [
     phone: "(731) 346-4107", email: "milesc_97@gmail.com",
     rating: 4.2, status: "active",
     profile: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&auto=format&fit=crop&q=60",
-    role: "Role",
+    role: "Frontend Engineer",
     dob: "1969-03-17T00:00:00.000Z",
+    peers: [
+      { name: "Ethan Brooks", profile: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=500&auto=format&fit=crop&q=60" },
+      { name: "Natalie Kim", profile: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&auto=format&fit=crop&q=60" },
+      { name: "Logan Cruz", profile: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&auto=format&fit=crop&q=60" },
+      { name: "Sophia Reed", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" },
+      { name: "Amelia Green", profile: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "2", name: "Lucille Guadalupe", age: 31,
@@ -16,8 +23,12 @@ export const tableData = [
     phone: "(250) 549-7396", email: "lucy.g22@yahoo.com",
     rating: 5, status: "inactive",
     profile: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop",
-    role: "Role",
+    role: "Product Manager",
     dob: "1978-11-02T00:00:00.000Z",
+    peers: [
+      { name: "Kevin Zhao", profile: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=500&auto=format&fit=crop&q=60" },
+      { name: "Megan Torres", profile: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "3", name: "Lopez Tucker", age: 27,
@@ -26,8 +37,9 @@ export const tableData = [
     phone: "(335) 885-1577", email: "lopez_tk88@outlook.com",
     rating: 2.5, status: "rejected",
     profile: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=764&auto=format&fit=crop",
-    role: "Role",
+    role: "UI/UX Designer",
     dob: "1985-07-19T00:00:00.000Z",
+    peers: []
   },
   {
     id: "4", name: "Yvonne Roosevelt", age: 21,
@@ -36,8 +48,13 @@ export const tableData = [
     phone: "(889) 467-6295", email: "yvonne.rz21@gmail.com",
     rating: 3, status: "leave",
     profile: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
+    role: "Marketing Associate",
     dob: "1992-01-25T00:00:00.000Z",
+    peers: [
+      { name: "Leo Gonzalez", profile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60" },
+      { name: "Chloe Parker", profile: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60" },
+      { name: "Ryan Carter", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "5", name: "Lela Glover", age: 46,
@@ -46,8 +63,14 @@ export const tableData = [
     phone: "(378) 738-1047", email: "lelaglover46@aol.com",
     rating: 1.7, status: "active",
     profile: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
+    role: "HR Specialist",
     dob: "1998-09-08T00:00:00.000Z",
+    peers: [
+      { name: "Aaron Patel", profile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60" },
+      { name: "Grace Allen", profile: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500&auto=format&fit=crop&q=60" },
+      { name: "Sophie Lane", profile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60" },
+      { name: "Lucas Brown", profile: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "6", name: "Carlos Rivera", age: 34,
@@ -56,8 +79,13 @@ export const tableData = [
     phone: "(512) 467-2039", email: "c.rivera84@gmail.com",
     rating: 0, status: "inactive",
     profile: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop",
-    role: "Role",
+    role: "DevOps Engineer",
     dob: "1973-05-10T00:00:00.000Z",
+    peers: [
+      { name: "Julia Becker", profile: "https://images.unsplash.com/photo-1607746882042-944635dfe10e?w=500&auto=format&fit=crop&q=60" },
+      { name: "Ryan Carter", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" },
+      { name: "Emma Hill", profile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "7", name: "Sophia Patel", age: 29,
@@ -66,8 +94,9 @@ export const tableData = [
     phone: "(908) 451-7765", email: "sophia_p29@icloud.com",
     rating: 5, status: "active",
     profile: "https://images.unsplash.com/photo-1623184663796-f0eb7e46d6ab?q=80&w=1112&auto=format&fit=crop",
-    role: "Role",
+    role: "QA Analyst",
     dob: "1989-12-30T00:00:00.000Z",
+    peers: []
   },
   {
     id: "8", name: "Henry Thompson", age: 52,
@@ -76,8 +105,12 @@ export const tableData = [
     phone: "(804) 330-4820", email: "hthompson52@comcast.net",
     rating: 2, status: "leave",
     profile: "https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?q=80&w=746&auto=format&fit=crop",
-    role: "Role",
+    role: "Operations Manager",
     dob: "2000-06-14T00:00:00.000Z",
+    peers: [
+      { name: "Samuel Ortiz", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" },
+      { name: "Diana Cooper", profile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "9", name: "Mia Chen", age: 41,
@@ -86,8 +119,15 @@ export const tableData = [
     phone: "(408) 590-1144", email: "miac_041@gmail.com",
     rating: 4, status: "active",
     profile: "https://images.unsplash.com/photo-1718391963402-e2011890093f?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
+    role: "Data Scientist",
     dob: "1967-08-23T00:00:00.000Z",
+    peers: [
+      { name: "Arjun Mehta", profile: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=500&auto=format&fit=crop&q=60" },
+      { name: "Sophie Lane", profile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60" },
+      { name: "Liam Scott", profile: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&auto=format&fit=crop&q=60" },
+      { name: "Ava Price", profile: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500&auto=format&fit=crop&q=60" },
+      { name: "Zachary Adams", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "10", name: "Daniel O'Connor", age: 38,
@@ -96,8 +136,9 @@ export const tableData = [
     phone: "(617) 742-6651", email: "dan.oconnor87@gmail.com",
     rating: 3, status: "inactive",
     profile: "https://images.unsplash.com/photo-1726639348363-ecf65a1bff79?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
+    role: "Backend Engineer",
     dob: "1995-04-02T00:00:00.000Z",
+    peers: []
   },
   {
     id: "11", name: "Ava Martinez", age: 27,
@@ -106,8 +147,12 @@ export const tableData = [
     phone: "(305) 983-2240", email: "avam27@hotmail.com",
     rating: 5, status: "rejected",
     profile: "https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=500&auto=format&fit=crop&q=60",
-    role: "Role",
+    role: "Business Analyst",
     dob: "1982-10-11T00:00:00.000Z",
+    peers: [
+      { name: "Layla Hughes", profile: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&auto=format&fit=crop&q=60" },
+      { name: "Mason Clark", profile: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "12", name: "Liam Anderson", age: 33,
@@ -116,8 +161,11 @@ export const tableData = [
     phone: "(206) 399-7721", email: "liam.a33@gmail.com",
     rating: 1, status: "active",
     profile: "https://images.unsplash.com/photo-1730403878956-bb4b0cd10737?q=80&w=735&auto=format&fit=crop",
-    role: "Role",
+    role: "Mobile Developer",
     dob: "1976-02-05T00:00:00.000Z",
+    peers: [
+      { name: "Oliver Ford", profile: "https://images.unsplash.com/photo-1573497491208-6b1acb260507?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "13", name: "Emma Wilson", age: 45,
@@ -126,8 +174,13 @@ export const tableData = [
     phone: "(412) 254-6330", email: "emmaw_78@outlook.com",
     rating: 0, status: "leave",
     profile: "https://images.unsplash.com/photo-1695927621677-ec96e048dce2?q=80&w=735&auto=format&fit=crop",
-    role: "Role",
+    role: "Content Strategist",
     dob: "2003-12-01T00:00:00.000Z",
+    peers: [
+      { name: "Jack Nguyen", profile: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=500&auto=format&fit=crop&q=60" },
+      { name: "Sienna Lopez", profile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60" },
+      { name: "Victoria Adams", profile: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "14", name: "Noah Smith", age: 39,
@@ -136,18 +189,28 @@ export const tableData = [
     phone: "(314) 209-8429", email: "noah_smith14@gmail.com",
     rating: 2, status: "inactive",
     profile: "https://images.unsplash.com/photo-1683539820597-78071a54b10d?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
+    role: "System Administrator",
     dob: "1990-07-22T00:00:00.000Z",
+    peers: [
+      { name: "George Simmons", profile: "https://images.unsplash.com/photo-1502767089025-6572583495b0?w=500&auto=format&fit=crop&q=60" },
+      { name: "Daisy Chen", profile: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60" },
+      { name: "Nathan Price", profile: "https://images.unsplash.com/photo-1552058544-f2b08422138a?w=500&auto=format&fit=crop&q=60" },
+      { name: "Emily James", profile: "https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=500&auto=format&fit=crop&q=60" },
+      { name: "Hugo Rivera", profile: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "15", name: "Isabella Rossi", age: 31,
-    rank: 15, duration: 22, address: "5 Sunset Blvd, Los Angeles CA 90026",
+    rank: 15, duration: 22, address: "45 Lakeview Dr, Chicago IL 60657",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
-    phone: "(213) 745-1188", email: "bella.rossi31@gmail.com",
-    rating: 4, status: "active",
-    profile: "https://images.unsplash.com/photo-1590086782792-42dd2350140d?q=80&w=687&auto=format&fit=crop",
-    role: "Role",
-    dob: "1971-09-27T00:00:00.000Z",
+    phone: "(773) 487-2094", email: "isa_rossi@icloud.com",
+    rating: 3.8, status: "active",
+    profile: "https://images.unsplash.com/photo-1723449087163-6c5194b1d2bb?q=80&w=739&auto=format&fit=crop",
+    role: "Project Coordinator",
+    dob: "1971-09-17T00:00:00.000Z",
+    peers: [
+      { name: "Clara White", profile: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&auto=format&fit=crop&q=60" }
+    ]
   },
   {
     id: "16", name: "Ethan Wright", age: 28,

@@ -39,6 +39,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
   expandedRows?: string[];
+  renderWhileCollapsed?: boolean;
 }
 
 const getSort = (columnKey: string, sort?: string): "+" | "-" | undefined => {
@@ -79,6 +80,7 @@ const Table = <T extends { id: string }>({
   className, rootClass,
   colDrag, rowDrag,
   isRowCollapsible, renderDetails, expandedRows,
+  renderWhileCollapsed = true,
   ...props
 }: TableProps<T>) => {
 
@@ -91,11 +93,8 @@ const Table = <T extends { id: string }>({
   // can use border since default is 1px otherwise will always have to give the transparent parent or higher width
   // use pseudo element
 
-  // useTable hook
-  // sort
-  // column order
-
-  // ADD RESIZE HANDLE AT THE END OF EACH RESIZABLE COLUMN
+  // on Drag start on header row
+  // find the drag over item
 
   const handleSort = (columnKey: string) => {
     let newSort = "";
@@ -170,11 +169,12 @@ const Table = <T extends { id: string }>({
                       })
                     }
                   </tr>
-                  {hasCollapsibleContent && (
+                  {(hasCollapsibleContent) && (
                     <tr className={styles.collapsible_row}>
                       <td colSpan={columns.length}>
                         <CollapsibleContainer
                           open={isExpanded ?? false}
+                          renderWhileClosed={renderWhileCollapsed}
                         >
                           {renderDetails?.(row)}
                         </CollapsibleContainer>
