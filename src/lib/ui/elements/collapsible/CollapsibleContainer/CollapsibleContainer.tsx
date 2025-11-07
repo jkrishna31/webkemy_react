@@ -24,7 +24,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const destroyContentRef = useRef<NodeJS.Timeout>(undefined);
 
-  const [destroyContent, setDestroyContent] = useState(renderWhileClosed);
+  const [destroyContent, setDestroyContent] = useState(!renderWhileClosed);
 
   const updateHeight = useCallback(() => {
     const elem = ref.current;
