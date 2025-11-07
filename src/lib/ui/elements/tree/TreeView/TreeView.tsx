@@ -14,12 +14,13 @@ export interface Tree {
 }
 
 export interface TreeViewProps extends ComponentProps<"ul"> {
-  tree: Tree[]
-  expandedIds: string[]
+  tree: Tree[];
+  expandedIds: string[];
+  renderWhileClosed?: boolean;
 }
 
 const TreeView = ({
-  children, className, tree, expandedIds,
+  children, className, tree, expandedIds, renderWhileClosed,
   ...props
 }: TreeViewProps) => {
   const renderSection = (t?: Tree[]) => {
@@ -34,7 +35,7 @@ const TreeView = ({
           wrapperAs="li"
           className={styles.item}
           detailsClass={styles.details}
-          renderWhileClosed={false}
+          renderWhileClosed={renderWhileClosed}
           summary={
             <div className={styles.item_wrapper}>
               {

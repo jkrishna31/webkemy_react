@@ -27,10 +27,10 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
     const WrapperElement = wrapperAs;
 
     const renderDetails = () => {
-        if (!renderWhileClosed && !open) return;
         return (
             <CollapsibleContainer
                 as={detailsAs} open={open} id={detailsPanelId} className={detailsClass}
+                renderWhileClosed={renderWhileClosed}
             >
                 {children}
             </CollapsibleContainer>

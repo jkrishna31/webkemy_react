@@ -9,10 +9,12 @@ export type CollapsibleContainerProps<T extends ElementType> = {
   as?: T;
   open?: boolean;
   renderWhileClosed?: boolean;
+  duration?: number;
 } & ComponentProps<T>;
 
 const CollapsibleContainer = <T extends ElementType = "div">({
   as = "div", open, children, className, renderWhileClosed = true,
+  duration = 500,
   ...props
 }: CollapsibleContainerProps<T>) => {
   const Element = as === "a" ? Link : as;
@@ -22,10 +24,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const destroyContentRef = useRef<NodeJS.Timeout>(undefined);
 
-  const [destroyContent, setDestroyContent] = useState(false);
+  const [destroyContent, setDestroyContent] = useState(renderWhileClosed);
 
   const updateHeight = useCallback(() => {
     const elem = ref.current;
+    console.log("=== update height ===",);
     if (elem) {
       const contentHeight = (elem as HTMLElement).scrollHeight;
       elem.style.height = "fit-content";
@@ -44,11 +47,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
         if (!renderWhileClosed) {
           destroyContentRef.current = setTimeout(() => {
             setDestroyContent(true);
-          }, 500);
+          }, duration);
         }
       }
     }
-  }, [open, renderWhileClosed]);
+  }, [duration, open, renderWhileClosed]);
 
   const handleTransitionStart = () => {
     const elem = ref.current;
@@ -79,11 +82,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       ref={ref}
       className={`${styles.container} ${className}`}
       onTransitionStart={open ? handleTransitionStart : undefined}
-      onTransitionEnd={open ? (e: TransitionEvent) => {
-        if (e.propertyName === "max-height") {
-          updateHeight();
-        }
-      } : undefined}
+      // onTransitionEnd={open ? (e: TransitionEvent) => {
+      //   if (e.propertyName !== "max-height") {
+      //     updateHeight();
+      //   }
+      // } : undefined}
       role="region"
       data-expanded={open}
     >

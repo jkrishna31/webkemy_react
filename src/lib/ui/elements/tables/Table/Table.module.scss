@@ -139,11 +139,10 @@
   width: 1rem;
   height: 100%;
   cursor: ew-resize;
-  opacity: 0;
 
   transition: opacity .3s ease;
 
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     top: 50%;
@@ -153,11 +152,14 @@
     height: 100%;
     // border-inline: .2rem solid var(--blue-3);
     background-color: var(--border-p);
+    opacity: 0;
   }
 
   &:hover,
   &:focus-visible {
-    opacity: 1;
+    &::after {
+      opacity: 1;
+    }
   }
 }
 

@@ -96,6 +96,11 @@ const Table = <T extends { id: string }>({
   // on Drag start on header row
   // find the drag over item
 
+  // on mount
+  // add drag event listeners
+  // on drag-start on header row or whole table
+  // 
+
   const handleSort = (columnKey: string) => {
     let newSort = "";
     if (!sort || !sort.includes(columnKey)) {
@@ -143,7 +148,7 @@ const Table = <T extends { id: string }>({
                 );
               })
             }
-            {/* column resize indicator */}
+            {/* column resize indicator (how will transform - relative to table) */}
           </tr>
         </thead>
         <tbody>
