@@ -1,5 +1,3 @@
-"use client";
-
 import React, { ComponentProps, CSSProperties, Fragment, ReactNode } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
@@ -34,12 +32,13 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   sort?: string;
   onSort?: (key: string) => void;
   rootClass?: string;
-  colDrag?: boolean;
-  rowDrag?: boolean;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
   expandedRows?: string[];
   renderWhileCollapsed?: boolean;
+  colDrag?: boolean;
+  rowDrag?: boolean;
+  colResize?: boolean;
 }
 
 const getSort = (columnKey: string, sort?: string): "+" | "-" | undefined => {
@@ -78,7 +77,7 @@ const Table = <T extends { id: string }>({
   stickyHeader,
   sort, onSort,
   className, rootClass,
-  colDrag, rowDrag,
+  colDrag, rowDrag, colResize,
   isRowCollapsible, renderDetails, expandedRows,
   renderWhileCollapsed = true,
   ...props
@@ -148,7 +147,6 @@ const Table = <T extends { id: string }>({
                 );
               })
             }
-            {/* column resize indicator (how will transform - relative to table) */}
           </tr>
         </thead>
         <tbody>

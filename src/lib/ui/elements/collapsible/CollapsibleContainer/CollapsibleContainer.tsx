@@ -28,9 +28,8 @@ const CollapsibleContainer = <T extends ElementType = "div">({
 
   const updateHeight = useCallback(() => {
     const elem = ref.current;
-    console.log("=== update height ===",);
     if (elem) {
-      const contentHeight = (elem as HTMLElement).scrollHeight;
+      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight + 1);
       elem.style.height = "fit-content";
       elem.style.maxHeight = `${open ? contentHeight : 0}px`;
       clearTimeout(timeoutRef.current);
@@ -39,8 +38,8 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       if (open) {
         elem.style.opacity = "100%";
         timeoutRef.current = setTimeout(() => {
-          elem.style.overflow = "initial";
-        }, .6 * 500);
+          elem.style.overflow = "";
+        }, duration);
       } else {
         elem.style.overflow = "hidden";
         elem.style.opacity = "0%";
@@ -56,7 +55,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const handleTransitionStart = () => {
     const elem = ref.current;
     if (elem && open) {
-      clearTimeout(timeoutRef.current ?? undefined);
+      // clearTimeout(timeoutRef.current ?? undefined);
       elem.style.overflow = "hidden";
     }
   };
@@ -82,11 +81,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       ref={ref}
       className={`${styles.container} ${className}`}
       onTransitionStart={open ? handleTransitionStart : undefined}
-      // onTransitionEnd={open ? (e: TransitionEvent) => {
-      //   if (e.propertyName !== "max-height") {
-      //     updateHeight();
-      //   }
-      // } : undefined}
+      onTransitionEnd={open ? (e: TransitionEvent) => {
+        if (e.propertyName !== "max-height") {
+          updateHeight();
+        }
+      } : undefined}
       role="region"
       data-expanded={open}
     >
