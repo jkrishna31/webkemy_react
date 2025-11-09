@@ -142,10 +142,10 @@ const Page = () => {
         key: "startDate", draggable: true, resizable: true,
         renderLeft: "Started On",
       },
-      {
-        key: "lastUpdateDate", draggable: true, resizable: true,
-        renderLeft: "Last Updated On",
-      },
+      // {
+      //   key: "lastUpdateDate", draggable: true, resizable: true,
+      //   renderLeft: "Last Updated On",
+      // },
       {
         key: "actions", draggable: true, resizable: true, sticky: "right",
         renderLeft: (
@@ -318,18 +318,18 @@ const Page = () => {
   const footer = {
     select: {
       render: (
-        <p>{"Total"}</p>
+        <p style={{ fontWeight: 500 }}>{"Total"}</p>
       ),
-      colSpan: 2,
+      colSpan: 1,
       sticky: "left" as StickType,
     },
     name: {
       render: "",
-      colSpan: header[header.length - 1].length - 3,
+      colSpan: header[header.length - 1].length - 2,
     },
     actions: {
       render: (
-        <p style={{ textAlign: "right" }}>{"15"}</p>
+        <p style={{ textAlign: "right", fontWeight: 500 }}>{"15"}</p>
       ),
       sticky: "right" as StickType,
       style: { zIndex: 12 },

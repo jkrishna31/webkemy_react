@@ -39,6 +39,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   stickyFooter?: boolean;
   sort?: string;
   onSort?: (key: string) => void;
+  onResize?: () => void;
   rootClass?: string;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
@@ -81,6 +82,7 @@ const getCellStyle = (
   totalCols: number, index: number, stick?: StickType, headerOrFooter?: boolean,
 ): React.CSSProperties => {
   const style: React.CSSProperties = {};
+  if (stick) style.position = "sticky";
   if (stick === "left" || stick === "both") style.zIndex = totalCols - index + (headerOrFooter ? 1 : 0);
   if (stick === "right") style.zIndex = index + (headerOrFooter ? 1 : 0);
   return style;
@@ -113,7 +115,6 @@ const Table = <T extends { id: string }>({
   // on mount
   // add drag event listeners
   // on drag-start on header row or whole table
-  // 
 
   const handleSort = (columnKey: string) => {
     let newSort = "";
@@ -125,6 +126,19 @@ const Table = <T extends { id: string }>({
       newSort = "";
     }
     onSort?.(newSort);
+  };
+
+  const handleResize = () => {
+    console.log("--- resize ---",);
+  };
+
+  const handlePointerDown = (e: React.PointerEvent) => {
+    e.preventDefault();
+
+  };
+
+  const handlePointerUp = () => {
+
   };
 
   return (
@@ -150,7 +164,7 @@ const Table = <T extends { id: string }>({
                           key={key}
                           data-column={key}
                           {...restProps}
-                          className={`${styles.cell} ${styles.header_cell} ${getStickyClasses(sticky)} ${className}`}
+                          className={`${getStickyClasses(sticky)} ${className}`}
                           style={{ ...getCellStyle(header[header.length - 1].length, index, sticky, true), ...(style ?? {}) }}
                         >
                           <div className={styles.header_cell_container}>
@@ -167,7 +181,12 @@ const Table = <T extends { id: string }>({
                             {renderRight}
                           </div>
                           {resizable && (
-                            <button className={styles.resize_handle}></button>
+                            <button
+                              className={styles.resize_handle}
+                              onPointerDown={handlePointerDown}
+                              onPointerUp={handlePointerUp}
+                            >
+                            </button>
                           )}
                         </Element>
                       );
@@ -195,7 +214,7 @@ const Table = <T extends { id: string }>({
                         return (
                           <Element
                             key={rowData.id + hCol.key}
-                            className={`${styles.cell ?? ""} ${hCol.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(hCol.sticky)}`}
+                            className={`${hCol.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(hCol.sticky)}`}
                             style={{ ...getCellStyle(cols.length, index, hCol.sticky), ...(rowConfig?.style ?? {}) }}
                           >
                             {rowConfig?.render?.(rowData)}
@@ -236,7 +255,7 @@ const Table = <T extends { id: string }>({
                   <Element
                     key={`fc-${hCol.key}`}
                     {...restProps}
-                    className={`${styles.cell} ${styles.header_cell} ${getStickyClasses(sticky)} ${className}`}
+                    className={`${getStickyClasses(sticky)} ${className}`}
                     style={{ ...getCellStyle(header[header.length - 1].length, index, sticky, true), ...(style ?? {}) }}
                   >
                     {render}

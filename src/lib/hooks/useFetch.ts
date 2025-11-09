@@ -2,88 +2,88 @@ import { AxiosError } from "axios";
 import { useCallback, useEffect, useReducer, useRef } from "react";
 
 type State<T> =
-  | { data: null; isLoading: boolean; error: null }
-  | { data: null; isLoading: boolean; error: AxiosError }
-  | { data: T; isLoading: boolean; error: null };
+  | { response: null; pending: boolean; error: null }
+  | { response: null; pending: boolean; error: AxiosError }
+  | { response: T; pending: boolean; error: null };
 
 type Action<T> =
-  | { type: "loading" }
-  | { type: "success"; data: T }
+  | { type: "pending" }
+  | { type: "response"; response: T }
   | { type: "error"; error: AxiosError };
 
 export interface UseFetchOptions extends RequestInit {
-  fetchOnMount?: boolean
-  onResponse?: (res: Response) => void
+  fetchOnMount?: boolean;
+  onResponse?: (res: Response) => Promise<any>;
+  onError?: (error: any) => Promise<any>;
+  onSettled?: any;
 }
 
-const useFetch = <T>(
-  url: string,
-  {
+export default function useFetch<T>(url: string, options: UseFetchOptions) {
+  const {
     fetchOnMount = true,
-    onResponse,
-    ...options
-  }: UseFetchOptions,
-) => {
+    onResponse, onError, onSettled,
+    ...fetchOptions
+  } = options;
+
   const [state, dispatch] = useReducer(reducer, {
-    data: null,
-    isLoading: false,
+    response: null,
+    pending: false,
     error: null,
   });
-  const controller = useRef<AbortController | null>(null);
+  const controller = useRef<AbortController>(null);
 
   function reducer(_: State<T>, action: Action<T>) {
     switch (action.type) {
-      case "loading":
+      case "pending":
         return {
-          isLoading: true, data: null, error: null,
+          pending: true, response: null, error: null,
         };
-      case "success":
+      case "response":
         return {
-          data: action.data, isLoading: false, error: null,
+          response: action.response, pending: false, error: null,
         };
       case "error":
         return {
-          data: null, isLoading: false, error: action.error,
+          response: null, pending: false, error: action.error,
         };
       default:
         throw new Error("Unknown action type");
     }
   }
 
-  const refetch = useCallback(async () => {
-    if (controller.current) {
-      controller.current.abort();
-    }
-    controller.current = new AbortController();
+  const request = useCallback(async (body?: any) => {
     try {
-      dispatch({ type: "loading" });
-      const response = await fetch(url, { signal: controller.current.signal, ...options });
+      controller.current?.abort();
+      controller.current = new AbortController();
+
+      dispatch({ type: "pending" });
+      const response = await fetch(url, {
+        body,
+        signal: controller.current.signal,
+        ...fetchOptions,
+      });
       onResponse?.(response);
-      const data = await response.json(); // other parsers - text, blob, arrayBuffer, formData
-      dispatch({ type: "success", data });
+      const data = await (onResponse?.(response) || response.json());
+      dispatch({ type: "response", response: data });
     } catch (error: any) {
       dispatch({ type: "error", error });
     }
-  }, [onResponse, options, url]);
+  }, [fetchOptions, onResponse, url]);
 
   const abort = useCallback(() => {
-    if (controller.current) {
-      controller.current.abort("");
-    }
+    controller.current?.abort("");
   }, []);
 
   useEffect(() => {
-    if (fetchOnMount) {
-      refetch();
-    }
-    return () => {
-      abort();
-    };
-  }, [abort, fetchOnMount, refetch, url]);
+    if (fetchOnMount) request();
+    return () => abort();
+  }, [abort, fetchOnMount, request]);
 
   return {
-    state, abort, refetch,
+    response: state.response,
+    pending: state.pending,
+    error: state.error,
+    request,
+    abort,
   };
-};
-
-export default useFetch;
+}

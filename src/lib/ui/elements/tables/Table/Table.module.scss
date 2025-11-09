@@ -15,26 +15,10 @@
   padding-bottom: .4rem;
   border-collapse: collapse;
 
-  th,
-  td {
-    padding-inline: 1.6rem;
-    padding-block: 1rem;
-    color: var(--fg-p);
-
-    font-size: 1.6rem;
-    line-height: 1.4;
-    background-color: inherit;
-  }
-
-  td {
-    border-bottom: .1rem solid var(--border-t);
-    background-color: var(--bg-p);
-  }
-
-  th {
-    font-weight: 500;
+  thead th {
+    position: relative;
     text-align: start;
-    padding-block: .8rem;
+    font-weight: 500;
     color: var(--fg-s);
     background-color: var(--bg-s);
 
@@ -51,11 +35,25 @@
     }
   }
 
+  tbody td {
+    padding-inline: 1.6rem;
+    padding-block: 1rem;
+    font-size: 1.6rem;
+    line-height: 1.4;
+    color: var(--fg-p);
+    background-color: var(--bg-p);
+    border-bottom: .1rem solid var(--border-t);
+  }
+
   tfoot td {
+    padding-inline: 1.6rem;
+    padding-block: 1rem;
+    font-size: 1.6rem;
+    line-height: 1.4;
     color: var(--fg-s);
     background-color: var(--bg-s);
-    padding-block: .8rem;
     border: none;
+
     position: sticky;
     bottom: 0;
 
@@ -66,21 +64,6 @@
     &:last-child {
       border-bottom-right-radius: .8rem;
     }
-  }
-
-  .stick_btn {
-    flex-shrink: 0;
-    margin-left: auto;
-    padding: .4rem .6rem;
-
-    &:hover {
-      color: var(--fg-p);
-    }
-  }
-
-  .left_icon {
-    width: 1.8rem;
-    height: 1.8rem;
   }
 
   .collapsible_row>td {
@@ -112,11 +95,15 @@
 }
 
 .header_cell_container {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: .2rem;
   width: 100%;
+  padding-block: .8rem;
+  padding-inline: 1.6rem;
+  font-size: 1.6rem;
 }
 
 .sc_td {
@@ -126,14 +113,27 @@
 
 .sc_left {
   position: sticky;
-  top: 0;
   left: 0;
 }
 
 .sc_right {
   position: sticky;
-  top: 0;
   right: 0;
+}
+
+.stick_btn {
+  flex-shrink: 0;
+  margin-left: auto;
+  padding: .4rem .6rem;
+
+  &:hover {
+    color: var(--fg-p);
+  }
+}
+
+.left_icon {
+  width: 1.8rem;
+  height: 1.8rem;
 }
 
 .resize_handle {
@@ -143,6 +143,7 @@
   width: 1rem;
   height: 100%;
   cursor: ew-resize;
+  flex-shrink: 0;
 
   transition: opacity .3s ease;
 
@@ -154,7 +155,6 @@
     transform: translate3d(-50%, -50%, 0);
     width: .2rem;
     height: 100%;
-    // border-inline: .2rem solid var(--blue-3);
     background-color: var(--border-p);
     opacity: 0;
   }
@@ -171,7 +171,13 @@
 @media screen and (max-width: 768px) {
   .table {
 
-    th,
+    .header_cell_container {
+      font-size: 1.4rem;
+      padding-inline: 1.6rem;
+      padding-block: .6rem;
+      line-height: 1.4;
+    }
+
     td {
       font-size: 1.4rem;
       padding-inline: 1.6rem;
