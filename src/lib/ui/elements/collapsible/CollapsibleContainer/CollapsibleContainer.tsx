@@ -38,8 +38,8 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       if (open) {
         elem.style.opacity = "100%";
         timeoutRef.current = setTimeout(() => {
-          elem.style.overflow = "";
-        }, duration);
+          elem.style.overflow = "initial";
+        }, .5 * duration);
       } else {
         elem.style.overflow = "hidden";
         elem.style.opacity = "0%";

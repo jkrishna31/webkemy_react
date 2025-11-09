@@ -1,4 +1,4 @@
-import React, { ComponentProps, CSSProperties, Fragment, ReactNode } from "react";
+import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
@@ -7,28 +7,36 @@ import styles from "./Table.module.scss";
 
 export type DragType = "reorder" | "transfer";
 export type StickType = "left" | "right" | "both";
-export interface TableCol<T> {
-  key: string;
-  accessor?: string | number;
-  renderHeadLeft?: ReactNode;
-  renderHeadRight?: ReactNode;
-  renderFooterCell?: ReactNode;
-  renderBodyCell: (record: T) => ReactNode;
+
+export interface RootCellItem {
+  as?: "th" | "td";
   sticky?: StickType;
-  allowSort?: boolean;
-  draggable?: boolean;
+  sortable?: boolean;
   resizable?: boolean;
-  thClass?: string;
-  tdClass?: string;
-  thStyle?: CSSProperties;
-  tdStyle?: CSSProperties;
-  footerCellSpan?: [number, number];
+  // draggable?: boolean;
+}
+
+export interface HeaderItem extends RootCellItem, ComponentPropsWithoutRef<"th"> {
+  key: string;
+  renderLeft?: ReactNode;
+  renderRight?: ReactNode;
+}
+export interface CellItem<T> extends ComponentPropsWithoutRef<"td"> {
+  as?: "th" | "td";
+}
+
+export interface BodyCellItem<T> extends CellItem<T> {
+  render?: (row: T) => ReactNode;
+}
+
+export interface FooterCellItem<T> extends RootCellItem, CellItem<T> {
+  render?: ReactNode;
 }
 
 export interface TableProps<T> extends ComponentProps<"div"> {
   data: Array<T>;
-  columns: Array<TableCol<T>>;
   stickyHeader?: boolean;
+  stickyFooter?: boolean;
   sort?: string;
   onSort?: (key: string) => void;
   rootClass?: string;
@@ -39,6 +47,13 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   colDrag?: boolean;
   rowDrag?: boolean;
   colResize?: boolean;
+  header?: Array<Array<HeaderItem>>;
+  body?: {
+    [key: string]: BodyCellItem<T>;
+  };
+  footer?: {
+    [key: string]: FooterCellItem<T>;
+  };
 }
 
 const getSort = (columnKey: string, sort?: string): "+" | "-" | undefined => {
@@ -73,8 +88,8 @@ const getCellStyle = (
 
 const Table = <T extends { id: string }>({
   data,
-  columns,
-  stickyHeader,
+  header, body, footer,
+  stickyHeader, stickyFooter,
   sort, onSort,
   className, rootClass,
   colDrag, rowDrag, colResize,
@@ -115,71 +130,88 @@ const Table = <T extends { id: string }>({
   return (
     <div className={`${styles.wrapper} ${rootClass}`}>
       <table className={`${styles.table} ${className}`}>
-        <thead>
-          <tr>
+        {!!header?.length && (
+          <thead
+            className={stickyHeader ? styles.sticky_header : ""}
+            style={(stickyHeader && header?.length) ? { zIndex: header[header.length - 1].length + 1 } : {}}
+          >
             {
-              columns?.map((column, index) => {
-                return (
-                  <th
-                    data-column={column.key}
-                    draggable={column?.draggable}
-                    key={column.key}
-                    className={`${styles.cell} ${styles.header_cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
-                    style={{ ...getCellStyle(columns.length, index, column.sticky, true), ...(column.thStyle ?? {}) }}
-                  >
-                    <div className={styles.header_cell_container}>
-                      {column.renderHeadLeft}
-                      {
-                        column.allowSort ? (
-                          <SortBtn
-                            sort={getSort(column.key, sort)}
-                            onClick={() => handleSort(column.key)}
-                            className={styles.sort_btn}
-                          />
-                        ) : null
-                      }
-                      {column.renderHeadRight}
-                    </div>
-                    {column.resizable && (
-                      <button className={styles.resize_handle}></button>
-                    )}
-                  </th>
-                );
-              })
+              header?.map((hRow, idx) => (
+                <tr key={idx}>
+                  {
+                    hRow.map((hCell, index) => {
+                      const {
+                        key, as, renderLeft, renderRight, sortable: sortableCol, resizable, sticky, className, style,
+                        ...restProps
+                      } = hCell;
+                      const Element = as ?? "th";
+                      return (
+                        <Element
+                          key={key}
+                          data-column={key}
+                          {...restProps}
+                          className={`${styles.cell} ${styles.header_cell} ${getStickyClasses(sticky)} ${className}`}
+                          style={{ ...getCellStyle(header[header.length - 1].length, index, sticky, true), ...(style ?? {}) }}
+                        >
+                          <div className={styles.header_cell_container}>
+                            {renderLeft}
+                            {
+                              sortableCol ? (
+                                <SortBtn
+                                  sort={getSort(key, sort)}
+                                  onClick={() => handleSort(key)}
+                                  className={styles.sort_btn}
+                                />
+                              ) : null
+                            }
+                            {renderRight}
+                          </div>
+                          {resizable && (
+                            <button className={styles.resize_handle}></button>
+                          )}
+                        </Element>
+                      );
+                    })
+                  }
+                </tr>
+              ))
             }
-          </tr>
-        </thead>
+          </thead>
+        )}
         <tbody>
           {
-            data?.map((row) => {
-              const hasCollapsibleContent = isRowCollapsible?.(row);
-              const isExpanded = hasCollapsibleContent && expandedRows?.includes(row.id);
+            data?.map((rowData) => {
+              const hasCollapsibleContent = isRowCollapsible?.(rowData);
+              const isExpanded = hasCollapsibleContent && expandedRows?.includes(rowData.id);
               const parentRowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
+              const cols = header?.[header.length - 1] ?? [];
               return (
-                <Fragment key={row.id}>
+                <Fragment key={rowData.id}>
                   <tr {...parentRowAttrs}>
                     {
-                      columns?.map((column, index) => {
+                      cols?.map((hCol, index) => {
+                        const rowConfig = body?.[hCol.key];
+                        const Element = rowConfig?.as ?? "td";
                         return (
-                          <td
-                            key={row.id + column.key}
-                            className={`${styles.cell ?? ""} ${column.sticky ? styles.sc_td : ""} ${column.tdClass ?? ""} ${getStickyClasses(column.sticky)}`}
-                            style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.tdStyle ?? {}) }}
+                          <Element
+                            key={rowData.id + hCol.key}
+                            className={`${styles.cell ?? ""} ${hCol.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(hCol.sticky)}`}
+                            style={{ ...getCellStyle(cols.length, index, hCol.sticky), ...(rowConfig?.style ?? {}) }}
                           >
-                            {column.renderBodyCell(row)}
-                          </td>
+                            {rowConfig?.render?.(rowData)}
+                          </Element>
                         );
                       })
                     }
                   </tr>
-                  {(hasCollapsibleContent) && (
+                  {hasCollapsibleContent && (
                     <tr className={styles.collapsible_row}>
-                      <td colSpan={columns.length}>
+                      <td colSpan={cols.length}>
                         <CollapsibleContainer
                           open={isExpanded ?? false}
                           renderWhileClosed={renderWhileCollapsed}
                         >
-                          {renderDetails?.(row)}
+                          {renderDetails?.(rowData)}
                         </CollapsibleContainer>
                       </td>
                     </tr>
@@ -189,21 +221,27 @@ const Table = <T extends { id: string }>({
             })
           }
         </tbody>
-        <tfoot>
+        <tfoot
+          className={stickyFooter ? styles.sticky_footer : ""}
+          style={(stickyFooter && header?.length) ? { zIndex: header[header.length - 1].length + 1 } : {}}
+        >
           <tr>
             {
-              columns?.map((column, index) => {
-                return column.renderFooterCell ? (
-                  <td
-                    key={column.key}
-                    className={`${styles.cell} ${stickyHeader ? styles.sc_th : ""} ${getStickyClasses(column.sticky)}`}
-                    style={{ ...getCellStyle(columns.length, index, column.sticky), ...(column.thStyle ?? {}) }}
-                    rowSpan={column.footerCellSpan?.[0]}
-                    colSpan={column.footerCellSpan?.[1]}
+              header?.[header.length - 1].map((hCol, index) => {
+                const rowConfig = footer?.[hCol.key];
+                if (!rowConfig) return null;
+                const { render, as, sticky, className, style, ...restProps } = rowConfig;
+                const Element = as ?? "td";
+                return (
+                  <Element
+                    key={`fc-${hCol.key}`}
+                    {...restProps}
+                    className={`${styles.cell} ${styles.header_cell} ${getStickyClasses(sticky)} ${className}`}
+                    style={{ ...getCellStyle(header[header.length - 1].length, index, sticky, true), ...(style ?? {}) }}
                   >
-                    {column.renderFooterCell}
-                  </td>
-                ) : null;
+                    {render}
+                  </Element>
+                );
               })
             }
           </tr>

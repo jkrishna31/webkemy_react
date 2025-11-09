@@ -15,16 +15,6 @@
   padding-bottom: .4rem;
   border-collapse: collapse;
 
-  .table_caption {
-    text-align: start;
-    width: fit-content;
-    margin-bottom: 1rem;
-  }
-
-  thead tr {
-    border-bottom: .1rem solid var(--border-t);
-  }
-
   th,
   td {
     padding-inline: 1.6rem;
@@ -105,6 +95,22 @@
   }
 }
 
+.table_caption {
+  text-align: start;
+  width: fit-content;
+  margin-bottom: 1rem;
+}
+
+.sticky_header {
+  position: sticky;
+  top: 0;
+}
+
+.sticky_footer {
+  position: sticky;
+  bottom: 0;
+}
+
 .header_cell_container {
   display: flex;
   align-items: center;
@@ -113,22 +119,20 @@
   width: 100%;
 }
 
-.sc_th {
-  position: sticky;
-  z-index: 2;
-  top: 0;
-}
-
 .sc_td {
   position: sticky;
   z-index: 1;
 }
 
 .sc_left {
+  position: sticky;
+  top: 0;
   left: 0;
 }
 
 .sc_right {
+  position: sticky;
+  top: 0;
   right: 0;
 }
 
