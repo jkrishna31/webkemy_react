@@ -1,4 +1,4 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode } from "react";
+import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useState } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
@@ -20,6 +20,7 @@ export interface HeaderItem extends RootCellItem, ComponentPropsWithoutRef<"th">
   key: string;
   renderLeft?: ReactNode;
   renderRight?: ReactNode;
+  width?: number;
 }
 export interface CellItem<T> extends ComponentPropsWithoutRef<"td"> {
   as?: "th" | "td";
@@ -39,7 +40,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   stickyFooter?: boolean;
   sort?: string;
   onSort?: (key: string) => void;
-  onResize?: () => void;
+  onResize?: (key: string, width: number) => void;
   rootClass?: string;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
@@ -48,6 +49,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   colDrag?: boolean;
   rowDrag?: boolean;
   colResize?: boolean;
+  colResizeDefer?: boolean;
   header?: Array<Array<HeaderItem>>;
   body?: {
     [key: string]: BodyCellItem<T>;
@@ -83,8 +85,8 @@ const getCellStyle = (
 ): React.CSSProperties => {
   const style: React.CSSProperties = {};
   if (stick) style.position = "sticky";
-  if (stick === "left" || stick === "both") style.zIndex = totalCols - index + (headerOrFooter ? 1 : 0);
-  if (stick === "right") style.zIndex = index + (headerOrFooter ? 1 : 0);
+  if (stick === "left") style.zIndex = totalCols + (headerOrFooter ? 1 : 0);
+  if (stick === "right" || stick === "both") style.zIndex = totalCols + (stick === "both" ? (totalCols - index) : 0) + (headerOrFooter ? 1 : 0);
   return style;
 };
 
@@ -94,11 +96,13 @@ const Table = <T extends { id: string }>({
   stickyHeader, stickyFooter,
   sort, onSort,
   className, rootClass,
-  colDrag, rowDrag, colResize,
+  colDrag, rowDrag, colResize, colResizeDefer,
+  onResize,
   isRowCollapsible, renderDetails, expandedRows,
   renderWhileCollapsed = true,
   ...props
 }: TableProps<T>) => {
+  const [resizingData, setResizingData] = useState<{ x: number; y: number; col: string; ogWidth?: number; }>();
 
   // if drag type is REORDER -- show the line on left/right side of the cells for the candidate position
 
@@ -128,17 +132,34 @@ const Table = <T extends { id: string }>({
     onSort?.(newSort);
   };
 
-  const handleResize = () => {
-    console.log("--- resize ---",);
+  // on resizeHandle focus add keydown event listener
+  // on drag start/end/cancel/over
+
+  const handleResize = (e: React.PointerEvent) => {
+    if (!resizingData || !onResize) return;
+    if (!colResizeDefer) {
+      onResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
+    }
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    e.preventDefault();
-
+    if (!onResize) return;
+    const elem = e.target as HTMLElement;
+    elem.setPointerCapture(e.pointerId);
+    const resizeHandle = elem?.closest("[data-resize]");
+    if (resizeHandle) {
+      e.preventDefault();
+      const colToResize = resizeHandle.closest("[data-column]") as HTMLElement;
+      setResizingData({ x: e.pageX, y: e.pageY, col: colToResize.getAttribute("data-column") ?? "", ogWidth: colToResize.clientWidth });
+    }
   };
 
-  const handlePointerUp = () => {
-
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (colResizeDefer && onResize && resizingData) {
+      onResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
+    }
+    setResizingData(undefined);
+    (e.target as HTMLElement).releasePointerCapture(e.pointerId);
   };
 
   return (
@@ -147,7 +168,10 @@ const Table = <T extends { id: string }>({
         {!!header?.length && (
           <thead
             className={stickyHeader ? styles.sticky_header : ""}
-            style={(stickyHeader && header?.length) ? { zIndex: header[header.length - 1].length + 1 } : {}}
+            style={(stickyHeader && header?.length) ? { zIndex: header[header.length - 1].length * 2 } : {}}
+            onPointerDown={colResize ? handlePointerDown : undefined}
+            onPointerMove={(colResize && resizingData && !colResizeDefer) ? handleResize : undefined}
+            onPointerUp={colResize ? handlePointerUp : undefined}
           >
             {
               header?.map((hRow, idx) => (
@@ -165,7 +189,11 @@ const Table = <T extends { id: string }>({
                           data-column={key}
                           {...restProps}
                           className={`${getStickyClasses(sticky)} ${className}`}
-                          style={{ ...getCellStyle(header[header.length - 1].length, index, sticky, true), ...(style ?? {}) }}
+                          style={{
+                            ...(hCell.width ? { minWidth: hCell.width } : {}),
+                            ...getCellStyle(header[header.length - 1].length, index, sticky, true),
+                            ...(style ?? {})
+                          }}
                         >
                           <div className={styles.header_cell_container}>
                             {renderLeft}
@@ -182,9 +210,8 @@ const Table = <T extends { id: string }>({
                           </div>
                           {resizable && (
                             <button
-                              className={styles.resize_handle}
-                              onPointerDown={handlePointerDown}
-                              onPointerUp={handlePointerUp}
+                              data-resize={key}
+                              className={`${styles.resize_handle}`}
                             >
                             </button>
                           )}
@@ -242,7 +269,7 @@ const Table = <T extends { id: string }>({
         </tbody>
         <tfoot
           className={stickyFooter ? styles.sticky_footer : ""}
-          style={(stickyFooter && header?.length) ? { zIndex: header[header.length - 1].length + 1 } : {}}
+          style={(stickyFooter && header?.length) ? { zIndex: header[header.length - 1].length * 2 } : {}}
         >
           <tr>
             {

@@ -110,10 +110,10 @@
 
     padding-bottom: 3rem;
     padding-inline: 1rem;
-    margin-top: 1rem;
 
     & :global(.group_header) {
-        background: var(--bg-p);
+        background: var(--gray-11-70);
+        margin-top: 1rem;
     }
 
     &::-webkit-scrollbar {

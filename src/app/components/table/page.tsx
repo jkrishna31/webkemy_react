@@ -50,6 +50,7 @@ const Page = () => {
   const [sort, setSort] = useState<string>();
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
+  const [colWidths, setColWidths] = useState<{ [key: string]: number }>({});
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
@@ -61,6 +62,13 @@ const Page = () => {
         setSelectedRows(currSelectedRows => [...currSelectedRows.filter(id => id !== row.id)]);
       }
     }
+  };
+
+  const handleResize = (colKey: string, newWidth: number) => {
+    setColWidths(currWidths => ({
+      ...currWidths,
+      [colKey]: newWidth,
+    }));
   };
 
   const isRowCollapsible = useCallback((_: TableData) => {
@@ -91,7 +99,7 @@ const Page = () => {
         ),
       },
       {
-        key: "name", draggable: true, resizable: true, sortable: true,
+        key: "name", draggable: true, resizable: true, sortable: true, width: colWidths.name,
         renderLeft: (
           <div className={styles.header_cell}>
             {"Name"}
@@ -99,7 +107,7 @@ const Page = () => {
         ),
       },
       {
-        key: "age", draggable: true, resizable: true,
+        key: "age", draggable: true, resizable: true, width: colWidths.age,
         renderLeft: (
           <div className={styles.header_cell}>
             {"D.O.B. (Age)"}
@@ -107,7 +115,7 @@ const Page = () => {
         ),
       },
       {
-        key: "status", draggable: true, resizable: true, sortable: true,
+        key: "status", draggable: true, resizable: true, sortable: true, width: colWidths.status,
         renderLeft: (
           <div className={styles.header_cell}>
             {"Status"}
@@ -115,7 +123,7 @@ const Page = () => {
         ),
       },
       {
-        key: "contact", draggable: true, resizable: true,
+        key: "contact", draggable: true, resizable: true, width: colWidths.contact,
         renderLeft: (
           <div className={styles.header_cell}>
             {"Contact"}
@@ -123,7 +131,7 @@ const Page = () => {
         ),
       },
       {
-        key: "rating", draggable: true, resizable: true, sortable: true,
+        key: "rating", draggable: true, resizable: true, sortable: true, width: colWidths.rating,
         renderLeft: (
           <div className={styles.header_cell}>
             {"Rating"}
@@ -131,15 +139,15 @@ const Page = () => {
         ),
       },
       {
-        key: "peers", draggable: true, resizable: true,
+        key: "peers", draggable: true, resizable: true, width: colWidths.peers,
         renderLeft: "Peers",
       },
       {
-        key: "address", draggable: true, resizable: true,
+        key: "address", draggable: true, resizable: true, width: colWidths.address,
         renderLeft: "Address",
       },
       {
-        key: "startDate", draggable: true, resizable: true,
+        key: "startDate", draggable: true, resizable: true, width: colWidths.startDate,
         renderLeft: "Started On",
       },
       // {
@@ -147,7 +155,7 @@ const Page = () => {
       //   renderLeft: "Last Updated On",
       // },
       {
-        key: "actions", draggable: true, resizable: true, sticky: "right",
+        key: "actions", draggable: true, resizable: true, sticky: "right", width: colWidths.actions,
         renderLeft: (
           <div className={styles.header_cell}>
             {"Actions"}
@@ -264,7 +272,7 @@ const Page = () => {
     address: {
       render: (row: any) => {
         return (
-          <p style={{ width: "20rem", whiteSpace: "wrap" }}>{row.address}</p>
+          <p style={{ minWidth: "20rem", whiteSpace: "wrap" }}>{row.address}</p>
         );
       },
     },
@@ -317,21 +325,22 @@ const Page = () => {
 
   const footer = {
     select: {
-      render: (
-        <p style={{ fontWeight: 500 }}>{"Total"}</p>
-      ),
-      colSpan: 1,
+      render: selectedRows.length ? (
+        <p style={{ fontWeight: 500 }}>{"Selected: "}<span>{selectedRows.length}</span></p>
+      ) : null,
       sticky: "left" as StickType,
+      colSpan: 2,
     },
     name: {
       render: "",
-      colSpan: header[header.length - 1].length - 2,
+      colSpan: header[header.length - 1].length - 3,
     },
     actions: {
       render: (
-        <p style={{ textAlign: "right", fontWeight: 500 }}>{"15"}</p>
+        <p style={{ textAlign: "right", fontWeight: 500 }}>{"Total: "}{data.length}</p>
       ),
       sticky: "right" as StickType,
+      colSpan: 2,
       style: { zIndex: 12 },
     },
   };
@@ -365,9 +374,12 @@ const Page = () => {
         header={header}
         body={body}
         footer={footer}
-        stickyHeader
+        stickyHeader stickyFooter
+        colResize
         sort={sort}
         onSort={setSort}
+        onResize={handleResize}
+        // colResizeDefer
         isRowCollapsible={isRowCollapsible}
         renderDetails={renderDetails}
         expandedRows={expandedRows}

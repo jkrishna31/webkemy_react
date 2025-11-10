@@ -14,7 +14,7 @@ type Action<T> =
 export interface UseFetchOptions extends RequestInit {
   fetchOnMount?: boolean;
   onResponse?: (res: Response) => Promise<any>;
-  onError?: (error: any) => Promise<any>;
+  onError?: any;
   onSettled?: any;
 }
 
@@ -57,18 +57,21 @@ export default function useFetch<T>(url: string, options: UseFetchOptions) {
       controller.current = new AbortController();
 
       dispatch({ type: "pending" });
-      const response = await fetch(url, {
+      const rawResponse = await fetch(url, {
         body,
         signal: controller.current.signal,
         ...fetchOptions,
       });
-      onResponse?.(response);
-      const data = await (onResponse?.(response) || response.json());
-      dispatch({ type: "response", response: data });
+      onResponse?.(rawResponse);
+      const response = await (onResponse?.(rawResponse) || rawResponse.json());
+      dispatch({ type: "response", response });
     } catch (error: any) {
       dispatch({ type: "error", error });
+      onError?.(error);
+    } finally {
+      onSettled?.();
     }
-  }, [fetchOptions, onResponse, url]);
+  }, [fetchOptions, onError, onResponse, onSettled, url]);
 
   const abort = useCallback(() => {
     controller.current?.abort("");
