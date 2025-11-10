@@ -120,6 +120,8 @@ const Table = <T extends { id: string }>({
   // add drag event listeners
   // on drag-start on header row or whole table
 
+  // on drag start/end/cancel/over
+
   const handleSort = (columnKey: string) => {
     let newSort = "";
     if (!sort || !sort.includes(columnKey)) {
@@ -131,9 +133,6 @@ const Table = <T extends { id: string }>({
     }
     onSort?.(newSort);
   };
-
-  // on resizeHandle focus add keydown event listener
-  // on drag start/end/cancel/over
 
   const handleResize = (e: React.PointerEvent) => {
     if (!resizingData || !onResize) return;
@@ -147,11 +146,10 @@ const Table = <T extends { id: string }>({
     const elem = e.target as HTMLElement;
     elem.setPointerCapture(e.pointerId);
     const resizeHandle = elem?.closest("[data-resize]");
-    if (resizeHandle) {
-      e.preventDefault();
-      const colToResize = resizeHandle.closest("[data-column]") as HTMLElement;
-      setResizingData({ x: e.pageX, y: e.pageY, col: colToResize.getAttribute("data-column") ?? "", ogWidth: colToResize.clientWidth });
-    }
+    if (!resizeHandle) return;
+    e.preventDefault();
+    const colToResize = resizeHandle.closest("[data-column]") as HTMLElement;
+    setResizingData({ x: e.pageX, y: e.pageY, col: colToResize.getAttribute("data-column") ?? "", ogWidth: colToResize.clientWidth });
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
@@ -160,6 +158,16 @@ const Table = <T extends { id: string }>({
     }
     setResizingData(undefined);
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.code !== "ArrowLeft" && e.code !== "ArrowRight") return;
+    if (!onResize) return;
+    const resizeHandle = (e.target as HTMLElement)?.closest("[data-resize]");
+    if (!resizeHandle) return;
+    const colToResize = resizeHandle.closest("[data-column]") as HTMLElement;
+    e.preventDefault();
+    onResize(colToResize.getAttribute("data-column") ?? "", colToResize.clientWidth + (e.code === "ArrowLeft" ? -5 : 5));
   };
 
   return (
@@ -172,6 +180,7 @@ const Table = <T extends { id: string }>({
             onPointerDown={colResize ? handlePointerDown : undefined}
             onPointerMove={(colResize && resizingData && !colResizeDefer) ? handleResize : undefined}
             onPointerUp={colResize ? handlePointerUp : undefined}
+            onKeyDown={colResize ? handleKeyDown : undefined}
           >
             {
               header?.map((hRow, idx) => (

@@ -8,7 +8,10 @@
 
   .table {
 
-    & th,
+    & th {
+      white-space: nowrap;
+    }
+
     & tr {
       // min-width: fit-content;
       white-space: nowrap;
