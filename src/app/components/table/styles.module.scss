@@ -8,37 +8,13 @@
 
   .table {
 
-    & th {
-      white-space: nowrap;
-    }
-
-    & tr {
-      // min-width: fit-content;
+    & th,
+    & td {
       white-space: nowrap;
     }
 
     & tbody tr:hover td {
       background-color: var(--bg-t);
-    }
-  }
-
-  .table_actions {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: .2rem;
-
-    button {
-      padding: .3rem 1rem;
-      min-height: fit-content;
-      border-color: transparent;
-      color: var(--fg-s);
-
-      svg {
-        width: 1.8rem;
-        height: 1.8rem;
-        stroke-width: .175rem;
-      }
     }
   }
 
@@ -86,30 +62,50 @@
       height: 2rem;
     }
   }
+}
 
-  .expand_btn {
-    height: fit-content;
-    width: fit-content;
-    padding: .6rem;
-    color: var(--fg-s-alt);
+.table_actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: .2rem;
 
-    & svg {
+  button {
+    padding: .3rem 1rem;
+    min-height: fit-content;
+    border-color: transparent;
+    color: var(--fg-s);
+
+    svg {
       width: 1.8rem;
       height: 1.8rem;
-      stroke-width: .2rem;
-      transition: transform .5s ease;
+      stroke-width: .175rem;
     }
+  }
+}
 
-    &:hover {
-      color: var(--fg-p);
-    }
+.expand_btn {
+  height: fit-content;
+  width: fit-content;
+  padding: .6rem;
+  color: var(--fg-s-alt);
 
-    &[aria-pressed="true"] {
-      color: var(--fg-p);
+  & svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    stroke-width: .2rem;
+    transition: transform .5s ease;
+  }
 
-      svg {
-        transform: rotate(90deg);
-      }
+  &:hover {
+    color: var(--fg-p);
+  }
+
+  &[aria-pressed="true"] {
+    color: var(--fg-p);
+
+    svg {
+      transform: rotate(90deg);
     }
   }
 }

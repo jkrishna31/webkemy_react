@@ -170,6 +170,26 @@ const Table = <T extends { id: string }>({
     onResize(colToResize.getAttribute("data-column") ?? "", colToResize.clientWidth + (e.code === "ArrowLeft" ? -5 : 5));
   };
 
+  const handleDragStart = (e: React.DragEvent) => {
+    const elem = e.target as HTMLElement;
+    const draggingCol = elem.closest("[data-column]");
+    if (!draggingCol) return;
+    const colKey = draggingCol.getAttribute("data-column");
+    console.log("+++ drag start +++", e, colKey);
+  };
+
+  const handleDragEnd = (e: React.DragEvent) => {
+    console.log("--- drag end ---", e);
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    const elem = e.target as HTMLElement;
+    const draggingCol = elem.closest("[data-column]");
+    if (!draggingCol) return;
+    const colKey = draggingCol.getAttribute("data-column");
+    console.log("=== drag over ===", e, colKey);
+  };
+
   return (
     <div className={`${styles.wrapper} ${rootClass}`}>
       <table className={`${styles.table} ${className}`}>
@@ -181,6 +201,9 @@ const Table = <T extends { id: string }>({
             onPointerMove={(colResize && resizingData && !colResizeDefer) ? handleResize : undefined}
             onPointerUp={colResize ? handlePointerUp : undefined}
             onKeyDown={colResize ? handleKeyDown : undefined}
+            onDragStart={handleDragStart}
+            onDragEnd={handleDragEnd}
+            onDragOver={handleDragOver}
           >
             {
               header?.map((hRow, idx) => (

@@ -155,7 +155,7 @@ const Page = () => {
       //   renderLeft: "Last Updated On",
       // },
       {
-        key: "actions", draggable: true, resizable: true, sticky: "right", width: colWidths.actions,
+        key: "actions", draggable: true, sticky: "right",
         renderLeft: (
           <div className={styles.header_cell}>
             {"Actions"}
@@ -195,7 +195,6 @@ const Page = () => {
     },
     name: {
       render: (row: any) => {
-        const isExpanded = expandedRows.includes(row.id);
         return (
           <div
             style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
