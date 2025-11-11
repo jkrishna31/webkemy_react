@@ -31,16 +31,20 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     if (elem) {
       const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight + 1);
       elem.style.height = "fit-content";
-      elem.style.maxHeight = `${open ? contentHeight : 0}px`;
       clearTimeout(timeoutRef.current);
       clearTimeout(destroyContentRef.current);
       setDestroyContent(false);
       if (open) {
+        const currMaxHeight = Number(elem.style?.maxHeight?.slice(0, -2));
+        if (currMaxHeight <= contentHeight) {
+          elem.style.maxHeight = `${contentHeight}px`;
+        }
         elem.style.opacity = "100%";
         timeoutRef.current = setTimeout(() => {
           elem.style.overflow = "initial";
         }, .5 * duration);
       } else {
+        elem.style.maxHeight = "0px";
         elem.style.overflow = "hidden";
         elem.style.opacity = "0%";
         if (!renderWhileClosed) {
@@ -75,8 +79,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     }
   }, [open, updateHeight]);
 
+  if (destroyContent && !open) return null;
+
   return (
     <Element
+      aria-hidden={!open}
       {...props}
       ref={ref}
       className={`${styles.container} ${className}`}
@@ -89,13 +96,9 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       role="region"
       data-expanded={open}
     >
-      {
-        (destroyContent && !open) ? null : (
-          <div className="inner_container" ref={innerRef}>
-            {children}
-          </div>
-        )
-      }
+      <div className="inner_container" ref={innerRef}>
+        {children}
+      </div>
     </Element>
   );
 };

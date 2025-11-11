@@ -11,8 +11,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
-import { Table } from "@/lib/ui/elements/tables";
-import { HeaderItem, StickType } from "@/lib/ui/elements/tables/Table/Table";
+import { StickType, Table, TableLayout } from "@/lib/ui/elements/tables";
 import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { Color } from "@/types/general.types";
@@ -51,6 +50,19 @@ const Page = () => {
   const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
   const [colWidths, setColWidths] = useState<{ [key: string]: number }>({});
+  const [layout, setLayout] = useState<TableLayout[]>([
+    { key: "select", },
+    { key: "name" },
+    { key: "age" },
+    { key: "status" },
+    { key: "contact" },
+    { key: "rating" },
+    { key: "peers" },
+    { key: "address" },
+    { key: "startDate" },
+    // { key: "lastUpdateDate" },
+    { key: "actions" },
+  ]);
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
@@ -65,14 +77,35 @@ const Page = () => {
   };
 
   const handleResize = (colKey: string, newWidth: number) => {
+    setLayout(currLayout => [...currLayout.map(item => ({ ...item, width: colKey === item.key ? newWidth : item.width }))]);
     setColWidths(currWidths => ({
       ...currWidths,
       [colKey]: newWidth,
     }));
   };
 
-  const handleColDnD = () => {
+  const handleColDnD = (config: any) => {
+    if (config.col !== config.over) {
+      let draggingColIdx = -1, overColIdx = -1;
+      for (let i = 0; i < layout.length; i++) {
+        if (layout[i].key === config.col) draggingColIdx = i;
+        if (layout[i].key === config.over) overColIdx = i;
+      }
 
+      const newLayout = [...layout];
+      const [draggingItem] = newLayout.splice(draggingColIdx, 1);
+      newLayout.splice(overColIdx - (config.to === "left" ? 1 : 0), 0, draggingItem);
+
+      const generateNewLayout = (order: any[]) => {
+        const newLayout: TableLayout[] = [...order];
+        // if any of order item key matches with dragging and/or over colKey
+        // if matches both, then update the position
+        // if only one matches, then find the other 
+        return newLayout;
+      };
+
+      setLayout(newLayout);
+    }
   };
 
   const isRowCollapsible = useCallback((_: TableData) => {
@@ -87,92 +120,125 @@ const Page = () => {
     );
   }, []);
 
-  const header: Array<Array<HeaderItem>> = [
-    [
+  /*
+    order = [
       {
-        key: "select", sticky: "left",
-        renderLeft: (
-          <div className={styles.header_cell}>
-            <Checkbox
-              className={styles.all_select_check}
-              data-indeterminate={!!selectedRows.length && selectedRows.length !== data.length}
-              checked={!!selectedRows.length && selectedRows.length === data.length}
-              onChange={e => handleSelection(e.target.checked)}
-            />
-          </div>
-        ),
+        key: "name", rowSpan: 2,
+        children: [
+          { key: "first" },
+          { key: "last" },
+        ]
+      },
+      { 
+        key: "details",
+        children: [
+          {
+            key: "address",
+            children: [
+              { key: "street" },
+              { key: "city" },
+              { key: "zip" },
+            ]
+          },
+          {
+            key: "contact",
+            children: [
+              { key: "phone" },
+              { key: "email" },
+            ]
+          },
+        ]
       },
       {
-        key: "name", draggable: true, resizable: true, sortable: true, width: colWidths.name,
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"Name"}
-          </div>
-        ),
-      },
-      {
-        key: "age", draggable: true, resizable: true, width: colWidths.age,
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"D.O.B. (Age)"}
-          </div>
-        ),
-      },
-      {
-        key: "status", draggable: true, resizable: true, sortable: true, width: colWidths.status,
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"Status"}
-          </div>
-        ),
-      },
-      {
-        key: "contact", draggable: true, resizable: true, width: colWidths.contact,
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"Contact"}
-          </div>
-        ),
-      },
-      {
-        key: "rating", draggable: true, resizable: true, sortable: true, width: colWidths.rating,
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"Rating"}
-          </div>
-        ),
-      },
-      {
-        key: "peers", draggable: true, resizable: true, width: colWidths.peers,
-        renderLeft: "Peers",
-      },
-      {
-        key: "address", draggable: true, resizable: true, width: colWidths.address,
-        renderLeft: "Address",
-      },
-      {
-        key: "startDate", draggable: true, resizable: true, width: colWidths.startDate,
-        renderLeft: "Started On",
-      },
-      // {
-      //   key: "lastUpdateDate", draggable: true, resizable: true,
-      //   renderLeft: "Last Updated On",
-      // },
-      {
-        key: "actions", draggable: true, sticky: "right",
-        renderLeft: (
-          <div className={styles.header_cell}>
-            {"Actions"}
-          </div>
-        ),
-        renderRight: (
-          <button className={styles.col_more}>
-            <EllipsisHIcon />
-          </button>
-        ),
-      },
+        key: "actions",
+      }
     ]
-  ];
+  */
+
+  const header = {
+    select: {
+      sticky: "left" as StickType,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          <Checkbox
+            className={styles.all_select_check}
+            data-indeterminate={!!selectedRows.length && selectedRows.length !== data.length}
+            checked={!!selectedRows.length && selectedRows.length === data.length}
+            onChange={e => handleSelection(e.target.checked)}
+          />
+        </div>
+      ),
+    },
+    name: {
+      draggable: true, resizable: true, sortable: true, width: colWidths.name,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"Name"}
+        </div>
+      ),
+    },
+    age: {
+      draggable: true, resizable: true, width: colWidths.age,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"D.O.B. (Age)"}
+        </div>
+      ),
+    },
+    status: {
+      draggable: true, resizable: true, sortable: true, width: colWidths.status,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"Status"}
+        </div>
+      ),
+    },
+    contact: {
+      draggable: true, resizable: true, width: colWidths.contact,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"Contact"}
+        </div>
+      ),
+    },
+    rating: {
+      draggable: true, resizable: true, sortable: true, width: colWidths.rating,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"Rating"}
+        </div>
+      ),
+    },
+    peers: {
+      draggable: true, resizable: true, width: colWidths.peers,
+      renderLeft: "Peers",
+    },
+    address: {
+      draggable: true, resizable: true, width: colWidths.address,
+      renderLeft: "Address",
+    },
+    startDate: {
+      draggable: true, resizable: true, width: colWidths.startDate,
+      renderLeft: "Started On",
+    },
+    lastUpdateDate: {
+      draggable: true, resizable: true,
+      renderLeft: "Last Updated On",
+    },
+    actions: {
+      sticky: "right" as StickType,
+      renderLeft: (
+        <div className={styles.header_cell}>
+          {"Actions"}
+        </div>
+      ),
+      renderRight: (
+        <button className={styles.col_more}>
+          <EllipsisHIcon />
+        </button>
+      ),
+    },
+  };
 
   const body = {
     select: {
@@ -336,7 +402,7 @@ const Page = () => {
     },
     name: {
       render: "",
-      colSpan: header[header.length - 1].length - 3,
+      colSpan: layout.length - 3,
     },
     actions: {
       render: (
@@ -374,6 +440,7 @@ const Page = () => {
 
       <Table<TableData>
         data={data}
+        layout={layout}
         header={header}
         body={body}
         footer={footer}
