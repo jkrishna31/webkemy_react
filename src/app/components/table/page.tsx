@@ -71,6 +71,10 @@ const Page = () => {
     }));
   };
 
+  const handleColDnD = () => {
+
+  };
+
   const isRowCollapsible = useCallback((_: TableData) => {
     return true;
   }, []);
@@ -374,10 +378,10 @@ const Page = () => {
         body={body}
         footer={footer}
         stickyHeader stickyFooter
-        colResize
         sort={sort}
         onSort={setSort}
-        onResize={handleResize}
+        onColResize={handleResize}
+        onColDrop={handleColDnD}
         // colResizeDefer
         isRowCollapsible={isRowCollapsible}
         renderDetails={renderDetails}

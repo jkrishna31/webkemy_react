@@ -40,15 +40,14 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   stickyFooter?: boolean;
   sort?: string;
   onSort?: (key: string) => void;
-  onResize?: (key: string, width: number) => void;
+  onColResize?: (key: string, width: number) => void;
+  onColDrop?: () => void;
+  onRowDrop?: () => void;
   rootClass?: string;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
   expandedRows?: string[];
   renderWhileCollapsed?: boolean;
-  colDrag?: boolean;
-  rowDrag?: boolean;
-  colResize?: boolean;
   colResizeDefer?: boolean;
   header?: Array<Array<HeaderItem>>;
   body?: {
@@ -96,31 +95,13 @@ const Table = <T extends { id: string }>({
   stickyHeader, stickyFooter,
   sort, onSort,
   className, rootClass,
-  colDrag, rowDrag, colResize, colResizeDefer,
-  onResize,
+  colResizeDefer, onColDrop, onRowDrop, onColResize,
   isRowCollapsible, renderDetails, expandedRows,
   renderWhileCollapsed = true,
   ...props
 }: TableProps<T>) => {
   const [resizingData, setResizingData] = useState<{ x: number; y: number; col: string; ogWidth?: number; }>();
-
-  // if drag type is REORDER -- show the line on left/right side of the cells for the candidate position
-
-  // if drag type is TRANSFER -- highlight the on hover cells
-
-  // disable the row/column being dragged by reducing opacity of tr for row or individual cell for the column
-  // how to highlight the candidate position for reorder in column
-  // can use border since default is 1px otherwise will always have to give the transparent parent or higher width
-  // use pseudo element
-
-  // on Drag start on header row
-  // find the drag over item
-
-  // on mount
-  // add drag event listeners
-  // on drag-start on header row or whole table
-
-  // on drag start/end/cancel/over
+  const [draggingData, setDraggingData] = useState<{ col?: string; over?: string; to?: "before" | "after"; }>();
 
   const handleSort = (columnKey: string) => {
     let newSort = "";
@@ -135,14 +116,14 @@ const Table = <T extends { id: string }>({
   };
 
   const handleResize = (e: React.PointerEvent) => {
-    if (!resizingData || !onResize) return;
+    if (!resizingData || !onColResize) return;
     if (!colResizeDefer) {
-      onResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
+      onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
     }
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
-    if (!onResize) return;
+    if (!onColResize) return;
     const elem = e.target as HTMLElement;
     elem.setPointerCapture(e.pointerId);
     const resizeHandle = elem?.closest("[data-resize]");
@@ -153,8 +134,8 @@ const Table = <T extends { id: string }>({
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (colResizeDefer && onResize && resizingData) {
-      onResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
+    if (colResizeDefer && onColResize && resizingData) {
+      onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
     }
     setResizingData(undefined);
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
@@ -162,32 +143,46 @@ const Table = <T extends { id: string }>({
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.code !== "ArrowLeft" && e.code !== "ArrowRight") return;
-    if (!onResize) return;
+    if (!onColResize) return;
     const resizeHandle = (e.target as HTMLElement)?.closest("[data-resize]");
     if (!resizeHandle) return;
     const colToResize = resizeHandle.closest("[data-column]") as HTMLElement;
     e.preventDefault();
-    onResize(colToResize.getAttribute("data-column") ?? "", colToResize.clientWidth + (e.code === "ArrowLeft" ? -5 : 5));
+    onColResize(colToResize.getAttribute("data-column") ?? "", colToResize.clientWidth + (e.code === "ArrowLeft" ? -5 : 5));
   };
 
   const handleDragStart = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
-    const draggingCol = elem.closest("[data-column]");
-    if (!draggingCol) return;
-    const colKey = draggingCol.getAttribute("data-column");
-    console.log("+++ drag start +++", e, colKey);
+    const draggingCol = elem?.closest("[data-column]");
+    const colKey = draggingCol?.getAttribute("data-column");
+    if (!colKey) return;
+    setDraggingData(currData => ({ ...currData, col: colKey }));
   };
 
   const handleDragEnd = (e: React.DragEvent) => {
-    console.log("--- drag end ---", e);
+    // if (e.dataTransfer.dropEffect) {
+    //   console.log("--- drag end ---", e, e.dataTransfer.dropEffect);
+    // }
+    setDraggingData(undefined);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    if (e.dataTransfer.dropEffect !== "none") {
+      e.preventDefault();
+      // console.log("*** DROP ***", e, e.dataTransfer.dropEffect);
+      onColDrop?.();
+    }
   };
 
   const handleDragOver = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
-    const draggingCol = elem.closest("[data-column]");
-    if (!draggingCol) return;
-    const colKey = draggingCol.getAttribute("data-column");
-    console.log("=== drag over ===", e, colKey);
+    const draggingCol = elem?.closest("[data-column]");
+    const colKey = draggingCol?.getAttribute("data-column");
+    if (!draggingCol || !colKey) return;
+    e.preventDefault();
+    const colRect = draggingCol.getBoundingClientRect();
+    const before = (e.pageX - colRect.x) < colRect.width / 2;
+    setDraggingData(currData => ({ ...currData, over: colKey, to: before ? "before" : "after" }));
   };
 
   return (
@@ -197,13 +192,14 @@ const Table = <T extends { id: string }>({
           <thead
             className={stickyHeader ? styles.sticky_header : ""}
             style={(stickyHeader && header?.length) ? { zIndex: header[header.length - 1].length * 2 } : {}}
-            onPointerDown={colResize ? handlePointerDown : undefined}
-            onPointerMove={(colResize && resizingData && !colResizeDefer) ? handleResize : undefined}
-            onPointerUp={colResize ? handlePointerUp : undefined}
-            onKeyDown={colResize ? handleKeyDown : undefined}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDragOver={handleDragOver}
+            onPointerDown={onColResize ? handlePointerDown : undefined}
+            onPointerMove={(onColResize && resizingData && !colResizeDefer) ? handleResize : undefined}
+            onPointerUp={onColResize ? handlePointerUp : undefined}
+            onKeyDown={onColResize ? handleKeyDown : undefined}
+            onDragStart={onColDrop ? handleDragStart : undefined}
+            onDragEnd={onColDrop ? handleDragEnd : undefined}
+            onDragOver={onColDrop ? handleDragOver : undefined}
+            onDrop={onColDrop ? handleDrop : undefined}
           >
             {
               header?.map((hRow, idx) => (
@@ -220,12 +216,20 @@ const Table = <T extends { id: string }>({
                           key={key}
                           data-column={key}
                           {...restProps}
-                          className={`${getStickyClasses(sticky)} ${className}`}
+                          className={`${styles.hcell} ${getStickyClasses(sticky)} ${className}`}
                           style={{
                             ...(hCell.width ? { minWidth: hCell.width } : {}),
                             ...getCellStyle(header[header.length - 1].length, index, sticky, true),
                             ...(style ?? {})
                           }}
+                          data-dragging={draggingData?.col === key}
+                          data-drag-over={
+                            draggingData?.over === key
+                              ? draggingData?.to === "before"
+                                ? "before"
+                                : "after"
+                              : ""
+                          }
                         >
                           <div className={styles.header_cell_container}>
                             {renderLeft}
