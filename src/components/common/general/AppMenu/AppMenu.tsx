@@ -313,6 +313,7 @@ export const menuItems = [
                 href: "/components/data-table",
                 primary: "Data Table",
                 icon: <TableIcon />,
+                disabled: true,
             },
             {
                 key: "timeline",

@@ -4,7 +4,7 @@
   border: .1rem solid var(--border-t);
   border-radius: 1.2rem;
   background-color: var(--bg-t);
-  margin-left: 1rem;
+  margin-left: 2rem;
   padding-top: 1rem;
   position: sticky;
   top: var(--h-header);
@@ -58,7 +58,7 @@
 .wrapper {
   height: 100%;
   overflow: auto;
-  scrollbar-width: thin;
+  scrollbar-width: none;
   padding: 0;
   padding-bottom: 2rem;
   padding-inline: 1rem;

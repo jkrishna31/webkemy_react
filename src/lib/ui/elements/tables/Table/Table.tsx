@@ -195,10 +195,8 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   };
 
   const handleDrop = (e: React.DragEvent) => {
-    if (e.dataTransfer.dropEffect !== "none") {
-      e.preventDefault();
-      onColDrop?.(draggingData);
-    }
+    e.preventDefault();
+    onColDrop?.(draggingData);
   };
 
   const handleDragOver = (e: React.DragEvent) => {
