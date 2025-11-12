@@ -14,9 +14,30 @@ import { Rate } from "@/lib/ui/elements/rate";
 import { StickType, Table, TableLayout } from "@/lib/ui/elements/tables";
 import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
+import { clampNumber } from "@/lib/utils/math.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
+
+function moveItem(array: any[], fromIndex: number, toIndex: number, direction = "left") {
+  const length = array.length;
+  if (length === 0) return array;
+
+  fromIndex = clampNumber(fromIndex, 0, length - 1);
+  toIndex = clampNumber(toIndex, 0, length - 1);
+
+  const arr = [...array];
+  const [item] = arr.splice(fromIndex, 1);
+
+  if (fromIndex < toIndex) toIndex--;
+  const insertIndex = direction === "right" ? toIndex + 1 : toIndex;
+
+  const safeInsertIndex = clampNumber(insertIndex, 0, arr.length);
+
+  arr.splice(safeInsertIndex, 0, item);
+
+  return arr;
+}
 
 const statusColorMap: { [key in string]: Color } = {
   "active": "green",
@@ -60,9 +81,44 @@ const Page = () => {
     { key: "peers" },
     { key: "address" },
     { key: "startDate" },
-    // { key: "lastUpdateDate" },
+    { key: "lastUpdateDate" },
     { key: "actions" },
   ]);
+
+  /*
+  order = [
+    {
+      key: "name", rowSpan: 2,
+      children: [
+        { key: "first" },
+        { key: "last" },
+      ]
+    },
+    { 
+      key: "details",
+      children: [
+        {
+          key: "address",
+          children: [
+            { key: "street" },
+            { key: "city" },
+            { key: "zip" },
+          ]
+        },
+        {
+          key: "contact",
+          children: [
+            { key: "phone" },
+            { key: "email" },
+          ]
+        },
+      ]
+    },
+    {
+      key: "actions",
+    }
+  ]
+*/
 
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
@@ -92,10 +148,7 @@ const Page = () => {
         if (layout[i].key === config.over) overColIdx = i;
       }
 
-      const newLayout = [...layout];
-      const [draggingItem] = newLayout.splice(draggingColIdx, 1);
-      newLayout.splice(overColIdx - (config.to === "left" ? 1 : 0), 0, draggingItem);
-
+      const newLayout = moveItem(layout, draggingColIdx, overColIdx, config.to);
       const generateNewLayout = (order: any[]) => {
         const newLayout: TableLayout[] = [...order];
         // if any of order item key matches with dragging and/or over colKey
@@ -119,41 +172,6 @@ const Page = () => {
       </div>
     );
   }, []);
-
-  /*
-    order = [
-      {
-        key: "name", rowSpan: 2,
-        children: [
-          { key: "first" },
-          { key: "last" },
-        ]
-      },
-      { 
-        key: "details",
-        children: [
-          {
-            key: "address",
-            children: [
-              { key: "street" },
-              { key: "city" },
-              { key: "zip" },
-            ]
-          },
-          {
-            key: "contact",
-            children: [
-              { key: "phone" },
-              { key: "email" },
-            ]
-          },
-        ]
-      },
-      {
-        key: "actions",
-      }
-    ]
-  */
 
   const header = {
     select: {

@@ -21,7 +21,6 @@ export interface RootCellItem {
   sticky?: StickType;
   sortable?: boolean;
   resizable?: boolean;
-  // draggable?: boolean;
 }
 
 export interface CellItem<T> extends ComponentPropsWithoutRef<"td"> {
