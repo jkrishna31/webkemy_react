@@ -46,8 +46,7 @@
   height: 100%;
   background-color: var(--bg-t);
   border-radius: var(--br-pill);
-  transition: all .15s ease;
-  // z-index: 1;
+  transition: all .2s ease;
 }
 
 .switch::before {
@@ -60,7 +59,7 @@
   border: .1rem solid var(--fg-t);
   background-color: var(--fg-t);
   border-radius: 50%;
-  transition: all .15s ease;
+  transition: all .2s ease;
   content: '';
 }
 

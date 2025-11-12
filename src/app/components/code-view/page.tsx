@@ -37,8 +37,8 @@ const codes2 = [
   "</div>",
 ];
 
-const codes1Highlight: Array<LineHighlight> = [{ line: [6, 7], type: "+" }];
-const codes2Highlight: Array<LineHighlight> = [[4, 7], { line: [10, 12], type: "-" }];
+const codes1Highlight: Array<LineHighlight> = [[4, 7]];
+const codes2Highlight: Array<LineHighlight> = [{ line: [4, 7], type: "+" }, { line: [10, 12], type: "-" }];
 
 const Page = () => {
   return (

@@ -73,6 +73,7 @@ const MenuItem = <T extends ElementType = "button">({
         disabled={disabled}
         aria-disabled={disabled}
         data-minimized={minimized}
+        {...((as === "a" && disabled) ? { tabIndex: -1 } : {})}
       >
         {!custom ? (
           <>

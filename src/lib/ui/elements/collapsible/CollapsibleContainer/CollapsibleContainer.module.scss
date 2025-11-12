@@ -3,7 +3,7 @@
   max-height: 0;
   transition-timing-function: ease;
   transition-duration: 500ms;
-  transition-property: height, max-height, opacity;
+  transition-property: max-height, opacity;
 
   &[data-expanded="true"] {
     max-height: auto;

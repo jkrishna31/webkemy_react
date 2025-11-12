@@ -70,6 +70,7 @@ const Pagination = ({
                 <Button
                     variant="primary" type="submit" disabled={currentPage === value}
                     className={`${styles.go_btn}`}
+                    hidden
                 >
                     {"Go"}
                 </Button>

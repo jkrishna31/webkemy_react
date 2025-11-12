@@ -71,7 +71,7 @@ const Page = () => {
       <TreeView
         className={styles.tree}
         expandedIds={activeTreeSection}
-        // renderWhileClosed={false}
+        renderWhileClosed={false}
         tree={[
           {
             id: virtualIds[0],
