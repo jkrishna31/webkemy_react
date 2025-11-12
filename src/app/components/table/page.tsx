@@ -19,7 +19,7 @@ import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
 
-function moveItem(array: any[], fromIndex: number, toIndex: number, direction = "left") {
+function moveItem(array: any[], fromIndex: number, toIndex: number, direction: string) {
   const length = array.length;
   if (length === 0) return array;
 
@@ -30,7 +30,7 @@ function moveItem(array: any[], fromIndex: number, toIndex: number, direction = 
   const [item] = arr.splice(fromIndex, 1);
 
   if (fromIndex < toIndex) toIndex--;
-  const insertIndex = direction === "right" ? toIndex + 1 : toIndex;
+  const insertIndex = direction === "after" ? toIndex + 1 : toIndex;
 
   const safeInsertIndex = clampNumber(insertIndex, 0, arr.length);
 
@@ -81,7 +81,7 @@ const Page = () => {
     { key: "peers" },
     { key: "address" },
     { key: "startDate" },
-    { key: "lastUpdateDate" },
+    // { key: "lastUpdateDate" },
     { key: "actions" },
   ]);
 
@@ -151,9 +151,9 @@ const Page = () => {
       const newLayout = moveItem(layout, draggingColIdx, overColIdx, config.to);
       const generateNewLayout = (order: any[]) => {
         const newLayout: TableLayout[] = [...order];
-        // if any of order item key matches with dragging and/or over colKey
-        // if matches both, then update the position
-        // if only one matches, then find the other 
+        // find dragging & dragover col index & parent key
+        // if parent key same then move the dragging col to dragover col idx accordingly
+        // if parent key are different then splice out the dragging col from its parent and splice into the dragover parent accordingly
         return newLayout;
       };
 

@@ -56,6 +56,8 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   sort?: string;
   onSort?: (key: string) => void;
   onColResize?: (key: string, width: number) => void;
+  colDnd?: DragType;
+  rowDnd?: DragType;
   onColDrop?: (payload: any) => void;
   onRowDrop?: () => void;
   isRowCollapsible?: (record: T) => boolean;
@@ -109,18 +111,18 @@ const getCellStyle = (
   return style;
 };
 
-const Table = <T extends { id: string }>({
+const Table = <T extends { id: string; children?: Array<T> }>({
   data,
   layout, header, body, footer,
   sort, onSort,
-  onColDrop, onRowDrop, onColResize,
+  colDnd = "reorder", rowDnd = "reorder", onColDrop, onRowDrop, onColResize,
   isRowCollapsible, renderDetails, expandedRows,
   stickyHeader, stickyFooter, colResizeDefer, renderWhileCollapsed = true,
   className, rootClass,
   ...props
 }: TableProps<T>) => {
   const [resizingData, setResizingData] = useState<{ x: number; y: number; col: string; ogWidth?: number; }>();
-  const [draggingData, setDraggingData] = useState<{ col?: string; over?: string; to?: "left" | "right"; }>();
+  const [draggingData, setDraggingData] = useState<{ row?: string; col?: string; over?: string; to?: "before" | "after"; }>();
 
   const headerRows: {
     key: string; rowSpan?: number; colSpan?: number; width?: number;
@@ -188,7 +190,7 @@ const Table = <T extends { id: string }>({
     setDraggingData(currData => ({ ...currData, col: colKey }));
   };
 
-  const handleDragEnd = (e: React.DragEvent) => {
+  const handleDragEnd = (_: React.DragEvent) => {
     setDraggingData(undefined);
   };
 
@@ -208,12 +210,74 @@ const Table = <T extends { id: string }>({
     e.preventDefault();
     const colRect = dragOverCol.getBoundingClientRect();
     const toLeft = (e.pageX - colRect.x) < colRect.width / 2;
-    setDraggingData(currData => ({ ...currData, over: colKey, to: toLeft ? "left" : "right" }));
+    setDraggingData(currData => ({ ...currData, over: colKey, to: toLeft ? "before" : "after" }));
+  };
+
+  const renderBodyRows = (rows?: T[], depth = 0) => {
+    if (!rows?.length) return null;
+    return rows?.map((rowData) => {
+      const hasCollapsibleContent = isRowCollapsible?.(rowData);
+      const isExpanded = hasCollapsibleContent && expandedRows?.includes(rowData.id);
+      const rowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
+      const cols = headerRows[0];
+      return (
+        <Fragment key={rowData.id}>
+          <tr
+            {...rowAttrs}
+            data-row={rowData.id}
+            draggable
+            data-dragging={draggingData?.row === rowData.id}
+            data-drag-over={
+              draggingData?.over === rowData.id
+                ? draggingData?.to
+                : ""
+            }
+          >
+            {
+              cols?.map((hCol, index) => {
+                const col = header?.[hCol.key];
+                const rowConfig = body?.[hCol.key];
+                const Element = rowConfig?.as ?? "td";
+                return (
+                  <Element
+                    key={rowData.id + hCol.key}
+                    className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
+                    style={{ ...getCellStyle(cols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
+                  >
+                    {rowConfig?.render?.(rowData)}
+                  </Element>
+                );
+              })
+            }
+          </tr>
+          {hasCollapsibleContent && (
+            <tr
+              className={styles.collapsible_row}
+              aria-hidden={isExpanded}
+            >
+              <td colSpan={cols?.length}>
+                <CollapsibleContainer
+                  open={isExpanded}
+                  renderWhileClosed={renderWhileCollapsed}
+                >
+                  {renderDetails?.(rowData)}
+                </CollapsibleContainer>
+              </td>
+            </tr>
+          )}
+          {/* render if children is present and expanded keys includes rowData.id */}
+          {/* is it even collapsible (whether to render in collapsible container or direct) -  */}
+          {renderBodyRows(rowData.children)}
+        </Fragment>
+      );
+    });
   };
 
   return (
     <div className={`${styles.wrapper} ${rootClass}`}>
-      <table className={`${styles.table} ${className}`}>
+      <table
+        className={`${styles.table} ${className}`}
+      >
         <thead
           className={stickyHeader ? styles.sticky_header : ""}
           style={stickyHeader ? { zIndex: totalCols * 2 } : {}}
@@ -225,6 +289,7 @@ const Table = <T extends { id: string }>({
           onDragEnd={onColDrop ? handleDragEnd : undefined}
           onDragOver={onColDrop ? handleDragOver : undefined}
           onDrop={onColDrop ? handleDrop : undefined}
+          data-col-dnd={colDnd}
         >
           {
             headerRows.map((hRow, hrIdx) => (
@@ -253,9 +318,7 @@ const Table = <T extends { id: string }>({
                         data-dragging={draggingData?.col === key}
                         data-drag-over={
                           draggingData?.over === key
-                            ? draggingData?.to === "left"
-                              ? "left"
-                              : "right"
+                            ? draggingData?.to
                             : ""
                         }
                         tabIndex={restProps.draggable && onColDrop ? 0 : undefined}
@@ -288,49 +351,10 @@ const Table = <T extends { id: string }>({
             ))
           }
         </thead>
-        <tbody>
-          {
-            data?.map((rowData) => {
-              const hasCollapsibleContent = isRowCollapsible?.(rowData);
-              const isExpanded = hasCollapsibleContent && expandedRows?.includes(rowData.id);
-              const parentRowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
-              const cols = headerRows[0];
-              return (
-                <Fragment key={rowData.id}>
-                  <tr {...parentRowAttrs}>
-                    {
-                      cols?.map((hCol, index) => {
-                        const col = header?.[hCol.key];
-                        const rowConfig = body?.[hCol.key];
-                        const Element = rowConfig?.as ?? "td";
-                        return (
-                          <Element
-                            key={rowData.id + hCol.key}
-                            className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
-                            style={{ ...getCellStyle(cols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
-                          >
-                            {rowConfig?.render?.(rowData)}
-                          </Element>
-                        );
-                      })
-                    }
-                  </tr>
-                  {hasCollapsibleContent && (
-                    <tr className={styles.collapsible_row}>
-                      <td colSpan={cols?.length}>
-                        <CollapsibleContainer
-                          open={isExpanded ?? false}
-                          renderWhileClosed={renderWhileCollapsed}
-                        >
-                          {renderDetails?.(rowData)}
-                        </CollapsibleContainer>
-                      </td>
-                    </tr>
-                  )}
-                </Fragment>
-              );
-            })
-          }
+        <tbody
+          data-row-dnd={rowDnd}
+        >
+          {renderBodyRows(data)}
         </tbody>
         <tfoot
           className={stickyFooter ? styles.sticky_footer : ""}

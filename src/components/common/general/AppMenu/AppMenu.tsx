@@ -309,6 +309,12 @@ export const menuItems = [
                 icon: <TableIcon />,
             },
             {
+                key: "data-table",
+                href: "/components/data-table",
+                primary: "Data Table",
+                icon: <TableIcon />,
+            },
+            {
                 key: "timeline",
                 href: "/components/timeline",
                 primary: "Timeline",
@@ -432,9 +438,9 @@ export const menuItems = [
                 disabled: true,
             },
             {
-                key: "chat",
-                href: "/templates/chat",
-                primary: "Chat",
+                key: "messaging",
+                href: "/templates/messaging",
+                primary: "Messaging",
                 icon: <CommentIcon />,
                 disabled: true,
             },
@@ -447,7 +453,11 @@ export const menuItems = [
             },
         ],
     }
-];
+]
+    .map(menuGroup => ({
+        ...menuGroup,
+        menu: menuGroup.menu.sort((a, b) => a.key.localeCompare(b.key)),
+    }));
 
 export interface AppMenuProps {
     open: boolean
