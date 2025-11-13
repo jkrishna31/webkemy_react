@@ -62,7 +62,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   onColDrag?: () => void;
   onColDrop?: (payload: any) => void;
   onRowDrag?: () => void;
-  onRowDrop?: () => void;
+  onRowDrop?: (payload: any) => void;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
   stickyHeader?: boolean;
@@ -82,6 +82,19 @@ const generateLayoutRows = (rows: any[], layout?: TableLayout[], depth = 0) => {
     rows[depth].push({ ...item });
     generateLayoutRows(rows, children, depth + (item.rowSpan ?? 1));
   }
+};
+
+const getRootCols = (layout: TableLayout[]) => {
+  const rootCols = [];
+  for (const item of layout) {
+    if (!item.children?.length) {
+      rootCols.push({ ...item });
+    } else {
+      const res = getRootCols(item.children);
+      res.forEach(item => rootCols.push({ ...item }));
+    }
+  }
+  return rootCols;
 };
 
 const getSort = (columnKey: string, sort?: string): "+" | "-" | undefined => {
@@ -144,7 +157,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     return rows;
   }, [layout]);
 
-  const totalCols = headerRows.reduce((res, row) => Math.max(res, row.length), 0);
+  const rootCols = layout ? getRootCols(layout) : [];
 
   const handleSort = (columnKey: string) => {
     let newSort = "";
@@ -175,9 +188,6 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    // if (colResizeDefer && onColResize && resizingData) {
-    //   onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
-    // }
     setResizingData(undefined);
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
   };
@@ -223,25 +233,16 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     }
   };
 
-  const handleDragStart = (e: React.DragEvent) => {
+  const handleColDragStart = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
     const draggingCol = elem?.closest("[data-column]");
     const colKey = draggingCol?.getAttribute("data-column");
     if (!colKey) return;
-    setDraggingData(currData => ({ ...currData, col: colKey }));
+    setDraggingData({ col: colKey });
     setDragImage(e, colKey);
   };
 
-  const handleDragEnd = (_: React.DragEvent) => {
-    setDraggingData(undefined);
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    onColDrop?.(draggingData);
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
+  const handleColDragOver = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
     const dragOverCol = elem?.closest("[data-column]");
     const colKey = dragOverCol?.getAttribute("data-column");
@@ -253,13 +254,48 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     setDraggingData(currData => ({ ...currData, over: colKey, to: toLeft ? "before" : "after" }));
   };
 
-  const renderBodyRows = (rows?: T[], depth = 0) => {
+  const handleColDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    onColDrop?.(draggingData);
+  };
+
+  const handleRowDragStart = (e: React.DragEvent) => {
+    const elem = e.target as HTMLElement;
+    const draggingCol = elem?.closest("[data-row]");
+    const rowKey = draggingCol?.getAttribute("data-row");
+    if (!rowKey) return;
+    setDraggingData({ row: rowKey });
+    setDragImage(e, rowKey);
+  };
+
+  const handleRowDragOver = (e: React.DragEvent) => {
+    const elem = e.target as HTMLElement;
+    const dragOverCol = elem?.closest("[data-row]");
+    const rowKey = dragOverCol?.getAttribute("data-row");
+    const isDraggable = dragOverCol?.getAttribute("draggable");
+    if (!dragOverCol || !rowKey || !isDraggable) return;
+    e.preventDefault();
+    const rowRect = dragOverCol.getBoundingClientRect();
+    const toUp = (e.pageY - rowRect.y) < rowRect.height / 2;
+    setDraggingData(currData => ({ ...currData, over: rowKey, to: toUp ? "before" : "after" }));
+  };
+
+  const handleRowDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    onRowDrop?.(draggingData);
+  };
+
+  const handleDragEnd = () => {
+    setDraggingData(undefined);
+  };
+
+  const renderBodyRows = (rows?: T[], depth = 0, parentId?: string, isParentDragging?: boolean) => {
     if (!rows?.length) return null;
     return rows?.map((rowData) => {
       const hasCollapsibleContent = isRowCollapsible?.(rowData);
       const isExpanded = expandedRows?.includes(rowData.id);
       const rowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
-      const cols = headerRows[0];
+      const isDragging = draggingData?.row === rowData.id || isParentDragging;
 
       return (
         <Fragment key={rowData.id}>
@@ -267,7 +303,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
             {...rowAttrs}
             data-row={rowData.id}
             draggable
-            data-dragging={draggingData?.row === rowData.id}
+            data-dragging={isDragging}
             data-drag-over={
               (draggingData?.row && draggingData?.over === rowData.id)
                 ? draggingData?.to
@@ -275,7 +311,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
             }
           >
             {
-              cols?.map((hCol, index) => {
+              rootCols?.map((hCol, index) => {
                 const col = header?.[hCol.key];
                 const rowConfig = body?.[hCol.key];
                 const Element = rowConfig?.as ?? "td";
@@ -283,7 +319,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                   <Element
                     key={rowData.id + hCol.key}
                     className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
-                    style={{ ...getCellStyle(cols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
+                    style={{ ...getCellStyle(rootCols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
                   >
                     {rowConfig?.render?.(rowData, depth)}
                   </Element>
@@ -296,7 +332,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
               className={styles.collapsible_row}
               aria-hidden={isExpanded}
             >
-              <td colSpan={cols?.length}>
+              <td colSpan={rootCols?.length}>
                 <CollapsibleContainer
                   open={isExpanded}
                   renderWhileClosed={renderWhileCollapsed}
@@ -306,7 +342,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
               </td>
             </tr>
           )}
-          {isExpanded && renderBodyRows(rowData.children, depth + 1)}
+          {isExpanded && renderBodyRows(rowData.children, depth + 1, rowData.id, isDragging)}
         </Fragment>
       );
     });
@@ -320,16 +356,16 @@ const Table = <T extends { id: string; children?: Array<T> }>({
         <thead
           data-col-dnd={colDnd}
           className={stickyHeader ? styles.sticky_header : ""}
-          style={stickyHeader ? { zIndex: totalCols * 2 } : {}}
+          style={stickyHeader ? { zIndex: rootCols.length * 2 } : {}}
           onPointerDown={onColResize ? handlePointerDown : undefined}
           onPointerMove={(onColResize && resizingData) ? handleResize : undefined}
           onPointerUp={onColResize ? handlePointerUp : undefined}
           onKeyDown={onColResize ? handleKeyDown : undefined}
-          onDragStart={onColDrop ? handleDragStart : undefined}
-          onDragEnd={onColDrop ? handleDragEnd : undefined}
-          onDragOver={onColDrop ? handleDragOver : undefined}
-          onDrop={onColDrop ? handleDrop : undefined}
-          onDragExit={onColDrop ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
+          onDragStart={onColDrop ? handleColDragStart : undefined}
+          onDragOver={(onColDrop && draggingData?.col) ? handleColDragOver : undefined}
+          onDrop={(onColDrop && draggingData?.col) ? handleColDrop : undefined}
+          onDragEnd={(onColDrop && draggingData?.col) ? handleDragEnd : undefined}
+          onDragExit={(onColDrop && draggingData?.col) ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
         >
           {
             headerRows.map((hRow, hrIdx) => (
@@ -352,7 +388,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         className={`${styles.hcell} ${getStickyClasses(sticky)} ${className}`}
                         style={{
                           ...(hCell.width ? { minWidth: width } : {}),
-                          ...getCellStyle(headerRows.length, hcIdx, sticky, true),
+                          ...getCellStyle(rootCols.length, hcIdx, sticky, true),
                           ...(style ?? {}),
                         }}
                         data-dragging={draggingData?.col === key}
@@ -380,7 +416,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                           <button
                             data-resize={key}
                             className={`${styles.resize_handle}`}
-                            style={{ "--zi-resize-handle": headerRows?.[0].length * 2 } as React.CSSProperties}
+                            style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
                           >
                           </button>
                         )}
@@ -394,16 +430,21 @@ const Table = <T extends { id: string; children?: Array<T> }>({
         </thead>
         <tbody
           data-row-dnd={rowDnd}
+          onDragStart={onRowDrop ? handleRowDragStart : undefined}
+          onDragOver={(onRowDrop && draggingData?.row) ? handleRowDragOver : undefined}
+          onDrop={(onRowDrop && draggingData?.row) ? handleRowDrop : undefined}
+          onDragEnd={(onRowDrop && draggingData?.row) ? handleDragEnd : undefined}
+          onDragExit={(onRowDrop && draggingData?.row) ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
         >
           {renderBodyRows(data)}
         </tbody>
         <tfoot
           className={stickyFooter ? styles.sticky_footer : ""}
-          style={stickyFooter ? { zIndex: totalCols * 2 } : {}}
+          style={stickyFooter ? { zIndex: rootCols.length * 2 } : {}}
         >
           <tr>
             {
-              headerRows[0].map((hCol, index) => {
+              rootCols.map((hCol, index) => {
                 const rowConfig = footer?.[hCol.key];
                 if (!rowConfig) return null;
                 const { render, as, sticky, className, style, ...restProps } = rowConfig;
@@ -413,7 +454,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                     key={`fc-${hCol.key}`}
                     {...restProps}
                     className={`${getStickyClasses(sticky)} ${className}`}
-                    style={{ ...getCellStyle(totalCols, index, sticky, true), ...(style ?? {}) }}
+                    style={{ ...getCellStyle(rootCols.length, index, sticky, true), ...(style ?? {}) }}
                   >
                     {render}
                   </Element>

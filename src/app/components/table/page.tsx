@@ -77,6 +77,7 @@ const statusColorMap: { [key in string]: Color } = {
   "inactive": "orange",
   "rejected": "red",
   "leave": "blue",
+  "pending": "yellow",
 };
 
 type TableData = {
@@ -195,6 +196,10 @@ const Page = () => {
 
       setLayout(newLayout);
     }
+  };
+
+  const handleRowDnD = () => {
+
   };
 
   const isRowCollapsible = useCallback((row: TableData) => {
@@ -502,6 +507,7 @@ const Page = () => {
         onSort={setSort}
         onColResize={handleResize}
         onColDrop={handleColDnD}
+        onRowDrop={handleRowDnD}
         isRowCollapsible={isRowCollapsible}
         renderDetails={renderDetails}
         expandedRows={expandedRows}

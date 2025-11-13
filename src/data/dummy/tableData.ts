@@ -21,12 +21,37 @@ export const tableData = [
         rank: 1, duration: 20, address: "21 Elm St, Abington MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(781) 555-2411", email: "tracy.nolan@example.com",
-        rating: 3.9, status: "active",
+        rating: 3.9, status: "leave",
         profile: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=500&auto=format&fit=crop&q=60",
         role: "Frontend Intern",
         dob: "1997-02-15T00:00:00.000Z",
         peers: [],
-        children: []
+        children: [
+          {
+            id: "1-1-1", name: "Olivia Grant", age: 26,
+            rank: 1, duration: 12, address: "42 Pine St, Abington MA",
+            startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+            phone: "(781) 222-7789", email: "olivia.grant@example.com",
+            rating: 4.0, status: "pending",
+            profile: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60",
+            role: "Junior Developer",
+            dob: "1999-05-12T00:00:00.000Z",
+            peers: [],
+            children: []
+          },
+          {
+            id: "1-1-2", name: "Daniel Hayes", age: 27,
+            rank: 2, duration: 10, address: "73 Summer St, Brockton MA",
+            startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+            phone: "(781) 445-2291", email: "daniel.hayes@example.com",
+            rating: 3.7, status: "inactive",
+            profile: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60",
+            role: "UI Trainee",
+            dob: "1998-10-02T00:00:00.000Z",
+            peers: [],
+            children: []
+          }
+        ]
       },
       {
         id: "1-2", name: "Mason Carter", age: 32,
@@ -38,7 +63,32 @@ export const tableData = [
         role: "Frontend Engineer",
         dob: "1993-09-22T00:00:00.000Z",
         peers: [],
-        children: []
+        children: [
+          {
+            id: "1-2-1", name: "Isabella Ward", age: 25,
+            rank: 1, duration: 8, address: "5 Oak St, Abington MA",
+            startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+            phone: "(617) 555-9132", email: "isabella.ward@example.com",
+            rating: 4.3, status: "active",
+            profile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60",
+            role: "Trainee Engineer",
+            dob: "2000-09-19T00:00:00.000Z",
+            peers: [],
+            children: []
+          },
+          {
+            id: "1-2-2", name: "Noah Mitchell", age: 29,
+            rank: 2, duration: 9, address: "11 Birch St, Brockton MA",
+            startDate: new Date().toISOString(), endDate: new Date().toISOString(),
+            phone: "(617) 555-8274", email: "noah.mitchell@example.com",
+            rating: 3.8, status: "active",
+            profile: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60",
+            role: "Associate Developer",
+            dob: "1996-12-04T00:00:00.000Z",
+            peers: [],
+            children: []
+          }
+        ]
       }
     ]
   },
@@ -161,7 +211,7 @@ export const tableData = [
     rank: 7, duration: 18, address: "88 Maple Ave, Edison NJ 08817",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(908) 451-7765", email: "sophia_p29@icloud.com",
-    rating: 5, status: "active",
+    rating: 5, status: "pending",
     profile: "https://images.unsplash.com/photo-1623184663796-f0eb7e46d6ab?q=80&w=1112&auto=format&fit=crop",
     role: "QA Analyst",
     dob: "1989-12-30T00:00:00.000Z",
@@ -328,7 +378,7 @@ export const tableData = [
     rank: 16, duration: 26, address: "600 Pine St, San Francisco CA 94108",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(415) 781-9923", email: "ethanw.sf28@gmail.com",
-    rating: 3.8, status: "active",
+    rating: 3.8, status: "pending",
     profile: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?q=80&w=800&auto=format&fit=crop",
     role: "Role",
     dob: "1997-03-19T00:00:00.000Z",
