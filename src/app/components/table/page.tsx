@@ -19,6 +19,39 @@ import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
 
+function defaultComparator<T extends Record<string, any>>(key: keyof T, desc?: boolean) {
+  return (a: T, b: T): number => {
+    const aVal = a[key];
+    const bVal = b[key];
+
+    const res =
+      aVal == null && bVal == null ? 0 :
+        aVal == null ? 1 :
+          bVal == null ? -1 :
+            typeof aVal === "number" && typeof bVal === "number"
+              ? aVal - bVal
+              : String(aVal).localeCompare(String(bVal));
+
+    return desc ? -res : res;
+  };
+}
+
+function deepSort<T extends Record<string, any>>(
+  array: T[],
+  key: keyof T,
+  desc?: boolean,
+  compareFn = defaultComparator<T>(key, desc)
+): T[] {
+  if (!Array.isArray(array)) return array;
+
+  const sorted = [...array].sort(compareFn);
+
+  return sorted.map(item => ({
+    ...item,
+    children: item.children ? deepSort(item.children, key, desc, compareFn) : item.children,
+  }));
+}
+
 function moveItem(array: any[], fromIndex: number, toIndex: number, direction: string) {
   const length = array.length;
   if (length === 0) return array;
@@ -120,6 +153,9 @@ const Page = () => {
   ]
 */
 
+  // how to generate the total coloumns from hierachy header
+  // each leaf node will be counted as a column (if there is no children then count as a body column)
+
   const handleSelection = (checked: boolean, row?: TableData,) => {
     if (!row) {
       setSelectedRows(checked ? [...data.map(item => item.id)] : []);
@@ -161,8 +197,8 @@ const Page = () => {
     }
   };
 
-  const isRowCollapsible = useCallback((_: TableData) => {
-    return true;
+  const isRowCollapsible = useCallback((row: TableData) => {
+    return ["6", "11"].includes(row.id);
   }, []);
 
   const renderDetails = useCallback((_: TableData) => {
@@ -270,22 +306,28 @@ const Page = () => {
               checked={selectedRows.includes(row.id)}
               onChange={e => handleSelection(e.target.checked, row)}
             />
-            <button
-              className={styles.expand_btn}
-              aria-pressed={isExpanded}
-              onClick={() => setExpandedRows(currRows => isExpanded ? [...currRows.filter(key => key !== row.id)] : [...currRows, row.id])}
-            >
-              <ChevronRightIcon />
-            </button>
+            {(!!row.children?.length || isRowCollapsible(row)) && (
+              <button
+                className={styles.expand_btn}
+                aria-pressed={isExpanded}
+                onClick={
+                  () => setExpandedRows(
+                    currRows => isExpanded ? [...currRows.filter(key => key !== row.id)] : [...currRows, row.id]
+                  )
+                }
+              >
+                <ChevronRightIcon />
+              </button>
+            )}
           </div>
         );
       },
     },
     name: {
-      render: (row: any) => {
+      render: (row: any, depth = 0) => {
         return (
           <div
-            style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
+            style={{ display: "flex", alignItems: "center", gap: ".8rem", paddingLeft: `${depth * 1.5}rem` }}
           >
             <div style={{ position: "relative" }}>
               <Avatar>
@@ -334,14 +376,18 @@ const Page = () => {
       render: (row: any) => {
         return (
           <>
-            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
-              {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-              <a href={`tel:${row.phone}`} style={{ color: "var(--blue-1)" }}>{row.phone}</a>
-            </p>
-            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
-              {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-              <a href="mailto:example@gmail.com" style={{ color: "var(--blue-1)" }}>{row.email ?? "N/A"}</a>
-            </p>
+            {!!row.phone && (
+              <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+                {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+                <a href={`tel:${row.phone}`} style={{ color: "var(--blue-1)" }}>{row.phone}</a>
+              </p>
+            )}
+            {!!row.email && (
+              <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+                {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+                <a href={`mailto:${row.email}`} style={{ color: "var(--blue-1)" }}>{row.email ?? "N/A"}</a>
+              </p>
+            )}
           </>
         );
       },
@@ -435,18 +481,7 @@ const Page = () => {
   useEffect(() => {
     if (sort) {
       const isAsc = sort.startsWith("-");
-      setData(currData => [
-        ...currData.sort((a, b) => {
-          const fieldKey = (isAsc ? sort.slice(1) : sort) as keyof TableData;
-          if (a[fieldKey]! < b[fieldKey]!) {
-            return isAsc ? 1 : -1;
-          } else if (a[fieldKey] === b[fieldKey]) {
-            return 0;
-          } else {
-            return isAsc ? -1 : 1;
-          }
-        })
-      ]);
+      setData(currData => deepSort<any>(currData, isAsc ? sort.slice(1) : sort, isAsc));
     } else {
       setData(tableData.slice(0, 15));
     }
@@ -467,7 +502,6 @@ const Page = () => {
         onSort={setSort}
         onColResize={handleResize}
         onColDrop={handleColDnD}
-        // colResizeDefer
         isRowCollapsible={isRowCollapsible}
         renderDetails={renderDetails}
         expandedRows={expandedRows}

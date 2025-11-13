@@ -50,10 +50,6 @@
     border: 0;
   }
 
-  tr[data-expanded="true"] td {
-    border-bottom-color: transparent;
-  }
-
   thead[data-col-dnd="reorder"] {
 
     th,
@@ -212,15 +208,18 @@
 }
 
 .resize_handle {
+  --zi-resize-handle: 1;
   position: absolute;
   top: 0;
   right: 0;
+  transform: translate3d(50%, 0, 0);
   width: 1rem;
   height: 100%;
   cursor: ew-resize;
   flex-shrink: 0;
   touch-action: none;
   outline-offset: -.3rem;
+  z-index: var(--zi-resize-handle);
 
   transition: opacity .3s ease;
 
@@ -245,6 +244,16 @@
       opacity: 1;
     }
   }
+}
+
+.drag_preview {
+  width: fit-content;
+  height: fit-content;
+  background-color: var(--bg-t);
+  border: .1rem solid var(--border-s);
+  border-radius: .6rem;
+  padding: .8rem 1.2rem;
+  color: var(--fg-s);
 }
 
 

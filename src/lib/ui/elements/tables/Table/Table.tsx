@@ -1,4 +1,5 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useState } from "react";
+import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useRef, useState } from "react";
+import { createRoot } from "react-dom/client";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
@@ -33,7 +34,7 @@ export interface HeaderItem<T> extends RootCellItem, ComponentPropsWithoutRef<"t
 }
 
 export interface BodyCellItem<T> extends CellItem<T> {
-  render?: (row: T) => ReactNode;
+  render?: (row: T, depth?: number) => ReactNode;
 }
 
 export interface FooterCellItem<T> extends RootCellItem, CellItem<T> {
@@ -58,16 +59,19 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   onColResize?: (key: string, width: number) => void;
   colDnd?: DragType;
   rowDnd?: DragType;
+  onColDrag?: () => void;
   onColDrop?: (payload: any) => void;
+  onRowDrag?: () => void;
   onRowDrop?: () => void;
   isRowCollapsible?: (record: T) => boolean;
   renderDetails?: (record: T) => ReactNode;
   stickyHeader?: boolean;
   stickyFooter?: boolean;
   renderWhileCollapsed?: boolean;
-  colResizeDefer?: boolean;
   rootClass?: string;
 }
+
+export interface DragPreviewProps extends ComponentProps<"div"> { }
 
 const generateLayoutRows = (rows: any[], layout?: TableLayout[], depth = 0) => {
   if (!layout) return;
@@ -111,13 +115,21 @@ const getCellStyle = (
   return style;
 };
 
+const DragPreview = (props: DragPreviewProps) => {
+  return (
+    <div className={styles.drag_preview} {...props}>
+      {props.children}
+    </div>
+  );
+};
+
 const Table = <T extends { id: string; children?: Array<T> }>({
   data,
   layout, header, body, footer,
   sort, onSort,
   colDnd = "reorder", rowDnd = "reorder", onColDrop, onRowDrop, onColResize,
   isRowCollapsible, renderDetails, expandedRows,
-  stickyHeader, stickyFooter, colResizeDefer, renderWhileCollapsed = true,
+  stickyHeader, stickyFooter, renderWhileCollapsed = true,
   className, rootClass,
   ...props
 }: TableProps<T>) => {
@@ -148,9 +160,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
 
   const handleResize = (e: React.PointerEvent) => {
     if (!resizingData || !onColResize) return;
-    if (!colResizeDefer) {
-      onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
-    }
+    onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
   };
 
   const handlePointerDown = (e: React.PointerEvent) => {
@@ -165,9 +175,9 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   };
 
   const handlePointerUp = (e: React.PointerEvent) => {
-    if (colResizeDefer && onColResize && resizingData) {
-      onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
-    }
+    // if (colResizeDefer && onColResize && resizingData) {
+    //   onColResize(resizingData.col, (resizingData.ogWidth ?? 0) + (e.pageX - resizingData.x));
+    // }
     setResizingData(undefined);
     (e.target as HTMLElement).releasePointerCapture(e.pointerId);
   };
@@ -182,12 +192,44 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     onColResize(colToResize.getAttribute("data-column") ?? "", colToResize.clientWidth + (e.code === "ArrowLeft" ? -5 : 5));
   };
 
+  const setDragImage = (e: React.DragEvent, content?: ReactNode, elem?: Node) => {
+    if (elem) {
+      const clone = elem.cloneNode(true) as HTMLElement;
+      clone.style.opacity = "1";
+      clone.style.transform = "scale(.85)";
+      clone.style.pointerEvents = "none";
+      document.body.appendChild(clone);
+      e.dataTransfer.setDragImage(clone, 10, 10);
+      setTimeout(() => clone.remove(), 0);
+    } else {
+      const node = document.createElement("div");
+      node.style.position = "absolute";
+      node.style.top = `-${300}vh`;
+      document.body.appendChild(node);
+
+      const root = createRoot(node);
+      root.render(
+        <DragPreview>
+          {content}
+        </DragPreview>
+      );
+
+      e.dataTransfer.setDragImage(node, -12, -12);
+
+      setTimeout(() => {
+        root.unmount();
+        node.remove();
+      }, 0);
+    }
+  };
+
   const handleDragStart = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
     const draggingCol = elem?.closest("[data-column]");
     const colKey = draggingCol?.getAttribute("data-column");
     if (!colKey) return;
     setDraggingData(currData => ({ ...currData, col: colKey }));
+    setDragImage(e, colKey);
   };
 
   const handleDragEnd = (_: React.DragEvent) => {
@@ -215,9 +257,10 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     if (!rows?.length) return null;
     return rows?.map((rowData) => {
       const hasCollapsibleContent = isRowCollapsible?.(rowData);
-      const isExpanded = hasCollapsibleContent && expandedRows?.includes(rowData.id);
+      const isExpanded = expandedRows?.includes(rowData.id);
       const rowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
       const cols = headerRows[0];
+
       return (
         <Fragment key={rowData.id}>
           <tr
@@ -226,7 +269,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
             draggable
             data-dragging={draggingData?.row === rowData.id}
             data-drag-over={
-              draggingData?.over === rowData.id
+              (draggingData?.row && draggingData?.over === rowData.id)
                 ? draggingData?.to
                 : ""
             }
@@ -242,7 +285,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                     className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
                     style={{ ...getCellStyle(cols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
                   >
-                    {rowConfig?.render?.(rowData)}
+                    {rowConfig?.render?.(rowData, depth)}
                   </Element>
                 );
               })
@@ -263,9 +306,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
               </td>
             </tr>
           )}
-          {/* render if children is present and expanded keys includes rowData.id */}
-          {/* is it even collapsible (whether to render in collapsible container or direct) -  */}
-          {renderBodyRows(rowData.children)}
+          {isExpanded && renderBodyRows(rowData.children, depth + 1)}
         </Fragment>
       );
     });
@@ -277,17 +318,18 @@ const Table = <T extends { id: string; children?: Array<T> }>({
         className={`${styles.table} ${className}`}
       >
         <thead
+          data-col-dnd={colDnd}
           className={stickyHeader ? styles.sticky_header : ""}
           style={stickyHeader ? { zIndex: totalCols * 2 } : {}}
           onPointerDown={onColResize ? handlePointerDown : undefined}
-          onPointerMove={(onColResize && resizingData && !colResizeDefer) ? handleResize : undefined}
+          onPointerMove={(onColResize && resizingData) ? handleResize : undefined}
           onPointerUp={onColResize ? handlePointerUp : undefined}
           onKeyDown={onColResize ? handleKeyDown : undefined}
           onDragStart={onColDrop ? handleDragStart : undefined}
           onDragEnd={onColDrop ? handleDragEnd : undefined}
           onDragOver={onColDrop ? handleDragOver : undefined}
           onDrop={onColDrop ? handleDrop : undefined}
-          data-col-dnd={colDnd}
+          onDragExit={onColDrop ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
         >
           {
             headerRows.map((hRow, hrIdx) => (
@@ -311,11 +353,11 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         style={{
                           ...(hCell.width ? { minWidth: width } : {}),
                           ...getCellStyle(headerRows.length, hcIdx, sticky, true),
-                          ...(style ?? {})
+                          ...(style ?? {}),
                         }}
                         data-dragging={draggingData?.col === key}
                         data-drag-over={
-                          draggingData?.over === key
+                          (draggingData?.col && draggingData?.over === key)
                             ? draggingData?.to
                             : ""
                         }
@@ -338,6 +380,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                           <button
                             data-resize={key}
                             className={`${styles.resize_handle}`}
+                            style={{ "--zi-resize-handle": headerRows?.[0].length * 2 } as React.CSSProperties}
                           >
                           </button>
                         )}

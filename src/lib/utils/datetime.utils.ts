@@ -26,6 +26,7 @@ export const getTimezoneOffset = () => {
 };
 
 export const formatDate = (ts: any, locale = null, format = null) => {
+    if (!ts) return;
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];
     const dt = new Date(ts);
     // it will give the locale time use utc time

@@ -69,7 +69,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   }, [updateHeight]);
 
   useEffect(() => {
-    const innerElem = innerRef.current;
+    const innerElem = ref.current;
     if (open && innerElem) {
       const observer = new ResizeObserver(() => {
         updateHeight();
@@ -96,9 +96,9 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       role="region"
       data-expanded={open}
     >
-      <div className="inner_container" ref={innerRef}>
-        {children}
-      </div>
+      {/* <div className="inner_container" ref={innerRef}> */}
+      {children}
+      {/* </div> */}
     </Element>
   );
 };
