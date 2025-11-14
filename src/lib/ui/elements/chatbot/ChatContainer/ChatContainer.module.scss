@@ -268,11 +268,6 @@
   }
 }
 
-.upload_btn svg {
-  width: 2.4rem;
-  height: 2.4rem;
-}
-
 .submit_btn,
 .mic_btn,
 .upload_btn,
@@ -296,8 +291,8 @@
 }
 
 .submit_btn svg {
-  width: 1.8rem;
-  height: 1.8rem;
+  width: 2.4rem;
+  height: 2.4rem;
 }
 
 .input_wrapper textarea {
@@ -309,9 +304,10 @@
   height: 1.8rem;
 }
 
-.emoji_icon {
-  width: 2.1rem;
-  height: 2.1rem;
+.emoji_btn svg,
+.upload_btn svg {
+  width: 2rem;
+  height: 2rem;
 }
 
 .files_preview {

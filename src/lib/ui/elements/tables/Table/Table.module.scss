@@ -105,8 +105,13 @@
     }
   }
 
+  thead th[draggable],
+  tbody tr[draggable] {
+    cursor: grab;
+  }
+
   tbody[data-row-dnd="reorder"] {
-    tr {
+    tr:not([data-dragging="true"]) {
 
       &[data-drag-over="before"],
       &[data-drag-over="after"] {
@@ -116,40 +121,41 @@
           position: relative;
         }
       }
-    }
 
-    tr[data-drag-over="before"],
-    tr[data-drag-over="after"] {
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        width: 100%;
-        height: .2rem;
-        z-index: 12;
-        background-color: var(--yellow-1);
+      &[data-drag-over="before"],
+      &[data-drag-over="after"] {
+        &::after {
+          content: '';
+          position: absolute;
+          left: 0;
+          width: 100%;
+          height: .2rem;
+          z-index: 12;
+          background-color: var(--yellow-1);
+        }
       }
-    }
 
-    tr[data-drag-over="before"] {
-      &::after {
-        top: 0;
-        transform: translate3d(0, -50%, 0);
+      &[data-drag-over="before"] {
+        &::after {
+          top: 0;
+          transform: translate3d(0, -50%, 0);
+        }
       }
-    }
 
-    tr[data-drag-over="after"] {
-      &::after {
-        bottom: 0;
-        transform: translate3d(0, 50%, 0);
+      &[data-drag-over="after"] {
+        &::after {
+          bottom: 0;
+          transform: translate3d(0, 50%, 0);
 
+        }
       }
     }
 
     tr[data-dragging="true"] {
       opacity: .7;
-      pointer-events: none;
-      touch-action: none;
+      // pointer-events: none;
+      // touch-action: none;
+
       // position: relative;
 
       // &::after {
@@ -187,14 +193,10 @@
     // border-right: 0;
   }
 
-  &[draggable="true"] {
-    cursor: grab;
-  }
-
   &[data-dragging="true"] {
     opacity: .7;
-    pointer-events: none;
-    touch-action: none;
+    // pointer-events: none;
+    // touch-action: none;
   }
 }
 

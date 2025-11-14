@@ -92,3 +92,36 @@ export const deepEqual = (a: any, b: any): boolean => {
 export const orderBy = () => {
 
 };
+
+export const defaultComparator = <T extends Record<string, any>>(key: keyof T, desc?: boolean) => {
+  return (a: T, b: T): number => {
+    const aVal = a[key];
+    const bVal = b[key];
+
+    const res =
+      aVal == null && bVal == null ? 0 :
+        aVal == null ? 1 :
+          bVal == null ? -1 :
+            typeof aVal === "number" && typeof bVal === "number"
+              ? aVal - bVal
+              : String(aVal).localeCompare(String(bVal));
+
+    return desc ? -res : res;
+  };
+};
+
+export const deepSort = <T extends Record<string, any>>(
+  array: T[],
+  sortKey: keyof T,
+  desc?: boolean,
+  compareFn = defaultComparator<T>(sortKey, desc)
+): T[] => {
+  if (!Array.isArray(array)) return array;
+
+  const sorted = [...array].sort(compareFn);
+
+  return sorted.map(item => ({
+    ...item,
+    children: item.children ? deepSort(item.children, sortKey, desc, compareFn) : item.children,
+  }));
+};

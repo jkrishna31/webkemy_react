@@ -5,6 +5,7 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
+import { useMultiLevelData } from "@/lib/hooks";
 import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
 import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
@@ -15,42 +16,10 @@ import { StickType, Table, TableLayout } from "@/lib/ui/elements/tables";
 import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { clampNumber } from "@/lib/utils/math.utils";
+import { deepSort } from "@/lib/utils/object.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
-
-function defaultComparator<T extends Record<string, any>>(key: keyof T, desc?: boolean) {
-  return (a: T, b: T): number => {
-    const aVal = a[key];
-    const bVal = b[key];
-
-    const res =
-      aVal == null && bVal == null ? 0 :
-        aVal == null ? 1 :
-          bVal == null ? -1 :
-            typeof aVal === "number" && typeof bVal === "number"
-              ? aVal - bVal
-              : String(aVal).localeCompare(String(bVal));
-
-    return desc ? -res : res;
-  };
-}
-
-function deepSort<T extends Record<string, any>>(
-  array: T[],
-  key: keyof T,
-  desc?: boolean,
-  compareFn = defaultComparator<T>(key, desc)
-): T[] {
-  if (!Array.isArray(array)) return array;
-
-  const sorted = [...array].sort(compareFn);
-
-  return sorted.map(item => ({
-    ...item,
-    children: item.children ? deepSort(item.children, key, desc, compareFn) : item.children,
-  }));
-}
 
 function moveItem(array: any[], fromIndex: number, toIndex: number, direction: string) {
   const length = array.length;
@@ -74,7 +43,7 @@ function moveItem(array: any[], fromIndex: number, toIndex: number, direction: s
 
 const statusColorMap: { [key in string]: Color } = {
   "active": "green",
-  "inactive": "orange",
+  "inactive": "purple",
   "rejected": "red",
   "leave": "blue",
   "pending": "yellow",
@@ -97,12 +66,12 @@ type TableData = {
   role: string;
   dob: string;
   peers?: { name: string; profile: string; }[];
+  children?: TableData[];
 }
 
 const Page = () => {
   const [data, setData] = useState<TableData[]>(() => tableData.slice(0, 15));
   const [sort, setSort] = useState<string>();
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
   const [colWidths, setColWidths] = useState<{ [key: string]: number }>({});
   const [layout, setLayout] = useState<TableLayout[]>([
@@ -118,6 +87,10 @@ const Page = () => {
     // { key: "lastUpdateDate" },
     { key: "actions" },
   ]);
+
+  const { selectedKeys: selectedRows, select, getTotalItems } = useMultiLevelData(data);
+
+  const totalItems = getTotalItems();
 
   /*
   order = [
@@ -154,19 +127,8 @@ const Page = () => {
   ]
 */
 
-  // how to generate the total coloumns from hierachy header
-  // each leaf node will be counted as a column (if there is no children then count as a body column)
-
-  const handleSelection = (checked: boolean, row?: TableData,) => {
-    if (!row) {
-      setSelectedRows(checked ? [...data.map(item => item.id)] : []);
-    } else {
-      if (checked) {
-        setSelectedRows(currSelectedRows => [...currSelectedRows, row.id]);
-      } else {
-        setSelectedRows(currSelectedRows => [...currSelectedRows.filter(id => id !== row.id)]);
-      }
-    }
+  const handleSelection = (checked: boolean, row?: TableData) => {
+    select(row ? [row.id] : [], checked ? "select" : "deselect");
   };
 
   const handleResize = (colKey: string, newWidth: number) => {
@@ -186,13 +148,6 @@ const Page = () => {
       }
 
       const newLayout = moveItem(layout, draggingColIdx, overColIdx, config.to);
-      const generateNewLayout = (order: any[]) => {
-        const newLayout: TableLayout[] = [...order];
-        // find dragging & dragover col index & parent key
-        // if parent key same then move the dragging col to dragover col idx accordingly
-        // if parent key are different then splice out the dragging col from its parent and splice into the dragover parent accordingly
-        return newLayout;
-      };
 
       setLayout(newLayout);
     }
@@ -221,8 +176,8 @@ const Page = () => {
         <div className={styles.header_cell}>
           <Checkbox
             className={styles.all_select_check}
-            data-indeterminate={!!selectedRows.length && selectedRows.length !== data.length}
-            checked={!!selectedRows.length && selectedRows.length === data.length}
+            data-indeterminate={!!selectedRows.length && selectedRows.length !== totalItems}
+            checked={!!selectedRows.length && selectedRows.length === totalItems}
             onChange={e => handleSelection(e.target.checked)}
           />
         </div>
@@ -475,7 +430,7 @@ const Page = () => {
     },
     actions: {
       render: (
-        <p style={{ textAlign: "right", fontWeight: 500 }}>{"Total: "}{data.length}</p>
+        <p style={{ textAlign: "right", fontWeight: 500 }}>{"Total: "}{totalItems}</p>
       ),
       sticky: "right" as StickType,
       colSpan: 2,

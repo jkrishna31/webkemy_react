@@ -5,7 +5,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { MenuItem } from "@/lib/ui/elements/menu";
 import { BarChartIcon, BubbleChartIcon, LineChartIcon, PieChartIcon, RadarChartIcon, ScatterChartIcon } from "@/lib/ui/svgs/charts";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { AppLogo, BellIcon, BlockCodeIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, SquareIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VerifiedBadgeIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
+import { AppLogo, AppNotificationIcon, BellIcon, BlockCodeIcon, BotMessageIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, MessagesIcon, NotificationRemoveIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./AppMenu.module.scss";
 
@@ -147,7 +147,7 @@ export const menuItems = [
                 key: "badge",
                 href: "/components/badge",
                 primary: "Badge",
-                icon: <VerifiedBadgeIcon />,
+                icon: <AppNotificationIcon />,
             },
             {
                 key: "button",
@@ -177,7 +177,7 @@ export const menuItems = [
                 key: "modal",
                 href: "/components/modal",
                 primary: "Modal",
-                icon: <SquareIcon />,
+                icon: <NotificationRemoveIcon />,
             },
             {
                 key: "scroll-controls",
@@ -237,7 +237,7 @@ export const menuItems = [
                 key: "chatbot",
                 href: "/components/chatbot",
                 primary: "Chatbot",
-                icon: <CommentIcon />,
+                icon: <MessagesIcon />,
             },
             {
                 key: "comparator",
@@ -268,7 +268,7 @@ export const menuItems = [
                 key: "lightbox",
                 href: "/components/lightbox",
                 primary: "Lightbox",
-                icon: <SquareIcon />,
+                icon: <NotificationRemoveIcon />,
             },
             {
                 key: "pagination",

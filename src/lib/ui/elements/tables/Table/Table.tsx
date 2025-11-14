@@ -270,24 +270,26 @@ const Table = <T extends { id: string; children?: Array<T> }>({
 
   const handleRowDragOver = (e: React.DragEvent) => {
     const elem = e.target as HTMLElement;
-    const dragOverCol = elem?.closest("[data-row]");
-    const rowKey = dragOverCol?.getAttribute("data-row");
-    const isDraggable = dragOverCol?.getAttribute("draggable");
-    if (!dragOverCol || !rowKey || !isDraggable) return;
+    const dragOverRow = elem?.closest("[data-row]");
+    const rowKey = dragOverRow?.getAttribute("data-row");
+    const isDraggable = dragOverRow?.getAttribute("draggable");
+    if (!dragOverRow || !rowKey || !isDraggable) return;
     e.preventDefault();
-    const rowRect = dragOverCol.getBoundingClientRect();
+    const rowRect = dragOverRow.getBoundingClientRect();
     const toUp = (e.pageY - rowRect.y) < rowRect.height / 2;
     setDraggingData(currData => ({ ...currData, over: rowKey, to: toUp ? "before" : "after" }));
   };
 
   const handleRowDrop = (e: React.DragEvent) => {
     e.preventDefault();
-    onRowDrop?.(draggingData);
+    if (!(e.target as HTMLElement).closest("[data-dragging]")) {
+      onRowDrop?.(draggingData);
+    }
   };
 
-  const handleDragEnd = () => {
-    setDraggingData(undefined);
-  };
+  const handleDragEnd = () => setDraggingData(undefined);
+
+  const handleDragExit = () => setDraggingData(currData => ({ ...currData, over: undefined }));
 
   const renderBodyRows = (rows?: T[], depth = 0, parentId?: string, isParentDragging?: boolean) => {
     if (!rows?.length) return null;
@@ -365,7 +367,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
           onDragOver={(onColDrop && draggingData?.col) ? handleColDragOver : undefined}
           onDrop={(onColDrop && draggingData?.col) ? handleColDrop : undefined}
           onDragEnd={(onColDrop && draggingData?.col) ? handleDragEnd : undefined}
-          onDragExit={(onColDrop && draggingData?.col) ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
+          onDragExit={(onColDrop && draggingData?.col) ? handleDragExit : undefined}
         >
           {
             headerRows.map((hRow, hrIdx) => (
@@ -434,7 +436,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
           onDragOver={(onRowDrop && draggingData?.row) ? handleRowDragOver : undefined}
           onDrop={(onRowDrop && draggingData?.row) ? handleRowDrop : undefined}
           onDragEnd={(onRowDrop && draggingData?.row) ? handleDragEnd : undefined}
-          onDragExit={(onRowDrop && draggingData?.row) ? () => setDraggingData(currData => ({ ...currData, over: undefined })) : undefined}
+          onDragExit={(onRowDrop && draggingData?.row) ? handleDragExit : undefined}
         >
           {renderBodyRows(data)}
         </tbody>

@@ -12,7 +12,7 @@ import { FilesPreview } from "@/lib/ui/elements/filesPreview";
 import { FileInput, InputFieldWrapper, TextArea } from "@/lib/ui/elements/inputs";
 import { Popover } from "@/lib/ui/elements/popper";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { BotMessageIcon, ChevronsDownIcon, CircleInfoIcon, CrossIcon, MaximizeIcon, MicIcon, MinimizeIcon, SearchIcon, SendSolidIcon, UploadIcon } from "@/lib/ui/svgs/icons";
+import { BotMessageIcon, ChevronsDownIcon, CircleInfoIcon, CrossIcon, MaximizeIcon, MicIcon, MinimizeIcon, PaperclipIcon, SearchIcon, SendSolidIcon, UploadIcon } from "@/lib/ui/svgs/icons";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { compareDateByPrecision, formatDate, formatTime } from "@/lib/utils/datetime.utils";
 
@@ -262,7 +262,7 @@ const ChatContainer = ({
                 className={styles.upload_btn}
                 minimal
               >
-                <UploadIcon />
+                <PaperclipIcon />
               </FileInput>
               <button
                 className={styles.emoji_btn}

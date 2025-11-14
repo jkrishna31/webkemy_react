@@ -36,6 +36,10 @@
     &[data-color="orange"] {
       background: var(--orange-2);
     }
+
+    &[data-color="purple"] {
+      background: var(--purple-5);
+    }
   }
 
   &[data-variant="text"] {
@@ -73,6 +77,10 @@
 
     &[data-color="yellow"] {
       background: var(--yellow-1);
+    }
+
+    &[data-color="purple"] {
+      background: var(--purple-5);
     }
   }
 }
