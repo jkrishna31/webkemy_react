@@ -1,164 +1,151 @@
-import { useCallback, useState } from "react";
-
-import { clampNumber } from "@/lib/utils/math.utils";
+import { useCallback, useEffect, useState } from "react";
 
 export interface UseMultiLevelDataOptions<T> {
   id?: string;
   branch?: keyof T;
+  orderOnly?: boolean;
 }
 
-export type MovePayload = {
+export type MoveSpec = {
   moveKey: string;
   moveToKey: string;
   place?: "before" | "after";
 };
 
-function moveItem(array: any[], fromIndex: number, toIndex: number, direction: string) {
-  const length = array.length;
-  if (length === 0) return array;
+export type Order = {
+  id: string;
+  children?: Order[];
+};
 
-  fromIndex = clampNumber(fromIndex, 0, length - 1);
-  toIndex = clampNumber(toIndex, 0, length - 1);
-
-  const arr = [...array];
-  const [item] = arr.splice(fromIndex, 1);
-
-  if (fromIndex < toIndex) toIndex--;
-  const insertIndex = direction === "after" ? toIndex + 1 : toIndex;
-
-  const safeInsertIndex = clampNumber(insertIndex, 0, arr.length);
-
-  arr.splice(safeInsertIndex, 0, item);
-
-  return arr;
-}
-
-export default function useMultiLevelData<T>(data: T[], options?: UseMultiLevelDataOptions<T>) {
+export default function useMultiLevelData<T>(payload: T[], options?: UseMultiLevelDataOptions<T>) {
   const {
     id = "id",
     branch = "children",
+    orderOnly,
   } = options ?? {};
 
-  const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
+  const [details, setDetails] = useState<{ [key: string]: T }>({});
+  const [order, setOrder] = useState<Order[]>([]);
 
-  const getTotalItems = useCallback((_data = data) => {
-    let count = 0;
-    const stack: T[] = [..._data];
+  useEffect(() => {
+    const _details: any = {};
 
-    while (stack.length) {
-      const node: any = stack.pop();
-      count++;
-
-      if (node && node[branch]?.length) stack.push(...node[branch]);
-    }
-
-    return count;
-  }, [branch, data]);
-
-  const findByKey = useCallback((key: string) => {
-    return (function _find(arr: T[]) {
-      for (const item of arr) {
-        const _item = item as any;
-        if (_item[id] === key) return item;
-        if (_item[branch]?.length) {
-          return _find(_item[branch]);
-        }
-      }
-      return;
-    })(data);
-  }, [branch, data, id]);
-
-  const select = useCallback(
-    (keys: string[], op: "select" | "deselect" | "toggle" = "toggle", strict?: boolean) => {
-      setSelectedKeys(currKeys => {
-        let newKeys = [...currKeys];
-
-        const _select = (_id: string) => {
-          const isAlreadyPresent = selectedKeys.includes(_id);
-          if (isAlreadyPresent && op !== "select") {
-            newKeys = newKeys.filter(newKey => newKey !== _id);
-          } else if (!isAlreadyPresent && op !== "deselect") {
-            newKeys.push(_id);
-          }
-        };
-
-        const deepSelect = (arr: T[]) => {
-          if (!arr?.length) return;
-          for (const item of arr) {
-            const itemId = (item as any)[id];
-            _select(itemId);
-            deepSelect((item as any)[branch]);
-          }
-        };
-
-        if (keys?.length) {
-          for (const key of keys) {
-            _select(key);
-            if (strict) {
-              const item: any = findByKey(key);
-              if (item[branch]?.length) deepSelect(item[branch]);
-            }
-          }
-        } else {
-          if (getTotalItems() === selectedKeys.length && op !== "select") {
-            newKeys = [];
-          } else {
-            deepSelect(data);
-          }
-        }
-
-        return newKeys;
-      });
-    },
-    [branch, data, findByKey, id, selectedKeys, getTotalItems]
-  );
-
-  const move = (type: "reorder" | "transfer" = "reorder", payload?: MovePayload) => {
-    const { moveKey, moveToKey, place } = payload ?? {};
-    if (!moveKey || !moveToKey || moveKey === moveToKey) return;
-
-    let moveKeyParent: string | undefined, moveToKeyParent: string | undefined;
-    let moveKeyIndex: number | undefined, moveToKeyIndex: number | undefined;
-
-    const findParentAndPos = (arr: T[], parent?: string) => {
-      if (moveKeyParent && moveToKeyParent) return;
+    const generateDataAndOrder = (arr: T[]) => {
+      const currLevelOrder: any[] = [];
 
       for (let i = 0; i < arr.length; i++) {
-        if (moveKeyParent && moveToKeyParent) return;
-
         const item = arr[i] as any;
-        if (moveKeyParent == null && item[id] === moveKey) {
-          moveKeyParent = parent;
-          moveKeyIndex = i;
-        }
-        if (moveToKeyParent == null && item[id] === moveToKey) {
-          moveToKeyParent = parent;
-          moveToKeyIndex = i;
+
+        if (!orderOnly) {
+          const _item = { ...item };
+          // delete _item[branch];
+          _details[_item[id]] = _item;
         }
 
-        if (item[branch]?.length) findParentAndPos(item[branch]);
-
+        currLevelOrder[i] = {
+          [id]: item[id],
+          ...(item[branch]?.length ? { children: generateDataAndOrder(item[branch]) } : {}),
+        };
       }
+
+      return currLevelOrder;
     };
 
-    findParentAndPos(data);
+    const _order: any[] = generateDataAndOrder(payload);
 
-    const generateNewData = (arr: T[]) => {
+    setOrder(_order);
+    setDetails(_details);
+  }, [branch, id, orderOnly, payload]);
 
-    };
+  const getTotalItems = useCallback(
+    (_data = payload) => {
+      let count = 0;
+      const stack: T[] = [..._data];
 
-    // separate out the og data and nested data of only keys
+      while (stack.length) {
+        const node: any = stack.pop();
+        count++;
 
-    if (moveKeyParent === moveToKeyParent) {
-      // if parent key same then move the dragging col to dragover col idx accordingly
-    } else {
-      // if parent key are different then splice out the dragging col from its parent and splice into the dragover parent accordingly
+        if (node && node[branch]?.length) stack.push(...node[branch]);
+      }
+
+      return count;
+    },
+    [branch, payload]
+  );
+
+  const move = useCallback(
+    (type: "reorder" | "transfer" = "reorder", moveSpec?: MoveSpec) => {
+      const { moveKey, moveToKey, place } = moveSpec ?? {};
+      if (!moveKey || !moveToKey || moveKey === moveToKey) return;
+
+      if (type === "reorder") {
+        let moveKeyParent: string | undefined;
+        let moveToKeyParent: string | undefined;
+        let moveKeyIndex: number | undefined;
+        let moveToKeyIndex: number | undefined;
+        let itemToMove: Order | undefined;
+
+        // also check for invalid move like moving to any of children
+        const findParentAndPos = (arr: Order[], parent?: string) => {
+          if (moveKeyParent && moveToKeyParent) return;
+
+          for (let i = 0; i < arr.length; i++) {
+            if (moveKeyParent && moveToKeyParent) return;
+
+            const item = arr[i] as any;
+            if (moveKeyParent == null && item[id] === moveKey) {
+              moveKeyParent = parent;
+              moveKeyIndex = i;
+              itemToMove = item;
+            }
+            if (moveToKeyParent == null && item[id] === moveToKey) {
+              moveToKeyParent = parent;
+              moveToKeyIndex = i;
+            }
+
+            if (item[branch]?.length) findParentAndPos(item[branch], arr[i].id);
+          }
+        };
+
+        findParentAndPos(order);
+
+        if (!itemToMove || moveKeyIndex === undefined || moveToKeyIndex === undefined) return;
+
+        if (moveKeyParent === moveToKeyParent && moveKeyIndex < moveToKeyIndex) moveToKeyIndex--;
+        const insertIndex = place === "after" ? moveToKeyIndex + 1 : moveToKeyIndex;
+
+        const generateNewOrder = (arr: Order[], parent?: string) => {
+          const newOrder: Order[] = [...arr];
+
+          if (moveKeyParent === parent) {
+            newOrder.splice(moveKeyIndex!, 1);
+          }
+
+          if (moveToKeyParent === parent) {
+            newOrder.splice(insertIndex, 0, itemToMove!);
+          }
+
+          for (let i = 0; i < newOrder.length; i++) {
+            const item = newOrder[i];
+            newOrder[i] = {
+              id: item.id,
+              ...(item.children?.length ? { children: generateNewOrder(item.children, item.id) } : {}),
+            };
+          }
+
+          return newOrder;
+        };
+
+        setOrder(generateNewOrder(order));
+      }
     }
-  };
+    , [branch, id, order]
+  );
 
   return {
-    selectedKeys,
-    select,
+    details,
+    order,
     move,
     getTotalItems,
   };

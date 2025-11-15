@@ -10,7 +10,7 @@ export type DragType = "reorder" | "transfer";
 export type StickType = "left" | "right" | "both";
 
 export interface TableLayout {
-  key: string;
+  id: string;
   rowSpan?: number;
   colSpan?: number;
   width?: number;
@@ -31,6 +31,7 @@ export interface CellItem<T> extends ComponentPropsWithoutRef<"td"> {
 export interface HeaderItem<T> extends RootCellItem, ComponentPropsWithoutRef<"th"> {
   renderLeft?: ReactNode;
   renderRight?: ReactNode;
+  width?: number;
 }
 
 export interface BodyCellItem<T> extends CellItem<T> {
@@ -150,7 +151,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   const [draggingData, setDraggingData] = useState<{ row?: string; col?: string; over?: string; to?: "before" | "after"; }>();
 
   const headerRows: {
-    key: string; rowSpan?: number; colSpan?: number; width?: number;
+    id: string; rowSpan?: number; colSpan?: number; width?: number;
   }[][] = useMemo(() => {
     const rows: any[] = [];
     generateLayoutRows(rows, layout, 0);
@@ -284,6 +285,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
     e.preventDefault();
     if (!(e.target as HTMLElement).closest("[data-dragging]")) {
       onRowDrop?.(draggingData);
+      setDraggingData(undefined);
     }
   };
 
@@ -314,12 +316,12 @@ const Table = <T extends { id: string; children?: Array<T> }>({
           >
             {
               rootCols?.map((hCol, index) => {
-                const col = header?.[hCol.key];
-                const rowConfig = body?.[hCol.key];
+                const col = header?.[hCol.id];
+                const rowConfig = body?.[hCol.id];
                 const Element = rowConfig?.as ?? "td";
                 return (
                   <Element
-                    key={rowData.id + hCol.key}
+                    key={rowData.id + hCol.id}
                     className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
                     style={{ ...getCellStyle(rootCols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
                   >
@@ -374,28 +376,28 @@ const Table = <T extends { id: string; children?: Array<T> }>({
               <tr key={hrIdx}>
                 {
                   hRow.map((hCell, hcIdx) => {
-                    const { key, colSpan, rowSpan, width } = hCell;
+                    const { id, colSpan, rowSpan } = hCell;
                     const {
-                      as, renderLeft, renderRight, sortable: sortableCol, resizable, sticky, className, style,
+                      as, renderLeft, renderRight, sortable: sortableCol, resizable, sticky, className, style, width,
                       ...restProps
-                    } = header?.[hCell.key] ?? {};
+                    } = header?.[id] ?? {};
                     const Element = as ?? "th";
                     return (
                       <Element
-                        key={key}
-                        data-column={key}
+                        key={id}
+                        data-column={id}
                         colSpan={colSpan}
                         rowSpan={rowSpan}
                         {...restProps}
                         className={`${styles.hcell} ${getStickyClasses(sticky)} ${className}`}
                         style={{
-                          ...(hCell.width ? { minWidth: width } : {}),
+                          ...(width ? { minWidth: width } : {}),
                           ...getCellStyle(rootCols.length, hcIdx, sticky, true),
                           ...(style ?? {}),
                         }}
-                        data-dragging={draggingData?.col === key}
+                        data-dragging={draggingData?.col === id}
                         data-drag-over={
-                          (draggingData?.col && draggingData?.over === key)
+                          (draggingData?.col && draggingData?.over === id)
                             ? draggingData?.to
                             : ""
                         }
@@ -406,8 +408,8 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                           {
                             sortableCol ? (
                               <SortBtn
-                                sort={getSort(key, sort)}
-                                onClick={() => handleSort(key)}
+                                sort={getSort(id, sort)}
+                                onClick={() => handleSort(id)}
                                 className={styles.sort_btn}
                               />
                             ) : null
@@ -416,7 +418,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         </div>
                         {resizable && (
                           <button
-                            data-resize={key}
+                            data-resize={id}
                             className={`${styles.resize_handle}`}
                             style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
                           >
@@ -447,13 +449,13 @@ const Table = <T extends { id: string; children?: Array<T> }>({
           <tr>
             {
               rootCols.map((hCol, index) => {
-                const rowConfig = footer?.[hCol.key];
+                const rowConfig = footer?.[hCol.id];
                 if (!rowConfig) return null;
                 const { render, as, sticky, className, style, ...restProps } = rowConfig;
                 const Element = as ?? "td";
                 return (
                   <Element
-                    key={`fc-${hCol.key}`}
+                    key={`fc-${hCol.id}`}
                     {...restProps}
                     className={`${getStickyClasses(sticky)} ${className}`}
                     style={{ ...getCellStyle(rootCols.length, index, sticky, true), ...(style ?? {}) }}

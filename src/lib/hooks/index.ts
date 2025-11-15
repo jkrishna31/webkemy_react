@@ -24,5 +24,6 @@ export { default as useScroll } from "./useScroll";
 export { default as useScrollLock } from "./useScrollLock";
 export { default as useSplitter } from "./useSplitter";
 export { default as useSwipe } from "./useSwipe";
+export { default as useTreeSelect } from "./useTreeSelect";
 export { default as useUnmount } from "./useUnmount";
 export { default as useWindowResize } from "./useWindowResize";

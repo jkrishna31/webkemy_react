@@ -5,41 +5,34 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
-import { useMultiLevelData } from "@/lib/hooks";
+import { useMultiLevelData, useTreeSelect } from "@/lib/hooks";
 import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
 import { Badge } from "@/lib/ui/elements/badges";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
-import { StickType, Table, TableLayout } from "@/lib/ui/elements/tables";
+import { StickType, Table } from "@/lib/ui/elements/tables";
 import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
-import { clampNumber } from "@/lib/utils/math.utils";
 import { deepSort } from "@/lib/utils/object.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
 
-function moveItem(array: any[], fromIndex: number, toIndex: number, direction: string) {
-  const length = array.length;
-  if (length === 0) return array;
-
-  fromIndex = clampNumber(fromIndex, 0, length - 1);
-  toIndex = clampNumber(toIndex, 0, length - 1);
-
-  const arr = [...array];
-  const [item] = arr.splice(fromIndex, 1);
-
-  if (fromIndex < toIndex) toIndex--;
-  const insertIndex = direction === "after" ? toIndex + 1 : toIndex;
-
-  const safeInsertIndex = clampNumber(insertIndex, 0, arr.length);
-
-  arr.splice(safeInsertIndex, 0, item);
-
-  return arr;
-}
+const DEFAULT_LAYOUT = [
+  { id: "select", },
+  { id: "name" },
+  { id: "age" },
+  { id: "status" },
+  { id: "contact" },
+  { id: "rating" },
+  { id: "peers" },
+  { id: "address" },
+  { id: "startDate" },
+  { id: "lastUpdateDate" },
+  { id: "actions" },
+];
 
 const statusColorMap: { [key in string]: Color } = {
   "active": "green",
@@ -74,21 +67,18 @@ const Page = () => {
   const [sort, setSort] = useState<string>();
   const [expandedRows, setExpandedRows] = useState<string[]>([]);
   const [colWidths, setColWidths] = useState<{ [key: string]: number }>({});
-  const [layout, setLayout] = useState<TableLayout[]>([
-    { key: "select", },
-    { key: "name" },
-    { key: "age" },
-    { key: "status" },
-    { key: "contact" },
-    { key: "rating" },
-    { key: "peers" },
-    { key: "address" },
-    { key: "startDate" },
-    // { key: "lastUpdateDate" },
-    { key: "actions" },
-  ]);
 
-  const { selectedKeys: selectedRows, select, getTotalItems } = useMultiLevelData(data);
+  const {
+    order: layoutOrder,
+    move: updateLayoutOrder,
+  } = useMultiLevelData(DEFAULT_LAYOUT, { orderOnly: true });
+  const {
+    order: recordsOrder, details: recordsDetails,
+    move: updateRecordsOrder,
+  } = useMultiLevelData(data);
+  const {
+    selectedKeys: selectedRows, select: selectRows, getTotalItems,
+  } = useTreeSelect(data);
 
   const totalItems = getTotalItems();
 
@@ -127,12 +117,11 @@ const Page = () => {
   ]
 */
 
-  const handleSelection = (checked: boolean, row?: TableData) => {
-    select(row ? [row.id] : [], checked ? "select" : "deselect");
+  const handleSelection = (checked: boolean, id?: string) => {
+    selectRows(id ? [id] : [], checked ? "select" : "deselect");
   };
 
   const handleResize = (colKey: string, newWidth: number) => {
-    setLayout(currLayout => [...currLayout.map(item => ({ ...item, width: colKey === item.key ? newWidth : item.width }))]);
     setColWidths(currWidths => ({
       ...currWidths,
       [colKey]: newWidth,
@@ -141,20 +130,14 @@ const Page = () => {
 
   const handleColDnD = (config: any) => {
     if (config.col !== config.over) {
-      let draggingColIdx = -1, overColIdx = -1;
-      for (let i = 0; i < layout.length; i++) {
-        if (layout[i].key === config.col) draggingColIdx = i;
-        if (layout[i].key === config.over) overColIdx = i;
-      }
-
-      const newLayout = moveItem(layout, draggingColIdx, overColIdx, config.to);
-
-      setLayout(newLayout);
+      updateLayoutOrder("reorder", { moveKey: config.col, moveToKey: config.over, place: config.to });
     }
   };
 
-  const handleRowDnD = () => {
-
+  const handleRowDnD = (config: any) => {
+    if (config.row !== config.over) {
+      updateRecordsOrder("reorder", { moveKey: config.row, moveToKey: config.over, place: config.to });
+    }
   };
 
   const isRowCollapsible = useCallback((row: TableData) => {
@@ -258,15 +241,16 @@ const Page = () => {
     select: {
       render: (row: any) => {
         const isExpanded = expandedRows.includes(row.id);
+        const rowDetails = recordsDetails[row.id];
         return (
           <div
             style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
           >
             <Checkbox
               checked={selectedRows.includes(row.id)}
-              onChange={e => handleSelection(e.target.checked, row)}
+              onChange={e => handleSelection(e.target.checked, row.id)}
             />
-            {(!!row.children?.length || isRowCollapsible(row)) && (
+            {(!!rowDetails.children?.length || isRowCollapsible(rowDetails)) && (
               <button
                 className={styles.expand_btn}
                 aria-pressed={isExpanded}
@@ -285,22 +269,23 @@ const Page = () => {
     },
     name: {
       render: (row: any, depth = 0) => {
+        const rowDetails = recordsDetails[row.id];
         return (
           <div
-            style={{ display: "flex", alignItems: "center", gap: ".8rem", paddingLeft: `${depth * 1.5}rem` }}
+            style={{ display: "flex", alignItems: "center", gap: ".8rem", paddingLeft: `${depth * 2}rem` }}
           >
             <div style={{ position: "relative" }}>
               <Avatar>
                 <Image
-                  src={row.profile ?? ""} alt={row.name} width={40} height={40}
+                  src={rowDetails.profile ?? ""} alt={rowDetails.name} width={40} height={40}
                   style={{ width: "2.6rem", height: "2.6rem" }}
                 />
               </Avatar>
-              <Badge color={statusColorMap[row.status]} float="br" style={{ transform: "translate3d(7%, 7%, 0)" }} />
+              <Badge color={statusColorMap[rowDetails.status!]} float="br" style={{ transform: "translate3d(7%, 7%, 0)" }} />
             </div>
             <div>
-              <p style={{ fontWeight: 500 }}>{row.name}</p>
-              <p style={{ color: "var(--fg-s)" }}>{row.role}</p>
+              <p style={{ fontWeight: 500 }}>{rowDetails.name}</p>
+              <p style={{ color: "var(--fg-s)" }}>{rowDetails.role}</p>
             </div>
           </div>
         );
@@ -308,44 +293,47 @@ const Page = () => {
     },
     age: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
           <>
-            {formatDate(row.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{row.age}{" Years"}{")"}</span>
+            {formatDate(rowDetails.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{rowDetails.age}{" Years"}{")"}</span>
           </>
         );
       },
     },
     status: {
       render: (row: any) => {
-        return row.status ? (
+        const rowDetails = recordsDetails[row.id];
+        return rowDetails.status ? (
           <Chip
-            color={statusColorMap[row.status]}
+            color={statusColorMap[rowDetails.status]}
             style={{
               textTransform: "capitalize",
               borderRadius: "var(--br-pill)",
               // paddingLeft: ".4rem"
             }}
           >
-            {/* <Badge color={statusColorMap[row.status]} style={{ flexShrink: 0, marginRight: ".4rem" }} float={null} /> */}
-            {row.status}
+            {/* <Badge color={statusColorMap[rowDetails.status]} style={{ flexShrink: 0, marginRight: ".4rem" }} float={null} /> */}
+            {rowDetails.status}
           </Chip>
         ) : "N/A";
       },
     },
     contact: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
           <>
-            {!!row.phone && (
+            {!!rowDetails.phone && (
               <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
                 {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-                <a href={`tel:${row.phone}`} style={{ color: "var(--blue-1)" }}>{row.phone}</a>
+                <a href={`tel:${rowDetails.phone}`} style={{ color: "var(--blue-1)" }}>{rowDetails.phone}</a>
               </p>
             )}
-            {!!row.email && (
+            {!!rowDetails.email && (
               <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
                 {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-                <a href={`mailto:${row.email}`} style={{ color: "var(--blue-1)" }}>{row.email ?? "N/A"}</a>
+                <a href={`mailto:${rowDetails.email}`} style={{ color: "var(--blue-1)" }}>{rowDetails.email ?? "N/A"}</a>
               </p>
             )}
           </>
@@ -354,27 +342,30 @@ const Page = () => {
     },
     rating: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
           <div style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
-            <Rate rating={(row.rating ?? 0) / 5} className={styles.rate} readonly key={row.id} max={1} />
-            <p>{row.rating}</p>
+            <Rate rating={(rowDetails.rating ?? 0) / 5} className={styles.rate} readonly key={rowDetails.id} max={1} />
+            <p>{rowDetails.rating}</p>
           </div>
         );
       },
     },
     address: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
-          <p style={{ minWidth: "20rem", whiteSpace: "wrap" }}>{row.address}</p>
+          <p style={{ minWidth: "20rem", whiteSpace: "wrap" }}>{rowDetails.address}</p>
         );
       },
     },
     peers: {
       render: (row: any) => {
-        return row.peers?.length ? (
+        const rowDetails = recordsDetails[row.id];
+        return rowDetails.peers?.length ? (
           <AvatarList
             expandable={false}
-            avatars={row.peers?.map((avatar: any) => (
+            avatars={rowDetails.peers?.map((avatar: any) => (
               {
                 id: avatar.name,
                 children: (
@@ -388,15 +379,17 @@ const Page = () => {
     },
     startDate: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
-          formatDate(row.startDate)
+          formatDate(rowDetails.startDate)
         );
       },
     },
     lastUpdateDate: {
       render: (row: any) => {
+        const rowDetails = recordsDetails[row.id];
         return (
-          formatDate(row.endDate)
+          formatDate(rowDetails.endDate)
         );
       },
     },
@@ -426,7 +419,7 @@ const Page = () => {
     },
     name: {
       render: "",
-      colSpan: layout.length - 3,
+      colSpan: layoutOrder.length - 3,
     },
     actions: {
       render: (
@@ -451,9 +444,9 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="table" />
 
-      <Table<TableData>
-        data={data}
-        layout={layout}
+      <Table<any>
+        data={recordsOrder}
+        layout={layoutOrder}
         header={header}
         body={body}
         footer={footer}
