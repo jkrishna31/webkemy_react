@@ -1,6 +1,6 @@
 export const tableData = [
   {
-    id: "1", name: "Miles Calvin", age: 24,
+    id: "1", name: "Miles Calvin",
     rank: 1, duration: 30, address: "777 Brockton Avenue, Abington MA 2351",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(731) 346-4107", email: "milesc_97@gmail.com",
@@ -17,7 +17,7 @@ export const tableData = [
     ],
     children: [
       {
-        id: "1-1", name: "Tracy Nolan", age: 28,
+        id: "1-1", name: "Tracy Nolan",
         rank: 1, duration: 20, address: "21 Elm St, Abington MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(781) 555-2411", email: "tracy.nolan@example.com",
@@ -28,7 +28,7 @@ export const tableData = [
         peers: [],
         children: [
           {
-            id: "1-1-1", name: "Olivia Grant", age: 26,
+            id: "1-1-1", name: "Olivia Grant",
             rank: 1, duration: 12, address: "42 Pine St, Abington MA",
             startDate: new Date().toISOString(), endDate: new Date().toISOString(),
             phone: "(781) 222-7789", email: "olivia.grant@example.com",
@@ -40,7 +40,7 @@ export const tableData = [
             children: []
           },
           {
-            id: "1-1-2", name: "Daniel Hayes", age: 27,
+            id: "1-1-2", name: "Daniel Hayes",
             rank: 2, duration: 10, address: "73 Summer St, Brockton MA",
             startDate: new Date().toISOString(), endDate: new Date().toISOString(),
             phone: "(781) 445-2291", email: "daniel.hayes@example.com",
@@ -54,7 +54,7 @@ export const tableData = [
         ]
       },
       {
-        id: "1-2", name: "Mason Carter", age: 32,
+        id: "1-2", name: "Mason Carter",
         rank: 2, duration: 18, address: "98 Main St, Brockton MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(617) 489-0071", email: "m.carter@example.com",
@@ -65,7 +65,7 @@ export const tableData = [
         peers: [],
         children: [
           {
-            id: "1-2-1", name: "Isabella Ward", age: 25,
+            id: "1-2-1", name: "Isabella Ward",
             rank: 1, duration: 8, address: "5 Oak St, Abington MA",
             startDate: new Date().toISOString(), endDate: new Date().toISOString(),
             phone: "(617) 555-9132", email: "isabella.ward@example.com",
@@ -77,7 +77,7 @@ export const tableData = [
             children: []
           },
           {
-            id: "1-2-2", name: "Noah Mitchell", age: 29,
+            id: "1-2-2", name: "Noah Mitchell",
             rank: 2, duration: 9, address: "11 Birch St, Brockton MA",
             startDate: new Date().toISOString(), endDate: new Date().toISOString(),
             phone: "(617) 555-8274", email: "noah.mitchell@example.com",
@@ -93,7 +93,7 @@ export const tableData = [
     ]
   },
   {
-    id: "2", name: "Lucille Guadalupe", age: 31,
+    id: "2", name: "Lucille Guadalupe",
     rank: 2, duration: 30, address: "30 Memorial Drive, Avon MA 2322",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(250) 549-7396", email: "lucy.g22@yahoo.com",
@@ -108,7 +108,7 @@ export const tableData = [
     children: []
   },
   {
-    id: "3", name: "Lopez Tucker", age: 27,
+    id: "3", name: "Lopez Tucker",
     rank: 3, duration: 30, address: "250 Hartford Avenue, Bellingham MA 2019",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(335) 885-1577", email: "lopez_tk88@outlook.com",
@@ -119,7 +119,7 @@ export const tableData = [
     peers: [],
     children: [
       {
-        id: "3-1", name: "Rachel Li", age: 25,
+        id: "3-1", name: "Rachel Li",
         rank: 1, duration: 12, address: "9 Harvard St, Bellingham MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(508) 452-9971", email: "rachel.li@example.com",
@@ -131,7 +131,7 @@ export const tableData = [
         children: []
       },
       {
-        id: "3-2", name: "Jason Patel", age: 26,
+        id: "3-2", name: "Jason Patel",
         rank: 2, duration: 16, address: "21 Liberty St, Bellingham MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(508) 882-4021", email: "jason.patel@example.com",
@@ -145,7 +145,7 @@ export const tableData = [
     ]
   },
   {
-    id: "4", name: "Yvonne Roosevelt", age: 21,
+    id: "4", name: "Yvonne Roosevelt",
     rank: 4, duration: 30, address: "700 Oak Street, Brockton MA 2301",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(889) 467-6295", email: "yvonne.rz21@gmail.com",
@@ -160,7 +160,7 @@ export const tableData = [
     ],
     children: [
       {
-        id: "4-1", name: "Liam Baker", age: 23,
+        id: "4-1", name: "Liam Baker",
         rank: 1, duration: 8, address: "12 Pine St, Brockton MA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(617) 338-2241", email: "liam.baker@example.com",
@@ -174,7 +174,7 @@ export const tableData = [
     ]
   },
   {
-    id: "5", name: "Lela Glover", age: 46,
+    id: "5", name: "Lela Glover",
     rank: 5, duration: 30, address: "66-4 Parkhurst Rd, Chelmsford MA 1824",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(378) 738-1047", email: "lelaglover46@aol.com",
@@ -191,7 +191,7 @@ export const tableData = [
     children: []
   },
   {
-    id: "6", name: "Carlos Rivera", age: 34,
+    id: "6", name: "Carlos Rivera",
     rank: 6, duration: 12, address: "12 Elm St, Austin TX 73301",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(512) 467-2039", email: "c.rivera84@gmail.com",
@@ -207,7 +207,7 @@ export const tableData = [
     children: []
   },
   {
-    id: "7", name: "Sophia Patel", age: 29,
+    id: "7", name: "Sophia Patel",
     rank: 7, duration: 18, address: "88 Maple Ave, Edison NJ 08817",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(908) 451-7765", email: "sophia_p29@icloud.com",
@@ -218,7 +218,7 @@ export const tableData = [
     peers: [],
     children: [
       {
-        id: "7-1", name: "Ella Kim", age: 25,
+        id: "7-1", name: "Ella Kim",
         rank: 1, duration: 14, address: "11 Birch Rd, Edison NJ",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(732) 775-4421", email: "ella.kim@example.com",
@@ -230,7 +230,7 @@ export const tableData = [
         children: []
       },
       {
-        id: "7-2", name: "Noah Davis", age: 28,
+        id: "7-2", name: "Noah Davis",
         rank: 2, duration: 10, address: "27 Maple Ave, Edison NJ",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(908) 444-9812", email: "noah.davis@example.com",
@@ -244,7 +244,7 @@ export const tableData = [
     ]
   },
   {
-    id: "8", name: "Henry Thompson", age: 52,
+    id: "8", name: "Henry Thompson",
     rank: 8, duration: 45, address: "220 Cedar Ln, Richmond VA 23220",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(804) 330-4820", email: "hthompson52@comcast.net",
@@ -259,7 +259,7 @@ export const tableData = [
     children: []
   },
   {
-    id: "9", name: "Mia Chen", age: 41,
+    id: "9", name: "Mia Chen",
     rank: 9, duration: 24, address: "731 Willow St, San Jose CA 95125",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(408) 590-1144", email: "miac_041@gmail.com",
@@ -276,7 +276,7 @@ export const tableData = [
     ],
     children: [
       {
-        id: "9-1", name: "Isabella Moore", age: 35,
+        id: "9-1", name: "Isabella Moore",
         rank: 1, duration: 16, address: "90 King St, San Jose CA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(408) 333-9090", email: "isabella.moore@example.com",
@@ -288,7 +288,7 @@ export const tableData = [
         children: []
       },
       {
-        id: "9-2", name: "Ethan White", age: 38,
+        id: "9-2", name: "Ethan White",
         rank: 2, duration: 10, address: "76 Market St, San Jose CA",
         startDate: new Date().toISOString(), endDate: new Date().toISOString(),
         phone: "(408) 711-2020", email: "ethan.white@example.com",
@@ -302,7 +302,7 @@ export const tableData = [
     ]
   },
   {
-    id: "11", name: "Ava Martinez", age: 27,
+    id: "11", name: "Ava Martinez",
     rank: 11, duration: 10, address: "440 Palm Dr, Miami FL 33101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(305) 983-2240", email: "avam27@hotmail.com",
@@ -316,7 +316,7 @@ export const tableData = [
     ]
   },
   {
-    id: "12", name: "Liam Anderson", age: 33,
+    id: "12", name: "Liam Anderson",
     rank: 12, duration: 20, address: "501 King St, Seattle WA 98104",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(206) 399-7721", email: "liam.a33@gmail.com",
@@ -329,7 +329,7 @@ export const tableData = [
     ]
   },
   {
-    id: "13", name: "Emma Wilson", age: 45,
+    id: "13", name: "Emma Wilson",
     rank: 13, duration: 50, address: "29 Market Sq, Pittsburgh PA 15222",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(412) 254-6330", email: "emmaw_78@outlook.com",
@@ -344,7 +344,7 @@ export const tableData = [
     ]
   },
   {
-    id: "14", name: "Noah Smith", age: 39,
+    id: "14", name: "Noah Smith",
     rank: 14, duration: 14, address: "1020 Olive St, St. Louis MO 63101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(314) 209-8429", email: "noah_smith14@gmail.com",
@@ -361,7 +361,7 @@ export const tableData = [
     ]
   },
   {
-    id: "15", name: "Isabella Rossi", age: 31,
+    id: "15", name: "Isabella Rossi",
     rank: 15, duration: 22, address: "45 Lakeview Dr, Chicago IL 60657",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(773) 487-2094", email: "isa_rossi@icloud.com",
@@ -374,7 +374,7 @@ export const tableData = [
     ]
   },
   {
-    id: "16", name: "Ethan Wright", age: 28,
+    id: "16", name: "Ethan Wright",
     rank: 16, duration: 26, address: "600 Pine St, San Francisco CA 94108",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(415) 781-9923", email: "ethanw.sf28@gmail.com",
@@ -384,7 +384,7 @@ export const tableData = [
     dob: "1997-03-19T00:00:00.000Z",
   },
   {
-    id: "17", name: "Olivia Johnson", age: 35,
+    id: "17", name: "Olivia Johnson",
     rank: 17, duration: 40, address: "710 Rose Ave, Santa Monica CA 90401",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(424) 312-7762", email: "olivia.johnson35@yahoo.com",
@@ -394,7 +394,7 @@ export const tableData = [
     dob: "1989-10-12T00:00:00.000Z",
   },
   {
-    id: "18", name: "James Lee", age: 43,
+    id: "18", name: "James Lee",
     rank: 18, duration: 32, address: "320 Pearl St, Dallas TX 75201",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(214) 995-2870", email: "jlee82@protonmail.com",
@@ -404,7 +404,7 @@ export const tableData = [
     dob: "1982-08-09T00:00:00.000Z",
   },
   {
-    id: "19", name: "Charlotte Davis", age: 26,
+    id: "19", name: "Charlotte Davis",
     rank: 19, duration: 18, address: "11 Harbor Way, Boston MA 02210",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(617) 452-8864", email: "char.davis26@gmail.com",
@@ -414,7 +414,7 @@ export const tableData = [
     dob: "1999-06-01T00:00:00.000Z",
   },
   {
-    id: "20", name: "Benjamin Clark", age: 50,
+    id: "20", name: "Benjamin Clark",
     rank: 20, duration: 55, address: "880 Main St, Columbus OH 43215",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(614) 990-4172", email: "benclark50@gmail.com",
@@ -424,7 +424,7 @@ export const tableData = [
     dob: "1975-02-28T00:00:00.000Z",
   },
   {
-    id: "21", name: "Amelia Evans", age: 32,
+    id: "21", name: "Amelia Evans",
     rank: 21, duration: 12, address: "200 Elmwood Ave, Buffalo NY 14222",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(716) 430-5288", email: "amelia.evans32@gmail.com",
@@ -434,7 +434,7 @@ export const tableData = [
     dob: "1993-05-20T00:00:00.000Z",
   },
   {
-    id: "22", name: "Logan Harris", age: 36,
+    id: "22", name: "Logan Harris",
     rank: 22, duration: 20, address: "34 King St, Charleston SC 29401",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(843) 765-2013", email: "logan_harris36@outlook.com",
@@ -444,7 +444,7 @@ export const tableData = [
     dob: "1988-12-18T00:00:00.000Z",
   },
   {
-    id: "23", name: "Harper Nelson", age: 47,
+    id: "23", name: "Harper Nelson",
     rank: 23, duration: 28, address: "155 Oak Ridge Dr, Nashville TN 37214",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(615) 839-3015", email: "harper_n47@gmail.com",
@@ -454,7 +454,7 @@ export const tableData = [
     dob: "1978-09-05T00:00:00.000Z",
   },
   {
-    id: "24", name: "Elijah Walker", age: 40,
+    id: "24", name: "Elijah Walker",
     rank: 24, duration: 16, address: "700 Lincoln Ave, Denver CO 80203",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(720) 501-9982", email: "eli.walker40@gmail.com",
@@ -464,7 +464,7 @@ export const tableData = [
     dob: "1985-01-10T00:00:00.000Z",
   },
   {
-    id: "25", name: "Grace Moore", age: 30,
+    id: "25", name: "Grace Moore",
     rank: 25, duration: 30, address: "55 Ocean Blvd, Virginia Beach VA 23451",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(757) 241-7724", email: "gracemoore_30@yahoo.com",
@@ -474,7 +474,7 @@ export const tableData = [
     dob: "1994-07-15T00:00:00.000Z",
   },
   {
-    id: "26", name: "Jack Bennett", age: 42,
+    id: "26", name: "Jack Bennett",
     rank: 26, duration: 27, address: "120 River Rd, Madison WI 53703",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(608) 451-9083",
@@ -484,7 +484,7 @@ export const tableData = [
     dob: "1983-07-02T00:00:00.000Z",
   },
   {
-    id: "27", name: "Ella Perez", age: 25,
+    id: "27", name: "Ella Perez",
     rank: 27, duration: 15, address: "420 Pine Ridge Rd, Orlando FL 32801",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(407) 982-4519",
@@ -494,7 +494,7 @@ export const tableData = [
     dob: "2000-12-22T00:00:00.000Z",
   },
   {
-    id: "28", name: "William King", age: 31,
+    id: "28", name: "William King",
     rank: 28, duration: 21, address: "55 Forest Ave, Portland ME 04101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(207) 660-2134",
@@ -504,7 +504,7 @@ export const tableData = [
     dob: "1994-04-18T00:00:00.000Z",
   },
   {
-    id: "29", name: "Chloe Adams", age: 37,
+    id: "29", name: "Chloe Adams",
     rank: 29, duration: 32, address: "77 Cherry Ln, Tulsa OK 74104",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(918) 320-7441",
@@ -514,7 +514,7 @@ export const tableData = [
     dob: "1988-09-11T00:00:00.000Z",
   },
   {
-    id: "30", name: "Lucas Scott", age: 28,
+    id: "30", name: "Lucas Scott",
     rank: 30, duration: 17, address: "302 Cedar Blvd, San Diego CA 92103",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(619) 750-4490",
@@ -524,7 +524,7 @@ export const tableData = [
     dob: "1997-08-05T00:00:00.000Z",
   },
   {
-    id: "31", name: "Scarlett Turner", age: 33,
+    id: "31", name: "Scarlett Turner",
     rank: 31, duration: 30, address: "11 Broadway, New York NY 10004",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(212) 455-6612",
@@ -534,7 +534,7 @@ export const tableData = [
     dob: "1991-02-16T00:00:00.000Z",
   },
   {
-    id: "32", name: "Matthew Hall", age: 46,
+    id: "32", name: "Matthew Hall",
     rank: 32, duration: 34, address: "42 Maple Dr, Raleigh NC 27603",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(919) 450-3359",
@@ -544,7 +544,7 @@ export const tableData = [
     dob: "1979-10-09T00:00:00.000Z",
   },
   {
-    id: "33", name: "Victoria Green", age: 29,
+    id: "33", name: "Victoria Green",
     rank: 33, duration: 18, address: "78 Ocean Dr, Santa Cruz CA 95060",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(831) 334-1290",
@@ -554,7 +554,7 @@ export const tableData = [
     dob: "1996-05-23T00:00:00.000Z",
   },
   {
-    id: "34", name: "Henry Martinez", age: 41,
+    id: "34", name: "Henry Martinez",
     rank: 34, duration: 19, address: "303 Main St, Salt Lake City UT 84101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(385) 442-7014",
@@ -564,7 +564,7 @@ export const tableData = [
     dob: "1984-01-17T00:00:00.000Z",
   },
   {
-    id: "35", name: "Zoe Brown", age: 38,
+    id: "35", name: "Zoe Brown",
     rank: 35, duration: 25, address: "810 Westlake Ave, Seattle WA 98109",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(206) 532-2248",
@@ -574,7 +574,7 @@ export const tableData = [
     dob: "1987-09-30T00:00:00.000Z",
   },
   {
-    id: "36", name: "Samuel Brooks", age: 27,
+    id: "36", name: "Samuel Brooks",
     rank: 36, duration: 12, address: "90 Pine St, Albany NY 12207",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(518) 990-5542",
@@ -584,7 +584,7 @@ export const tableData = [
     dob: "1998-11-11T00:00:00.000Z",
   },
   {
-    id: "37", name: "Layla Rivera", age: 30,
+    id: "37", name: "Layla Rivera",
     rank: 37, duration: 20, address: "12 Ocean Blvd, Charleston SC 29401",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(843) 760-1124",
@@ -594,7 +594,7 @@ export const tableData = [
     dob: "1995-07-28T00:00:00.000Z",
   },
   {
-    id: "38", name: "Owen Foster", age: 48,
+    id: "38", name: "Owen Foster",
     rank: 38, duration: 35, address: "910 Vine St, Cincinnati OH 45202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(513) 681-7780",
@@ -604,7 +604,7 @@ export const tableData = [
     dob: "1977-02-15T00:00:00.000Z",
   },
   {
-    id: "39", name: "Hazel Price", age: 34,
+    id: "39", name: "Hazel Price",
     rank: 39, duration: 29, address: "400 Willow St, Boise ID 83702",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(208) 611-2401",
@@ -614,7 +614,7 @@ export const tableData = [
     dob: "1991-01-09T00:00:00.000Z",
   },
   {
-    id: "40", name: "Alexander Hughes", age: 36,
+    id: "40", name: "Alexander Hughes",
     rank: 40, duration: 24, address: "101 Pearl St, Denver CO 80203",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(720) 455-7751",
@@ -624,7 +624,7 @@ export const tableData = [
     dob: "1989-06-16T00:00:00.000Z",
   },
   {
-    id: "41", name: "Penelope Carter", age: 26,
+    id: "41", name: "Penelope Carter",
     rank: 41, duration: 14, address: "315 Oak St, Madison WI 53703",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(608) 720-9921",
@@ -634,7 +634,7 @@ export const tableData = [
     dob: "1999-04-14T00:00:00.000Z",
   },
   {
-    id: "42", name: "Nathan Reed", age: 39,
+    id: "42", name: "Nathan Reed",
     rank: 42, duration: 33, address: "220 Elm St, Houston TX 77002",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(713) 555-3472",
@@ -644,7 +644,7 @@ export const tableData = [
     dob: "1986-09-12T00:00:00.000Z",
   },
   {
-    id: "43", name: "Aria Bell", age: 29,
+    id: "43", name: "Aria Bell",
     rank: 43, duration: 18, address: "118 Maple St, Phoenix AZ 85004",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(602) 483-1176",
@@ -654,7 +654,7 @@ export const tableData = [
     dob: "1996-01-08T00:00:00.000Z",
   },
   {
-    id: "44", name: "Julian Torres", age: 34,
+    id: "44", name: "Julian Torres",
     rank: 44, duration: 22, address: "75 Sunset Dr, Tampa FL 33602",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(813) 601-4410",
@@ -664,7 +664,7 @@ export const tableData = [
     dob: "1991-11-19T00:00:00.000Z",
   },
   {
-    id: "45", name: "Luna Murphy", age: 31,
+    id: "45", name: "Luna Murphy",
     rank: 45, duration: 19, address: "900 Broad St, Newark NJ 07102",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(973) 220-7458",
@@ -674,7 +674,7 @@ export const tableData = [
     dob: "1994-08-27T00:00:00.000Z",
   },
   {
-    id: "46", name: "Sebastian Hughes", age: 44,
+    id: "46", name: "Sebastian Hughes",
     rank: 46, duration: 28, address: "12 Lakeview Dr, Portland OR 97201",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(503) 855-4429",
@@ -684,7 +684,7 @@ export const tableData = [
     dob: "1981-02-14T00:00:00.000Z",
   },
   {
-    id: "47", name: "Nora Cooper", age: 40,
+    id: "47", name: "Nora Cooper",
     rank: 47, duration: 26, address: "55 Bridge St, Brooklyn NY 11201",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(718) 640-2293",
@@ -694,7 +694,7 @@ export const tableData = [
     dob: "1985-10-01T00:00:00.000Z",
   },
   {
-    id: "48", name: "Isaac Morgan", age: 36,
+    id: "48", name: "Isaac Morgan",
     rank: 48, duration: 20, address: "231 Walnut St, Kansas City MO 64105",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(816) 750-6622",
@@ -704,7 +704,7 @@ export const tableData = [
     dob: "1989-03-11T00:00:00.000Z",
   },
   {
-    id: "49", name: "Hannah Flores", age: 27,
+    id: "49", name: "Hannah Flores",
     rank: 49, duration: 15, address: "707 Bay St, Savannah GA 31401",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(912) 430-9910",
@@ -714,7 +714,7 @@ export const tableData = [
     dob: "1998-06-06T00:00:00.000Z",
   },
   {
-    id: "50", name: "Daniela Ruiz", age: 33,
+    id: "50", name: "Daniela Ruiz",
     rank: 50, duration: 23, address: "22 Garden Ave, Chicago IL 60616",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(312) 851-4402",
@@ -724,7 +724,7 @@ export const tableData = [
     dob: "1992-09-25T00:00:00.000Z",
   },
   {
-    id: "51", name: "Miles Richardson", age: 38,
+    id: "51", name: "Miles Richardson",
     rank: 51, duration: 27, address: "832 Oak Ave, Boulder CO 80302",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(720) 515-1138",
@@ -734,7 +734,7 @@ export const tableData = [
     dob: "1987-04-11T00:00:00.000Z",
   },
   {
-    id: "52", name: "Adeline Brooks", age: 25,
+    id: "52", name: "Adeline Brooks",
     rank: 52, duration: 13, address: "78 Pine St, Charleston SC 29401",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(843) 333-7070",
@@ -744,7 +744,7 @@ export const tableData = [
     dob: "2000-10-22T00:00:00.000Z",
   },
   {
-    id: "53", name: "Ethan Matthews", age: 32,
+    id: "53", name: "Ethan Matthews",
     rank: 53, duration: 21, address: "19 River St, Boise ID 83702",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(208) 555-9083",
@@ -754,7 +754,7 @@ export const tableData = [
     dob: "1993-02-03T00:00:00.000Z",
   },
   {
-    id: "54", name: "Zara Hayes", age: 28,
+    id: "54", name: "Zara Hayes",
     rank: 54, duration: 17, address: "501 Main St, Sacramento CA 95814",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(916) 203-8012",
@@ -764,7 +764,7 @@ export const tableData = [
     dob: "1997-07-19T00:00:00.000Z",
   },
   {
-    id: "55", name: "Owen Parker", age: 43,
+    id: "55", name: "Owen Parker",
     rank: 55, duration: 30, address: "701 Market St, St. Louis MO 63101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(314) 566-3201",
@@ -774,7 +774,7 @@ export const tableData = [
     dob: "1982-11-10T00:00:00.000Z",
   },
   {
-    id: "56", name: "Clara Benson", age: 36,
+    id: "56", name: "Clara Benson",
     rank: 56, duration: 22, address: "22 Cypress Rd, Miami FL 33101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(305) 908-4419",
@@ -784,7 +784,7 @@ export const tableData = [
     dob: "1989-03-05T00:00:00.000Z",
   },
   {
-    id: "57", name: "Jacob Wright", age: 41,
+    id: "57", name: "Jacob Wright",
     rank: 57, duration: 25, address: "913 Birch St, Omaha NE 68102",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(402) 403-7742",
@@ -794,7 +794,7 @@ export const tableData = [
     dob: "1984-06-15T00:00:00.000Z",
   },
   {
-    id: "58", name: "Sophia James", age: 29,
+    id: "58", name: "Sophia James",
     rank: 58, duration: 18, address: "303 King St, Seattle WA 98104",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(206) 212-9817",
@@ -804,7 +804,7 @@ export const tableData = [
     dob: "1996-05-09T00:00:00.000Z",
   },
   {
-    id: "59", name: "Leo Simmons", age: 34,
+    id: "59", name: "Leo Simmons",
     rank: 59, duration: 20, address: "780 Canal St, New Orleans LA 70112",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(504) 311-2305",
@@ -814,7 +814,7 @@ export const tableData = [
     dob: "1991-09-13T00:00:00.000Z",
   },
   {
-    id: "60", name: "Violet Anderson", age: 27,
+    id: "60", name: "Violet Anderson",
     rank: 60, duration: 15, address: "654 Willow Rd, Des Moines IA 50309",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(515) 203-4990",
@@ -824,7 +824,7 @@ export const tableData = [
     dob: "1998-02-01T00:00:00.000Z",
   },
   {
-    id: "61", name: "Henry Adams", age: 37,
+    id: "61", name: "Henry Adams",
     rank: 61, duration: 23, address: "455 Cedar St, Nashville TN 37203",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(615) 412-8823",
@@ -834,7 +834,7 @@ export const tableData = [
     dob: "1988-08-04T00:00:00.000Z",
   },
   {
-    id: "62", name: "Maya Rivera", age: 33,
+    id: "62", name: "Maya Rivera",
     rank: 62, duration: 20, address: "320 Valley St, Denver CO 80202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(720) 215-5561",
@@ -844,7 +844,7 @@ export const tableData = [
     dob: "1992-11-22T00:00:00.000Z",
   },
   {
-    id: "63", name: "Liam Peterson", age: 42,
+    id: "63", name: "Liam Peterson",
     rank: 63, duration: 29, address: "11 Greenway Rd, Detroit MI 48226",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(313) 745-6901",
@@ -854,7 +854,7 @@ export const tableData = [
     dob: "1983-03-19T00:00:00.000Z",
   },
   {
-    id: "64", name: "Chloe Evans", age: 26,
+    id: "64", name: "Chloe Evans",
     rank: 64, duration: 14, address: "210 Rose Blvd, Orlando FL 32801",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(407) 621-3131",
@@ -864,7 +864,7 @@ export const tableData = [
     dob: "1999-01-30T00:00:00.000Z",
   },
   {
-    id: "65", name: "Noah Ramirez", age: 39,
+    id: "65", name: "Noah Ramirez",
     rank: 65, duration: 24, address: "87 Ocean Dr, San Diego CA 92101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(619) 601-4439",
@@ -874,7 +874,7 @@ export const tableData = [
     dob: "1986-05-28T00:00:00.000Z",
   },
   {
-    id: "66", name: "Ella Foster", age: 31,
+    id: "66", name: "Ella Foster",
     rank: 66, duration: 19, address: "142 Pearl St, Boston MA 02110",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(617) 933-7052",
@@ -884,7 +884,7 @@ export const tableData = [
     dob: "1994-09-07T00:00:00.000Z",
   },
   {
-    id: "67", name: "Aiden Kelly", age: 30,
+    id: "67", name: "Aiden Kelly",
     rank: 67, duration: 18, address: "122 Pine Hill Rd, Albany NY 12207",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(518) 303-7794",
@@ -894,7 +894,7 @@ export const tableData = [
     dob: "1995-10-16T00:00:00.000Z",
   },
   {
-    id: "68", name: "Hazel Bailey", age: 29,
+    id: "68", name: "Hazel Bailey",
     rank: 68, duration: 16, address: "901 Hill St, Austin TX 78701",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(512) 509-6600",
@@ -904,7 +904,7 @@ export const tableData = [
     dob: "1996-12-25T00:00:00.000Z",
   },
   {
-    id: "69", name: "Caleb Morgan", age: 37,
+    id: "69", name: "Caleb Morgan",
     rank: 69, duration: 23, address: "88 Crescent Rd, Cleveland OH 44114",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(216) 611-7721",
@@ -914,7 +914,7 @@ export const tableData = [
     dob: "1988-08-11T00:00:00.000Z",
   },
   {
-    id: "70", name: "Scarlett Hughes", age: 35,
+    id: "70", name: "Scarlett Hughes",
     rank: 70, duration: 22, address: "422 Palm St, Tampa FL 33606",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(813) 888-9022",
@@ -924,7 +924,7 @@ export const tableData = [
     dob: "1990-04-03T00:00:00.000Z",
   },
   {
-    id: "71", name: "Gabriel Cooper", age: 40,
+    id: "71", name: "Gabriel Cooper",
     rank: 71, duration: 25, address: "120 Harbor St, San Francisco CA 94105",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(415) 745-8821",
@@ -934,7 +934,7 @@ export const tableData = [
     dob: "1985-11-14T00:00:00.000Z",
   },
   {
-    id: "72", name: "Lydia Bennett", age: 27,
+    id: "72", name: "Lydia Bennett",
     rank: 72, duration: 14, address: "67 Elm Rd, Raleigh NC 27601",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(919) 603-1144",
@@ -944,7 +944,7 @@ export const tableData = [
     dob: "1998-06-22T00:00:00.000Z",
   },
   {
-    id: "73", name: "Grayson Scott", age: 33,
+    id: "73", name: "Grayson Scott",
     rank: 73, duration: 19, address: "88 Cedar Blvd, Tulsa OK 74103",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(918) 331-9920",
@@ -954,7 +954,7 @@ export const tableData = [
     dob: "1992-02-07T00:00:00.000Z",
   },
   {
-    id: "74", name: "Avery Turner", age: 35,
+    id: "74", name: "Avery Turner",
     rank: 74, duration: 22, address: "102 Park Ave, Indianapolis IN 46204",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(317) 907-5508",
@@ -964,7 +964,7 @@ export const tableData = [
     dob: "1990-12-05T00:00:00.000Z",
   },
   {
-    id: "75", name: "Isabelle Ross", age: 28,
+    id: "75", name: "Isabelle Ross",
     rank: 75, duration: 16, address: "7 Brook St, Salt Lake City UT 84101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(385) 441-2281",
@@ -974,7 +974,7 @@ export const tableData = [
     dob: "1997-03-29T00:00:00.000Z",
   },
   {
-    id: "76", name: "Connor Diaz", age: 31,
+    id: "76", name: "Connor Diaz",
     rank: 76, duration: 20, address: "45 Forest Ln, Charlotte NC 28202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(704) 500-9912",
@@ -984,7 +984,7 @@ export const tableData = [
     dob: "1994-01-19T00:00:00.000Z",
   },
   {
-    id: "77", name: "Ruby Walsh", age: 29,
+    id: "77", name: "Ruby Walsh",
     rank: 77, duration: 18, address: "80 Grove St, Boise ID 83702",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(208) 720-6512",
@@ -994,7 +994,7 @@ export const tableData = [
     dob: "1996-07-15T00:00:00.000Z",
   },
   {
-    id: "78", name: "Mason King", age: 39,
+    id: "78", name: "Mason King",
     rank: 78, duration: 27, address: "50 Cherry Dr, Reno NV 89501",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(775) 303-5200",
@@ -1004,7 +1004,7 @@ export const tableData = [
     dob: "1986-05-03T00:00:00.000Z",
   },
   {
-    id: "79", name: "Willow Brooks", age: 26,
+    id: "79", name: "Willow Brooks",
     rank: 79, duration: 14, address: "12 Glen Rd, Fargo ND 58102",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(701) 221-8890",
@@ -1014,7 +1014,7 @@ export const tableData = [
     dob: "1999-02-10T00:00:00.000Z",
   },
   {
-    id: "80", name: "Lucas Edwards", age: 42,
+    id: "80", name: "Lucas Edwards",
     rank: 80, duration: 28, address: "211 Ivy St, Wichita KS 67202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(316) 601-7707",
@@ -1024,7 +1024,7 @@ export const tableData = [
     dob: "1983-09-24T00:00:00.000Z",
   },
   {
-    id: "81", name: "Naomi Grant", age: 30,
+    id: "81", name: "Naomi Grant",
     rank: 81, duration: 19, address: "44 Hillview Ave, Tucson AZ 85701",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(520) 633-8855",
@@ -1034,7 +1034,7 @@ export const tableData = [
     dob: "1995-11-30T00:00:00.000Z",
   },
   {
-    id: "82", name: "Elias Ward", age: 36,
+    id: "82", name: "Elias Ward",
     rank: 82, duration: 23, address: "120 Pearl St, Pittsburgh PA 15222",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(412) 907-6632",
@@ -1044,7 +1044,7 @@ export const tableData = [
     dob: "1989-03-07T00:00:00.000Z",
   },
   {
-    id: "83", name: "Eva Kim", age: 34,
+    id: "83", name: "Eva Kim",
     rank: 83, duration: 21, address: "94 River Rd, Columbus OH 43215",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(614) 550-9092",
@@ -1054,7 +1054,7 @@ export const tableData = [
     dob: "1991-06-11T00:00:00.000Z",
   },
   {
-    id: "84", name: "Benjamin Hayes", age: 43,
+    id: "84", name: "Benjamin Hayes",
     rank: 84, duration: 28, address: "80 Maple Dr, Milwaukee WI 53202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(414) 209-3344",
@@ -1064,7 +1064,7 @@ export const tableData = [
     dob: "1982-08-16T00:00:00.000Z",
   },
   {
-    id: "85", name: "Zoe Morales", age: 27,
+    id: "85", name: "Zoe Morales",
     rank: 85, duration: 15, address: "70 Center St, Las Vegas NV 89101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(702) 511-7821",
@@ -1074,7 +1074,7 @@ export const tableData = [
     dob: "1998-03-05T00:00:00.000Z",
   },
   {
-    id: "86", name: "Jack Foster", age: 38,
+    id: "86", name: "Jack Foster",
     rank: 86, duration: 26, address: "99 Bay Rd, Baton Rouge LA 70802",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(225) 900-4432",
@@ -1084,7 +1084,7 @@ export const tableData = [
     dob: "1987-02-28T00:00:00.000Z",
   },
   {
-    id: "87", name: "Layla Perry", age: 29,
+    id: "87", name: "Layla Perry",
     rank: 87, duration: 17, address: "60 High St, Portland ME 04101",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(207) 890-2209",
@@ -1094,7 +1094,7 @@ export const tableData = [
     dob: "1996-09-12T00:00:00.000Z",
   },
   {
-    id: "88", name: "Evan Coleman", age: 32,
+    id: "88", name: "Evan Coleman",
     rank: 88, duration: 20, address: "51 Market St, Richmond VA 23219",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(804) 300-9911",
@@ -1104,7 +1104,7 @@ export const tableData = [
     dob: "1993-10-01T00:00:00.000Z",
   },
   {
-    id: "89", name: "Amelia Watson", age: 30,
+    id: "89", name: "Amelia Watson",
     rank: 89, duration: 18, address: "34 Birch Dr, Boise ID 83703",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(208) 601-6672",
@@ -1114,7 +1114,7 @@ export const tableData = [
     dob: "1995-07-20T00:00:00.000Z",
   },
   {
-    id: "90", name: "Nicholas Gray", age: 45,
+    id: "90", name: "Nicholas Gray",
     rank: 90, duration: 31, address: "710 King Blvd, Newark NJ 07102",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(973) 555-2010",
@@ -1124,7 +1124,7 @@ export const tableData = [
     dob: "1980-04-17T00:00:00.000Z",
   },
   {
-    id: "91", name: "Madeline Rogers", age: 34,
+    id: "91", name: "Madeline Rogers",
     rank: 91, duration: 22, address: "19 Pine Rd, Tulsa OK 74104",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(918) 200-3364",
@@ -1134,7 +1134,7 @@ export const tableData = [
     dob: "1991-09-25T00:00:00.000Z",
   },
   {
-    id: "92", name: "Dylan Powell", age: 33,
+    id: "92", name: "Dylan Powell",
     rank: 92, duration: 21, address: "65 Grove Ln, Memphis TN 38103",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(901) 414-8822",
@@ -1144,7 +1144,7 @@ export const tableData = [
     dob: "1992-05-02T00:00:00.000Z",
   },
   {
-    id: "93", name: "Stella Ramirez", age: 29,
+    id: "93", name: "Stella Ramirez",
     rank: 93, duration: 17, address: "23 Oak Ln, Cincinnati OH 45202",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(513) 233-7111",
@@ -1154,7 +1154,7 @@ export const tableData = [
     dob: "1996-10-11T00:00:00.000Z",
   },
   {
-    id: "94", name: "Hunter Cox", age: 41,
+    id: "94", name: "Hunter Cox",
     rank: 94, duration: 26, address: "101 Ridge Rd, Phoenix AZ 85003",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(602) 707-9903",
@@ -1164,7 +1164,7 @@ export const tableData = [
     dob: "1984-12-10T00:00:00.000Z",
   },
   {
-    id: "95", name: "Camila Rivera", age: 28,
+    id: "95", name: "Camila Rivera",
     rank: 95, duration: 16, address: "72 Forest Ave, San Antonio TX 78205",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(210) 622-9929",
@@ -1174,7 +1174,7 @@ export const tableData = [
     dob: "1997-06-19T00:00:00.000Z",
   },
   {
-    id: "96", name: "Elijah Ward", age: 38,
+    id: "96", name: "Elijah Ward",
     rank: 96, duration: 24, address: "92 Main St, Lincoln NE 68508",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(402) 601-1193",
@@ -1184,7 +1184,7 @@ export const tableData = [
     dob: "1987-09-09T00:00:00.000Z",
   },
   {
-    id: "97", name: "Isla Moore", age: 30,
+    id: "97", name: "Isla Moore",
     rank: 97, duration: 18, address: "61 Lake Dr, Sacramento CA 95814",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(916) 745-7750",
@@ -1194,7 +1194,7 @@ export const tableData = [
     dob: "1995-04-14T00:00:00.000Z",
   },
   {
-    id: "98", name: "Leo Murphy", age: 35,
+    id: "98", name: "Leo Murphy",
     rank: 98, duration: 21, address: "29 Pine Blvd, Omaha NE 68102",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(402) 900-3344",
@@ -1204,7 +1204,7 @@ export const tableData = [
     dob: "1990-02-12T00:00:00.000Z",
   },
   {
-    id: "99", name: "Clara Simmons", age: 26,
+    id: "99", name: "Clara Simmons",
     rank: 99, duration: 13, address: "20 Birch St, Portland OR 97209",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(503) 441-8822",
@@ -1214,7 +1214,7 @@ export const tableData = [
     dob: "1999-10-28T00:00:00.000Z",
   },
   {
-    id: "100", name: "Jameson Price", age: 44,
+    id: "100", name: "Jameson Price",
     rank: 100, duration: 30, address: "109 Market Blvd, Chicago IL 60606",
     startDate: new Date().toISOString(), endDate: new Date().toISOString(),
     phone: "(312) 820-3003",

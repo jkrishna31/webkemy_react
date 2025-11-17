@@ -34,60 +34,72 @@
   place-items: center;
   align-content: center;
   gap: 1rem;
-  // background-color: var(--bg-t);
-  background-color: transparent;
   border-radius: 1.2rem;
   z-index: 1;
 
-  color: var(--fg-t);
+  // border: .6rem double var(--border-s);
+  // background-color: var(--bg-t);
+  // background-color: transparent;
+  // -webkit-backdrop-filter: blur(.2rem);
+  // backdrop-filter: blur(.2rem);
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    -webkit-backdrop-filter: blur(1rem);
-    backdrop-filter: blur(1rem);
-    z-index: -1;
-  }
+  // &::before {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   -webkit-backdrop-filter: blur(.2rem);
+  //   backdrop-filter: blur(.2rem);
+  //   z-index: 1;
+  // }
 }
 
-// .blob {
-//   position: absolute;
-//   opacity: 0.5;
-//   width: 400px;
-//   aspect-ratio: 1/1;
-//   animation: animate 10s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate forwards;
-//   filter: blur(40px);
-//   z-index: 0;
-//   background: linear-gradient(47deg,
-//       var(--red-1) 21%,
-//       var(--blue-1) 67%,
-//       var(--purple-1) 81%);
-// }
+.pattern_svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  color: var(--border-s);
+}
 
-// @keyframes animate {
-//   0% {
-//     translate: 40% -25%;
-//     border-radius: 60% 40% 30% 70% / 100% 85% 92% 74%;
-//   }
+.blob {
+  position: absolute;
+  opacity: 0.5;
+  width: 400px;
+  aspect-ratio: 1/1;
+  animation: animate 10s cubic-bezier(0.68, -0.55, 0.27, 1.55) infinite alternate forwards;
+  filter: blur(40px);
+  z-index: 0;
+  background: linear-gradient(47deg,
+      var(--red-1) 21%,
+      var(--blue-1) 67%,
+      var(--purple-1) 81%);
+}
 
-//   50% {
-//     translate: 0% 13%;
-//     border-radius: 20% 71% 47% 70% / 81% 15% 22% 54%;
-//     rotate: 41deg;
-//     scale: 1.15;
-//   }
+@keyframes animate {
+  0% {
+    translate: 40% -25%;
+    border-radius: 60% 40% 30% 70% / 100% 85% 92% 74%;
+  }
 
-//   100% {
-//     translate: -45% 39%;
-//     border-radius: 100% 75% 92% 74% / 60% 80% 30% 70%;
-//     rotate: -60deg;
-//     scale: 1.05;
-//   }
-// }
+  50% {
+    translate: 0% 13%;
+    border-radius: 20% 71% 47% 70% / 81% 15% 22% 54%;
+    rotate: 41deg;
+    scale: 1.15;
+  }
+
+  100% {
+    translate: -45% 39%;
+    border-radius: 100% 75% 92% 74% / 60% 80% 30% 70%;
+    rotate: -60deg;
+    scale: 1.05;
+  }
+}
 
 @media screen and (max-width: 768px) {
   .title {

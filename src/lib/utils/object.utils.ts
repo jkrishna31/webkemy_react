@@ -1,3 +1,5 @@
+import { isValidDateString } from "@/lib/utils/datetime.utils";
+
 export const isObject = (obj: object) => {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
@@ -104,7 +106,9 @@ export const defaultComparator = <T extends Record<string, any>>(key: keyof T, d
           bVal == null ? -1 :
             typeof aVal === "number" && typeof bVal === "number"
               ? aVal - bVal
-              : String(aVal).localeCompare(String(bVal));
+              : (isValidDateString(aVal) && isValidDateString(bVal))
+                ? Date.parse(aVal) - Date.parse(bVal) /* new Date(aVal).getTime() - new Date(bVal).getTime() */
+                : String(aVal).localeCompare(String(bVal));
 
     return desc ? -res : res;
   };

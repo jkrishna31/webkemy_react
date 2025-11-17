@@ -25,6 +25,11 @@ export const getTimezoneOffset = () => {
     const date = new Date().getTimezoneOffset();
 };
 
+export const isValidDateString = (str: string) => {
+    const d = new Date(str);
+    return !isNaN(d.getTime());
+};
+
 export const formatDate = (ts: any, locale = null, format = null) => {
     if (!ts) return;
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sept", "Oct", "Nov", "Dec"];

@@ -13,7 +13,7 @@ import { Chip } from "@/lib/ui/elements/chip";
 import { Checkbox } from "@/lib/ui/elements/inputs";
 import { Rate } from "@/lib/ui/elements/rate";
 import { StickType, Table } from "@/lib/ui/elements/tables";
-import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon } from "@/lib/ui/svgs/icons";
+import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon, PlusIcon } from "@/lib/ui/svgs/icons";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { deepSort } from "@/lib/utils/object.utils";
 import { Color } from "@/types/general.types";
@@ -23,14 +23,14 @@ import styles from "./styles.module.scss";
 const DEFAULT_LAYOUT = [
   { id: "select", },
   { id: "name" },
-  { id: "age" },
+  { id: "dob" },
   { id: "status" },
   { id: "contact" },
   { id: "rating" },
   { id: "peers" },
   { id: "address" },
   { id: "startDate" },
-  { id: "lastUpdateDate" },
+  // { id: "lastUpdateDate" },
   { id: "actions" },
 ];
 
@@ -45,7 +45,6 @@ const statusColorMap: { [key in string]: Color } = {
 type TableData = {
   id: string;
   name: string;
-  age: number;
   rank: number;
   address: string;
   duration: number;
@@ -82,41 +81,6 @@ const Page = () => {
 
   const totalItems = getTotalItems();
 
-  /*
-  order = [
-    {
-      key: "name", rowSpan: 2,
-      children: [
-        { key: "first" },
-        { key: "last" },
-      ]
-    },
-    { 
-      key: "details",
-      children: [
-        {
-          key: "address",
-          children: [
-            { key: "street" },
-            { key: "city" },
-            { key: "zip" },
-          ]
-        },
-        {
-          key: "contact",
-          children: [
-            { key: "phone" },
-            { key: "email" },
-          ]
-        },
-      ]
-    },
-    {
-      key: "actions",
-    }
-  ]
-*/
-
   const handleSelection = (checked: boolean, id?: string) => {
     selectRows(id ? [id] : [], checked ? "select" : "deselect");
   };
@@ -141,7 +105,7 @@ const Page = () => {
   };
 
   const isRowCollapsible = useCallback((row: TableData) => {
-    return ["6", "11"].includes(row.id);
+    return ["6", "11", "14", "15"].includes(row.id);
   }, []);
 
   const renderDetails = useCallback((_: TableData) => {
@@ -174,8 +138,8 @@ const Page = () => {
         </div>
       ),
     },
-    age: {
-      draggable: true, resizable: true, width: colWidths.age,
+    dob: {
+      draggable: true, resizable: true, sortable: true, width: colWidths.dob,
       renderLeft: (
         <div className={styles.header_cell}>
           {"D.O.B. (Age)"}
@@ -242,6 +206,7 @@ const Page = () => {
       render: (row: any) => {
         const isExpanded = expandedRows.includes(row.id);
         const rowDetails = recordsDetails[row.id];
+        const isCollapsible = isRowCollapsible(rowDetails);
         return (
           <div
             style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
@@ -250,7 +215,7 @@ const Page = () => {
               checked={selectedRows.includes(row.id)}
               onChange={e => handleSelection(e.target.checked, row.id)}
             />
-            {(!!rowDetails.children?.length || isRowCollapsible(rowDetails)) && (
+            {(!!rowDetails.children?.length || isCollapsible) && (
               <button
                 className={styles.expand_btn}
                 aria-pressed={isExpanded}
@@ -260,7 +225,7 @@ const Page = () => {
                   )
                 }
               >
-                <ChevronRightIcon />
+                {isCollapsible ? <PlusIcon /> : <ChevronRightIcon />}
               </button>
             )}
           </div>
@@ -291,12 +256,12 @@ const Page = () => {
         );
       },
     },
-    age: {
+    dob: {
       render: (row: any) => {
         const rowDetails = recordsDetails[row.id];
         return (
           <>
-            {formatDate(rowDetails.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{rowDetails.age}{" Years"}{")"}</span>
+            {formatDate(rowDetails.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{new Date().getUTCFullYear() - new Date(rowDetails.dob).getUTCFullYear()}{" Years"}{")"}</span>
           </>
         );
       },

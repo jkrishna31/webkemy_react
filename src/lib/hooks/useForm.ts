@@ -21,23 +21,21 @@ export interface IOption {
 }
 
 export interface IFormField {
-  key: string
-  label?: string
-  required?: boolean
-  type?: "text" | "number" | "date" | "email" | "select_single" | "select_multiple" | "checkbox" | "radio"
-  validations?: number[]
-  multiple?: boolean
-  value: string
-  errors?: any[]
+  key: string;
+  label?: string;
+  required?: boolean;
+  type?: "text" | "number" | "date" | "email" | "select" | "checkbox" | "radio" | "file";
+  validations?: number[];
+  multiple?: boolean;
+  value: string;
+  errors?: any[];
+  dependee?: any[]; // fields on which this field depends on
+  dependent?: any[]; // fields depending on this field
 }
 
 export interface IForm {
   [key: string]: IFormField
 }
-
-// form scenarios
-// individual fields
-// linked fields - if one value change, reset/disable/enable the other/dependent field(s)
 
 // how to handle array of values
 // change validation (min/max) based on the value of other field value (ex: from to date range)
@@ -46,13 +44,8 @@ export interface IForm {
 // divide in two parts - ui and data
 // ui parts - order of fields, layout, min/max/minLenght/maxLength (based on validation and depending field value)
 
-
 const useForm = (initial: IForm) => {
   const [form, setForm] = useState<IForm>(initial);
-
-  useEffect(() => {
-    setForm(initial);
-  }, [initial]);
 
   const validateField = (fieldKey: string, validations: IValidation[], value?: string) => {
     const validationsToSatisty = form[fieldKey].validations;
@@ -112,6 +105,10 @@ const useForm = (initial: IForm) => {
   const clearForm = () => {
 
   };
+
+  useEffect(() => {
+    setForm(initial);
+  }, [initial]);
 
   return {
     form, setFieldValue,
