@@ -60,6 +60,10 @@ const Select = ({
                 <input
                     type="text" className={styles.input} id={id} onClick={e => e.stopPropagation()}
                     autoComplete="off"
+                    role="combobox"
+                    aria-controls=""
+                    aria-expanded={dd}
+                    aria-haspopup={true}
                     value={query}
                     onInput={(e: any) => setQuery(e.target.value)}
                 />

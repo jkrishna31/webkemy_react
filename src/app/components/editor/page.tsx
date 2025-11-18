@@ -8,7 +8,8 @@ import { editorBlocks, editorTools } from "@/constants/editor.const";
 import { BlockSelector, Editor, ToolSelector } from "@/lib/ui/elements/editor";
 import { GeneralInput, InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { Text } from "@/lib/ui/elements/text";
-import { BlockCautionIcon, BlockCodeIcon, BlockNoteIcon, BlockquoteIcon, BlockTipIcon, BoldIcon, CopyLinkIcon, DeleteIcon, DividerIcon, EmbedCodepenIcon, EmbedCSBIcon, EmbedGithubIcon, EmbedIcon, EmbedYoutubeIcon, FileIcon, FrameIcon, HeadingIcon, HighlightertIcon, HyperlinkIcon, ImageIcon, IndentDecIcon, IndentIncIcon, InlineCodeIcon, ItalicIcon, LineThroughIcon, OrderedListIcon, PilcrowIcon, RedoIcon, SparklesIcon, SubHeadingIcon, SubscriptIcon, SuperscriptIcon, SwapIcon, TableIcon, TopSidebarCloseIcon, UnderlineIcon, UndoIcon, UnorderedListIcon } from "@/lib/ui/svgs/icons";
+import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
+import { AlignCenterIcon, AlignRightIcon, BlockCautionIcon, BlockCodeIcon, BlockNoteIcon, BlockquoteIcon, BlockTipIcon, BoldIcon, ColorPaletteIcon, CopyLinkIcon, DeleteIcon, DividerIcon, EmbedCodepenIcon, EmbedCSBIcon, EmbedGithubIcon, EmbedIcon, EmbedYoutubeIcon, FileIcon, FontIcon, FrameIcon, HashtagIcon, HeadingIcon, HighlightertIcon, HyperlinkIcon, ImageIcon, IndentDecIcon, IndentIncIcon, InlineCodeIcon, ItalicIcon, LetterCaseIcon, LetterCaseLowerIcon, LetterCaseToggleIcon, LetterCaseUpperIcon, LetterSpacingIcon, LineHeightIcon, LineThroughIcon, MentionIcon, OrderedListIcon, PilcrowIcon, RedoIcon, SparklesIcon, SubHeadingIcon, SubscriptIcon, SuperscriptIcon, SwapIcon, TableIcon, TextColorIcon, TextFormattingRemoveIcon, TextIcon, TextOutlineIcon, TextSizeIcon, TopSidebarCloseIcon, UnderlineIcon, UndoIcon, UnorderedListIcon } from "@/lib/ui/svgs/icons";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 import styles from "./styles.module.scss";
@@ -184,22 +185,22 @@ const tools = [
       name: "Superscript", key: editorTools.SUPERSCRIPT,
       render: <SuperscriptIcon className={styles.icon} />
     },
-    // {
-    //     name: "Mention", key: editorTools.MENTION,
-    //     render: <MentionIcon className={styles.icon} />
-    // },
-    // {
-    //     name: "Hashtag", key: "hashtag",
-    //     render: <HashtagIcon className={styles.icon} />
-    // },
-    // {
-    //     name: "Color", key: "color",
-    //     render: <ColorPaletteIcon className={styles.icon} />
-    // },
-    // {
-    //     name: "Emoji", key: "emoji",
-    //     render: <AddEmojiIcon className={styles.icon} />
-    // },
+    {
+      name: "Mention", key: editorTools.MENTION,
+      render: <MentionIcon className={styles.icon} />
+    },
+    {
+      name: "Hashtag", key: "hashtag",
+      render: <HashtagIcon className={styles.icon} />
+    },
+    {
+      name: "Color", key: "color",
+      render: <ColorPaletteIcon className={styles.icon} />
+    },
+    {
+      name: "Emoji", key: "emoji",
+      render: <AddEmojiIcon className={styles.icon} />
+    },
   ],
   [
     {
@@ -211,66 +212,66 @@ const tools = [
       render: <IndentIncIcon className={styles.icon} />
     },
   ],
-  // [
-  //     {
-  //         name: "Text", key: "text",
-  //         render: <TextIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Text Color", key: "text_color",
-  //         render: <TextColorIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Text Size", key: "text_size",
-  //         render: <TextSizeIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Letter Spacing", key: "letter_spacing",
-  //         render: <LetterSpacingIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Line Height", key: "line_height",
-  //         render: <LineHeightIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Text Outline", key: "text_outline",
-  //         render: <TextOutlineIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Text Formatting", key: "text_formatting",
-  //         render: <FontIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Letter Case", key: "letter_case",
-  //         render: <LetterCaseIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Letter Case Upper", key: "letter_case_upper",
-  //         render: <LetterCaseUpperIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Letter Case Lower", key: "letter_case_lower",
-  //         render: <LetterCaseLowerIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Letter Case Toggle", key: "letter_case_toggle",
-  //         render: <LetterCaseToggleIcon className={styles.icon} />,
-  //     },
-  //     {
-  //         name: "Text Formatting Clear", key: "text_formatting_clear",
-  //         render: <TextFormattingRemoveIcon className={styles.icon} />,
-  //     },
-  // ],
-  // [
-  //     {
-  //         name: "Align Center", key: "align_center",
-  //         render: <AlignCenterIcon className={styles.icon} />
-  //     },
-  //     {
-  //         name: "Align Right", key: "align_right",
-  //         render: <AlignRightIcon className={styles.icon} />
-  //     },
-  // ],
+  [
+    {
+      name: "Text", key: "text",
+      render: <TextIcon className={styles.icon} />,
+    },
+    {
+      name: "Text Color", key: "text_color",
+      render: <TextColorIcon className={styles.icon} />,
+    },
+    {
+      name: "Text Size", key: "text_size",
+      render: <TextSizeIcon className={styles.icon} />,
+    },
+    {
+      name: "Letter Spacing", key: "letter_spacing",
+      render: <LetterSpacingIcon className={styles.icon} />,
+    },
+    {
+      name: "Line Height", key: "line_height",
+      render: <LineHeightIcon className={styles.icon} />,
+    },
+    {
+      name: "Text Outline", key: "text_outline",
+      render: <TextOutlineIcon className={styles.icon} />,
+    },
+    {
+      name: "Text Formatting", key: "text_formatting",
+      render: <FontIcon className={styles.icon} />,
+    },
+    {
+      name: "Letter Case", key: "letter_case",
+      render: <LetterCaseIcon className={styles.icon} />,
+    },
+    {
+      name: "Letter Case Upper", key: "letter_case_upper",
+      render: <LetterCaseUpperIcon className={styles.icon} />,
+    },
+    {
+      name: "Letter Case Lower", key: "letter_case_lower",
+      render: <LetterCaseLowerIcon className={styles.icon} />,
+    },
+    {
+      name: "Letter Case Toggle", key: "letter_case_toggle",
+      render: <LetterCaseToggleIcon className={styles.icon} />,
+    },
+    {
+      name: "Text Formatting Clear", key: "text_formatting_clear",
+      render: <TextFormattingRemoveIcon className={styles.icon} />,
+    },
+  ],
+  [
+    {
+      name: "Align Center", key: "align_center",
+      render: <AlignCenterIcon className={styles.icon} />
+    },
+    {
+      name: "Align Right", key: "align_right",
+      render: <AlignRightIcon className={styles.icon} />
+    },
+  ],
   [
     {
       name: "Convert", key: editorTools.CONVERT,
@@ -280,10 +281,6 @@ const tools = [
       name: "Copy Link", key: editorTools.COPY_LINK,
       render: <CopyLinkIcon className={styles.icon} />
     },
-    // {
-    //     name: "Grab Block", key: editorTools.GRAB,
-    //     render: <GrabIcon className={styles.icon} />
-    // },
     {
       name: "Delete Block", key: editorTools.DELETE, color: "red",
       render: <DeleteIcon className={styles.icon} />

@@ -33,6 +33,7 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
             onMouseEnter={openToolsList} onMouseLeave={closeToolsList}
             onOpen={handleSelectorClick}
             dropdown={
+                // use Options or SelectDropdown
                 <ul className={classes(styles.tools_list, "scroll_thin", listClass)}>
                     {
                         blocks.map((item: any) => {

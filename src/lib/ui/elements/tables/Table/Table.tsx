@@ -339,6 +339,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
           {hasCollapsibleContent && (
             <tr
               className={styles.collapsible_row}
+              data-dragging={isDragging}
               aria-hidden={isExpanded}
             >
               <td colSpan={rootCols?.length}>

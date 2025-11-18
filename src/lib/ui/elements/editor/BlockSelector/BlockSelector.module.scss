@@ -45,6 +45,10 @@
         background-color: var(--bg-s);
 
         @include scrollbar_y(1rem);
+
+        & :global(.menu_item) {
+            padding-block: .7rem;
+        }
     }
 }
 

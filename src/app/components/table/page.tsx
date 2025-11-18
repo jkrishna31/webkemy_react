@@ -111,7 +111,8 @@ const Page = () => {
   const renderDetails = useCallback((_: TableData) => {
     return (
       <div style={{ padding: "1rem 2rem", maxWidth: "100%", whiteSpace: "wrap", borderBottom: ".1rem solid var(--border-t)", background: "var(--bg-t)" }}>
-        {"Lorem ipsum dolor, sit amet elit. Odit numquam consequuntur, commodi ipsum consectetur tenetur natus, aliquam omnis in necessitatibus earum? Inventore voluptatum cupiditate et. Dolorum unde voluptas est dicta consectetur officia?"}
+        <p>{"Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti reiciendis, laboriosam pariatur temporibus, incidunt deleniti delectus quia, velit illo aspernatur facilis! Maiores placeat quae earum nam similique quo beatae asperiores veritatis debitis inventore magnam sed pariatur a, praesentium perferendis aliquid numquam maxime, in nobis cum! Error repellat adipisci dolorem quos quam possimus itaque deserunt provident, doloribus quidem cum."}</p>
+        <p>{"Doloribus voluptas adipisci facilis, velit exercitationem cumque architecto ut quasi corporis blanditiis. Sapiente dolor autem mollitia. Voluptas sint voluptatibus quod facere accusamus, tenetur quasi non nam blanditiis doloribus quae illum esse possimus cum dignissimos tempora? Debitis facilis sunt possimus voluptatem quis consequuntur nihil, beatae dicta aliquid deleniti molestiae perspiciatis distinctio, inventore ipsa eum quas soluta aut, consectetur ut? Ducimus officia commodi."}</p>
       </div>
     );
   }, []);

@@ -14,10 +14,9 @@ const Options = ({
 }: OptionsProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  // no need to focus trap
-  // only loop on item as per arrow keys
-  // arrow keys to iterate on items
-  // on tab move out of options
+  // arrow key navigation support
+  // arrow key lock
+  // update focus on hover
 
   return (
     <div
