@@ -5,6 +5,7 @@ import React, { ComponentProps, useState } from "react";
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { DateInput, GeneralInput, InputFieldWrapper, InputItem, Select, Switch, TagsInput, TextArea, TimeInput } from "@/lib/ui/elements/inputs";
 import { Text } from "@/lib/ui/elements/text";
+import { classes } from "@/lib/utils/style.utils";
 
 import { FormControls } from "..";
 import styles from "./EventForm.module.scss";
@@ -22,31 +23,31 @@ const colorOptions = [
   {
     name: "Green", value: "green",
     icon: (
-      <div className={`${styles.color_icon} ${styles.green}`}></div>
+      <div className={classes(styles.color_icon, styles.green)}></div>
     ),
   },
   {
     name: "Blue", value: "blue",
     icon: (
-      <div className={`${styles.color_icon} ${styles.blue}`}></div>
+      <div className={classes(styles.color_icon, styles.blue)}></div>
     ),
   },
   {
     name: "Red", value: "red",
     icon: (
-      <div className={`${styles.color_icon} ${styles.red}`}></div>
+      <div className={classes(styles.color_icon, styles.red)}></div>
     ),
   },
   {
     name: "Yellow", value: "yellow",
     icon: (
-      <div className={`${styles.color_icon} ${styles.yellow}`}></div>
+      <div className={classes(styles.color_icon, styles.yellow)}></div>
     ),
   },
   {
     name: "Orange", value: "orange",
     icon: (
-      <div className={`${styles.color_icon} ${styles.orange}`}></div>
+      <div className={classes(styles.color_icon, styles.orange)}></div>
     ),
   },
 ];

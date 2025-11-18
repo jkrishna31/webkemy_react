@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./RippleLoader.module.scss";
 
 export interface CircularLoaderProps extends ComponentProps<"div"> {
@@ -8,7 +10,7 @@ export interface CircularLoaderProps extends ComponentProps<"div"> {
 
 const RippleLoader = ({ className, ...props }: CircularLoaderProps) => {
   return (
-    <div className={`${styles.loader} ${className}`} {...props}></div>
+    <div className={classes(styles.loader, className)} {...props}></div>
   );
 };
 

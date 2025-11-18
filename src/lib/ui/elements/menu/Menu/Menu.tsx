@@ -3,6 +3,7 @@
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { Popover } from "@/lib/ui/elements/popper";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Menu.module.scss";
 
@@ -63,7 +64,7 @@ const Menu = ({
   return (
     <div
       ref={menuRef}
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
       data-minimized={minimized}
       {...props}
     >

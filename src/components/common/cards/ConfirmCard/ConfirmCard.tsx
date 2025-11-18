@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import { Modal } from "@/lib/ui/elements/modals";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ConfirmCard.module.scss";
 
@@ -40,26 +41,26 @@ const ConfirmCard = ({
                 <>
                     {
                         heading ? (
-                            <h2 className={`${styles.title} ${titleClass}`}>{heading}</h2>
+                            <h2 className={classes(styles.title, titleClass)}>{heading}</h2>
                         ) : null
                     }
                     {
                         desc ? (
-                            <p className={`${styles.desc} ${descClass}`}>
+                            <p className={classes(styles.desc, descClass)}>
                                 {desc}
                             </p>
                         ) : null
                     }
                     {
                         controls ? (
-                            <div className={`${styles.controls} ${controlsClass}`}>
+                            <div className={classes(styles.controls, controlsClass)}>
                                 {
                                     controls?.map((control: any) => {
                                         if (control.type === "primary") {
                                             return (
                                                 <Button
                                                     variant="primary"
-                                                    className={`${styles.control_btn}`}
+                                                    className={styles.control_btn}
                                                     key={control.id}
                                                     onClick={control.onClick}
                                                 >
@@ -70,7 +71,7 @@ const ConfirmCard = ({
                                             return (
                                                 <Button
                                                     variant="secondary"
-                                                    className={`${styles.control_btn} ${styles.secondary_btn}`}
+                                                    className={classes(styles.control_btn, styles.secondary_btn)}
                                                     onClick={control.onClick}
                                                     key={control.id}
                                                 >
@@ -89,7 +90,7 @@ const ConfirmCard = ({
     };
 
     return (
-        <Modal overlay onClose={handleOverlayClick} className={`${styles.card} ${cardClass}`}>
+        <Modal overlay onClose={handleOverlayClick} className={classes(styles.card, cardClass)}>
             {renderLayout()}
         </Modal>
     );

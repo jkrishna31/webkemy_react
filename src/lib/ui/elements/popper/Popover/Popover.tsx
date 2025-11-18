@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 
 import { edges } from "@/constants/general.const";
 import { useKey, useScrollLock } from "@/lib/hooks";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Popover.module.scss";
 
@@ -166,7 +167,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={popoverRef}
-        className={`${styles.wrapper} ${className}`}
+        className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >
@@ -176,7 +177,7 @@ const Popover = ({
     : (
       <div
         ref={popoverRef}
-        className={`${styles.wrapper} ${className}`}
+        className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >

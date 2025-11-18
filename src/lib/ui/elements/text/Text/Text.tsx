@@ -1,5 +1,7 @@
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Text.module.scss";
 
 type TextTags = "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "label" | "legend";
@@ -23,7 +25,7 @@ const Text = <T extends ElementType = "p">({
 
   return (
     <Element
-      className={`${styles[as]} ${className}`}
+      className={classes(styles[as], className)}
       data-inline={inline} data-normal={normal}
       aria-disabled={props["aria-disabled"] || disabled}
       {...props}

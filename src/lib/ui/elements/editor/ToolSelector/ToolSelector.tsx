@@ -2,6 +2,8 @@
 
 import { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./ToolSelector.module.scss";
 
 export interface ToolSelectorProps extends ComponentProps<"div"> {
@@ -28,7 +30,7 @@ const ToolSelector = ({
                                 toolGroup?.map((tool: any) => (
                                     <button
                                         key={tool.key}
-                                        className={`${styles.inline_tool_btn} ${styles?.[tool["color"]] || ""}`}
+                                        className={classes(styles.inline_tool_btn, styles?.[tool["color"]])}
                                         title={tool.name}
                                         disabled={tool?.disabled}
                                         data-active={toolsState?.[tool.key]}

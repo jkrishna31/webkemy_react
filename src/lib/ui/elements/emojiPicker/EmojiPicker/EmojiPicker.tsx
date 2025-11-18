@@ -13,6 +13,7 @@ import { TabList } from "@/lib/ui/elements/tablist";
 import { EmojiSmileIcon } from "@/lib/ui/svgs/emojis";
 import { BulbIcon, BusFrontIcon, CatIcon, CrossIcon, FlagIcon, HistoryIcon, PopcornIcon, SearchIcon, StarIcon, VolleyBallIcon } from "@/lib/ui/svgs/icons";
 import { throttle } from "@/lib/utils/general.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./EmojiPicker.module.scss";
 
@@ -227,7 +228,7 @@ const EmojiPicker = ({
       />
       <ul
         ref={containerRef}
-        className={`${styles.emojis_wrapper} scroll_thin`}
+        className={classes(styles.emojis_wrapper, "scroll_thin")}
         onMouseMove={handleMouseMove}
         onFocus={handleMouseMove}
         onMouseLeave={() => clearAnchor(true)}

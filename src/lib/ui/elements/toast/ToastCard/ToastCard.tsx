@@ -4,6 +4,7 @@ import { ComponentProps, memo, useCallback, useEffect, useRef } from "react";
 
 import { ToastType } from "@/data/stores";
 import { CircleCheckIcon, CircleCrossIcon, CircleInfoIcon, CrossIcon, TriangleWarningIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ToastCard.module.scss";
 
@@ -55,7 +56,7 @@ const ToastCard = ({
 
     return (
         <div
-            className={`${styles.card_wrapper} ${getToastColorClass()} ${className}`}
+            className={classes(styles.card_wrapper, getToastColorClass(), className)}
             data-toast
             data-id={toastId}
             role="alert"
@@ -66,7 +67,7 @@ const ToastCard = ({
             </div>
             <div className={styles.controls_wrapper}>
                 <button
-                    className={`${styles.close_btn} ${styles.icon_wrapper}`}
+                    className={classes(styles.close_btn, styles.icon_wrapper)}
                     onClick={handleClose}
                     aria-label="Close"
                 >
@@ -81,19 +82,19 @@ const renderIcon = (type?: ToastType) => {
     switch (type) {
         case "success":
             return (
-                <CircleCheckIcon className={`${styles.icon} ${styles.green}`} />
+                <CircleCheckIcon className={classes(styles.icon, styles.green)} />
             );
         case "error":
             return (
-                <CircleCrossIcon className={`${styles.icon} ${styles.red}`} />
+                <CircleCrossIcon className={classes(styles.icon, styles.red)} />
             );
         case "warn":
             return (
-                <TriangleWarningIcon className={`${styles.icon} ${styles.yellow}`} />
+                <TriangleWarningIcon className={classes(styles.icon, styles.yellow)} />
             );
         case "info":
             return (
-                <CircleInfoIcon className={`${styles.icon} ${styles.blue}`} />
+                <CircleInfoIcon className={classes(styles.icon, styles.blue)} />
             );
         default:
             return null;

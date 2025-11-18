@@ -2,6 +2,8 @@
 
 import React, { ComponentProps, FormEvent, useCallback, useEffect, useImperativeHandle, useRef } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./TextArea.module.scss";
 
 export interface TextAreaProps extends ComponentProps<"textarea"> {
@@ -60,7 +62,7 @@ const TextArea = ({
             name={id} id={id}
             onKeyDown={handleKeyDown}
             onInput={handleInput}
-            className={`${styles.input} ${className}`}
+            className={classes(styles.input, className)}
             ref={taRef}
             autoComplete="off"
             value={value}

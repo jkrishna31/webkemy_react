@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./CarouselItem.module.scss";
 
 export interface CarouselItemProps extends ComponentProps<"div"> {
@@ -11,7 +13,7 @@ const CarouselItem = ({
   ...props
 }: CarouselItemProps) => {
   return (
-    <div className={`${styles.wrapper} ${className}`}>
+    <div className={classes(styles.wrapper, className)}>
       {children}
     </div>
   );

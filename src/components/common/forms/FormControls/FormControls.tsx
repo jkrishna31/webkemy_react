@@ -1,6 +1,7 @@
 import { ComponentProps } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./FormControls.module.scss";
 
@@ -20,13 +21,13 @@ const FormControls = ({
     ...props
 }: FormControlsProps) => {
     return (
-        <div className={`${styles.form_controls} ${className}`}>
+        <div className={classes(styles.form_controls, className)}>
             <Button
                 variant="secondary"
                 type="reset"
                 onClick={onCancel}
                 disabled={disableCancel}
-                className={`${styles.ctrl_btn} ${styles.sec_btn}`}
+                className={classes(styles.ctrl_btn, styles.sec_btn)}
             >
                 {cancelLabel}
             </Button>
@@ -34,7 +35,7 @@ const FormControls = ({
                 variant="primary"
                 type="submit"
                 disabled={disableSubmit}
-                className={`${styles.ctrl_btn}`}
+                className={classes(styles.ctrl_btn)}
             >
                 {submitLabel}
             </Button>

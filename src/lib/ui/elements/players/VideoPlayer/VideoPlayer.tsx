@@ -14,6 +14,7 @@ import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { breakdownTime, TimeField } from "@/lib/utils/datetime.utils";
 import { getFormattedTime } from "@/lib/utils/format.utils";
 import { clampNumber } from "@/lib/utils/math.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./VideoPlayer.module.scss";
 
@@ -143,7 +144,7 @@ const VideoPlayer = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${rootClass}`}
+      className={classes(styles.wrapper, rootClass)}
       ref={containerRef}
       data-overlay={overlay}
       onClick={handleClick}

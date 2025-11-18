@@ -37,12 +37,6 @@ const SearchManager = ({ overlayClass, wrapperClass, ...props }: SearchBoxProps)
   const renderSearchHistory = () => {
     return (
       <div className={styles.history_wrapper}>
-        {/* <div className={styles.history_header}>
-                    <h3 className={styles.section_title}>History</h3>
-                    <div className={styles.history_controls}>
-                        <button className={`${styles.ctrl_btn} ${styles.remove_all_btn}`}>Clear All</button>
-                    </div>
-                </div> */}
         <ul className={styles.history_list}>
           {
             history.map((item, idx) => (
@@ -63,7 +57,7 @@ const SearchManager = ({ overlayClass, wrapperClass, ...props }: SearchBoxProps)
   return active ? (
     <Modal
       overlay pos={positions.TOP_CENTER} onClose={handleClose}
-      className={`${styles.component}`}
+      className={styles.component}
     >
       {active === "audio" ? (
         <AudioListener />

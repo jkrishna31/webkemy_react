@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { clampNumber } from "@/lib/utils/math.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ImageCrop.module.scss";
 
@@ -205,16 +206,16 @@ const ImageCrop = ({
     <div
       tabIndex={0}
       ref={containerRef}
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
     >
       <div className={styles.box}>
-        <div data-frame className={`${styles.selection} selection`}></div>
+        <div data-frame className={classes(styles.selection, "selection")}></div>
         <Image
           src={src}
           alt="image to crop"
           width={200} height={200}
           data-crop
-          className={`${styles.img}`}
+          className={styles.img}
           style={{
             transform: getTransform([...translate.current], scale, [yFlip ? 180 : 0, xFlip ? 180 : 0, 0]),
           }}

@@ -3,6 +3,7 @@
 import React, { ComponentProps } from "react";
 
 import { MinusIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import { GeneralInput, InputFieldWrapper } from "..";
 import styles from "./NumberInput.module.scss";
@@ -51,7 +52,7 @@ const NumberInput = ({
   };
 
   return (
-    <div className={`${enclosedControls ? "input_like" : ""} ${styles.wrapper} ${className}`}>
+    <div className={classes(enclosedControls && "input_like", styles.wrapper, className)}>
       {
         !hideControls ? (
           <button

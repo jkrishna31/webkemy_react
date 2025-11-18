@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ComponentProps, ElementType, ReactNode } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./Button.module.scss";
@@ -59,7 +60,7 @@ const Button = <T extends ElementType = "button">({
         return (
             <>
                 {icon}
-                {data ? (<span className={`${styles.data} ${dataClass}`}>{data}</span>) : (null)}
+                {data ? (<span className={classes(styles.data, dataClass)}>{data}</span>) : (null)}
                 {children}
             </>
         );
@@ -67,7 +68,7 @@ const Button = <T extends ElementType = "button">({
 
     return (
         <Tag
-            className={`${styles.btn} ${getVariantClass(variant)} ${className}`}
+            className={classes(styles.btn, getVariantClass(variant), className)}
             // data-variant={variant}
             data-color={color}
             {...(!isLink ? { type: "button" } : {})}

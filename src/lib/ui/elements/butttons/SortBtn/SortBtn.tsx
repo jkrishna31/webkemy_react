@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 
 import { SortIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SortBtn.module.scss";
 
@@ -16,7 +17,7 @@ const SortBtn = ({
   return (
     <button
       data-sort={sort}
-      className={`${styles.btn} ${className}`}
+      className={classes(styles.btn, className)}
       {...props}
     >
       <SortIcon />

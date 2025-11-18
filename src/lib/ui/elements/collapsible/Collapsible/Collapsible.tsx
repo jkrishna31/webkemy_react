@@ -3,6 +3,7 @@
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible/CollapsibleContainer";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Collapsible.module.scss";
 
@@ -39,7 +40,7 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
 
     return (
         <WrapperElement
-            className={`${styles.wrapper} ${className}`}
+            className={classes(styles.wrapper, className)}
             data-expanded={open}
             {...props}
         >

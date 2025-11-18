@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useEvents, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
+import { classes } from "@/lib/utils/style.utils";
 
 import { DayView, DayViewProps, MonthView, MonthViewProps, WeekView, WeekViewProps, YearView, YearViewProps } from "..";
 import styles from "./CalendarBody.module.scss";
@@ -35,7 +36,7 @@ const CalendarBody = ({
   };
 
   return (
-    <div className={`${styles.wrapper} ${className}`}>
+    <div className={classes(styles.wrapper, className)}>
       {
         calendarMode === "day" ? (
           <DayView

@@ -6,6 +6,7 @@ import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
 import { Menu, MenuItem } from "@/lib/ui/elements/menu";
 import { ChevronsLeftIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppSidebar.module.scss";
 
@@ -33,7 +34,7 @@ const AppSidebar = ({
   }, [setField, windowSize]);
 
   return (
-    <div className={`${styles.sidebar} ${className}`} style={{ width: sidebar === "collapsed" ? "fit-content" : "32rem" }}>
+    <div className={classes(styles.sidebar, className)} style={{ width: sidebar === "collapsed" ? "fit-content" : "32rem" }}>
       <button className={styles.close_btn} aria-pressed={sidebar === "collapsed"} onClick={toggleSidebar}>
         <ChevronsLeftIcon />
       </button>

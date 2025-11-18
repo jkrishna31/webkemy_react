@@ -6,6 +6,7 @@ import { useWindowSize } from "@/data/stores";
 import { useDebouncedCallback } from "@/lib/hooks";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
 import { hasDOM } from "@/lib/utils/client.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Scrollable.module.scss";
 
@@ -86,7 +87,7 @@ const Scrollable = ({
       {
         hasXScroll[0] ? (
           <button
-            className={`${styles.scroll_btn} ${styles.btn_left} scroll_btn`}
+            className={classes(styles.scroll_btn, styles.btn_left, "scroll_btn")}
             onClick={() => performScroll("left")}
             aria-label="Scroll Left"
           >
@@ -96,7 +97,7 @@ const Scrollable = ({
       }
       <div
         {...props}
-        className={`scroll_invisible ${styles.container} ${className}`}
+        className={classes("scroll_invisible", styles.container, className)}
         ref={listRef}
       >
         {children}
@@ -104,7 +105,7 @@ const Scrollable = ({
       {
         hasXScroll[1] ? (
           <button
-            className={`${styles.scroll_btn} ${styles.btn_right} scroll_btn`}
+            className={classes(styles.scroll_btn, styles.btn_right, "scroll_btn")}
             onClick={() => performScroll("right")}
             aria-label="Scroll Right"
           >

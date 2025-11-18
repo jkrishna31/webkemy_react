@@ -1,5 +1,7 @@
 import React, { ComponentProps, ElementType } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import { Avatar, AvatarProps } from "..";
 import styles from "./AvatarList.module.scss";
 
@@ -13,7 +15,7 @@ const AvatarList = <T extends ElementType>({
   ...props
 }: AvatarsListProps<T>) => {
   return (
-    <div className={`${styles.list} ${expandable ? styles.expandable : ""} ${className}`} {...props}>
+    <div className={classes(styles.list, expandable && styles.expandable, className)} {...props}>
       {
         avatars?.map((avatar) => {
           return (

@@ -5,6 +5,7 @@ import React, { ComponentProps, ReactNode, useEffect, useMemo, useState } from "
 import { SearchForm } from "@/components/common/forms";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SelectDropdown.module.scss";
 
@@ -79,7 +80,7 @@ const SelectDropdown = ({
     return (
         <Dropdown
             open={open}
-            className={`${styles.container} ${wrapperClass}`}
+            className={classes(styles.container, wrapperClass)}
             onMouseLeave={allowSearch ? undefined : closeDropdown}
             onClose={closeDropdown}
             onOpen={openDropdown}
@@ -102,13 +103,13 @@ const SelectDropdown = ({
                             </div>
                         ) : null
                     }
-                    <ul className={`${styles.ul} scroll_thin`}>
+                    <ul className={classes(styles.ul, "scroll_thin")}>
                         {
                             listToShow.map((item, index) => {
                                 return (
                                     <li key={index} className={styles.list_item}>
                                         <button
-                                            className={`${styles.item_btn} ${selected === item.value ? styles.item_selected : null}`}
+                                            className={classes(styles.item_btn, selected === item.value && styles.item_selected)}
                                             onClick={() => handleItemSelect(item)}
                                             disabled={item.disabled}
                                         >
@@ -142,7 +143,7 @@ const SelectDropdown = ({
                         </span>
                         {
                             !noIcon ? (
-                                <ExpandSolidIcon className={`${styles.dropdown_icon} ${iconClass}`} />
+                                <ExpandSolidIcon className={classes(styles.dropdown_icon, iconClass)} />
                             ) : null
                         }
                     </>

@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Slider.module.scss";
 
 export interface SliderProps extends ComponentProps<"input"> {
@@ -20,7 +22,7 @@ const Slider = ({
   // todo: start range
   return (
     <div
-      className={`${styles.wrapper} ${wrapperClass}`}
+      className={classes(styles.wrapper, wrapperClass)}
       data-variant={variant}
       data-is-progress={asProgress}
       aria-orientation={props["aria-orientation"] || orientation}
@@ -33,7 +35,7 @@ const Slider = ({
     >
       <input
         type="range"
-        className={`${styles.input} ${className}`}
+        className={classes(styles.input, className)}
         min={min} max={max} value={value}
         {...props}
         aria-orientation={props["aria-orientation"] || orientation}

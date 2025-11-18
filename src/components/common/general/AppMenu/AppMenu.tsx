@@ -6,6 +6,7 @@ import { MenuItem } from "@/lib/ui/elements/menu";
 import { BarChartIcon, BubbleChartIcon, LineChartIcon, PieChartIcon, RadarChartIcon, ScatterChartIcon } from "@/lib/ui/svgs/charts";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
 import { AppLogo, AppNotificationIcon, BellIcon, BlockCodeIcon, BotMessageIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CapsuleIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, MessagesIcon, NotificationRemoveIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppMenu.module.scss";
 
@@ -502,32 +503,32 @@ const AppMenu = ({ open }: AppMenuProps) => {
             </div>
             <nav
                 id="navigation-drawer"
-                className={`${styles.navmenu_container} ${styles.flex_vert}`}
+                className={classes(styles.navmenu_container, styles.flex_vert)}
                 inert={open ? undefined : true}
             >
                 <div className={styles.top_section}>
                     <AppLogo className={styles.logo_icon} />
                     <div className={styles.top_right}>
                         <Button
-                            className={`${styles.menu_header_ctrl} ${styles.translate_btn}`}
+                            className={classes(styles.menu_header_ctrl, styles.translate_btn)}
                             icon={
-                                <GlobeIcon className={`${styles.header_ctrl_icon} ${styles.translate_icon}`} />
+                                <GlobeIcon className={classes(styles.header_ctrl_icon, styles.translate_icon)} />
                             }
                             onClick={handleLangBtnClick}
                             aria-label="Language"
                         />
                         <Button
-                            className={`${styles.menu_header_ctrl} ${styles.theme_btn}`}
+                            className={classes(styles.menu_header_ctrl, styles.theme_btn)}
                             icon={
-                                <ThemeIcon className={`${styles.header_ctrl_icon} ${styles.theme_icon}`} />
+                                <ThemeIcon className={classes(styles.header_ctrl_icon, styles.theme_icon)} />
                             }
                             onClick={handleThemeBtnClick}
                             aria-label="Theme"
                         />
                         <Button
-                            className={`${styles.menu_header_ctrl} ${styles.menu_close_btn}`}
+                            className={classes(styles.menu_header_ctrl, styles.menu_close_btn)}
                             icon={
-                                <CrossIcon className={`${styles.header_ctrl_icon} ${styles.close_icon}`} />
+                                <CrossIcon className={classes(styles.header_ctrl_icon, styles.close_icon)} />
                             }
                             onClick={closeMenu}
                             aria-label="close menu"

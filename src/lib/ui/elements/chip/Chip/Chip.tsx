@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 
 import { CrossIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./Chip.module.scss";
@@ -19,7 +20,7 @@ const Chip = ({
 }: ChipProps) => {
   return (
     <div
-      className={`${styles.chip} ${onRemove ? "" : styles.static} ${className}`}
+      className={classes(styles.chip, !onRemove && styles.static, className)}
       data-color={color}
       data-removable={!!onRemove}
       {...props}

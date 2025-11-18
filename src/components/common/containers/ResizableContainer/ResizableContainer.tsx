@@ -2,6 +2,8 @@
 
 import React, { ComponentProps, ElementType, memo, useCallback, useRef, useState } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./ResizableContainer.module.scss";
 
 export type Resizers = "l" | "r" | "t" | "b" | "tl" | "tr" | "bl" | "br";
@@ -103,10 +105,10 @@ const ResizableContainer = <T extends ElementType = "div">({
   return (
     <Element
       ref={elRef}
-      className={`${styles.container} ${className}`}
+      className={classes(styles.container, className)}
       {...props}
     >
-      <div className={`${styles.content} ${contentClass}`}>
+      <div className={classes(styles.content, contentClass)}>
         {children}
       </div>
 

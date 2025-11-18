@@ -5,6 +5,7 @@ import React, { ComponentProps, useRef, useState } from "react";
 import { useFocusTrap } from "@/lib/hooks";
 import { Button } from "@/lib/ui/elements/butttons";
 import { CrossIcon, ZoomInIcon, ZoomOutIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Lightbox.module.scss";
 
@@ -68,7 +69,7 @@ const Lightbox = ({
         </Button>
         <Button
           variant="tertiary"
-          className={`${styles.ctrl_btn} ${styles.close_btn}`}
+          className={classes(styles.ctrl_btn, styles.close_btn)}
           onClick={onClose}
           data-autofocus={true}
           aria-label="Close" title="Close"

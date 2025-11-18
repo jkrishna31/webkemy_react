@@ -6,6 +6,7 @@ import { createPortal } from "react-dom";
 import { Overlay } from "@/components/common/containers";
 import { positions } from "@/constants/general.const";
 import { useFocusTrap, useKey } from "@/lib/hooks";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Modal.module.scss";
 
@@ -41,7 +42,7 @@ const Modal = ({
         <>
             {overlay && <Overlay className={styles.overlay} open={true} onClick={onClose} />}
             <div
-                className={`${styles.wrapper} ${getClass(pos)} ${className} scroll_thin`}
+                className={classes(styles.wrapper, getClass(pos), className, "scroll_thin")}
                 role="dialog"
                 ref={ref}
                 {...props}

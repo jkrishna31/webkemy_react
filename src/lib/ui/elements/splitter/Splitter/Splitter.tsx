@@ -2,6 +2,8 @@
 
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Splitter.module.scss";
 
 export interface SplitterProps extends ComponentProps<"div"> {
@@ -18,7 +20,7 @@ const Splitter = ({
     <div
       data-splitter
       data-layout={layout}
-      className={`${styles.splitter} ${className}`}
+      className={classes(styles.splitter, className)}
       style={{
         flex: value / 100,
         ...(style ?? {}),

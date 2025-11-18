@@ -7,6 +7,7 @@ import { useCalendarActions, useWindowSize } from "@/data/stores";
 import { useMounted } from "@/lib/hooks";
 import { PlusIcon } from "@/lib/ui/svgs/icons";
 import { compareDateByPrecision, getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";
+import { classes } from "@/lib/utils/style.utils";
 import { CalendarDay } from "@/types/calendar.types";
 
 import { CalendarEvent, DayCard } from "..";
@@ -243,7 +244,7 @@ const MonthView = ({
   return isMounted ? (
     <div
       ref={containerRef}
-      className={`${styles.container} ${className}`}
+      className={classes(styles.container, className)}
       {...dragEvts}
       onPointerDown={windowSize[0] > 700 ? handlePointerDown : undefined}
       onPointerLeave={() => setSelection(["", ""])}
@@ -252,7 +253,7 @@ const MonthView = ({
         weekDaysOrder.map((_, idx: number) => {
           const weekDayKey: string = weekDaysOrder[(weekDayStart + idx) % weekDaysOrder.length];
           return (
-            <div key={weekDayKey} className={`${styles.header_cell}`} data-compact={compact}>
+            <div key={weekDayKey} className={styles.header_cell} data-compact={compact}>
               {weekDays[weekDayKey].label.slice(0, 3)}
               {
                 !compact ? (

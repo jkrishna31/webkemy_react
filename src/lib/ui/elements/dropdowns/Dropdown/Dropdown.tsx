@@ -4,6 +4,7 @@ import React, { ComponentProps, ReactNode, useCallback, useEffect, useLayoutEffe
 
 import { useFocusTrap } from "@/lib/hooks";
 import { hasDOM } from "@/lib/utils/client.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Dropdown.module.scss";
 
@@ -91,13 +92,13 @@ const Dropdown = ({
   }, [dropdown]);
 
   return (
-    <div ref={ref} className={`${styles.wrapper} ${className}`} {...props}>
+    <div ref={ref} className={classes(styles.wrapper, className)} {...props}>
       {
         isCustomSelector ? (
           children
         ) : (
           <button
-            className={`${styles.btn} ${btnClass}`}
+            className={classes(styles.btn, btnClass)}
             onClick={onOpen}
             type="button"
           >
@@ -108,7 +109,7 @@ const Dropdown = ({
       {
         open ? (
           <div
-            className={`${styles.dropdown} ${getClasses()} ${dropdownClass}`}
+            className={classes(styles.dropdown, getClasses(), dropdownClass)}
             data-overlap={!noOverlap}
             ref={dropdownRef}
           >

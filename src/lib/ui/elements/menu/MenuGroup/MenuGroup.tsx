@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./MenuGroup.module.scss";
 
 export interface MenuGroupProps extends ComponentProps<"div"> {
@@ -15,11 +17,11 @@ const MenuGroup = ({
 }: MenuGroupProps) => {
   // todo: collapsible
   return (
-    <div className={`${styles.group} ${className}`} {...props}>
-      <div className={`${styles.header} ${headerClass}`}>
+    <div className={classes(styles.group, className)} {...props}>
+      <div className={classes(styles.header, headerClass)}>
         <p>{title}</p>
       </div>
-      <div className={`${styles.body} body`}>
+      <div className={classes(styles.body, "body")}>
         {children}
       </div>
     </div>

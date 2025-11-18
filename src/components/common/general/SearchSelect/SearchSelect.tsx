@@ -78,7 +78,7 @@ const SearchSelect = ({ options, title, keey, wrapperClass, selected, overlay = 
                 ) : null
             }
             <div className={styles.list_section}>
-                <ul className={`${styles.list}`}>
+                <ul className={styles.list}>
                     {
                         allowedItems?.map((item: any, index: number) => (
                             <li className={styles.list_item} key={index}>

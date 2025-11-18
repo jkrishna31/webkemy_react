@@ -4,6 +4,7 @@ import React, { ComponentProps, ElementType, ReactNode } from "react";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Collapsible } from "@/lib/ui/elements/collapsible";
 import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./MenuItem.module.scss";
 
@@ -62,10 +63,10 @@ const MenuItem = <T extends ElementType = "button">({
 
   const renderElement = () => {
     return group ? (
-      <div className={`${styles.group_header} ${styles.sticky} group_header`}>{group}</div>
+      <div className={classes(styles.group_header, styles.sticky, "group_header", className)}>{group}</div>
     ) : (
       <Element
-        className={`${styles.item} ${className} ${collapsible ? styles.sticky : ""} menu_item`}
+        className={classes(styles.item, className, collapsible && styles.sticky, "menu_item")}
         aria-label={typeof primary === "string" ? primary : ""}
         {...props}
         onClick={onClick ? () => onClick(id) : undefined}
@@ -80,7 +81,7 @@ const MenuItem = <T extends ElementType = "button">({
             {icon}
             <div className={styles.content}>
               <div className={styles.details}>
-                <p className={`${styles.primary} primary`}>{primary}</p>
+                <p className={classes(styles.primary, "primary")}>{primary}</p>
                 {
                   secondary ? (
                     <p className={styles.secondary}>{secondary}</p>
@@ -114,7 +115,7 @@ const MenuItem = <T extends ElementType = "button">({
             <Button
               variant="tertiary"
               className={styles.toggle_btn}
-              onClick={() => onMenuToggle(id)}
+              onClick={() => onMenuToggle?.(id)}
               aria-pressed={isOpen}
               aria-label={isOpen ? "Close Sub-Menu" : "Open Sub-Menu"}
               title={isOpen ? "Close Sub-Menu" : "Open Sub-Menu"}
@@ -133,7 +134,7 @@ const MenuItem = <T extends ElementType = "button">({
       </Collapsible>
     ) : (
       <div
-        className={`${styles.container} ${group ? styles.group_container : ""}`}
+        className={classes(styles.container, group && styles.group_container)}
         data-minimized={minimized}
       >
         {renderElement()}

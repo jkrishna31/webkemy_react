@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./BannerItem.module.scss";
 
 export interface BannerItemProps extends ComponentProps<"li"> {
@@ -11,7 +13,7 @@ const BannerItem = ({
   ...props
 }: BannerItemProps) => {
   return (
-    <li className={`${styles.wrapper} ${className}`} {...props}>
+    <li className={classes(styles.wrapper, className)} {...props}>
       {children}
     </li>
   );

@@ -1,6 +1,7 @@
 import React, { ComponentProps, ReactNode } from "react";
 
 import { CheckMarkIcon, CrossIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Timeline.module.scss";
 
@@ -26,14 +27,14 @@ const Timeline = ({
   const renderTimeline = (timeline: TimelineEntry[], sub?: boolean) => {
     return (
       <ul
-        className={`${styles.wrapper} ${!sub ? styles.root_wrapper : ""} ${className}`}
+        className={classes(styles.wrapper, !sub && styles.root_wrapper, className)}
         data-flow={flow}
         {...props}
       >
         {
           timeline?.map((entry) => (
             <li key={entry.id} className={entryClass}>
-              <div className={`${sub ? styles.sub_entry : styles.entry}`}>
+              <div className={classes(sub ? styles.sub_entry : styles.entry)}>
                 {entry.left ? (
                   <div className={styles.left}>
                     {entry.left}

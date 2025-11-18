@@ -3,6 +3,7 @@
 import React, { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { useScroll } from "@/lib/hooks";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Virtualizer.module.scss";
 
@@ -60,7 +61,7 @@ const Virtualizer = <T extends object | string | number | boolean>({
 
   return (
     <div
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
       ref={ref}
     >
       {

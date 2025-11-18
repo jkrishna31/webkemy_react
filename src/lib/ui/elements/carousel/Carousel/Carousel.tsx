@@ -3,6 +3,7 @@
 import React, { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Carousel.module.scss";
 
@@ -58,7 +59,7 @@ const Carousel = ({
   return (
     <div
       role="region"
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
       {...props}
     >
       <button
@@ -79,7 +80,7 @@ const Carousel = ({
       </button>
       <div
         ref={containerRef}
-        className={`${styles.slides} scroll_invisible`}
+        className={classes(styles.slides, "scroll_invisible")}
       >
         {
           slides?.map((slide, idx) => {

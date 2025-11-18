@@ -63,6 +63,11 @@
       height: 2rem;
     }
   }
+
+  .collapsible_row>td {
+    padding: 0;
+    border: none;
+  }
 }
 
 .table_actions {

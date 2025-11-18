@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 
 import { PlusIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import { CalendarEvent, EventBadge } from "..";
 import styles from "./DayCard.module.scss";
@@ -29,14 +30,14 @@ const DayCard = ({
 }: DayCardProps) => {
   if (hideOutsideDays && monthType == "prev") {
     return (
-      <div className={`${styles.card} ${styles.pm_date_card}`} {...props}>
+      <div className={classes(styles.card, styles.pm_date_card)} {...props}>
       </div>
     );
   }
 
   if (hideOutsideDays && monthType === "next") {
     return (
-      <div className={`${styles.card} ${styles.nm_date_card}`} {...props}>
+      <div className={classes(styles.card, styles.nm_date_card)} {...props}>
       </div>
     );
   }
@@ -48,7 +49,7 @@ const DayCard = ({
       return null;
     }
     return (
-      <div className={`${compact ? styles.dots_wrapper : styles.badges_wrapper} scroll_thin`}>
+      <div className={classes(compact ? styles.dots_wrapper : styles.badges_wrapper, "scroll_thin")}>
         {
           events?.map((event: CalendarEvent, i: number) => (
             <EventBadge
@@ -69,7 +70,7 @@ const DayCard = ({
 
   return (
     <div
-      className={`${styles.card} ${className}`}
+      className={classes(styles.card, className)}
       {...props}
       data-compact={compact}
       data-day={`${year}-${month}-${day}`}

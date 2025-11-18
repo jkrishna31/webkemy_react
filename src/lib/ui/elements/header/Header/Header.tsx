@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Header.module.scss";
 
 export interface HeaderProps extends ComponentProps<"header"> {
@@ -13,7 +15,7 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <header
-      className={`${styles.header} ${className}`}
+      className={classes(styles.header, className)}
       data-invisible={!visible}
       {...props}
     >

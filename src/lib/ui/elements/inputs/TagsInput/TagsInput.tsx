@@ -4,6 +4,7 @@ import React, { ComponentProps, useRef } from "react";
 
 import { useKey } from "@/lib/hooks";
 import { CrossIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TagsInput.module.scss";
 
@@ -74,7 +75,7 @@ const TagsInput = ({
 
     return (
         <>
-            <div className={`${styles.input_wrapper} ${className}`}>
+            <div className={classes(styles.input_wrapper, className)}>
                 <input
                     type="text" className={styles.input_field}
                     value={value}

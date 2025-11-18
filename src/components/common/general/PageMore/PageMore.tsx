@@ -4,6 +4,7 @@ import React, { ComponentProps, useCallback, useState } from "react";
 
 import { Dropdown, DropdownList, SelectOption } from "@/lib/ui/elements/dropdowns";
 import { EllipsisHIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./PageMore.module.scss";
 
@@ -34,7 +35,7 @@ const PageMore = ({
 
     return (
         <Dropdown
-            className={`${styles.container} ${wrapperClass}`}
+            className={classes(styles.container, wrapperClass)}
             open={open}
             onOpen={openDd}
             btnClass={`${styles.more_btn} ${btnClass}`}
@@ -49,7 +50,7 @@ const PageMore = ({
             {
                 children
                     ? children
-                    : <EllipsisHIcon className={`${styles.more_btn_icon} ${iconClass}`} />
+                    : <EllipsisHIcon className={classes(styles.more_btn_icon, iconClass)} />
             }
         </Dropdown>
     );

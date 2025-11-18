@@ -9,6 +9,7 @@ import { useCalendarActions } from "@/data/stores";
 import { CalendarEvent, EventBadge } from "@/lib/ui/elements/calendar/EventBadge";
 import { getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { debounce, isNullish } from "@/lib/utils/general.utils";
+import { classes } from "@/lib/utils/style.utils";
 import { CalendarDay } from "@/types/calendar.types";
 
 import styles from "./DayView.module.scss";
@@ -428,9 +429,9 @@ const DayView = ({
 
   return (
     <div
-      className={`${styles.container} ${className}`}
+      className={classes(styles.container, className)}
     >
-      <div className={`${styles.col} ${styles.hr_col}`}>
+      <div className={classes(styles.col, styles.hr_col)}>
         {
           days > 1 ? (
             <div className={styles.week_number}>{"W"}{week}</div>
@@ -501,7 +502,7 @@ const DayView = ({
               return (
                 <div
                   key={idx}
-                  className={`${styles.col} ${styles.day_col} ${idx === days - 1 ? styles.last_day_col : ""}`}
+                  className={classes(styles.col, styles.day_col, idx === days - 1 && styles.last_day_col)}
                   data-day={weekDetails[idx].date[2]}
                   data-day-state={idx === 2 ? "active" : ""}
                 >

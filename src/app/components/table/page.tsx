@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { ComponentProps, useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
@@ -115,6 +115,12 @@ const Page = () => {
       </div>
     );
   }, []);
+
+  const getRowProps = (row: TableData): ComponentProps<"tr"> => {
+    return isRowCollapsible(row) ? {
+      // className: styles.collapsible_row,
+    } : {};
+  };
 
   const header = {
     select: {
@@ -361,7 +367,7 @@ const Page = () => {
     actions: {
       render: () => {
         return (
-          <div className={`${styles.table_actions}`}>
+          <div className={styles.table_actions}>
             <Button variant="secondary">
               <EditIcon />
             </Button>
@@ -427,6 +433,7 @@ const Page = () => {
         renderWhileCollapsed={false}
         className={styles.table}
         rootClass={styles.table_wrapper}
+        getRowProps={getRowProps}
       />
     </main>
   );

@@ -8,6 +8,7 @@ import { NumberInput } from "@/lib/ui/elements/inputs";
 import { TabList } from "@/lib/ui/elements/tablist";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
 import { updateDatetime } from "@/lib/utils/datetime.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./CalendarHeader.module.scss";
 
@@ -93,7 +94,7 @@ const CalendarHeader = ({
   };
 
   return (
-    <div className={`${styles.container} ${className}`}>
+    <div className={classes(styles.container, className)}>
       <div className={styles.container_left}>
         <button className={styles.ctrl_btn} onClick={() => handleDateControls(-1)}>
           <ChevronLeftIcon />

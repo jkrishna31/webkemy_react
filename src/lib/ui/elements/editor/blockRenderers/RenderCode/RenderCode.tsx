@@ -7,6 +7,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { CopyIcon, WrapOffIcon, WrapOnIcon } from "@/lib/ui/svgs/icons";
 import { copyToClipboard } from "@/lib/utils/client.utils";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import cStyles from "../block.module.scss";
 import styles from "./RenderCode.module.scss";
@@ -112,7 +113,7 @@ const RenderCode = ({ block, ...props }: any) => {
   */
 
   return (
-    <div data-block className={`${cStyles.block} ${styles.code_wrapper}`} id={block.id}>
+    <div data-block className={classes(cStyles.block, styles.code_wrapper)} id={block.id}>
       {
         block.filename || !block.hideControls ? (
           <div className={styles.header}>
@@ -128,16 +129,16 @@ const RenderCode = ({ block, ...props }: any) => {
           <tbody>
             {
               block.data?.map((item: string, idx: number) => (
-                <tr className={`${styles.code_row} `} key={idx}>
+                <tr className={styles.code_row} key={idx}>
                   {
                     block.lineNumber ? (
-                      <td className={`${styles.number_col} ${styles.number_cell}`} contentEditable={false}>
+                      <td className={classes(styles.number_col, styles.number_cell)} contentEditable={false}>
                         <span>{idx + 1}</span>
                       </td>
                     ) : null
                   }
-                  <td className={`${styles.code_col} ${styles.code_cell} ${!block.lineNumber ? styles.pl : ""}`}>
-                    <pre className={`${styles.pre} ${wrap ? styles.wrap : null} `}>
+                  <td className={classes(styles.code_col, styles.code_cell, !block.lineNumber && styles.pl)}>
+                    <pre className={classes(styles.pre, wrap && styles.wrap)}>
                       <span>{item}</span>
                     </pre>
                   </td>

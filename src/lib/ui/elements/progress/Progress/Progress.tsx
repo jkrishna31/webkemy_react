@@ -1,5 +1,7 @@
 import React, { ComponentProps, CSSProperties } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Progress.module.scss";
 
 export interface ProgressProps extends ComponentProps<"progress"> {
@@ -13,7 +15,7 @@ const Progress = ({
 }: ProgressProps) => {
   return (
     <div
-      className={`${styles.wrapper} ${styles[variant]} ${className}`}
+      className={classes(styles.wrapper, styles[variant], className)}
       style={{ "--value": `${value}%` } as CSSProperties}
       data-value={value ?? true}
     >

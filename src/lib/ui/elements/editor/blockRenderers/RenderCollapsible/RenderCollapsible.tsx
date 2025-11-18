@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 
 import { TriangleRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import cStyles from "../block.module.scss";
 import styles from "./RenderCollapsible.module.scss";
@@ -17,7 +18,7 @@ const RenderCollapsible = ({ block, ...props }: any) => {
     return (
         <div
             data-block
-            className={`${cStyles.block} ${styles.data_collapsible} ${state ? styles.open : ""}`}
+            className={classes(cStyles.block, styles.data_collapsible, state && styles.open)}
             data-open={state}
             id={block.id}
         >
@@ -27,7 +28,7 @@ const RenderCollapsible = ({ block, ...props }: any) => {
                 </button>
                 <p className={styles.title}>{block.data?.title}</p>
             </div>
-            <div className={`${styles.body}`}>
+            <div className={styles.body}>
                 <div className={styles.details}>
                     <span>
                         {block.data?.desc}

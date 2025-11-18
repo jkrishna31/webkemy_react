@@ -1,5 +1,7 @@
 import { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import { InputFieldWrapper } from "..";
 import styles from "./Switch.module.scss";
 
@@ -15,7 +17,7 @@ const Switch = ({
 }: SwitchProps) => {
     return (
         <InputFieldWrapper
-            className={`${styles.wrapper} ${className}`}
+            className={classes(styles.wrapper, className)}
             data-size={switchSize}
         >
             <input type="checkbox" className={styles.input} {...props} />

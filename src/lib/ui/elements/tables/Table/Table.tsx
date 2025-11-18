@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Table.module.scss";
 
@@ -70,6 +71,7 @@ export interface TableProps<T> extends ComponentProps<"div"> {
   stickyFooter?: boolean;
   renderWhileCollapsed?: boolean;
   rootClass?: string;
+  getRowProps?: (row: T) => ComponentProps<"tr">;
 }
 
 export interface DragPreviewProps extends ComponentProps<"div"> { }
@@ -142,7 +144,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   layout, header, body, footer,
   sort, onSort,
   colDnd = "reorder", rowDnd = "reorder", onColDrop, onRowDrop, onColResize,
-  isRowCollapsible, renderDetails, expandedRows,
+  isRowCollapsible, renderDetails, expandedRows, getRowProps,
   stickyHeader, stickyFooter, renderWhileCollapsed = true,
   className, rootClass,
   ...props
@@ -301,10 +303,13 @@ const Table = <T extends { id: string; children?: Array<T> }>({
       const rowAttrs = hasCollapsibleContent ? { "data-expanded": isExpanded } : {};
       const isDragging = draggingData?.row === rowData.id || isParentDragging;
 
+      const rowProps = getRowProps?.(rowData) ?? {};
+
       return (
         <Fragment key={rowData.id}>
           <tr
             {...rowAttrs}
+            {...rowProps}
             data-row={rowData.id}
             draggable
             data-dragging={isDragging}
@@ -322,7 +327,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                 return (
                   <Element
                     key={rowData.id + hCol.id}
-                    className={`${col?.sticky ? styles.sc_td : ""} ${rowConfig?.className ?? ""} ${getStickyClasses(col?.sticky)}`}
+                    className={classes(col?.sticky && styles.sc_td, rowConfig?.className, getStickyClasses(col?.sticky))}
                     style={{ ...getCellStyle(rootCols?.length, index, col?.sticky), ...(rowConfig?.style ?? {}) }}
                   >
                     {rowConfig?.render?.(rowData, depth)}
@@ -353,9 +358,9 @@ const Table = <T extends { id: string; children?: Array<T> }>({
   };
 
   return (
-    <div className={`${styles.wrapper} ${rootClass}`}>
+    <div className={classes(styles.wrapper, rootClass)}>
       <table
-        className={`${styles.table} ${className}`}
+        className={classes(styles.table, className)}
       >
         <thead
           data-col-dnd={colDnd}
@@ -389,7 +394,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         colSpan={colSpan}
                         rowSpan={rowSpan}
                         {...restProps}
-                        className={`${styles.hcell} ${getStickyClasses(sticky)} ${className}`}
+                        className={classes(styles.hcell, getStickyClasses(sticky), className)}
                         style={{
                           ...(width ? { minWidth: width } : {}),
                           ...getCellStyle(rootCols.length, hcIdx, sticky, true),
@@ -419,7 +424,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         {resizable && (
                           <button
                             data-resize={id}
-                            className={`${styles.resize_handle}`}
+                            className={styles.resize_handle}
                             style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
                           >
                           </button>
@@ -457,7 +462,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                   <Element
                     key={`fc-${hCol.id}`}
                     {...restProps}
-                    className={`${getStickyClasses(sticky)} ${className}`}
+                    className={classes(getStickyClasses(sticky), className)}
                     style={{ ...getCellStyle(rootCols.length, index, sticky, true), ...(style ?? {}) }}
                   >
                     {render}

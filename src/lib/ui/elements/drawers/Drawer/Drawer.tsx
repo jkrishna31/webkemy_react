@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 
 import { Overlay } from "@/components/common/containers";
 import { useFocusTrap, useKey } from "@/lib/hooks";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Drawer.module.scss";
 
@@ -36,7 +37,7 @@ const Drawer = ({
             ) : null}
             <div
                 ref={ref}
-                className={`${styles.container} ${className} ${open ? styles.open : null}`}
+                className={classes(styles.container, className, open && styles.open)}
                 role="dialog"
                 aria-modal
                 {...props}

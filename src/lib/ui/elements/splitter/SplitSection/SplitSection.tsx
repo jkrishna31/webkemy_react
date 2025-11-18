@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./SplitSection.module.scss";
 
 export interface SplitSectionProps extends ComponentProps<"div"> {
@@ -14,7 +16,7 @@ const SplitSection = ({
   return (
     <div
       data-section
-      className={`${styles.section} ${className}`}
+      className={classes(styles.section, className)}
       style={{
         flexBasis: size !== undefined ? `${size}%` : "auto",
         flexGrow: size !== undefined ? 0 : 1,

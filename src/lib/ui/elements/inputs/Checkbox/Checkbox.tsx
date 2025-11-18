@@ -1,5 +1,7 @@
 import { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Checkbox.module.scss";
 
 export interface CheckboxProps extends ComponentProps<"input"> {
@@ -12,7 +14,7 @@ const Checkbox = ({
 }: CheckboxProps) => {
     return (
         <input
-            type="checkbox" className={`${styles.input} ${className}`} data-invisible={invisible}
+            type="checkbox" className={classes(styles.input, className)} data-invisible={invisible}
             {...props}
         />
     );

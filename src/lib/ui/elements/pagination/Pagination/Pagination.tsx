@@ -5,6 +5,7 @@ import { ComponentProps, useEffect, useState } from "react";
 import { Button } from "@/lib/ui/elements/butttons";
 import { NumberInput } from "@/lib/ui/elements/inputs";
 import { ChevronLeftIcon, ChevronRightIcon, ChevronsLeftIcon, ChevronsRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Pagination.module.scss";
 
@@ -38,7 +39,7 @@ const Pagination = ({
     }, [currentPage]);
 
     return (
-        <div className={`${styles.pagination_bar} ${className}`}>
+        <div className={classes(styles.pagination_bar, className)}>
             <Button
                 variant="primary" className={styles.pagination_btn} title="Previous"
                 onClick={() => handleChange(currentPage - 1)}
@@ -69,7 +70,7 @@ const Pagination = ({
                 />
                 <Button
                     variant="primary" type="submit" disabled={currentPage === value}
-                    className={`${styles.go_btn}`}
+                    className={styles.go_btn}
                     hidden
                 >
                     {"Go"}

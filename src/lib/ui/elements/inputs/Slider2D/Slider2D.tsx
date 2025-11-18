@@ -5,6 +5,7 @@ import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef, useS
 import { usePointerFlow } from "@/lib/hooks";
 import useEvent from "@/lib/hooks/useEvent";
 import { clampNumber } from "@/lib/utils/math.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Slider2D.module.scss";
 
@@ -124,14 +125,14 @@ const Slider2D = ({
   return (
     <div
       ref={areaRef}
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
       tabIndex={0}
       onClick={handlePointerUpdate}
       {...props}
     >
       <div
         ref={thumbRef}
-        className={`${styles.thumb} ${thumbClass}`}
+        className={classes(styles.thumb, thumbClass)}
       ></div>
     </div>
   );

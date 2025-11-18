@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { ComponentProps, ElementType } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Avatar.module.scss";
 
 export type AvatarType = "div" | "button" | "a";
@@ -18,7 +20,7 @@ const Avatar = <T extends ElementType = "div">({
   const Element = as !== "a" ? as : Link;
 
   return (
-    <Element className={`${styles.avatar} ${className}`} data-avatar {...props}>
+    <Element className={classes(styles.avatar, className)} data-avatar {...props}>
       {children}
     </Element>
   );

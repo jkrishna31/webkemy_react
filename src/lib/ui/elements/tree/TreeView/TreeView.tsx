@@ -2,6 +2,7 @@ import React, { ComponentProps, MouseEvent, ReactNode } from "react";
 
 import { Collapsible } from "@/lib/ui/elements/collapsible";
 import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TreeView.module.scss";
 
@@ -62,7 +63,7 @@ const TreeView = ({
   };
 
   return (
-    <ul className={`${styles.wrapper} ${className}`} {...props}>
+    <ul className={classes(styles.wrapper, className)} {...props}>
       {renderSection(tree)}
     </ul>
   );

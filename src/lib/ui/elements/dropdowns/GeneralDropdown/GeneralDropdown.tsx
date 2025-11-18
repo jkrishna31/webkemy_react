@@ -3,6 +3,7 @@
 import React, { ComponentProps, ReactNode, useEffect, useState } from "react";
 
 import { ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import { Dropdown } from "..";
 import styles from "./GeneralDropdown.module.scss";
@@ -47,9 +48,9 @@ const GeneralDropdown = ({
       open={open}
       onOpen={openDropdown}
       onClose={closeDropdown}
-      className={`${styles.container} ${wrapperClass}`}
-      btnClass={`${styles.dropdown_btn} ${btnClass}`}
-      dropdownClass={`${styles.dd_list} ${ddClass}`}
+      className={classes(styles.container, wrapperClass)}
+      btnClass={classes(styles.dropdown_btn, btnClass)}
+      dropdownClass={classes(styles.dd_list, ddClass)}
       onMouseLeave={closeOnLeave ? closeDropdown : undefined}
       xPos={xPos} yPos={yPos}
       dropdown={dropdownContent}
@@ -64,7 +65,7 @@ const GeneralDropdown = ({
       {children}
       {
         !noIcon ? (
-          <ExpandSolidIcon className={`${styles.dropdown_icon} ${iconClass}`} />
+          <ExpandSolidIcon className={classes(styles.dropdown_icon, iconClass)} />
         ) : null
       }
     </Dropdown>

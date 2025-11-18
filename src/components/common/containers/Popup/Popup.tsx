@@ -2,6 +2,8 @@
 
 import React, { PropsWithChildren, useCallback, useEffect, useState } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./Popup.module.scss";
 
 const Popup = ({ closeAfterInterval, children, className, ...props }: PropsWithChildren<any>) => {
@@ -21,7 +23,7 @@ const Popup = ({ closeAfterInterval, children, className, ...props }: PropsWithC
 
     if (showPopup) {
         return (
-            <div className={`${styles.popup} ${className}`} {...props}>
+            <div className={classes(styles.popup, className)} {...props}>
                 {children}
             </div>
         );

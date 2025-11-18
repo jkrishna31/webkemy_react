@@ -3,6 +3,8 @@
 import Link from "next/link";
 import React, { ComponentProps, ElementType, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./CollapsibleContainer.module.scss";
 
 export type CollapsibleContainerProps<T extends ElementType> = {
@@ -86,7 +88,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       aria-hidden={!open}
       {...props}
       ref={ref}
-      className={`${styles.container} ${className}`}
+      className={classes(styles.container, className)}
       onTransitionStart={open ? handleTransitionStart : undefined}
       onTransitionEnd={open ? (e: TransitionEvent) => {
         if (e.propertyName !== "max-height") {

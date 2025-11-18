@@ -6,6 +6,7 @@ import { editorBlocks } from "@/constants/editor.const";
 import { RenderBlock } from "@/lib/ui/elements/editor/blockRenderers";
 import docStyles from "@/lib/ui/styles/classes/doc.module.scss";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Editor.module.scss";
 
@@ -368,9 +369,9 @@ const Editor = ({
     }, []);
 
     return (
-        <div className={`${styles.wrapper} ${rootClass}`}>
+        <div className={classes(styles.wrapper, rootClass)}>
             <div
-                className={`${docStyles.doc} ${styles.editor} ${className}`}
+                className={classes(docStyles.doc, styles.editor, className)}
                 suppressContentEditableWarning
                 ref={editorRef}
                 contentEditable={true}

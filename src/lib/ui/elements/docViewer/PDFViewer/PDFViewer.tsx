@@ -1,5 +1,7 @@
 import React from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./PDFViewer.module.scss";
 
 export interface PDFViewerProps {
@@ -12,7 +14,7 @@ const PDFViewer = ({
   ...props
 }: PDFViewerProps) => {
   return (
-    <div className={`${styles.wrapper} ${className}`} {...props}>
+    <div className={classes(styles.wrapper, className)} {...props}>
       <iframe src={src}></iframe>
     </div>
   );

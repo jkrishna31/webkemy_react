@@ -27,102 +27,110 @@ const getPlaceholder = (type: any) => {
 
 const blocks = [
   {
-    label: "General",
-    st: [
+    key: "general",
+    group: "General",
+    collapsible: false,
+    className: styles.block_group,
+    menu: [
       {
-        key: editorBlocks.HEADING, label: "Heading",
-        icon: <HeadingIcon className={styles.tool_icon} />
+        key: editorBlocks.HEADING, primary: "Heading",
+        icon: <HeadingIcon />,
       },
       {
-        key: editorBlocks.SUB_HEADING, label: "Sub Heading",
-        icon: <SubHeadingIcon className={styles.tool_icon} />
+        key: editorBlocks.SUB_HEADING, primary: "Sub Heading",
+        icon: <SubHeadingIcon />
       },
       {
-        key: editorBlocks.PARA, label: "Paragraph",
-        icon: <PilcrowIcon className={styles.tool_icon} />
+        key: editorBlocks.PARA, primary: "Paragraph",
+        icon: <PilcrowIcon />
       },
       {
-        key: editorBlocks.CODE, label: "Code",
-        icon: <BlockCodeIcon className={styles.tool_icon} />
+        key: editorBlocks.CODE, primary: "Code",
+        icon: <BlockCodeIcon />
       },
       {
-        key: editorBlocks.ORDERED_LIST, label: "Ordered List",
-        icon: <OrderedListIcon className={styles.tool_icon} />
+        key: editorBlocks.ORDERED_LIST, primary: "Ordered List",
+        icon: <OrderedListIcon />
       },
       {
-        key: editorBlocks.UNORDERED_LIST, label: "Unordered List",
-        icon: <UnorderedListIcon className={styles.tool_icon} />
+        key: editorBlocks.UNORDERED_LIST, primary: "Unordered List",
+        icon: <UnorderedListIcon />
       },
       {
-        key: editorBlocks.IMAGE, label: "Image",
-        icon: <ImageIcon className={styles.tool_icon} />
+        key: editorBlocks.IMAGE, primary: "Image",
+        icon: <ImageIcon />
       },
       {
-        key: editorBlocks.TABLE, label: "Table",
-        icon: <TableIcon className={styles.tool_icon} />
-        // disabled: true,
+        key: editorBlocks.TABLE, primary: "Table",
+        icon: <TableIcon />
       },
       {
-        key: editorBlocks.COLLAPSIBLE, label: "Collapsible",
-        icon: <TopSidebarCloseIcon className={styles.tool_icon} />
+        key: editorBlocks.COLLAPSIBLE, primary: "Collapsible",
+        icon: <TopSidebarCloseIcon />
       },
       {
-        key: editorBlocks.DIVIDER, label: "Divider",
-        icon: <DividerIcon className={styles.tool_icon} />
+        key: editorBlocks.DIVIDER, primary: "Divider",
+        icon: <DividerIcon />
       },
-    ]
+    ],
   },
   {
-    label: "Frame",
-    st: [
+    key: "frame",
+    group: "Frame",
+    collapsible: false,
+    className: styles.block_group,
+    menu: [
       {
-        key: editorBlocks.QUOTE, label: "Quote",
-        icon: <BlockquoteIcon className={styles.tool_icon} />
+        key: editorBlocks.QUOTE, primary: "Quote",
+        icon: <BlockquoteIcon />
       },
       {
-        key: editorBlocks.NOTE, label: "Note",
-        icon: <BlockNoteIcon className={styles.tool_icon} />
+        key: editorBlocks.NOTE, primary: "Note",
+        icon: <BlockNoteIcon />
       },
       {
-        key: editorBlocks.TIP, label: "Tip",
-        icon: <BlockTipIcon className={styles.tool_icon} />
+        key: editorBlocks.TIP, primary: "Tip",
+        icon: <BlockTipIcon />
       },
       {
-        key: editorBlocks.CAUTION, label: "Caution",
-        icon: <BlockCautionIcon className={styles.tool_icon} />
+        key: editorBlocks.CAUTION, primary: "Caution",
+        icon: <BlockCautionIcon />
+      },
+    ],
+  },
+  {
+    key: "embed",
+    group: "Embed",
+    collapsible: false,
+    className: styles.block_group,
+    menu: [
+      {
+        key: editorBlocks.YOUTUBE, primary: "Youtube",
+        icon: <EmbedYoutubeIcon />
+      },
+      {
+        key: editorBlocks.GITHUB, primary: "Github Gist",
+        icon: <EmbedGithubIcon />
+      },
+      {
+        key: editorBlocks.CODEPEN, primary: "CodePen",
+        icon: <EmbedCodepenIcon />
+      },
+      {
+        key: editorBlocks.CODESANDBOX, primary: "CodeSandbox",
+        icon: <EmbedCSBIcon />
       }
     ],
-    icon: <FrameIcon className={styles.tool_icon} />
   },
   {
-    label: "Embed",
-    st: [
+    key: "misc",
+    group: "Misc",
+    collapsible: false,
+    className: styles.block_group,
+    menu: [
       {
-        key: editorBlocks.YOUTUBE, label: "Youtube",
-        icon: <EmbedYoutubeIcon className={styles.tool_icon} />
-      },
-      {
-        key: editorBlocks.GITHUB, label: "Github Gist",
-        icon: <EmbedGithubIcon className={styles.tool_icon} />
-      },
-      {
-        key: editorBlocks.CODEPEN, label: "CodePen",
-        icon: <EmbedCodepenIcon className={styles.tool_icon} />
-      },
-      {
-        key: editorBlocks.CODESANDBOX, label: "CodeSandbox",
-        icon: <EmbedCSBIcon className={styles.tool_icon} />
-      }
-    ],
-    icon: <EmbedIcon className={styles.tool_icon} />
-  },
-  {
-    label: "Misc",
-    st: [
-      {
-        key: editorBlocks.DRAFT, label: "Upload Draft",
-        // disabled: true,
-        icon: <FileIcon className={styles.tool_icon} />
+        key: editorBlocks.DRAFT, primary: "Upload Draft",
+        icon: <FileIcon />
       },
     ]
   }

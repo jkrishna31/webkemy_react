@@ -1,5 +1,7 @@
 import { ComponentProps, ElementType } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./InputItem.module.scss";
 
 export type InputItemProps<T extends ElementType> = {
@@ -16,7 +18,7 @@ const InputItem = <T extends ElementType>({
 
     return (
         <Tag
-            className={`${styles.wrapper} ${inline ? styles.inline : null} ${className}`}
+            className={classes(styles.wrapper, inline && styles.inline, className)}
             aria-disabled={props.disabled}
             {...props}
         >

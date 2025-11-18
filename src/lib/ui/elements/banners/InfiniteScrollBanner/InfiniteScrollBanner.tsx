@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./InfiniteScrollBanner.module.scss";
 
 export interface InfiniteScrollBannerProps extends ComponentProps<"div"> {
@@ -11,7 +13,7 @@ const InfiniteScrollBanner = ({
   ...props
 }: InfiniteScrollBannerProps) => {
   return (
-    <div className={`${styles.wrapper} scroll_thin ${className}`} {...props}>
+    <div className={classes(styles.wrapper, "scroll_thin", "className")} {...props}>
       {
         Array.from({ length: repeat }).map((_, idx) => (
           <ul key={idx} aria-hidden={!!idx}>

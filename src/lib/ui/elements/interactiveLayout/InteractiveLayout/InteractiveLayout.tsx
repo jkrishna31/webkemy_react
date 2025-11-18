@@ -1,5 +1,7 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./InteractiveLayout.module.scss";
 
 export interface InteractiveLayoutProps extends ComponentProps<"div"> {
@@ -17,7 +19,7 @@ const InteractiveLayout = ({
   // + take all avaibale width
 
   return (
-    <div className={`${styles.container} ${className}`} {...props}>
+    <div className={classes(styles.container, className)} {...props}>
       <div data-type="dr"></div>
       <div data-type="dr"></div>
       <div data-type="dr"></div>

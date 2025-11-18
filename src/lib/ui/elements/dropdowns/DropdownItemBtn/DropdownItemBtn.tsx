@@ -1,8 +1,10 @@
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./DropdownItemBtn.module.scss";
 
 const DropdownItemBtn = ({ text, data, icon, className, children, ...props }: any) => {
     return (
-        <button className={`${styles.btn} ${className}`} {...props}>
+        <button className={classes(styles.btn, className)} {...props}>
             {icon}
             <span>{data}</span>
             {data ? <span>{data}</span> : null}

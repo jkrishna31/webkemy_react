@@ -3,6 +3,7 @@
 import { ComponentProps, useEffect, useRef } from "react";
 
 import { Scrollable } from "@/lib/ui/elements/scrollable";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TabList.module.scss";
 
@@ -36,18 +37,18 @@ const TabList = ({
 
     return (
         <div
-            className={`scroll_invisible ${styles.tab_btns_wrapper} ${className}`}
+            className={classes("scroll_invisible", styles.tab_btns_wrapper, className)}
             {...rest}
         >
             <Scrollable
-                className={`${styles.tabs_wrapper} ${wrapperInnerClass}`}
+                className={classes(styles.tabs_wrapper, wrapperInnerClass)}
                 role="tablist"
                 ref={containerRef}
             >
                 {
                     tabs?.map((tab: any, idx: number) => (
                         <button
-                            className={`${styles.tab_btn} ${btnClass}`}
+                            className={classes(styles.tab_btn, btnClass)}
                             tab-active={tab.id === activeTab ? 1 : 0}
                             ref={tab.id === activeTab ? activeTabRef : null}
                             onClick={(e) => {

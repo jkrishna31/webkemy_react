@@ -1,5 +1,7 @@
 import React, { ComponentProps, ElementType } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./SkeletonLoader.module.scss";
 
 export type SkeletonLoaderProps<T extends ElementType> = {
@@ -17,7 +19,7 @@ const SkeletonLoader = <T extends ElementType = "div">({
 
   return (
     <Element
-      className={`skeleton ${styles.loader} ${className}`}
+      className={classes("skeleton", styles.loader, className)}
       data-loading={loading}
       {...props}
     >

@@ -1,5 +1,6 @@
 import React, { ComponentProps } from "react";
 
+import { classes } from "@/lib/utils/style.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./Badge.module.scss";
@@ -17,7 +18,7 @@ const Badge = ({
 }: BadgeProps) => {
   return (
     <div
-      className={`${styles.badge} ${float ? styles.float : ""} ${float ? styles[float] : ""} ${className}`}
+      className={classes(styles.badge, float && styles.float, float && styles[float], className)}
       data-variant={children ? "text" : "dot"}
       data-color={color}
       data-animate={animate}

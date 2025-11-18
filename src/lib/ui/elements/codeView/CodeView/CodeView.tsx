@@ -7,6 +7,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { CopyIcon, WrapOffIcon, WrapOnIcon } from "@/lib/ui/svgs/icons";
 import { copyToClipboard } from "@/lib/utils/client.utils";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./CodeView.module.scss";
 
@@ -106,7 +107,7 @@ const CodeView = ({
   };
 
   return (
-    <div className={`${styles.code_wrapper} ${className}`}>
+    <div className={classes(styles.code_wrapper, className)}>
       {
         (controls || title) ? (
           <div className={styles.header}>
@@ -126,7 +127,7 @@ const CodeView = ({
                 return (
                   <tr
                     key={idx}
-                    className={`${styles.code_row} `}
+                    className={styles.code_row}
                     data-highlight={highlight}
                   >
                     {
@@ -139,8 +140,8 @@ const CodeView = ({
                         </td>
                       ) : null
                     }
-                    <td className={`${styles.code_col} ${styles.code_cell} ${(!numbered && !highlights?.length) ? styles.pl : ""}`}>
-                      <pre className={`${styles.pre} ${wrap ? styles.wrap : null} `}>
+                    <td className={classes(styles.code_col, styles.code_cell, (!numbered && !highlights?.length) && styles.pl)}>
+                      <pre className={classes(styles.pre, wrap && styles.wrap)}>
                         <span>{item}</span>
                       </pre>
                     </td>

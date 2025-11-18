@@ -7,6 +7,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { CrossIcon } from "@/lib/ui/svgs/icons";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { formatSize } from "@/lib/utils/format.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./FilesPreview.module.scss";
 
@@ -78,7 +79,7 @@ const FilesPreview = ({
   };
 
   return previews.length ? (
-    <div className={`${styles.wrapper} ${className}`}>
+    <div className={classes(styles.wrapper, className)}>
       {
         (previews.length > 1 && !noHeading) ? (
           <p className={styles.count}>{previews.length}{" "}{srcs?.length ? "Image(s)" : "File(s)"}</p>

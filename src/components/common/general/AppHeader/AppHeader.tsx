@@ -10,6 +10,7 @@ import { Avatar } from "@/lib/ui/elements/avatar";
 import { Header } from "@/lib/ui/elements/header";
 import { AppLogo, CrossIcon, GlobeIcon, HistoryIcon, MenuIcon, SearchIcon, ThemeIcon } from "@/lib/ui/svgs/icons";
 import { GithubLogo } from "@/lib/ui/svgs/logos";
+import { classes } from "@/lib/utils/style.utils";
 
 import { AppMenu } from "..";
 import styles from "./AppHeader.module.scss";
@@ -81,7 +82,7 @@ const AppHeader = ({
                         <Link
                             aria-label="search"
                             href="#"
-                            className={`${styles.hr_link} ${styles.search_link}`}
+                            className={classes(styles.hr_link, styles.search_link)}
                             title="Search"
                         >
                             <SearchIcon className={styles.header_search_icon} />
@@ -96,7 +97,7 @@ const AppHeader = ({
                         </Avatar>
                         <button
                             aria-label="change theme"
-                            className={`${styles.hr_link} ${styles.theme_btn}`}
+                            className={classes(styles.hr_link, styles.theme_btn)}
                             title="Change Theme"
                             onClick={() => updateModalField("theme", true)}
                         >
@@ -104,7 +105,7 @@ const AppHeader = ({
                         </button>
                         <button
                             aria-label="change language"
-                            className={`${styles.hr_link} ${styles.lang_btn}`}
+                            className={classes(styles.hr_link, styles.lang_btn)}
                             title="Change Language"
                             onClick={() => updateModalField("lang", true)}
                         >

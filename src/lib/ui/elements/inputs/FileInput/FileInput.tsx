@@ -3,6 +3,7 @@
 import React, { ComponentProps, useEffect, useRef } from "react";
 
 import { AddFileIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./FileInput.module.scss";
 
@@ -43,7 +44,7 @@ const FileInput = ({
 
     return (
         <div
-            className={`${styles.input_wrapper} ${minimal ? "" : styles.input_wrapper_full} ${className}`}
+            className={classes(styles.input_wrapper, !minimal && styles.input_wrapper_full, className)}
             onDragOver={e => e.preventDefault()}
             onDrop={handleDrop}
         >
@@ -56,7 +57,7 @@ const FileInput = ({
                 ref={inputRef}
                 {...props}
             />
-            <label htmlFor={id} className={`${styles.label} ${styles.file_input}`}>
+            <label htmlFor={id} className={classes(styles.label, styles.file_input)}>
                 {children || (
                     <>
                         <AddFileIcon className={styles.add_file_icon} />

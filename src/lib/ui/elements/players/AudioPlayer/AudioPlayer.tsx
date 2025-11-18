@@ -9,6 +9,7 @@ import { Slider } from "@/lib/ui/elements/inputs";
 import { PauseIcon, PlayIcon, VolumeHighIcon, VolumenMuteIcon } from "@/lib/ui/svgs/icons";
 import { breakdownTime, TimeField } from "@/lib/utils/datetime.utils";
 import { getFormattedTime } from "@/lib/utils/format.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import { PaceControl, VolumeControl } from "..";
 import styles from "./AudioPlayer.module.scss";
@@ -35,7 +36,7 @@ const AudioPlayer = ({
   const durationParts: { [key in TimeField | "day"]?: number } = breakdownTime(duration, "second");
 
   return (
-    <div className={`${styles.wrapper} ${rootClass}`}>
+    <div className={classes(styles.wrapper, rootClass)}>
       <audio
         {...props}
         muted={isMute}

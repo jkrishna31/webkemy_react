@@ -3,6 +3,7 @@ import React, { ComponentProps, FormEvent } from "react";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { GeneralInput, InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { CrossIcon, MicIcon, SearchIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SearchForm.module.scss";
 
@@ -21,7 +22,7 @@ const SearchForm = ({
     ...props
 }: any) => {
     return (
-        <form className={`${styles.form} ${formClass}`} role="search" {...props}>
+        <form className={classes(styles.form, formClass)} role="search" {...props}>
             <Dropdown
                 open={searchDd}
                 className={styles.ddw}
@@ -32,26 +33,26 @@ const SearchForm = ({
                 }
                 xPos={xPos}
             >
-                <InputFieldWrapper className={`${styles.wrapper} ${wrapperClass}`} onClick={onClick}>
+                <InputFieldWrapper className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
                     <GeneralInput
                         spellCheck="false" id="query"
                         onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
                         required
                         placeholder={placeholder}
-                        className={`${styles.input} ${inputClass}`}
+                        className={classes(styles.input, inputClass)}
                         autoComplete="off"
                     // aria-label={placeholder}
                     />
                     {
                         allowClear ? (
-                            <button type="reset" className={`${styles.form_btn} ${styles.reset_btn}`} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
+                            <button type="reset" className={classes(styles.form_btn, styles.reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
                                 <CrossIcon className={styles.reset_icon} />
                             </button>
                         ) : null
                     }
                     {
                         allowSearch ? (
-                            <button type="submit" className={`${styles.form_btn} ${styles.search_btn}`} title="Search">
+                            <button type="submit" className={classes(styles.form_btn, styles.search_btn)} title="Search">
                                 <SearchIcon className={styles.search_icon} />
                             </button>
                         ) : null
@@ -60,7 +61,7 @@ const SearchForm = ({
             </Dropdown>
             {audio ? (
                 <button
-                    type="button" className={`${styles.form_btn} ${styles.mic_btn}`} title="Mic"
+                    type="button" className={classes(styles.form_btn, styles.mic_btn)} title="Mic"
                     onClick={onMicClick}
                 >
                     <MicIcon className={styles.mic_icon} />

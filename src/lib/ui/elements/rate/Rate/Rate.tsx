@@ -4,6 +4,7 @@ import React, { ComponentProps, ReactNode, useId, useState } from "react";
 
 import { StarIcon } from "@/lib/ui/svgs/icons";
 import { SVG } from "@/lib/ui/svgs/misc";
+import { classes } from "@/lib/utils/style.utils";
 import { Color } from "@/types/general.types";
 
 import styles from "./Rate.module.scss";
@@ -45,7 +46,7 @@ const Rate = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${className}`}
+      className={classes(styles.wrapper, className)}
       onClick={(readonly || disabled) ? undefined : handleRating}
       aria-readonly={readonly}
       aria-disabled={disabled}

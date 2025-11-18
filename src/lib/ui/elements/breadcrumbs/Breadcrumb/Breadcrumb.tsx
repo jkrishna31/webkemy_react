@@ -3,6 +3,7 @@ import { ComponentProps, Fragment, ReactNode } from "react";
 
 import { RippleLoader } from "@/lib/ui/elements/loaders";
 import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Breadcrumb.module.scss";
 
@@ -27,7 +28,7 @@ const Breadcrumb = ({
     // todo: minimize the middle section
 
     return (
-        <div className={`scroll_invisible ${styles.list}`}>
+        <div className={classes("scroll_invisible", styles.list)}>
             {
                 crumbs?.map((crumb, idx) => (
                     <Fragment key={crumb.key}>

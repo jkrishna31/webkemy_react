@@ -1,4 +1,5 @@
 import { editorBlocks as b } from "@/constants/editor.const";
+import { classes } from "@/lib/utils/style.utils";
 
 import cStyles from "../block.module.scss";
 import styles from "./RenderEmbed.module.scss";
@@ -24,7 +25,7 @@ const RenderEmbed = ({ block, ...props }: any) => {
     };
 
     return (
-        <div data-block className={`${cStyles.block} ${styles.data_iframe} ${getClass()}`} id={block.id}>
+        <div data-block className={classes(cStyles.block, styles.data_iframe, getClass())} id={block.id}>
             <iframe
                 width="100%" height="100%"
                 src={block.src}

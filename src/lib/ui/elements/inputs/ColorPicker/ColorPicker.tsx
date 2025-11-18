@@ -4,6 +4,7 @@ import React, { CSSProperties, useState } from "react";
 
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { ColorFormat, hsvToHex, hsvToHsl, hsvToRgb, stringifyColor } from "@/lib/utils/color.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import { GeneralInput, InputFieldWrapper, Slider, Slider2D } from "..";
 import styles from "./ColorPicker.module.scss";
@@ -67,7 +68,7 @@ const ColorPicker = () => {
         <Slider
           orientation="vertical"
           id="hue" name="hue"
-          className={`${styles.slider} ${styles.hue_slider}`}
+          className={classes(styles.slider, styles.hue_slider)}
           min={0} max={360} step={1}
           value={color[0]}
           onInput={(e) => handleValueChange("hue", (e.target as HTMLInputElement).value)}
@@ -75,7 +76,7 @@ const ColorPicker = () => {
         <Slider
           orientation="vertical"
           id="opacity" name="opacity"
-          className={`${styles.slider} ${styles.opacity_slider}`}
+          className={classes(styles.slider, styles.opacity_slider)}
           min={0} max={100} step={1}
           value={color[3]}
           onInput={(e) => handleValueChange("alpha", (e.target as HTMLInputElement).value)}

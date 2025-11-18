@@ -15,6 +15,7 @@ import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
 import { BotMessageIcon, ChevronsDownIcon, CircleInfoIcon, CrossIcon, MaximizeIcon, MicIcon, MinimizeIcon, PaperclipIcon, SearchIcon, SendSolidIcon, UploadIcon } from "@/lib/ui/svgs/icons";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { compareDateByPrecision, formatDate, formatTime } from "@/lib/utils/datetime.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ChatContainer.module.scss";
 
@@ -227,7 +228,7 @@ const ChatContainer = ({
             <CrossIcon />
           </button>
         </div>
-        <div className={`${styles.body} scroll_thin`} ref={chatsContainerRef}>
+        <div className={classes(styles.body, "scroll_thin")} ref={chatsContainerRef}>
           <AllChats chats={chats} idx={0} />
         </div>
         <div className={styles.footer}>

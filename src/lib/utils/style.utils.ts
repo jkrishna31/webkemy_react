@@ -1,7 +1,7 @@
 import { ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export type ClassType = string | number | null | undefined | object;
+export type ClassType = string | number | null | undefined | object | false;
 const SEPARATOR = " ";
 
 export function cn(...inputs: ClassValue[]) {

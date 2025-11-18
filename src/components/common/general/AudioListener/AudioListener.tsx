@@ -5,6 +5,7 @@ import React, { ComponentProps, useCallback, useEffect, useState } from "react";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MicIcon } from "@/lib/ui/svgs/icons";
 import { hasDOM } from "@/lib/utils/client.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AudioListener.module.scss";
 
@@ -84,7 +85,7 @@ const AudioListener = ({
       </div>
       <div className={styles.mic_wrapper}>
         <Button
-          className={`${styles.mic_btn} ${getMicStatus()}`}
+          className={classes(styles.mic_btn, getMicStatus())}
           icon={<MicIcon className={styles.mic_icon} />}
           onClick={handleMicClick}
         />

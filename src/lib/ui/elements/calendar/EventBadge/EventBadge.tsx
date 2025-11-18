@@ -1,6 +1,7 @@
 import React, { ComponentProps } from "react";
 
 import { formatTime } from "@/lib/utils/datetime.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./EventBadge.module.scss";
 
@@ -64,12 +65,12 @@ const EventBadge = ({
   return compact ? (
     <div
       key={event.title}
-      className={`scroll_invisible ${styles.ev_dot} ${event.color ? styles[`${event.color}_bg`] : ""}`}
+      className={classes("scroll_invisible", styles.ev_dot, event.color && styles[`${event.color}_bg`])}
       aria-label={event.title}
     ></div>
   ) : (
     <div
-      className={`${styles.badge} ${getBadgeClasses(event)} ${styles.lc} ${className}`}
+      className={classes(styles.badge, getBadgeClasses(event), styles.lc, className)}
       onClick={onBadgeClick}
       {...props}
     >
