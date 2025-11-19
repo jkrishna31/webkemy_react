@@ -17,6 +17,8 @@ const SortBtn = ({
   return (
     <button
       data-sort={sort}
+      aria-label="Sort"
+      title="Sort"
       className={classes(styles.btn, className)}
       {...props}
     >

@@ -20,6 +20,7 @@ const Select = ({
     variant = "select",
     label, options, showDopdown, labelKey = "label",
     id, className,
+    // onInput, onClick,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
@@ -58,21 +59,29 @@ const Select = ({
         >
             <InputFieldWrapper className={className}>
                 <input
-                    type="text" className={styles.input} id={id} onClick={e => e.stopPropagation()}
+                    {...props as ComponentProps<"input">}
+                    type="text" className={styles.input} id={id}
                     autoComplete="off"
                     role="combobox"
                     aria-controls=""
                     aria-expanded={dd}
                     aria-haspopup={true}
                     value={query}
+                    onClick={e => e.stopPropagation()}
                     onInput={(e: any) => setQuery(e.target.value)}
                 />
                 {
                     query ? (
-                        <button className={styles.dd_btn} onClick={(e) => {
-                            e.stopPropagation();
-                            setQuery("");
-                        }} type="button" title="Clear">
+                        <button
+                            className={styles.dd_btn}
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setQuery("");
+                            }}
+                            type="button"
+                            title="Clear"
+                            aria-label="Clear Select"
+                        >
                             <CrossIcon strokeWidth={2} className={styles.down_icon} />
                         </button>
                     ) : null
@@ -84,7 +93,9 @@ const Select = ({
                         e.stopPropagation();
                         setDd(!dd);
                     }}
-                    type="button" title="Options Dropdown"
+                    type="button"
+                    title="Options Dropdown"
+                    aria-label={dd ? "Open Options" : "Close Options"}
                 >
                     <ExpandSolidIcon className={styles.down_icon} />
                 </button>

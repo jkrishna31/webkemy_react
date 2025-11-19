@@ -71,6 +71,7 @@ const MenuItem = <T extends ElementType = "button">({
         {...props}
         onClick={onClick ? () => onClick(id) : undefined}
         data-active={activeItem === id}
+        {...((as === "a" && activeItem === id) ? { "aria-current": "page" } : {})}
         disabled={disabled}
         aria-disabled={disabled}
         data-minimized={minimized}

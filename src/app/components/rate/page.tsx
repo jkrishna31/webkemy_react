@@ -11,12 +11,12 @@ const page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="rate" />
 
-      <Rate />
-      <Rate max={7} color="blue" icon={<DiamondIcon />} />
-      <Rate max={3} noStroke />
-      <Rate rating={2.5} color="orange" noStroke readonly />
-      <Rate rating={4.35} color="green" readonly />
-      <Rate rating={3} color="red" disabled icon={<CircleIcon />} />
+      <Rate aria-label="Rate" />
+      <Rate max={7} color="blue" icon={<DiamondIcon />} aria-label="Rate" />
+      <Rate max={3} noStroke aria-label="Rate" />
+      <Rate rating={2.5} color="orange" noStroke readonly aria-label="Rate" />
+      <Rate rating={4.35} color="green" readonly aria-label="Rate" />
+      <Rate rating={3} color="red" disabled icon={<CircleIcon />} aria-label="Rate" />
     </main>
   );
 };

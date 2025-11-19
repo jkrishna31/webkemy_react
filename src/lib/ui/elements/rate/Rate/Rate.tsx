@@ -48,9 +48,11 @@ const Rate = ({
     <div
       className={classes(styles.wrapper, className)}
       onClick={(readonly || disabled) ? undefined : handleRating}
-      aria-readonly={readonly}
-      aria-disabled={disabled}
       data-color={color}
+      aria-disabled={disabled}
+      aria-readonly={readonly}
+      role="textbox"
+      {...props}
     >
       {
         Array.from({ length: (max - min + 1) / step }).map((_, idx: number) => {
@@ -66,6 +68,7 @@ const Rate = ({
               data-readonly={readonly}
               data-nostroke={noStroke}
               type="button"
+              aria-label={String(rating)}
               style={isPartial ? { fill: `url(#${id})` } : {}}
             >
               {

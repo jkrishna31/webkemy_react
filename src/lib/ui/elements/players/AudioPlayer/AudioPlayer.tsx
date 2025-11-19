@@ -60,6 +60,7 @@ const AudioPlayer = ({
           variant='tertiary'
           className={styles.play_btn}
           onClick={togglePlayState}
+          aria-label={isPlaying ? "Pause" : "Play"}
         >
           {
             isPlaying ? <PauseIcon /> : <PlayIcon />
@@ -78,6 +79,7 @@ const AudioPlayer = ({
             className={styles.slider}
             variant="rod"
             asProgress={true}
+            aria-label="Seek"
           />
         </div>
         <GeneralDropdown

@@ -25,13 +25,12 @@ export interface BreadcrumbProps extends ComponentProps<"div"> {
 const Breadcrumb = ({
     crumbs,
 }: BreadcrumbProps) => {
-    // todo: minimize the middle section
 
     return (
-        <div className={classes("scroll_invisible", styles.list)}>
+        <ol className={classes("scroll_invisible", styles.list)}>
             {
                 crumbs?.map((crumb, idx) => (
-                    <Fragment key={crumb.key}>
+                    <li key={crumb.key} className={styles.list_item}>
                         {crumb.render}
                         {
                             crumb.link ? (
@@ -41,6 +40,7 @@ const Breadcrumb = ({
                                     data-disabled={crumb.disabled}
                                     className={styles.item}
                                     aria-current={crumb.active}
+                                    aria-hidden={crumb.disabled}
                                 >
                                     {crumb.label}
                                 </Link>
@@ -70,10 +70,10 @@ const Breadcrumb = ({
                                 <ChevronRightIcon className={styles.separator} />
                             ) : null
                         }
-                    </Fragment>
+                    </li>
                 ))
             }
-        </div>
+        </ol>
     );
 };
 

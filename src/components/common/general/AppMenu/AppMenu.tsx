@@ -287,7 +287,6 @@ export const menuItems = [
                 key: "editor",
                 href: "/components/editor",
                 primary: "Editor",
-                disabled: true,
                 icon: <WriteIcon />,
             },
             {

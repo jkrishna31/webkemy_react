@@ -48,7 +48,7 @@ const AppHeader = ({
         <>
             <Header visible={scrollDir === edges.TOP}>
                 <div className={styles.wrapper}>
-                    <Link href="/" className={styles.logo_container} title="Elselog Home">
+                    <Link href="/" className={styles.logo_container} title="Elselog Home" aria-label="App Logo (Webkemy)">
                         <AppLogo className={styles.header_app_logo} />
                     </Link>
                     <SearchForm

@@ -59,6 +59,8 @@ const NumberInput = ({
             type="button"
             disabled={!!min && value === min}
             onClick={() => handleValueUpdation("dec")}
+            aria-label="Decrease"
+            title="Decrease"
           >
             <MinusIcon />
           </button>
@@ -79,6 +81,8 @@ const NumberInput = ({
             type="button"
             disabled={!!max && value === max}
             onClick={() => handleValueUpdation("inc")}
+            aria-label="Increase"
+            title="Increase"
           >
             <PlusIcon />
           </button>

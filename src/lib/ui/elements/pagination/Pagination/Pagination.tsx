@@ -66,7 +66,7 @@ const Pagination = ({
                 <NumberInput
                     value={value} onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
                     className={styles.input_wrapper} min={1} max={totalPages}
-                    enclosedControls
+                    enclosedControls aria-label="Page Number"
                 />
                 <Button
                     variant="primary" type="submit" disabled={currentPage === value}

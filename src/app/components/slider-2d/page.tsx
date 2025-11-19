@@ -17,7 +17,10 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="slider-2d" />
 
-      <Slider2D value={value} onInput={setValue} className={styles.slider} />
+      <Slider2D
+        value={value} onInput={setValue} className={styles.slider}
+        aria-label="Slide"
+      />
       <Text>{value[0]}{", "}{value[1]}</Text>
     </main>
   );

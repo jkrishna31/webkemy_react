@@ -6,6 +6,11 @@
   max-width: 100%;
 }
 
+.list_item {
+  display: flex;
+  align-items: center;
+}
+
 .item {
   color: var(--fg-s);
   border-radius: var(--br-pill);
@@ -26,7 +31,7 @@
 
   &:hover,
   &:focus {
-    color: var(--blue-2);
+    color: var(--blue-1);
     background-color: var(--bg-t);
   }
 }
@@ -36,6 +41,7 @@
   height: 1.8rem;
   color: var(--fg-t);
   flex-shrink: 0;
+  stroke-width: .2rem;
 }
 
 .loader {

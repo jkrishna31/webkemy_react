@@ -21,9 +21,9 @@ const Page = () => {
           <button
             className={styles.summary}
             onClick={() => setOpen(!open)}
-            role="header"
             aria-expanded={open}
-            aria-controls="id-of-the-panel"
+          // role="header"
+          // aria-controls="id-of-the-panel"
           >
             {"Collapsible Summary"}
             <ChevronRightIcon />

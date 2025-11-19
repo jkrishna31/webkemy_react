@@ -17,16 +17,19 @@ const Page = () => {
       <NumberInput
         value={value}
         onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
+        aria-label="Enter Number"
       />
 
       <NumberInput
         value={value} enclosedControls
         onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
+        aria-label="Enter Number"
       />
 
       <NumberInput
         value={value} hideControls
         onInput={e => setValue(Number((e.target as HTMLInputElement).value))}
+        aria-label="Enter Number"
       />
     </main>
   );

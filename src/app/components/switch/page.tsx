@@ -10,9 +10,9 @@ const page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="switch" />
 
-      <Switch switchSize="sm" />
-      <Switch switchSize="md" />
-      <Switch switchSize="lg" />
+      <Switch switchSize="sm" aria-label="Switch" />
+      <Switch switchSize="md" aria-label="Switch" />
+      <Switch switchSize="lg" aria-label="Switch" />
     </main>
   );
 };

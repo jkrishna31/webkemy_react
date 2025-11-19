@@ -105,7 +105,12 @@ const DatePicker = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <Button variant="tertiary" className={styles.nav_btn} onClick={() => navPrevNext(-1)}>
+        <Button
+          variant="tertiary" className={styles.nav_btn}
+          aria-label="Previous Month"
+          title="Previous Month"
+          onClick={() => navPrevNext(-1)}
+        >
           <ChevronLeftIcon />
         </Button>
         <div>
@@ -125,7 +130,12 @@ const DatePicker = ({
             xPos="left"
           />
         </div>
-        <Button variant="tertiary" className={styles.nav_btn} onClick={() => navPrevNext(1)}>
+        <Button
+          variant="tertiary" className={styles.nav_btn}
+          onClick={() => navPrevNext(1)}
+          aria-label="Next Month"
+          title="Next Month"
+        >
           <ChevronRightIcon />
         </Button>
       </div>

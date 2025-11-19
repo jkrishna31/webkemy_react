@@ -25,7 +25,7 @@ const Slider = ({
       className={classes(styles.wrapper, wrapperClass)}
       data-variant={variant}
       data-is-progress={asProgress}
-      aria-orientation={props["aria-orientation"] || orientation}
+      // aria-orientation={props["aria-orientation"] || orientation}
       style={
         {
           "--value": `${max ? (((value as number) / (max as number)) * 100) : 0}%`,

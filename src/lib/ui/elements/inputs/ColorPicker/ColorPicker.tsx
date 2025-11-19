@@ -72,6 +72,7 @@ const ColorPicker = () => {
           min={0} max={360} step={1}
           value={color[0]}
           onInput={(e) => handleValueChange("hue", (e.target as HTMLInputElement).value)}
+          aria-label="Hue Slider"
         />
         <Slider
           orientation="vertical"
@@ -80,6 +81,7 @@ const ColorPicker = () => {
           min={0} max={100} step={1}
           value={color[3]}
           onInput={(e) => handleValueChange("alpha", (e.target as HTMLInputElement).value)}
+          aria-label="Opacity Slider"
         />
       </div>
 
@@ -96,6 +98,7 @@ const ColorPicker = () => {
             value={stringifyColor(colorInSelectedFormat, selectedFormat, true)}
             onInput={(e) => { }}
             className={styles.color_input}
+            aria-label="Color Value"
           />
         </InputFieldWrapper>
       </div>

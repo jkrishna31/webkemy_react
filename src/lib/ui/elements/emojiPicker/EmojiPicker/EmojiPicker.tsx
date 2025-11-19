@@ -201,10 +201,21 @@ const EmojiPicker = ({
             value={query}
             onInput={e => setQuery((e.target as HTMLInputElement).value)}
           />
-          <button type="reset" className={styles.reset_btn} hidden={!query} onClick={() => setQuery("")} title="Clear">
+          <button
+            type="reset"
+            className={styles.reset_btn}
+            hidden={!query}
+            onClick={() => setQuery("")}
+            aria-label="Clear Search"
+            title="Clear"
+          >
             <CrossIcon className={styles.reset_icon} />
           </button>
-          <button className={styles.search_btn} onClick={() => handleSearch(query)}>
+          <button
+            className={styles.search_btn}
+            onClick={() => handleSearch(query)}
+            aria-label="Search"
+          >
             <SearchIcon className={styles.search_icon} />
           </button>
         </InputFieldWrapper>

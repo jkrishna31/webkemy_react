@@ -20,6 +20,7 @@ const Page = () => {
         value={value}
         onInput={(e) => setValue((e.target as HTMLInputElement).value)}
         className={styles.input}
+        aria-label="Add Tags"
       />
     </main>
   );

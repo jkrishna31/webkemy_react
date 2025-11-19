@@ -201,7 +201,7 @@ const Page = () => {
         </div>
       ),
       renderRight: (
-        <button className={styles.col_more}>
+        <button className={styles.col_more} aria-label="More">
           <EllipsisHIcon />
         </button>
       ),
@@ -369,10 +369,10 @@ const Page = () => {
       render: () => {
         return (
           <div className={styles.table_actions}>
-            <Button variant="secondary">
+            <Button variant="secondary" aria-label="Edit" title="Edit">
               <EditIcon />
             </Button>
-            <Button variant="secondary">
+            <Button variant="secondary" aria-label="Delete" title="Delete">
               <DeleteIcon />
             </Button>
           </div>

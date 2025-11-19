@@ -35,7 +35,13 @@ const AppSidebar = ({
 
   return (
     <div className={classes(styles.sidebar, className)} style={{ width: sidebar === "collapsed" ? "fit-content" : "32rem" }}>
-      <button className={styles.close_btn} aria-pressed={sidebar === "collapsed"} onClick={toggleSidebar}>
+      <button
+        className={styles.close_btn}
+        aria-pressed={sidebar === "collapsed"}
+        onClick={toggleSidebar}
+        aria-label={sidebar === "collapsed" ? "Open Sidebar" : "Close Sidebar"}
+        title={sidebar === "collapsed" ? "Open Sidebar" : "Close Sidebar"}
+      >
         <ChevronsLeftIcon />
       </button>
 

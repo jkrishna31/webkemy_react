@@ -21,6 +21,7 @@ const Page = () => {
         files={filelist}
         multiple
         onInput={(e) => setFilelist((e.target as HTMLInputElement)?.files)}
+        aria-label="Choose File(s)"
       />
       <FilesPreview
         mode="file"

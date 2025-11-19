@@ -86,7 +86,9 @@ const TagsInput = ({
                     {...props}
                 />
                 <button
-                    type="button" className={styles.add_key_btn} title="Add Key"
+                    type="button" className={styles.add_key_btn}
+                    title="Add"
+                    aria-label="Add"
                     onClick={handleKeyAdd}
                 >
                     <PlusIcon className={styles.plus_icon} />

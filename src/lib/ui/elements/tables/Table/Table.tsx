@@ -424,6 +424,8 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         </div>
                         {resizable && (
                           <button
+                            aria-label="Resize Column"
+                            title="Resize Column"
                             data-resize={id}
                             className={styles.resize_handle}
                             style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
