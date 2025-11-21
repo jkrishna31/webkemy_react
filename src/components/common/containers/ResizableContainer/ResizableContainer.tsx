@@ -95,6 +95,7 @@ const ResizableContainer = <T extends ElementType = "div">({
     }
     return (
       <div
+        tabIndex={0}
         className={className}
         data-active={activeResize === dir}
         onPointerDown={startResize(dir)}

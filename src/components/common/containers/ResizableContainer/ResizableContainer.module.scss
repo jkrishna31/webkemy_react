@@ -20,6 +20,7 @@
   touch-action: none;
 
   &:hover,
+  &:focus-visible,
   &[data-active="true"] {
     opacity: 1;
   }

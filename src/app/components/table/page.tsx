@@ -317,7 +317,7 @@ const Page = () => {
         const rowDetails = recordsDetails[row.id];
         return (
           <div style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
-            <Rate rating={(rowDetails.rating ?? 0) / 5} className={styles.rate} readonly key={rowDetails.id} max={1} />
+            <Rate value={(rowDetails.rating ?? 0) / 5} className={styles.rate} readonly key={rowDetails.id} max={1} />
             <p>{rowDetails.rating}</p>
           </div>
         );

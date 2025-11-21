@@ -1,5 +1,11 @@
 @use '@/lib/ui/styles/mixins/animations' as *;
 
+.header {
+    background: var(--gray-11-70);
+    -webkit-backdrop-filter: blur(.4rem);
+    backdrop-filter: blur(.4rem);
+}
+
 .sf {
     max-width: 36rem;
     width: 36rem;

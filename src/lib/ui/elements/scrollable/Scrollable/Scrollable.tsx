@@ -90,6 +90,7 @@ const Scrollable = ({
             className={classes(styles.scroll_btn, styles.btn_left, "scroll_btn")}
             onClick={() => performScroll("left")}
             aria-label="Scroll Left"
+            title="Scroll Left"
           >
             <ChevronLeftIcon className={styles.scroll_icon} />
           </button>
@@ -108,6 +109,7 @@ const Scrollable = ({
             className={classes(styles.scroll_btn, styles.btn_right, "scroll_btn")}
             onClick={() => performScroll("right")}
             aria-label="Scroll Right"
+            title="Scroll Right"
           >
             <ChevronRightIcon className={styles.scroll_icon} />
           </button>

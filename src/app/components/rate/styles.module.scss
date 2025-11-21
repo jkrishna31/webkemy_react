@@ -1,0 +1,8 @@
+.main {
+  .item[data-state="full"] {
+    & svg {
+      fill: transparent;
+      stroke: var(--rate-color);
+    }
+  }
+}

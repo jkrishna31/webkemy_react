@@ -46,7 +46,7 @@ const AppHeader = ({
 
     return (
         <>
-            <Header visible={scrollDir === edges.TOP}>
+            <Header visible={scrollDir === edges.TOP} className={styles.header}>
                 <div className={styles.wrapper}>
                     <Link href="/" className={styles.logo_container} title="Elselog Home" aria-label="App Logo (Webkemy)">
                         <AppLogo className={styles.header_app_logo} />

@@ -11,6 +11,7 @@
   flex-shrink: 0;
   position: absolute;
   z-index: 1;
+  outline-offset: -.3rem;
 
   &:hover {
     color: var(--fg-p);
