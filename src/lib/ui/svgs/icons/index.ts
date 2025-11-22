@@ -125,8 +125,6 @@ export { default as EmbedCSBIcon } from "./EmbedCSBIcon";
 export { default as EmbedGithubIcon } from "./EmbedGithubIcon";
 export { default as EmbedIcon } from "./EmbedIcon";
 export { default as EmbedYoutubeIcon } from "./EmbedYoutubeIcon";
-export { default as EmojiCryIcon } from "./EmojiCryIcon";
-export { default as EmojiDeadIcon } from "./EmojiDeadIcon";
 export { default as ExpandIcon } from "./ExpandIcon";
 export { default as ExpandSolidIcon } from "./ExpandSolidIcon";
 export { default as ExperimentIcon } from "./ExperimentIcon";

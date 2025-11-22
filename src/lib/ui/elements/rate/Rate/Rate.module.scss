@@ -5,6 +5,8 @@
   align-items: center;
   gap: .2rem;
 
+  position: relative;
+
   &[aria-disabled="true"],
   &:disabled {
     opacity: .5;
@@ -70,6 +72,15 @@
   color: var(--border-p);
   transition: transform .3s ease, color .3s ease, background .3s ease;
 
+  label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: .1rem;
+    height: .1rem;
+    opacity: .001;
+  }
+
   input {
     appearance: none;
     position: absolute;
@@ -77,7 +88,7 @@
     left: 0;
     width: .1rem;
     height: .1rem;
-    opacity: .01;
+    opacity: .001;
     border: none;
     background: none;
     outline: none;
@@ -88,10 +99,15 @@
     width: 100%;
     height: 100%;
 
-    &+label {
-      outline: .2rem solid var(--blue-1);
+    &~svg {
+      outline: .2rem dashed var(--rate-color, var(--fg-p-alt));
       outline-offset: .2rem;
     }
+  }
+
+  .active_label {
+    width: 100%;
+    height: 100%;
   }
 
   &:not(:disabled),
@@ -99,13 +115,8 @@
 
     &:hover,
     &:focus-visible {
-      transform: scale(1.25);
+      transform: scale(1.35);
       color: var(--fg-p-alt);
-
-      // &[data-state=""] svg {
-      //   stroke-width: 1.5;
-      //   color: var(--fg-s);
-      // }
     }
   }
 
@@ -131,6 +142,15 @@
   }
 }
 
+.clear_input_label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
 .clear_input {
   position: absolute;
   width: .1rem;
@@ -138,5 +158,9 @@
   top: 0;
   border: none;
   background-color: none;
-  opacity: .01;
+  opacity: .0001;
+
+  &:focus-visible~.clear_input_label {
+    outline: .2rem dashed var(--rate-color, var(--fg-p-alt));
+  }
 }

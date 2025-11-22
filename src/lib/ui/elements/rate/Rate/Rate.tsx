@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useEffect, useId, useState } from "react";
+import React, { ComponentProps, Fragment, ReactNode, useEffect, useId, useState } from "react";
 
 import { StarIcon } from "@/lib/ui/svgs/icons";
 import { SVG } from "@/lib/ui/svgs/misc";
@@ -30,7 +30,7 @@ export interface RateProps extends ComponentProps<"fieldset"> {
 
 const Rate = ({
   value, defaultValue, onChange,
-  min = 1, max = 5, step = 1, subStep = 1,
+  min = 1, max = 5, step = 1, subStep = step,
   readonly, disabled, noStroke, icon, color,
   className, children, name = "rating", clearable, onClick,
   getLabelText, characters, itemClass,
@@ -41,27 +41,33 @@ const Rate = ({
 
   const id = useId();
   const total = (max - min + 1) / step;
+  const noOfSubStops = Math.ceil(step / subStep);
 
-  const handleRating = (e: React.FormEvent<HTMLFieldSetElement>) => {
+  const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
     setRate(Number((e.target as HTMLInputElement).value));
-    onChange?.(e);
+    onChange?.(e as any);
   };
 
   const handleClick = (e: React.MouseEvent<HTMLFieldSetElement, MouseEvent>) => {
-    const selectedRating = (e.target as HTMLElement).closest("[data-rating]");
-    if (selectedRating) {
-      const newRated = Number(selectedRating?.getAttribute("data-rating"));
-      if (newRated === rate) {
+    const selectedRatingElem = (e.target as HTMLElement).closest("[data-rating]");
+    if (selectedRatingElem) {
+      const newRating = Number(selectedRatingElem?.getAttribute("data-rating"));
+      // adjust as per mouse offset from the selectedRatingElem
+      if (newRating === rate) {
         setRate(0);
       }
     }
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
-    const selectedRating = (e.target as HTMLElement).closest("[data-rating]");
-    if (selectedRating) {
-      const newRated = Number(selectedRating?.getAttribute("data-rating"));
-      setActive(newRated);
+    const selectedRatingElem = (e.target as HTMLElement).closest("[data-rating]");
+    if (selectedRatingElem) {
+      const newRating = Number(selectedRatingElem?.getAttribute("data-rating"));
+      const selectedRatingElemRect = selectedRatingElem.getBoundingClientRect();
+      const subStepInPx = selectedRatingElemRect.width / noOfSubStops;
+      const coveredSubStops = Math.ceil((e.clientX - selectedRatingElemRect.x) / subStepInPx);
+      const finalNewRating = (newRating - step) + (coveredSubStops * subStep);
+      setActive(finalNewRating);
     }
   };
 
@@ -75,7 +81,6 @@ const Rate = ({
 
   return (
     <fieldset
-      onChange={handleRating}
       onClick={clearable ? handleClick : undefined}
       onPointerMove={(disabled || readonly) ? undefined : handlePointerMove}
       onPointerLeave={(disabled || readonly) ? undefined : handlePointerLeave}
@@ -86,15 +91,26 @@ const Rate = ({
       aria-readonly={readonly}
       {...props}
     >
+      {!!clearable && (
+        <>
+          <input
+            type="radio"
+            name={name} id={name + "-clear"}
+            value=""
+            onChange={handleRating}
+            className={classes(styles.clear_input)}
+          />
+          <label className={styles.clear_input_label} htmlFor={name + "-clear"}></label>
+        </>
+      )}
       {
-        Array.from({ length: total }).map((_, idx: number) => {
-          const rating = min + (step * idx);
+        Array.from({ length: total }).map((_, stepIdx: number) => {
+          const rating = min + (step * stepIdx);
           const ceil = active ?? rate;
           const isPartial = ceil < rating && ceil > (rating - step);
-          // subSections = subStep; // each section value = (rating - 1) + step/subStep
           return (
             <span
-              key={rating}
+              key={"rating-" + rating}
               data-rating={rating}
               data-state={(rating <= ceil && !isPartial) ? "full" : isPartial ? "partial" : ""}
               data-nostroke={noStroke}
@@ -117,26 +133,34 @@ const Rate = ({
                   </SVG>
                 ) : null
               }
-              <input
-                type="radio" name={name} id={name + "-" + rating} value={rating}
-              />
-              <label htmlFor={name + "-" + rating}>
-                {icon ?? characters?.[idx] ?? <StarIcon />}
-                <span className="invisible">
-                  {getLabelText?.(rating) ?? `${rating} Rating`}
-                </span>
-              </label>
+              {
+                Array.from({ length: noOfSubStops }).map((_, subStepIdx) => {
+                  const subRating = Math.min((rating - step) + ((subStepIdx + 1) * subStep), rating);
+                  return (
+                    <Fragment key={subRating}>
+                      <label htmlFor={name + "-" + subRating} className={classes(subRating === active && styles.active_label)}>
+                        <span className="invisible" hidden>
+                          {getLabelText?.(subRating) ?? subRating}
+                        </span>
+                      </label>
+                      <input
+                        type="radio"
+                        name={name} id={name + "-" + subRating}
+                        value={subRating}
+                        defaultChecked={subRating === ceil}
+                        onChange={handleRating}
+                      />
+                    </Fragment>
+                  );
+                })
+              }
+              {/* <label>
+              </label> */}
+              {icon ?? characters?.[stepIdx] ?? <StarIcon />}
             </span>
           );
         })
       }
-      {!!clearable && (
-        <>
-          <label className={styles.clear_input}>
-            <input type="radio" name={name} id={name + "-clear"} value="" />
-          </label>
-        </>
-      )}
     </fieldset>
   );
 };

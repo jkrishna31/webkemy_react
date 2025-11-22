@@ -1,7 +1,7 @@
 .main {
   .item[data-state="full"] {
     & svg {
-      fill: transparent;
+      fill: var(--purple-1-30);
       stroke: var(--rate-color);
     }
   }

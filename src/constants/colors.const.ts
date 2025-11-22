@@ -7,4 +7,6 @@ export const colors = {
   WHITE: "white",
   BLACK: "black",
   GRAY: "gray",
+  PINK: "pink",
+  PURPLE: "purple",
 } as const;

@@ -1,4 +1,4 @@
-export const isEqual = (a: number, b: number, threshold: number = Number.EPSILON) => {
+export const isEqualWithPrecision = (a: number, b: number, threshold: number = Number.EPSILON) => {
     return Math.abs(a - b) < threshold;
 };
 
