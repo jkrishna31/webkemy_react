@@ -9,7 +9,7 @@ import { BlockSelector, Editor, ToolSelector } from "@/lib/ui/elements/editor";
 import { GeneralInput, InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { Text } from "@/lib/ui/elements/text";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { AlignCenterIcon, AlignRightIcon, BlockCautionIcon, BlockCodeIcon, BlockNoteIcon, BlockquoteIcon, BlockTipIcon, BoldIcon, ColorPaletteIcon, CopyLinkIcon, DeleteIcon, DividerIcon, EmbedCodepenIcon, EmbedCSBIcon, EmbedGithubIcon, EmbedIcon, EmbedYoutubeIcon, FileIcon, FontIcon, FrameIcon, HashtagIcon, HeadingIcon, HighlightertIcon, HyperlinkIcon, ImageIcon, IndentDecIcon, IndentIncIcon, InlineCodeIcon, ItalicIcon, LetterCaseIcon, LetterCaseLowerIcon, LetterCaseToggleIcon, LetterCaseUpperIcon, LetterSpacingIcon, LineHeightIcon, LineThroughIcon, MentionIcon, OrderedListIcon, PilcrowIcon, RedoIcon, SparklesIcon, SubHeadingIcon, SubscriptIcon, SuperscriptIcon, SwapIcon, TableIcon, TextColorIcon, TextFormattingRemoveIcon, TextIcon, TextOutlineIcon, TextSizeIcon, TopSidebarCloseIcon, UnderlineIcon, UndoIcon, UnorderedListIcon } from "@/lib/ui/svgs/icons";
+import { AlignCenterIcon, AlignLeftIcon, AlignRightIcon, BlockCautionIcon, BlockCodeIcon, BlockNoteIcon, BlockquoteIcon, BlockTipIcon, BoldIcon, ColorPaletteIcon, CopyLinkIcon, DeleteIcon, DividerIcon, EmbedCodepenIcon, EmbedCSBIcon, EmbedGithubIcon, EmbedIcon, EmbedYoutubeIcon, FileIcon, FontIcon, FrameIcon, HashtagIcon, HeadingIcon, HighlightertIcon, HyperlinkIcon, ImageIcon, IndentDecIcon, IndentIncIcon, InlineCodeIcon, ItalicIcon, LetterCaseIcon, LetterCaseLowerIcon, LetterCaseToggleIcon, LetterCaseUpperIcon, LetterSpacingIcon, LineHeightIcon, LineThroughIcon, MentionIcon, OrderedListIcon, PilcrowIcon, RedoIcon, SparklesIcon, SubHeadingIcon, SubscriptIcon, SuperscriptIcon, SwapIcon, TableIcon, TextColorIcon, TextFormattingRemoveIcon, TextIcon, TextOutlineIcon, TextSizeIcon, TopSidebarCloseIcon, UnderlineIcon, UndoIcon, UnorderedListIcon } from "@/lib/ui/svgs/icons";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 import styles from "./styles.module.scss";
@@ -263,6 +263,10 @@ const tools = [
     },
   ],
   [
+    {
+      name: "Align Left", key: "align_left",
+      render: <AlignLeftIcon className={styles.icon} />
+    },
     {
       name: "Align Center", key: "align_center",
       render: <AlignCenterIcon className={styles.icon} />

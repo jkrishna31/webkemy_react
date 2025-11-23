@@ -36,27 +36,17 @@ const Rate = ({
   getLabelText, characters, itemClass,
   ...props
 }: RateProps) => {
-  const [rate, setRate] = useState<number>(value ?? defaultValue ?? 0);
+  const [rate, setRate] = useState<number | undefined>(value ?? defaultValue);
   const [active, setActive] = useState<number | null>(null);
 
   const id = useId();
   const total = (max - min + 1) / step;
   const noOfSubStops = Math.ceil(step / subStep);
+  const isEventsAllowed = !disabled && !readonly;
 
   const handleRating = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setRate(Number((e.target as HTMLInputElement).value));
+    setRate(Number(e.target.value));
     onChange?.(e as any);
-  };
-
-  const handleClick = (e: React.MouseEvent<HTMLFieldSetElement, MouseEvent>) => {
-    const selectedRatingElem = (e.target as HTMLElement).closest("[data-rating]");
-    if (selectedRatingElem) {
-      const newRating = Number(selectedRatingElem?.getAttribute("data-rating"));
-      // adjust as per mouse offset from the selectedRatingElem
-      if (newRating === rate) {
-        setRate(0);
-      }
-    }
   };
 
   const handlePointerMove = (e: React.PointerEvent) => {
@@ -81,14 +71,13 @@ const Rate = ({
 
   return (
     <fieldset
-      onClick={clearable ? handleClick : undefined}
-      onPointerMove={(disabled || readonly) ? undefined : handlePointerMove}
-      onPointerLeave={(disabled || readonly) ? undefined : handlePointerLeave}
+      onPointerMove={isEventsAllowed ? handlePointerMove : undefined}
+      onPointerLeave={isEventsAllowed ? handlePointerLeave : undefined}
       className={classes(styles.wrapper, className)}
       data-color={color}
       disabled={disabled || readonly}
       aria-disabled={disabled || readonly}
-      aria-readonly={readonly}
+      data-readonly={readonly}
       {...props}
     >
       {!!clearable && (
@@ -97,16 +86,23 @@ const Rate = ({
             type="radio"
             name={name} id={name + "-clear"}
             value=""
+            checked={rate === null}
             onChange={handleRating}
             className={classes(styles.clear_input)}
+            disabled={disabled}
+            readOnly={readonly}
           />
-          <label className={styles.clear_input_label} htmlFor={name + "-clear"}></label>
+          <label className={styles.clear_input_label} htmlFor={name + "-clear"}>
+            <span className="sr_only">
+              {"0"}
+            </span>
+          </label>
         </>
       )}
       {
         Array.from({ length: total }).map((_, stepIdx: number) => {
           const rating = min + (step * stepIdx);
-          const ceil = active ?? rate;
+          const ceil = active ?? rate ?? 0;
           const isPartial = ceil < rating && ceil > (rating - step);
           return (
             <span
@@ -114,12 +110,9 @@ const Rate = ({
               data-rating={rating}
               data-state={(rating <= ceil && !isPartial) ? "full" : isPartial ? "partial" : ""}
               data-nostroke={noStroke}
-              aria-label={String(rating)}
               aria-disabled={disabled || readonly}
               style={isPartial ? { fill: `url(#${id})` } : {}}
               className={classes(styles.item, itemClass)}
-              aria-setsize={total}
-              aria-posinset={rating}
             >
               {
                 isPartial ? (
@@ -136,26 +129,36 @@ const Rate = ({
               {
                 Array.from({ length: noOfSubStops }).map((_, subStepIdx) => {
                   const subRating = Math.min((rating - step) + ((subStepIdx + 1) * subStep), rating);
+                  const label = getLabelText?.(subRating) ?? String(subRating);
                   return (
                     <Fragment key={subRating}>
-                      <label htmlFor={name + "-" + subRating} className={classes(subRating === active && styles.active_label)}>
-                        <span className="invisible" hidden>
-                          {getLabelText?.(subRating) ?? subRating}
+                      <label
+                        htmlFor={name + "-" + subRating}
+                        style={{ left: `${subStepIdx * (100 / noOfSubStops)}%`, width: `${100 / noOfSubStops}%` }}
+                      >
+                        <span className="sr_only">
+                          {label}
                         </span>
                       </label>
                       <input
                         type="radio"
-                        name={name} id={name + "-" + subRating}
+                        name={name}
+                        id={name + "-" + subRating}
                         value={subRating}
-                        defaultChecked={subRating === ceil}
+                        checked={subRating === rate}
                         onChange={handleRating}
+                        disabled={disabled || readonly}
+                        readOnly={readonly}
+                        onClick={
+                          (isEventsAllowed && clearable && subRating === rate)
+                            ? () => setRate(undefined)
+                            : undefined
+                        }
                       />
                     </Fragment>
                   );
                 })
               }
-              {/* <label>
-              </label> */}
               {icon ?? characters?.[stepIdx] ?? <StarIcon />}
             </span>
           );
