@@ -100,6 +100,16 @@
         cursor: ns-resize;
       }
     }
+
+    &:focus-visible {
+      &::-webkit-slider-thumb {
+        outline: .2rem dashed var(--fg-p-alt);
+      }
+
+      &::-moz-range-thumb {
+        outline: .2rem dashed var(--fg-p-alt);
+      }
+    }
   }
 
   &[data-is-progress="true"] {

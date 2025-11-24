@@ -10,6 +10,7 @@
   cursor: pointer;
   user-select: none;
   touch-action: none;
+  outline: none;
 
   &:hover {
     border-color: var(--border-p);
@@ -17,6 +18,10 @@
 
   &:focus-within {
     border-color: var(--blue-6);
+
+    .thumb {
+      outline: .2rem dashed var(--fg-p-alt);
+    }
   }
 }
 

@@ -64,10 +64,11 @@
     color: var(--fg-p);
 
     .logo_icon {
-        height: 1.4rem;
+        height: 1.6rem;
         width: auto;
         object-fit: contain;
         margin-inline: 1rem;
+        color: var(--fg-p-alt);
     }
 
     .top_right {
@@ -98,6 +99,11 @@
         .theme_icon {
             height: 2.4rem;
             width: 2.4rem;
+            stroke-width: .175rem;
+        }
+
+        .theme_icon path:nth-child(2) {
+            stroke-width: .175rem;
         }
     }
 }
