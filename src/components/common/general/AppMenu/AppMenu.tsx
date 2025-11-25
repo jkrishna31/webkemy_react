@@ -5,7 +5,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { MenuItem } from "@/lib/ui/elements/menu";
 import { BarChartIcon, BubbleChartIcon, LineChartIcon, PieChartIcon, RadarChartIcon, ScatterChartIcon } from "@/lib/ui/svgs/charts";
 import { AddEmojiIcon } from "@/lib/ui/svgs/emojis";
-import { AppLogo, AppNotificationIcon, BellIcon, BlockCodeIcon, BotMessageIcon, ButtonIcon, CalendarDaysIcon, CalendarPlusIcon, CapsuleIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, MessagesIcon, NotificationRemoveIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
+import { AppLogo, AppNotificationIcon, BellIcon, BlockCodeIcon, CalendarDaysIcon, CalendarPlusIcon, CapsuleIcon, CarouselVerticalIcon, CheckboxIcon, ChevronsRightIcon, ColorPickerIcon, CommentIcon, CompareIcon, CropIcon, CrossIcon, DashboardIcon, EastWestArrowCircleIcon, FileIcon, FilesIcon, FlagIcon2, GlobeIcon, GridIcon, HashtagIcon, HierarchyIcon, InputIcon, KeyframesMultipleIcon, ListCollapseIcon, ListOpenIcon, LoaderIcon, MenuCollapseIcon, MessagesIcon, NotificationRemoveIcon, PanelLeftIcon, PlayIcon, PopoverLeftIcon, RadioButtonIcon, RectangleGogglesIcon, RectangleHorizontalIcon, ScrollIcon2, ShopIcon, SliderIcon, SplitHorizontalIcon, StarIcon, TableIcon, TabsIcon, TagIcon, TextIcon, TextIcon3, ThemeIcon, ToggleSwitchIcon, TreeListIcon, UnorderedListIcon, UserCircleIcon, UserIcon, VolumeHighIcon, WriteIcon } from "@/lib/ui/svgs/icons";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppMenu.module.scss";
@@ -136,7 +136,7 @@ export const menuItems = [
                 key: "avatar",
                 href: "/components/avatar",
                 primary: "Avatar",
-                icon: <UserIcon />,
+                icon: <UserCircleIcon />,
             },
             {
                 key: "text",

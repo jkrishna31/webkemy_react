@@ -22,7 +22,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const Element = as === "a" ? Link : as;
 
   const ref = useRef<HTMLElement>(null);
-  const innerRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout>(undefined);
   const destroyContentRef = useRef<NodeJS.Timeout>(undefined);
 
@@ -98,9 +97,7 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       role="region"
       data-expanded={open}
     >
-      {/* <div className="inner_container" ref={innerRef}> */}
       {children}
-      {/* </div> */}
     </Element>
   );
 };

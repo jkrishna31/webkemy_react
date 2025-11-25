@@ -1,5 +1,8 @@
+"use client";
+
 import React, { ComponentProps, useRef } from "react";
 
+import { useFocusTrap } from "@/lib/hooks";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Options.module.scss";
@@ -14,14 +17,22 @@ const Options = ({
 }: OptionsProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  // arrow key navigation support
-  // arrow key lock
-  // update focus on hover
+  // useFocusTrap(ref);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    // 
+    if ("onpointermove" in e.target) {
+
+    }
+  };
 
   return (
     <div
       ref={ref}
       className={classes(styles.wrapper)}
+      onMouseMove={handleMouseMove}
+      tabIndex={-1}
+      {...props}
     >
       {children}
     </div>

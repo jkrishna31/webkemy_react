@@ -19,7 +19,12 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="select" />
 
-      <Select options={options} className={styles.input} aria-label="Select" />
+      <Select
+        options={options}
+        className={styles.input}
+        aria-label="Select"
+        placeholder="Select..."
+      />
     </main>
   );
 };

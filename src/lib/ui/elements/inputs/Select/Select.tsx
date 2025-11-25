@@ -4,39 +4,33 @@ import React, { ComponentProps, useState } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs";
-import { CrossIcon, ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { MenuItem } from "@/lib/ui/elements/menu";
+import { Options } from "@/lib/ui/elements/options";
+import { CheckMarkIcon, CrossIcon, ExpandSolidIcon } from "@/lib/ui/svgs/icons";
 
 import styles from "./Select.module.scss";
 
 export interface SelectProps extends ComponentProps<"select"> {
-    label?: string
-    options: any[]
-    showDopdown?: boolean
-    labelKey?: string
-    variant?: "combobox" | "select"
+    label?: string;
+    options: any[];
+    showDopdown?: boolean;
+    labelKey?: string;
+    variant?: "combobox" | "select";
+    clearable?: boolean;
+    searchable?: boolean;
+    placeholder?: string;
 }
 
 const Select = ({
     variant = "select",
-    label, options, showDopdown, labelKey = "label",
+    label, options, showDopdown, labelKey = "label", clearable, searchable, multiple, placeholder,
     id, className,
-    // onInput, onClick,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
     const [query, setQuery] = useState("");
 
     const optionsToShow = query ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) : options;
-
-    if (query && optionsToShow.length && !dd) {
-        setDd(true);
-    }
-
-    // if single input -> then close on click inside as well
-    // if multiple input -> then prevent propagation on inside dd click
-
-    // if combobox
-    // show an add btn as well for input, so that can be added
 
     return (
         <Dropdown
@@ -49,25 +43,38 @@ const Select = ({
             dropdownClass={styles.dd_list}
             noOverlap
             dropdown={
-                optionsToShow?.map((item: any) => (
-                    <div className={styles.list_item} key={item.value}>
-                        {item.icon}
-                        <span className={styles.item}>{item[labelKey]}</span>
-                    </div>
-                ))
+                <Options role="listbox">
+                    {
+                        optionsToShow?.map((item: any) => (
+                            <MenuItem
+                                as="div"
+                                key={item.value}
+                                id={item.value}
+                                icon={item.icon}
+                                primary={item[labelKey]}
+                                // badge={(multiple && selected) ? <CheckMarkIcon style={{ width: "1.8rem", height: "1.8rem" }} /> : undefined}
+                                role="option"
+                                data-value={item.value}
+                                aria-selected={false}
+                            />
+                        ))
+                    }
+                </Options>
             }
         >
-            <InputFieldWrapper className={className}>
+            <InputFieldWrapper className={className} onClick={() => setDd(true)}>
                 <input
                     {...props as ComponentProps<"input">}
-                    type="text" className={styles.input} id={id}
+                    placeholder={placeholder}
+                    id={id}
+                    type="search"
+                    className={styles.input}
                     autoComplete="off"
                     role="combobox"
                     aria-controls=""
                     aria-expanded={dd}
                     aria-haspopup={true}
                     value={query}
-                    onClick={e => e.stopPropagation()}
                     onInput={(e: any) => setQuery(e.target.value)}
                 />
                 {

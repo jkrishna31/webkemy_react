@@ -23,7 +23,6 @@
   }
 }
 
-
 .row {
   display: flex;
   align-items: center;
@@ -42,7 +41,7 @@
   color: var(--fg-p-alt);
 }
 
-.play_btn svg {
+.play_btn .btn_icon {
   width: 2rem;
   height: 2rem;
 }

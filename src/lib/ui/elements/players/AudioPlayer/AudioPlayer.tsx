@@ -6,6 +6,7 @@ import { useMediaPlayer } from "@/lib/hooks";
 import { Button } from "@/lib/ui/elements/butttons";
 import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
 import { Slider } from "@/lib/ui/elements/inputs";
+import { RippleLoader } from "@/lib/ui/elements/loaders";
 import { PauseIcon, PlayIcon, VolumeHighIcon, VolumenMuteIcon } from "@/lib/ui/svgs/icons";
 import { breakdownTime, TimeField } from "@/lib/utils/datetime.utils";
 import { getFormattedTime } from "@/lib/utils/format.utils";
@@ -26,7 +27,7 @@ const AudioPlayer = ({
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const {
-    duration, isMute, isPlaying, currTime, pace, volume,
+    duration, isMute, isPlaying, currTime, pace, volume, loading,
     setIsPlaying, setIsMute,
     updateCurrTime, updatePace, updateVolume,
     handleLoadedMetadata,
@@ -61,9 +62,12 @@ const AudioPlayer = ({
           className={styles.play_btn}
           onClick={togglePlayState}
           aria-label={isPlaying ? "Pause" : "Play"}
+          disabled={loading}
         >
           {
-            isPlaying ? <PauseIcon /> : <PlayIcon />
+            loading
+              ? <RippleLoader className={styles.btn_icon} />
+              : (isPlaying ? <PauseIcon className={styles.btn_icon} /> : <PlayIcon className={styles.btn_icon} />)
           }
         </Button>
         <div className={styles.player}>

@@ -34,6 +34,7 @@ const VolumeControl = ({
         <Button
           className={styles.vol_dec_btn}
           onClick={() => updateVolume(Math.max(0, volume - 5))}
+          disabled={mute}
         >
           <MinusIcon />
         </Button>
@@ -42,10 +43,12 @@ const VolumeControl = ({
           value={volume}
           onInput={(e) => updateVolume((e.target as HTMLInputElement).valueAsNumber)}
           className={styles.volume_slider}
+          disabled={mute}
         />
         <Button
           className={styles.vol_inc_btn}
           onClick={() => updateVolume(Math.min(100, volume + 5))}
+          disabled={mute}
         >
           <PlusIcon />
         </Button>

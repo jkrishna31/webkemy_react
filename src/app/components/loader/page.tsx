@@ -22,20 +22,20 @@ const page = () => {
       >
         <SkeletonLoader
           loading
-          style={{ gridRow: "1/-1", width: "4rem", height: "4rem", borderRadius: "var(--br-pill)" }}
+          style={{ gridRow: "1/-1", width: "4rem", height: "4rem", borderRadius: "var(--br-pill)", padding: ".2rem" }}
         >
         </SkeletonLoader>
         <SkeletonLoader<"p">
           as="p"
           loading
-          style={{ width: "fit-content", height: "fit-content", borderRadius: "var(--br-pill)" }}
+          style={{ width: "fit-content", height: "fit-content", borderRadius: "var(--br-pill)", padding: ".2rem" }}
         >
           {"John Doe (Developer)"}
         </SkeletonLoader>
         <SkeletonLoader<"p">
           as="p"
           loading
-          style={{ height: "fit-content", borderRadius: ".4rem" }}
+          style={{ height: "fit-content", borderRadius: ".4rem", padding: ".2rem" }}
         >
           {"Lorem ipsum dolor sit amet, inventore."}
         </SkeletonLoader>

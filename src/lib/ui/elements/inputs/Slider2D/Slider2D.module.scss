@@ -19,9 +19,9 @@
   &:focus-within {
     border-color: var(--blue-6);
 
-    .thumb {
-      outline: .2rem dashed var(--fg-p-alt);
-    }
+    // .thumb {
+    //   outline: .2rem dotted var(--blue-1);
+    // }
   }
 }
 

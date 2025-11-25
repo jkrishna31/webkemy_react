@@ -34,6 +34,7 @@
 
     &:disabled {
       opacity: .5;
+      cursor: not-allowed;
     }
 
     &::-webkit-slider-thumb {
@@ -43,7 +44,6 @@
     }
 
     &::-webkit-slider-thumb {
-      cursor: pointer;
       border: .1rem solid var(--border-s);
       background: var(--fg-p);
       border-radius: .3rem;
@@ -53,7 +53,6 @@
     }
 
     &::-moz-range-thumb {
-      cursor: pointer;
       border: .1rem solid var(--border-s);
       background: var(--fg-p);
       border-radius: .3rem;
@@ -103,11 +102,13 @@
 
     &:focus-visible {
       &::-webkit-slider-thumb {
-        outline: .2rem dashed var(--fg-p-alt);
+        outline: .2rem dotted var(--blue-1);
+        outline-offset: .2rem;
       }
 
       &::-moz-range-thumb {
-        outline: .2rem dashed var(--fg-p-alt);
+        outline: .2rem dotted var(--blue-1);
+        outline-offset: .2rem;
       }
     }
   }

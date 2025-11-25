@@ -42,6 +42,7 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
         <WrapperElement
             className={classes(styles.wrapper, className)}
             data-expanded={open}
+            aria-expanded={open}
             {...props}
         >
             {summary}

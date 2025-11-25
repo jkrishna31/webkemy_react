@@ -92,7 +92,7 @@ const Carousel = ({
           })
         }
       </div>
-      <div className={styles.slide_btns}>
+      <div className={styles.slide_btns} role="listbox">
         {
           slides?.map((slide, idx) => {
             return (
@@ -100,6 +100,8 @@ const Carousel = ({
                 key={slide.id}
                 className={styles.slide_btn}
                 data-active={activeSlide === idx}
+                role="option"
+                aria-selected={activeSlide === idx}
                 onClick={() => setActiveSlide(idx)}
                 aria-label={slide.title ?? `Show Slide ${idx + 1}`}
               ></button>

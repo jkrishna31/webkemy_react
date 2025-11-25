@@ -23,6 +23,7 @@ export interface ScrollableProps extends ComponentProps<"div"> {
 const Scrollable = ({
   children,
   className,
+  id,
   vertical,
   scrollStep = 100,
   ref,
@@ -91,6 +92,7 @@ const Scrollable = ({
             onClick={() => performScroll("left")}
             aria-label="Scroll Left"
             title="Scroll Left"
+            aria-controls={id}
           >
             <ChevronLeftIcon className={styles.scroll_icon} />
           </button>
@@ -98,6 +100,7 @@ const Scrollable = ({
       }
       <div
         {...props}
+        id={id}
         className={classes("scroll_invisible", styles.container, className)}
         ref={listRef}
       >
@@ -110,6 +113,7 @@ const Scrollable = ({
             onClick={() => performScroll("right")}
             aria-label="Scroll Right"
             title="Scroll Right"
+            aria-controls={id}
           >
             <ChevronRightIcon className={styles.scroll_icon} />
           </button>

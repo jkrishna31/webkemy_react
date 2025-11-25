@@ -63,7 +63,7 @@ const TreeView = ({
   };
 
   return (
-    <ul className={classes(styles.wrapper, className)} {...props}>
+    <ul className={classes(styles.wrapper, className)} role="group" {...props}>
       {renderSection(tree)}
     </ul>
   );
