@@ -37,6 +37,7 @@
   .expand_btn {
     color: var(--fg-t);
     align-self: stretch;
+    outline-offset: -.3rem;
 
     &:hover {
       color: var(--fg-p);

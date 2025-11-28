@@ -8,7 +8,7 @@ export interface SliderProps extends ComponentProps<"input"> {
   orientation?: "vertical" | "horizontal"
   variant?: "tube" | "rod"
   wrapperClass?: string
-  asProgress?: boolean
+  showFill?: boolean
 }
 
 const Slider = ({
@@ -16,22 +16,23 @@ const Slider = ({
   orientation = "horizontal",
   variant = "tube",
   className, wrapperClass,
-  asProgress,
+  showFill,
   ...props
 }: SliderProps) => {
   // todo: start range
   return (
     <div
-      className={classes(styles.wrapper, wrapperClass)}
+      className={classes(styles.wrapper, showFill && styles.filled, wrapperClass)}
       data-variant={variant}
-      data-is-progress={asProgress}
-      // aria-orientation={props["aria-orientation"] || orientation}
+      data-is-progress={showFill}
+      aria-orientation={props["aria-orientation"] || orientation}
       style={
         {
           "--value": `${max ? (((value as number) / (max as number)) * 100) : 0}%`,
           ...style,
         } as React.CSSProperties
       }
+      {...(props.dir ? { dir: props.dir } : {})}
     >
       <input
         type="range"

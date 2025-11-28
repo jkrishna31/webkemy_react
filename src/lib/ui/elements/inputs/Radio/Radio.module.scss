@@ -11,14 +11,26 @@
     overflow: hidden;
     cursor: pointer;
     flex-shrink: 0;
+    outline: initial;
+
+    transition: color .2s linear, border .2s linear;
+
+    &:hover {
+        border-color: var(--border-p);
+    }
 
     &:checked {
         border-color: var(--blue-1);
         background: transparent;
     }
 
-    &:checked~label {
-        color: var(--fg-p);
+    &:checked,
+    &:hover,
+    &:focus-within {
+        &~label {
+            transition: color .2s linear;
+            color: var(--fg-p);
+        }
     }
 
     &:checked::after {
@@ -36,6 +48,12 @@
 
     &:disabled {
         opacity: .7;
+    }
+
+    &:focus-visible {
+        outline: .2rem dotted var(--blue-1);
+        outline-offset: .2rem;
+        border-color: var(--blue-1);
     }
 }
 

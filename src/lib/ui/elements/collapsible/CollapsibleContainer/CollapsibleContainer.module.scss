@@ -7,5 +7,6 @@
 
   &[data-expanded="true"] {
     max-height: auto;
+    overflow: unset;
   }
 }

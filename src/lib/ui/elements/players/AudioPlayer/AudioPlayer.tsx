@@ -82,7 +82,7 @@ const AudioPlayer = ({
             onInput={(e) => updateCurrTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
             className={styles.slider}
             variant="rod"
-            asProgress={true}
+            showFill={true}
             aria-label="Seek"
           />
         </div>

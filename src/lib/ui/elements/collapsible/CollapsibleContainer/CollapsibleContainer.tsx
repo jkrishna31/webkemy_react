@@ -31,7 +31,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     const elem = ref.current;
     if (elem) {
       const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight + 1);
-      elem.style.height = "fit-content";
       clearTimeout(timeoutRef.current);
       clearTimeout(destroyContentRef.current);
       setDestroyContent(false);
@@ -40,9 +39,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
         if (currMaxHeight <= contentHeight) {
           elem.style.maxHeight = `${contentHeight}px`;
         }
+        elem.style.overflow = "hidden";
         elem.style.opacity = "100%";
         timeoutRef.current = setTimeout(() => {
-          elem.style.overflow = "initial";
+          elem.style.overflow = "unset";
+          // elem.style.maxHeight = "";
         }, .5 * duration);
       } else {
         elem.style.maxHeight = "0px";
@@ -56,14 +57,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       }
     }
   }, [duration, open, renderWhileClosed]);
-
-  const handleTransitionStart = () => {
-    const elem = ref.current;
-    if (elem && open) {
-      // clearTimeout(timeoutRef.current ?? undefined);
-      elem.style.overflow = "hidden";
-    }
-  };
 
   useLayoutEffect(() => {
     updateHeight();
@@ -88,7 +81,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       {...props}
       ref={ref}
       className={classes(styles.container, className)}
-      onTransitionStart={open ? handleTransitionStart : undefined}
       onTransitionEnd={open ? (e: TransitionEvent) => {
         if (e.propertyName !== "max-height") {
           updateHeight();

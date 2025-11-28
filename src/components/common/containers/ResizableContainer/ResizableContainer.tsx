@@ -1,7 +1,8 @@
 "use client";
 
-import React, { ComponentProps, ElementType, memo, useCallback, useRef, useState } from "react";
+import React, { ComponentProps, ElementType, memo, useCallback, useEffect, useRef, useState } from "react";
 
+import { Keys } from "@/constants/keys.const";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ResizableContainer.module.scss";
@@ -89,16 +90,38 @@ const ResizableContainer = <T extends ElementType = "div">({
     handleResize(e.nativeEvent, dir);
   };
 
-  const renderResizer = (dir: Resizers, className: string) => {
-    if (!allowedResizers?.includes(dir)) {
-      return null;
+  const keyDownHandler = (keyDownEvent: React.KeyboardEvent) => {
+    // console.log("--- key down ---", keyDownEvent.key);
+    // get the handle type from e.target classes
+    // based on key & step
+    let newValue = 0;
+    switch (keyDownEvent.key) {
+      case Keys.ARROW_LEFT:
+        newValue -= 2;
+        break;
+      case Keys.ARROW_RIGHT:
+        newValue += 2;
+        break;
+      case Keys.ARROW_UP:
+        keyDownEvent.preventDefault();
+        newValue -= 2;
+        break;
+      case Keys.ARROW_DOWN:
+        keyDownEvent.preventDefault();
+        newValue += 2;
+        break;
     }
+  };
+
+  const renderResizer = (dir: Resizers, className: string) => {
+    if (!allowedResizers?.includes(dir)) return null;
     return (
       <div
         tabIndex={0}
         className={className}
         data-active={activeResize === dir}
         onPointerDown={startResize(dir)}
+        onKeyDown={keyDownHandler}
       ></div>
     );
   };

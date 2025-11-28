@@ -2,29 +2,29 @@
 
 import React, { ComponentProps, ReactNode, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 
-import { useFocusTrap } from "@/lib/hooks";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Dropdown.module.scss";
 
 export interface DropdownProps extends ComponentProps<"div"> {
-  dropdown: ReactNode
-  onClose?: any
-  onOpen?: any
-  open?: boolean
-  yPos?: "bottom" | "top"
-  xPos?: "left" | "right"
-  dropdownClass?: string
-  btnClass?: string
-  isCustomSelector?: boolean
-  noOverlap?: boolean
+  dropdown: ReactNode;
+  onClose?: () => void;
+  onOpen?: () => any;
+  open?: boolean;
+  yPos?: "bottom" | "top";
+  xPos?: "left" | "right";
+  dropdownClass?: string;
+  btnClass?: string;
+  isCustomSelector?: boolean;
+  noOverlap?: boolean;
+  autoSize?: boolean;
 }
 
 const Dropdown = ({
   dropdown, children, className, dropdownClass, btnClass,
   onClose, open, onOpen, isCustomSelector, noOverlap,
-  yPos = "bottom", xPos = "right",
+  yPos = "bottom", xPos = "right", autoSize = true,
   ...props
 }: DropdownProps) => {
   const ref = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ const Dropdown = ({
   const handleOutsideClick = useCallback((e: MouseEvent) => {
     if (!(ref.current as HTMLDivElement).contains(e.target as HTMLElement)) {
       window.removeEventListener("click", handleOutsideClick);
-      onClose();
+      onClose?.();
     }
   }, [onClose]);
 
@@ -80,8 +80,6 @@ const Dropdown = ({
       };
     }
   }, [handleOutsideClick, onClose]);
-
-  // useFocusTrap(dropdownRef, true); // arrow keys focus trap
 
   useLayoutEffect(() => {
     if (ref.current) {

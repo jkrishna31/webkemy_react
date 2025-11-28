@@ -62,6 +62,15 @@ const MenuItem = <T extends ElementType = "button">({
   };
 
   const renderElement = () => {
+    // const conditionalProps: any = !group ? {} : {};
+    // if (disabled) {
+    //   conditionalProps["disabled"] = disabled;
+    //   conditionalProps["aria-disabled"] = disabled;
+    // }
+    // if (minimized) {
+    //   conditionalProps["data-minimized"] = minimized;
+    // }
+
     return group ? (
       <div className={classes(styles.group_header, styles.sticky, "group_header", className)}>{group}</div>
     ) : (

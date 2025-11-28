@@ -5,7 +5,7 @@ import React, { ComponentProps, useEffect } from "react";
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
 import { Menu, MenuItem } from "@/lib/ui/elements/menu";
-import { ChevronsLeftIcon } from "@/lib/ui/svgs/icons";
+import { ChevronLeftIcon } from "@/lib/ui/svgs/icons";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppSidebar.module.scss";
@@ -34,7 +34,10 @@ const AppSidebar = ({
   }, [setField, windowSize]);
 
   return (
-    <div className={classes(styles.sidebar, className)} style={{ width: sidebar === "collapsed" ? "fit-content" : "32rem" }}>
+    <div
+      className={classes(styles.sidebar, className)}
+      style={{ width: sidebar === "collapsed" ? "auto" : "32rem" }}
+    >
       <button
         className={styles.close_btn}
         aria-pressed={sidebar === "collapsed"}
@@ -42,10 +45,13 @@ const AppSidebar = ({
         aria-label={sidebar === "collapsed" ? "Open Sidebar" : "Close Sidebar"}
         title={sidebar === "collapsed" ? "Open Sidebar" : "Close Sidebar"}
       >
-        <ChevronsLeftIcon />
+        <ChevronLeftIcon />
       </button>
 
-      <Menu minimized={sidebar === "collapsed"} className={styles.wrapper}>
+      <Menu
+        minimized={sidebar === "collapsed"}
+        className={styles.wrapper}
+      >
         {
           menuItems.map((item: any) => {
             return (

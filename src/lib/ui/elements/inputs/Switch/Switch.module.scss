@@ -24,9 +24,15 @@
   flex: 0 !important;
 }
 
-.wrapper:has(.input:checked) {
-  border-color: transparent;
+.wrapper:has(input:focus-visible) {
+  outline-offset: .2rem;
+  outline: .2rem dotted var(--blue-1);
 }
+
+// .wrapper:has(.input:checked) {
+//   // border-color: transparent;
+//   border-color: var(--fg-p-alt);
+// }
 
 .input {
   appearance: none;
@@ -65,7 +71,6 @@
 
 .input:checked~.switch::before {
   background-color: var(--bg-p);
-  border-color: var(--bg-p);
   transform: translate3d(calc(var(--switch-height) - var(--gap) - var(--gap)), -50%, 0);
 }
 

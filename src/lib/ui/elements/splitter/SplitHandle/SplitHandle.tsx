@@ -2,10 +2,12 @@
 
 import React, { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 
+import { Keys } from "@/constants/keys.const";
+
 import styles from "./SplitHandle.module.scss";
 
 
-const ALLOWED_KEYS = ["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"];
+const ALLOWED_KEYS: string[] = [Keys.ARROW_DOWN, Keys.ARROW_LEFT, Keys.ARROW_RIGHT, Keys.ARROW_UP];
 
 export interface SplitHandleProps extends ComponentProps<"div"> {
   layout?: "v" | "h";
@@ -14,11 +16,12 @@ export interface SplitHandleProps extends ComponentProps<"div"> {
   min?: number;
   max?: number;
   onChange?: (e: FormEvent<Element>) => void;
+  step?: number;
 }
 
 const SplitHandle = ({
   layout = "h", passive,
-  value, min, max, onChange,
+  value, min, max, onChange, step = 2,
   className,
   ...props
 }: SplitHandleProps) => {
@@ -83,19 +86,19 @@ const SplitHandle = ({
 
         let newValue = _layout === "v" ? dy : dx;
         switch (keyDownEvent.key) {
-          case "ArrowLeft":
-            newValue -= 2;
+          case Keys.ARROW_LEFT:
+            newValue -= step;
             break;
-          case "ArrowRight":
-            newValue += 2;
+          case Keys.ARROW_RIGHT:
+            newValue += step;
             break;
-          case "ArrowUp":
+          case Keys.ARROW_UP:
             keyDownEvent.preventDefault();
-            newValue -= 2;
+            newValue -= step;
             break;
-          case "ArrowDown":
+          case Keys.ARROW_DOWN:
             keyDownEvent.preventDefault();
-            newValue += 2;
+            newValue += step;
             break;
         }
 

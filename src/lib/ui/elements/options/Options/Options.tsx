@@ -1,30 +1,38 @@
 "use client";
 
-import React, { ComponentProps, useRef } from "react";
+import React, { ComponentProps, useEffect, useRef } from "react";
 
-import { useFocusTrap } from "@/lib/hooks";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Options.module.scss";
 
 export interface OptionsProps extends ComponentProps<"div"> {
-
+  onCandidateChange?: (eOrIdx: KeyboardEvent | number, group?: string) => void;
 }
 
 const Options = ({
-  children, className,
+  children, className, onCandidateChange,
   ...props
 }: OptionsProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
-  // useFocusTrap(ref);
-
   const handleMouseMove = (e: React.MouseEvent) => {
-    // 
-    if ("onpointermove" in e.target) {
-
+    const optionItem = (e.target as HTMLElement)?.closest("[role='option']");
+    if (optionItem) {
+      onCandidateChange?.(Array.prototype.indexOf.call(optionItem?.parentNode?.children, optionItem));
     }
   };
+
+  useEffect(() => {
+    if (onCandidateChange) {
+      const handleKeyDown = (e: KeyboardEvent) => {
+        onCandidateChange?.(e);
+      };
+
+      window.addEventListener("keydown", handleKeyDown);
+      return () => window.removeEventListener("keydown", handleKeyDown);
+    }
+  }, [onCandidateChange]);
 
   return (
     <div

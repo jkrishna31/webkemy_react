@@ -1,37 +1,116 @@
 "use client";
 
-import React, { ComponentProps, useState } from "react";
+import React, { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
+import { Keys } from "@/constants/keys.const";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { MenuItem } from "@/lib/ui/elements/menu";
 import { Options } from "@/lib/ui/elements/options";
 import { CheckMarkIcon, CrossIcon, ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Select.module.scss";
 
+export interface Option {
+    label: ReactNode;
+    value: string | number;
+    group?: ReactNode;
+    options?: Option[];
+    icon?: ReactNode;
+}
+
 export interface SelectProps extends ComponentProps<"select"> {
     label?: string;
-    options: any[];
+    options: Option[];
     showDopdown?: boolean;
     labelKey?: string;
     variant?: "combobox" | "select";
     clearable?: boolean;
     searchable?: boolean;
     placeholder?: string;
+    separator?: string;
 }
 
 const Select = ({
     variant = "select",
+    value,
     label, options, showDopdown, labelKey = "label", clearable, searchable, multiple, placeholder,
+    separator = ",", onChange,
     id, className,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
     const [query, setQuery] = useState("");
+    const [activeCandidate, setActiveCandidate] = useState<{ index: number; keyboard?: boolean; }>({ index: 0 });
 
-    const optionsToShow = query ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) : options;
+    const listRef = useRef<HTMLDivElement>(null);
 
+    const filteredOptions = useMemo(() => {
+        return query ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) : options;
+    }, [labelKey, options, query]);
+
+    const handleSelect = (item?: Option, activeIndex?: number) => {
+        if (item) {
+            // if multiple, then add to the values
+        } else if (activeIndex != null) {
+            // find item from filteredOptions using activeIndex
+        } else {
+            // find item from filteredOptions using activeCandidate
+        }
+        if (!multiple) setDd(false);
+    };
+
+    const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
+        // TODO: handle optgroup
+        if (typeof e === "number") {
+            setActiveCandidate({ index: e });
+        } else {
+            switch (e.key) {
+                case Keys.ARROW_UP:
+                    e.preventDefault();
+                    setActiveCandidate(curr => {
+                        const newActiveIdx = (filteredOptions.length + (curr.index - 1)) % filteredOptions.length;
+                        if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
+                        return { index: newActiveIdx, keyboard: true };
+                    });
+                    break;
+                case Keys.ARROW_DOWN:
+                    e.preventDefault();
+                    setActiveCandidate(curr => {
+                        const newActiveIdx = (filteredOptions.length + (curr.index + 1)) % filteredOptions.length;
+                        if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
+                        return { index: newActiveIdx, keyboard: true };
+                    });
+                    break;
+                case Keys.ENTER:
+                    handleSelect();
+                    break;
+            }
+        }
+    };
+
+    useEffect(() => {
+        setActiveCandidate({ index: 0 });
+    }, [filteredOptions, dd]);
+
+    useEffect(() => {
+        if (!activeCandidate.keyboard) return;
+        const listElem = listRef.current;
+        if ((listElem && listElem.scrollHeight > listElem.clientHeight) || (listElem?.parentElement && listElem.parentElement.scrollHeight > listElem.parentElement.clientHeight)) {
+            const activeElem = listElem.querySelector(".active_option");
+            if (activeElem) {
+                const containerRect = listElem.getBoundingClientRect();
+                const activeElemRect = activeElem.getBoundingClientRect();
+                const scrollBy = activeElemRect.top - containerRect.top + listElem.scrollTop - (listElem.parentElement?.clientHeight ?? 0) / 2 + activeElemRect.height / 2;
+                listElem.parentElement?.scrollTo({ top: scrollBy, behavior: "smooth" });
+            }
+        }
+    }, [activeCandidate]);
+
+    // on focus loose close the dropdown
+    // multiple (show all values, separated by <separator>)
+    // combobox
     return (
         <Dropdown
             className={styles.wrapper}
@@ -43,21 +122,28 @@ const Select = ({
             dropdownClass={styles.dd_list}
             noOverlap
             dropdown={
-                <Options role="listbox">
+                <Options role="listbox" onCandidateChange={handleKeyboardNavigation} ref={listRef}>
                     {
-                        optionsToShow?.map((item: any) => (
-                            <MenuItem
-                                as="div"
-                                key={item.value}
-                                id={item.value}
-                                icon={item.icon}
-                                primary={item[labelKey]}
-                                // badge={(multiple && selected) ? <CheckMarkIcon style={{ width: "1.8rem", height: "1.8rem" }} /> : undefined}
-                                role="option"
-                                data-value={item.value}
-                                aria-selected={false}
-                            />
-                        ))
+                        filteredOptions?.map((item, idx: number) => {
+                            const isSelected = Array.isArray(value) ? value.includes(item.value) : value === item.value;
+                            return (
+                                <MenuItem<"div">
+                                    as="div"
+                                    key={item.value}
+                                    id={item.value as string}
+                                    icon={item.icon}
+                                    primary={(item as any)[labelKey]}
+                                    badge={(isSelected) ? (
+                                        <CheckMarkIcon className={styles.mark} />
+                                    ) : undefined}
+                                    onClick={() => handleSelect(item)}
+                                    role="option"
+                                    aria-selected={isSelected}
+                                    className={classes(styles.option, idx === activeCandidate.index && "active_option")}
+                                    collapsible={false}
+                                />
+                            );
+                        })
                     }
                 </Options>
             }
