@@ -111,7 +111,7 @@ const SplitHandle = ({
         handleElem.removeEventListener("keydown", keyDownHandler);
       };
     }
-  }, [onChange]);
+  }, [onChange, step]);
 
   return (
     <div

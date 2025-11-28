@@ -13,7 +13,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Select.module.scss";
 
 export interface Option {
-    label: ReactNode;
+    label?: ReactNode;
     value: string | number;
     group?: ReactNode;
     options?: Option[];
