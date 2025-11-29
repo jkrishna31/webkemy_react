@@ -60,11 +60,19 @@
 }
 
 .option {
+    transition: background .1s linear;
+
+    &[aria-selected="true"] {
+        // background: var(--gray-30);
+        // background: var(--fg-p-alt);
+        // color: var(--bg-p);
+    }
+
     .mark {
         width: 1.8rem;
         height: 1.8rem;
         margin-left: auto;
-        // color: var(--blue-1) !important;
+        // color: inherit;
     }
 }
 

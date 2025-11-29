@@ -8,6 +8,7 @@ import { InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { MenuItem } from "@/lib/ui/elements/menu";
 import { Options } from "@/lib/ui/elements/options";
 import { CheckMarkIcon, CrossIcon, ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Select.module.scss";
@@ -29,14 +30,12 @@ export interface SelectProps extends ComponentProps<"select"> {
     clearable?: boolean;
     searchable?: boolean;
     placeholder?: string;
-    separator?: string;
 }
 
 const Select = ({
     variant = "select",
-    value,
+    value, onChange,
     label, options, showDopdown, labelKey = "label", clearable, searchable, multiple, placeholder,
-    separator = ",", onChange,
     id, className,
     ...props
 }: SelectProps) => {
@@ -47,18 +46,25 @@ const Select = ({
     const listRef = useRef<HTMLDivElement>(null);
 
     const filteredOptions = useMemo(() => {
-        return query ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) : options;
+        return query
+            ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase()))
+            : options;
     }, [labelKey, options, query]);
 
     const handleSelect = (item?: Option, activeIndex?: number) => {
-        if (item) {
-            // if multiple, then add to the values
-        } else if (activeIndex != null) {
-            // find item from filteredOptions using activeIndex
-        } else {
-            // find item from filteredOptions using activeCandidate
+        const selectedOption = item ?? filteredOptions[activeIndex ?? activeCandidate.index];
+        if (selectedOption) {
+            if (multiple) {
+                const newValues = (value as (string | number)[]).filter(item => item !== selectedOption.value);
+                if (newValues.length === (value as (string | number[])).length) {
+                    newValues.push(selectedOption.value);
+                }
+                onChange?.({ target: { value: newValues } } as any);
+            } else {
+                if (selectedOption) onChange?.({ target: { value: selectedOption.value } } as any);
+            }
+            if (!multiple) setDd(false);
         }
-        if (!multiple) setDd(false);
     };
 
     const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
@@ -91,7 +97,8 @@ const Select = ({
     };
 
     useEffect(() => {
-        setActiveCandidate({ index: 0 });
+        if (hasDOM() && window.innerWidth >= 768) setActiveCandidate({ index: 0 });
+        else setActiveCandidate({ index: -1 });
     }, [filteredOptions, dd]);
 
     useEffect(() => {
@@ -109,8 +116,13 @@ const Select = ({
     }, [activeCandidate]);
 
     // on focus loose close the dropdown
-    // multiple (show all values, separated by <separator>)
-    // combobox
+
+    // on enter (if open - select the item on active index (for combobox add a new entry in the dropdown saying "Add New Value"); if close - open)
+
+    // CAN'T SHOW THE VALUES IN THE INPUT, CAUSES ISSUE WITH SEARCH & ALSO CAN'T CLEAR SPECIFIC KEYS
+    // another issue: where to show
+    // before the input or below the input
+
     return (
         <Dropdown
             className={styles.wrapper}
@@ -125,7 +137,7 @@ const Select = ({
                 <Options role="listbox" onCandidateChange={handleKeyboardNavigation} ref={listRef}>
                     {
                         filteredOptions?.map((item, idx: number) => {
-                            const isSelected = Array.isArray(value) ? value.includes(item.value) : value === item.value;
+                            const isSelected = (multiple && Array.isArray(value)) ? value.includes(item.value) : value === item.value;
                             return (
                                 <MenuItem<"div">
                                     as="div"
