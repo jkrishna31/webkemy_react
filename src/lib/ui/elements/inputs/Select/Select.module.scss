@@ -60,13 +60,18 @@
 }
 
 .option {
+    cursor: pointer;
     transition: background .1s linear;
 
-    &[aria-selected="true"] {
-        // background: var(--gray-30);
-        // background: var(--fg-p-alt);
-        // color: var(--bg-p);
+    &:not(:global(.active_option)):hover {
+        background: inherit;
     }
+
+    // &[aria-selected="true"] {
+    //     background: var(--gray-30);
+    //     background: var(--fg-p-alt);
+    //     color: var(--bg-p);
+    // }
 
     .mark {
         width: 1.8rem;

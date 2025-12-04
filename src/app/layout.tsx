@@ -6,6 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 
 import { FrontendObservability } from "@/components/managers";
+import { THEME_BG_DARK, THEME_BG_LIGHT } from "@/constants/colors.const";
 
 export const metadata: Metadata = {
   title: "Webkemy React",
@@ -16,11 +17,11 @@ export const viewport: Viewport = {
   themeColor: [
     {
       media: "(prefers-color-scheme: light)",
-      color: "rgb(252, 254, 255)",
+      color: THEME_BG_LIGHT,
     },
     {
       media: "(prefers-color-scheme: dark)",
-      color: "rgb(26, 28, 29)"
+      color: THEME_BG_DARK,
     },
   ],
   width: "device-width",

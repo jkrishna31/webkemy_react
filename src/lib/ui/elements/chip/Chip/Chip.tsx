@@ -28,7 +28,7 @@ const Chip = ({
       {children ?? <span>{label}</span>}
       {
         onRemove ? (
-          <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove Key">
+          <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove">
             <CrossIcon className={styles.cross_icon} />
           </button>
         ) : null

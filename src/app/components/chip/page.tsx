@@ -26,6 +26,8 @@ const Page = () => {
         <Badge color="yellow" float={null} animate="ripple" style={{ marginRight: ".5rem" }} />
         {"Pending"}
       </Chip>
+      <Chip color="purple" label="Archived" onRemove={handleRemove} />
+      <Chip color="pink" label="Done" onRemove={handleRemove} />
     </main>
   );
 };

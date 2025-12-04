@@ -1,3 +1,6 @@
+export const THEME_BG_LIGHT = "rgb(252, 254, 255)";
+export const THEME_BG_DARK = "rgb(24, 26, 27)";
+
 export const colors = {
   RED: "red",
   YELLOW: "yellow",

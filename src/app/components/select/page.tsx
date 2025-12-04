@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
+import { Chip } from "@/lib/ui/elements/chip";
 import { Select } from "@/lib/ui/elements/inputs";
 
 import styles from "./styles.module.scss";
@@ -33,19 +34,40 @@ const options = [
 const Page = () => {
   const [selected, setSelected] = useState<string[]>([]);
 
+  const getLabel = (value: string) => {
+    return options.find(item => item.value === value)?.label;
+  };
+
+  const handleRemove = (value: string) => {
+    setSelected(currSelected => [...currSelected.filter(item => item !== value)]);
+  };
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="select" />
 
-      <Select
-        value={selected}
-        onChange={(e: any) => setSelected(e.target.value)}
-        multiple
-        options={options}
-        className={styles.input}
-        aria-label="Select"
-        placeholder="Select..."
-      />
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Select
+          value={selected}
+          onChange={(e: any) => {
+            setSelected(e.target.value);
+          }}
+          multiple
+          options={options}
+          className={styles.input}
+          aria-label="Select"
+          placeholder="Select..."
+        />
+        {!!selected.length && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: ".8rem", marginTop: "2rem", maxWidth: "40rem" }}>
+            {
+              selected.map((item) => (
+                <Chip key={item} label={getLabel(item)} onRemove={() => handleRemove(item)} />
+              ))
+            }
+          </div>
+        )}
+      </div>
     </main>
   );
 };

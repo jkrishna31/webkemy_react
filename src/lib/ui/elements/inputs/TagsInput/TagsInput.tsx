@@ -3,6 +3,7 @@
 import React, { ComponentProps, useRef } from "react";
 
 import { useKey } from "@/lib/hooks";
+import { Chip } from "@/lib/ui/elements/chip";
 import { CrossIcon, PlusIcon } from "@/lib/ui/svgs/icons";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -59,12 +60,7 @@ const TagsInput = ({
                 <ul className={styles.keys_list}>
                     {
                         tags.map((key: string, idx: number) => (
-                            <li key={key + idx} className={styles.key_item}>
-                                <span className={styles.key}>{key}</span>
-                                <button type="button" className={styles.del_btn} onClick={() => handleRemoveItem(key)} title="Remove Key">
-                                    <CrossIcon className={styles.cross_icon} />
-                                </button>
-                            </li>
+                            <Chip label={key} key={key + idx} onRemove={() => handleRemoveItem(key)} />
                         ))
                     }
                 </ul>

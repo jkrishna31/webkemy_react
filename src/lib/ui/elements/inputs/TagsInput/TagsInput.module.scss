@@ -27,11 +27,6 @@
     &:focus {
         border-color: var(--blue-6);
     }
-
-    // &:focus-visible {
-    //     outline: .2rem solid var(--blue-6);
-    //     outline-offset: .1rem;
-    // }
 }
 
 .add_key_btn {
@@ -45,7 +40,6 @@
     border-radius: .4rem;
     background-color: var(--fg-p);
     color: var(--bg-p);
-    // background: radial-gradient(at 52% -52%, rgb(250, 250, 250) 0px, oklab(0.984805 -1.49012e-7 0 / 0.7) 100%);
 
     &:hover {
         background-color: var(--fg-p-alt);
@@ -62,28 +56,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: .8rem;
-    padding: 1rem;
-    border: 2px dashed var(--border-t);
-    border-radius: .4rem;
     margin-top: 1rem;
-}
-
-.key_item {
-    background-color: var(--bg-t);
-    border-radius: .4rem;
-    display: flex;
-    align-items: center;
-    font-size: 1.4rem;
-    padding-left: .8rem;
-}
-
-.key {
-    display: inline-block;
-    padding-block: .6rem;
-    max-width: 20rem;
-    text-overflow: ellipsis;
-    text-wrap: nowrap;
-    overflow: hidden;
 }
 
 .del_btn {

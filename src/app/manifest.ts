@@ -1,5 +1,7 @@
 import { MetadataRoute } from "next";
 
+import { THEME_BG_DARK } from "@/constants/colors.const";
+
 export default function manifest(): MetadataRoute.Manifest {
   return {
     "name": "Webkemy",
@@ -8,8 +10,8 @@ export default function manifest(): MetadataRoute.Manifest {
     "start_url": "/",
     "display": "standalone",
     "categories": ["social"],
-    "background_color": "rgb(26, 28, 29)",
-    "theme_color": "rgb(26, 28, 29)",
+    "background_color": THEME_BG_DARK,
+    "theme_color": THEME_BG_DARK,
     "scope": "/",
     "lang": "en",
     "icons": [

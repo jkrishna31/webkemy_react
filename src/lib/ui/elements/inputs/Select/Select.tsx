@@ -67,28 +67,29 @@ const Select = ({
         }
     };
 
+    // todo: combobox (explicit option in dropdown to add the query)
+    // todo: optgroup
+
     const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
         // TODO: handle optgroup
         if (typeof e === "number") {
             setActiveCandidate({ index: e });
         } else {
             switch (e.key) {
-                case Keys.ARROW_UP:
+                case Keys.ARROW_UP: {
                     e.preventDefault();
-                    setActiveCandidate(curr => {
-                        const newActiveIdx = (filteredOptions.length + (curr.index - 1)) % filteredOptions.length;
-                        if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
-                        return { index: newActiveIdx, keyboard: true };
-                    });
+                    const newActiveIdx = (filteredOptions.length + (activeCandidate.index - 1)) % filteredOptions.length;
+                    setActiveCandidate({ index: newActiveIdx, keyboard: true });
+                    if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
                     break;
-                case Keys.ARROW_DOWN:
+                }
+                case Keys.ARROW_DOWN: {
                     e.preventDefault();
-                    setActiveCandidate(curr => {
-                        const newActiveIdx = (filteredOptions.length + (curr.index + 1)) % filteredOptions.length;
-                        if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
-                        return { index: newActiveIdx, keyboard: true };
-                    });
+                    const newActiveIdx = (filteredOptions.length + (activeCandidate.index + 1)) % filteredOptions.length;
+                    setActiveCandidate({ index: newActiveIdx, keyboard: true });
+                    if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
                     break;
+                }
                 case Keys.ENTER:
                     handleSelect();
                     break;
@@ -114,14 +115,6 @@ const Select = ({
             }
         }
     }, [activeCandidate]);
-
-    // on focus loose close the dropdown
-
-    // on enter (if open - select the item on active index (for combobox add a new entry in the dropdown saying "Add New Value"); if close - open)
-
-    // CAN'T SHOW THE VALUES IN THE INPUT, CAUSES ISSUE WITH SEARCH & ALSO CAN'T CLEAR SPECIFIC KEYS
-    // another issue: where to show
-    // before the input or below the input
 
     return (
         <Dropdown
