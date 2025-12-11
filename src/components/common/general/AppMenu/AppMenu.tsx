@@ -332,7 +332,6 @@ export const menuItems = [
                 key: "framer",
                 href: "/components/framer",
                 primary: "Framer",
-                disabled: true,
                 icon: <KeyframesMultipleIcon />,
             },
             {

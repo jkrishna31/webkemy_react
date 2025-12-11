@@ -32,14 +32,15 @@ const options = [
 ];
 
 const Page = () => {
-  const [selected, setSelected] = useState<string[]>([]);
+  const [selected1, setSelected1] = useState<string>();
+  const [selected2, setSelected2] = useState<string[]>([]);
 
   const getLabel = (value: string) => {
     return options.find(item => item.value === value)?.label;
   };
 
   const handleRemove = (value: string) => {
-    setSelected(currSelected => [...currSelected.filter(item => item !== value)]);
+    setSelected2(currSelected => [...currSelected.filter(item => item !== value)]);
   };
 
   return (
@@ -48,20 +49,32 @@ const Page = () => {
 
       <div style={{ display: "flex", flexDirection: "column" }}>
         <Select
-          value={selected}
+          value={selected1}
           onChange={(e: any) => {
-            setSelected(e.target.value);
+            setSelected1(e.target.value);
+          }}
+          options={options}
+          className={styles.input}
+          aria-label="Select"
+          placeholder="Select (single)..."
+          styles={{ root: { marginBottom: "2rem" } }}
+        />
+        <Select
+          defaultValue="5"
+          value={selected2}
+          onChange={(e: any) => {
+            setSelected2(e.target.value);
           }}
           multiple
           options={options}
           className={styles.input}
           aria-label="Select"
-          placeholder="Select..."
+          placeholder="Select (multiple)..."
         />
-        {!!selected.length && (
+        {!!selected2.length && (
           <div style={{ display: "flex", flexWrap: "wrap", gap: ".8rem", marginTop: "2rem", maxWidth: "40rem" }}>
             {
-              selected.map((item) => (
+              selected2.map((item) => (
                 <Chip key={item} label={getLabel(item)} onRemove={() => handleRemove(item)} />
               ))
             }

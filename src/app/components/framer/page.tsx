@@ -1,8 +1,11 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
+import { Framer } from "@/lib/ui/elements/framer";
 
 import styles from "./styles.module.scss";
+
+const dummyPages = Array.from({ length: 20 }).map((_, idx) => idx + 1);
 
 const page = () => {
   // === in the container
@@ -20,11 +23,11 @@ const page = () => {
     <main>
       <PageSetup pageKey="framer" />
 
-      <div className={styles.container}>
+      <Framer className={styles.container}>
         <div data-frame='prev'></div>
         <div data-frame='curr'></div>
         <div data-frame='next'></div>
-      </div>
+      </Framer>
     </main>
   );
 };

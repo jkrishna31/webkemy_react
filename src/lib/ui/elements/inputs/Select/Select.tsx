@@ -13,9 +13,11 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Select.module.scss";
 
+export type Value = string | number | boolean;
+
 export interface Option {
     label?: ReactNode;
-    value: string | number;
+    value: Value;
     group?: ReactNode;
     options?: Option[];
     icon?: ReactNode;
@@ -30,13 +32,17 @@ export interface SelectProps extends ComponentProps<"select"> {
     clearable?: boolean;
     searchable?: boolean;
     placeholder?: string;
+    rootClassName?: string;
+    styles?: {
+        root?: React.CSSProperties;
+    }
 }
 
 const Select = ({
     variant = "select",
-    value, onChange,
+    defaultValue, value, onChange,
     label, options, showDopdown, labelKey = "label", clearable, searchable, multiple, placeholder,
-    id, className,
+    id, className, rootClassName, styles: stylesFromProp,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
@@ -55,7 +61,7 @@ const Select = ({
         const selectedOption = item ?? filteredOptions[activeIndex ?? activeCandidate.index];
         if (selectedOption) {
             if (multiple) {
-                const newValues = (value as (string | number)[]).filter(item => item !== selectedOption.value);
+                const newValues = (value as Value[]).filter(item => item !== selectedOption.value);
                 if (newValues.length === (value as (string | number[])).length) {
                     newValues.push(selectedOption.value);
                 }
@@ -68,10 +74,9 @@ const Select = ({
     };
 
     // todo: combobox (explicit option in dropdown to add the query)
-    // todo: optgroup
+    // todo: optgroup (keyboard nav)
 
     const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
-        // TODO: handle optgroup
         if (typeof e === "number") {
             setActiveCandidate({ index: e });
         } else {
@@ -80,14 +85,14 @@ const Select = ({
                     e.preventDefault();
                     const newActiveIdx = (filteredOptions.length + (activeCandidate.index - 1)) % filteredOptions.length;
                     setActiveCandidate({ index: newActiveIdx, keyboard: true });
-                    if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
+                    if (e.shiftKey) handleSelect(undefined, newActiveIdx);
                     break;
                 }
                 case Keys.ARROW_DOWN: {
                     e.preventDefault();
                     const newActiveIdx = (filteredOptions.length + (activeCandidate.index + 1)) % filteredOptions.length;
                     setActiveCandidate({ index: newActiveIdx, keyboard: true });
-                    if (e.shiftKey && multiple) handleSelect(undefined, newActiveIdx);
+                    if (e.shiftKey) handleSelect(undefined, newActiveIdx);
                     break;
                 }
                 case Keys.ENTER:
@@ -118,7 +123,7 @@ const Select = ({
 
     return (
         <Dropdown
-            className={styles.wrapper}
+            className={classes(styles.wrapper, rootClassName)}
             open={dd}
             onClose={() => {
                 setDd(false);
@@ -134,7 +139,7 @@ const Select = ({
                             return (
                                 <MenuItem<"div">
                                     as="div"
-                                    key={item.value}
+                                    key={String(item.value)}
                                     id={item.value as string}
                                     icon={item.icon}
                                     primary={(item as any)[labelKey]}
@@ -152,6 +157,7 @@ const Select = ({
                     }
                 </Options>
             }
+            {...({ style: stylesFromProp?.root ?? {} })}
         >
             <InputFieldWrapper className={className} onClick={() => setDd(true)}>
                 <input

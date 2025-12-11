@@ -13,7 +13,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "editor.hover.enabled": true,
+  "editor.hover.enabled": "on",
   "editor.colorDecorators": true,
   "eslint.workingDirectories": [
     {

@@ -3,6 +3,7 @@
 import React, { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
+import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
 import { DateInput, GeneralInput, InputFieldWrapper, InputItem, Select, Switch, TagsInput, TextArea, TimeInput } from "@/lib/ui/elements/inputs";
 import { Text } from "@/lib/ui/elements/text";
 import { classes } from "@/lib/utils/style.utils";
@@ -120,28 +121,26 @@ const EventForm = ({
         <Text<"label"> as="label" inline htmlFor="repeat">{"Repeat"}</Text>
       </InputItem>
 
-      {
-        repeat ? (
-          <InputItem inline={true} className={styles.date_time_wrapper}>
-            <InputItem>
-              <Text<"label"> as="label" htmlFor="repeat_every">{"Repeat Every"}</Text>
-              <Select
-                labelKey="name"
-                options={repeatOptions}
-                id="repeat_every"
-              />
-            </InputItem>
-            <InputItem>
-              <Text<"label"> as="label" htmlFor="repeat_on">{"On (Week) Day"}</Text>
-              <Select
-                labelKey="label"
-                options={weekdayOptions}
-                id="repeat_on"
-              />
-            </InputItem>
+      <CollapsibleContainer open={repeat} renderWhileClosed={false}>
+        <InputItem inline={true} className={styles.date_time_wrapper}>
+          <InputItem>
+            <Text<"label"> as="label" htmlFor="repeat_every">{"Repeat Every"}</Text>
+            <Select
+              labelKey="name"
+              options={repeatOptions}
+              id="repeat_every"
+            />
           </InputItem>
-        ) : null
-      }
+          <InputItem>
+            <Text<"label"> as="label" htmlFor="repeat_on">{"On (Week) Day"}</Text>
+            <Select
+              labelKey="label"
+              options={weekdayOptions}
+              id="repeat_on"
+            />
+          </InputItem>
+        </InputItem>
+      </CollapsibleContainer>
 
       <InputItem inline>
         <Switch id="all_day" />

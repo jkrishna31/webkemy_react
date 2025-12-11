@@ -4,28 +4,31 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Framer.module.scss";
 
+export interface FrameProps extends ComponentProps<"div"> {
+  type?: "PREV" | "NEXT" | "CURR";
+}
+
 export interface FramerProps extends ComponentProps<"div"> {
 
 }
+
+const Frame = ({ type = "CURR", className, ...props }: FrameProps) => {
+  return (
+    <div className={classes(styles.frame, className)} data-frame={type}>
+
+    </div>
+  );
+};
 
 const Framer = ({
   children, className,
   ...props
 }: FramerProps) => {
-
-  // how will it look in home screen, especially the prev frame navigation
-
   return (
     <div className={classes(styles.wrapper, className)}>
-      <div className={styles.frame_prev}>
-        {/* prev page */}
-      </div>
-      <div className={styles.frame_curr}>
+      <Frame>
         {children}
-      </div>
-      <div className={styles.frame_next}>
-        {/* next page */}
-      </div>
+      </Frame>
     </div>
   );
 };
