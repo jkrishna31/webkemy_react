@@ -1,1 +1,2 @@
-export { default as CarouselItem, type CarouselItemProps } from "./CarouselItem";
+export type * from "./CarouselItem";
+export { default as CarouselItem } from "./CarouselItem";

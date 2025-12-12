@@ -8,7 +8,8 @@
     border: .1rem solid var(--border-s);
     background-color: var(--bg-t);
     color: var(--fg-p);
-    transition: border .15s linear;
+    outline-color: transparent;
+    transition: border .15s linear, outline .15s linear;
 
     &:hover {
         border-color: var(--border-p);
@@ -16,6 +17,7 @@
 
     &:focus-within {
         border-color: var(--blue-6);
+        outline: .3rem solid var(--blue-1-30);
     }
 
     &[data-invalid="true"] {

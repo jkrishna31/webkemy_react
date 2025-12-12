@@ -1,1 +1,2 @@
-export { default as Collapsible, type CollapsibleProps } from "./Collapsible";
+export type * from "./Collapsible";
+export { default as Collapsible } from "./Collapsible";

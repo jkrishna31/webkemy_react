@@ -1,1 +1,2 @@
-export { default as Virtualizer, type VirtualizerProps } from "./Virtualizer";
+export type * from "./Virtualizer";
+export { default as Virtualizer } from "./Virtualizer";

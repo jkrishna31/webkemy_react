@@ -1,13 +1,17 @@
 .container {
+  --mxh: 0;
+
+  max-height: var(--mxh);
   overflow: hidden;
-  max-height: 0;
   opacity: 0;
+
   transition-timing-function: ease;
   transition-duration: 500ms;
   transition-property: max-height, opacity;
 
   &[data-expanded="true"] {
-    max-height: auto;
-    overflow: unset;
+    --mxh: "auto";
+    overflow: initial;
+    opacity: 1;
   }
 }

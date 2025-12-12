@@ -1,1 +1,2 @@
-export { default as Progress, type ProgressProps } from "./Progress";
+export type * from "./Progress";
+export { default as Progress } from "./Progress";

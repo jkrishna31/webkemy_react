@@ -1,1 +1,2 @@
-export { default as AvatarList, type AvatarsListProps } from "./AvatarList";
+export type * from "./AvatarList";
+export { default as AvatarList } from "./AvatarList";

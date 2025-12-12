@@ -1,1 +1,2 @@
-export { default as FilesPreview, type FilesPreviewProps } from "./FilesPreview";
+export type * from "./FilesPreview";
+export { default as FilesPreview } from "./FilesPreview";

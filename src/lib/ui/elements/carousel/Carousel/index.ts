@@ -1,1 +1,2 @@
-export { default as Carousel, type CarouselProps, type Slide } from "./Carousel";
+export type * from "./Carousel";
+export { default as Carousel } from "./Carousel"; 

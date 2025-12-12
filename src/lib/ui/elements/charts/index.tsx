@@ -1,8 +1,8 @@
-export { default as BarChart } from "./BarChart/BarChart";
-export { default as GeoChart } from "./GeoChart/GeoChart";
-export { default as HeatMap } from "./HeatMap/HeatMap";
-export { default as LineChart } from "./LineChart/LineChart";
-export { default as PackedCircles } from "./PackedCircles/PackedCircles";
-export { default as PieChart } from "./PieChart/PieChart";
-export { default as RadarChart } from "./RadarChart/RadarChart";
-export { default as ScatterChart } from "./ScatterChart/ScatterChart";
+export * from "./BarChart";
+export * from "./GeoChart";
+export * from "./HeatMap";
+export * from "./LineChart";
+export * from "./PackedCircles";
+export * from "./PieChart";
+export * from "./RadarChart";
+export * from "./ScatterChart";

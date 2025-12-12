@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, ElementType, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { ComponentProps, ElementType, useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 
@@ -36,17 +36,20 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       setDestroyContent(false);
       if (open) {
         const currMaxHeight = Number(elem.style?.maxHeight?.slice(0, -2));
+        // console.log("=== update height ===", elem, contentHeight, currMaxHeight, (elem as HTMLElement).offsetHeight);
         if (currMaxHeight <= contentHeight) {
-          elem.style.maxHeight = `${contentHeight}px`;
+          elem.style.setProperty("--mxh", "0px");
+          void elem.offsetHeight;
+          elem.style.setProperty("--mxh", `${contentHeight}px`);
         }
         elem.style.overflow = "hidden";
         elem.style.opacity = "100%";
-        timeoutRef.current = setTimeout(() => {
-          elem.style.overflow = "unset";
-          // elem.style.maxHeight = "";
-        }, .5 * duration);
+        timeoutRef.current = setTimeout(() => elem.style.overflow = "", .5 * duration);
+        timeoutRef.current = setTimeout(() => elem.style.setProperty("--mxh", "auto"), duration);
       } else {
-        elem.style.maxHeight = "0px";
+        elem.style.setProperty("--mxh", `${contentHeight}px`);
+        void elem.offsetHeight;
+        elem.style.setProperty("--mxh", "0px");
         elem.style.overflow = "hidden";
         elem.style.opacity = "0%";
         if (!renderWhileClosed) {
@@ -62,16 +65,16 @@ const CollapsibleContainer = <T extends ElementType = "div">({
     updateHeight();
   }, [updateHeight]);
 
-  useEffect(() => {
-    const innerElem = ref.current;
-    if (open && innerElem) {
-      const observer = new ResizeObserver(() => {
-        updateHeight();
-      });
-      observer.observe(innerElem);
-      return () => observer.disconnect();
-    }
-  }, [open, updateHeight]);
+  // useEffect(() => {
+  //   const innerElem = ref.current;
+  //   if (open && innerElem) {
+  //     const observer = new ResizeObserver((d) => {
+  //       updateHeight();
+  //     });
+  //     observer.observe(innerElem);
+  //     return () => observer.disconnect();
+  //   }
+  // }, [open, updateHeight]);
 
   if (destroyContent && !open) return null;
 
@@ -81,11 +84,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       {...props}
       ref={ref}
       className={classes(styles.container, className)}
-      onTransitionEnd={open ? (e: TransitionEvent) => {
-        if (e.propertyName !== "max-height") {
-          updateHeight();
-        }
-      } : undefined}
+      // onTransitionEnd={open ? (e: TransitionEvent) => {
+      //   if (e.propertyName !== "max-height") {
+      //     updateHeight();
+      //   }
+      // } : undefined}
       role="region"
       data-expanded={open}
     >

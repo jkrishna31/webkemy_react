@@ -1,1 +1,2 @@
-export { default as SelectDropdown, type SelectDropdownProps, type SelectOption } from "./SelectDropdown";
+export type * from "./SelectDropdown";
+export { default as SelectDropdown } from "./SelectDropdown";

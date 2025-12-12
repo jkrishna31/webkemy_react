@@ -1,1 +1,2 @@
-export { default as TabList, type TabListProps } from "./TabList";
+export type * from "./TabList";
+export { default as TabList } from "./TabList";

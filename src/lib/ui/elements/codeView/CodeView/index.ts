@@ -1,1 +1,2 @@
-export { default as CodeView, type LineHighlight } from "./CodeView";
+export type * from "./CodeView";
+export { default as CodeView } from "./CodeView";

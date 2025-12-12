@@ -1,1 +1,2 @@
-export { default as AdvTable, type AdvTableProps } from "./AdvTable";
+export type * from "./AdvTable";
+export { default as AdvTable } from "./AdvTable";

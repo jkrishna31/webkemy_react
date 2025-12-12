@@ -1,1 +1,2 @@
-export { default as AdvImage, type AdvImageProps } from "./AdvImage";
+export type * from "./AdvImage";
+export { default as AdvImage } from "./AdvImage";

@@ -1,1 +1,2 @@
-export { type CalendarEvent, default as EventBadge, type EventBadgeProps } from "./EventBadge";
+export type * from "./EventBadge";
+export { default as EventBadge } from "./EventBadge";

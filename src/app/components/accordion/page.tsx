@@ -27,7 +27,7 @@ const Details = ({ children }: { children?: ReactNode }) => {
 };
 
 const Page = () => {
-  const { activeSections, updateAccordion } = useAccordion("single");
+  const { activeSections, updateAccordion } = useAccordion("single", ["1"]);
 
   return (
     <main className={styles.main}>
