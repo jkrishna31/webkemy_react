@@ -38,8 +38,8 @@ const CollapsibleContainer = <T extends ElementType = "div">({
         const currMaxHeight = Number(elem.style?.maxHeight?.slice(0, -2));
         // console.log("=== update height ===", elem, contentHeight, currMaxHeight, (elem as HTMLElement).offsetHeight);
         if (currMaxHeight <= contentHeight) {
-          elem.style.setProperty("--mxh", "0px");
-          void elem.offsetHeight;
+          // elem.style.setProperty("--mxh", "0px");
+          // void elem.offsetHeight;
           elem.style.setProperty("--mxh", `${contentHeight}px`);
         }
         elem.style.overflow = "hidden";
