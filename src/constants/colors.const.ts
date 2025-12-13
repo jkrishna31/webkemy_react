@@ -1,5 +1,5 @@
 export const THEME_BG_LIGHT = "rgb(252, 254, 255)";
-export const THEME_BG_DARK = "rgb(26, 28, 28)";
+export const THEME_BG_DARK = "rgb(26, 28, 30)";
 
 export const colors = {
   RED: "red",

@@ -14,7 +14,8 @@
     padding: .8rem 1rem;
     font-size: 1.6rem;
     cursor: pointer;
-    transition: border .15s linear;
+    outline-color: transparent;
+    transition: border .15s linear, outline .15s linear;
 
     &:hover {
         border-color: var(--border-p);
@@ -22,6 +23,7 @@
 
     &:focus {
         border-color: var(--blue-6);
+        outline: .3rem solid var(--blue-1-30);
     }
 }
 
