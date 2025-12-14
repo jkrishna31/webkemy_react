@@ -21,8 +21,6 @@ const Text = <T extends ElementType = "p">({
 }: TextProps<T>) => {
   const Element = as;
 
-  // code, bold, italic, underlive, strike-through, highlight
-
   return (
     <Element
       className={classes(styles[as], className)}

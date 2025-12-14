@@ -1,8 +1,8 @@
+import "./styles.scss";
+
 import React, { ReactNode } from "react";
 
 import { ComponentLayout } from "@/components/layouts";
-
-import styles from "./styles.module.scss";
 
 const Layout = ({
   children
@@ -11,7 +11,7 @@ const Layout = ({
 }>) => {
   return (
     <ComponentLayout>
-      <div className={styles.wrapper}>
+      <div className="wrapper">
         {children}
       </div>
     </ComponentLayout>

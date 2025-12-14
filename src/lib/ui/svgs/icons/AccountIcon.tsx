@@ -3,8 +3,8 @@ import { SVGProps } from "@/types/prop.types";
 const AccountIcon = (props: SVGProps) => {
     return (
         <svg
-            width="28"
-            height="28"
+            width="24"
+            height="24"
             viewBox="0 0 416 416"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"

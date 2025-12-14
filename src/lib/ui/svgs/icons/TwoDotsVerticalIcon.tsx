@@ -4,7 +4,7 @@ import { SVGProps } from "@/types/prop.types";
 
 const TwoDotsVerticalIcon = (props: SVGProps) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 20 20" {...props}><path fill="currentColor" d="M10.001 8.2a2.2 2.2 0 1 0-.002-4.4a2.2 2.2 0 0 0 .002 4.4m0 3.6a2.2 2.2 0 1 0 0 4.402a2.2 2.2 0 0 0 0-4.402" /></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 20 20" {...props}><path fill="currentColor" d="M10.001 8.2a2.2 2.2 0 1 0-.002-4.4a2.2 2.2 0 0 0 .002 4.4m0 3.6a2.2 2.2 0 1 0 0 4.402a2.2 2.2 0 0 0 0-4.402" /></svg>
 
   );
 };

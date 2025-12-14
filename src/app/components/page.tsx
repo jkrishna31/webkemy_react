@@ -1,13 +1,11 @@
 import React from "react";
 
-import styles from "./styles.module.scss";
+import { ComponentsPage } from "@/components/pages";
 
-const ComponentsPage = () => {
+const Page = () => {
   return (
-    <main className={styles.main}>
-
-    </main>
+    <ComponentsPage />
   );
 };
 
-export default ComponentsPage;
+export default Page;
