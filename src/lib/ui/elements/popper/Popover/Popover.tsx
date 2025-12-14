@@ -137,12 +137,14 @@ const Popover = ({
 
   useEffect(() => {
     if (anchor && (isTooltip || closeOnScroll)) {
-      const handleScroll = () => {
-        onClose?.();
+      const handleScroll = (e: Event) => {
+        if ((e.target as HTMLElement).contains(anchor)) {
+          onClose?.();
+        }
       };
       // close on esc
-      // add scoll listener on all scrollable parent
-      window.addEventListener("scroll", handleScroll, { once: true, passive: true });
+      // re-position on resize
+      window.addEventListener("scroll", handleScroll, { once: true, passive: true, capture: true });
       return () => window.removeEventListener("scroll", handleScroll);
     }
   }, [anchor, closeOnScroll, isTooltip, onClose]);

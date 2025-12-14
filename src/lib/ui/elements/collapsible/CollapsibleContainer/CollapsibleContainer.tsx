@@ -26,55 +26,48 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const destroyContentRef = useRef<NodeJS.Timeout>(undefined);
 
   const [destroyContent, setDestroyContent] = useState(!renderWhileClosed);
+  const isFirstRender = useRef(true);
 
   const updateHeight = useCallback(() => {
     const elem = ref.current;
-    if (elem) {
-      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight + 1);
+    if (elem && !isFirstRender.current) {
+      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
+      const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
       clearTimeout(timeoutRef.current);
       clearTimeout(destroyContentRef.current);
       setDestroyContent(false);
-      if (open) {
-        const currMaxHeight = Number(elem.style?.maxHeight?.slice(0, -2));
-        // console.log("=== update height ===", elem, contentHeight, currMaxHeight, (elem as HTMLElement).offsetHeight);
-        if (currMaxHeight <= contentHeight) {
-          // elem.style.setProperty("--mxh", "0px");
-          // void elem.offsetHeight;
+      requestAnimationFrame(() => {
+        if (open) {
+          elem.style.overflow = "hidden";
+          elem.style.opacity = "100%";
+          elem.style.setProperty("--mxh", (currHeight && renderWhileClosed) ? `${currHeight}px` : "0px");
+          void elem.offsetHeight;
           elem.style.setProperty("--mxh", `${contentHeight}px`);
-        }
-        elem.style.overflow = "hidden";
-        elem.style.opacity = "100%";
-        timeoutRef.current = setTimeout(() => elem.style.overflow = "", .5 * duration);
-        timeoutRef.current = setTimeout(() => elem.style.setProperty("--mxh", "auto"), duration);
-      } else {
-        elem.style.setProperty("--mxh", `${contentHeight}px`);
-        void elem.offsetHeight;
-        elem.style.setProperty("--mxh", "0px");
-        elem.style.overflow = "hidden";
-        elem.style.opacity = "0%";
-        if (!renderWhileClosed) {
-          destroyContentRef.current = setTimeout(() => {
-            setDestroyContent(true);
+          timeoutRef.current = setTimeout(() => {
+            elem.style.overflow = "";
+            elem.style.setProperty("--mxh", "none");
           }, duration);
+        } else {
+          elem.style.overflow = "hidden";
+          elem.style.opacity = "0%";
+          elem.style.setProperty("--mxh", `${currHeight}px`);
+          void elem.offsetHeight;
+          elem.style.setProperty("--mxh", "0px");
+          if (!renderWhileClosed) {
+            destroyContentRef.current = setTimeout(() => {
+              setDestroyContent(true);
+            }, duration);
+          }
         }
-      }
+      });
     }
   }, [duration, open, renderWhileClosed]);
 
   useLayoutEffect(() => {
-    updateHeight();
-  }, [updateHeight]);
+    isFirstRender.current = false;
+  }, []);
 
-  // useEffect(() => {
-  //   const innerElem = ref.current;
-  //   if (open && innerElem) {
-  //     const observer = new ResizeObserver((d) => {
-  //       updateHeight();
-  //     });
-  //     observer.observe(innerElem);
-  //     return () => observer.disconnect();
-  //   }
-  // }, [open, updateHeight]);
+  useLayoutEffect(updateHeight, [updateHeight]);
 
   if (destroyContent && !open) return null;
 
@@ -84,11 +77,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       {...props}
       ref={ref}
       className={classes(styles.container, className)}
-      // onTransitionEnd={open ? (e: TransitionEvent) => {
-      //   if (e.propertyName !== "max-height") {
-      //     updateHeight();
-      //   }
-      // } : undefined}
       role="region"
       data-expanded={open}
     >

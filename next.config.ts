@@ -39,17 +39,17 @@ const nextConfig: NextConfig = {
             value: "no-store, max-age=0",
           },
           {
-            // this header prevents the browser from attempting to guess the type of content if the Content-Type header is not explicitly set (can prevent XSS exploits)
+            // prevents the browser from attempting to guess the type of content if the Content-Type header is not explicitly set (can prevent XSS exploits)
             key: "X-Content-Type-Options",
             value: "nosniff",
           },
           {
-            // this header indicates whether the site should be allowed to be displayed within an iframe (can prevent against clickjacking attacks)
+            // indicates whether the site should be allowed to be displayed within an iframe (can prevent against clickjacking attacks)
             key: "X-Frame-Options",
             value: "DENY",
           },
           {
-            // this header controls how much info the browser includes when navigating cross origin
+            // controls how much info the browser includes when navigating cross origin
             key: "Referrer-Policy",
             value: "strict-origin-when-cross-origin",
           },

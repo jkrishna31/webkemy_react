@@ -297,7 +297,6 @@ const ChatContainer = ({
               anchor={emojiPickerAnchor}
               onClose={() => setEmojiPickerAnchor(null)}
               closeOnOutsideClick
-              closeOnScroll
               className={styles.emoji_popover}
               useTransform={false}
             >
