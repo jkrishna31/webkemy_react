@@ -30,7 +30,6 @@
 
   a {
     font-size: 1.8rem;
-    // font-weight: 500;
     border-radius: .6rem;
     padding: .8rem 1.6rem;
     transition-property: color, background;
@@ -80,8 +79,14 @@
   }
 
   .section {
+    ul {
+      gap: .8rem;
+    }
+
     a {
       font-size: 1.6rem;
+      padding: .8rem 1rem;
+      gap: 1.2rem;
     }
   }
 }
