@@ -18,9 +18,7 @@
   input {
     appearance: none;
     -webkit-appearance: none;
-    border-radius: .4rem;
-    background-color: var(--bg-t);
-    border: .1rem solid var(--border-s);
+    border-radius: .6rem;
     transition: border .15s linear;
 
     min-width: 10rem;
@@ -46,18 +44,22 @@
     &::-webkit-slider-thumb {
       border: .1rem solid var(--border-s);
       background: var(--fg-p);
-      border-radius: .3rem;
+      border-radius: .6rem;
       width: .8rem;
       height: 1.6rem;
       cursor: ew-resize;
+      outline-color: transparent;
+      transition: all .3s ease;
     }
 
     &::-moz-range-thumb {
       border: .1rem solid var(--border-s);
       background: var(--fg-p);
-      border-radius: .3rem;
+      border-radius: .6rem;
       width: .6rem;
       cursor: ew-resize;
+      outline-color: transparent;
+      transition: all .3s ease;
     }
 
     &:hover {
@@ -95,7 +97,7 @@
 
       &::-moz-range-thumb {
         height: .6rem;
-        width: 1.4rem;
+        width: 1.6rem;
         cursor: ns-resize;
       }
     }
@@ -165,17 +167,17 @@
 
 .wrapper {
   input {
-    &:focus-visible {
+    &:focus {
       &::-webkit-slider-thumb {
         border-color: var(--blue-1);
-        outline: .2rem dotted var(--blue-1);
-        outline-offset: .2rem;
+        outline: .3rem solid var(--blue-1-15);
+        // outline-offset: .2rem;
       }
 
       &::-moz-range-thumb {
         border-color: var(--blue-1);
-        outline: .2rem dotted var(--blue-1);
-        outline-offset: .2rem;
+        outline: .3rem solid var(--blue-1-15);
+        // outline-offset: .2rem;
       }
     }
   }

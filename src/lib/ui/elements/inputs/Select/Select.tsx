@@ -75,6 +75,7 @@ const Select = ({
 
     // todo: combobox (explicit option in dropdown to add the query)
     // todo: optgroup (keyboard nav)
+    // todo: diabled item
 
     const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
         if (typeof e === "number") {

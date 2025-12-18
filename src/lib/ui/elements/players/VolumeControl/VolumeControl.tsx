@@ -44,6 +44,8 @@ const VolumeControl = ({
           onInput={(e) => updateVolume((e.target as HTMLInputElement).valueAsNumber)}
           className={styles.volume_slider}
           disabled={mute}
+          showFill
+          variant="rod"
         />
         <Button
           className={styles.vol_inc_btn}

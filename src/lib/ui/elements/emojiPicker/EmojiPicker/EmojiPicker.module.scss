@@ -126,10 +126,10 @@
   cursor: pointer;
   padding: .3rem;
   border-radius: .4rem;
+  outline: none;
 }
 
 .emoji[data-skin-tone="true"]::after {
-  // content: "⦿";
   content: "•";
   position: absolute;
   bottom: .1rem;
@@ -139,7 +139,8 @@
   color: var(--yellow-1);
 }
 
-.emoji:hover {
+.emoji:hover,
+.emoji:focus {
   background-color: var(--bg-s);
 
   &[data-skin-tone="true"]::after {

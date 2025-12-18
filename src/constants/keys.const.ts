@@ -8,6 +8,7 @@ export const Keys = {
   SHIFT: "Shift",
   TAB: "Tab",
   ALT: "Alt",
+  SPACE: "Space",
 
   // Arrow Keys
   ARROW_UP: "ArrowUp",

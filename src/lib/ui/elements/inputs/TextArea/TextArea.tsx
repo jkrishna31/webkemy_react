@@ -7,14 +7,15 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./TextArea.module.scss";
 
 export interface TextAreaProps extends ComponentProps<"textarea"> {
-    focused?: boolean
-    autoResize?: boolean
-    onInput?: any
-    multiline?: boolean
+    focused?: boolean;
+    autoResize?: boolean;
+    onInput?: any;
+    multiline?: boolean;
+    maxRows?: number;
 }
 
 const TextArea = ({
-    focused, className, autoResize = true, id, onInput, ref, value, multiline = true, rows,
+    focused, className, autoResize = true, id, onInput, ref, value, multiline = true, rows, maxRows,
     ...props
 }: TextAreaProps) => {
     const taRef = useRef<HTMLTextAreaElement>(null);

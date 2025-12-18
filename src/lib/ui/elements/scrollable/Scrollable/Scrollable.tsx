@@ -3,17 +3,13 @@
 import React, { ComponentProps, useEffect, useImperativeHandle, useRef, useState } from "react";
 
 import { useWindowSize } from "@/data/stores";
-import { useDebouncedCallback } from "@/lib/hooks";
+import { useThrottledCallback } from "@/lib/hooks";
 import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Scrollable.module.scss";
 
-const SCROLL_OPTIONS = {
-  leading: true,
-  trailing: true,
-};
 
 export interface ScrollableProps extends ComponentProps<"div"> {
   vertical?: boolean
@@ -36,22 +32,19 @@ const Scrollable = ({
   const [hasXScroll, setHasXScroll] = useState([false, false]);
   const [hasYScroll, setHasYScroll] = useState([false, false]);
 
-  const updateScrollArea = useDebouncedCallback(
+  const updateScrollArea = useThrottledCallback(
     () => {
-      if (listRef.current) {
-        if (vertical) {
-          const canScrollUp = listRef.current.scrollTop > 0;
-          const canScrollDown = listRef.current.scrollTop < (listRef.current.scrollHeight - listRef.current.clientHeight);
-          setHasYScroll([canScrollUp, canScrollDown]);
-        } else {
-          const canScrollLeft = listRef.current.scrollLeft > 0;
-          const canScrollRight = Math.ceil(listRef.current.scrollLeft) < (listRef.current.scrollWidth - listRef.current.clientWidth);
-          setHasXScroll([canScrollLeft, canScrollRight]);
-        }
+      if (!listRef.current) return;
+      if (vertical) {
+        const canScrollUp = listRef.current.scrollTop > 0;
+        const canScrollDown = listRef.current.scrollTop < (listRef.current.scrollHeight - listRef.current.clientHeight);
+        setHasYScroll([canScrollUp, canScrollDown]);
+      } else {
+        const canScrollLeft = listRef.current.scrollLeft > 0;
+        const canScrollRight = Math.ceil(listRef.current.scrollLeft) < (listRef.current.scrollWidth - listRef.current.clientWidth);
+        setHasXScroll([canScrollLeft, canScrollRight]);
       }
     },
-    50,
-    SCROLL_OPTIONS
   );
 
   const performScroll = (dir: "left" | "right") => {
@@ -66,8 +59,9 @@ const Scrollable = ({
   useImperativeHandle(ref, () => listRef.current!);
 
   useEffect(() => {
-    if (hasDOM() && listRef.current) {
-      const elem = listRef.current;
+    // TODO: add only if has scrollable area
+    const elem = listRef.current;
+    if (hasDOM() && elem) {
       elem.addEventListener("scroll", updateScrollArea, { passive: true });
       elem.addEventListener("wheel", updateScrollArea, { passive: true });
       return () => {

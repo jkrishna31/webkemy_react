@@ -2,6 +2,7 @@
 
 import { ComponentProps, useEffect, useRef } from "react";
 
+import { Keys } from "@/constants/keys.const";
 import { Scrollable } from "@/lib/ui/elements/scrollable";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -35,6 +36,26 @@ const TabList = ({
         }
     }, [activeTab]);
 
+    useEffect(() => {
+        const list = containerRef.current;
+        if (list) {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                const activeElem = list.contains(document.activeElement) ? document.activeElement : activeTabRef.current;
+                if (!activeElem) return;
+                let focusableTab: HTMLElement | undefined;
+                if (e.key === Keys.ARROW_DOWN || e.key === Keys.ARROW_RIGHT) {
+                    focusableTab = activeElem.nextElementSibling as HTMLElement;
+                } else if (e.key === Keys.ARROW_UP || e.key === Keys.ARROW_LEFT) {
+                    focusableTab = activeElem.previousElementSibling as HTMLElement;
+                }
+                focusableTab?.focus();
+            };
+
+            list.addEventListener("keydown", handleKeyDown);
+            return () => list.removeEventListener("keydown", handleKeyDown);
+        }
+    }, []);
+
     return (
         <div
             className={classes("scroll_invisible", styles.tab_btns_wrapper, className)}
@@ -46,27 +67,27 @@ const TabList = ({
                 ref={containerRef}
             >
                 {
-                    tabs?.map((tab: any, idx: number) => (
-                        <button
-                            className={classes(styles.tab_btn, btnClass)}
-                            tab-active={tab.id === activeTab ? 1 : 0}
-                            ref={tab.id === activeTab ? activeTabRef : null}
-                            onClick={(e) => {
-                                onChange(tab.id);
-                            }}
-                            aria-selected={tab.id === activeTab}
-                            key={tab.id}
-                            role="tab"
-                            title={tab.title}
-                            aria-hidden={rest["aria-hidden"]}
-                            tabIndex={rest["aria-hidden"] ? -1 : 0}
-                        >
-                            {tab.render?.()}
-                            {tab.label ? (
-                                <span className={styles.tab_btn_label}>{tab.label}</span>
-                            ) : null}
-                        </button>
-                    ))
+                    tabs?.map((tab: any) => {
+                        const isSelected = tab.id === activeTab;
+                        return (
+                            <button
+                                className={classes(styles.tab_btn, btnClass)}
+                                ref={isSelected ? activeTabRef : null}
+                                onClick={() => onChange(tab.id)}
+                                aria-selected={isSelected}
+                                key={tab.id}
+                                role="tab"
+                                title={tab.title}
+                                aria-hidden={rest["aria-hidden"]}
+                                tabIndex={isSelected ? 0 : -1}
+                            >
+                                {tab.render?.()}
+                                {tab.label ? (
+                                    <span className={styles.tab_btn_label}>{tab.label}</span>
+                                ) : null}
+                            </button>
+                        );
+                    })
                 }
             </Scrollable>
         </div>

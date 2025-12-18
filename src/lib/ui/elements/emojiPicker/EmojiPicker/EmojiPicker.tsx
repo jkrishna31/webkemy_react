@@ -1,18 +1,18 @@
 "use client";
 
-import React, { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { skinTones } from "@/constants/characters.const";
+import { Keys } from "@/constants/keys.const";
 import { categories, categoriesOrder } from "@/data/general/emojis";
 import emojisJSON from "@/data/json/emojis.json";
-import { useDebouncedCallback } from "@/lib/hooks";
+import { useDebouncedCallback, useFocusTrap, usePrevious, useThrottledCallback } from "@/lib/hooks";
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { GeneralInput, InputFieldWrapper } from "@/lib/ui/elements/inputs";
 import { Popover } from "@/lib/ui/elements/popper";
 import { TabList } from "@/lib/ui/elements/tablist";
 import { EmojiSmileIcon } from "@/lib/ui/svgs/emojis";
 import { BulbIcon, BusFrontIcon, CatIcon, CrossIcon, FlagIcon, HistoryIcon, PopcornIcon, SearchIcon, StarIcon, VolleyBallIcon } from "@/lib/ui/svgs/icons";
-import { throttle } from "@/lib/utils/general.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./EmojiPicker.module.scss";
@@ -23,7 +23,7 @@ export interface EmojiPickerProps extends ComponentProps<"div"> {
 
 const skinToneOptions = skinTones.map((sk, idx) => ({ label: sk, value: idx }));
 
-// move to locales
+// TODO: move to locales
 const i18nNames: { [key: string]: string } = {
   recent: "Recent",
   smileys_people: "Smileys and People",
@@ -65,10 +65,14 @@ const EmojiPicker = ({
   const [variationPicker, setVariationPicker] = useState<{
     emojiId: string; anchor: HTMLElement;
   }>();
+  const prevVariationPicker = usePrevious(variationPicker);
 
   const containerRef = useRef<HTMLUListElement>(null);
   const explicitRef = useRef<boolean>(false);
   const timeoutIdRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const variationsRef = useRef<HTMLDivElement>(null);
+
+  const variations = variationPicker?.emojiId ? (emojisJSON.emojis as any)[variationPicker.emojiId].skins : [];
 
   const scrollToElem = (elem: HTMLElement, behavior: ScrollBehavior = "smooth") => {
     const elemRect = elem.getBoundingClientRect();
@@ -110,30 +114,27 @@ const EmojiPicker = ({
     300,
   );
 
-  const clearAnchor = (immediate?: boolean, e?: any) => {
+  const throttledHandleMouseMove = useThrottledCallback((e: any) => {
+    if (!e.isTrusted) return;
+    clearTimeout(timeoutIdRef.current);
+    const emojiBtn = (e.target as HTMLElement).closest("button");
+    if (emojiBtn) {
+      const emojiId = emojiBtn.getAttribute("data-id");
+      const currEmojiId = anchor ? anchor.getAttribute("data-id") : null;
+      if (emojiId !== currEmojiId) setAnchor(emojiBtn);
+    }
+    else setAnchor(null);
+  }, 150);
+
+  const clearAnchor = useCallback((immediate?: boolean, e?: any) => {
     clearTimeout(timeoutIdRef.current);
     timeoutIdRef.current = setTimeout(() => {
-      throttledHandleMouseMove.cancel();
       setAnchor(null);
-    }, immediate ? 0 : 180);
-  };
+      throttledHandleMouseMove.cancel();
+    }, immediate ? 0 : 150);
+  }, [throttledHandleMouseMove]);
 
-  const throttledHandleMouseMove = useMemo(() => {
-    return throttle((e: any) => {
-      if (!e.isTrusted) return;
-      clearTimeout(timeoutIdRef.current);
-      const emojiBtn = (e.target as HTMLElement).closest("button");
-      if (emojiBtn) {
-        setAnchor(emojiBtn);
-      } else {
-        setAnchor(null);
-      }
-    }, 180);
-  }, []);
-
-  const handleMouseMove = useCallback(throttledHandleMouseMove, [throttledHandleMouseMove]);
-
-  const handleDoubleClick = (e: MouseEvent) => {
+  const handleContextMenu = (e: MouseEvent) => {
     const emojiBtn = (e.target as HTMLButtonElement).closest("button");
     const hasVariation = emojiBtn?.getAttribute("data-skin-tone");
     const emojiId = emojiBtn?.getAttribute("data-id");
@@ -179,9 +180,15 @@ const EmojiPicker = ({
     categoryElems.forEach(elem => observer.observe(elem));
   };
 
+  useEffect(() => handleSearch(query), [handleSearch, query]);
+
+  useEffect(() => anchor?.focus(), [anchor]);
+
   useEffect(() => {
-    handleSearch(query);
-  }, [handleSearch, query]);
+    if (!variationPicker) {
+      prevVariationPicker?.anchor?.focus();
+    }
+  }, [prevVariationPicker?.anchor, variationPicker]);
 
   useEffect(() => {
     observeCategoryIntersection();
@@ -191,12 +198,44 @@ const EmojiPicker = ({
     });
   }, [filteredCategories]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const emojiBtn = (e.target as HTMLButtonElement).closest("button");
+      const hasVariation = emojiBtn?.getAttribute("data-skin-tone");
+      const emojiId = emojiBtn?.getAttribute("data-id");
+
+      if (e.code === Keys.SPACE && hasVariation === "true" && emojiId && emojiBtn) {
+        e.preventDefault();
+        clearAnchor(true);
+        setVariationPicker(curr => {
+          // TODO: save curr.anchor
+          return curr?.emojiId === emojiId ? undefined : { emojiId, anchor: emojiBtn };
+        });
+      } else if (e.code === Keys.ARROW_DOWN) {
+
+      } else if (e.code === Keys.ARROW_UP) {
+
+      } else if (e.code === Keys.ENTER) {
+        // if (variationPicker?.emojiId) { select the active variation }
+      } else if (e.code === Keys.ARROW_LEFT) {
+        // if (variationPicker?.emojiId) { select the active variation }
+      } else if (e.code === Keys.ARROW_RIGHT) {
+        // if (variationPicker?.emojiId) { select the active variation }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [clearAnchor]);
+
+  useFocusTrap(variationsRef, !!variationPicker?.emojiId);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.search_wrapper}>
         <InputFieldWrapper className={styles.search_input_wrapper}>
           <GeneralInput
-            placeholder="Search..."
+            placeholder="Search"
             className={styles.search_input}
             value={query}
             onInput={e => setQuery((e.target as HTMLInputElement).value)}
@@ -240,11 +279,11 @@ const EmojiPicker = ({
       <ul
         ref={containerRef}
         className={classes(styles.emojis_wrapper, "scroll_thin")}
-        onMouseMove={handleMouseMove}
-        onFocus={handleMouseMove}
+        onMouseMove={throttledHandleMouseMove}
+        onFocus={throttledHandleMouseMove}
         onMouseLeave={() => clearAnchor(true)}
-        onBlur={(e) => clearAnchor(false, e)}
-        onContextMenu={handleDoubleClick}
+        onBlur={() => clearAnchor(false)}
+        onContextMenu={handleContextMenu}
       >
         {
           categoriesOrder.map(catId => {
@@ -283,7 +322,7 @@ const EmojiPicker = ({
           anchor={anchor}
           onClose={() => clearAnchor(true)}
           isTooltip
-        // delayCloseOnEsc
+        // closeOnEsc="capture"
         >
           <div className={styles.popover}>
             {anchor.innerText}
@@ -299,13 +338,13 @@ const EmojiPicker = ({
           onClose={() => setVariationPicker(undefined)}
           closeOnScroll
           closeOnOutsideClick
-          // offset={3}
           usePortal={false}
-        // delayCloseOnEsc
+          ref={variationsRef}
+        // closeOnEsc="capture"
         >
           <div className={styles.variations}>
             {
-              (emojisJSON.emojis as any)[variationPicker.emojiId].skins?.map((skin: any) => (
+              variations?.map((skin: any) => (
                 <button key={skin.native} className={styles.emoji}>
                   {skin.native}
                 </button>

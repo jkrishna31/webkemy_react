@@ -26,18 +26,20 @@ const Menu = ({
     const menuElem = menuRef.current;
     if (menuElem && minimized) {
       const handlePointerMove = (e: PointerEvent) => {
-        const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
-        const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
-        clearTimeout(timeoutRef.current ?? undefined);
-        if (!menuItem) {
-          timeoutRef.current = setTimeout(() => {
-            setAnchor(undefined);
-            setTooltip("");
-          }, 100);
-        } else {
-          setAnchor(menuItem);
-          setTooltip(tooltipContent);
-        }
+        requestAnimationFrame(() => {
+          const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
+          const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
+          clearTimeout(timeoutRef.current ?? undefined);
+          if (!menuItem) {
+            timeoutRef.current = setTimeout(() => {
+              setAnchor(undefined);
+              setTooltip("");
+            }, 100);
+          } else {
+            setAnchor(menuItem);
+            setTooltip(tooltipContent);
+          }
+        });
       };
 
       const handlePointerLeave = () => {

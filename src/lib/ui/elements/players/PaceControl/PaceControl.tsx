@@ -40,6 +40,7 @@ const PaceControl = ({
           value={pace}
           onInput={(e) => updatePace((e.target as HTMLInputElement).valueAsNumber)}
           className={styles.speed_slider}
+          variant="rod"
         />
         <Button
           className={styles.speed_inc_btn}
