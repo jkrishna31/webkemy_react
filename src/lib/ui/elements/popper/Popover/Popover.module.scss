@@ -2,6 +2,7 @@
   position: fixed;
   z-index: var(--zi-drawer);
   max-width: calc(100vw - 4rem);
+  max-height: calc(100vh - 4rem);
 
   animation: fade-in .5s ease;
 
@@ -9,6 +10,10 @@
     pointer-events: none;
     touch-action: none;
   }
+}
+
+.animate {
+  animation: fade-in .2s ease, slide-in-y .2s ease;
 }
 
 @keyframes fade-in {

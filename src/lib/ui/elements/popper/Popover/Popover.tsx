@@ -34,49 +34,149 @@ const getLocation = (
     placement: Exclude<Position, "center">
     alignment: Position
     offset: number
+    overlap?: boolean
   }
 ) => {
-  const { placement, alignment, offset = 8 } = options;
+  const { placement, alignment, offset = 8, overlap } = options;
 
-  const leftSpace = anchorBoundingRect.x;
-  const rightSpace = window.innerWidth - (anchorBoundingRect.x + anchorBoundingRect.width);
-  const topSpace = anchorBoundingRect.y;
-  const bottomSpace = window.innerHeight - (anchorBoundingRect.y + anchorBoundingRect.height);
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
 
-  if (placement === "left" || placement === "right") {
-    const hasEnoughLeftSpace = leftSpace >= (targetBoundingRect.width + 20 + offset);
-    const hasEnoughRightSpace = rightSpace >= (targetBoundingRect.width + 20 + offset);
+  const position: {
+    top: number;
+    left: number;
+    bottom?: number;
+    right?: number;
+    maxHeight?: number | string;
+    maxWidth?: number | string;
+  } = {
+    top: offset,
+    left: offset,
+  };
 
-    const position: { [key: string]: number } = {};
+  if (!placement || placement === "left" || placement === "right") {
+    const _leftSpace = anchorBoundingRect.x + (overlap ? anchorBoundingRect.width : 0) - offset - (overlap ? 0 : offset);
+    const _rightSpace = vw - anchorBoundingRect.x - (overlap ? 0 : anchorBoundingRect.width) - offset - (overlap ? 0 : offset);
+    const _topSpace = anchorBoundingRect.y - offset;
+    const _bottomSpace = vh - anchorBoundingRect.y - anchorBoundingRect.height - offset;
 
-    if (hasEnoughLeftSpace && placement === "left") {
-      position.left = anchorBoundingRect.x - targetBoundingRect.width - offset;
-      position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
-      return position;
-    } else if (hasEnoughRightSpace && placement === "right") {
-      position.left = anchorBoundingRect.x + anchorBoundingRect.width + offset;
-      position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
-      return position;
+    const isCenterAlignPossible = ((_topSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset))
+      && ((_bottomSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset));
+    const isTopAlignPossible = _bottomSpace >= (targetBoundingRect.height + offset);
+    const isBottomAlignPossible = _topSpace >= (targetBoundingRect.height + offset);
+
+    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
+      || (alignment === "top" && isTopAlignPossible ? "top" : null)
+      || (alignment === "bottom" && isBottomAlignPossible ? "bottom" : null)
+      || (isCenterAlignPossible ? "center" : null)
+      || (isBottomAlignPossible ? "bottom" : null)
+      || (isTopAlignPossible ? "top" : null);
+
+    switch (finalAlignment) {
+      case "top": {
+        position.top = anchorBoundingRect.y;
+        break;
+      }
+      case "center": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+        break;
+      }
+      case "bottom": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height - targetBoundingRect.height;
+        break;
+      }
+      default: {
+        position.top = offset;
+        position.maxHeight = `calc(100vh - ${offset * 2}`;
+      }
     }
+
+    const isLeftPlacementPossible = _leftSpace >= targetBoundingRect.width;
+    const isRightPlacementPossible = _rightSpace >= targetBoundingRect.width;
+
+    const finalPlacement = (placement === "left" && isLeftPlacementPossible ? "left" : null)
+      || (placement === "right" && isRightPlacementPossible ? "right" : null)
+      || (isLeftPlacementPossible ? "left" : null)
+      || (isRightPlacementPossible ? "right" : null);
+
+    switch (finalPlacement) {
+      case "left": {
+        position.left = anchorBoundingRect.x - offset - targetBoundingRect.width;
+        break;
+      }
+      case "right": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width + offset;
+        break;
+      }
+      default: {
+        position.left = offset;
+        position.maxWidth = `calc(100vw - ${offset * 2})`;
+      }
+    }
+
+    return position;
   }
 
-  const hasEnoughLeftSpace = leftSpace >= targetBoundingRect.width / 2;
-  const hasEnoughRightSpace = rightSpace >= targetBoundingRect.width / 2;
+  if (!placement || placement === "top" || placement === "bottom") {
+    const _topSpace = anchorBoundingRect.y + (overlap ? anchorBoundingRect.height : 0) - offset - (overlap ? 0 : offset);
+    const _bottomSpace = vh - anchorBoundingRect.y - (overlap ? 0 : anchorBoundingRect.height) - offset - (overlap ? 0 : offset);
+    const _leftSpace = anchorBoundingRect.x - offset;
+    const _rightSpace = vw - anchorBoundingRect.x - anchorBoundingRect.width - offset;
 
-  const position: { [key: string]: number } = {};
+    const isCenterAlignPossible = ((_leftSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset)) && ((_rightSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset));
+    const isLeftAlignPossible = _rightSpace >= (targetBoundingRect.width + offset);
+    const isRightAlignPossible = _leftSpace >= (targetBoundingRect.width + offset);
 
-  if (hasEnoughLeftSpace && hasEnoughRightSpace) {
-    position.left = (leftSpace + anchorBoundingRect.width / 2) - targetBoundingRect.width / 2;
-  } else if (!hasEnoughLeftSpace) {
-    position.left = 20;
-  } else {
-    position.left = window.innerWidth - 20 - targetBoundingRect.width;
-  }
+    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
+      || (alignment === "left" && isLeftAlignPossible ? "left" : null)
+      || (alignment === "right" && isRightAlignPossible ? "right" : null)
+      || (isCenterAlignPossible ? "center" : null)
+      || (isLeftAlignPossible ? "left" : null)
+      || (isRightAlignPossible ? "right" : null);
 
-  if (topSpace > bottomSpace) {
-    position.top = topSpace - targetBoundingRect.height - offset;
-  } else {
-    position.top = (anchorBoundingRect.y + anchorBoundingRect.height) + offset;
+    switch (finalAlignment) {
+      case "left": {
+        position.left = anchorBoundingRect.x;
+        break;
+      }
+      case "center": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width / 2 - targetBoundingRect.width / 2;
+        break;
+      }
+      case "right": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width - targetBoundingRect.width;
+        break;
+      }
+      default: {
+        position.left = 0;
+        position.maxWidth = `calc(100vw - ${offset * 2})`;
+      }
+    }
+
+    const isTopPlacementPossible = _topSpace >= targetBoundingRect.height;
+    const isBottomPlacementPossible = _bottomSpace >= targetBoundingRect.height;
+
+    const finalPlacement = (placement === "top" && isTopPlacementPossible ? "top" : null)
+      || (placement === "bottom" && isBottomPlacementPossible ? "bottom" : null)
+      || (isTopPlacementPossible ? "top" : null)
+      || (isBottomPlacementPossible ? "bottom" : null);
+
+    switch (finalPlacement) {
+      case "top": {
+        position.top = anchorBoundingRect.y - offset - targetBoundingRect.height;
+        break;
+      }
+      case "bottom": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height + offset;
+        break;
+      }
+      default: {
+        position.top = offset;
+        position.maxHeight = `calc(100vh - ${offset * 2})`;
+      }
+    }
+
+    return position;
   }
 
   return position;
@@ -106,26 +206,28 @@ const Popover = ({
   const { lock, unlock } = useScrollLock();
 
   const layoutPopover = useCallback(() => {
-    const anchorBoundingRect = anchor.getBoundingClientRect();
-    const popoverBoundingRect = (popoverRef.current as HTMLDivElement).getBoundingClientRect();
-    const { top, left } = getLocation(
-      anchorBoundingRect, popoverBoundingRect,
-      {
-        placement, alignment, offset,
+    const elem = popoverRef.current;
+    if (!elem) return;
+    requestAnimationFrame(() => {
+      const anchorBoundingRect = anchor.getBoundingClientRect();
+      const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
+      const { top, left, maxWidth } = getLocation(
+        anchorBoundingRect, popoverBoundingRect,
+        { placement, alignment, offset },
+      );
+      (elem as HTMLElement).style.top = "0px";
+      (elem as HTMLElement).style.left = "0px";
+      if (!!(elem as HTMLElement).style.transform) {
+        (elem as HTMLElement).style.transition = "transform .2s ease, left .2s ease, top .2s ease";
       }
-    );
-    (popoverRef.current as HTMLElement).style.top = "0px";
-    (popoverRef.current as HTMLElement).style.left = "0px";
-    if (!!(popoverRef.current as HTMLElement).style.transform) {
-      (popoverRef.current as HTMLElement).style.transition = "transform .2s ease, left .2s ease, top .2s ease";
-    }
-    if (useTransform) {
-      (popoverRef.current as HTMLElement).style.transform = `translate3d(${left}px, ${top}px, 0)`;
-    } else {
-      // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-      (popoverRef.current as HTMLElement).style.left = `${left}px`;
-      (popoverRef.current as HTMLElement).style.top = `${top}px`;
-    }
+      if (useTransform) {
+        (elem as HTMLElement).style.transform = `translate3d(${left}px, ${top}px, 0)`;
+      } else {
+        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+        (elem as HTMLElement).style.left = `${left}px`;
+        (elem as HTMLElement).style.top = `${top}px`;
+      }
+    });
   }, [alignment, anchor, offset, placement, useTransform]);
 
   useLayoutEffect(layoutPopover, [layoutPopover]);
@@ -142,7 +244,6 @@ const Popover = ({
 
   useKey(closeOnEsc ? (e) => {
     onClose?.();
-    // console.log("---- close on esc ----",);
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
   useEffect(() => {
@@ -184,7 +285,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, className)}
+        className={classes(styles.wrapper, !useTransform && styles.animate, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >
@@ -194,7 +295,7 @@ const Popover = ({
     : (
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, className)}
+        className={classes(styles.wrapper, !useTransform && styles.animate, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >

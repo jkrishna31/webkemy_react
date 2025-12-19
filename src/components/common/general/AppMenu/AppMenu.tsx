@@ -299,7 +299,6 @@ export const menuItems = [
                 key: "popover",
                 href: "/components/popover",
                 primary: "Popover",
-                disabled: true,
                 icon: <PopoverLeftIcon />
             },
             {
