@@ -148,7 +148,7 @@ const getLocation = (
         break;
       }
       default: {
-        position.left = 0;
+        position.left = offset;
         position.maxWidth = `calc(100vw - ${offset * 2})`;
       }
     }
@@ -235,7 +235,9 @@ const Popover = ({
   // TODO: re-position on resize
   useEffect(() => {
     const handleResize = () => {
-      layoutPopover();
+      requestAnimationFrame(() => {
+        layoutPopover();
+      });
     };
 
     window.addEventListener("resize", handleResize);

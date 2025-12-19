@@ -170,13 +170,13 @@
     &:focus {
       &::-webkit-slider-thumb {
         border-color: var(--blue-1);
-        outline: .3rem solid var(--blue-1-15);
+        outline: .3rem solid var(--blue-1-10);
         // outline-offset: .2rem;
       }
 
       &::-moz-range-thumb {
         border-color: var(--blue-1);
-        outline: .3rem solid var(--blue-1-15);
+        outline: .3rem solid var(--blue-1-10);
         // outline-offset: .2rem;
       }
     }

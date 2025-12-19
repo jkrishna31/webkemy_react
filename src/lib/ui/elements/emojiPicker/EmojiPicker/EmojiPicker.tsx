@@ -182,11 +182,17 @@ const EmojiPicker = ({
 
   useEffect(() => handleSearch(query), [handleSearch, query]);
 
-  useEffect(() => anchor?.focus(), [anchor]);
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      anchor?.focus();
+    });
+  }, [anchor]);
 
   useEffect(() => {
     if (!variationPicker) {
-      prevVariationPicker?.anchor?.focus();
+      requestAnimationFrame(() => {
+        prevVariationPicker?.anchor?.focus();
+      });
     }
   }, [prevVariationPicker?.anchor, variationPicker]);
 
