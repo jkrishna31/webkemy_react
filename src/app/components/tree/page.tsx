@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/ui/elements/Badge";
-import { TreeView } from "@/lib/ui/elements/TreeView";
+import { Tree } from "@/lib/ui/elements/Tree";
 import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
 import FolderIcon from "@/lib/ui/svgs/icons/FolderIcon";
 import FolderOpenIcon from "@/lib/ui/svgs/icons/FolderOpenIcon";
@@ -65,9 +65,9 @@ const Page = () => {
 
   return (
     <main className={styles.main}>
-      <PageSetup pageKey="tree-view" />
+      <PageSetup pageKey="tree" />
 
-      <TreeView
+      <Tree
         className={styles.tree}
         expandedIds={activeTreeSection}
         renderWhileClosed={false}

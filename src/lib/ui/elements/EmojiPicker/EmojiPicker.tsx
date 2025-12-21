@@ -14,7 +14,7 @@ import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Popover } from "@/lib/ui/elements/Popover";
-import { TabList } from "@/lib/ui/elements/TabList";
+import { Tabs } from "@/lib/ui/elements/Tabs";
 import BulbIcon from "@/lib/ui/svgs/icons/BulbIcon";
 import BusFrontIcon from "@/lib/ui/svgs/icons/BusFrontIcon";
 import CatIcon from "@/lib/ui/svgs/icons/CatIcon";
@@ -287,7 +287,7 @@ const EmojiPicker = ({
           wrapperClass={styles.skintone_selector}
         />
       </div>
-      <TabList
+      <Tabs
         activeTab={query ? "" : activeCategory}
         tabs={categoryTabs}
         onChange={handleTabClick}

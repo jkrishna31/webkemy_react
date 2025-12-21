@@ -2,7 +2,7 @@ import Link, { LinkProps } from "next/link";
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { Collapsible } from "@/lib/ui/elements/collapsible";
+import { Collapsible } from "@/lib/ui/elements/Collapsible";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 

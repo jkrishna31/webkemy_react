@@ -3,7 +3,7 @@
 import React, { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
+import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
 import { DateInput } from "@/lib/ui/elements/inputs/DateInput";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";

@@ -393,8 +393,8 @@ export const menuItems = [
                 icon: <KeyframesMultipleIcon />,
             },
             {
-                key: "code-view",
-                href: "/components/code-view",
+                key: "code-block",
+                href: "/components/code-block",
                 primary: "Code View",
                 icon: <BlockCodeIcon />,
             },
@@ -412,9 +412,9 @@ export const menuItems = [
                 icon: <BellIcon />,
             },
             {
-                key: "tree-view",
-                href: "/components/tree-view",
-                primary: "Tree View",
+                key: "tree",
+                href: "/components/tree",
+                primary: "Tree",
                 icon: <TreeListIcon />,
             },
         ],

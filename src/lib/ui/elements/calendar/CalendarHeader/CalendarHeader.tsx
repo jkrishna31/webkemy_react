@@ -5,7 +5,7 @@ import { months, monthsOrder } from "@/data/general/datetime";
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
 import { GeneralDropdown, SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { NumberInput } from "@/lib/ui/elements/inputs/NumberInput";
-import { TabList } from "@/lib/ui/elements/TabList";
+import { Tabs } from "@/lib/ui/elements/Tabs";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { updateDatetime } from "@/lib/utils/datetime.utils";
@@ -158,7 +158,7 @@ const CalendarHeader = ({
         {headerLeft}
       </div>
       <div className={styles.container_right}>
-        <TabList
+        <Tabs
           activeTab={calendarMode}
           onChange={(id: string) => setField("mode", id)}
           tabs={tabs}

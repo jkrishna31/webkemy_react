@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { CodeView, LineHighlight } from "@/lib/ui/elements/CodeView";
+import { CodeBlock, LineHighlight } from "@/lib/ui/elements/CodeBlock";
 
 import styles from "./styles.module.scss";
 
@@ -43,14 +43,14 @@ const codes2Highlight: Array<LineHighlight> = [{ line: [4, 7], type: "+" }, { li
 const Page = () => {
   return (
     <main className={styles.main}>
-      <PageSetup pageKey="code-view" />
+      <PageSetup pageKey="code-block" />
 
-      <CodeView
+      <CodeBlock
         controls={false} numbered={false}
         data={codes1} title="Directory Structure" highlights={codes1Highlight}
         className={styles.code}
       />
-      <CodeView
+      <CodeBlock
         data={codes2} title="index.html" highlights={codes2Highlight}
         className={styles.code}
       />

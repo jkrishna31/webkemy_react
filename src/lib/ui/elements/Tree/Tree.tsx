@@ -1,30 +1,30 @@
 import React, { ComponentProps, MouseEvent, ReactNode } from "react";
 
-import { Collapsible } from "@/lib/ui/elements/collapsible";
+import { Collapsible } from "@/lib/ui/elements/Collapsible";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
-import styles from "./TreeView.module.scss";
+import styles from "./Tree.module.scss";
 
-export interface Tree {
+export interface TreeNode {
   render?: ReactNode | ((open: boolean) => ReactNode)
   expandIcon?: ReactNode
-  children?: Tree[]
+  children?: TreeNode[]
   id: string
   onExpand?: (id: string, e?: MouseEvent<HTMLButtonElement>) => void
 }
 
 export interface TreeViewProps extends ComponentProps<"ul"> {
-  tree: Tree[];
+  tree: TreeNode[];
   expandedIds: string[];
   renderWhileClosed?: boolean;
 }
 
-const TreeView = ({
+const Tree = ({
   children, className, tree, expandedIds, renderWhileClosed,
   ...props
 }: TreeViewProps) => {
-  const renderSection = (t?: Tree[]) => {
+  const renderSection = (t?: TreeNode[]) => {
     if (!t?.length) return null;
     return t.map((item) => {
       const isExpanded = expandedIds.includes(item.id);
@@ -69,4 +69,4 @@ const TreeView = ({
   );
 };
 
-export default TreeView;
+export default Tree;

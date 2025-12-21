@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Carousel, Slide } from "@/lib/ui/elements/carousel";
+import { Carousel, Slide } from "@/lib/ui/elements/Carousel";
 
 import styles from "./styles.module.scss";
 

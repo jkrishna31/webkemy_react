@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { TabList } from "@/lib/ui/elements/TabList";
+import { Tabs } from "@/lib/ui/elements/Tabs";
 
 import styles from "./styles.module.scss";
 
@@ -26,7 +26,7 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="tablist" />
 
-      <TabList
+      <Tabs
         tabs={tabs} activeTab={activeTab} onChange={setActiveTab}
         className={styles.tablist}
       />

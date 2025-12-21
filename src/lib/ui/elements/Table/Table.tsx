@@ -1,8 +1,8 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useRef, useState } from "react";
+import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
-import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
+import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Table.module.scss";

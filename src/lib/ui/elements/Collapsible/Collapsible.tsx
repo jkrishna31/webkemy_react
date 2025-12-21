@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
-import { CollapsibleContainer } from "@/lib/ui/elements/collapsible/CollapsibleContainer";
+import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Collapsible.module.scss";

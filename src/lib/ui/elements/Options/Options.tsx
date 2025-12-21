@@ -9,6 +9,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Options.module.scss";
 
 export interface OptionsProps extends ComponentProps<"div"> {
+  type?: "menu" | "select";
   onCandidateChange?: (eOrIdx: KeyboardEvent | number, group?: string) => void;
 }
 
@@ -29,7 +30,6 @@ const Options = ({
     if (onCandidateChange) {
       const handleKeyDown = (e: KeyboardEvent) => {
         onCandidateChange?.(e);
-        // if 
       };
 
       window.addEventListener("keydown", handleKeyDown);

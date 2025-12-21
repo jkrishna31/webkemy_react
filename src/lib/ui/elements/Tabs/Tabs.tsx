@@ -6,7 +6,7 @@ import { Keys } from "@/constants/keys.const";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import { classes } from "@/lib/utils/style.utils";
 
-import styles from "./TabList.module.scss";
+import styles from "./Tabs.module.scss";
 
 export interface TabListProps extends ComponentProps<"div"> {
     wrapperInnerClass?: string
@@ -17,7 +17,7 @@ export interface TabListProps extends ComponentProps<"div"> {
     showScrollBtns?: boolean
 }
 
-const TabList = ({
+const Tabs = ({
     wrapperInnerClass, btnClass, tabs, onChange, activeTab, showScrollBtns = false,
     className,
     ...rest
@@ -95,4 +95,4 @@ const TabList = ({
     );
 };
 
-export default TabList;
+export default Tabs;
