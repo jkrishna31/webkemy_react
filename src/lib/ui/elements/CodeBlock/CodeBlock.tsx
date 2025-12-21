@@ -11,7 +11,7 @@ import { copyToClipboard } from "@/lib/utils/client.utils";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { classes } from "@/lib/utils/style.utils";
 
-import styles from "./CodeView.module.scss";
+import styles from "./CodeBlock.module.scss";
 
 export type LineHighlight = number | [number?, number?] | {
   line: number | [number?, number?];
@@ -51,7 +51,7 @@ const getHighlight = (line: number, highlights?: Array<[LineHighlight?, LineHigh
   return;
 };
 
-const CodeView = ({
+const CodeBlock = ({
   className,
   controls = true, numbered = true, highlights,
   title, data,
@@ -158,4 +158,4 @@ const CodeView = ({
   );
 };
 
-export default CodeView;
+export default CodeBlock;
