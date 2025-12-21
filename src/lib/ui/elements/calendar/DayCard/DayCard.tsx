@@ -1,6 +1,6 @@
 import React, { ComponentProps } from "react";
 
-import { PlusIcon } from "@/lib/ui/svgs/icons";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import { CalendarEvent, EventBadge } from "..";

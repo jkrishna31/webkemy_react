@@ -6,7 +6,10 @@ import { months, monthsOrder } from "@/data/general/datetime";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MonthView } from "@/lib/ui/elements/calendar/MonthView";
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
-import { ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, CrossIcon } from "@/lib/ui/svgs/icons";
+import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
+import ChevronsRightIcon from "@/lib/ui/svgs/icons/ChevronsRightIcon";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import { updateDatetime } from "@/lib/utils/datetime.utils";
 
 import styles from "./DatePicker.module.scss";

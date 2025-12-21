@@ -4,10 +4,12 @@ import React, { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState 
 
 import { Keys } from "@/constants/keys.const";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { MenuItem } from "@/lib/ui/elements/menu";
-import { Options } from "@/lib/ui/elements/options";
-import { CheckMarkIcon, CrossIcon, ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import { Options } from "@/lib/ui/elements/Options";
+import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -152,6 +154,7 @@ const Select = ({
                                     aria-selected={isSelected}
                                     className={classes(styles.option, idx === activeCandidate.index && "active_option")}
                                     collapsible={false}
+                                    tabIndex={idx === activeCandidate.index ? 0 : -1}
                                 />
                             );
                         })

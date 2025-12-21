@@ -1,3 +1,5 @@
+// NOTE: prefer direct import
+
 export { default as AppleLogo } from "./AppleLogo";
 export { default as BlueskyLogo } from "./BlueskyLogo";
 export { default as FacebookLogo } from "./FacebookLogo";

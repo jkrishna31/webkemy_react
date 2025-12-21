@@ -29,6 +29,8 @@ const eslintConfig = [
       "no-multiple-empty-lines": ["error", { "max": 2, "maxEOF": 0, "maxBOF": 0 }],
       "eol-last": ["error", "always"],
       // "comma-dangle": "error",
+      // "import/no-cycle": "error",
+
     }
   },
   {

@@ -3,9 +3,9 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { useFiles } from "@/lib/hooks";
-import { FilesPreview } from "@/lib/ui/elements/filesPreview";
-import { FileInput } from "@/lib/ui/elements/inputs";
+import useFiles from "@/lib/hooks/useFiles";
+import { FilesPreview } from "@/lib/ui/elements/FilesPreview";
+import { FileInput } from "@/lib/ui/elements/inputs/FileInput";
 
 import styles from "./styles.module.scss";
 

@@ -1,8 +1,11 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { GeneralInput, InputFieldWrapper, InputItem, Radio } from "@/lib/ui/elements/inputs";
-import { Text } from "@/lib/ui/elements/text";
+import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
+import { Radio } from "@/lib/ui/elements/inputs/Radio";
+import { Text } from "@/lib/ui/elements/Text";
 
 import styles from "./styles.module.scss";
 

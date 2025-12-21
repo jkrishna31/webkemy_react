@@ -1,6 +1,6 @@
 {/* <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" width="24" height="24" strokeWidth="1.5" {...props}> <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path> <path d="M12 3l0 4"></path> <path d="M12 21l0 -3"></path> <path d="M3 12l4 0"></path> <path d="M21 12l-3 0"></path> <path d="M12 12l0 .01"></path> </svg> */ }
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const CrossHairIcon = (props: SVGProps) => {
   return (

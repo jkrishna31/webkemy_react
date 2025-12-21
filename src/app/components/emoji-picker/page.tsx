@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { EmojiPicker } from "@/lib/ui/elements/emojiPicker";
+import { EmojiPicker } from "@/lib/ui/elements/EmojiPicker";
 
 import styles from "./styles.module.scss";
 

@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, useEffect, useRef } from "react";
 
-import { AddFileIcon } from "@/lib/ui/svgs/icons";
+import AddFileIcon from "@/lib/ui/svgs/icons/AddFileIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./FileInput.module.scss";

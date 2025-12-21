@@ -4,7 +4,9 @@ import React, { useState } from "react";
 
 import { useToastActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
-import { CopyIcon, WrapOffIcon, WrapOnIcon } from "@/lib/ui/svgs/icons";
+import CopyIcon from "@/lib/ui/svgs/icons/CopyIcon";
+import WrapOffIcon from "@/lib/ui/svgs/icons/WrapOffIcon";
+import WrapOnIcon from "@/lib/ui/svgs/icons/WrapOnIcon";
 import { copyToClipboard } from "@/lib/utils/client.utils";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { classes } from "@/lib/utils/style.utils";

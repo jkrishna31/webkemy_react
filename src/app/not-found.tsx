@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { Text } from "@/lib/ui/elements/text";
+import { Text } from "@/lib/ui/elements/Text";
 
 const NotFoundPage = () => {
   return (

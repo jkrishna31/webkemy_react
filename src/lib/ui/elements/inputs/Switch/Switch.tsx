@@ -1,8 +1,8 @@
 import { ComponentProps } from "react";
 
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { classes } from "@/lib/utils/style.utils";
 
-import { InputFieldWrapper } from "..";
 import styles from "./Switch.module.scss";
 
 export interface SwitchProps extends ComponentProps<"input"> {

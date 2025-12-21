@@ -4,7 +4,7 @@ import React, { ComponentProps, ReactNode, useEffect, useMemo, useState } from "
 
 import { SearchForm } from "@/components/common/forms";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
-import { ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SelectDropdown.module.scss";

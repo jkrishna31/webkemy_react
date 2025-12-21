@@ -1,0 +1,158 @@
+import { edges } from "@/constants/general.const";
+
+export type LayoutPosition = typeof edges[keyof typeof edges] | "center";
+
+export const calculateRenderPosition = (
+  anchorBoundingRect: DOMRect,
+  targetBoundingRect: DOMRect,
+  options: {
+    placement: Exclude<LayoutPosition, "center">
+    alignment: LayoutPosition
+    offset: number
+    overlap?: boolean
+  }
+) => {
+  const { placement, alignment, offset = 8, overlap } = options;
+
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+
+  const position: {
+    top: number;
+    left: number;
+    bottom?: number;
+    right?: number;
+    maxHeight?: number | string;
+    maxWidth?: number | string;
+  } = {
+    top: offset,
+    left: offset,
+  };
+
+  if (!placement || placement === "left" || placement === "right") {
+    const _leftSpace = anchorBoundingRect.x + (overlap ? anchorBoundingRect.width : 0) - offset - (overlap ? 0 : offset);
+    const _rightSpace = vw - anchorBoundingRect.x - (overlap ? 0 : anchorBoundingRect.width) - offset - (overlap ? 0 : offset);
+    const _topSpace = anchorBoundingRect.y - offset;
+    const _bottomSpace = vh - anchorBoundingRect.y - anchorBoundingRect.height - offset;
+
+    const isCenterAlignPossible = ((_topSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset))
+      && ((_bottomSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset));
+    const isTopAlignPossible = _bottomSpace >= (targetBoundingRect.height + offset);
+    const isBottomAlignPossible = _topSpace >= (targetBoundingRect.height + offset);
+
+    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
+      || (alignment === "top" && isTopAlignPossible ? "top" : null)
+      || (alignment === "bottom" && isBottomAlignPossible ? "bottom" : null)
+      || (isCenterAlignPossible ? "center" : null)
+      || (isBottomAlignPossible ? "bottom" : null)
+      || (isTopAlignPossible ? "top" : null);
+
+    switch (finalAlignment) {
+      case "top": {
+        position.top = anchorBoundingRect.y;
+        break;
+      }
+      case "center": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+        break;
+      }
+      case "bottom": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height - targetBoundingRect.height;
+        break;
+      }
+      default: {
+        position.top = offset;
+        position.maxHeight = `calc(100vh - ${offset * 2}`;
+      }
+    }
+
+    const isLeftPlacementPossible = _leftSpace >= targetBoundingRect.width;
+    const isRightPlacementPossible = _rightSpace >= targetBoundingRect.width;
+
+    const finalPlacement = (placement === "left" && isLeftPlacementPossible ? "left" : null)
+      || (placement === "right" && isRightPlacementPossible ? "right" : null)
+      || (isLeftPlacementPossible ? "left" : null)
+      || (isRightPlacementPossible ? "right" : null);
+
+    switch (finalPlacement) {
+      case "left": {
+        position.left = anchorBoundingRect.x - offset - targetBoundingRect.width;
+        break;
+      }
+      case "right": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width + offset;
+        break;
+      }
+      default: {
+        position.left = offset;
+        position.maxWidth = `calc(100vw - ${offset * 2})`;
+      }
+    }
+
+    return position;
+  }
+
+  if (!placement || placement === "top" || placement === "bottom") {
+    const _topSpace = anchorBoundingRect.y + (overlap ? anchorBoundingRect.height : 0) - offset - (overlap ? 0 : offset);
+    const _bottomSpace = vh - anchorBoundingRect.y - (overlap ? 0 : anchorBoundingRect.height) - offset - (overlap ? 0 : offset);
+    const _leftSpace = anchorBoundingRect.x - offset;
+    const _rightSpace = vw - anchorBoundingRect.x - anchorBoundingRect.width - offset;
+
+    const isCenterAlignPossible = ((_leftSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset)) && ((_rightSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset));
+    const isLeftAlignPossible = _rightSpace >= (targetBoundingRect.width + offset);
+    const isRightAlignPossible = _leftSpace >= (targetBoundingRect.width + offset);
+
+    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
+      || (alignment === "left" && isLeftAlignPossible ? "left" : null)
+      || (alignment === "right" && isRightAlignPossible ? "right" : null)
+      || (isCenterAlignPossible ? "center" : null)
+      || (isLeftAlignPossible ? "left" : null)
+      || (isRightAlignPossible ? "right" : null);
+
+    switch (finalAlignment) {
+      case "left": {
+        position.left = anchorBoundingRect.x;
+        break;
+      }
+      case "center": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width / 2 - targetBoundingRect.width / 2;
+        break;
+      }
+      case "right": {
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width - targetBoundingRect.width;
+        break;
+      }
+      default: {
+        position.left = offset;
+        position.maxWidth = `calc(100vw - ${offset * 2})`;
+      }
+    }
+
+    const isTopPlacementPossible = _topSpace >= targetBoundingRect.height;
+    const isBottomPlacementPossible = _bottomSpace >= targetBoundingRect.height;
+
+    const finalPlacement = (placement === "top" && isTopPlacementPossible ? "top" : null)
+      || (placement === "bottom" && isBottomPlacementPossible ? "bottom" : null)
+      || (isTopPlacementPossible ? "top" : null)
+      || (isBottomPlacementPossible ? "bottom" : null);
+
+    switch (finalPlacement) {
+      case "top": {
+        position.top = anchorBoundingRect.y - offset - targetBoundingRect.height;
+        break;
+      }
+      case "bottom": {
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height + offset;
+        break;
+      }
+      default: {
+        position.top = offset;
+        position.maxHeight = `calc(100vh - ${offset * 2})`;
+      }
+    }
+
+    return position;
+  }
+
+  return position;
+};

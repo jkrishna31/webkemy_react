@@ -31,11 +31,11 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   const updateHeight = useCallback(() => {
     const elem = ref.current;
     if (elem && !isFirstRender.current) {
-      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
-      const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
       clearTimeout(timeoutRef.current);
       clearTimeout(destroyContentRef.current);
       setDestroyContent(false);
+      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
+      const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
       requestAnimationFrame(() => {
         if (open) {
           elem.style.overflow = "hidden";

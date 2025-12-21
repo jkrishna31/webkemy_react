@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { AudioPlayer } from "@/lib/ui/elements/players";
+import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 
 import styles from "./styles.module.scss";
 

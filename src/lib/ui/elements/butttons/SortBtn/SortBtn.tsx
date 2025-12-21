@@ -1,6 +1,6 @@
 import React, { ComponentProps } from "react";
 
-import { SortIcon } from "@/lib/ui/svgs/icons";
+import SortIcon from "@/lib/ui/svgs/icons/SortIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SortBtn.module.scss";

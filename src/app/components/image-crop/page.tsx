@@ -4,8 +4,13 @@ import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/ui/elements/butttons";
-import { ImageCrop } from "@/lib/ui/elements/crop";
-import { ClockwiseIcon, CounterClockwiseIcon, FlipHorizontalIcon, FlipVerticalIcon, ZoomInIcon, ZoomOutIcon } from "@/lib/ui/svgs/icons";
+import { ImageCrop } from "@/lib/ui/elements/ImageCrop";
+import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
+import CounterClockwiseIcon from "@/lib/ui/svgs/icons/CounterClockwiseIcon";
+import FlipHorizontalIcon from "@/lib/ui/svgs/icons/FlipHorizontalIcon";
+import FlipVerticalIcon from "@/lib/ui/svgs/icons/FlipVerticalIcon";
+import ZoomInIcon from "@/lib/ui/svgs/icons/ZoomInIcon";
+import ZoomOutIcon from "@/lib/ui/svgs/icons/ZoomOutIcon";
 import { clampNumber } from "@/lib/utils/math.utils";
 
 import styles from "./styles.module.scss";

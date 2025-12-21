@@ -7,7 +7,7 @@
     <path d="M6.82 4.98996C3.41 5.55996 2 7.65996 2 11.9V14.93C2 19.98 4 22 9 22H15C20 22 22 19.98 22 14.93V11.9C22 7.58996 20.54 5.47996 17 4.95996" />
 </svg> */}
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const SavedIcon = (props: SVGProps) => {
     return (

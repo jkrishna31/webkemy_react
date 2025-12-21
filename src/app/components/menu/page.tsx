@@ -3,10 +3,20 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/badges";
+import { Badge } from "@/lib/ui/elements/Badge";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Menu, MenuItem } from "@/lib/ui/elements/menu";
-import { CircleIcon, ConeIcon, CylinderIcon, DiamondIcon, HexagonIcon, OctagonIcon, PentagonIcon, RectangleVerticalIcon, SquareIcon, StarIcon, TriangleIcon } from "@/lib/ui/svgs/icons";
+import CircleIcon from "@/lib/ui/svgs/icons/CircleIcon";
+import ConeIcon from "@/lib/ui/svgs/icons/ConeIcon";
+import CylinderIcon from "@/lib/ui/svgs/icons/CylinderIcon";
+import DiamondIcon from "@/lib/ui/svgs/icons/DiamondIcon";
+import HexagonIcon from "@/lib/ui/svgs/icons/HexagonIcon";
+import OctagonIcon from "@/lib/ui/svgs/icons/OctagonIcon";
+import PentagonIcon from "@/lib/ui/svgs/icons/PentagonIcon";
+import RectangleVerticalIcon from "@/lib/ui/svgs/icons/RectangleVerticalIcon";
+import SquareIcon from "@/lib/ui/svgs/icons/SquareIcon";
+import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
+import TriangleIcon from "@/lib/ui/svgs/icons/TriangleIcon";
 
 import styles from "./styles.module.scss";
 

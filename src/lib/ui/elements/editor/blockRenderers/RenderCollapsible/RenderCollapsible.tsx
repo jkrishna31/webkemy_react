@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 
-import { TriangleRightIcon } from "@/lib/ui/svgs/icons";
+import TriangleRightIcon from "@/lib/ui/svgs/icons/TriangleRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import cStyles from "../block.module.scss";

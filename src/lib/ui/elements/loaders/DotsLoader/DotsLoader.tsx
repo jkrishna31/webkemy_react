@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 import styles from "./DotsLoader.module.scss";
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const KosovoFlag = (props: SVGProps) => {
   return (<svg xmlns="http://www.w3.org/2000/svg" id="flag-icons-xk" viewBox="0 0 640 480" {...props}>

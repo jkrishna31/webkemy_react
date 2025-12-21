@@ -1,4 +1,4 @@
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const SyncIcon = (props: SVGProps) => {
     return (

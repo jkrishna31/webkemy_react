@@ -3,7 +3,7 @@
 import React, { useCallback } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { useSplitter } from "@/lib/hooks";
+import useSplitter from "@/lib/hooks/useSplitter";
 import { SplitHandle, SplitSection, Splitter } from "@/lib/ui/elements/splitter";
 
 import styles from "./styles.module.scss";

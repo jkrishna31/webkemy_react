@@ -4,9 +4,10 @@ import { PageMore } from "@/components/common/general";
 import { months, monthsOrder } from "@/data/general/datetime";
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
 import { GeneralDropdown, SelectDropdown } from "@/lib/ui/elements/dropdowns";
-import { NumberInput } from "@/lib/ui/elements/inputs";
-import { TabList } from "@/lib/ui/elements/tablist";
-import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import { NumberInput } from "@/lib/ui/elements/inputs/NumberInput";
+import { TabList } from "@/lib/ui/elements/TabList";
+import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { updateDatetime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
 

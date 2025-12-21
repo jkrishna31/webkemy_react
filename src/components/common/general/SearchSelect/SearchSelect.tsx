@@ -2,10 +2,12 @@
 
 import React, { ComponentProps, useState } from "react";
 
-import { InputItem, Radio } from "@/lib/ui/elements/inputs";
+import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
+import { Radio } from "@/lib/ui/elements/inputs/Radio";
 import { Modal, ModalHeader } from "@/lib/ui/elements/modals";
-import { Text } from "@/lib/ui/elements/text";
-import { CrossIcon, SearchIcon } from "@/lib/ui/svgs/icons";
+import { Text } from "@/lib/ui/elements/Text";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
 
 import styles from "./SearchSelect.module.scss";
 

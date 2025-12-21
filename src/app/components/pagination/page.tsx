@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Pagination } from "@/lib/ui/elements/pagination";
+import { Pagination } from "@/lib/ui/elements/Pagination";
 
 import styles from "./styles.module.scss";
 

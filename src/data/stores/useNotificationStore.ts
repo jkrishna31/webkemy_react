@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { RequireOnly } from "@/types/utility.types";
+import { RequireOnly } from "@/lib/types/utility.types";
 
 export interface INotification {
   id: string

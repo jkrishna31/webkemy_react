@@ -3,9 +3,9 @@
 import React, { ReactNode } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { useAccordion } from "@/lib/hooks";
+import useAccordion from "@/lib/hooks/useAccordion";
 import { Collapsible } from "@/lib/ui/elements/collapsible";
-import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 
 import styles from "./page.module.scss";
 

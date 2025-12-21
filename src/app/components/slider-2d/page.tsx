@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Slider2D } from "@/lib/ui/elements/inputs";
-import { Text } from "@/lib/ui/elements/text";
+import { Slider2D } from "@/lib/ui/elements/inputs/Slider2D";
+import { Text } from "@/lib/ui/elements/Text";
 
 import styles from "./styles.module.scss";
 

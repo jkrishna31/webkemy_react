@@ -2,9 +2,9 @@
 
 import React, { ComponentProps, useRef } from "react";
 
-import { useKey } from "@/lib/hooks";
-import { Chip } from "@/lib/ui/elements/chip";
-import { CrossIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import useKey from "@/lib/hooks/useKey";
+import { Chip } from "@/lib/ui/elements/Chip";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TagsInput.module.scss";
@@ -49,9 +49,7 @@ const TagsInput = ({
         }
     };
 
-    useKey(() => {
-        handleKeyAdd();
-    }, ["Enter"], "keypress");
+    useKey(handleKeyAdd, ["Enter"], "keypress");
 
     const renderKeys = () => {
         if (!showKeys) return null;

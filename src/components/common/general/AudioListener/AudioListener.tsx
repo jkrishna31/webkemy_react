@@ -3,7 +3,7 @@
 import React, { ComponentProps, useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { MicIcon } from "@/lib/ui/svgs/icons";
+import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 

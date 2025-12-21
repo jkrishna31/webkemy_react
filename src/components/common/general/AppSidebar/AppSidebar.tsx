@@ -5,7 +5,7 @@ import React, { ComponentProps, useEffect } from "react";
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
 import { Menu, MenuItem } from "@/lib/ui/elements/menu";
-import { ChevronLeftIcon } from "@/lib/ui/svgs/icons";
+import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppSidebar.module.scss";

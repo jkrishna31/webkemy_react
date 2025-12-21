@@ -4,8 +4,16 @@ import React, { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { CollapsibleContainer } from "@/lib/ui/elements/collapsible";
-import { DateInput, GeneralInput, InputFieldWrapper, InputItem, Select, Switch, TagsInput, TextArea, TimeInput } from "@/lib/ui/elements/inputs";
-import { Text } from "@/lib/ui/elements/text";
+import { DateInput } from "@/lib/ui/elements/inputs/DateInput";
+import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
+import { Select } from "@/lib/ui/elements/inputs/Select";
+import { Switch } from "@/lib/ui/elements/inputs/Switch";
+import { TagsInput } from "@/lib/ui/elements/inputs/TagsInput";
+import { TextArea } from "@/lib/ui/elements/inputs/TextArea";
+import { TimeInput } from "@/lib/ui/elements/inputs/TimeInput";
+import { Text } from "@/lib/ui/elements/Text";
 import { classes } from "@/lib/utils/style.utils";
 
 import { FormControls } from "..";

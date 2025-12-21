@@ -2,8 +2,8 @@
 
 import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef, useState } from "react";
 
-import { usePointerFlow } from "@/lib/hooks";
 import useEvent from "@/lib/hooks/useEvent";
+import usePointerFlow from "@/lib/hooks/usePointerFlow";
 import { clampNumber } from "@/lib/utils/math.utils";
 import { classes } from "@/lib/utils/style.utils";
 

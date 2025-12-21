@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from "react";
 
-import { CrossIcon } from "@/lib/ui/svgs/icons";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
 import styles from "./DrawerHeader.module.scss";
 

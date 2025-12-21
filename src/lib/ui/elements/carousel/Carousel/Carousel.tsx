@@ -2,7 +2,8 @@
 
 import React, { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Carousel.module.scss";

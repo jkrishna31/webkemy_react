@@ -1,11 +1,11 @@
 "use client";
 
-import { SearchForm } from "@/components/common/forms";
 import { AudioListener } from "@/components/common/general";
 import { positions } from "@/constants/general.const";
 import { useSearchActions, useSearchActive } from "@/data/stores";
 import { Modal } from "@/lib/ui/elements/modals";
-import { ChevronLeftIcon, CrossIcon, HistoryIcon } from "@/lib/ui/svgs/icons";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
 
 import styles from "./SearchManager.module.scss";
 

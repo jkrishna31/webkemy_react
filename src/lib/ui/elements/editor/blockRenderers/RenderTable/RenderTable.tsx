@@ -1,5 +1,3 @@
-import { Button } from "@/lib/ui/elements/butttons";
-import { ArrowLeftBar } from "@/lib/ui/svgs/icons";
 import { classes } from "@/lib/utils/style.utils";
 
 import cStyles from "../block.module.scss";

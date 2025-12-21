@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/badges";
-import { TreeView } from "@/lib/ui/elements/tree";
-import { FileIcon, FolderIcon, FolderOpenIcon } from "@/lib/ui/svgs/icons";
+import { Badge } from "@/lib/ui/elements/Badge";
+import { TreeView } from "@/lib/ui/elements/TreeView";
+import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
+import FolderIcon from "@/lib/ui/svgs/icons/FolderIcon";
+import FolderOpenIcon from "@/lib/ui/svgs/icons/FolderOpenIcon";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 import styles from "./styles.module.scss";
@@ -26,9 +28,6 @@ const Page = () => {
   };
 
   const renderIcon = (type: "file" | "folder", open?: boolean) => {
-    // return (
-    //     <Checkbox />
-    // );
     if (type === "file") {
       return (
         <FileIcon className="text-[var(--fg-s-alt)] w-[1.8rem] h-[1.8rem]" />

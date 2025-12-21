@@ -1,6 +1,6 @@
 import React from "react";
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const CyprusFlag = (props: SVGProps) => {
   return (

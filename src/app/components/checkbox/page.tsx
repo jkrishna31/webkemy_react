@@ -1,8 +1,9 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Checkbox, InputItem } from "@/lib/ui/elements/inputs";
-import { Text } from "@/lib/ui/elements/text";
+import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
+import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
+import { Text } from "@/lib/ui/elements/Text";
 
 import styles from "./styles.module.scss";
 

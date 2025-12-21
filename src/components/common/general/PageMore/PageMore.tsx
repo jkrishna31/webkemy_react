@@ -3,7 +3,7 @@
 import React, { ComponentProps, useCallback, useState } from "react";
 
 import { Dropdown, DropdownList, SelectOption } from "@/lib/ui/elements/dropdowns";
-import { EllipsisHIcon } from "@/lib/ui/svgs/icons";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./PageMore.module.scss";

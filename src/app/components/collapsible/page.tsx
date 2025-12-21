@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Collapsible } from "@/lib/ui/elements/collapsible";
-import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 
 import styles from "./styles.module.scss";
 

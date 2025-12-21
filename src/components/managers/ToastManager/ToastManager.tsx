@@ -3,8 +3,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useToastActions, useToasts } from "@/data/stores";
-import { useSwipe } from "@/lib/hooks";
-import { ToastCard } from "@/lib/ui/elements/toast";
+import useSwipe from "@/lib/hooks/useSwipe";
+import { Toast } from "@/lib/ui/elements/Toast";
 
 import styles from "./ToastManager.module.scss";
 
@@ -38,7 +38,7 @@ const ToastManager = () => {
             {
                 toasts.slice(0, showAll ? undefined : 1).map((toast) => {
                     return (
-                        <ToastCard
+                        <Toast
                             key={toast.id}
                             toastId={toast.id}
                             className={styles.toast}

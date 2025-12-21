@@ -1,5 +1,5 @@
 import { Button } from "@/lib/ui/elements/butttons";
-import { Text } from "@/lib/ui/elements/text";
+import { Text } from "@/lib/ui/elements/Text";
 
 import styles from "./page.module.scss";
 

@@ -2,7 +2,8 @@ import Image from "next/image";
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
+import { Avatar } from "@/lib/ui/elements/Avatar";
+import { AvatarList } from "@/lib/ui/elements/AvatarList";
 
 import styles from "./styles.module.scss";
 

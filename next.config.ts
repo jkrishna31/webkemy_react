@@ -4,6 +4,11 @@ import createNextIntlPlugin from "next-intl/plugin";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  allowedDevOrigins: ["*"],
+  experimental: {
+    cssChunking: "strict",
+    scrollRestoration: true,
+  },
   images: {
     remotePatterns: [
       {
@@ -23,11 +28,6 @@ const nextConfig: NextConfig = {
         hostname: "archive.org",
       },
     ]
-  },
-  allowedDevOrigins: ["*"],
-  experimental: {
-    cssChunking: "strict",
-    scrollRestoration: true,
   },
   async headers() {
     return [

@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { ComponentProps, ElementType, ReactNode } from "react";
 
+import { Color } from "@/lib/types/general.types";
 import { classes } from "@/lib/utils/style.utils";
-import { Color } from "@/types/general.types";
 
 import styles from "./Button.module.scss";
 

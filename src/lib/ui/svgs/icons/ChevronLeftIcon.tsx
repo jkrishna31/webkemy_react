@@ -1,6 +1,6 @@
 {/* <svg xmlns="http://www.w3.org/2000/svg" width="3206" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.75" {...props}><path d="m16 20l-8-8l8-8" /></svg> */ }
 
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const ChevronLeftIcon = (props: SVGProps) => {
     return (

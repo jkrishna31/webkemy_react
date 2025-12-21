@@ -1,4 +1,4 @@
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const TopSidebarCloseIcon = (props: SVGProps) => {
     return (

@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { CrossIcon } from "@/lib/ui/svgs/icons";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
 import styles from "./RenderCoverImg.module.scss";
 

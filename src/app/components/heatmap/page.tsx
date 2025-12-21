@@ -2,7 +2,7 @@ import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { heatMapData } from "@/data/dummy/heatMapData";
-import { HeatMap } from "@/lib/ui/elements/charts";
+import { HeatMap } from "@/lib/ui/elements/charts/HeatMap";
 
 import styles from "./styles.module.scss";
 

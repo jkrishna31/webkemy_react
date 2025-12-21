@@ -61,7 +61,6 @@
 
 .option {
     cursor: pointer;
-    transition: background .1s linear;
 
     &:not(:global(.active_option)):hover {
         background: inherit;

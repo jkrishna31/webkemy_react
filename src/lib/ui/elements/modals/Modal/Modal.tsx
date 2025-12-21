@@ -5,7 +5,8 @@ import { createPortal } from "react-dom";
 
 import { Overlay } from "@/components/common/containers";
 import { positions } from "@/constants/general.const";
-import { useFocusTrap, useKey } from "@/lib/hooks";
+import useFocusTrap from "@/lib/hooks/useFocusTrap";
+import useKey from "@/lib/hooks/useKey";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Modal.module.scss";

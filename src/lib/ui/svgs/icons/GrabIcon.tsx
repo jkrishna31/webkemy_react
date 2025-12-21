@@ -1,4 +1,4 @@
-import { SVGProps } from "@/types/prop.types";
+import { SVGProps } from "@/lib/types/prop.types";
 
 const GrabIcon = (props: SVGProps) => {
     return (

@@ -3,8 +3,8 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/badges";
-import { Chip } from "@/lib/ui/elements/chip";
+import { Badge } from "@/lib/ui/elements/Badge";
+import { Chip } from "@/lib/ui/elements/Chip";
 
 import styles from "./styles.module.scss";
 

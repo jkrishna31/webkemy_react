@@ -2,7 +2,7 @@ import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { lineChartData2 } from "@/data/dummy/lineChartData";
-import { LineChart } from "@/lib/ui/elements/charts";
+import { LineChart } from "@/lib/ui/elements/charts/LineChart";
 
 import styles from "./styles.module.scss";
 

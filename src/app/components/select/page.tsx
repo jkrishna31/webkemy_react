@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Chip } from "@/lib/ui/elements/chip";
-import { Select } from "@/lib/ui/elements/inputs";
+import { Chip } from "@/lib/ui/elements/Chip";
+import { Select } from "@/lib/ui/elements/inputs/Select";
 
 import styles from "./styles.module.scss";
 
@@ -56,7 +56,7 @@ const Page = () => {
           options={options}
           className={styles.input}
           aria-label="Select"
-          placeholder="Select (single)..."
+          placeholder="Select (single)"
           styles={{ root: { marginBottom: "2rem" } }}
         />
         <Select
@@ -69,7 +69,7 @@ const Page = () => {
           options={options}
           className={styles.input}
           aria-label="Select"
-          placeholder="Select (multiple)..."
+          placeholder="Select (multiple)"
         />
         {!!selected2.length && (
           <div style={{ display: "flex", flexWrap: "wrap", gap: ".8rem", marginTop: "2rem", maxWidth: "40rem" }}>

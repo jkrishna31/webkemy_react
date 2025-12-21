@@ -3,10 +3,13 @@
 import React, { CSSProperties, useState } from "react";
 
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import { Slider } from "@/lib/ui/elements/inputs/Slider";
+import { Slider2D } from "@/lib/ui/elements/inputs/Slider2D";
 import { ColorFormat, hsvToHex, hsvToHsl, hsvToRgb, stringifyColor } from "@/lib/utils/color.utils";
 import { classes } from "@/lib/utils/style.utils";
 
-import { GeneralInput, InputFieldWrapper, Slider, Slider2D } from "..";
 import styles from "./ColorPicker.module.scss";
 
 const converters: { [key in ColorFormat]?: Function } = {

@@ -5,18 +5,24 @@ import React, { ComponentProps, useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
-import { useMultiLevelData, useTreeSelect } from "@/lib/hooks";
-import { Avatar, AvatarList } from "@/lib/ui/elements/avatar";
-import { Badge } from "@/lib/ui/elements/badges";
+import useMultiLevelData from "@/lib/hooks/useMultiLevelData";
+import useTreeSelect from "@/lib/hooks/useTreeSelect";
+import { Color } from "@/lib/types/general.types";
+import { Avatar } from "@/lib/ui/elements/Avatar";
+import { AvatarList } from "@/lib/ui/elements/AvatarList";
+import { Badge } from "@/lib/ui/elements/Badge";
 import { Button } from "@/lib/ui/elements/butttons";
-import { Chip } from "@/lib/ui/elements/chip";
-import { Checkbox } from "@/lib/ui/elements/inputs";
-import { Rate } from "@/lib/ui/elements/rate";
-import { StickType, Table } from "@/lib/ui/elements/tables";
-import { ChevronRightIcon, DeleteIcon, EditIcon, EllipsisHIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import { Chip } from "@/lib/ui/elements/Chip";
+import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
+import { Rate } from "@/lib/ui/elements/Rate";
+import { type StickType, Table } from "@/lib/ui/elements/Table";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
+import DeleteIcon from "@/lib/ui/svgs/icons/DeleteIcon";
+import EditIcon from "@/lib/ui/svgs/icons/EditIcon";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { deepSort } from "@/lib/utils/object.utils";
-import { Color } from "@/types/general.types";
 
 import styles from "./styles.module.scss";
 

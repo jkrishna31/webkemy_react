@@ -1,4 +1,4 @@
-import { CrossIcon } from "@/lib/ui/svgs/icons";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
 import styles from "./DrawerFooter.module.scss";
 

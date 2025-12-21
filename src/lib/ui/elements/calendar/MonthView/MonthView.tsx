@@ -4,11 +4,11 @@ import React, { ComponentProps, useRef, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions, useWindowSize } from "@/data/stores";
-import { useMounted } from "@/lib/hooks";
-import { PlusIcon } from "@/lib/ui/svgs/icons";
+import useMounted from "@/lib/hooks/useMounted";
+import { CalendarDay } from "@/lib/types/calendar.types";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { compareDateByPrecision, getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
-import { CalendarDay } from "@/types/calendar.types";
 
 import { CalendarEvent, DayCard } from "..";
 import styles from "./MonthView.module.scss";

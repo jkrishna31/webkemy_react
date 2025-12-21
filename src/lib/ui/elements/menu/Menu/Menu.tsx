@@ -1,21 +1,23 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import React, { ComponentProps, ElementType, useEffect, useRef, useState } from "react";
 
-import { Popover } from "@/lib/ui/elements/popper";
+import { Item } from "@/lib/ui/elements/menu";
+import { Popover } from "@/lib/ui/elements/Popover";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Menu.module.scss";
 
-export interface MenuProps extends ComponentProps<"div"> {
+export interface MenuProps<T extends ElementType> extends ComponentProps<"div"> {
   minimized?: boolean;
+  items?: Item<T>;
 }
 
-const Menu = ({
-  minimized,
+const Menu = <T extends ElementType>({
+  minimized, items,
   children, className,
   ...props
-}: MenuProps) => {
+}: MenuProps<T>) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<NodeJS.Timeout>(null);
 
@@ -24,43 +26,43 @@ const Menu = ({
 
   useEffect(() => {
     const menuElem = menuRef.current;
-    if (menuElem && minimized) {
-      const handlePointerMove = (e: PointerEvent) => {
-        requestAnimationFrame(() => {
-          const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
-          const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
-          clearTimeout(timeoutRef.current ?? undefined);
-          if (!menuItem) {
-            timeoutRef.current = setTimeout(() => {
-              setAnchor(undefined);
-              setTooltip("");
-            }, 100);
-          } else {
-            setAnchor(menuItem);
-            setTooltip(tooltipContent);
-          }
-        });
-      };
+    if (!menuElem || !minimized) return;
 
-      const handlePointerLeave = () => {
-        setAnchor(undefined);
-        setTooltip("");
-        menuElem.removeEventListener("pointermove", handlePointerMove);
-        menuElem.removeEventListener("pointerleave", handlePointerLeave);
-      };
+    const handlePointerMove = (e: PointerEvent) => {
+      requestAnimationFrame(() => {
+        const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
+        const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
+        clearTimeout(timeoutRef.current ?? undefined);
+        if (!menuItem) {
+          timeoutRef.current = setTimeout(() => {
+            setAnchor(undefined);
+            setTooltip("");
+          }, 100);
+        } else {
+          setAnchor(menuItem);
+          setTooltip(tooltipContent);
+        }
+      });
+    };
 
-      const handlePointerEnter = () => {
-        menuElem.addEventListener("pointermove", handlePointerMove, { passive: true });
-        menuElem.addEventListener("pointerleave", handlePointerLeave);
-      };
+    const handlePointerLeave = () => {
+      setAnchor(undefined);
+      setTooltip("");
+      menuElem.removeEventListener("pointermove", handlePointerMove);
+      menuElem.removeEventListener("pointerleave", handlePointerLeave);
+    };
 
-      menuElem.addEventListener("pointerenter", handlePointerEnter);
+    const handlePointerEnter = () => {
+      menuElem.addEventListener("pointermove", handlePointerMove, { passive: true });
+      menuElem.addEventListener("pointerleave", handlePointerLeave);
+    };
 
-      return () => {
-        menuElem.removeEventListener("pointerenter", handlePointerEnter);
-        handlePointerLeave();
-      };
-    }
+    menuElem.addEventListener("pointerenter", handlePointerEnter);
+
+    return () => {
+      menuElem.removeEventListener("pointerenter", handlePointerEnter);
+      handlePointerLeave();
+    };
   }, [minimized]);
 
   return (

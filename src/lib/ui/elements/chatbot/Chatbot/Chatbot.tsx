@@ -2,8 +2,9 @@
 
 import React, { useEffect, useState } from "react";
 
-import { useFocusRestore } from "@/lib/hooks";
-import { BotMessageIcon, CrossIcon } from "@/lib/ui/svgs/icons";
+import useFocusRestore from "@/lib/hooks/useFocusRestore";
+import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
 import { ChatContainer } from "..";
 import styles from "./Chatbot.module.scss";

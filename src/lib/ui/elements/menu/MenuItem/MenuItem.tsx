@@ -3,28 +3,32 @@ import React, { ComponentProps, ElementType, ReactNode } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import { Collapsible } from "@/lib/ui/elements/collapsible";
-import { ChevronRightIcon } from "@/lib/ui/svgs/icons";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./MenuItem.module.scss";
 
-export type MenuItemProps<T extends ElementType> = {
-  id: string
-  as?: T
-  icon?: ReactNode
-  primary?: ReactNode
-  secondary?: ReactNode
-  badge?: ReactNode
-  custom?: boolean
-  activeItem?: string | number
-  disabled?: boolean
-  minimized?: boolean
-  openItems?: string[]
-  menu?: Array<MenuItemProps<T>>
-  onMenuToggle?: (id: string) => void;
+export type Item<T extends ElementType> = {
+  id: string;
+  as?: T;
+  icon?: ReactNode;
+  primary?: ReactNode;
+  secondary?: ReactNode;
+  badge?: ReactNode;
+  menu?: Array<Item<T>>;
   group?: ReactNode;
+
+  custom?: boolean;
+  activeItem?: string | number;
+  disabled?: boolean;
+  minimized?: boolean;
+  openItems?: (string | number)[];
   collapsible?: boolean;
+
+  onMenuToggle?: (id: string | number) => void;
 } & (T extends "a" ? LinkProps : ComponentProps<T>);
+
+export type MenuItemProps<T extends ElementType> = Item<T>;
 
 const MenuItem = <T extends ElementType = "button">({
   as = "button", id,
@@ -62,17 +66,13 @@ const MenuItem = <T extends ElementType = "button">({
   };
 
   const renderElement = () => {
-    // const conditionalProps: any = !group ? {} : {};
-    // if (disabled) {
-    //   conditionalProps["disabled"] = disabled;
-    //   conditionalProps["aria-disabled"] = disabled;
-    // }
-    // if (minimized) {
-    //   conditionalProps["data-minimized"] = minimized;
-    // }
-
     return group ? (
-      <div className={classes(styles.group_header, styles.sticky, "group_header", className)}>{group}</div>
+      <div
+        className={classes(styles.group_header, styles.sticky, "group_header", className)}
+        role="presentation"
+      >
+        {group}
+      </div>
     ) : (
       <Element
         className={classes(styles.item, className, collapsible && styles.sticky, "menu_item")}
@@ -145,7 +145,7 @@ const MenuItem = <T extends ElementType = "button">({
     ) : (
       <div
         className={classes(styles.container, group && styles.group_container)}
-        data-minimized={minimized}
+        data-minimized={minimized} role="group"
       >
         {renderElement()}
         {renderSubMenu()}

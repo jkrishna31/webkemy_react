@@ -2,10 +2,12 @@
 
 import React, { ComponentProps } from "react";
 
-import { MinusIcon, PlusIcon } from "@/lib/ui/svgs/icons";
+import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import MinusIcon from "@/lib/ui/svgs/icons/MinusIcon";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
-import { GeneralInput, InputFieldWrapper } from "..";
 import styles from "./NumberInput.module.scss";
 
 export interface NumberInputProps extends ComponentProps<"input"> {

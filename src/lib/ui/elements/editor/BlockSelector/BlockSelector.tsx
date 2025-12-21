@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { MenuItem } from "@/lib/ui/elements/menu";
-import { PlusIcon } from "@/lib/ui/svgs/icons";
+import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./BlockSelector.module.scss";

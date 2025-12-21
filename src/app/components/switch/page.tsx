@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Switch } from "@/lib/ui/elements/inputs";
+import { Switch } from "@/lib/ui/elements/inputs/Switch";
 
 import styles from "./styles.module.scss";
 

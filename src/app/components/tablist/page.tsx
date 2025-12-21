@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { TabList } from "@/lib/ui/elements/tablist";
+import { TabList } from "@/lib/ui/elements/TabList";
 
 import styles from "./styles.module.scss";
 

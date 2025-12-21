@@ -6,9 +6,15 @@ import React, { ComponentProps, useState } from "react";
 import { SearchForm } from "@/components/common/forms";
 import { edges } from "@/constants/general.const";
 import { useAppMenu, useLayoutActions, useModalActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
-import { Avatar } from "@/lib/ui/elements/avatar";
-import { Header } from "@/lib/ui/elements/header";
-import { AppLogo, CrossIcon, GlobeIcon, HistoryIcon, MenuIcon, SearchIcon, ThemeIcon } from "@/lib/ui/svgs/icons";
+import { Avatar } from "@/lib/ui/elements/Avatar";
+import { Header } from "@/lib/ui/elements/Header";
+import AppLogo from "@/lib/ui/svgs/icons/AppLogo";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import GlobeIcon from "@/lib/ui/svgs/icons/GlobeIcon";
+import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
+import MenuIcon from "@/lib/ui/svgs/icons/MenuIcon";
+import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
+import ThemeIcon from "@/lib/ui/svgs/icons/ThemeIcon";
 import { GithubLogo } from "@/lib/ui/svgs/logos";
 import { classes } from "@/lib/utils/style.utils";
 

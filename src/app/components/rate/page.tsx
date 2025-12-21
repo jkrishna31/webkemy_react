@@ -1,9 +1,14 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Rate } from "@/lib/ui/elements/rate";
-import { EmojiAngryIcon, EmojiLaughIcon, EmojiNeutralIcon, EmojiSadIcon, EmojiSmileIcon } from "@/lib/ui/svgs/emojis";
-import { CircleIcon, DiamondIcon } from "@/lib/ui/svgs/icons";
+import { Rate } from "@/lib/ui/elements/Rate";
+import CircleIcon from "@/lib/ui/svgs/icons/CircleIcon";
+import DiamondIcon from "@/lib/ui/svgs/icons/DiamondIcon";
+import EmojiAngryIcon from "@/lib/ui/svgs/icons/EmojiAngryIcon";
+import EmojiLaughIcon from "@/lib/ui/svgs/icons/EmojiLaughIcon";
+import EmojiNeutralIcon from "@/lib/ui/svgs/icons/EmojiNeutralIcon";
+import EmojiSadIcon from "@/lib/ui/svgs/icons/EmojiSadIcon";
+import EmojiSmileIcon from "@/lib/ui/svgs/icons/EmojiSmileIcon";
 
 import styles from "./styles.module.scss";
 

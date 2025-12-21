@@ -1,8 +1,11 @@
 import React, { ComponentProps, FormEvent } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
-import { GeneralInput, InputFieldWrapper } from "@/lib/ui/elements/inputs";
-import { CrossIcon, MicIcon, SearchIcon } from "@/lib/ui/svgs/icons";
+import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
+import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SearchForm.module.scss";

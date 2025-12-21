@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { ArrowTopRightIcon } from "@/lib/ui/svgs/icons";
+import ArrowTopRightIcon from "@/lib/ui/svgs/icons/ArrowTopRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./DropdownList.module.scss";

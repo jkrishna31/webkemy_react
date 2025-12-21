@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, ReactNode, useEffect, useState } from "react";
 
-import { ExpandSolidIcon } from "@/lib/ui/svgs/icons";
+import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import { Dropdown } from "..";

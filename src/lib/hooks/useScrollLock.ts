@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import { useIsomorphicLayoutEffect } from ".";
+import useIsomorphicLayoutEffect from "@/lib/hooks/useIsomorphicLayoutEffect";
 
 type UseScrollLockOptions = {
     autoLock?: boolean

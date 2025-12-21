@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { CodeView, LineHighlight } from "@/lib/ui/elements/codeView";
+import { CodeView, LineHighlight } from "@/lib/ui/elements/CodeView";
 
 import styles from "./styles.module.scss";
 

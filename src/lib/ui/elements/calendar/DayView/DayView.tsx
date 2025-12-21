@@ -6,11 +6,11 @@ import { ResizableContainer } from "@/components/common/containers";
 import { Resizers } from "@/components/common/containers/ResizableContainer";
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";
+import { CalendarDay } from "@/lib/types/calendar.types";
 import { CalendarEvent, EventBadge } from "@/lib/ui/elements/calendar/EventBadge";
 import { getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { debounce, isNullish } from "@/lib/utils/general.utils";
 import { classes } from "@/lib/utils/style.utils";
-import { CalendarDay } from "@/types/calendar.types";
 
 import styles from "./DayView.module.scss";
 

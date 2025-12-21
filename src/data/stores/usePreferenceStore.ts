@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { themes } from "@/constants/general.const";
-import { LangType, ThemeType } from "@/types/general.types";
+import { LangType, ThemeType } from "@/lib/types/general.types";
 
 export interface PreferenceStore {
     theme: ThemeType

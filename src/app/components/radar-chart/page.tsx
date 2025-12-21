@@ -2,7 +2,7 @@ import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { radarChartData } from "@/data/dummy/radarChartData";
-import { RadarChart } from "@/lib/ui/elements/charts";
+import { RadarChart } from "@/lib/ui/elements/charts/RadarChart";
 
 import styles from "./styles.module.scss";
 

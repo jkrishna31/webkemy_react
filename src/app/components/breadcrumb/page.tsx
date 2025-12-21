@@ -1,7 +1,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Breadcrumb, Crumb } from "@/lib/ui/elements/breadcrumbs";
+import { Breadcrumb, type Crumb } from "@/lib/ui/elements/Breadcrumb";
 
 import styles from "./styles.module.scss";
 
