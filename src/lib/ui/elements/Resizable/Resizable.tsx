@@ -5,11 +5,11 @@ import React, { ComponentProps, ElementType, memo, useCallback, useRef, useState
 import { Keys } from "@/constants/keys.const";
 import { classes } from "@/lib/utils/style.utils";
 
-import styles from "./ResizableContainer.module.scss";
+import styles from "./Resizable.module.scss";
 
 export type Resizers = "l" | "r" | "t" | "b" | "tl" | "tr" | "bl" | "br";
 
-export type ResizableContainerProps<T extends ElementType> = {
+export type ResizableProps<T extends ElementType> = {
   as?: T;
   allowedResizers?: Resizers[];
   contentClass?: string;
@@ -20,12 +20,12 @@ export type ResizableContainerProps<T extends ElementType> = {
   payload?: any;
 } & ComponentProps<T>;
 
-const ResizableContainer = <T extends ElementType = "div">({
+const Resizable = <T extends ElementType = "div">({
   as = "div",
   children, className, allowedResizers, contentClass,
   handleMove, handleUp, payload, xStep = 1, yStep = 1,
   ...props
-}: ResizableContainerProps<T>) => {
+}: ResizableProps<T>) => {
   const Element = as;
 
   const elRef = useRef<T>(null);
@@ -149,4 +149,4 @@ const ResizableContainer = <T extends ElementType = "div">({
   );
 };
 
-export default memo(ResizableContainer);
+export default memo(Resizable);

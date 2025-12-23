@@ -3,7 +3,7 @@
 import React from "react";
 
 import { PageSetup } from "@/components/managers";
-import useFiles from "@/lib/hooks/useFiles";
+import { useFiles } from "@/lib/hooks/useFiles";
 import { FilesPreview } from "@/lib/ui/elements/FilesPreview";
 import { FileInput } from "@/lib/ui/elements/inputs/FileInput";
 

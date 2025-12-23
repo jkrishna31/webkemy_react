@@ -2,12 +2,11 @@
 
 import React, { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
 
-import { ResizableContainer } from "@/components/common/containers";
-import { Resizers } from "@/components/common/containers/ResizableContainer";
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";
 import { CalendarDay } from "@/lib/types/calendar.types";
 import { CalendarEvent, EventBadge } from "@/lib/ui/elements/calendar/EventBadge";
+import { Resizable, Resizers } from "@/lib/ui/elements/Resizable";
 import { getRelativeMonth } from "@/lib/utils/datetime.utils";
 import { debounce, isNullish } from "@/lib/utils/general.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -404,7 +403,7 @@ const DayView = ({
       return null;
     }
     return (
-      <ResizableContainer
+      <Resizable
         key="new"
         className={styles.ev_wrapper}
         style={{
@@ -423,7 +422,7 @@ const DayView = ({
           draggable
         // onDragEnd={handleDragEnd}
         />
-      </ResizableContainer>
+      </Resizable>
     );
   };
 
@@ -525,7 +524,7 @@ const DayView = ({
                       if (ev.start) resizers.push("t");
                       if (ev.end) resizers.push("b");
                       return (
-                        <ResizableContainer
+                        <Resizable
                           key={ev.id}
                           className={styles.ev_wrapper}
                           style={{
@@ -549,7 +548,7 @@ const DayView = ({
                             draggable
                           // onDragEnd={handleDragEnd}
                           />
-                        </ResizableContainer>
+                        </Resizable>
                       );
                     })
                   }

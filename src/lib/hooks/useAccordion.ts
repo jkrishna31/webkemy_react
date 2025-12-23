@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function useAccordion(mode: "single" | "multiple", defaultActive?: Array<number | string>) {
+export function useAccordion(mode: "single" | "multiple", defaultActive?: Array<number | string>) {
   const [activeSections, setActiveSections] = useState<Array<number | string>>(defaultActive ?? []);
 
   const updateAccordion = (key: string) => {

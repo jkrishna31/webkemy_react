@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, ElementType, ReactNode } from "react";
 
-import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
+import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Collapsible.module.scss";
@@ -15,12 +15,11 @@ export type CollapsibleProps<T extends ElementType, K extends ElementType> = {
     detailsClass?: string;
     renderWhileClosed?: boolean;
     detailsPanelId?: string;
-    adjustOverflow?: boolean;
 } & ComponentProps<T>;
 
 const Collapsible = <T extends ElementType = "div", K extends ElementType = "div">({
     children, className, detailsClass,
-    open, summary, renderWhileClosed = true, adjustOverflow,
+    open, summary, renderWhileClosed = true,
     detailsPanelId,
     wrapperAs = "div", detailsAs = "div",
     ...props
@@ -29,19 +28,18 @@ const Collapsible = <T extends ElementType = "div", K extends ElementType = "div
 
     const renderDetails = () => {
         return (
-            <CollapsibleContainer
+            <CollapsiblePanel
                 as={detailsAs} open={open} id={detailsPanelId} className={detailsClass}
                 renderWhileClosed={renderWhileClosed}
             >
                 {children}
-            </CollapsibleContainer>
+            </CollapsiblePanel>
         );
     };
 
     return (
         <WrapperElement
             className={classes(styles.wrapper, className)}
-            data-expanded={open}
             aria-expanded={open}
             {...props}
         >

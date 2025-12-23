@@ -44,7 +44,7 @@ export interface IForm {
 // divide in two parts - ui and data
 // ui parts - order of fields, layout, min/max/minLenght/maxLength (based on validation and depending field value)
 
-const useForm = (initial: IForm) => {
+export const useForm = (initial: IForm) => {
   const [form, setForm] = useState<IForm>(initial);
 
   const validateField = (fieldKey: string, validations: IValidation[], value?: string) => {
@@ -116,5 +116,3 @@ const useForm = (initial: IForm) => {
     validateField, validateForm,
   };
 };
-
-export default useForm;

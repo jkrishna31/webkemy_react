@@ -3,7 +3,7 @@
 import React, { ReactNode } from "react";
 
 import { PageSetup } from "@/components/managers";
-import useAccordion from "@/lib/hooks/useAccordion";
+import { useAccordion } from "@/lib/hooks/useAccordion";
 import { Collapsible } from "@/lib/ui/elements/Collapsible";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 

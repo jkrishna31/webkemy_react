@@ -153,7 +153,7 @@
     border-radius: .8rem;
   }
 
-  &[data-expanded="true"] .toggle_btn[aria-pressed="true"] {
+  .toggle_btn[aria-pressed="true"] {
     background: transparent;
 
     &:hover {
@@ -184,7 +184,7 @@
       transform: rotate(90deg);
     }
 
-    &[data-expanded="true"] .toggle_btn[aria-pressed="true"] svg {
+    .toggle_btn[aria-pressed="true"] svg {
       transform: rotate(-90deg);
     }
   }

@@ -1,19 +1,1 @@
 // NOTE: prefer direct import
-
-// export * from "./Checkbox";
-// export * from "./ColorPicker";
-// export * from "./DateInput";
-// export * from "./FileInput";
-// export * from "./GeneralInput";
-// export * from "./InputFieldWrapper";
-// export * from "./InputItem";
-// export * from "./InputMetaWrapper";
-// export * from "./NumberInput";
-// export * from "./Radio";
-// export * from "./Select";
-// export * from "./Slider";
-// export * from "./Slider2D";
-// export * from "./Switch";
-// export * from "./TagsInput";
-// export * from "./TextArea";
-// export * from "./TimeInput";

@@ -4,7 +4,7 @@ export interface UseDebouncedValueOptions {
   leading: boolean
 }
 
-export default function useDebouncedValue<T>(defaultValue: T, delay: number, options: UseDebouncedValueOptions = { leading: false }) {
+export function useDebouncedValue<T>(defaultValue: T, delay: number, options: UseDebouncedValueOptions = { leading: false }) {
   const { leading } = options;
 
   const [value, setValue] = useState<T>(defaultValue);

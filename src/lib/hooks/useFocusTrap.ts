@@ -2,7 +2,7 @@ import { RefObject, useEffect } from "react";
 
 import { FOCUS_SELECTOR, focusable, scopeTab, tabbable } from "@/lib/utils/tabbable.utils";
 
-export default function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) {
+export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) {
   const focusNode = (node: HTMLElement) => {
     let focusElement: HTMLElement | null = node.querySelector("[data-autofocus]");
 

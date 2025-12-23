@@ -5,7 +5,7 @@ export interface UseTreeSelectOptions<T> {
   branch?: keyof T;
 }
 
-export default function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
+export function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
   const {
     id = "id",
     branch = "children",

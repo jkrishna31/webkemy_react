@@ -120,7 +120,7 @@ export const throttle = <T extends (...args: any) => void>(callback: T, delay: n
 };
 
 export const isNullish = (val: any): boolean => {
-    return val == null;
+    return val == undefined;
 };
 
 export const isFalsy = (val: any) => {

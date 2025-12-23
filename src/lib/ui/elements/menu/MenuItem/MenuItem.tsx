@@ -134,7 +134,6 @@ const MenuItem = <T extends ElementType = "button">({
             </Button>
           </div>
         }
-        adjustOverflow
         className={styles.container}
         data-minimized={minimized}
       >
@@ -145,7 +144,8 @@ const MenuItem = <T extends ElementType = "button">({
     ) : (
       <div
         className={classes(styles.container, group && styles.group_container)}
-        data-minimized={minimized} role="group"
+        data-minimized={minimized}
+        role="group"
       >
         {renderElement()}
         {renderSubMenu()}

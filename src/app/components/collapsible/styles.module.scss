@@ -28,7 +28,7 @@
   }
 }
 
-.collapsible[data-expanded="true"] svg {
+.collapsible[aria-expanded="true"] svg {
   transform: rotate(90deg);
 }
 

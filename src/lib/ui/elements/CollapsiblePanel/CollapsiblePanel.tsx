@@ -5,20 +5,20 @@ import React, { ComponentProps, ElementType, useCallback, useLayoutEffect, useRe
 
 import { classes } from "@/lib/utils/style.utils";
 
-import styles from "./CollapsibleContainer.module.scss";
+import styles from "./CollapsiblePanel.module.scss";
 
-export type CollapsibleContainerProps<T extends ElementType> = {
+export type CollapsiblerPanelProps<T extends ElementType> = {
   as?: T;
   open?: boolean;
   renderWhileClosed?: boolean;
   duration?: number;
 } & ComponentProps<T>;
 
-const CollapsibleContainer = <T extends ElementType = "div">({
+const CollapsiblePanel = <T extends ElementType = "div">({
   as = "div", open, children, className, renderWhileClosed = true,
   duration = 500,
   ...props
-}: CollapsibleContainerProps<T>) => {
+}: CollapsiblerPanelProps<T>) => {
   const Element = as === "a" ? Link : as;
 
   const ref = useRef<HTMLElement>(null);
@@ -39,7 +39,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
       requestAnimationFrame(() => {
         if (open) {
           elem.style.overflow = "hidden";
-          elem.style.opacity = "100%";
           elem.style.setProperty("--mxh", (currHeight && renderWhileClosed) ? `${currHeight}px` : "0px");
           void elem.offsetHeight;
           elem.style.setProperty("--mxh", `${contentHeight}px`);
@@ -49,7 +48,6 @@ const CollapsibleContainer = <T extends ElementType = "div">({
           }, duration);
         } else {
           elem.style.overflow = "hidden";
-          elem.style.opacity = "0%";
           elem.style.setProperty("--mxh", `${currHeight}px`);
           void elem.offsetHeight;
           elem.style.setProperty("--mxh", "0px");
@@ -85,4 +83,4 @@ const CollapsibleContainer = <T extends ElementType = "div">({
   );
 };
 
-export default CollapsibleContainer;
+export default CollapsiblePanel;

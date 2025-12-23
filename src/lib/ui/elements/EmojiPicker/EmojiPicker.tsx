@@ -6,10 +6,10 @@ import { skinTones } from "@/constants/characters.const";
 import { Keys } from "@/constants/keys.const";
 import { categories, categoriesOrder } from "@/data/general/emojis";
 import emojisJSON from "@/data/json/emojis.json";
-import useDebouncedCallback from "@/lib/hooks/useDebouncedCallback";
-import useFocusTrap from "@/lib/hooks/useFocusTrap";
-import usePrevious from "@/lib/hooks/usePrevious";
-import useThrottledCallback from "@/lib/hooks/useThrottledCallback";
+import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
+import { usePrevious } from "@/lib/hooks/usePrevious";
+import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
 import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
@@ -202,14 +202,6 @@ const EmojiPicker = ({
   }, [anchor]);
 
   useEffect(() => {
-    if (!variationPicker) {
-      requestAnimationFrame(() => {
-        prevVariationPicker?.anchor?.focus();
-      });
-    }
-  }, [prevVariationPicker?.anchor, variationPicker]);
-
-  useEffect(() => {
     observeCategoryIntersection();
     (containerRef.current as HTMLElement).scrollTo({
       behavior: "instant",
@@ -227,7 +219,6 @@ const EmojiPicker = ({
         e.preventDefault();
         clearAnchor(true);
         setVariationPicker(curr => {
-          // TODO: save curr.anchor
           return curr?.emojiId === emojiId ? undefined : { emojiId, anchor: emojiBtn };
         });
       } else if (e.code === Keys.ARROW_DOWN) {
@@ -240,12 +231,16 @@ const EmojiPicker = ({
         // if (variationPicker?.emojiId) { select the active variation }
       } else if (e.code === Keys.ARROW_RIGHT) {
         // if (variationPicker?.emojiId) { select the active variation }
+      } else if (e.key === Keys.ESC) {
+        if (prevVariationPicker?.anchor) {
+          prevVariationPicker?.anchor?.focus();
+        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [clearAnchor]);
+  }, [clearAnchor, prevVariationPicker?.anchor]);
 
   useFocusTrap(variationsRef, !!variationPicker?.emojiId);
 

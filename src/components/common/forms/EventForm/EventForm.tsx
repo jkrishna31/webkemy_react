@@ -3,7 +3,7 @@
 import React, { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
+import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { DateInput } from "@/lib/ui/elements/inputs/DateInput";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
@@ -129,7 +129,7 @@ const EventForm = ({
         <Text<"label"> as="label" inline htmlFor="repeat">{"Repeat"}</Text>
       </InputItem>
 
-      <CollapsibleContainer open={repeat} renderWhileClosed={false}>
+      <CollapsiblePanel open={repeat} renderWhileClosed={false}>
         <InputItem inline={true} className={styles.date_time_wrapper}>
           <InputItem>
             <Text<"label"> as="label" htmlFor="repeat_every">{"Repeat Every"}</Text>
@@ -148,7 +148,7 @@ const EventForm = ({
             />
           </InputItem>
         </InputItem>
-      </CollapsibleContainer>
+      </CollapsiblePanel>
 
       <InputItem inline>
         <Switch id="all_day" />

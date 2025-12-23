@@ -7,7 +7,7 @@ import { PageSetup } from "@/components/managers";
 import { allEvents } from "@/data/dummy/calendarEvents";
 import { useCalendarActions } from "@/data/stores";
 import { CalendarBody, CalendarHeader, CalendarWrapper } from "@/lib/ui/elements/calendar";
-import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/drawers";
+import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/Drawer";
 import CalendarPlusIcon from "@/lib/ui/svgs/icons/CalendarPlusIcon";
 
 import styles from "./styles.module.scss";

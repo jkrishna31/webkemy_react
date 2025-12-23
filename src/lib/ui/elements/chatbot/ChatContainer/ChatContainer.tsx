@@ -5,10 +5,10 @@ import React, { ComponentProps, useCallback, useEffect, useRef, useState } from 
 import { Overlay } from "@/components/common/containers";
 import { characters } from "@/constants/characters.const";
 import { dummyChats } from "@/data/dummy/chatData";
-import useFiles from "@/lib/hooks/useFiles";
-import useFocusTrap from "@/lib/hooks/useFocusTrap";
-import useMutationObserver from "@/lib/hooks/useMutationObserver";
-import useScroll from "@/lib/hooks/useScroll";
+import { useFiles } from "@/lib/hooks/useFiles";
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
+import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
+import { useScroll } from "@/lib/hooks/useScroll";
 import { EmojiPicker } from "@/lib/ui/elements/EmojiPicker";
 import { FilesPreview } from "@/lib/ui/elements/FilesPreview";
 import { FileInput } from "@/lib/ui/elements/inputs/FileInput";

@@ -1,8 +1,8 @@
 "use client";
 
-import React, { ComponentProps, useRef } from "react";
+import React, { ComponentProps, useMemo, useRef, useState } from "react";
 
-import useMediaPlayer from "@/lib/hooks/useMediaPlayer";
+import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
 import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
@@ -20,8 +20,8 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./AudioPlayer.module.scss";
 
 export interface AudioPlayerProps extends ComponentProps<"audio"> {
-  sources?: ComponentProps<"source">[]
-  rootClass?: string
+  sources?: ComponentProps<"source">[];
+  rootClass?: string;
 }
 
 const AudioPlayer = ({
@@ -29,6 +29,8 @@ const AudioPlayer = ({
   ...props
 }: AudioPlayerProps) => {
   const audioRef = useRef<HTMLAudioElement>(null);
+
+  const [progressMode, setProgressMode] = useState<"elapsed" | "remaining">("elapsed");
 
   const {
     duration, isMute, isPlaying, currTime, pace, volume, loading,
@@ -39,6 +41,9 @@ const AudioPlayer = ({
   } = useMediaPlayer(audioRef);
 
   const durationParts: { [key in TimeField | "day"]?: number } = breakdownTime(duration, "second");
+  const progressDisplay = useMemo(() => {
+    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currTime : duration - currTime, "second", "hour"));
+  }, [currTime, duration, progressMode]);
 
   return (
     <div className={classes(styles.wrapper, rootClass)}>
@@ -75,11 +80,15 @@ const AudioPlayer = ({
           }
         </Button>
         <div className={styles.player}>
-          <div className={styles.duration}>
-            <p className={styles.curr_timestamp}>{duration ? getFormattedTime(breakdownTime(currTime, "second", "hour")) : "--:--"}</p>
+          <button
+            aria-pressed={progressMode === "remaining"}
+            onClick={() => setProgressMode(progressMode === "remaining" ? "elapsed" : "remaining")}
+            className={styles.duration}
+          >
+            <p className={styles.curr_timestamp}>{duration ? progressDisplay : "--:--"}</p>
             <span className={styles.separator}>{"/"}</span>
             <p className={styles.total_duration}>{durationParts ? getFormattedTime(durationParts) : "--:--"}</p>
-          </div>
+          </button>
           <Slider
             min={0} max={duration ?? 0} step={1}
             value={currTime}

@@ -2,31 +2,22 @@
     --color-scheme-abs: #000000;
     --color-scheme-abs-inverse: #ffffff;
 
-    --orange-1: #e36e00;
-    --orange-2: #f86931;
-    --orange-2-10: rgba(248, 106, 49, 0.1);
-    --orange-3: #e75608;
-    --orange-4: orange;
-    --orange-5: orange;
+    --orange-1: #ff8e25;
+    --orange-2: rgb(250, 106, 49);
+    --orange-2-10: rgba(250, 106, 49, 0.1);
     --orange-6: #ffa67d;
 
     --yellow-1: #f1a33b;
     --yellow-1-10: rgba(241, 162, 59, 0.1);
-    --yellow-1-alt: rgb(209, 140, 49);
     --yellow-2: rgb(255, 202, 79);
-    --yellow-3: #f7efaa;
-    --yellow-4: #d29926;
-    --yellow-5: rgb(225, 216, 50);
-    --yellow-6: rgb(255, 201, 126);
+    --yellow-4: #ecc92e;
+    --yellow-6: rgb(255, 218, 126);
 
     --red-1: #fe4151;
     --red-1-10: rgba(254, 65, 81, 0.1);
-    --red-2: #ff6961;
-    --red-3: rgb(147, 30, 40);
     --red-4: rgb(255, 58, 68);
     --red-5: rgb(245, 55, 90);
     --red-6: rgb(255, 80, 95);
-    --red-7: #ff3f3f;
     --red-8: #ff8c8c;
     --red-9: #322b2b;
 
@@ -37,21 +28,13 @@
     --green-1-10: rgba(16, 185, 129, 0.1);
     --green-2: #09835d;
     --green-3: rgb(110 231 183);
-    --green-4: #047857;
     --green-5: #1ac88b;
-    --green-6: #99ffff;
-    --green-7: rgb(52, 245, 145);
-    --green-8: rgb(90, 244, 79);
     --green-9: #57dbad;
-    --green-9-comp: #d5fdef;
-    --green-10: #28312e;
+    --green-10: #28312d;
 
     --blue-1: #498cf8;
     --blue-1-10: rgba(66, 135, 246, 0.1);
     --blue-2: #277dc3;
-    --blue-3: rgb(111, 111, 247);
-    --blue-4: #c3c6ff;
-    --blue-5: #3fd5f0;
     --blue-6: #3978de;
     --blue-7: #94c0ff;
     --blue-8: #315bcd;
@@ -74,12 +57,12 @@
     --gray-8-30: rgba(180, 181, 185, 0.1);
     --gray-9: rgb(134, 135, 136);
     --gray-10: rgb(153, 154, 158);
-    --gray-11: rgb(26, 28, 30);
-    --gray-11-70: rgba(26, 28, 30, 0.6);
+    --gray-11: rgb(28, 30, 31);
+    --gray-11-70: rgba(28, 30, 31, 0.6);
     --gray-12: rgb(38, 42, 44);
     --gray-12-70: rgba(38, 42, 44, .7);
-    --gray-13: rgb(32, 34, 36);
-    --gray-13-70: rgba(32, 34, 36, .7);
+    --gray-13: rgb(34, 36, 37);
+    --gray-13-70: rgba(34, 36, 37, .7);
     --gray-14: rgb(32, 36, 40);
     // --gray-11: rgb(12, 14, 16);
     // --gray-11-70: rgba(12, 14, 16, 0.6);

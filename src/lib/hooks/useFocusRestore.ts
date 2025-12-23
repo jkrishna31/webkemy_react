@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export default function useFocusRestore() {
+export function useFocusRestore() {
   const ref = useRef<HTMLElement>(null);
 
   const onOpen = () => {

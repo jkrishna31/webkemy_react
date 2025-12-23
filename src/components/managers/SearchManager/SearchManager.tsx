@@ -3,7 +3,7 @@
 import { AudioListener } from "@/components/common/general";
 import { positions } from "@/constants/general.const";
 import { useSearchActions, useSearchActive } from "@/data/stores";
-import { Modal } from "@/lib/ui/elements/modals";
+import { Modal } from "@/lib/ui/elements/Modal";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
 

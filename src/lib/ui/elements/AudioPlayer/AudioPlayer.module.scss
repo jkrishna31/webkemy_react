@@ -12,13 +12,14 @@
 
     &::-webkit-slider-thumb {
       border-radius: var(--br-pill);
-      width: 2rem;
-      height: 1.6rem;
+      width: 2.2rem;
+      height: 1.8rem;
     }
 
     &::-moz-range-thumb {
       border-radius: var(--br-pill);
       width: 1.8rem;
+      height: 1.4rem;
     }
   }
 }
@@ -65,15 +66,13 @@
 
 .duration {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  margin-left: auto;
   gap: .6rem;
   margin-bottom: .4rem;
   font-size: 1.4rem;
 }
 
 .separator {
-  // font-size: 1.2rem;
   color: var(--fg-s-alt);
 }
 
@@ -81,10 +80,6 @@
 .total_duration {
   color: var(--fg-s);
 }
-
-// .total_duration {
-//   color: var(--fg-s-alt);
-// }
 
 .speed_dropdown,
 .vol_dropdown {

@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-import useFocusRestore from "@/lib/hooks/useFocusRestore";
+import { useFocusRestore } from "@/lib/hooks/useFocusRestore";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 

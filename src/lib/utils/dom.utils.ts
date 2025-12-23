@@ -156,3 +156,47 @@ export const calculateRenderPosition = (
 
   return position;
 };
+
+export function findNextCandidate(
+  allItems?: NodeListOf<Element>,
+  options?: {
+    predicate?: (el: Element) => boolean,
+    current?: number;
+    dir?: "prev" | "next";
+  }
+) {
+  const len = allItems?.length;
+  if (!len) return;
+
+  const {
+    current = -1,
+    dir = "next",
+    predicate = (el: Element) => el?.getAttribute("disabled") !== "true" && el?.getAttribute("aria-disabled") !== "true",
+  } = options ?? {};
+
+  let nextItemIdx: number | undefined;
+
+  if (dir === "prev") {
+    for (let i = 0; i < len; i++) {
+      const idx = (current - 1 - i + len) % len;
+      if (predicate(allItems[idx])) {
+        nextItemIdx = idx;
+        break;
+      }
+    }
+  } else {
+    for (let i = 0; i < len; i++) {
+      const idx = (current + 1 + i) % len;
+      if (predicate(allItems[idx])) {
+        nextItemIdx = idx;
+        break;
+      }
+    }
+  }
+
+  return nextItemIdx;
+}
+
+export function findTerminalDescendent() {
+
+}

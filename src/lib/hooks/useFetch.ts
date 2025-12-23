@@ -18,7 +18,7 @@ export interface UseFetchOptions extends RequestInit {
   onSettled?: any;
 }
 
-export default function useFetch<T>(url: string, options: UseFetchOptions) {
+export function useFetch<T>(url: string, options: UseFetchOptions) {
   const {
     fetchOnMount = true,
     onResponse, onError, onSettled,

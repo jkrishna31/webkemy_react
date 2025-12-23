@@ -1,9 +1,9 @@
 export const Keys = {
   ENTER: "Enter",
-  ESC: "Esc",
+  ESC: "Escape",
   BACKSPACE: "Backspace",
-  DELETE: "Delete",
-  INSERT: "Insert",
+  DEL: "Delete",
+  INS: "Insert",
   CTRL: "Control",
   SHIFT: "Shift",
   TAB: "Tab",

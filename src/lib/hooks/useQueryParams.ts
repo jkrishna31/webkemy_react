@@ -1,7 +1,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 
-export default function useQueryParams<
+export function useQueryParams<
   K extends Record<string, string | number | boolean | unknown>
 >(replace: boolean = false) {
   const searchParams = useSearchParams();

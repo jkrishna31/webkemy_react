@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { useToastActions, useToasts } from "@/data/stores";
-import useSwipe from "@/lib/hooks/useSwipe";
+import { useSwipe } from "@/lib/hooks/useSwipe";
 import { Toast } from "@/lib/ui/elements/Toast";
 
 import styles from "./ToastManager.module.scss";

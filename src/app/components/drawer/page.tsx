@@ -4,7 +4,7 @@ import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/ui/elements/butttons";
-import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/drawers";
+import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/Drawer";
 
 import styles from "./styles.module.scss";
 

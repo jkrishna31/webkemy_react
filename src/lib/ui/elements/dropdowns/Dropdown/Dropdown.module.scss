@@ -34,7 +34,7 @@
 }
 
 .bottom {
-  animation: fib 260ms ease; // cubic-bezier(.075, .82, .165, 1)
+  animation: fib 260ms ease;
 
   &[data-overlap="false"] {
     top: 110%;
@@ -43,7 +43,6 @@
 
 .top {
   top: 100%;
-  // left: 50%;
   transform: translate3d(0%, -100%, 0);
   animation: fit 260ms ease;
 

@@ -4,7 +4,7 @@ import React, { ComponentProps, useRef, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions, useWindowSize } from "@/data/stores";
-import useMounted from "@/lib/hooks/useMounted";
+import { useMounted } from "@/lib/hooks/useMounted";
 import { CalendarDay } from "@/lib/types/calendar.types";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { compareDateByPrecision, getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime.utils";

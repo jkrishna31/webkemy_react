@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, useRef, useState } from "react";
 
-import useFocusTrap from "@/lib/hooks/useFocusTrap";
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { Button } from "@/lib/ui/elements/butttons";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import ZoomInIcon from "@/lib/ui/svgs/icons/ZoomInIcon";

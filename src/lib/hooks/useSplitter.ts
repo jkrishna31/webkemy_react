@@ -1,8 +1,8 @@
 import { useState } from "react";
 
-import useEvent from "@/lib/hooks/useEvent";
+import { useEvent } from "@/lib/hooks/useEvent";
 
-export default function useSplitter(initSizes: number[] = []) {
+export function useSplitter(initSizes: number[] = []) {
   const [sizes, setSizes] = useState<number[]>(initSizes);
 
   const onResize = useEvent((newSize: number, idx: number = 0) => {

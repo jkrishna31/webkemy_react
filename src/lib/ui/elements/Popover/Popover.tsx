@@ -3,8 +3,8 @@
 import React, { ComponentProps, useCallback, useEffect, useId, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import useKey from "@/lib/hooks/useKey";
-import useScrollLock from "@/lib/hooks/useScrollLock";
+import { useKey } from "@/lib/hooks/useKey";
+import { useScrollLock } from "@/lib/hooks/useScrollLock";
 import { calculateRenderPosition, LayoutPosition } from "@/lib/utils/dom.utils";
 import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";

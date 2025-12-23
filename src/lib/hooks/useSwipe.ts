@@ -4,12 +4,12 @@ import { RefObject, useCallback, useEffect, useRef } from "react";
 
 import { hasDOM } from "@/lib/utils/client.utils";
 
-const useSwipe = (
+export function useSwipe(
   ref: RefObject<HTMLElement | null>,
   onSwipe: (a: "LEFT" | "RIGHT", b: "UP" | "DOWN", e: TouchEvent) => void,
   threshold = [0, 0],
   type: "HOZ" | "VRT" | "ALL" = "ALL",
-) => {
+) {
   const startCoords = useRef([0, 0]);
 
   const handleTouchStart = useCallback((e: TouchEvent) => {
@@ -48,6 +48,4 @@ const useSwipe = (
       };
     }
   }, [handleTouchEnd, handleTouchStart, ref]);
-};
-
-export default useSwipe;
+}

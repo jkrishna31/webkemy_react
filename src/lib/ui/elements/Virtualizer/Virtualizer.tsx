@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-import useScroll from "@/lib/hooks/useScroll";
+import { useScroll } from "@/lib/hooks/useScroll";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Virtualizer.module.scss";

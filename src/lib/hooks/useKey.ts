@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 
 import { hasDOM } from "@/lib/utils/client.utils";
 
-export default function useKey(
+export function useKey(
   onKey: ((event: KeyboardEvent) => void) | undefined,
   filterKeys: string[],
   type: "keydown" | "keyup" | "keypress" = "keydown",

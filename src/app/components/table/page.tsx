@@ -5,8 +5,8 @@ import React, { ComponentProps, useCallback, useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
-import useMultiLevelData from "@/lib/hooks/useMultiLevelData";
-import useTreeSelect from "@/lib/hooks/useTreeSelect";
+import { useMultiLevelData } from "@/lib/hooks/useMultiLevelData";
+import { useTreeSelect } from "@/lib/hooks/useTreeSelect";
 import { Color } from "@/lib/types/general.types";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { AvatarList } from "@/lib/ui/elements/AvatarList";

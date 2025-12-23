@@ -1,12 +1,13 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useImperativeHandle, useRef, useState } from "react";
+import React, { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { useWindowSize } from "@/data/stores";
-import useThrottledCallback from "@/lib/hooks/useThrottledCallback";
+import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { hasDOM } from "@/lib/utils/client.utils";
+import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Scrollable.module.scss";
@@ -57,11 +58,9 @@ const Scrollable = ({
     }
   };
 
-  useImperativeHandle(ref, () => listRef.current!);
-
   useEffect(() => {
-    // TODO: add only if has scrollable area
     const elem = listRef.current;
+    // TODO: add only if has scrollable area (and listen for resize)
     if (hasDOM() && elem) {
       elem.addEventListener("scroll", updateScrollArea, { passive: true });
       elem.addEventListener("wheel", updateScrollArea, { passive: true });
@@ -97,7 +96,7 @@ const Scrollable = ({
         {...props}
         id={id}
         className={classes("scroll_invisible", styles.container, className)}
-        ref={listRef}
+        ref={mergeRefs(listRef, ref)}
       >
         {children}
       </div>

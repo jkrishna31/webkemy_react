@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import React, { ComponentProps, ReactNode, useEffect, useMemo, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
@@ -10,7 +10,6 @@ import { Options } from "@/lib/ui/elements/Options";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
-import { hasDOM } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Select.module.scss";
@@ -23,6 +22,7 @@ export interface Option {
     group?: ReactNode;
     options?: Option[];
     icon?: ReactNode;
+    disabled?: boolean;
 }
 
 export interface SelectProps extends ComponentProps<"select"> {
@@ -49,9 +49,7 @@ const Select = ({
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
     const [query, setQuery] = useState("");
-    const [activeCandidate, setActiveCandidate] = useState<{ index: number; keyboard?: boolean; }>({ index: 0 });
-
-    const listRef = useRef<HTMLDivElement>(null);
+    const [highlighted, setHighlighted] = useState<{ index?: number, keyboard?: boolean } | undefined>();
 
     const filteredOptions = useMemo(() => {
         return query
@@ -60,7 +58,9 @@ const Select = ({
     }, [labelKey, options, query]);
 
     const handleSelect = (item?: Option, activeIndex?: number) => {
-        const selectedOption = item ?? filteredOptions[activeIndex ?? activeCandidate.index];
+        const selectedOption = item
+            ?? (activeIndex ? filteredOptions[activeIndex] : null)
+            ?? (highlighted?.index ? filteredOptions[highlighted.index] : null);
         if (selectedOption) {
             if (multiple) {
                 const newValues = (value as Value[]).filter(item => item !== selectedOption.value);
@@ -75,54 +75,22 @@ const Select = ({
         }
     };
 
-    // todo: combobox (explicit option in dropdown to add the query)
-    // todo: optgroup (keyboard nav)
-    // todo: diabled item
-
-    const handleKeyboardNavigation = (e: KeyboardEvent | number) => {
-        if (typeof e === "number") {
-            setActiveCandidate({ index: e });
-        } else {
-            switch (e.key) {
-                case Keys.ARROW_UP: {
-                    e.preventDefault();
-                    const newActiveIdx = (filteredOptions.length + (activeCandidate.index - 1)) % filteredOptions.length;
-                    setActiveCandidate({ index: newActiveIdx, keyboard: true });
-                    if (e.shiftKey) handleSelect(undefined, newActiveIdx);
-                    break;
-                }
-                case Keys.ARROW_DOWN: {
-                    e.preventDefault();
-                    const newActiveIdx = (filteredOptions.length + (activeCandidate.index + 1)) % filteredOptions.length;
-                    setActiveCandidate({ index: newActiveIdx, keyboard: true });
-                    if (e.shiftKey) handleSelect(undefined, newActiveIdx);
-                    break;
-                }
-                case Keys.ENTER:
-                    handleSelect();
-                    break;
+    const handleKeyDown = (e: React.KeyboardEvent, highlightedIdx?: number) => {
+        if (e.key === Keys.ARROW_DOWN || e.key === Keys.ARROW_UP) {
+            if (e.shiftKey) {
+                handleSelect(undefined, highlightedIdx);
             }
+        } else if (e.key === Keys.ENTER) {
+            handleSelect(undefined);
         }
     };
 
-    useEffect(() => {
-        if (hasDOM() && window.innerWidth >= 768) setActiveCandidate({ index: 0 });
-        else setActiveCandidate({ index: -1 });
-    }, [filteredOptions, dd]);
+    // todo: variant combobox (+ Add "<query>")
+    // todo: optgroup
 
     useEffect(() => {
-        if (!activeCandidate.keyboard) return;
-        const listElem = listRef.current;
-        if ((listElem && listElem.scrollHeight > listElem.clientHeight) || (listElem?.parentElement && listElem.parentElement.scrollHeight > listElem.parentElement.clientHeight)) {
-            const activeElem = listElem.querySelector(".active_option");
-            if (activeElem) {
-                const containerRect = listElem.getBoundingClientRect();
-                const activeElemRect = activeElem.getBoundingClientRect();
-                const scrollBy = activeElemRect.top - containerRect.top + listElem.scrollTop - (listElem.parentElement?.clientHeight ?? 0) / 2 + activeElemRect.height / 2;
-                listElem.parentElement?.scrollTo({ top: scrollBy, behavior: "smooth" });
-            }
-        }
-    }, [activeCandidate]);
+        setHighlighted(undefined);
+    }, [filteredOptions]);
 
     return (
         <Dropdown
@@ -135,10 +103,16 @@ const Select = ({
             dropdownClass={styles.dd_list}
             noOverlap
             dropdown={
-                <Options role="listbox" onCandidateChange={handleKeyboardNavigation} ref={listRef}>
+                <Options
+                    role="listbox"
+                    highlighted={highlighted}
+                    onHighlightedChange={setHighlighted}
+                    onKeyDown={handleKeyDown}
+                >
                     {
                         filteredOptions?.map((item, idx: number) => {
                             const isSelected = (multiple && Array.isArray(value)) ? value.includes(item.value) : value === item.value;
+                            const isHighlighted = idx === highlighted?.index;
                             return (
                                 <MenuItem<"div">
                                     as="div"
@@ -146,19 +120,21 @@ const Select = ({
                                     id={item.value as string}
                                     icon={item.icon}
                                     primary={(item as any)[labelKey]}
-                                    badge={(isSelected) ? (
-                                        <CheckMarkIcon className={styles.mark} />
-                                    ) : undefined}
+                                    badge={isSelected ? <CheckMarkIcon className={styles.mark} /> : undefined}
                                     onClick={() => handleSelect(item)}
                                     role="option"
                                     aria-selected={isSelected}
-                                    className={classes(styles.option, idx === activeCandidate.index && "active_option")}
+                                    disabled={item.disabled}
+                                    aria-disabled={item.disabled}
+                                    tabIndex={isHighlighted ? 0 : -1}
+                                    className={classes(styles.option, isHighlighted && "active_option")}
                                     collapsible={false}
-                                    tabIndex={idx === activeCandidate.index ? 0 : -1}
+                                    data-highlighted={isHighlighted}
                                 />
                             );
                         })
                     }
+                    {/* TODO: + Add "<query>" */}
                 </Options>
             }
             {...({ style: stylesFromProp?.root ?? {} })}

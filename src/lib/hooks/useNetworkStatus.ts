@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-export default function useNetworkStatus() {
+export function useNetworkStatus() {
   const [status, setStatus] = useState<"online" | "offline">();
 
   const handleOnline = useCallback(() => {

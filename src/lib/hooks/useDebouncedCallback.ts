@@ -7,7 +7,7 @@ export interface UseDebouncedCallbackOptions {
   trailing: boolean
 }
 
-export default function useDebouncedCallback<T extends (...args: any) => any>(cb: T, delay: number, options: UseDebouncedCallbackOptions = { leading: false, trailing: true }) {
+export function useDebouncedCallback<T extends (...args: any) => any>(cb: T, delay: number, options: UseDebouncedCallbackOptions = { leading: false, trailing: true }) {
   const { leading, trailing } = options;
 
   const cbRef = useRef(cb);

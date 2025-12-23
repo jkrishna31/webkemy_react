@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-import useIsomorphicLayoutEffect from "@/lib/hooks/useIsomorphicLayoutEffect";
+import { useIsomorphicLayoutEffect } from "@/lib/hooks/useIsomorphicLayoutEffect";
 
 type UseScrollLockOptions = {
     autoLock?: boolean
@@ -24,7 +24,7 @@ type OriginalStyle = {
 
 const IS_SERVER = typeof window === "undefined";
 
-export default function useScrollLock(
+export function useScrollLock(
     options: UseScrollLockOptions = {},
 ): UseScrollLockReturn {
     const { autoLock, lockTarget, lockAll, widthReflow = true } = options;

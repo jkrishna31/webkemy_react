@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { positions } from "@/constants/general.const";
 import { Button } from "@/lib/ui/elements/butttons";
-import { Modal, ModalHeader } from "@/lib/ui/elements/modals";
+import { Modal, ModalHeader } from "@/lib/ui/elements/Modal";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
 import styles from "./styles.module.scss";

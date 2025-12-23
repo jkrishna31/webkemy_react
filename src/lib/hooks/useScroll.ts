@@ -12,9 +12,9 @@ export interface UseScrollProps {
   initialState?: boolean
 }
 
-const useScroll = ({
+export function useScroll({
   target, margin = 0, delay = 300, onScroll, initialState,
-}: UseScrollProps, options?: boolean | AddEventListenerOptions) => {
+}: UseScrollProps, options?: boolean | AddEventListenerOptions) {
   const [isOnBoundary, setIsOnBoundary] = useState(initialState);
 
   const throttledScrollHandler = useMemo(() => throttle((e?: any) => {
@@ -42,6 +42,4 @@ const useScroll = ({
   }, [handleScroll, options, target]);
 
   return { isOnBoundary, setIsOnBoundary, handleScroll };
-};
-
-export default useScroll;
+}

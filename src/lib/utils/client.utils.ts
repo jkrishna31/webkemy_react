@@ -390,3 +390,8 @@ export const getQueryFromObj = (
         .join("&");
     return queryStr ? queryStr : "";
 };
+
+export const isMobileDevice = () => {
+    if (hasDOM() && ("ontouchstart" in window || navigator.maxTouchPoints > 0)) return true;
+    return false;
+};

@@ -26,7 +26,6 @@ const Tabs = ({
     const activeTabRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
-        // call only when the container has scroll area
         if (activeTabRef.current && containerRef.current && containerRef.current.scrollWidth > containerRef.current.clientWidth) {
             activeTabRef.current.scrollIntoView({
                 behavior: "smooth",

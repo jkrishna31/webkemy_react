@@ -44,7 +44,7 @@ const Tree = ({
                   <button
                     className={styles.expand_btn}
                     onClick={(e) => item.onExpand?.(item.id, e)}
-                    data-expanded={isExpanded}
+                    aria-expanded={isExpanded}
                   >
                     <ChevronRightIcon />
                   </button>

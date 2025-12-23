@@ -4,10 +4,9 @@ import { RefObject, useEffect } from "react";
 
 const defaultOpts: MutationObserverInit = {
     childList: true, attributes: true, subtree: true, characterData: true
-
 };
 
-export default function useMutationObserver(
+export function useMutationObserver(
     target: RefObject<HTMLElement | null>,
     cb: MutationCallback,
     options: MutationObserverInit = defaultOpts,

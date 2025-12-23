@@ -1,6 +1,6 @@
 import { RefObject, useEffect } from "react";
 
-export default function usePointerFlow(
+export function usePointerFlow(
   target: RefObject<HTMLElement | null>,
   onFlow: (event: PointerEvent) => void,
   onStart?: (event: PointerEvent) => void,

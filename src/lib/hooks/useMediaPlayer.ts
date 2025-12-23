@@ -1,6 +1,6 @@
 import { RefObject, useEffect, useState } from "react";
 
-export default function useMediaPlayer(
+export function useMediaPlayer(
   target: RefObject<HTMLAudioElement | HTMLVideoElement | null>
 ) {
   const [duration, setDuration] = useState<number>(0);

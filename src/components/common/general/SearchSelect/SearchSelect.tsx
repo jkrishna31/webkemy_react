@@ -4,7 +4,7 @@ import React, { ComponentProps, useState } from "react";
 
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Radio } from "@/lib/ui/elements/inputs/Radio";
-import { Modal, ModalHeader } from "@/lib/ui/elements/modals";
+import { Modal, ModalHeader } from "@/lib/ui/elements/Modal";
 import { Text } from "@/lib/ui/elements/Text";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";

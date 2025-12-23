@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { Modal } from "@/lib/ui/elements/modals";
+import { Modal } from "@/lib/ui/elements/Modal";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ConfirmCard.module.scss";

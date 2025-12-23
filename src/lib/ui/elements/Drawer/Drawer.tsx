@@ -4,8 +4,8 @@ import { ComponentProps, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { Overlay } from "@/components/common/containers";
-import useFocusTrap from "@/lib/hooks/useFocusTrap";
-import useKey from "@/lib/hooks/useKey";
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
+import { useKey } from "@/lib/hooks/useKey";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Drawer.module.scss";

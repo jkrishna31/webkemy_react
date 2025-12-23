@@ -18,7 +18,7 @@
     font-size: 1.6rem;
     padding-inline: 1rem .6rem;
     margin-right: .8rem;
-    outline-color: transparent;
+    // outline-color: transparent;
     transition: border .15s linear, outline .15s linear;
 
     &:hover {
@@ -27,7 +27,7 @@
 
     &:focus {
         border-color: var(--blue-6);
-        outline: .3rem solid var(--blue-1-10);
+        // outline: .3rem solid var(--blue-1-10);
     }
 }
 

@@ -62,7 +62,7 @@
     transition: transform .5s ease-in-out;
   }
 
-  .expand_btn[data-expanded="true"] svg {
+  .expand_btn[aria-expanded="true"] svg {
     transform: rotateZ(90deg);
   }
 

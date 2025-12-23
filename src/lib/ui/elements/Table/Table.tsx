@@ -2,7 +2,7 @@ import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, u
 import { createRoot } from "react-dom/client";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
-import { CollapsibleContainer } from "@/lib/ui/elements/CollapsibleContainer";
+import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Table.module.scss";
@@ -343,12 +343,12 @@ const Table = <T extends { id: string; children?: Array<T> }>({
               aria-hidden={isExpanded}
             >
               <td colSpan={rootCols?.length}>
-                <CollapsibleContainer
+                <CollapsiblePanel
                   open={isExpanded}
                   renderWhileClosed={renderWhileCollapsed}
                 >
                   {renderDetails?.(rowData)}
-                </CollapsibleContainer>
+                </CollapsiblePanel>
               </td>
             </tr>
           )}

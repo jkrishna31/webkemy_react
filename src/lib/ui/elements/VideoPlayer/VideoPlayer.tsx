@@ -1,11 +1,11 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import React, { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
 
 import { PageMore } from "@/components/common/general";
 import { useToastActions } from "@/data/stores";
-import useDebouncedCallback from "@/lib/hooks/useDebouncedCallback";
-import useMediaPlayer from "@/lib/hooks/useMediaPlayer";
+import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
+import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
@@ -37,6 +37,7 @@ const VideoPlayer = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [overlay, setOverlay] = useState(false);
+  const [progressMode, setProgressMode] = useState<"elapsed" | "remaining">("elapsed");
 
   const { addToast } = useToastActions();
 
@@ -49,6 +50,10 @@ const VideoPlayer = ({
   } = useMediaPlayer(videoRef);
 
   const durationParts: { [key in TimeField | "day"]?: number } = breakdownTime(duration, "second");
+
+  const progressDisplay = useMemo(() => {
+    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currTime : duration - currTime, "second", "hour"));
+  }, [currTime, duration, progressMode]);
 
   const hideOverlay = () => {
     setOverlay(false);
@@ -226,11 +231,15 @@ const VideoPlayer = ({
                 isPlaying ? <PauseIcon /> : <PlayIcon />
               }
             </button>
-            <div className={styles.duration_info}>
-              <p className={styles.curr_timestamp}>{duration ? getFormattedTime(breakdownTime(currTime, "second", "hour")) : "--:--"}</p>
+            <button
+              aria-pressed={progressMode === "remaining"}
+              onClick={() => setProgressMode(progressMode === "remaining" ? "elapsed" : "remaining")}
+              className={styles.duration_info}
+            >
+              <p className={styles.curr_timestamp}>{duration ? progressDisplay : "--:--"}</p>
               <span className={styles.separator}>{"/"}</span>
               <p className={styles.total_duration}>{durationParts ? getFormattedTime(durationParts) : "--:--"}</p>
-            </div>
+            </button>
             <GeneralDropdown
               value={`${pace}x`}
               dropdownContent={

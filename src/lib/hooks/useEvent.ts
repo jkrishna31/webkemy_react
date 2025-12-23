@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-export default function useEvent<T extends Function>(fn: T): T {
+export function useEvent<T extends Function>(fn: T): T {
   const ref = useRef<T>(null);
 
   ref.current = fn;

@@ -17,7 +17,7 @@ export type Order = {
   children?: Order[];
 };
 
-export default function useMultiLevelData<T>(payload: T[], options?: UseMultiLevelDataOptions<T>) {
+export function useMultiLevelData<T>(payload: T[], options?: UseMultiLevelDataOptions<T>) {
   const {
     id = "id",
     branch = "children",

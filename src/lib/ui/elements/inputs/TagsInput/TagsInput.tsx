@@ -2,7 +2,7 @@
 
 import React, { ComponentProps, useRef } from "react";
 
-import useKey from "@/lib/hooks/useKey";
+import { useKey } from "@/lib/hooks/useKey";
 import { Chip } from "@/lib/ui/elements/Chip";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
