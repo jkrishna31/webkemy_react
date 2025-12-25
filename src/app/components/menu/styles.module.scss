@@ -6,3 +6,14 @@
   display: grid;
   gap: .2rem;
 }
+
+.sub_menu {
+  display: grid;
+  gap: .2rem;
+  padding-top: .2rem;
+  padding-inline: .8rem;
+}
+
+.menu[data-minimized="true"] .sub_menu {
+  place-items: center;
+}

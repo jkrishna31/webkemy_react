@@ -8,6 +8,7 @@ import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
+import { RippleLoader } from "@/lib/ui/elements/loaders";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
 import { VolumeControl } from "@/lib/ui/elements/VolumeControl";
 import FastForwardIcon from "@/lib/ui/svgs/icons/FastForwardIcon";
@@ -42,7 +43,7 @@ const VideoPlayer = ({
   const { addToast } = useToastActions();
 
   const {
-    duration, isMute, isPlaying, currTime, pace, volume,
+    duration, isMute, isPlaying, currTime, pace, volume, loading,
     setIsPlaying, setIsMute,
     updateCurrTime, updatePace, updateVolume,
     handleLoadedMetadata,
@@ -194,9 +195,12 @@ const VideoPlayer = ({
           <button
             className={styles.main_play_btn}
             onClick={togglePlayState}
+            disabled={loading}
           >
             {
-              isPlaying ? <PauseIcon /> : <PlayIcon />
+              loading
+                ? <RippleLoader className={styles.btn_icon} />
+                : (isPlaying ? <PauseIcon /> : <PlayIcon />)
             }
           </button>
           <button
@@ -226,9 +230,12 @@ const VideoPlayer = ({
             <button
               className={styles.play_btn}
               onClick={togglePlayState}
+              disabled={loading}
             >
               {
-                isPlaying ? <PauseIcon /> : <PlayIcon />
+                loading
+                  ? <RippleLoader className={styles.btn_icon} />
+                  : (isPlaying ? <PauseIcon /> : <PlayIcon />)
               }
             </button>
             <button

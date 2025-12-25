@@ -1,6 +1,6 @@
 import React, { ComponentProps, MouseEvent, ReactNode } from "react";
 
-import { Collapsible } from "@/lib/ui/elements/Collapsible";
+import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -29,35 +29,30 @@ const Tree = ({
     return t.map((item) => {
       const isExpanded = expandedIds.includes(item.id);
       return (
-        <Collapsible<"li", "ul">
+        <li
           key={item.id}
-          open={isExpanded}
-          detailsAs="ul"
-          wrapperAs="li"
           className={styles.item}
-          detailsClass={styles.details}
-          renderWhileClosed={renderWhileClosed}
-          summary={
-            <div className={styles.item_wrapper}>
-              {
-                item.children?.length ? (
-                  <button
-                    className={styles.expand_btn}
-                    onClick={(e) => item.onExpand?.(item.id, e)}
-                    aria-expanded={isExpanded}
-                  >
-                    <ChevronRightIcon />
-                  </button>
-                ) : (
-                  <div className={styles.expand_btn_ph}></div>
-                )
-              }
-              {typeof item.render === "function" ? item.render?.(isExpanded) : item.render}
-            </div>
-          }
         >
-          {renderSection(item.children)}
-        </Collapsible>
+          <div className={styles.item_wrapper}>
+            {
+              item.children?.length ? (
+                <button
+                  className={styles.expand_btn}
+                  onClick={(e) => item.onExpand?.(item.id, e)}
+                  aria-expanded={isExpanded}
+                >
+                  <ChevronRightIcon />
+                </button>
+              ) : (
+                <div className={styles.expand_btn_ph}></div>
+              )
+            }
+            {typeof item.render === "function" ? item.render?.(isExpanded) : item.render}
+          </div>
+          <CollapsiblePanel<"ul"> as="ul" open={isExpanded} className={styles.details} renderWhileClosed={renderWhileClosed}>
+            {renderSection(item.children)}
+          </CollapsiblePanel>
+        </li>
       );
     });
   };

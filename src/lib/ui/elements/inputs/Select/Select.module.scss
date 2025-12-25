@@ -53,25 +53,22 @@
     overflow: auto;
     padding: .4rem;
     @include scrollbar_y(.8rem);
-
-    & :global(.active_option) {
-        background: var(--bg-hover);
-    }
 }
 
-.option {
-    cursor: pointer;
+.option .mark {
+    width: 1.8rem;
+    height: 1.8rem;
+    margin-left: auto;
+}
 
-    &:not(:global(.active_option)):hover {
-        background: inherit;
-    }
+.group {
+    background: var(--gray-12);
+}
 
-    .mark {
-        width: 1.8rem;
-        height: 1.8rem;
-        margin-left: auto;
-        // color: inherit;
-    }
+.group_options {
+    display: grid;
+    gap: .2rem;
+    padding-inline: .8rem;
 }
 
 

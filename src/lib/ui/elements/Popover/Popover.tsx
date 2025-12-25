@@ -12,18 +12,19 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Popover.module.scss";
 
 export interface PopoverProps extends ComponentProps<"div"> {
-  anchor: HTMLElement
-  placement?: Exclude<LayoutPosition, "center">
-  alignment?: LayoutPosition
-  isTooltip?: boolean
-  onClose?: () => void
-  closeOnScroll?: boolean
-  closeOnOutsideClick?: boolean
-  lockScroll?: boolean
-  offset?: number
-  usePortal?: boolean
-  useTransform?: boolean
-  closeOnEsc?: boolean | "capture"
+  anchor: HTMLElement;
+  placement?: Exclude<LayoutPosition, "center">;
+  alignment?: LayoutPosition;
+  isTooltip?: boolean;
+  onClose?: () => void;
+  closeOnScroll?: boolean;
+  closeOnOutsideClick?: boolean;
+  lockScroll?: boolean;
+  offset?: number;
+  usePortal?: boolean;
+  useTransform?: boolean;
+  closeOnEsc?: boolean | "capture";
+  adjustOnScroll?: boolean;
 }
 
 const Popover = ({
@@ -36,6 +37,7 @@ const Popover = ({
   closeOnScroll,
   closeOnOutsideClick,
   lockScroll,
+  adjustOnScroll,
   onClose,
   usePortal = true,
   useTransform = true,
@@ -49,7 +51,7 @@ const Popover = ({
 
   const { lock, unlock } = useScrollLock();
 
-  const layoutPopover = useCallback(() => {
+  const updatePopoverLayout = useCallback(() => {
     const elem = popoverRef.current;
     if (!elem) return;
     requestAnimationFrame(() => {
@@ -74,21 +76,15 @@ const Popover = ({
     });
   }, [alignment, anchor, offset, placement, useTransform]);
 
-  useLayoutEffect(layoutPopover, [layoutPopover]);
+  useLayoutEffect(updatePopoverLayout, [updatePopoverLayout]);
 
-  // TODO: re-position on resize
   useEffect(() => {
-    const handleResize = () => {
-      requestAnimationFrame(() => {
-        layoutPopover();
-      });
-    };
-
+    const handleResize = () => requestAnimationFrame(updatePopoverLayout);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [layoutPopover]);
+  }, [updatePopoverLayout]);
 
-  useKey(closeOnEsc ? (e) => {
+  useKey(closeOnEsc ? () => {
     onClose?.();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
@@ -100,16 +96,19 @@ const Popover = ({
   }, [anchor, lock, lockScroll, unlock]);
 
   useEffect(() => {
-    if (anchor && (isTooltip || closeOnScroll)) {
+    if (anchor && (isTooltip || closeOnScroll || adjustOnScroll)) {
       const handleScroll = (e: Event) => {
-        if ((e.target as HTMLElement).contains(anchor)) {
+        if ((isTooltip || closeOnScroll) && (e.target as HTMLElement).contains(anchor)) {
           onClose?.();
         }
+        if (adjustOnScroll) {
+          updatePopoverLayout();
+        }
       };
-      window.addEventListener("scroll", handleScroll, { once: true, passive: true, capture: true });
+      window.addEventListener("scroll", handleScroll, { once: isTooltip || closeOnScroll, passive: true, capture: true });
       return () => window.removeEventListener("scroll", handleScroll);
     }
-  }, [anchor, closeOnScroll, isTooltip, onClose]);
+  }, [adjustOnScroll, anchor, closeOnScroll, isTooltip, onClose, updatePopoverLayout]);
 
   useEffect(() => {
     if (anchor && closeOnOutsideClick) {

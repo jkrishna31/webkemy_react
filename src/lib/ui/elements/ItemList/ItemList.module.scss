@@ -1,0 +1,15 @@
+.list {
+  display: grid;
+  gap: .2rem;
+
+  [role="option"],
+  [role="listitem"] {
+    &:not([data-highlight="true"]) {
+      background-color: inherit;
+    }
+
+    &[data-highlight="true"] {
+      background: var(--bg-hover);
+    }
+  }
+}

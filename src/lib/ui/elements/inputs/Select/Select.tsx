@@ -5,8 +5,9 @@ import React, { ComponentProps, ReactNode, useEffect, useMemo, useState } from "
 import { Keys } from "@/constants/keys.const";
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
-import { MenuItem } from "@/lib/ui/elements/menu";
-import { Options } from "@/lib/ui/elements/Options";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
@@ -16,14 +17,23 @@ import styles from "./Select.module.scss";
 
 export type Value = string | number | boolean;
 
-export interface Option {
+export type OptionBase = {
     label?: ReactNode;
     value: Value;
-    group?: ReactNode;
-    options?: Option[];
     icon?: ReactNode;
     disabled?: boolean;
 }
+
+export type IndexedOpitonBase = OptionBase & { _index?: number };
+
+export type OptionGroup<T = OptionBase> = {
+    key: string;
+    group: ReactNode;
+    options?: T[];
+}
+
+export type Option = (OptionGroup & Partial<OptionBase>) | (OptionBase & Partial<OptionGroup>);
+type IndexedOption = (OptionGroup<IndexedOpitonBase> & Partial<IndexedOpitonBase>) | (IndexedOpitonBase & Partial<OptionGroup<IndexedOpitonBase>>);
 
 export interface SelectProps extends ComponentProps<"select"> {
     label?: string;
@@ -52,16 +62,43 @@ const Select = ({
     const [highlighted, setHighlighted] = useState<{ index?: number, keyboard?: boolean } | undefined>();
 
     const filteredOptions = useMemo(() => {
-        return query
-            ? options?.filter((item: any) => item?.[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase()))
-            : options;
+        if (!query?.trim) return options as IndexedOption[];
+        const _options: IndexedOption[] = [];
+        let _index = 0;
+        options.forEach(option => {
+            if (option.group) {
+                const __options: IndexedOpitonBase[] = [];
+                option.options?.forEach(subOption => {
+                    if ((subOption as any)[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) {
+                        __options.push({ ...subOption, _index: _index++ });
+                    }
+                });
+                if (__options.length) _options.push({ ...option, options: __options } as IndexedOption);
+            } else {
+                if ((option as any)[labelKey]?.toLocaleLowerCase()?.includes(query?.toLocaleLowerCase())) {
+                    _options.push({ ...option, _index: _index++ });
+                }
+            }
+        });
+        return _options;
     }, [labelKey, options, query]);
 
+    const getItemByIndex = (index: number) => {
+        for (const option of filteredOptions) {
+            if (option.group) {
+                for (const subOption of (option.options ?? [])) {
+                    if (subOption._index === index) return subOption;
+                }
+            } else if (option._index === index) return option;
+        }
+        return undefined;
+    };
+
     const handleSelect = (item?: Option, activeIndex?: number) => {
-        const selectedOption = item
-            ?? (activeIndex ? filteredOptions[activeIndex] : null)
-            ?? (highlighted?.index ? filteredOptions[highlighted.index] : null);
-        if (selectedOption) {
+        let selectedOption = item;
+        const targetIndex = activeIndex ?? highlighted?.index;
+        if (!selectedOption && targetIndex !== undefined) selectedOption = getItemByIndex(targetIndex);
+        if (selectedOption && selectedOption.value) {
             if (multiple) {
                 const newValues = (value as Value[]).filter(item => item !== selectedOption.value);
                 if (newValues.length === (value as (string | number[])).length) {
@@ -85,12 +122,52 @@ const Select = ({
         }
     };
 
-    // todo: variant combobox (+ Add "<query>")
-    // todo: optgroup
+    // TODO: variant combobox (+ Add "<query>")
 
     useEffect(() => {
         setHighlighted(undefined);
     }, [filteredOptions]);
+
+    const renderOptions = (_items?: IndexedOption[]) => {
+        if (!_items?.length) return null;
+        return (
+            _items?.map((item) => {
+                if (item.group) {
+                    return (
+                        <ItemGroup
+                            group={item.group}
+                            key={item.key}
+                            headerClass={styles.group}
+                        >
+                            <div className={styles.group_options}>
+                                {renderOptions(item.options)}
+                            </div>
+                        </ItemGroup>
+                    );
+                } else {
+                    const isSelected = (multiple && Array.isArray(value)) ? value.includes(item.value) : value === item.value;
+                    const isHighlighted = item._index === highlighted?.index;
+                    return (
+                        <Item<"div">
+                            as="div"
+                            key={String(item.value)}
+                            icon={item.icon}
+                            primary={(item as any)[labelKey]}
+                            badge={isSelected ? <CheckMarkIcon className={styles.mark} /> : undefined}
+                            onClick={() => handleSelect(item)}
+                            role="option"
+                            aria-selected={isSelected}
+                            disabled={item.disabled}
+                            aria-disabled={item.disabled}
+                            tabIndex={isHighlighted ? 0 : -1}
+                            className={classes(styles.option, isHighlighted && "active_option")}
+                            data-highlight={isHighlighted}
+                        />
+                    );
+                }
+            })
+        );
+    };
 
     return (
         <Dropdown
@@ -103,39 +180,16 @@ const Select = ({
             dropdownClass={styles.dd_list}
             noOverlap
             dropdown={
-                <Options
+                <ItemList
                     role="listbox"
-                    highlighted={highlighted}
-                    onHighlightedChange={setHighlighted}
+                    highlight={highlighted}
+                    onHighlightChange={setHighlighted}
                     onKeyDown={handleKeyDown}
+                    className={styles.options}
                 >
-                    {
-                        filteredOptions?.map((item, idx: number) => {
-                            const isSelected = (multiple && Array.isArray(value)) ? value.includes(item.value) : value === item.value;
-                            const isHighlighted = idx === highlighted?.index;
-                            return (
-                                <MenuItem<"div">
-                                    as="div"
-                                    key={String(item.value)}
-                                    id={item.value as string}
-                                    icon={item.icon}
-                                    primary={(item as any)[labelKey]}
-                                    badge={isSelected ? <CheckMarkIcon className={styles.mark} /> : undefined}
-                                    onClick={() => handleSelect(item)}
-                                    role="option"
-                                    aria-selected={isSelected}
-                                    disabled={item.disabled}
-                                    aria-disabled={item.disabled}
-                                    tabIndex={isHighlighted ? 0 : -1}
-                                    className={classes(styles.option, isHighlighted && "active_option")}
-                                    collapsible={false}
-                                    data-highlighted={isHighlighted}
-                                />
-                            );
-                        })
-                    }
+                    {renderOptions(filteredOptions)}
                     {/* TODO: + Add "<query>" */}
-                </Options>
+                </ItemList>
             }
             {...({ style: stylesFromProp?.root ?? {} })}
         >

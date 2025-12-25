@@ -89,6 +89,8 @@ const Dropdown = ({
     }
   }, [dropdown]);
 
+  // TODO: use Popover (with position: absolute, and transform with top & left value)
+
   return (
     <div ref={ref} className={classes(styles.wrapper, className)} {...props}>
       {

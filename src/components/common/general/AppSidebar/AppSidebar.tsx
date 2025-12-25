@@ -4,7 +4,9 @@ import React, { ComponentProps, useEffect } from "react";
 
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
-import { Menu, MenuItem } from "@/lib/ui/elements/menu";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
+import { Menu } from "@/lib/ui/elements/Menu";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -37,6 +39,7 @@ const AppSidebar = ({
     <div
       className={classes(styles.sidebar, className)}
       style={{ width: sidebar === "collapsed" ? "auto" : "32rem" }}
+      {...props}
     >
       <button
         className={styles.close_btn}
@@ -50,21 +53,27 @@ const AppSidebar = ({
 
       <Menu
         minimized={sidebar === "collapsed"}
-        className={styles.wrapper}
+        className={styles.menu}
       >
         {
-          menuItems.map((item: any) => {
-            return (
-              <MenuItem
-                as={item.group ? "button" : "a"}
-                {...item}
-                key={item.key}
-                id={item.key}
-                activeItem={page}
-                minimized={sidebar === "collapsed"}
-              />
-            );
-          })
+          menuItems?.map((group) => (
+            <ItemGroup group={group.group} key={group.key} minimized={sidebar === "collapsed"}>
+              <div className={styles.list}>
+                {
+                  group.menu?.map((item) => (
+                    <Item<"a">
+                      as="a"
+                      {...item}
+                      key={item.key}
+                      aria-current={item.key === page}
+                      minimized={sidebar === "collapsed"}
+                      data-tooltip={item.primary}
+                    />
+                  ))
+                }
+              </div>
+            </ItemGroup>
+          ))
         }
       </Menu>
     </div>

@@ -3,7 +3,8 @@
 import React, { useState } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/dropdowns";
-import { MenuItem } from "@/lib/ui/elements/menu";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -33,19 +34,27 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
             onMouseEnter={openToolsList} onMouseLeave={closeToolsList}
             onOpen={handleSelectorClick}
             dropdown={
-                // use Options or SelectDropdown
                 <ul className={classes(styles.tools_list, "scroll_thin", listClass)}>
                     {
-                        blocks.map((item: any) => {
-                            return (
-                                <MenuItem
-                                    as="button"
-                                    {...item}
-                                    key={item.key}
-                                    id={item.key}
-                                />
-                            );
-                        })
+                        blocks?.map((group: any) => (
+                            <ItemGroup
+                                key={group.key}
+                                headerClass={group.className}
+                                group={group.group}
+                            >
+                                <div className={styles.list}>
+                                    {
+                                        group.menu?.map((item: any) => (
+                                            <Item<"button">
+                                                as="button"
+                                                {...item}
+                                                key={item.key}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                            </ItemGroup>
+                        ))
                     }
                 </ul>
             }

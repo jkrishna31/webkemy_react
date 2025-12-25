@@ -6,6 +6,12 @@
   display: grid;
   gap: .2rem;
 
+  .sub_menu {
+    display: grid;
+    gap: .2rem;
+    padding-inline: .8rem;
+  }
+
   &[data-minimized="true"] {
     place-items: center;
   }

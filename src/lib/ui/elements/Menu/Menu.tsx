@@ -1,20 +1,23 @@
 "use client";
 
-import React, { ComponentProps, ElementType, useEffect, useRef, useState } from "react";
+import React, { ComponentProps, ElementType, ReactNode, useEffect, useRef, useState } from "react";
 
-import { Item } from "@/lib/ui/elements/menu";
+import { TItem } from "@/lib/ui/elements/Item";
 import { Popover } from "@/lib/ui/elements/Popover";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Menu.module.scss";
 
-export interface MenuProps<T extends ElementType> extends ComponentProps<"div"> {
+export type TMenuItem<T extends ElementType> = TItem<T> & { menu?: TMenuItem<T>[]; group?: ReactNode; };
+
+export interface MenuProps<T extends ElementType = "a"> extends ComponentProps<"div"> {
   minimized?: boolean;
-  items?: Item<T>;
+  as?: T;
+  items?: TMenuItem<T>[];
 }
 
 const Menu = <T extends ElementType>({
-  minimized, items,
+  minimized, items, as,
   children, className,
   ...props
 }: MenuProps<T>) => {
@@ -31,9 +34,9 @@ const Menu = <T extends ElementType>({
     const handlePointerMove = (e: PointerEvent) => {
       requestAnimationFrame(() => {
         const menuItem = (e.target as HTMLElement).closest(".menu_item") as HTMLElement;
-        const tooltipContent = menuItem?.getAttribute("aria-label") ?? "";
+        const tooltipContent = menuItem?.getAttribute("data-tooltip") ?? "";
         clearTimeout(timeoutRef.current ?? undefined);
-        if (!menuItem) {
+        if (!menuItem || !tooltipContent) {
           timeoutRef.current = setTimeout(() => {
             setAnchor(undefined);
             setTooltip("");
@@ -62,6 +65,9 @@ const Menu = <T extends ElementType>({
     return () => {
       menuElem.removeEventListener("pointerenter", handlePointerEnter);
       handlePointerLeave();
+      if (!minimized) {
+        setAnchor(undefined);
+      }
     };
   }, [minimized]);
 

@@ -50,6 +50,12 @@
             padding-block: .7rem;
         }
     }
+
+    .list {
+        display: grid;
+        gap: .2rem;
+        padding-inline: .8rem;
+    }
 }
 
 

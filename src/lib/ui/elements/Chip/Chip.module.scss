@@ -63,6 +63,7 @@
   padding: .5rem .6rem;
   color: var(--fg-s);
   cursor: pointer;
+  outline-offset: -.3rem;
 
   &:hover {
     color: var(--red-6);

@@ -118,13 +118,19 @@
     padding-inline: 1rem;
 
     & :global(.group_header) {
-        background: var(--gray-11-70);
+        background: var(--gray-11);
         margin-top: 1rem;
     }
 
     &::-webkit-scrollbar {
         appearance: none;
         width: 0;
+    }
+
+    .list {
+        display: grid;
+        gap: .2rem;
+        padding-inline: .8rem;
     }
 }
 

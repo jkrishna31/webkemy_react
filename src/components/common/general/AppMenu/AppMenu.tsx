@@ -2,7 +2,8 @@ import { faro, LogLevel } from "@grafana/faro-web-sdk";
 
 import { useActivePage, useLayoutActions, useModalActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
-import { MenuItem } from "@/lib/ui/elements/menu";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
 import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
 import AppLogo from "@/lib/ui/svgs/icons/AppLogo";
 import AppNotificationIcon from "@/lib/ui/svgs/icons/AppNotificationIcon";
@@ -594,17 +595,17 @@ const AppMenu = ({ open }: AppMenuProps) => {
                 </div>
                 <div className={styles.bottom_section}>
                     {
-                        menuItems.map((item: any) => {
-                            return (
-                                <MenuItem
-                                    as={item.group ? "button" : "a"}
-                                    {...item}
-                                    key={item.key}
-                                    id={item.key}
-                                    activeItem={page}
-                                />
-                            );
-                        })
+                        menuItems?.map((group) => (
+                            <ItemGroup group={group.group} key={group.key}>
+                                <div className={styles.list}>
+                                    {
+                                        group.menu?.map((item) => (
+                                            <Item<"a"> as="a" {...item} key={item.key} aria-current={item.key === page} />
+                                        ))
+                                    }
+                                </div>
+                            </ItemGroup>
+                        ))
                     }
                 </div>
             </nav>

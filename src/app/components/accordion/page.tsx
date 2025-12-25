@@ -4,7 +4,7 @@ import React, { ReactNode } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { useAccordion } from "@/lib/hooks/useAccordion";
-import { Collapsible } from "@/lib/ui/elements/Collapsible";
+import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 
 import styles from "./page.module.scss";
@@ -18,11 +18,13 @@ const Summary = ({ children, onClick }: { children?: ReactNode; onClick?: () => 
   );
 };
 
-const Details = ({ children }: { children?: ReactNode }) => {
+const Details = ({ children, open }: { children?: ReactNode; open?: boolean }) => {
   return (
-    <div className={styles.details}>
-      {children}
-    </div>
+    <CollapsiblePanel open={open}>
+      <div className={styles.details}>
+        {children}
+      </div>
+    </CollapsiblePanel>
   );
 };
 
@@ -34,28 +36,18 @@ const Page = () => {
       <PageSetup pageKey="accordion" />
 
       <div className={styles.accordion}>
-        <Collapsible
-          className={styles.collapsible}
-          open={activeSections.includes("1")}
-          summary={
-            <Summary onClick={() => updateAccordion("1")}>{"Summary 1"}</Summary>
-          }
-        >
-          <Details>
+        <div className={styles.collapsible} aria-expanded={activeSections.includes("1")}>
+          <Summary onClick={() => updateAccordion("1")}>{"Summary 1"}</Summary>
+          <Details open={activeSections.includes("1")}>
             <p>{"Detials:"}</p>
             <p>
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quasi blanditiis molestiae. Porro, expedita eum natus qui nulla aliquid asperiores quibusdam totam sint tenetur. Natus?"}
             </p>
           </Details>
-        </Collapsible>
-        <Collapsible
-          className={styles.collapsible}
-          open={activeSections.includes("2")}
-          summary={
-            <Summary onClick={() => updateAccordion("2")}>{"Summary 2"}</Summary>
-          }
-        >
-          <Details>
+        </div>
+        <div className={styles.collapsible} aria-expanded={activeSections.includes("2")}>
+          <Summary onClick={() => updateAccordion("2")}>{"Summary 2"}</Summary>
+          <Details open={activeSections.includes("2")}>
             <p>{"Detials:"}</p>
             <p>
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quasi blanditiis molestiae. Porro, expedita eum natus qui nulla aliquid asperiores quibusdam totam sint tenetur. Natus?"}
@@ -64,15 +56,10 @@ const Page = () => {
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut perspiciatis autem totam debitis deserunt mollitia, minus laborum repellat praesentium labore voluptas quis. Molestias dolor explicabo nulla? Velit, tenetur."}
             </p>
           </Details>
-        </Collapsible>
-        <Collapsible
-          className={styles.collapsible}
-          open={activeSections.includes("3")}
-          summary={
-            <Summary onClick={() => updateAccordion("3")}>{"Summary 3"}</Summary>
-          }
-        >
-          <Details>
+        </div>
+        <div className={styles.collapsible} aria-expanded={activeSections.includes("3")}>
+          <Summary onClick={() => updateAccordion("3")}>{"Summary 3"}</Summary>
+          <Details open={activeSections.includes("3")}>
             <p>{"Detials:"}</p>
             <p>
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quasi blanditiis molestiae. Porro, expedita eum natus qui nulla aliquid asperiores quibusdam totam sint tenetur. Natus?"}
@@ -81,29 +68,19 @@ const Page = () => {
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odit debitis consequuntur dignissimos ratione, doloribus voluptatem officiis sit expedita neque! Ut perspiciatis autem totam debitis deserunt mollitia, minus laborum repellat praesentium labore voluptas quis. Molestias dolor explicabo nulla? Velit, tenetur."}
             </p>
           </Details>
-        </Collapsible>
-        <Collapsible
-          className={styles.collapsible}
-          open={activeSections.includes("4")}
-          summary={
-            <Summary onClick={() => updateAccordion("4")}>{"Summary 4"}</Summary>
-          }
-        >
-          <Details>
+        </div>
+        <div className={styles.collapsible} aria-expanded={activeSections.includes("4")}>
+          <Summary onClick={() => updateAccordion("4")}>{"Summary 4"}</Summary>
+          <Details open={activeSections.includes("4")}>
             <p>{"Detials:"}</p>
             <p>
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odit debitis consequuntur dignissimos ratione, doloribus voluptatem officiis sit expedita neque! Ut perspiciatis autem totam debitis deserunt mollitia, minus laborum repellat praesentium labore voluptas quis. Molestias dolor explicabo nulla? Velit, tenetur."}
             </p>
           </Details>
-        </Collapsible>
-        <Collapsible
-          className={styles.collapsible}
-          open={activeSections.includes("5")}
-          summary={
-            <Summary onClick={() => updateAccordion("5")}>{"Summary 5"}</Summary>
-          }
-        >
-          <Details>
+        </div>
+        <div className={styles.collapsible} aria-expanded={activeSections.includes("5")}>
+          <Summary onClick={() => updateAccordion("5")}>{"Summary 5"}</Summary>
+          <Details open={activeSections.includes("5")}>
             <p>{"Detials:"}</p>
             <p>
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quasi blanditiis molestiae. Porro, expedita eum natus qui nulla aliquid asperiores quibusdam totam sint tenetur. Natus?"}
@@ -112,7 +89,7 @@ const Page = () => {
               {"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus odit debitis consequuntur dignissimos ratione, doloribus voluptatem officiis sit expedita neque! Ut perspiciatis autem totam debitis deserunt mollitia, minus laborum repellat praesentium labore voluptas quis. Molestias dolor explicabo nulla? Velit, tenetur."}
             </p>
           </Details>
-        </Collapsible>
+        </div>
       </div>
     </main>
   );

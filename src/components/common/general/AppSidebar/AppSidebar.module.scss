@@ -64,7 +64,7 @@
   z-index: 2;
 }
 
-.wrapper {
+.menu {
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -75,6 +75,12 @@
   border-radius: 1.2rem;
 }
 
-.menu_group {
-  background-color: var(--bg-t);
+.list {
+  display: grid;
+  gap: .2rem;
+  padding-inline: .8rem;
+}
+
+.menu[data-minimized="true"] .list {
+  place-items: center;
 }
