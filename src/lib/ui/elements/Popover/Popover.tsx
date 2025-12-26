@@ -25,6 +25,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   useTransform?: boolean;
   closeOnEsc?: boolean | "capture";
   adjustOnScroll?: boolean;
+  overlap?: boolean;
 }
 
 const Popover = ({
@@ -43,6 +44,7 @@ const Popover = ({
   useTransform = true,
   ref,
   closeOnEsc = true,
+  overlap,
   ...props
 }: PopoverProps) => {
   const popoverId = useId();
@@ -57,24 +59,29 @@ const Popover = ({
     requestAnimationFrame(() => {
       const anchorBoundingRect = anchor?.getBoundingClientRect();
       const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
-      const { top, left } = calculateRenderPosition(
+
+      const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
         anchorBoundingRect, popoverBoundingRect,
-        { placement, alignment, offset },
+        { placement, alignment, offset, overlap },
       );
-      (elem as HTMLElement).style.top = "0px";
-      (elem as HTMLElement).style.left = "0px";
-      if (!!(elem as HTMLElement).style.transform) {
-        (elem as HTMLElement).style.transition = "transform .2s ease, left .2s ease, top .2s ease";
-      }
+
+      const computedStyle = getComputedStyle(elem);
+
+      if (computedStyle.transform === "none") elem.style.transform = "none";
+      else elem.style.transition = "transform .2s ease";
+
+      if (maxHeight) elem.style.maxHeight = String(maxHeight);
+      if (maxWidth) elem.style.maxWidth = String(maxWidth);
+
       if (useTransform) {
-        (elem as HTMLElement).style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
       } else {
         // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-        (elem as HTMLElement).style.left = `${left}px`;
-        (elem as HTMLElement).style.top = `${top}px`;
+        elem.style.left = `${left}px`;
+        elem.style.top = `${top}px`;
       }
     });
-  }, [alignment, anchor, offset, placement, useTransform]);
+  }, [alignment, anchor, offset, overlap, placement, useTransform]);
 
   useLayoutEffect(updatePopoverLayout, [updatePopoverLayout]);
 
@@ -130,7 +137,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, !useTransform && styles.animate, className)}
+        className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >
@@ -140,7 +147,7 @@ const Popover = ({
     : (
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, !useTransform && styles.animate, className)}
+        className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
       >

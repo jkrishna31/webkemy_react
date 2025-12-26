@@ -3,6 +3,8 @@
   --popup-y: 0;
 
   position: fixed;
+  top: 0;
+  left: 0;
   z-index: var(--zi-drawer);
   max-width: calc(100vw - 4rem);
   max-height: calc(100vh - 4rem);

@@ -63,7 +63,7 @@ export const calculateRenderPosition = (
       }
       default: {
         position.top = offset;
-        position.maxHeight = `calc(100vh - ${offset * 2}`;
+        position.maxHeight = overlap ? `calc(100vh - ${offset * 2}` : `${_bottomSpace >= _topSpace ? _bottomSpace : _topSpace}px`;
       }
     }
 
@@ -148,7 +148,7 @@ export const calculateRenderPosition = (
       }
       default: {
         position.top = offset;
-        position.maxHeight = `calc(100vh - ${offset * 2})`;
+        position.maxHeight = overlap ? `calc(100vh - ${offset * 2})` : `${_bottomSpace >= _topSpace ? _bottomSpace : _topSpace}px`;
       }
     }
 
