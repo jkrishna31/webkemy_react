@@ -123,6 +123,8 @@ const Select = ({
     };
 
     // TODO: variant combobox (+ Add "<query>")
+    // TODO: opening/closing in accordance with focus
+    // TODO: selected value display for single select
 
     useEffect(() => {
         setHighlighted(undefined);
@@ -188,7 +190,6 @@ const Select = ({
                     className={styles.options}
                 >
                     {renderOptions(filteredOptions)}
-                    {/* TODO: + Add "<query>" */}
                 </ItemList>
             }
             {...({ style: stylesFromProp?.root ?? {} })}

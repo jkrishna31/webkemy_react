@@ -271,9 +271,9 @@ export const menuItems = [
                 icon: <FlagIcon2 />,
             },
             {
-                key: "tablist",
-                href: "/components/tablist",
-                primary: "Tablist",
+                key: "tabs",
+                href: "/components/tabs",
+                primary: "Tabs",
                 icon: <TabsIcon />,
             },
             {
@@ -396,7 +396,7 @@ export const menuItems = [
             {
                 key: "code-block",
                 href: "/components/code-block",
-                primary: "Code View",
+                primary: "Code Block",
                 icon: <BlockCodeIcon />,
             },
             {

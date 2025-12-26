@@ -14,7 +14,6 @@
     height: fit-content;
 
     scrollbar-width: thin;
-    // @include scrollbar_x();
 
     pre {
       overflow-x: auto;
@@ -67,10 +66,6 @@
     color: var(--fg-p);
   }
 
-  .highlighted {
-    background-color: var(--ghost-2);
-  }
-
   .wrap {
     white-space: pre-wrap;
     white-space: -moz-pre-wrap;
@@ -118,16 +113,29 @@
     justify-content: center;
   }
 
-  & tr[data-highlight="true"] td {
-    background-color: var(--bg-s);
+  & tr[data-highlight="true"] {
+    border-inline: .2rem solid var(--border-p);
+
+    td {
+      background-color: var(--bg-s);
+      position: relative;
+    }
   }
 
-  & tr[data-highlight="+"] td {
-    background-color: var(--green-10);
+  & tr[data-highlight="+"] {
+    border-inline: .2rem solid var(--green-2);
+
+    td {
+      background-color: var(--green-10);
+    }
   }
 
-  & tr[data-highlight="-"] td {
-    background-color: var(--red-9);
+  & tr[data-highlight="-"] {
+    border-inline: .2rem solid var(--red-7);
+
+    td {
+      background-color: var(--red-9);
+    }
   }
 
   .copy_icon {

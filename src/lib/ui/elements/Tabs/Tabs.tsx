@@ -1,17 +1,25 @@
 "use client";
 
-import { ComponentProps, useEffect, useRef } from "react";
+import { ComponentProps, ReactNode, useEffect, useRef } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
+import { isDisabled } from "@/lib/utils/dom.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Tabs.module.scss";
 
+export interface Tab extends ComponentProps<"button"> {
+    id: string;
+    label?: ReactNode;
+    disabled?: boolean;
+    render?: () => ReactNode;
+}
+
 export interface TabListProps extends ComponentProps<"div"> {
     wrapperInnerClass?: string
     btnClass?: string
-    tabs: any[]
+    tabs: Tab[]
     onChange: any
     activeTab: string
     showScrollBtns?: boolean
@@ -41,20 +49,41 @@ const Tabs = ({
             const handleKeyDown = (e: KeyboardEvent) => {
                 const activeElem = list.contains(document.activeElement) ? document.activeElement : activeTabRef.current;
                 if (!activeElem) return;
+
                 let focusableTab: HTMLElement | undefined;
-                // TODO: nextElementSibling, if not diabled; and move to first or last if last or first respectively
+
                 if (e.key === Keys.ARROW_DOWN || e.key === Keys.ARROW_RIGHT) {
-                    focusableTab = activeElem.nextElementSibling as HTMLElement;
+                    let i = 0;
+                    let candidate = activeElem.nextElementSibling as HTMLElement;
+                    while (!focusableTab && candidate && i < tabs?.length) {
+                        if (candidate.getAttribute("role") === "tab" && !isDisabled(candidate)) {
+                            focusableTab = candidate;
+                        } else {
+                            candidate = candidate.nextElementSibling as HTMLElement;
+                        }
+                        i++;
+                    }
                 } else if (e.key === Keys.ARROW_UP || e.key === Keys.ARROW_LEFT) {
-                    focusableTab = activeElem.previousElementSibling as HTMLElement;
+                    let i = 0;
+                    let candidate = activeElem.previousElementSibling as HTMLElement;
+                    while (!focusableTab && candidate && i < tabs?.length) {
+                        if (candidate.getAttribute("role") === "tab" && !isDisabled(candidate)) {
+                            focusableTab = candidate;
+                        } else {
+                            candidate = candidate.previousElementSibling as HTMLElement;
+                        }
+                    }
+                    i++;
                 }
+
                 focusableTab?.focus();
+                if (e.shiftKey) focusableTab?.click();
             };
 
             list.addEventListener("keydown", handleKeyDown);
             return () => list.removeEventListener("keydown", handleKeyDown);
         }
-    }, []);
+    }, [tabs?.length]);
 
     return (
         <div
@@ -67,19 +96,20 @@ const Tabs = ({
                 ref={containerRef}
             >
                 {
-                    tabs?.map((tab: any) => {
+                    tabs?.map((tab) => {
                         const isSelected = tab.id === activeTab;
                         return (
                             <button
                                 className={classes(styles.tab_btn, btnClass)}
+                                role="tab"
+                                key={tab.id}
                                 ref={isSelected ? activeTabRef : null}
                                 onClick={() => onChange(tab.id)}
                                 aria-selected={isSelected}
-                                key={tab.id}
-                                role="tab"
                                 title={tab.title}
                                 aria-hidden={rest["aria-hidden"]}
                                 tabIndex={isSelected ? 0 : -1}
+                                disabled={tab.disabled}
                             >
                                 {tab.render?.()}
                                 {tab.label ? (

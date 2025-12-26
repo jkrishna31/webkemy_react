@@ -37,7 +37,6 @@ const SearchSelect = ({ options, title, keey, wrapperClass, selected, overlay = 
                 value: value,
             });
         } else {
-            console.log("------ handlePick ------", checked, keey, value);
         }
     };
 

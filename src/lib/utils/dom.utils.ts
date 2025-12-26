@@ -197,6 +197,9 @@ export function findNextCandidate(
   return nextItemIdx;
 }
 
-export function findTerminalDescendent() {
-
+export function isDisabled(element?: Element) {
+  if (!element) return false;
+  if (element.hasAttribute("disabled") && element.getAttribute("disabled") !== "false") return true;
+  if (element.hasAttribute("aria-disabled") && element.getAttribute("aria-disabled") !== "false") return true;
+  return false;
 }

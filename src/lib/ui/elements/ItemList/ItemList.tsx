@@ -45,12 +45,14 @@ const ItemList = ({
       let nextItemIdx;
       switch (e.key) {
         case Keys.ARROW_DOWN: {
+          e.preventDefault();
           const allItems = _ref.current?.querySelectorAll("[role='option']");
           nextItemIdx = findNextCandidate(allItems, { current: highlight?.index });
           if (nextItemIdx != undefined) onHighlightChange({ index: nextItemIdx, keyboard: true });
           break;
         }
         case Keys.ARROW_UP: {
+          e.preventDefault();
           const allItems = _ref.current?.querySelectorAll("[role='option']");
           nextItemIdx = findNextCandidate(allItems, { current: highlight?.index, dir: "prev" });
           if (nextItemIdx != undefined) onHighlightChange({ index: nextItemIdx, keyboard: true });

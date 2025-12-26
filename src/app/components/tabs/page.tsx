@@ -10,7 +10,7 @@ import styles from "./styles.module.scss";
 const tabs = [
   { id: "1", label: "Tab Item 1" },
   { id: "2", label: "Tab Item 2" },
-  { id: "3", label: "Tab Item 3" },
+  { id: "3", label: "Tab Item 3", disabled: true },
   { id: "4", label: "Tab Item 4" },
   { id: "5", label: "Tab Item 5" },
   { id: "6", label: "Tab Item 6" },
@@ -24,7 +24,7 @@ const Page = () => {
 
   return (
     <main className={styles.main}>
-      <PageSetup pageKey="tablist" />
+      <PageSetup pageKey="tabs" />
 
       <Tabs
         tabs={tabs} activeTab={activeTab} onChange={setActiveTab}

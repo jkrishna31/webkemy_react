@@ -4,6 +4,7 @@ import React, { ComponentProps, ElementType, ReactNode, useEffect, useRef, useSt
 
 import { TItem } from "@/lib/ui/elements/Item";
 import { Popover } from "@/lib/ui/elements/Popover";
+import { isMobileDevice } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Menu.module.scss";
@@ -29,7 +30,7 @@ const Menu = <T extends ElementType>({
 
   useEffect(() => {
     const menuElem = menuRef.current;
-    if (!menuElem || !minimized) return;
+    if (!menuElem || !minimized || isMobileDevice()) return;
 
     const handlePointerMove = (e: PointerEvent) => {
       requestAnimationFrame(() => {

@@ -58,11 +58,9 @@ export const readClipboard = (textOnly?: boolean) => {
     return null;
 
     // for (let item of contents) {
-    //     console.log('Types for this item: ', item.types);
     //     if (item.types.includes('text/html')) {
     //         let blob = await item.getType('text/html');
     //         let html = await blob.text();
-    //         console.log(html);
     //         $log.innerHTML += html.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
     //         $log.innerHTML += '<hr>';
     //     }
@@ -70,7 +68,6 @@ export const readClipboard = (textOnly?: boolean) => {
     //     if (item.types.includes('text/plain')) {
     //         let blob = await item.getType('text/plain');
     //         let text = await blob.text();
-    //         console.log(text);
     //         $log.innerHTML += text.replaceAll('<', '&lt;').replaceAll('>', '&gt;');
     //         $log.innerHTML += '<hr>';
     //     }

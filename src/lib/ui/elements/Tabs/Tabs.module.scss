@@ -51,6 +51,10 @@
         background-color: var(--bg-t);
         color: var(--fg-p);
     }
+
+    &:disabled {
+        opacity: .5;
+    }
 }
 
 .tab_btn[aria-selected="true"] {

@@ -2,6 +2,7 @@ import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Framer } from "@/lib/ui/elements/Framer";
+import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";
 
 import styles from "./styles.module.scss";
 
@@ -22,6 +23,11 @@ const page = () => {
   return (
     <main>
       <PageSetup pageKey="framer" />
+
+      <div className="flex flex-col items-center justify-center gap-[1rem]">
+        <TriangleWarningIcon />
+        <p>{"Under Construction!"}</p>
+      </div>
 
       <Framer className={styles.container}>
         <div data-frame='prev'></div>

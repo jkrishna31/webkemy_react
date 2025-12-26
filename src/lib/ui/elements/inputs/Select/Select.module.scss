@@ -51,7 +51,7 @@
     width: 100%;
     max-height: 26rem;
     overflow: auto;
-    padding: .4rem;
+    padding-inline: .4rem;
     @include scrollbar_y(.8rem);
 }
 
@@ -69,6 +69,10 @@
     display: grid;
     gap: .2rem;
     padding-inline: .8rem;
+}
+
+.options {
+    padding-block: .4rem;
 }
 
 

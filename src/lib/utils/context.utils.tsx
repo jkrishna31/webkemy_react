@@ -23,9 +23,9 @@ function createDebugProxy(contextValue: any, contextName: string) {
         return new Proxy(value, {
           apply(fn, thisArg, args) {
             console.group(`[${contextName}] Accessing: ${String(prop)}`);
-            console.log("Arguments:", args);
+            // console.log("Arguments:", args);
             const result = fn.apply(thisArg, args);
-            console.log("Result:", result);
+            // console.log("Result:", result);
             console.groupEnd();
             return result;
           }
