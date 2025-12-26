@@ -235,6 +235,12 @@ export const menuItems = [
                 icon: <PanelLeftIcon />,
             },
             {
+                key: "dropdown",
+                href: "/components/dropdown",
+                primary: "Dropdown",
+                icon: <PopoverLeftIcon />,
+            },
+            {
                 key: "modal",
                 href: "/components/modal",
                 primary: "Modal",

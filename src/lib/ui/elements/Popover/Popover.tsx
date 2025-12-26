@@ -12,7 +12,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Popover.module.scss";
 
 export interface PopoverProps extends ComponentProps<"div"> {
-  anchor: HTMLElement;
+  anchor?: HTMLElement;
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   isTooltip?: boolean;
@@ -53,9 +53,9 @@ const Popover = ({
 
   const updatePopoverLayout = useCallback(() => {
     const elem = popoverRef.current;
-    if (!elem) return;
+    if (!elem || !anchor) return;
     requestAnimationFrame(() => {
-      const anchorBoundingRect = anchor.getBoundingClientRect();
+      const anchorBoundingRect = anchor?.getBoundingClientRect();
       const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
       const { top, left } = calculateRenderPosition(
         anchorBoundingRect, popoverBoundingRect,
@@ -115,7 +115,7 @@ const Popover = ({
       const handleClick = (e: MouseEvent) => {
         const composedPath = e.composedPath();
 
-        if (!(popoverRef.current && composedPath.includes(popoverRef.current))) {
+        if (!(popoverRef.current && composedPath.includes(popoverRef.current)) && !composedPath.includes(anchor)) {
           onClose?.();
         }
       };

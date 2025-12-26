@@ -1,0 +1,69 @@
+"use client";
+
+import React, { ComponentProps, ReactNode, useRef, useState } from "react";
+
+import { Button } from "@/lib/ui/elements/butttons";
+import { Popover } from "@/lib/ui/elements/Popover";
+import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
+import { classes } from "@/lib/utils/style.utils";
+
+import styles from "./Dropdown.module.scss";
+
+export interface DropdownProps extends ComponentProps<"div"> {
+  dropdown?: ReactNode;
+  placeholder?: ReactNode;
+  hintIcon?: ReactNode | null;
+}
+
+const Dropdown = ({
+  dropdown, hintIcon,
+  className, children,
+  ...restProps
+}: DropdownProps) => {
+  const [open, setOpen] = useState(false);
+
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const updateDropdownState = (isOpen?: boolean) => {
+    if (isOpen) setOpen(true);
+    else if (isOpen === false) setOpen(false);
+    else setOpen(!open);
+  };
+
+  return (
+    <div
+      className={classes(styles.wrapper, className)}
+    >
+      <Button
+        ref={triggerRef}
+        className={classes(styles.trigger, "trigger")}
+        onClick={() => updateDropdownState()}
+      >
+        {children}
+        {
+          hintIcon ?? (
+            hintIcon !== null ? (
+              <ExpandSolidIcon className={styles.hint_icon} />
+            ) : null
+          )
+        }
+      </Button>
+      {(open && !!triggerRef.current) && (
+        <Popover
+          anchor={triggerRef.current}
+          onClose={() => updateDropdownState(false)}
+          offset={6}
+          closeOnEsc
+          closeOnOutsideClick
+          adjustOnScroll
+          // useTransform={false}
+          className={styles.dropdown}
+        >
+          {dropdown}
+        </Popover>
+      )}
+    </div>
+  );
+};
+
+export default Dropdown;

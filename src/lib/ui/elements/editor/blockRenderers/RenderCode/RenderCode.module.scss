@@ -1,5 +1,3 @@
-@use '@/lib/ui/styles/mixins/scrollbar' as *;
-
 .code_wrapper {
     position: relative;
 
@@ -10,8 +8,7 @@
         overflow: auto;
         background-color: var(--bg-t);
         border-radius: .4rem;
-
-        @include scrollbar_x();
+        scrollbar-width: thin;
 
         pre {
             overflow-x: auto;

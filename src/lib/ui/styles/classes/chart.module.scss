@@ -1,9 +1,7 @@
-@use '@/lib/ui/styles/mixins/scrollbar' as *;
-
 .fig {
   overflow: auto;
   max-width: 100%;
-  @include scrollbar_x(.4rem);
+  scrollbar-width: thin;
 }
 
 .fit {

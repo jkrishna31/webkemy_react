@@ -1,5 +1,3 @@
-@use '@/lib/ui/styles/mixins/scrollbar' as *;
-
 .container {
     min-width: 30rem;
 }
@@ -98,7 +96,7 @@
         font-size: 1.4rem;
     }
 
-    @include scrollbar_y(1rem 0);
+    scrollbar-width: thin;
 }
 
 

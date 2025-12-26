@@ -1,4 +1,5 @@
 export const APPNAME = "WEBKEMY";
+export const SOURCE_CODE = "https://github.com/jkrishna31/webkemy_react";
 
 // ENVIRONMENT
 export const env = {

@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { ComponentProps, useState } from "react";
 
 import { SearchForm } from "@/components/common/forms";
-import { edges } from "@/constants/general.const";
+import { edges, SOURCE_CODE } from "@/constants/general.const";
 import { useAppMenu, useLayoutActions, useModalActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Header } from "@/lib/ui/elements/Header";
@@ -95,7 +95,7 @@ const AppHeader = ({
                         </Link>
                         <Avatar<"a">
                             as="a"
-                            href="https://github.com/jkrishna31/webkemy_react" target="_blank"
+                            href={SOURCE_CODE} target="_blank"
                             title="Source Code" aria-label="write"
                             className={styles.source_code}
                         >

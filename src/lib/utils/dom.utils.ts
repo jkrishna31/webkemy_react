@@ -6,10 +6,11 @@ export const calculateRenderPosition = (
   anchorBoundingRect: DOMRect,
   targetBoundingRect: DOMRect,
   options: {
-    placement: Exclude<LayoutPosition, "center">
-    alignment: LayoutPosition
-    offset: number
-    overlap?: boolean
+    placement: Exclude<LayoutPosition, "center">;
+    alignment: LayoutPosition;
+    offset: number;
+    overlap?: boolean | "prefer";
+
   }
 ) => {
   const { placement, alignment, offset = 8, overlap } = options;

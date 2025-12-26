@@ -20,13 +20,13 @@
   &::-webkit-scrollbar-thumb {
     // border: .1rem solid var(--bg-scrollbar-thumb);
     background-color: var(--bg-scrollbar-thumb);
-    border-radius: 6px;
+    border-radius: .6rem;
   }
 }
 
 @mixin scrollbar_y($mBlock: 0) {
   &::-webkit-scrollbar {
-    width: .1rem;
+    width: .6rem;
   }
 
   &::-webkit-scrollbar-track {
@@ -35,13 +35,15 @@
     }
 
     // box-shadow: inset 0 0 6px var(--gray-5);
-    background-color: var(--bg-scrollbar-track);
-    border-radius: 6px;
+    background-color: transparent;
+    width: .6rem;
+    border-radius: var(--br-pill);
   }
 
   &::-webkit-scrollbar-thumb {
+    // width: .6rem;
     background-color: var(--bg-scrollbar-thumb);
-    border-radius: 6px;
+    border-radius: var(--br-pill);
   }
 }
 

@@ -1,12 +1,8 @@
-@use '@/lib/ui/styles/mixins/scrollbar' as *;
-
 .table_wrapper {
     width: 100%;
     overflow: auto;
     position: relative;
-    // max-height: 26rem;
-
-    @include scrollbar_x();
+    scrollbar-width: thin;
 }
 
 .data_table {
