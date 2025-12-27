@@ -4,7 +4,7 @@ import React, { ComponentProps, useMemo, useRef, useState } from "react";
 
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
-import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { RippleLoader } from "@/lib/ui/elements/loaders";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
@@ -99,27 +99,26 @@ const AudioPlayer = ({
             aria-label="Seek"
           />
         </div>
-        <GeneralDropdown
-          value={`${pace}x`}
-          dropdownContent={
+        <Dropdown
+          dropdown={
             <PaceControl pace={pace} updatePace={updatePace} />
           }
-          ddClass={styles.speed_dropdown}
-          btnClass={styles.speed_btn}
-          noIcon
-          xPos="right"
-        />
-        <GeneralDropdown
-          dropdownContent={
+          hintIcon={null}
+          triggerClass={styles.speed_btn}
+          dropdownClass={styles.speed_dropdown}
+        >
+          {pace}{"x"}
+        </Dropdown>
+        <Dropdown
+          dropdown={
             <VolumeControl mute={isMute} setMute={setIsMute} volume={volume} updateVolume={updateVolume} />
           }
-          ddClass={styles.vol_dropdown}
-          btnClass={styles.mute_btn}
-          noIcon
-          xPos="right"
+          triggerClass={styles.mute_btn}
+          dropdownClass={styles.vol_dropdown}
+          hintIcon={null}
         >
           {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
-        </GeneralDropdown>
+        </Dropdown>
       </div>
     </div>
   );

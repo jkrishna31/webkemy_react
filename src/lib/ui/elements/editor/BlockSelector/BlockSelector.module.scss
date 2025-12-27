@@ -1,11 +1,9 @@
 .wrapper {
-    position: relative;
-    width: auto;
     display: flex;
 
     .selector {
-        height: 3rem;
         width: 3rem;
+        min-height: 3rem;
         border-radius: 4rem;
         background: var(--fg-p-alt);
         color: var(--bg-p);
@@ -22,37 +20,29 @@
         height: 2.2rem;
         stroke-width: .2rem;
     }
+}
 
-    .dropdown {
-        padding-block: .8rem;
-    }
+.tools_list {
+    min-width: 24rem;
+    max-height: 46rem;
+    overflow: auto;
+    overscroll-behavior-y: contain;
 
-    .tools_list {
-        overflow: auto;
-        overscroll-behavior-y: contain;
-        width: 100%;
-        min-width: 24rem;
-        max-height: 42rem;
+    display: flex;
+    flex-direction: column;
 
-        padding-inline: .4rem;
+    border-radius: .6rem;
+    background-color: var(--bg-s);
+    scrollbar-width: thin;
+}
 
-        display: flex;
-        flex-direction: column;
+.list {
+    display: grid;
+    gap: .2rem;
+}
 
-        border-radius: .6rem;
-        background-color: var(--bg-s);
-        scrollbar-width: thin;
-
-        & :global(.menu_item) {
-            padding-block: .7rem;
-        }
-    }
-
-    .list {
-        display: grid;
-        gap: .2rem;
-        padding-inline: .8rem;
-    }
+.group {
+    background-color: var(--bg-s);
 }
 
 

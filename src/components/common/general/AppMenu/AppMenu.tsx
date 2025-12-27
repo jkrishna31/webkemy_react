@@ -41,6 +41,7 @@ import MenuCollapseIcon from "@/lib/ui/svgs/icons/MenuCollapseIcon";
 import MessagesIcon from "@/lib/ui/svgs/icons/MessagesIcon";
 import NotificationRemoveIcon from "@/lib/ui/svgs/icons/NotificationRemoveIcon";
 import PanelLeftIcon from "@/lib/ui/svgs/icons/PanelLeftIcon";
+import PanelTopIcon from "@/lib/ui/svgs/icons/PanelTopIcon";
 import PieChartIcon from "@/lib/ui/svgs/icons/PieChartIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
 import PopoverLeftIcon from "@/lib/ui/svgs/icons/PopoverLeftIcon";
@@ -238,7 +239,7 @@ export const menuItems = [
                 key: "dropdown",
                 href: "/components/dropdown",
                 primary: "Dropdown",
-                icon: <PopoverLeftIcon />,
+                icon: <PanelTopIcon />,
             },
             {
                 key: "modal",

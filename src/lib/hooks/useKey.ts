@@ -24,7 +24,7 @@ export function useKey(
       };
       window.addEventListener(type, keyDownHandler, options);
       return () => {
-        window.removeEventListener(type, keyDownHandler);
+        window.removeEventListener(type, keyDownHandler, options);
       };
     }
   }, [filterKeys, options, type]);

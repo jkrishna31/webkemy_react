@@ -42,8 +42,15 @@
   width: 4rem;
   height: 4rem;
   border-radius: 50%;
+  background: transparent;
+  justify-content: center;
   margin-left: 1rem;
+  padding: .4rem;
   color: var(--fg-s);
+
+  &:hover {
+    color: var(--fg-p);
+  }
 }
 
 .year_input {
@@ -58,5 +65,10 @@
 @media screen and (max-width: 700px) {
   .container {
     justify-content: center;
+  }
+
+  .more_btn svg {
+    width: 2rem;
+    height: 2rem;
   }
 }

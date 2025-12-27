@@ -47,6 +47,7 @@ import LineHeightIcon from "@/lib/ui/svgs/icons/LineHeightIcon";
 import LineThroughIcon from "@/lib/ui/svgs/icons/LineThroughIcon";
 import MentionIcon from "@/lib/ui/svgs/icons/MentionIcon";
 import OrderedListIcon from "@/lib/ui/svgs/icons/OrderedListIcon";
+import PanelTopCloseIcon from "@/lib/ui/svgs/icons/PanelTopCloseIcon";
 import PilcrowIcon from "@/lib/ui/svgs/icons/PilcrowIcon";
 import RedoIcon from "@/lib/ui/svgs/icons/RedoIcon";
 import SparklesIcon from "@/lib/ui/svgs/icons/SparklesIcon";
@@ -60,7 +61,6 @@ import TextFormattingRemoveIcon from "@/lib/ui/svgs/icons/TextFormattingRemoveIc
 import TextIcon from "@/lib/ui/svgs/icons/TextIcon";
 import TextOutlineIcon from "@/lib/ui/svgs/icons/TextOutlineIcon";
 import TextSizeIcon from "@/lib/ui/svgs/icons/TextSizeIcon";
-import TopSidebarCloseIcon from "@/lib/ui/svgs/icons/TopSidebarCloseIcon";
 import UnderlineIcon from "@/lib/ui/svgs/icons/UnderlineIcon";
 import UndoIcon from "@/lib/ui/svgs/icons/UndoIcon";
 import UnorderedListIcon from "@/lib/ui/svgs/icons/UnorderedListIcon";
@@ -121,7 +121,7 @@ const blocks = [
       },
       {
         key: editorBlocks.COLLAPSIBLE, primary: "Collapsible",
-        icon: <TopSidebarCloseIcon />
+        icon: <PanelTopCloseIcon />
       },
       {
         key: editorBlocks.DIVIDER, primary: "Divider",
@@ -380,7 +380,7 @@ const convertTools = [
     },
     {
       name: "Collapsible", key: editorBlocks.COLLAPSIBLE,
-      render: <TopSidebarCloseIcon className={styles.icon} />,
+      render: <PanelTopCloseIcon className={styles.icon} />,
     },
     {
       name: "Quote", key: editorBlocks.QUOTE,
@@ -554,7 +554,7 @@ const Page = () => {
                 //     />
                 //     <Button
                 //         className={styles.tool_btn}
-                //         icon={<TopSidebarCloseIcon className={styles.tool_icon} />}
+                //         icon={<PanelTopCloseIcon className={styles.tool_icon} />}
                 //     />
                 //     <Button
                 //         className={styles.tool_btn}

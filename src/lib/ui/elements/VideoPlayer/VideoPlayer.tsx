@@ -2,15 +2,17 @@
 
 import React, { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
 
-import { PageMore } from "@/components/common/general";
 import { useToastActions } from "@/data/stores";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
-import { GeneralDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import { RippleLoader } from "@/lib/ui/elements/loaders";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
 import { VolumeControl } from "@/lib/ui/elements/VolumeControl";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import FastForwardIcon from "@/lib/ui/svgs/icons/FastForwardIcon";
 import PauseIcon from "@/lib/ui/svgs/icons/PauseIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
@@ -247,35 +249,44 @@ const VideoPlayer = ({
               <span className={styles.separator}>{"/"}</span>
               <p className={styles.total_duration}>{durationParts ? getFormattedTime(durationParts) : "--:--"}</p>
             </button>
-            <GeneralDropdown
-              value={`${pace}x`}
-              dropdownContent={
+            <Dropdown
+              dropdown={
                 <PaceControl pace={pace} updatePace={updatePace} />
               }
-              ddClass={styles.speed_dropdown}
-              btnClass={styles.pace_btn}
-              noIcon
-              xPos="right"
-            />
-            <GeneralDropdown
-              dropdownContent={
+              hintIcon={null}
+              triggerClass={styles.pace_btn}
+              dropdownClass={styles.speed_dropdown}
+            >
+              {pace}{"x"}
+            </Dropdown>
+            <Dropdown
+              dropdown={
                 <VolumeControl
                   mute={isMute} volume={volume}
                   setMute={setIsMute} updateVolume={updateVolume}
                 />
               }
-              ddClass={styles.speed_dropdown}
-              btnClass={styles.vol_btn}
-              noIcon
-              xPos="right"
+              hintIcon={null}
+              triggerClass={styles.vol_btn}
+              dropdownClass={styles.speed_dropdown}
             >
               {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
-            </GeneralDropdown>
-            <PageMore
-              options={playerMoreOptions}
-              onSelect={() => { }}
-              btnClass={styles.fullscreen_btn}
-            />
+            </Dropdown>
+            <Dropdown
+              dropdown={
+                <ItemList>
+                  {
+                    playerMoreOptions.map(item => (
+                      <Item<"button"> as="button" key={item.label} primary={item.label} onClick={item.onClick} disabled={item.disabled} />
+                    ))
+                  }
+                </ItemList>
+              }
+              triggerClass={styles.more_controls}
+              hintIcon={null}
+            >
+              <EllipsisHIcon />
+            </Dropdown>
           </div>
         </div>
       </div>

@@ -66,10 +66,6 @@ const SelectDropdown = ({
         return selectedOp?.data ? `${selectedOp.data} ${selectedOp.label}` : selectedOp?.label;
     };
 
-    // useEffect(() => {
-    //     setListToShow(options);
-    // }, [options]);
-
     useEffect(() => {
         const newListToShow = options?.filter(item => (
             item.label.toLowerCase().includes(query.toLowerCase())

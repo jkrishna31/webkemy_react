@@ -53,8 +53,6 @@ const Dropdown = ({
 
   const handleKeyDown = useCallback((e: any) => {
     if (e.key === "Escape") {
-      // e.preventDefault();
-      // e.stopPropagation();
       e.stopImmediatePropagation();
       onClose?.();
     }
@@ -88,8 +86,6 @@ const Dropdown = ({
       setY(rect.top > height - rect.top ? "top" : "bottom");
     }
   }, [dropdown]);
-
-  // TODO: use Popover (with position: absolute, and transform with top & left value)
 
   return (
     <div ref={ref} className={classes(styles.wrapper, className)} {...props}>

@@ -98,7 +98,7 @@ const Page = () => {
           className={styles.input}
           aria-label="Select"
           placeholder="Select (single)"
-          styles={{ root: { marginBottom: "2rem" } }}
+          style={{ marginBottom: "2rem" }}
         />
         <Select
           defaultValue="5"

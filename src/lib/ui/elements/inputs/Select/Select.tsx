@@ -1,13 +1,13 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useEffect, useMemo, useState } from "react";
+import React, { ComponentProps, CSSProperties, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
-import { Dropdown } from "@/lib/ui/elements/dropdowns";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
 import { ItemList } from "@/lib/ui/elements/ItemList";
+import { Popover } from "@/lib/ui/elements/Popover";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
@@ -44,22 +44,21 @@ export interface SelectProps extends ComponentProps<"select"> {
     clearable?: boolean;
     searchable?: boolean;
     placeholder?: string;
-    rootClassName?: string;
-    styles?: {
-        root?: React.CSSProperties;
-    }
+    style?: CSSProperties;
 }
 
 const Select = ({
     variant = "select",
     defaultValue, value, onChange,
     label, options, showDopdown, labelKey = "label", clearable, searchable, multiple, placeholder,
-    id, className, rootClassName, styles: stylesFromProp,
+    id, className, style,
     ...props
 }: SelectProps) => {
     const [dd, setDd] = useState(false);
     const [query, setQuery] = useState("");
     const [highlighted, setHighlighted] = useState<{ index?: number, keyboard?: boolean } | undefined>();
+
+    const anchorRef = useRef<HTMLDivElement>(null);
 
     const filteredOptions = useMemo(() => {
         if (!query?.trim) return options as IndexedOption[];
@@ -172,29 +171,8 @@ const Select = ({
     };
 
     return (
-        <Dropdown
-            className={classes(styles.wrapper, rootClassName)}
-            open={dd}
-            onClose={() => {
-                setDd(false);
-            }}
-            isCustomSelector
-            dropdownClass={styles.dd_list}
-            noOverlap
-            dropdown={
-                <ItemList
-                    role="listbox"
-                    highlight={highlighted}
-                    onHighlightChange={setHighlighted}
-                    onKeyDown={handleKeyDown}
-                    className={styles.options}
-                >
-                    {renderOptions(filteredOptions)}
-                </ItemList>
-            }
-            {...({ style: stylesFromProp?.root ?? {} })}
-        >
-            <InputFieldWrapper className={className} onClick={() => setDd(true)}>
+        <>
+            <InputFieldWrapper ref={anchorRef} className={className} onClick={() => setDd(true)} style={style}>
                 <input
                     {...props as ComponentProps<"input">}
                     placeholder={placeholder}
@@ -239,7 +217,29 @@ const Select = ({
                     <ExpandSolidIcon className={styles.down_icon} />
                 </button>
             </InputFieldWrapper>
-        </Dropdown>
+            {(dd && !!anchorRef.current) && (
+                <Popover
+                    anchor={anchorRef.current}
+                    onClose={() => setDd(false)}
+                    offset={6}
+                    closeOnEsc="capture"
+                    closeOnOutsideClick
+                    adjustOnScroll
+                    className={styles.dropdown}
+                >
+                    <ItemList
+                        role="listbox"
+                        highlight={highlighted}
+                        onHighlightChange={setHighlighted}
+                        onKeyDown={handleKeyDown}
+                        className={styles.options}
+                    >
+                        {renderOptions(filteredOptions)}
+                    </ItemList>
+                </Popover>
+            )}
+        </>
+
     );
 };
 

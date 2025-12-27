@@ -67,19 +67,21 @@ const Popover = ({
 
       const computedStyle = getComputedStyle(elem);
 
-      if (computedStyle.transform === "none") elem.style.transform = "none";
-      else elem.style.transition = "transform .2s ease";
-
       if (maxHeight) elem.style.maxHeight = String(maxHeight);
       if (maxWidth) elem.style.maxWidth = String(maxWidth);
+      if (!overlap) elem.style.minWidth = `${anchorBoundingRect.width}px`;
 
-      if (useTransform) {
-        elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-      } else {
-        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-        elem.style.left = `${left}px`;
-        elem.style.top = `${top}px`;
-      }
+      if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
+
+      requestAnimationFrame(() => {
+        if (useTransform) {
+          elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        } else {
+          // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+          elem.style.left = `${left}px`;
+          elem.style.top = `${top}px`;
+        }
+      });
     });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
 
@@ -91,7 +93,8 @@ const Popover = ({
     return () => window.removeEventListener("resize", handleResize);
   }, [updatePopoverLayout]);
 
-  useKey(closeOnEsc ? () => {
+  useKey(closeOnEsc ? (e) => {
+    e.stopImmediatePropagation();
     onClose?.();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
@@ -108,12 +111,12 @@ const Popover = ({
         if ((isTooltip || closeOnScroll) && (e.target as HTMLElement).contains(anchor)) {
           onClose?.();
         }
-        if (adjustOnScroll) {
+        if (adjustOnScroll && !popoverRef.current?.contains(e.target as HTMLElement)) {
           updatePopoverLayout();
         }
       };
       window.addEventListener("scroll", handleScroll, { once: isTooltip || closeOnScroll, passive: true, capture: true });
-      return () => window.removeEventListener("scroll", handleScroll);
+      return () => window.removeEventListener("scroll", handleScroll, true);
     }
   }, [adjustOnScroll, anchor, closeOnScroll, isTooltip, onClose, updatePopoverLayout]);
 

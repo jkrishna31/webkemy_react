@@ -1,13 +1,16 @@
 import React, { ComponentProps, ReactNode } from "react";
 
-import { PageMore } from "@/components/common/general";
 import { months, monthsOrder } from "@/data/general/datetime";
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
-import { GeneralDropdown, SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
+import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { NumberInput } from "@/lib/ui/elements/inputs/NumberInput";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Tabs } from "@/lib/ui/elements/Tabs";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import { updateDatetime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -57,15 +60,15 @@ const CalendarHeader = ({
 
   const calendarMoreOpts = [
     {
-      label: "Toggle Start of Week", value: 0,
+      label: "Toggle Start of Week",
       onClick: () => setField("weekDayStart", Number(!weekDayStart)),
     },
     {
-      label: "Toggle Time Format", value: 1,
+      label: "Toggle Time Format",
       onClick: () => setField("timeFormat", timeFormat === "12h" ? "24h" : "12h"),
     },
     {
-      label: "Toggle Overlapping Days", value: 1,
+      label: "Toggle Overlapping Days",
       onClick: () => setField("showOutsideDays", !showOutsideDays),
     },
   ];
@@ -142,16 +145,16 @@ const CalendarHeader = ({
             />
           ) : null
         }
-        <GeneralDropdown
-          value={activeYear}
-          dropdownContent={
+        <Dropdown
+          dropdown={
             <NumberInput
               value={activeYear} onInput={e => setField("activeYear", Number((e.target as HTMLInputElement).value))}
               className={styles.year_input}
             />
           }
-          xPos={calendarMode === "year" ? "left" : "right"}
-        />
+        >
+          {activeYear}
+        </Dropdown>
         <button className={styles.ctrl_btn} onClick={() => handleDateControls(1)}>
           <ChevronRightIcon />
         </button>
@@ -164,11 +167,21 @@ const CalendarHeader = ({
           tabs={tabs}
           showScrollBtns={true}
         />
-        <PageMore
-          options={calendarMoreOpts}
-          onSelect={() => { }}
-          btnClass={styles.more_btn}
-        />
+        <Dropdown
+          dropdown={
+            <ItemList>
+              {
+                calendarMoreOpts.map(item => (
+                  <Item<"button"> as="button" key={item.label} primary={item.label} onClick={item.onClick} />
+                ))
+              }
+            </ItemList>
+          }
+          triggerClass={styles.more_btn}
+          hintIcon={null}
+        >
+          <EllipsisHIcon />
+        </Dropdown>
         {headerRight}
       </div>
       {children}

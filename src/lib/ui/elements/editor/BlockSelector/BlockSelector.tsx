@@ -1,45 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
-import { Dropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./BlockSelector.module.scss";
 
 const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listClass, ...props }: any) => {
-    const [listState, setListState] = useState<boolean>(false);
-
-    const openToolsList = () => {
-        setListState(true);
-    };
-
-    const closeToolsList = () => {
-        setListState(false);
-    };
-
-    const handleSelectorClick = () => {
-        setListState(!listState);
-    };
-
     return (
         <Dropdown
-            open={listState}
+            hintIcon={null}
             className={classes(styles.wrapper, wrapperClass)}
-            btnClass={classes(styles.selector, btnClass)}
-            dropdownClass={classes(styles.dropdown)}
-            onMouseEnter={openToolsList} onMouseLeave={closeToolsList}
-            onOpen={handleSelectorClick}
+            triggerClass={classes(styles.selector, btnClass)}
             dropdown={
-                <ul className={classes(styles.tools_list, "scroll_thin", listClass)}>
+                <ItemList className={classes(styles.tools_list, "scroll_thin", listClass)}>
                     {
                         blocks?.map((group: any) => (
                             <ItemGroup
                                 key={group.key}
-                                headerClass={group.className}
+                                headerClass={classes(styles.group, group.className)}
                                 group={group.group}
                             >
                                 <div className={styles.list}>
@@ -56,9 +40,8 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
                             </ItemGroup>
                         ))
                     }
-                </ul>
+                </ItemList>
             }
-            xPos="left"
         >
             <PlusIcon className={styles.plus_icon} />
         </Dropdown>

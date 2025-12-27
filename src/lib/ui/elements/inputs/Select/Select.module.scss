@@ -45,14 +45,6 @@
     }
 }
 
-.dd_list {
-    width: 100%;
-    max-height: 26rem;
-    overflow: auto;
-    padding-inline: .4rem;
-    scrollbar-width: thin;
-}
-
 .option .mark {
     width: 1.8rem;
     height: 1.8rem;
@@ -71,6 +63,19 @@
 
 .options {
     padding-block: .4rem;
+}
+
+.dropdown {
+    width: fit-content;
+    max-width: calc(100vw - 4rem);
+    overflow: auto;
+    background-color: var(--bg-s);
+    color: var(--fg-p);
+    border-radius: .6rem;
+    padding-inline: .4rem;
+    white-space: nowrap;
+    box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+    scrollbar-width: thin;
 }
 
 

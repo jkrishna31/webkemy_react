@@ -95,7 +95,7 @@
 
 .play_btn,
 .caption_btn,
-.fullscreen_btn,
+.more_controls,
 .pip_btn,
 .pace_btn,
 .vol_btn {
@@ -108,6 +108,10 @@
   &:hover {
     color: var(--fg-p);
   }
+}
+
+.more_controls {
+  justify-content: center;
 }
 
 .vol_btn svg {

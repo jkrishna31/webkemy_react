@@ -13,10 +13,12 @@ export interface DropdownProps extends ComponentProps<"div"> {
   dropdown?: ReactNode;
   placeholder?: ReactNode;
   hintIcon?: ReactNode | null;
+  triggerClass?: string;
+  dropdownClass?: string;
 }
 
 const Dropdown = ({
-  dropdown, hintIcon,
+  dropdown, hintIcon, triggerClass, dropdownClass,
   className, children,
   ...restProps
 }: DropdownProps) => {
@@ -36,7 +38,7 @@ const Dropdown = ({
     >
       <Button
         ref={triggerRef}
-        className={classes(styles.trigger, "trigger")}
+        className={classes(styles.trigger, triggerClass, "trigger")}
         onClick={() => updateDropdownState()}
       >
         {children}
@@ -56,8 +58,7 @@ const Dropdown = ({
           closeOnEsc
           closeOnOutsideClick
           adjustOnScroll
-          // useTransform={false}
-          className={styles.dropdown}
+          className={classes(styles.dropdown, dropdownClass)}
         >
           {dropdown}
         </Popover>
