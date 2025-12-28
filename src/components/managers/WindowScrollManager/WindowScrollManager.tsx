@@ -17,28 +17,26 @@ const WindowScrollManager = () => {
     if (!e.isTrusted) {
       return;
     }
-    requestAnimationFrame(() => {
-      const currScroll = window.scrollY + window.innerHeight;
-      const isBottom = (document.body.scrollHeight - currScroll) <= margin;
-      const isTop = window.scrollY === 0;
-      let dir = scrollDir;
-      const dy = lastScrollCoords.current - window.scrollY;
-      lastScrollCoords.current = Math.abs(window.scrollY);
-      if (dy >= 0) {
-        dir = edges.TOP;
-      } else if (dy < 0) {
-        dir = edges.BOTTOM;
-      }
-      if (isBottom && xEdge !== edges.BOTTOM) {
-        updateScrollStore("xEdge", edges.BOTTOM);
-      }
-      if (isTop && xEdge !== edges.TOP) {
-        updateScrollStore("xEdge", edges.TOP);
-      }
-      if (scrollDir !== dir) {
-        updateScrollStore("dir", dir);
-      }
-    });
+    const currScroll = window.scrollY + window.innerHeight;
+    const isBottom = (document.body.scrollHeight - currScroll) <= margin;
+    const isTop = window.scrollY === 0;
+    let dir = scrollDir;
+    const dy = lastScrollCoords.current - window.scrollY;
+    lastScrollCoords.current = Math.abs(window.scrollY);
+    if (dy >= 0) {
+      dir = edges.TOP;
+    } else if (dy < 0) {
+      dir = edges.BOTTOM;
+    }
+    if (isBottom && xEdge !== edges.BOTTOM) {
+      updateScrollStore("xEdge", edges.BOTTOM);
+    }
+    if (isTop && xEdge !== edges.TOP) {
+      updateScrollStore("xEdge", edges.TOP);
+    }
+    if (scrollDir !== dir) {
+      updateScrollStore("dir", dir);
+    }
   }, [scrollDir, updateScrollStore, margin, xEdge]);
 
 

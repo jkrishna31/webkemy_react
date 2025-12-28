@@ -13,10 +13,6 @@
   gap: .4rem;
 }
 
-.skintone_selector {
-  z-index: 2;
-}
-
 .skintone_btn {
   min-height: 4rem;
   min-width: 4rem;
@@ -28,6 +24,10 @@
   &:hover {
     background-color: var(--bg-t);
   }
+}
+
+.item {
+  padding: .8rem;
 }
 
 .search_input_wrapper {

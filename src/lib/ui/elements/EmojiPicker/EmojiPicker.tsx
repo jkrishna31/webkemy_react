@@ -10,9 +10,11 @@ import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { usePrevious } from "@/lib/hooks/usePrevious";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
-import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
 import { Tabs } from "@/lib/ui/elements/Tabs";
 import BulbIcon from "@/lib/ui/svgs/icons/BulbIcon";
@@ -272,15 +274,27 @@ const EmojiPicker = ({
             <SearchIcon className={styles.search_icon} />
           </button>
         </InputFieldWrapper>
-        <SelectDropdown
-          options={skinToneOptions}
-          selected={activeSkinTone}
-          onOptionSelect={(selected) => setActiveSkinTone(selected.value)}
-          noIcon
-          xPos="left"
-          btnClass={styles.skintone_btn}
-          wrapperClass={styles.skintone_selector}
-        />
+        <Dropdown
+          dropdown={
+            <ItemList>
+              {
+                skinToneOptions.map(item => (
+                  <Item
+                    key={item.value}
+                    primary={item.label}
+                    onClick={() => setActiveSkinTone(item.value)}
+                    selected={activeSkinTone === item.value}
+                    className={styles.item}
+                  />
+                ))
+              }
+            </ItemList>
+          }
+          hintIcon={null}
+          triggerClass={styles.skintone_btn}
+        >
+          {skinToneOptions.find(item => item.value === activeSkinTone)?.label}
+        </Dropdown>
       </div>
       <Tabs
         activeTab={query ? "" : activeCategory}

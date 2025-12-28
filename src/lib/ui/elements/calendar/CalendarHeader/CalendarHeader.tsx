@@ -3,7 +3,6 @@ import React, { ComponentProps, ReactNode } from "react";
 import { months, monthsOrder } from "@/data/general/datetime";
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
-import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
 import { NumberInput } from "@/lib/ui/elements/inputs/NumberInput";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
@@ -105,44 +104,72 @@ const CalendarHeader = ({
         </button>
         {
           calendarMode === "day" ? (
-            <SelectDropdown
-              selected={activeDay}
-              options={
-                Array.from({ length: daysInCurrentMonth }).map((_, idx: number) => ({
-                  label: String(idx + 1), value: idx + 1
-                }))
+            <Dropdown
+              dropdown={
+                <ItemList className={styles.dropdown_list}>
+                  {
+                    Array.from({ length: daysInCurrentMonth }).map((_, idx: number) => ({
+                      label: String(idx + 1), value: idx + 1
+                    })).map(item => (
+                      <Item
+                        key={item.value}
+                        primary={item.label}
+                        onClick={() => setField("activeDay", (item.value as number))}
+                        selected={item.value === activeDay}
+                      />
+                    ))
+                  }
+                </ItemList>
               }
-              onOptionSelect={(item) => setField("activeDay", (item.value as number) + 1)}
-              allowSearch
-              xPos="left"
-            />
+            >
+              {activeDay}
+            </Dropdown>
           ) : null
         }
         {
           calendarMode === "week" ? (
-            <SelectDropdown
-              selected={activeWeek}
-              options={
-                Array.from({ length: 6 }).map((_, idx: number) => ({
-                  label: `Week ${idx + 1}`, value: idx + 1
-                }))
+            <Dropdown
+              dropdown={
+                <ItemList className={styles.dropdown_list}>
+                  {
+                    Array.from({ length: 6 }).map((_, idx: number) => ({
+                      label: `Week ${idx + 1}`, value: idx + 1
+                    })).map(item => (
+                      <Item
+                        key={item.value}
+                        primary={item.label}
+                        onClick={() => setField("activeWeek", item.value as number)}
+                        selected={item.value === activeWeek}
+                      />
+                    ))
+                  }
+                </ItemList>
               }
-              onOptionSelect={(item) => setField("activeWeek", item.value as number)}
-              allowSearch
-              xPos="left"
-            />
+            >
+              {"Week "}{activeWeek}
+            </Dropdown>
           ) : null
         }
         {
           calendarMode !== "year" ? (
-            <SelectDropdown
-              selected={activeMonth}
-              transformSelected={op => op?.label.slice(0, 3)}
-              options={monthsOptions}
-              onOptionSelect={(item) => setField("activeMonth", item.value)}
-              allowSearch
-              xPos="left"
-            />
+            <Dropdown
+              dropdown={
+                <ItemList className={styles.dropdown_list}>
+                  {
+                    monthsOptions.map(item => (
+                      <Item
+                        key={item.value}
+                        primary={item.label}
+                        onClick={() => setField("activeMonth", item.value)}
+                        selected={item.value === activeMonth}
+                      />
+                    ))
+                  }
+                </ItemList>
+              }
+            >
+              {monthsOptions.find(item => item.value === activeMonth)?.label?.slice(0, 3)}
+            </Dropdown>
           ) : null
         }
         <Dropdown

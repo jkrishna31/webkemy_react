@@ -24,12 +24,12 @@ const SearchForm = ({
     xPos,
     ...props
 }: any) => {
-    const anchorRef = useRef<HTMLFormElement>(null);
+    const anchorRef = useRef<HTMLDivElement>(null);
 
     return (
         <>
-            <form ref={anchorRef} className={classes(styles.form, formClass)} role="search" {...props}>
-                <InputFieldWrapper className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
+            <form className={classes(styles.form, formClass)} role="search" {...props}>
+                <InputFieldWrapper ref={anchorRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
                     <GeneralInput
                         spellCheck="false" id="query"
                         onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
@@ -37,7 +37,6 @@ const SearchForm = ({
                         placeholder={placeholder}
                         className={classes(styles.input, inputClass)}
                         autoComplete="off"
-                    // aria-label={placeholder}
                     />
                     {
                         allowClear ? (
@@ -57,7 +56,8 @@ const SearchForm = ({
                 {(!!searchDd && !!anchorRef.current) && (
                     <Popover
                         anchor={anchorRef.current}
-                        placement="bottom" alignment="right"
+                        placement="bottom"
+                        alignment="right"
                         className={styles.dropdown}
                         adjustOnScroll
                         closeOnEsc="capture"

@@ -110,6 +110,7 @@
 
     &[aria-orientation="vertical"] {
       --dir: bottom;
+      touch-action: none;
 
       &[dir="rtl"] {
         --dir: top;

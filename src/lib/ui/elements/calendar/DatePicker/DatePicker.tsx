@@ -5,7 +5,9 @@ import React, { ComponentProps, useEffect, useState } from "react";
 import { months, monthsOrder } from "@/data/general/datetime";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MonthView } from "@/lib/ui/elements/calendar/MonthView";
-import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import ChevronsRightIcon from "@/lib/ui/svgs/icons/ChevronsRightIcon";
@@ -117,21 +119,42 @@ const DatePicker = ({
           <ChevronLeftIcon />
         </Button>
         <div>
-          <SelectDropdown
-            selected={activeMonth - 1}
-            onOptionSelect={(item) => updateDateField(item.value as number, "month")}
-            transformSelected={op => op?.label.slice(0, 3)}
-            options={monthsOptions}
-            allowSearch
-            xPos="left"
-          />
-          <SelectDropdown
-            selected={activeYear}
-            onOptionSelect={(item) => updateDateField(item.value as number, "year")}
-            options={Array.from({ length: 10 }).map((_, idx: number) => ({ label: `${2020 + idx}`, value: 2020 + idx }))}
-            allowSearch
-            xPos="left"
-          />
+          <Dropdown
+            dropdown={
+              <ItemList>
+                {
+                  monthsOptions.map(item => (
+                    <Item
+                      key={item.value}
+                      primary={item.label}
+                      onClick={() => updateDateField(item.value as number, "month")}
+                      selected={item.value === activeMonth - 1}
+                    />
+                  ))
+                }
+              </ItemList>
+            }
+          >
+            {monthsOptions.find(item => item.value === activeMonth - 1)?.label?.slice(0, 3)}
+          </Dropdown>
+          <Dropdown
+            dropdown={
+              <ItemList>
+                {
+                  Array.from({ length: 10 }).map((_, idx: number) => ({ label: `${2020 + idx}`, value: 2020 + idx })).map(item => (
+                    <Item
+                      key={item.value}
+                      primary={item.label}
+                      selected={item.value === activeYear}
+                      onClick={() => updateDateField(item.value as number, "year")}
+                    />
+                  ))
+                }
+              </ItemList>
+            }
+          >
+            {activeYear}
+          </Dropdown>
         </div>
         <Button
           variant="tertiary" className={styles.nav_btn}

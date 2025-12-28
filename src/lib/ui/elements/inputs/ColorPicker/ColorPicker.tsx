@@ -2,11 +2,13 @@
 
 import React, { CSSProperties, useState } from "react";
 
-import { SelectDropdown } from "@/lib/ui/elements/dropdowns";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { Slider2D } from "@/lib/ui/elements/inputs/Slider2D";
+import { Item } from "@/lib/ui/elements/Item";
+import { ItemList } from "@/lib/ui/elements/ItemList";
 import { ColorFormat, hsvToHex, hsvToHsl, hsvToRgb, stringifyColor } from "@/lib/utils/color.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -90,12 +92,26 @@ const ColorPicker = () => {
 
       <div className={styles.result}>
         <div className={styles.active_color}></div>
-        <SelectDropdown
-          selected={selectedFormat}
-          options={colorFormatOpts}
-          onOptionSelect={(option) => setSelectedFormat(option.value as ColorFormat)}
-          btnClass={styles.format_selector}
-        />
+        <Dropdown
+          dropdown={
+            <ItemList>
+              {
+                colorFormatOpts.map(item => (
+                  <Item
+                    key={item.value}
+                    primary={item.label}
+                    onClick={() => setSelectedFormat(item.value as ColorFormat)}
+                    selected={selectedFormat === item.value}
+                    disabled={item.disabled}
+                  />
+                ))
+              }
+            </ItemList>
+          }
+          triggerClass={styles.format_selector}
+        >
+          {colorFormatOpts.find(item => item.value === selectedFormat)?.label}
+        </Dropdown>
         <InputFieldWrapper>
           <GeneralInput
             value={stringifyColor(colorInSelectedFormat, selectedFormat, true)}
