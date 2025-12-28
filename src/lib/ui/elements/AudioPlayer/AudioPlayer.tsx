@@ -106,6 +106,7 @@ const AudioPlayer = ({
           hintIcon={null}
           triggerClass={styles.speed_btn}
           dropdownClass={styles.speed_dropdown}
+          alignment="right"
         >
           {pace}{"x"}
         </Dropdown>
@@ -116,6 +117,7 @@ const AudioPlayer = ({
           triggerClass={styles.mute_btn}
           dropdownClass={styles.vol_dropdown}
           hintIcon={null}
+          alignment="right"
         >
           {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
         </Dropdown>

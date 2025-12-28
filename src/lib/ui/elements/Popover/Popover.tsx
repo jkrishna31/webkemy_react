@@ -58,6 +58,9 @@ const Popover = ({
     if (!elem || !anchor) return;
     requestAnimationFrame(() => {
       const anchorBoundingRect = anchor?.getBoundingClientRect();
+
+      elem.style.minWidth = `${anchorBoundingRect.width}px`;
+
       const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
 
       const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
@@ -69,7 +72,6 @@ const Popover = ({
 
       if (maxHeight) elem.style.maxHeight = String(maxHeight);
       if (maxWidth) elem.style.maxWidth = String(maxWidth);
-      if (!overlap) elem.style.minWidth = `${anchorBoundingRect.width}px`;
 
       if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
 

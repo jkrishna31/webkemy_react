@@ -21,7 +21,7 @@ const TextArea = ({
     const taRef = useRef<HTMLTextAreaElement>(null);
 
     const resize = useCallback((elem: HTMLTextAreaElement) => {
-        if (CSS.supports && CSS.supports("field-sizing", "content")) return;
+        // if (CSS.supports && CSS.supports("field-sizing", "content")) return;
         // handles content-sizing: content-box (subtract padding and border width from scrollHeight)
         if (taRef.current && autoResize) {
             taRef.current.style.height = "auto";

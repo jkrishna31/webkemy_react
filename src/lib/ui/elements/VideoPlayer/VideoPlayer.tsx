@@ -256,6 +256,7 @@ const VideoPlayer = ({
               hintIcon={null}
               triggerClass={styles.pace_btn}
               dropdownClass={styles.speed_dropdown}
+              alignment="right"
             >
               {pace}{"x"}
             </Dropdown>
@@ -269,6 +270,7 @@ const VideoPlayer = ({
               hintIcon={null}
               triggerClass={styles.vol_btn}
               dropdownClass={styles.speed_dropdown}
+              alignment="right"
             >
               {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
             </Dropdown>
@@ -282,8 +284,9 @@ const VideoPlayer = ({
                   }
                 </ItemList>
               }
-              triggerClass={styles.more_controls}
               hintIcon={null}
+              triggerClass={styles.more_controls}
+              alignment="right"
             >
               <EllipsisHIcon />
             </Dropdown>

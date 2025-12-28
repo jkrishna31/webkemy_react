@@ -5,6 +5,7 @@ import React, { ComponentProps, ReactNode, useRef, useState } from "react";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
+import { LayoutPosition } from "@/lib/utils/dom.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Dropdown.module.scss";
@@ -15,10 +16,12 @@ export interface DropdownProps extends ComponentProps<"div"> {
   hintIcon?: ReactNode | null;
   triggerClass?: string;
   dropdownClass?: string;
+  placement?: Exclude<LayoutPosition, "center">;
+  alignment?: LayoutPosition;
 }
 
 const Dropdown = ({
-  dropdown, hintIcon, triggerClass, dropdownClass,
+  dropdown, hintIcon, triggerClass, dropdownClass, placement, alignment,
   className, children,
   ...restProps
 }: DropdownProps) => {
@@ -59,6 +62,8 @@ const Dropdown = ({
           closeOnOutsideClick
           adjustOnScroll
           className={classes(styles.dropdown, dropdownClass)}
+          alignment={alignment}
+          placement={placement}
         >
           {dropdown}
         </Popover>
