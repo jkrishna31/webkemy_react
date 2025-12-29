@@ -54,7 +54,7 @@ const Select = ({
     id, className, style,
     ...props
 }: SelectProps) => {
-    const [dd, setDd] = useState(false);
+    const [open, setOpen] = useState(false);
     const [query, setQuery] = useState("");
     const [highlighted, setHighlighted] = useState<{ index?: number, keyboard?: boolean } | undefined>();
 
@@ -107,7 +107,7 @@ const Select = ({
             } else {
                 if (selectedOption) onChange?.({ target: { value: selectedOption.value } } as any);
             }
-            if (!multiple) setDd(false);
+            if (!multiple) setOpen(false);
         }
     };
 
@@ -172,7 +172,7 @@ const Select = ({
 
     return (
         <>
-            <InputFieldWrapper ref={anchorRef} className={className} onClick={() => setDd(true)} style={style}>
+            <InputFieldWrapper ref={anchorRef} className={className} onClick={() => setOpen(true)} style={style}>
                 <input
                     {...props as ComponentProps<"input">}
                     placeholder={placeholder}
@@ -182,7 +182,7 @@ const Select = ({
                     autoComplete="off"
                     role="combobox"
                     aria-controls=""
-                    aria-expanded={dd}
+                    aria-expanded={open}
                     aria-haspopup={true}
                     value={query}
                     onInput={(e: any) => setQuery(e.target.value)}
@@ -204,23 +204,23 @@ const Select = ({
                     ) : null
                 }
                 <button
-                    aria-pressed={dd}
+                    aria-pressed={open}
                     className={styles.dd_btn}
                     onClick={(e) => {
                         e.stopPropagation();
-                        setDd(!dd);
+                        setOpen(!open);
                     }}
                     type="button"
                     title="Options Dropdown"
-                    aria-label={dd ? "Open Options" : "Close Options"}
+                    aria-label={open ? "Open Options" : "Close Options"}
                 >
                     <ExpandSolidIcon className={styles.down_icon} />
                 </button>
             </InputFieldWrapper>
-            {(dd && !!anchorRef.current) && (
+            {(open && !!anchorRef.current) && (
                 <Popover
                     anchor={anchorRef.current}
-                    onClose={() => setDd(false)}
+                    onClose={() => setOpen(false)}
                     offset={6}
                     closeOnEsc="capture"
                     closeOnOutsideClick

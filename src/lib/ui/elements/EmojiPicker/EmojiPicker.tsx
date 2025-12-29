@@ -72,6 +72,7 @@ const EmojiPicker = ({
   className, children,
   ...restProps
 }: EmojiPickerProps) => {
+  const [openSkinTonePicker, setOpenSkinTonePicker] = useState(false);
   const [query, setQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("");
   const [activeSkinTone, setActiveSkinTone] = useState<string | number>(skinToneOptions[0].value);
@@ -275,6 +276,8 @@ const EmojiPicker = ({
           </button>
         </InputFieldWrapper>
         <Dropdown
+          open={openSkinTonePicker}
+          onOpenChange={setOpenSkinTonePicker}
           dropdown={
             <ItemList>
               {
@@ -282,7 +285,10 @@ const EmojiPicker = ({
                   <Item
                     key={item.value}
                     primary={item.label}
-                    onClick={() => setActiveSkinTone(item.value)}
+                    onClick={() => {
+                      setActiveSkinTone(item.value);
+                      setOpenSkinTonePicker(false);
+                    }}
                     selected={activeSkinTone === item.value}
                     className={styles.item}
                   />

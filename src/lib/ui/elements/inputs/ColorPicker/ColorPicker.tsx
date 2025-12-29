@@ -31,6 +31,7 @@ const colorFormatOpts = [
 const ColorPicker = () => {
   const [color, setColor] = useState<number[]>([0, 0, 100, 100]);
   const [selectedFormat, setSelectedFormat] = useState<ColorFormat>("hsv");
+  const [openFormatSelector, setOpenFormatSelector] = useState(false);
 
   const colorInSelectedFormat = converters[selectedFormat]?.(...color);
   const colorInHslFormat = hsvToHsl(color[0], color[1], color[2]);
@@ -93,6 +94,8 @@ const ColorPicker = () => {
       <div className={styles.result}>
         <div className={styles.active_color}></div>
         <Dropdown
+          open={openFormatSelector}
+          onOpenChange={setOpenFormatSelector}
           dropdown={
             <ItemList>
               {
@@ -100,7 +103,10 @@ const ColorPicker = () => {
                   <Item
                     key={item.value}
                     primary={item.label}
-                    onClick={() => setSelectedFormat(item.value as ColorFormat)}
+                    onClick={() => {
+                      setSelectedFormat(item.value as ColorFormat);
+                      setOpenFormatSelector(false);
+                    }}
                     selected={selectedFormat === item.value}
                     disabled={item.disabled}
                   />

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useRef, useState } from "react";
+import React, { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import { Popover } from "@/lib/ui/elements/Popover";
@@ -18,22 +18,30 @@ export interface DropdownProps extends ComponentProps<"div"> {
   dropdownClass?: string;
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 const Dropdown = ({
-  dropdown, hintIcon, triggerClass, dropdownClass, placement, alignment,
+  open = false, onOpenChange, dropdown, hintIcon, triggerClass, dropdownClass, placement, alignment,
   className, children,
   ...restProps
 }: DropdownProps) => {
-  const [open, setOpen] = useState(false);
+  const [_open, setOpen] = useState(false);
 
   const triggerRef = useRef<HTMLButtonElement>(null);
 
   const updateDropdownState = (isOpen?: boolean) => {
-    if (isOpen) setOpen(true);
-    else if (isOpen === false) setOpen(false);
-    else setOpen(!open);
+    let newState = false;
+    if (isOpen) newState = true;
+    else if (isOpen === false) newState = false;
+    else newState = !_open;
+
+    setOpen(newState);
+    onOpenChange?.(newState);
   };
+
+  useEffect(() => setOpen(open), [open]);
 
   return (
     <div
@@ -53,7 +61,7 @@ const Dropdown = ({
           )
         }
       </Button>
-      {(open && !!triggerRef.current) && (
+      {(_open && !!triggerRef.current) && (
         <Popover
           anchor={triggerRef.current}
           onClose={() => updateDropdownState(false)}

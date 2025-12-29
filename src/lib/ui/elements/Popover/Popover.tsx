@@ -90,9 +90,8 @@ const Popover = ({
   useLayoutEffect(updatePopoverLayout, [updatePopoverLayout]);
 
   useEffect(() => {
-    const handleResize = () => requestAnimationFrame(updatePopoverLayout);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
+    window.addEventListener("resize", updatePopoverLayout, { passive: true });
+    return () => window.removeEventListener("resize", updatePopoverLayout);
   }, [updatePopoverLayout]);
 
   useKey(closeOnEsc ? (e) => {

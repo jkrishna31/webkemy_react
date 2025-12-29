@@ -5,9 +5,11 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["*"],
+  productionBrowserSourceMaps: true,
   experimental: {
     cssChunking: "strict",
     scrollRestoration: true,
+    webpackMemoryOptimizations: true,
   },
   images: {
     remotePatterns: [
@@ -28,6 +30,10 @@ const nextConfig: NextConfig = {
         hostname: "archive.org",
       },
     ]
+  },
+  webpack(config, { dev }) {
+    // if (dev) config.cache = false;
+    return config;
   },
   async headers() {
     return [

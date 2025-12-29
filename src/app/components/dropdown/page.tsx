@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { SOURCE_CODE } from "@/constants/general.const";
@@ -14,22 +16,35 @@ import { GithubLogo } from "@/lib/ui/svgs/logos";
 import styles from "./styles.module.scss";
 
 const Page = () => {
+  const [selected, setSelected] = useState<string>();
+  const [open, setOpen] = useState(false);
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="dropdown" />
 
       <Dropdown
+        open={open}
+        onOpenChange={setOpen}
         dropdown={
           <ItemList>
             {
               monthsOrder.map(key => (
-                <Item key={key} primary={months[key].label} />
+                <Item
+                  key={key}
+                  primary={months[key].label}
+                  selected={selected === key}
+                  onClick={() => {
+                    setSelected(key);
+                    setOpen(false);
+                  }}
+                />
               ))
             }
           </ItemList>
         }
       >
-        {"Month"}
+        {selected ? months[selected]?.label : "Month"}
       </Dropdown>
 
       <Dropdown
@@ -44,6 +59,7 @@ const Page = () => {
               as="a" href="/components/dropdown"
               primary="Dropdown"
               icon={<PopoverLeftIcon />}
+              disabled
             />
             <Item<"a">
               as="a" href="/components/popover"
