@@ -1,10 +1,10 @@
 .wrapper {
-  --popup-x: 0;
-  --popup-y: 0;
+  --popup-x: -100%;
+  --popup-y: -100%;
 
   position: fixed;
-  top: 0;
-  left: 0;
+  left: var(--popup-x);
+  top: var(--popup-y);
   z-index: var(--zi-drawer);
   max-width: calc(100vw - 4rem);
   max-height: calc(100vh - 4rem);

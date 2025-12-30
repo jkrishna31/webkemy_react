@@ -83,6 +83,8 @@ const Popover = ({
     if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
 
     requestAnimationFrame(() => {
+      elem.style.setProperty("--popup-x", "0");
+      elem.style.setProperty("--popup-y", "0");
       if (useTransform) {
         elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
       } else {
