@@ -39,7 +39,7 @@ export function getElementTabIndex(element: HTMLElement) {
 export function focusable(element: HTMLElement) {
   const nodeName = element.nodeName.toLowerCase();
   const isTabIndexNotNaN = !isNaN(getElementTabIndex(element));
-  const res = (TABBABLE_NODES.test(nodeName) && !element.ariaDisabled) || (element instanceof HTMLAnchorElement ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
+  const res = (TABBABLE_NODES.test(nodeName) && !element.ariaDisabled && !element.hasAttribute("disabled")) || (element instanceof HTMLAnchorElement ? element.href || isTabIndexNotNaN : isTabIndexNotNaN);
   return res && visible(element);
 }
 

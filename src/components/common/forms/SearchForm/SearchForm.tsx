@@ -11,7 +11,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./SearchForm.module.scss";
 
 export interface SearchFormProps extends ComponentProps<"div"> {
-
+    onClose?: () => void;
 }
 
 const SearchForm = ({
@@ -21,60 +21,60 @@ const SearchForm = ({
     onMicClick, onClick,
     query, onQueryChange,
     allowClear = true, allowSearch = true,
-    xPos,
+    xPos, onClose,
     ...props
 }: any) => {
     const anchorRef = useRef<HTMLDivElement>(null);
 
     return (
-        <>
-            <form className={classes(styles.form, formClass)} role="search" {...props}>
-                <InputFieldWrapper ref={anchorRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
-                    <GeneralInput
-                        spellCheck="false" id="query"
-                        onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
-                        required
-                        placeholder={placeholder}
-                        className={classes(styles.input, inputClass)}
-                        autoComplete="off"
-                    />
-                    {
-                        allowClear ? (
-                            <button type="reset" className={classes(styles.form_btn, styles.reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
-                                <CrossIcon className={styles.reset_icon} />
-                            </button>
-                        ) : null
-                    }
-                    {
-                        allowSearch ? (
-                            <button type="submit" className={classes(styles.form_btn, styles.search_btn)} title="Search">
-                                <SearchIcon className={styles.search_icon} />
-                            </button>
-                        ) : null
-                    }
-                </InputFieldWrapper>
-                {(!!searchDd && !!anchorRef.current) && (
-                    <Popover
-                        anchor={anchorRef.current}
-                        placement="bottom"
-                        alignment="right"
-                        className={styles.dropdown}
-                        adjustOnScroll
-                        closeOnEsc="capture"
-                    >
-                        {searchDd}
-                    </Popover>
-                )}
-                {audio ? (
-                    <button
-                        type="button" className={classes(styles.form_btn, styles.mic_btn)} title="Mic"
-                        onClick={onMicClick}
-                    >
-                        <MicIcon className={styles.mic_icon} />
-                    </button>
-                ) : null}
-            </form>
-        </>
+        <form className={classes(styles.form, formClass)} role="search" {...props}>
+            <InputFieldWrapper ref={anchorRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
+                <GeneralInput
+                    spellCheck="false" id="query"
+                    onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
+                    required
+                    placeholder={placeholder}
+                    className={classes(styles.input, inputClass)}
+                    autoComplete="off"
+                />
+                {
+                    allowClear ? (
+                        <button type="reset" className={classes(styles.form_btn, styles.reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
+                            <CrossIcon className={styles.reset_icon} />
+                        </button>
+                    ) : null
+                }
+                {
+                    allowSearch ? (
+                        <button type="submit" className={classes(styles.form_btn, styles.search_btn)} title="Search">
+                            <SearchIcon className={styles.search_icon} />
+                        </button>
+                    ) : null
+                }
+            </InputFieldWrapper>
+            {(!!searchDd && !!anchorRef.current) && (
+                <Popover
+                    anchor={anchorRef.current}
+                    placement="bottom"
+                    alignment="right"
+                    className={styles.dropdown}
+                    closeOnEsc="capture"
+                    closeOnScroll
+                    onClose={onClose}
+                    trapFocus={false}
+                >
+                    {searchDd}
+                </Popover>
+            )}
+            {audio ? (
+                <button
+                    type="button" className={classes(styles.form_btn, styles.mic_btn)} title="Mic"
+                    onClick={onMicClick}
+                >
+                    <MicIcon className={styles.mic_icon} />
+                </button>
+            ) : null}
+        </form>
     );
 };
 

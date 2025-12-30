@@ -129,7 +129,7 @@ const EventForm = ({
         <Text<"label"> as="label" inline htmlFor="repeat">{"Repeat"}</Text>
       </InputItem>
 
-      <CollapsiblePanel open={repeat} renderWhileClosed={false}>
+      {!!repeat && (
         <InputItem inline={true} className={styles.date_time_wrapper}>
           <InputItem>
             <Text<"label"> as="label" htmlFor="repeat_every">{"Repeat Every"}</Text>
@@ -148,7 +148,7 @@ const EventForm = ({
             />
           </InputItem>
         </InputItem>
-      </CollapsiblePanel>
+      )}
 
       <InputItem inline>
         <Switch id="all_day" />

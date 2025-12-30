@@ -17,22 +17,8 @@
   }
 }
 
-.animate {
-  animation: fade-in .2s ease, slide-in-y .26s ease;
-}
-
 @keyframes fade-in {
   from {
     opacity: 0;
-  }
-}
-
-@keyframes slide-in-y {
-  from {
-    transform: translate3d(var(--popup-x), calc(var(--popup-y) + 2rem), 0);
-  }
-
-  to {
-    transform: none;
   }
 }

@@ -226,6 +226,7 @@ const Select = ({
                     closeOnOutsideClick
                     adjustOnScroll
                     className={styles.dropdown}
+                    trapFocus={false}
                 >
                     <ItemList
                         role="listbox"

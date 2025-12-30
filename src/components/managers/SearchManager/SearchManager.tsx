@@ -5,7 +5,6 @@ import { positions } from "@/constants/general.const";
 import { useSearchActions, useSearchActive } from "@/data/stores";
 import { Modal } from "@/lib/ui/elements/Modal";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
 
 import styles from "./SearchManager.module.scss";
 
@@ -26,32 +25,9 @@ const history = [
 const SearchManager = ({ overlayClass, wrapperClass, ...props }: SearchBoxProps) => {
   const { setSearch } = useSearchActions();
   const active = useSearchActive();
-  // const [query, setQuery] = useState("");
-  // const [audioMode, setAudioMode] = useState(false);
 
   const handleClose = () => {
-    // setAudioMode(false);
     setSearch("active", undefined);
-  };
-
-  const renderSearchHistory = () => {
-    return (
-      <div className={styles.history_wrapper}>
-        <ul className={styles.history_list}>
-          {
-            history.map((item, idx) => (
-              <li className={styles.history_item} key={idx}>
-                <HistoryIcon className={styles.history_icon} />
-                <span className={styles.query}>{item}</span>
-                <button className={styles.delete_btn}>
-                  <CrossIcon className={styles.delete_icon} />
-                </button>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    );
   };
 
   return active ? (
@@ -61,15 +37,7 @@ const SearchManager = ({ overlayClass, wrapperClass, ...props }: SearchBoxProps)
     >
       {active === "audio" ? (
         <AudioListener />
-      ) : (
-        <>
-          {/* <SearchForm
-                        formClass={styles.search_form} placeholder="Search..." audio={true}
-                        onMicClick={() => setAudioMode(!audioMode)}
-                    />
-                    {renderSearchHistory()} */}
-        </>
-      )}
+      ) : null}
       <div className={styles.float_box}>
         {/* {audioMode ? (
                     <button className={styles.back_btn} onClick={() => setAudioMode(false)}>

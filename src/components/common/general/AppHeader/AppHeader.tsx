@@ -64,6 +64,7 @@ const AppHeader = ({
                             setSearch("active", "audio");
                         }}
                         onClick={() => setLayout("searchMenu", true)}
+                        onClose={() => setLayout("searchMenu", false)}
                         formClass={styles.sf}
                         inputClass={styles.sfi}
                         searchDd={

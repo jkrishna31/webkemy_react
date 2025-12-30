@@ -3,8 +3,10 @@
 import React, { ComponentProps, useCallback, useEffect, useId, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
+import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useKey } from "@/lib/hooks/useKey";
 import { useScrollLock } from "@/lib/hooks/useScrollLock";
+import { hasDOM } from "@/lib/utils/client.utils";
 import { calculateRenderPosition, LayoutPosition } from "@/lib/utils/dom.utils";
 import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -26,6 +28,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   closeOnEsc?: boolean | "capture";
   adjustOnScroll?: boolean;
   overlap?: boolean;
+  trapFocus?: boolean;
 }
 
 const Popover = ({
@@ -45,6 +48,7 @@ const Popover = ({
   ref,
   closeOnEsc = true,
   overlap,
+  trapFocus = true,
   ...props
 }: PopoverProps) => {
   const popoverId = useId();
@@ -56,45 +60,61 @@ const Popover = ({
   const updatePopoverLayout = useCallback(() => {
     const elem = popoverRef.current;
     if (!elem || !anchor) return;
+
+    // requestAnimationFrame(() => {
+    const anchorBoundingRect = anchor?.getBoundingClientRect();
+
+    // console.log("+++ anchor rect +++", anchor, anchorBoundingRect);
+
+    elem.style.minWidth = `${anchorBoundingRect.width}px`;
+
+    const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
+
+    const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
+      anchorBoundingRect, popoverBoundingRect,
+      { placement, alignment, offset, overlap },
+    );
+
+    const computedStyle = getComputedStyle(elem);
+
+    if (maxHeight) elem.style.maxHeight = String(maxHeight);
+    if (maxWidth) elem.style.maxWidth = String(maxWidth);
+
+    if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
+
     requestAnimationFrame(() => {
-      const anchorBoundingRect = anchor?.getBoundingClientRect();
-
-      elem.style.minWidth = `${anchorBoundingRect.width}px`;
-
-      const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
-
-      const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
-        anchorBoundingRect, popoverBoundingRect,
-        { placement, alignment, offset, overlap },
-      );
-
-      const computedStyle = getComputedStyle(elem);
-
-      if (maxHeight) elem.style.maxHeight = String(maxHeight);
-      if (maxWidth) elem.style.maxWidth = String(maxWidth);
-
-      if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
-
-      requestAnimationFrame(() => {
-        if (useTransform) {
-          elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-        } else {
-          // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-          elem.style.left = `${left}px`;
-          elem.style.top = `${top}px`;
-        }
-      });
+      if (useTransform) {
+        elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+      } else {
+        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+        elem.style.left = `${left}px`;
+        elem.style.top = `${top}px`;
+      }
     });
+    // });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
 
-  useLayoutEffect(updatePopoverLayout, [updatePopoverLayout]);
-
-  useEffect(() => {
-    window.addEventListener("resize", updatePopoverLayout, { passive: true });
-    return () => window.removeEventListener("resize", updatePopoverLayout);
-  }, [updatePopoverLayout]);
+  useLayoutEffect(() => {
+    const elem = popoverRef.current;
+    if (hasDOM() && elem && anchor && "ResizeObserver" in window) {
+      const observer = new ResizeObserver((e) => {
+        updatePopoverLayout();
+        e.forEach((i) => {
+          // console.log("--- ro ---", elem, i, anchor);
+        });
+      });
+      observer.observe(elem);
+      observer.observe(anchor);
+      observer.observe(window.document.body);
+      return () => observer.disconnect();
+    } else {
+      window.addEventListener("resize", updatePopoverLayout, { passive: true, capture: true });
+      return () => window.removeEventListener("resize", updatePopoverLayout, true);
+    }
+  }, [anchor, updatePopoverLayout]);
 
   useKey(closeOnEsc ? (e) => {
+    e.stopPropagation();
     e.stopImmediatePropagation();
     onClose?.();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
@@ -116,7 +136,7 @@ const Popover = ({
           updatePopoverLayout();
         }
       };
-      window.addEventListener("scroll", handleScroll, { once: isTooltip || closeOnScroll, passive: true, capture: true });
+      window.addEventListener("scroll", handleScroll, { passive: true, capture: true });
       return () => window.removeEventListener("scroll", handleScroll, true);
     }
   }, [adjustOnScroll, anchor, closeOnScroll, isTooltip, onClose, updatePopoverLayout]);
@@ -137,6 +157,8 @@ const Popover = ({
     }
   }, [anchor, closeOnOutsideClick, lock, onClose, popoverId, unlock]);
 
+  useFocusTrap(popoverRef, trapFocus && !isTooltip);
+
   return usePortal
     ? createPortal((
       <div
@@ -144,6 +166,8 @@ const Popover = ({
         className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
+        tabIndex={-1}
+        {...props}
       >
         {children}
       </div>
@@ -154,6 +178,8 @@ const Popover = ({
         className={classes(styles.wrapper, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
+        tabIndex={-1}
+        {...props}
       >
         {children}
       </div>

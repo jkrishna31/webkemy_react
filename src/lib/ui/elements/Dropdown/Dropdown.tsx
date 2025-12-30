@@ -39,6 +39,8 @@ const Dropdown = ({
 
     setOpen(newState);
     onOpenChange?.(newState);
+
+    if (!newState) triggerRef.current?.focus();
   };
 
   useEffect(() => setOpen(open), [open]);
@@ -66,7 +68,7 @@ const Dropdown = ({
           anchor={triggerRef.current}
           onClose={() => updateDropdownState(false)}
           offset={6}
-          closeOnEsc
+          closeOnEsc="capture"
           closeOnOutsideClick
           adjustOnScroll
           className={classes(styles.dropdown, dropdownClass)}

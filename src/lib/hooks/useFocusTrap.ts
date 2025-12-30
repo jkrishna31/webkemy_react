@@ -6,6 +6,7 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) 
   const focusNode = (node: HTMLElement) => {
     let focusElement: HTMLElement | null = node.querySelector("[data-autofocus]");
 
+
     if (!focusElement) {
       const children = Array.from<HTMLElement>(node.querySelectorAll(FOCUS_SELECTOR));
       focusElement = children.find(tabbable) || children.find(focusable) || null;
