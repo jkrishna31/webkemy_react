@@ -127,6 +127,16 @@
     font-size: 1.4rem;
 }
 
+.btn:active {
+    animation: scale-effect .15s ease-out alternate;
+}
+
+@keyframes scale-effect {
+    25% {
+        scale: .9;
+    }
+}
+
 
 @media screen and (max-width: 768px) {
     .btn {

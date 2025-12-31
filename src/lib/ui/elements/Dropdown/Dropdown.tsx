@@ -39,8 +39,6 @@ const Dropdown = ({
 
     setOpen(newState);
     onOpenChange?.(newState);
-
-    if (!newState) triggerRef.current?.focus();
   };
 
   useEffect(() => setOpen(open), [open]);
@@ -74,6 +72,7 @@ const Dropdown = ({
           className={classes(styles.dropdown, dropdownClass)}
           alignment={alignment}
           placement={placement}
+          usePortal={false}
         >
           {dropdown}
         </Popover>

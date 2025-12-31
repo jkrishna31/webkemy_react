@@ -29,7 +29,6 @@ const Page = () => {
         <CalendarHeader className="py-[1.6rem]" />
         <CalendarBody
           onAdd={() => setShowEventForm(true)}
-          className="pb-[1.6rem]"
         />
       </CalendarWrapper>
 

@@ -54,6 +54,7 @@ const Popover = ({
   const popoverId = useId();
 
   const popoverRef = useRef<HTMLDivElement>(null);
+  const prevActiveElem = useRef<Element>(null);
 
   const { lock, unlock } = useScrollLock();
 
@@ -61,10 +62,7 @@ const Popover = ({
     const elem = popoverRef.current;
     if (!elem || !anchor) return;
 
-    // requestAnimationFrame(() => {
     const anchorBoundingRect = anchor?.getBoundingClientRect();
-
-    // console.log("+++ anchor rect +++", anchor, anchorBoundingRect);
 
     elem.style.minWidth = `${anchorBoundingRect.width}px`;
 
@@ -93,17 +91,25 @@ const Popover = ({
         elem.style.top = `${top}px`;
       }
     });
-    // });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
+
+  useFocusTrap(popoverRef, trapFocus && !isTooltip);
+
+  useKey(closeOnEsc ? (e) => {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    onClose?.();
+    if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
+  } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
   useLayoutEffect(() => {
     const elem = popoverRef.current;
-    if (hasDOM() && elem && anchor && "ResizeObserver" in window) {
+    if (!anchor || !elem) return;
+    updatePopoverLayout();
+    prevActiveElem.current = document.activeElement;
+    if (hasDOM() && "ResizeObserver" in window) {
       const observer = new ResizeObserver((e) => {
         updatePopoverLayout();
-        e.forEach((i) => {
-          // console.log("--- ro ---", elem, i, anchor);
-        });
       });
       observer.observe(elem);
       observer.observe(anchor);
@@ -114,12 +120,6 @@ const Popover = ({
       return () => window.removeEventListener("resize", updatePopoverLayout, true);
     }
   }, [anchor, updatePopoverLayout]);
-
-  useKey(closeOnEsc ? (e) => {
-    e.stopPropagation();
-    e.stopImmediatePropagation();
-    onClose?.();
-  } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
   useEffect(() => {
     if (anchor && lockScroll) {
@@ -158,8 +158,6 @@ const Popover = ({
       };
     }
   }, [anchor, closeOnOutsideClick, lock, onClose, popoverId, unlock]);
-
-  useFocusTrap(popoverRef, trapFocus && !isTooltip);
 
   return usePortal
     ? createPortal((

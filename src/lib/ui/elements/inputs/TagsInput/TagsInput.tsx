@@ -3,6 +3,7 @@
 import React, { ComponentProps, useRef } from "react";
 
 import { useKey } from "@/lib/hooks/useKey";
+import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/Chip";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
@@ -79,14 +80,16 @@ const TagsInput = ({
                     onChange={onChange}
                     {...props}
                 />
-                <button
-                    type="button" className={styles.add_key_btn}
+                <Button
+                    variant="primary"
+                    type="button"
                     title="Add"
                     aria-label="Add"
+                    className={styles.add_key_btn}
                     onClick={handleKeyAdd}
                 >
                     <PlusIcon className={styles.plus_icon} />
-                </button>
+                </Button>
             </div>
             {renderKeys()}
         </>

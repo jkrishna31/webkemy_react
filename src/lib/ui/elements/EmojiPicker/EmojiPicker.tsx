@@ -8,7 +8,6 @@ import { categories, categoriesOrder } from "@/data/general/emojis";
 import emojisJSON from "@/data/json/emojis.json";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
-import { usePrevious } from "@/lib/hooks/usePrevious";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
@@ -81,7 +80,6 @@ const EmojiPicker = ({
   const [variationPicker, setVariationPicker] = useState<{
     emojiId: string; anchor: HTMLElement;
   }>();
-  const prevVariationPicker = usePrevious(variationPicker);
 
   const containerRef = useRef<HTMLUListElement>(null);
   const explicitRef = useRef<boolean>(false);
@@ -235,15 +233,12 @@ const EmojiPicker = ({
       } else if (e.code === Keys.ARROW_RIGHT) {
         // if (variationPicker?.emojiId) { select the active variation }
       } else if (e.key === Keys.ESC) {
-        if (prevVariationPicker?.anchor) {
-          prevVariationPicker?.anchor?.focus();
-        }
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [clearAnchor, prevVariationPicker?.anchor]);
+  }, [clearAnchor]);
 
   useFocusTrap(variationsRef, !!variationPicker?.emojiId);
 
