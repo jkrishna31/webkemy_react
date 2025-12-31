@@ -1,7 +1,7 @@
 @use '@/lib/ui/styles/mixins/animations' as *;
 
 .header {
-    background: var(--gray-11-70);
+    background: var(--bg-overlay);
     -webkit-backdrop-filter: blur(.4rem);
     backdrop-filter: blur(.4rem);
 }

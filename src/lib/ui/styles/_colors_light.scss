@@ -59,7 +59,8 @@
     --gray-9: #8d8d8e;
     --gray-10: #7a7c7c;
     --gray-11: rgb(252, 254, 255);
-    --gray-11-70: rgba(252, 254, 255, 0.7);
+    --gray-11-70: rgba(252, 254, 255, 0.3);
+    --gray-11-70: rgba(252, 254, 255, 0.6);
     --gray-12: rgb(235, 237, 239);
     --gray-12-70: rgba(235, 237, 239, .7);
     --gray-13: rgb(242, 244, 246);
@@ -94,7 +95,7 @@
     --bg-t-70: var(--gray-13-70);
     --bg-q: var(--gray-14);
 
-    --bg-overlay: var(--gray-11-70);
+    --bg-overlay: var(--gray-11-30);
     --bg-selection: var(--ghost-4);
     --bg-hover: var(--ghost-1);
     --bg-highlight: var(--gray-24);

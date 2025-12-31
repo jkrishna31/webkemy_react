@@ -59,6 +59,7 @@
     --gray-9: rgb(134, 135, 136);
     --gray-10: rgb(153, 154, 158);
     --gray-11: rgb(24, 26, 27);
+    --gray-11-30: rgba(24, 26, 27, 0.3);
     --gray-11-70: rgba(24, 26, 27, 0.6);
     --gray-12: rgb(34, 38, 40);
     --gray-12-70: rgba(34, 38, 40, .7);
@@ -94,7 +95,7 @@
     --bg-t-70: var(--gray-13-70);
     --bg-q: var(--gray-14);
 
-    --bg-overlay: var(--gray-11-70);
+    --bg-overlay: var(--gray-11-30);
     --bg-selection: var(--ghost-4);
     --bg-hover: var(--ghost-1);
     --bg-highlight: var(--gray-24);

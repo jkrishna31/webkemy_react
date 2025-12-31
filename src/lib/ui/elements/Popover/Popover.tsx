@@ -64,32 +64,34 @@ const Popover = ({
 
     const anchorBoundingRect = anchor?.getBoundingClientRect();
 
-    elem.style.minWidth = `${anchorBoundingRect.width}px`;
-
-    const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
-
-    const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
-      anchorBoundingRect, popoverBoundingRect,
-      { placement, alignment, offset, overlap },
-    );
-
-    const computedStyle = getComputedStyle(elem);
-
-    if (maxHeight) elem.style.maxHeight = String(maxHeight);
-    if (maxWidth) elem.style.maxWidth = String(maxWidth);
-
-    if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
-
     requestAnimationFrame(() => {
-      elem.style.setProperty("--popup-x", "0");
-      elem.style.setProperty("--popup-y", "0");
-      if (useTransform) {
-        elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-      } else {
-        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-        elem.style.left = `${left}px`;
-        elem.style.top = `${top}px`;
-      }
+      elem.style.minWidth = `${anchorBoundingRect.width}px`;
+
+      const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
+
+      const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
+        anchorBoundingRect, popoverBoundingRect,
+        { placement, alignment, offset, overlap },
+      );
+
+      const computedStyle = getComputedStyle(elem);
+
+      if (maxHeight) elem.style.maxHeight = String(maxHeight);
+      if (maxWidth) elem.style.maxWidth = String(maxWidth);
+
+      if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
+
+      requestAnimationFrame(() => {
+        elem.style.setProperty("--popup-x", "0");
+        elem.style.setProperty("--popup-y", "0");
+        if (useTransform) {
+          elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+        } else {
+          // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+          elem.style.left = `${left}px`;
+          elem.style.top = `${top}px`;
+        }
+      });
     });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
 

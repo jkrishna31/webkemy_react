@@ -197,9 +197,7 @@ const EmojiPicker = ({
   useEffect(() => handleSearch(query), [handleSearch, query]);
 
   useEffect(() => {
-    requestAnimationFrame(() => {
-      anchor?.focus();
-    });
+    anchor?.focus({ preventScroll: true });
   }, [anchor]);
 
   useEffect(() => {
