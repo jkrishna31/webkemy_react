@@ -497,9 +497,9 @@ export const menuItems = [
         collapsible: false,
         menu: [
             {
-                key: "ecommerce",
-                href: "/templates/ecommerce",
-                primary: "Ecommerce",
+                key: "shop",
+                href: "/templates/shop",
+                primary: "Shop",
                 icon: <ShopIcon />,
                 disabled: true,
             },

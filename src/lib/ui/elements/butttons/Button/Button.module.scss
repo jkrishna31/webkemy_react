@@ -6,7 +6,8 @@
     background-color: transparent;
     border-radius: var(--br-pill);
     font-weight: 500;
-    transition: border-color .2s linear, background .2s linear, color .2s linear;
+    will-change: transform;
+    transition: border-color .2s linear, background .2s linear, color .2s linear, transform .15s ease;
 
     &:disabled {
         opacity: .5;
@@ -128,13 +129,7 @@
 }
 
 .btn:active {
-    animation: scale-effect .15s ease-out alternate;
-}
-
-@keyframes scale-effect {
-    25% {
-        scale: .9;
-    }
+    transform: scale(.95);
 }
 
 

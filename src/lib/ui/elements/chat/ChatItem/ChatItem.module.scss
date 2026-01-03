@@ -1,0 +1,90 @@
+.wrapper {
+  display: flex;
+  gap: .8rem;
+  margin-inline: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.wrapper[data-author="me"] {
+  margin-left: auto;
+  margin-right: 1.2rem;
+  align-self: flex-end;
+  max-width: 70%;
+}
+
+.profile_container {
+  display: flex;
+  border-radius: 50%;
+  color: var(--fg-s-alt);
+}
+
+.profile {
+  width: 2.6rem;
+  height: 2.6rem;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 50%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.meta p {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: 1.4rem;
+  color: var(--fg-t);
+}
+
+.author,
+.meta p time {
+  color: var(--fg-s-alt);
+}
+
+.wrapper[data-author="me"] .meta p {
+  justify-content: flex-end;
+  font-size: 1.3rem;
+}
+
+.chat_list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+
+.chat {
+  width: fit-content;
+  border-radius: .6rem;
+
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.wrapper[data-author="me"] .chat_list {
+  align-items: flex-end;
+}
+
+.wrapper[data-author="me"] .chat {
+  padding-block: .8rem;
+  padding-inline: 1rem;
+  background-color: var(--bg-p);
+}
+
+@media screen and (max-width: 768px) {
+  .meta p {
+    font-size: 1.3rem;
+  }
+
+  .chat {
+    font-size: 1.5rem;
+  }
+
+  .wrapper[data-author="me"] .chat {
+    background-color: var(--bg-t);
+  }
+}

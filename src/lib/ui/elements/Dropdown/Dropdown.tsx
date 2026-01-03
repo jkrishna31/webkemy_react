@@ -66,13 +66,9 @@ const Dropdown = ({
           anchor={triggerRef.current}
           onClose={() => updateDropdownState(false)}
           offset={6}
-          closeOnEsc="capture"
-          closeOnOutsideClick
-          adjustOnScroll
           className={classes(styles.dropdown, dropdownClass)}
           alignment={alignment}
           placement={placement}
-          usePortal={false}
         >
           {dropdown}
         </Popover>

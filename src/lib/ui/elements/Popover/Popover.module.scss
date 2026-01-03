@@ -1,15 +1,17 @@
 .wrapper {
-  --popup-x: -100%;
-  --popup-y: -100%;
+  --popover-left: -100%;
+  --popover-top: -100%;
+  --popover-max-height: calc(100vh - 4rem);
+  --popover-max-width: calc(100vw - 4rem);
 
   position: fixed;
-  left: var(--popup-x);
-  top: var(--popup-y);
+  left: var(--popover-left);
+  top: var(--popover-top);
+  max-width: var(--popover-max-width);
+  max-height: var(--popover-max-height);
   z-index: var(--zi-drawer);
-  max-width: calc(100vw - 4rem);
-  max-height: calc(100vh - 4rem);
 
-  animation: fade-in .5s ease;
+  animation: fade-in .3s ease;
 
   &[data-popover="tooltip"] {
     pointer-events: none;

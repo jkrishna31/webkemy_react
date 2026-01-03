@@ -349,7 +349,6 @@ const EmojiPicker = ({
           anchor={anchor}
           onClose={() => clearAnchor(true)}
           isTooltip
-          closeOnEsc="capture"
         >
           <div className={styles.popover}>
             {anchor.innerText}
@@ -363,12 +362,8 @@ const EmojiPicker = ({
         <Popover
           anchor={variationPicker.anchor}
           onClose={() => setVariationPicker(undefined)}
-          closeOnEsc="capture"
           closeOnScroll
-          closeOnOutsideClick
-          usePortal={false}
           ref={variationsRef}
-        // closeOnEsc="capture"
         >
           <div className={styles.variations}>
             {

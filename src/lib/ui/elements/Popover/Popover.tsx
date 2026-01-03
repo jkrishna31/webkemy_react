@@ -20,7 +20,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   isTooltip?: boolean;
   onClose?: () => void;
   closeOnScroll?: boolean;
-  closeOnOutsideClick?: boolean;
+  closeOnOutsideClick?: boolean | "capture";
   lockScroll?: boolean;
   offset?: number;
   usePortal?: boolean;
@@ -39,14 +39,14 @@ const Popover = ({
   isTooltip,
   className, children,
   closeOnScroll,
-  closeOnOutsideClick,
+  closeOnOutsideClick = "capture",
+  closeOnEsc = "capture",
   lockScroll,
-  adjustOnScroll,
+  adjustOnScroll = true,
   onClose,
   usePortal = true,
   useTransform = true,
   ref,
-  closeOnEsc = true,
   overlap,
   trapFocus = true,
   ...props
@@ -82,8 +82,8 @@ const Popover = ({
       if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
 
       requestAnimationFrame(() => {
-        elem.style.setProperty("--popup-x", "0");
-        elem.style.setProperty("--popup-y", "0");
+        elem.style.setProperty("--popover-left", "0");
+        elem.style.setProperty("--popover-top", "0");
         if (useTransform) {
           elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
         } else {
@@ -146,17 +146,26 @@ const Popover = ({
   }, [adjustOnScroll, anchor, closeOnScroll, isTooltip, onClose, updatePopoverLayout]);
 
   useEffect(() => {
-    if (anchor && closeOnOutsideClick) {
+    const elem = popoverRef.current;
+    if (anchor && closeOnOutsideClick && elem) {
       const handleClick = (e: MouseEvent) => {
         const composedPath = e.composedPath();
 
-        if (!(popoverRef.current && composedPath.includes(popoverRef.current)) && !composedPath.includes(anchor)) {
-          onClose?.();
-        }
+        // console.log("=== detect outside ===", anchor, composedPath.includes(elem), composedPath.includes(anchor), elem?.contains(e.target as HTMLElement), elem.contains(e.target as HTMLElement), anchor.contains(e.target as HTMLElement));
+
+        const isInsidePopover = composedPath.includes(elem) || elem?.contains(e.target as HTMLElement);
+
+        // if (isInsidePopover) e.stopImmediatePropagation();
+        if (isInsidePopover || composedPath.includes(anchor)) return;
+
+        // e.stopPropagation();
+        // e.stopImmediatePropagation();
+        onClose?.();
+        // console.log("--- on close ---", anchor, composedPath);
       };
-      window.addEventListener("click", handleClick, { capture: true });
+      window.addEventListener("click", handleClick, { capture: closeOnOutsideClick === "capture" });
       return () => {
-        window.removeEventListener("click", handleClick, { capture: true });
+        window.removeEventListener("click", handleClick, { capture: closeOnOutsideClick === "capture" });
       };
     }
   }, [anchor, closeOnOutsideClick, lock, onClose, popoverId, unlock]);

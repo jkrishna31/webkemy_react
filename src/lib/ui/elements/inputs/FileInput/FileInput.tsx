@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef } from "react";
+import React, { ComponentProps, useEffect, useRef, useState } from "react";
 
 import AddFileIcon from "@/lib/ui/svgs/icons/AddFileIcon";
 import { classes } from "@/lib/utils/style.utils";
@@ -26,6 +26,7 @@ const FileInput = ({
     ...props
 }: IFileInput) => {
     const inputRef = useRef<HTMLInputElement>(null);
+    const [draggingOver, setDraggingOver] = useState(false);
 
     const handlePaste = (e: any) => {
         // check the mime type
@@ -33,9 +34,15 @@ const FileInput = ({
         // then add, otherwise ignore
     };
 
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        setDraggingOver(true);
+    };
+
     const handleDrop = (e: React.DragEvent) => {
         e.preventDefault();
         onInput?.({ target: { files: e.dataTransfer.files } } as any);
+        setDraggingOver(false);
     };
 
     useEffect(() => {
@@ -44,9 +51,10 @@ const FileInput = ({
 
     return (
         <div
-            className={classes(styles.input_wrapper, !minimal && styles.input_wrapper_full, className)}
-            onDragOver={e => e.preventDefault()}
+            className={classes(styles.input_wrapper, !minimal && styles.input_wrapper_full, draggingOver && styles.drag_over, className)}
+            onDragOver={handleDragOver}
             onDrop={handleDrop}
+            onDragLeave={() => setDraggingOver(false)}
         >
             <input
                 type="file"

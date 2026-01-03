@@ -1,7 +1,8 @@
 "use client";
 
-import React, { ComponentProps, FormEvent, useCallback, useEffect, useImperativeHandle, useRef } from "react";
+import React, { ComponentProps, FormEvent, useCallback, useEffect, useRef } from "react";
 
+import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TextArea.module.scss";
@@ -9,7 +10,7 @@ import styles from "./TextArea.module.scss";
 export interface TextAreaProps extends ComponentProps<"textarea"> {
     focused?: boolean;
     autoResize?: boolean;
-    onInput?: any;
+    onInput?: (event: FormEvent<HTMLTextAreaElement>) => void;
     multiline?: boolean;
     maxRows?: number;
 }
@@ -18,55 +19,49 @@ const TextArea = ({
     focused, className, autoResize = true, id, onInput, ref, value, multiline = true, rows, maxRows,
     ...props
 }: TextAreaProps) => {
-    const taRef = useRef<HTMLTextAreaElement>(null);
+    const _ref = useRef<HTMLTextAreaElement>(null);
 
-    const resize = useCallback((elem: HTMLTextAreaElement) => {
+    const resize = useCallback(() => {
         // if (CSS.supports && CSS.supports("field-sizing", "content")) return;
         // handles content-sizing: content-box (subtract padding and border width from scrollHeight)
-        if (taRef.current && autoResize) {
-            taRef.current.style.height = "auto";
-            taRef.current.style.height = `${elem.scrollHeight}px`;
+        if (_ref.current && autoResize) {
+            _ref.current.style.height = "auto";
+            _ref.current.style.height = `${_ref.current.scrollHeight}px`;
         }
     }, [autoResize]);
 
-    const handleKeyDown = (e: FormEvent<HTMLTextAreaElement>) => { };
-
     const handleInput = useCallback((e: FormEvent<HTMLTextAreaElement>) => {
-        let val = (e.target as HTMLTextAreaElement).value;  // or use taRef.current?.value
+        let val = (e.target as HTMLTextAreaElement).value;
         if (!multiline && val.charAt(val.length - 1) === "\n") {
             val = val.slice(0, -1);
             (e.target as HTMLTextAreaElement).value = val;
         }
-        resize(e.target as HTMLTextAreaElement);
-        onInput?.(e, val);
+        resize();
+        onInput?.(e);
     }, [multiline, resize, onInput]);
 
     useEffect(() => {
-        if (taRef.current) {
-            resize(taRef.current);
-        }
-    }, [resize, value]);
+        if (_ref.current) _ref.current.value = (value ?? "") as string;
+    }, [value]);
+
+    useEffect(resize, [resize, value]);
 
     useEffect(() => {
-        if (taRef.current) {
-            if (focused) {
-                taRef.current.focus();
-            }
-            resize(taRef.current);
+        if (_ref.current) {
+            if (focused) _ref.current.focus();
+            resize();
         }
     }, [focused, resize]);
 
-    useImperativeHandle(ref, () => taRef.current!);
-
     return (
         <textarea
-            name={id} id={id}
-            onKeyDown={handleKeyDown}
+            name={id}
+            id={id}
+            // value={value}
             onInput={handleInput}
             className={classes(styles.input, className)}
-            ref={taRef}
+            ref={mergeRefs(_ref, ref)}
             autoComplete="off"
-            value={value}
             rows={multiline ? rows : 1}
             {...props}
         >

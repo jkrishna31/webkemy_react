@@ -40,9 +40,7 @@ export default function RootLayout({
     // suppressHydrationWarning
     >
       <GoogleAnalytics gaId="G-RTNS9WR6PR" />
-      <body
-        className="antialiased"
-      >
+      <body>
         <FrontendObservability />
         {children}
       </body>

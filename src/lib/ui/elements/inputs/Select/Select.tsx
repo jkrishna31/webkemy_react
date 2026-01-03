@@ -222,9 +222,6 @@ const Select = ({
                     anchor={anchorRef.current}
                     onClose={() => setOpen(false)}
                     offset={6}
-                    closeOnEsc="capture"
-                    closeOnOutsideClick
-                    adjustOnScroll
                     className={styles.dropdown}
                     trapFocus={false}
                 >

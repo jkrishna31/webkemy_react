@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  position: relative;
+  max-height: fit-content;
+  margin-bottom: 1.6rem;
+}
+
+.datetime {
+  align-self: center;
+  font-size: 1.3rem;
+  color: var(--fg-s);
+  background-color: var(--bg-p);
+  padding: .3rem .8rem .4rem .8rem;
+  border-radius: var(--br-pill);
+  position: sticky;
+  top: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .datetime {
+    font-size: 1.2rem;
+    background-color: var(--bg-t);
+  }
+}

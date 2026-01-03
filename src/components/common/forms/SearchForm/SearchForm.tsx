@@ -58,7 +58,6 @@ const SearchForm = ({
                     placement="bottom"
                     alignment="right"
                     className={styles.dropdown}
-                    closeOnEsc="capture"
                     closeOnScroll
                     onClose={onClose}
                     trapFocus={false}

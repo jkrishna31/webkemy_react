@@ -24,10 +24,10 @@ html {
 
 html,
 body {
-  // text-rendering: optimizeLegibility;
   -webkit-tap-highlight-color: transparent;
+  // text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
   color-scheme: light dark;
   outline-color: var(--border-s);
 }

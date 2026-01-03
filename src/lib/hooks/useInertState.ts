@@ -1,11 +1,11 @@
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 
 export function useInertState<T>(initValue?: T) {
   const ref = useRef<T>(initValue);
 
-  const setRef = (val: T) => {
+  const setRef = useCallback((val: T) => {
     ref.current = val;
-  };
+  }, []);
 
   return [ref.current, setRef];
 }
