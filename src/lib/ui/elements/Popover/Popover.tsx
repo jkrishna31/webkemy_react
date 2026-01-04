@@ -103,6 +103,7 @@ const Popover = ({
     e.stopPropagation();
     e.stopImmediatePropagation();
     onClose?.();
+    if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
   useLayoutEffect(() => {
@@ -119,13 +120,11 @@ const Popover = ({
       observer.observe(window.document.body);
       return () => {
         observer.disconnect();
-        if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
       };
     } else {
       window.addEventListener("resize", updatePopoverLayout, { passive: true, capture: true });
       return () => {
         window.removeEventListener("resize", updatePopoverLayout, true);
-        if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
       };
     }
   }, [anchor, updatePopoverLayout]);
@@ -162,6 +161,7 @@ const Popover = ({
       if (popoverRect.x <= e.x && (popoverRect.x + popoverRect.width) >= e.x && popoverRect.y <= e.y && (popoverRect.y + popoverRect.height) >= e.y) return;
 
       onClose?.();
+      if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
     };
     window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
     return () => {
