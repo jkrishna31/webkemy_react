@@ -5,6 +5,7 @@ import { createPortal } from "react-dom";
 
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useKey } from "@/lib/hooks/useKey";
+import { useMounted } from "@/lib/hooks/useMounted";
 import { useScrollLock } from "@/lib/hooks/useScrollLock";
 import { hasDOM } from "@/lib/utils/client.utils";
 import { calculateRenderPosition, LayoutPosition } from "@/lib/utils/dom.utils";
@@ -57,6 +58,7 @@ const Popover = ({
   const prevActiveElem = useRef<Element>(null);
 
   const { lock, unlock } = useScrollLock();
+  const isMounted = useMounted();
 
   const updatePopoverLayout = useCallback(() => {
     const elem = popoverRef.current;
@@ -101,7 +103,6 @@ const Popover = ({
     e.stopPropagation();
     e.stopImmediatePropagation();
     onClose?.();
-    if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
   useLayoutEffect(() => {
@@ -116,10 +117,16 @@ const Popover = ({
       observer.observe(elem);
       observer.observe(anchor);
       observer.observe(window.document.body);
-      return () => observer.disconnect();
+      return () => {
+        observer.disconnect();
+        if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
+      };
     } else {
       window.addEventListener("resize", updatePopoverLayout, { passive: true, capture: true });
-      return () => window.removeEventListener("resize", updatePopoverLayout, true);
+      return () => {
+        window.removeEventListener("resize", updatePopoverLayout, true);
+        if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
+      };
     }
   }, [anchor, updatePopoverLayout]);
 
@@ -147,28 +154,20 @@ const Popover = ({
 
   useEffect(() => {
     const elem = popoverRef.current;
-    if (anchor && closeOnOutsideClick && elem) {
-      const handleClick = (e: MouseEvent) => {
-        const composedPath = e.composedPath();
+    if (!elem || !anchor || !closeOnOutsideClick || !isMounted) return;
+    const handleClick = (e: PointerEvent) => {
+      const popoverRect = elem.getBoundingClientRect();
 
-        // console.log("=== detect outside ===", anchor, composedPath.includes(elem), composedPath.includes(anchor), elem?.contains(e.target as HTMLElement), elem.contains(e.target as HTMLElement), anchor.contains(e.target as HTMLElement));
+      if (!e.pointerType) return; // TODO: if e.target is outside, then close
+      if (popoverRect.x <= e.x && (popoverRect.x + popoverRect.width) >= e.x && popoverRect.y <= e.y && (popoverRect.y + popoverRect.height) >= e.y) return;
 
-        const isInsidePopover = composedPath.includes(elem) || elem?.contains(e.target as HTMLElement);
-
-        // if (isInsidePopover) e.stopImmediatePropagation();
-        if (isInsidePopover || composedPath.includes(anchor)) return;
-
-        // e.stopPropagation();
-        // e.stopImmediatePropagation();
-        onClose?.();
-        // console.log("--- on close ---", anchor, composedPath);
-      };
-      window.addEventListener("click", handleClick, { capture: closeOnOutsideClick === "capture" });
-      return () => {
-        window.removeEventListener("click", handleClick, { capture: closeOnOutsideClick === "capture" });
-      };
-    }
-  }, [anchor, closeOnOutsideClick, lock, onClose, popoverId, unlock]);
+      onClose?.();
+    };
+    window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
+    return () => {
+      window.removeEventListener("click", handleClick, closeOnOutsideClick === "capture");
+    };
+  }, [anchor, closeOnOutsideClick, isMounted, lock, onClose, popoverId, unlock]);
 
   return usePortal
     ? createPortal((
