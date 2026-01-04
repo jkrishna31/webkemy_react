@@ -32,22 +32,21 @@
   gap: .6rem;
 }
 
-.meta p {
+.meta {
+  font-size: 1.4rem;
+  color: var(--fg-t);
   display: flex;
   align-items: center;
   gap: .6rem;
-  font-size: 1.4rem;
-  color: var(--fg-t);
 }
 
 .author,
-.meta p time {
+.meta time {
   color: var(--fg-s-alt);
 }
 
-.wrapper[data-author="me"] .meta p {
+.wrapper[data-author="me"] .meta {
   justify-content: flex-end;
-  font-size: 1.3rem;
 }
 
 .chat_list {
@@ -76,7 +75,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .meta p {
+  .meta {
     font-size: 1.3rem;
   }
 

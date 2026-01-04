@@ -33,17 +33,15 @@ const ChatItem = ({
       }
       <div className={styles.right}>
         <div className={styles.meta}>
-          <p>
-            {
-              chat.author.id !== "me" ? (
-                <>
-                  <span className={styles.author}>{"Bot"}</span>
-                  {characters.BULLET}
-                </>
-              ) : null
-            }
-            <time>{formatTime(chat.datetime)}</time>
-          </p>
+          {
+            chat.author.id !== "me" ? (
+              <>
+                <span className={styles.author}>{"Bot"}</span>
+                {characters.BULLET}
+              </>
+            ) : null
+          }
+          <time>{formatTime(chat.datetime)}</time>
         </div>
         <div className={styles.chat_list}>
           {

@@ -40,7 +40,7 @@ const Popover = ({
   isTooltip,
   className, children,
   closeOnScroll,
-  closeOnOutsideClick = "capture",
+  closeOnOutsideClick = true,
   closeOnEsc = "capture",
   lockScroll,
   adjustOnScroll = true,
@@ -157,11 +157,18 @@ const Popover = ({
     const handleClick = (e: PointerEvent) => {
       const popoverRect = elem.getBoundingClientRect();
 
-      if (!e.pointerType) return; // TODO: if e.target is outside, then close
-      if (popoverRect.x <= e.x && (popoverRect.x + popoverRect.width) >= e.x && popoverRect.y <= e.y && (popoverRect.y + popoverRect.height) >= e.y) return;
+      if (
+        popoverRect.x <= e.x && (popoverRect.x + popoverRect.width) >= e.x
+        &&
+        popoverRect.y <= e.y && (popoverRect.y + popoverRect.height) >= e.y
+      ) return;
+      if (!e.pointerType) {
+        const isContained = elem.contains(document.activeElement);
+        if (prevActiveElem.current && !isContained) (prevActiveElem.current as HTMLElement).focus();
+        return;
+      }
 
       onClose?.();
-      if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
     };
     window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
     return () => {

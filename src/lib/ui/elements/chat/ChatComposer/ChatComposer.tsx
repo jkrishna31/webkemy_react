@@ -123,7 +123,6 @@ const ChatComposer = ({
           onClose={() => setEmojiPickerAnchor(null)}
           className={styles.emoji_popover}
           closeOnEsc
-          closeOnOutsideClick
           trapFocus
         >
           <EmojiPicker />
