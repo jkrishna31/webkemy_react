@@ -135,12 +135,15 @@ const EmojiPicker = ({
     if (emojiBtn) {
       const emojiId = emojiBtn.getAttribute("data-id");
       const currEmojiId = anchor ? anchor.getAttribute("data-id") : null;
-      if (emojiId !== currEmojiId) setAnchor(emojiBtn);
+      if (emojiId !== currEmojiId) {
+        setAnchor(emojiBtn);
+      }
+    } else {
+      setAnchor(null);
     }
-    else setAnchor(null);
   }, 150);
 
-  const clearAnchor = useCallback((immediate?: boolean, e?: any) => {
+  const clearAnchor = useCallback((immediate?: boolean) => {
     clearTimeout(timeoutIdRef.current);
     timeoutIdRef.current = setTimeout(() => {
       setAnchor(null);
@@ -155,8 +158,8 @@ const EmojiPicker = ({
     if (hasVariation === "true" && emojiBtn && emojiId) {
       e.preventDefault();
       e.stopPropagation();
-      setVariationPicker({ emojiId, anchor: emojiBtn });
       clearAnchor(true);
+      setVariationPicker({ emojiId, anchor: emojiBtn });
     } else {
       setVariationPicker(undefined);
     }
@@ -308,8 +311,12 @@ const EmojiPicker = ({
         className={classes(styles.emojis_wrapper, "scroll_thin")}
         onMouseMove={throttledHandleMouseMove}
         onFocus={throttledHandleMouseMove}
-        onMouseLeave={() => clearAnchor(true)}
-        onBlur={() => clearAnchor(false)}
+        onMouseLeave={() => {
+          clearAnchor(true);
+        }}
+        onBlur={() => {
+          clearAnchor(false);
+        }}
         onContextMenu={handleContextMenu}
       >
         {
@@ -347,8 +354,11 @@ const EmojiPicker = ({
       {anchor ? (
         <Popover
           anchor={anchor}
-          onClose={() => clearAnchor(true)}
+          onClose={(e) => {
+            clearAnchor(e?.type === "scroll");
+          }}
           isTooltip
+          closeOnScroll
         >
           <div className={styles.popover}>
             {anchor.innerText}

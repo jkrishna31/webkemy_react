@@ -19,7 +19,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   isTooltip?: boolean;
-  onClose?: (prevActiveElement?: Element) => void;
+  onClose?: (e?: Event) => void;
   closeOnScroll?: boolean;
   closeOnOutsideClick?: boolean | "capture";
   lockScroll?: boolean;
@@ -75,23 +75,22 @@ const Popover = ({
         { placement, alignment, offset, overlap },
       );
 
-      // const computedStyle = getComputedStyle(elem);
-
       if (maxHeight) elem.style.setProperty("--popover-max-height", String(maxHeight));
       if (maxWidth) elem.style.setProperty("--popover-max-width", String(maxWidth));
 
-
-      if (useTransform) {
-        elem.style.setProperty("--popover-left", "0");
-        elem.style.setProperty("--popover-top", "0");
-        elem.style.setProperty("--popover-left-shift", `${Math.floor(left)}px`);
-        elem.style.setProperty("--popover-top-shift", `${Math.floor(top)}px`);
+      requestAnimationFrame(() => {
+        if (useTransform) {
+          elem.style.setProperty("--popover-left", "0");
+          elem.style.setProperty("--popover-top", "0");
+          elem.style.setProperty("--popover-left-shift", `${Math.floor(left)}px`);
+          elem.style.setProperty("--popover-top-shift", `${Math.floor(top)}px`);
+        } else {
+          // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+          elem.style.setProperty("--popover-left", `${left}px`);
+          elem.style.setProperty("--popover-top", `${top}px`);
+        }
         requestAnimationFrame(() => elem.style.setProperty("--popover-transition-dur", ".2s"));
-      } else {
-        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-        elem.style.setProperty("--popover-left", `${left}px`);
-        elem.style.setProperty("--popover-top", `${top}px`);
-      }
+      });
     });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
 
@@ -100,7 +99,7 @@ const Popover = ({
   useKey(closeOnEsc ? (e) => {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    onClose?.();
+    onClose?.(e);
     if (prevActiveElem.current) (prevActiveElem.current as HTMLElement).focus();
   } : undefined, ["Escape"], "keydown", closeOnEsc === "capture");
 
@@ -110,7 +109,7 @@ const Popover = ({
     prevActiveElem.current = document.activeElement;
     if (hasDOM() && "ResizeObserver" in window) {
       const observer = new ResizeObserver(updatePopoverLayout);
-      observer.observe(elem);
+      // observer.observe(elem);
       observer.observe(anchor);
       observer.observe(window.document.body);
       return () => {
@@ -136,7 +135,7 @@ const Popover = ({
     if (anchor && (isTooltip || closeOnScroll || adjustOnScroll)) {
       const handleScroll = (e: Event) => {
         if ((isTooltip || closeOnScroll) && (e.target as HTMLElement).contains(anchor)) {
-          onClose?.();
+          onClose?.(e);
         }
         if (adjustOnScroll && !popoverRef.current?.contains(e.target as HTMLElement)) {
           updatePopoverLayout();
@@ -164,7 +163,7 @@ const Popover = ({
         return;
         // TODO: (preserve only if closes [also check if another popover directly gets enabled])
       }
-      onClose?.();
+      onClose?.(e);
     };
     window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
     return () => {

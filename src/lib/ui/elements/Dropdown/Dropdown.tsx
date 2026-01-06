@@ -41,8 +41,7 @@ const Dropdown = ({
     onOpenChange?.(newState);
   };
 
-  const handleClose = (prevActiveElement?: Element) => {
-    if (prevActiveElement) (prevActiveElement as HTMLElement)?.focus();
+  const handleClose = () => {
     updateDropdownState(false);
   };
 

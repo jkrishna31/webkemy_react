@@ -12,6 +12,7 @@ import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
 import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
 import PaperclipIcon from "@/lib/ui/svgs/icons/PaperclipIcon";
 import SendSolidIcon from "@/lib/ui/svgs/icons/SendSolidIcon";
+import { isMobileDevice } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ChatComposer.module.scss";
@@ -42,7 +43,7 @@ const ChatComposer = ({
 
   useEffect(() => {
     const inputElem = inputRef.current;
-    if (inputElem) {
+    if (inputElem && !isMobileDevice()) {
       const handleKeyDown = (e: KeyboardEvent) => {
         if (e.key === Keys.ENTER) setEntered(!e.shiftKey);
         else setEntered(false);
@@ -69,7 +70,7 @@ const ChatComposer = ({
           value={query}
           onInput={(e: any) => {
             const val = e.target.value;
-            if (entered === true && val?.trim()?.length) {
+            if (!isMobileDevice() && entered === true && val?.trim()?.length) {
               setEntered(false);
               handleSubmit(e.target.value);
             } else {
