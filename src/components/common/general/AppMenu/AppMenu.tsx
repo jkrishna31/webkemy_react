@@ -205,7 +205,6 @@ export const menuItems = [
                 href: "/components/divider",
                 primary: "Divider",
                 icon: <DividerIcon />,
-                disabled: true,
             },
             {
                 key: "text",
@@ -578,6 +577,11 @@ const AppMenu = ({ open }: AppMenuProps) => {
                 id="navigation-drawer"
                 className={classes(styles.navmenu_container, styles.flex_vert)}
                 inert={open ? undefined : true}
+                onClick={e => {
+                    if ((e.target as HTMLElement).closest("[href]")) {
+                        closeMenu();
+                    }
+                }}
             >
                 <div className={styles.top_section}>
                     <AppLogo className={styles.logo_icon} />
