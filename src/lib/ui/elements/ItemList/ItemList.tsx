@@ -60,6 +60,24 @@ const ItemList = ({
           if (nextItemIdx != undefined) onHighlightChange({ index: nextItemIdx, keyboard: true });
           break;
         }
+        case Keys.HOME: {
+          const allItems = _ref.current?.querySelectorAll("[role='option']");
+          nextItemIdx = findNextCandidate(allItems, { current: (allItems?.length ?? 0) - 1, dir: "next" });
+          if (nextItemIdx != undefined) onHighlightChange({ index: nextItemIdx, keyboard: true });
+          break;
+        }
+        case Keys.END: {
+          const allItems = _ref.current?.querySelectorAll("[role='option']");
+          nextItemIdx = findNextCandidate(allItems, { current: 0, dir: "prev" });
+          if (nextItemIdx != undefined) onHighlightChange({ index: nextItemIdx, keyboard: true });
+          break;
+        }
+        case Keys.PAGE_UP: {
+          break;
+        }
+        case Keys.PAGE_DOWN: {
+          break;
+        }
       }
       onKeyDown?.(e as unknown as React.KeyboardEvent<HTMLDivElement>, nextItemIdx);
     };

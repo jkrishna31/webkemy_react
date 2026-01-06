@@ -78,7 +78,7 @@ const ChatComposer = ({
           }}
           ref={inputRef}
           className={styles.input}
-          enterKeyHint="send"
+        // enterKeyHint="send"
         />
         <div className={styles.controls}>
           <FileInput

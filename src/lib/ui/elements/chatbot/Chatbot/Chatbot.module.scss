@@ -73,13 +73,13 @@
   padding: .8rem;
   font-size: 1.4rem;
   box-shadow: var(--shadow-p) 0px 0px 6px 0px;
-  animation: fade-in .2s ease;
+  animation: fade-in .2s var(--timing-fn-1);
 }
 
 @keyframes fade-in {
   from {
-    transform: translate3d(0, 2rem, 0);
     opacity: 0;
+    transform: translate3d(0, 1rem, 0);
   }
 }
 

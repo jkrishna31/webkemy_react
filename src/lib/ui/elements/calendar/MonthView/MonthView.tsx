@@ -96,7 +96,7 @@ const MonthView = ({
   const { setStore, setField, getSegregatedEvents } = useCalendarActions();
 
   const [dragOverDay, setDragOverDay] = useState<string>();
-  const [selection, setSelection] = useState<[string, string]>(["", ""]);
+  const [selection, setSelection] = useState<[string?, string?] | undefined>();
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -153,7 +153,7 @@ const MonthView = ({
     const dayCellElem = (e.target as HTMLElement).closest("[data-day]");
     const dayDetails = dayCellElem?.getAttribute("data-day");
     if (dayDetails) {
-      setSelection(currSelection => [currSelection[0], dayDetails]);
+      setSelection(currSelection => [currSelection?.[0], dayDetails]);
     }
   };
 
@@ -196,7 +196,7 @@ const MonthView = ({
     if (dragOverDay === dayDetail.date.join("-")) {
       return true;
     }
-    if (selection[0] && selection[1]) {
+    if (selection?.[0] && selection?.[1]) {
       const [sy, sm, sd] = selection[0].split("-").map(Number);
       const [ey, em, ed] = selection[1].split("-").map(Number);
       const sDate = new Date(sy, sm, sd);
@@ -247,7 +247,7 @@ const MonthView = ({
       className={classes(styles.container, className)}
       {...dragEvts}
       onPointerDown={windowSize[0] > 700 ? handlePointerDown : undefined}
-      onPointerLeave={() => setSelection(["", ""])}
+      onPointerLeave={() => setSelection(undefined)}
     >
       {
         weekDaysOrder.map((_, idx: number) => {

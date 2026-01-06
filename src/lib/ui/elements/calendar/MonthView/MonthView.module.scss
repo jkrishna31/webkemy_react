@@ -2,7 +2,6 @@
   position: relative;
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
-  // grid-template-rows: auto repeat(5, 1fr);
   grid-template-rows: auto;
   grid-auto-rows: 1fr;
   align-items: stretch;
@@ -18,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 500;
   color: var(--fg-s);
   background-color: var(--bg-p);
@@ -30,12 +29,12 @@
   opacity: 0;
   padding: .4rem;
   transition: opacity .2s linear;
-}
 
-.add_icon {
-  width: 1.8rem;
-  height: 1.8rem;
-  stroke-width: .2rem;
+  svg {
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .2rem;
+  }
 }
 
 .header_cell:hover .add_btn,
@@ -46,6 +45,14 @@
 .header_cell[data-compact="true"] {
   justify-content: center;
   padding-inline: .4rem;
+  font-size: 1.4rem;
+}
+
+.header_cell[data-compact="true"] .add_btn {
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
 }
 
 

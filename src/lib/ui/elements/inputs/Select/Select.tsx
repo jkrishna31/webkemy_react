@@ -112,13 +112,10 @@ const Select = ({
     };
 
     const handleKeyDown = (e: React.KeyboardEvent, highlightedIdx?: number) => {
-        if (e.key === Keys.ARROW_DOWN || e.key === Keys.ARROW_UP) {
-            if (e.shiftKey) {
-                handleSelect(undefined, highlightedIdx);
-            }
-        } else if (e.key === Keys.ENTER) {
+        if (e.key === Keys.ENTER)
             handleSelect(undefined);
-        }
+        else if ((e.key === Keys.ARROW_DOWN || e.key === Keys.ARROW_UP) && e.shiftKey)
+            handleSelect(undefined, highlightedIdx);
     };
 
     // TODO: variant combobox (+ Add "<query>")
@@ -207,7 +204,6 @@ const Select = ({
                     aria-pressed={open}
                     className={styles.dd_btn}
                     onClick={(e) => {
-                        e.stopPropagation();
                         setOpen(!open);
                     }}
                     type="button"

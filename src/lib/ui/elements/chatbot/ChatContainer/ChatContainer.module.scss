@@ -12,11 +12,11 @@
   border-radius: .8rem;
   background-color: var(--bg-t);
   transform: translate3d(0, calc(-100% - 2rem), 0);
-  animation: fade-in 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
   border-block: .2rem solid var(--fg-t);
   border-inline: .1rem solid var(--border-t);
   display: flex;
   flex-direction: column;
+  animation: fade-in 200ms var(--timing-fn-1);
 }
 
 @media screen and (min-width: 768px) {
@@ -33,13 +33,9 @@
 }
 
 @keyframes fade-in {
-  0% {
-    transform: translate3d(0, -100%, 0);
+  from {
     opacity: 0;
-  }
-
-  80% {
-    opacity: 1;
+    transform: translate3d(0, calc(-100% - 3rem), 0);
   }
 }
 

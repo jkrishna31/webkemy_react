@@ -10,7 +10,7 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./SearchForm.module.scss";
 
-export interface SearchFormProps extends ComponentProps<"div"> {
+export interface SearchFormProps extends ComponentProps<"form"> {
     onClose?: () => void;
 }
 
@@ -21,14 +21,14 @@ const SearchForm = ({
     onMicClick, onClick,
     query, onQueryChange,
     allowClear = true, allowSearch = true,
-    xPos, onClose,
+    xPos, onClose, ref,
     ...props
 }: any) => {
-    const anchorRef = useRef<HTMLDivElement>(null);
+    const inputRef = useRef<HTMLInputElement>(null);
 
     return (
         <form className={classes(styles.form, formClass)} role="search" {...props}>
-            <InputFieldWrapper ref={anchorRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
+            <InputFieldWrapper ref={inputRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
                 <GeneralInput
                     spellCheck="false" id="query"
                     onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
@@ -52,9 +52,9 @@ const SearchForm = ({
                     ) : null
                 }
             </InputFieldWrapper>
-            {(!!searchDd && !!anchorRef.current) && (
+            {!!(searchDd && inputRef?.current) && (
                 <Popover
-                    anchor={anchorRef.current}
+                    anchor={inputRef.current}
                     placement="bottom"
                     alignment="right"
                     className={styles.dropdown}

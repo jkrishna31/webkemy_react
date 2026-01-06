@@ -1,14 +1,21 @@
 export const Keys = {
   ENTER: "Enter",
-  ESC: "Escape",
-  BACKSPACE: "Backspace",
-  DEL: "Delete",
-  INS: "Insert",
   CTRL: "Control",
   SHIFT: "Shift",
   TAB: "Tab",
   ALT: "Alt",
   SPACE: "Space",
+  ESC: "Escape",
+  BACKSPACE: "Backspace",
+  CAPS_LOCK: "CapsLock",
+  FN: "WakeUp",
+
+  DEL: "Delete",
+  INS: "Insert",
+  HOME: "Home",
+  END: "End",
+  PAGE_UP: "PageUp",
+  PAGE_DOWN: "PageDown",
 
   // Arrow Keys
   ARROW_UP: "ArrowUp",

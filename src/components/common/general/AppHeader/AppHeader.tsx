@@ -58,15 +58,13 @@ const AppHeader = ({
                         <AppLogo className={styles.header_app_logo} />
                     </Link>
                     <SearchForm
-                        query={query} onQueryChange={setQuery}
-                        audio={true}
-                        onMicClick={() => {
-                            setSearch("active", "audio");
-                        }}
+                        query={query}
+                        onQueryChange={setQuery}
+                        audio
+                        onMicClick={() => setSearch("active", "audio")}
                         onClick={() => setLayout("searchMenu", true)}
                         onClose={() => setLayout("searchMenu", false)}
-                        formClass={styles.sf}
-                        inputClass={styles.sfi}
+                        formClass={styles.search_form}
                         searchDd={
                             searchMenu ? (
                                 <ul>

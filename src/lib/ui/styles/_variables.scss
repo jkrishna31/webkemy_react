@@ -1,28 +1,21 @@
 :root {
     // DIMENSIONS ...
-    //  ------------------------------------------------------------------------
     --mw-app: 140rem;
     --h-header: 6rem;
-    //  ************************************************************************
 
     //  FONTS ...
-    //  ------------------------------------------------------------------------
     --font-mono: "SFMono-Regular", Dank Mono, Operator Mono, Inconsolata, Fira Mono, ui-monospace, SF Mono, Monaco, Droid Sans Mono, Source Code Pro, Cascadia Code, Menlo, Consolas, DejaVu Sans Mono, monospace;
     --font-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
     --font-serif: 'Times New Roman', Times, serif;
-    //  ************************************************************************
 
-    //  LAYOUT BREAKPOINTS ...
-    //  ------------------------------------------------------------------------
+    //  LAYOUT BREAKPOINTS
     --wbr-s: 350px;
     --wbr-m: 767px;
     --wbr-l: 1200px;
     --wbr-xl: 1400px;
     --wbr-xxl: 1600px;
-    //  ************************************************************************
 
-    //  STACKING ...
-    //  ------------------------------------------------------------------------
+    //  STACKING
     --zi-dialog: 1000000;
     --zi-drawer: 100000;
     --zi-menu: 100000;
@@ -35,10 +28,10 @@
     --zi-bottom: -1;
     --zi-deep: -10;
     --zi-hidden: -1000;
-    //  ************************************************************************
 
-    //  BORDER RADIUS ...
-    //  ------------------------------------------------------------------------
+    //  BORDER RADIUS
     --br-pill: 999rem;
-    //  ************************************************************************
+
+    // ANIMATION TIMING FUNCTION
+    --timing-fn-1: cubic-bezier(.08, .52, .52, 1);
 }

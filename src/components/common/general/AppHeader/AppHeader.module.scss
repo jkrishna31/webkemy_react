@@ -1,12 +1,10 @@
-@use '@/lib/ui/styles/mixins/animations' as *;
-
 .header {
     background: var(--bg-overlay);
     -webkit-backdrop-filter: blur(.4rem);
     backdrop-filter: blur(.4rem);
 }
 
-.sf {
+.search_form {
     max-width: 36rem;
     width: 36rem;
     margin-left: auto;
@@ -172,7 +170,7 @@
         display: flex;
     }
 
-    .sf,
+    .search_form,
     .mob_hide,
     .lang_btn,
     .theme_btn {

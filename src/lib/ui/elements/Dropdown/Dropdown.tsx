@@ -41,6 +41,11 @@ const Dropdown = ({
     onOpenChange?.(newState);
   };
 
+  const handleClose = (prevActiveElement?: Element) => {
+    if (prevActiveElement) (prevActiveElement as HTMLElement)?.focus();
+    updateDropdownState(false);
+  };
+
   useEffect(() => setOpen(open), [open]);
 
   return (
@@ -64,7 +69,7 @@ const Dropdown = ({
       {(_open && !!triggerRef.current) && (
         <Popover
           anchor={triggerRef.current}
-          onClose={() => updateDropdownState(false)}
+          onClose={handleClose}
           offset={6}
           className={classes(styles.dropdown, dropdownClass)}
           alignment={alignment}

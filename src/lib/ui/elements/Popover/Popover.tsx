@@ -19,7 +19,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   isTooltip?: boolean;
-  onClose?: () => void;
+  onClose?: (prevActiveElement?: Element) => void;
   closeOnScroll?: boolean;
   closeOnOutsideClick?: boolean | "capture";
   lockScroll?: boolean;
@@ -65,10 +65,9 @@ const Popover = ({
     if (!elem || !anchor) return;
 
     const anchorBoundingRect = anchor?.getBoundingClientRect();
+    elem.style.setProperty("--popover-min-width", `${anchorBoundingRect.width}px`);
 
     requestAnimationFrame(() => {
-      elem.style.minWidth = `${anchorBoundingRect.width}px`;
-
       const popoverBoundingRect = (elem as HTMLDivElement).getBoundingClientRect();
 
       const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
@@ -76,24 +75,23 @@ const Popover = ({
         { placement, alignment, offset, overlap },
       );
 
-      const computedStyle = getComputedStyle(elem);
+      // const computedStyle = getComputedStyle(elem);
 
-      if (maxHeight) elem.style.maxHeight = String(maxHeight);
-      if (maxWidth) elem.style.maxWidth = String(maxWidth);
+      if (maxHeight) elem.style.setProperty("--popover-max-height", String(maxHeight));
+      if (maxWidth) elem.style.setProperty("--popover-max-width", String(maxWidth));
 
-      if (computedStyle.transform !== "none") elem.style.transition = "transform .2s ease";
 
-      requestAnimationFrame(() => {
+      if (useTransform) {
         elem.style.setProperty("--popover-left", "0");
         elem.style.setProperty("--popover-top", "0");
-        if (useTransform) {
-          elem.style.transform = `translate3d(${left}px, ${top}px, 0)`;
-        } else {
-          // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
-          elem.style.left = `${left}px`;
-          elem.style.top = `${top}px`;
-        }
-      });
+        elem.style.setProperty("--popover-left-shift", `${Math.floor(left)}px`);
+        elem.style.setProperty("--popover-top-shift", `${Math.floor(top)}px`);
+        requestAnimationFrame(() => elem.style.setProperty("--popover-transition-dur", ".2s"));
+      } else {
+        // will use this for when having nested popover (not using portal), since transform affects the children fixed elements 
+        elem.style.setProperty("--popover-left", `${left}px`);
+        elem.style.setProperty("--popover-top", `${top}px`);
+      }
     });
   }, [alignment, anchor, offset, overlap, placement, useTransform]);
 
@@ -109,12 +107,9 @@ const Popover = ({
   useLayoutEffect(() => {
     const elem = popoverRef.current;
     if (!anchor || !elem) return;
-    updatePopoverLayout();
     prevActiveElem.current = document.activeElement;
     if (hasDOM() && "ResizeObserver" in window) {
-      const observer = new ResizeObserver((e) => {
-        updatePopoverLayout();
-      });
+      const observer = new ResizeObserver(updatePopoverLayout);
       observer.observe(elem);
       observer.observe(anchor);
       observer.observe(window.document.body);
@@ -122,6 +117,7 @@ const Popover = ({
         observer.disconnect();
       };
     } else {
+      updatePopoverLayout();
       window.addEventListener("resize", updatePopoverLayout, { passive: true, capture: true });
       return () => {
         window.removeEventListener("resize", updatePopoverLayout, true);
@@ -166,15 +162,15 @@ const Popover = ({
         const isContained = elem.contains(document.activeElement);
         if (prevActiveElem.current && !isContained) (prevActiveElem.current as HTMLElement).focus();
         return;
+        // TODO: (preserve only if closes [also check if another popover directly gets enabled])
       }
-
       onClose?.();
     };
     window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
     return () => {
       window.removeEventListener("click", handleClick, closeOnOutsideClick === "capture");
     };
-  }, [anchor, closeOnOutsideClick, isMounted, lock, onClose, popoverId, unlock]);
+  }, [anchor, closeOnOutsideClick, isMounted, onClose]);
 
   return usePortal
     ? createPortal((

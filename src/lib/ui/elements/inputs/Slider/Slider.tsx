@@ -1,14 +1,15 @@
 import React, { ComponentProps } from "react";
 
+import { Orientation } from "@/lib/types/general.types";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Slider.module.scss";
 
 export interface SliderProps extends ComponentProps<"input"> {
-  orientation?: "vertical" | "horizontal"
-  variant?: "tube" | "rod"
-  wrapperClass?: string
-  showFill?: boolean
+  orientation?: Orientation;
+  variant?: "tube" | "rod";
+  wrapperClass?: string;
+  showFill?: boolean;
 }
 
 const Slider = ({

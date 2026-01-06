@@ -3,15 +3,26 @@
   --popover-top: -100%;
   --popover-max-height: calc(100vh - 4rem);
   --popover-max-width: calc(100vw - 4rem);
+  --popover-min-width: auto;
+  --popover-left-shift: 0;
+  --popover-top-shift: 0;
+  --popover-transition-dur: 0;
 
   position: fixed;
   left: var(--popover-left);
   top: var(--popover-top);
+  min-width: var(--popover-min-width);
   max-width: var(--popover-max-width);
   max-height: var(--popover-max-height);
   z-index: var(--zi-drawer);
+  transition-duration: var(--popover-transition-dur);
+  transition-property: transform;
+  transition-timing-function: ease;
+  transform: translate3d(var(--popover-left-shift), var(--popover-top-shift), 0);
 
-  animation: fade-in .3s ease;
+  animation-name: faded-slide-in;
+  animation-timing-function: var(--timing-fn-1);
+  animation-duration: .2s;
 
   &[data-popover="tooltip"] {
     pointer-events: none;
@@ -19,8 +30,9 @@
   }
 }
 
-@keyframes fade-in {
+@keyframes faded-slide-in {
   from {
     opacity: 0;
+    // transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) + 1rem), 0);
   }
 }

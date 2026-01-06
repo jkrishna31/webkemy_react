@@ -4,8 +4,7 @@ import { FOCUS_SELECTOR, focusable, scopeTab, tabbable } from "@/lib/utils/tabba
 
 export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) {
   const focusNode = (node: HTMLElement) => {
-    let focusElement: HTMLElement | null = node.querySelector("[data-autofocus]");
-
+    let focusElement: HTMLElement | null = node?.querySelector("[data-autofocus]");
 
     if (!focusElement) {
       const children = Array.from<HTMLElement>(node.querySelectorAll(FOCUS_SELECTOR));
@@ -21,18 +20,14 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) 
   };
 
   useEffect(() => {
-    if (!active) {
-      return undefined;
-    }
+    const elem = ref.current;
 
-    if (ref.current) {
-      setTimeout(() => focusNode(ref.current!));
-    }
+    if (!active || !elem) return undefined;
+
+    setTimeout(() => focusNode(elem));
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Tab" && ref.current) {
-        scopeTab(ref.current, event);
-      }
+      if (event.key === "Tab") scopeTab(elem, event);
     };
 
     document.addEventListener("keydown", handleKeyDown);
