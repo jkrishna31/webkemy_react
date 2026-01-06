@@ -10,8 +10,8 @@
     cursor: pointer;
     z-index: var(--zi-main-overlay);
 
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
     background-color: var(--bg-overlay);
 
     transform: none;

@@ -14,11 +14,11 @@ const Page = () => {
       <Divider label="Label" labelAlignment="right" />
       <div className="flex items-center gap-[1.6rem]">
         <span>{"Left"}</span>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" label="Divider Start" />
         <span>{"Center"}</span>
-        <Divider orientation="vertical" label="Divider Middle" />
+        <Divider orientation="vertical" label="Divider Middle" labelAlignment="center" />
         <span>{"Right"}</span>
-        <Divider orientation="vertical" />
+        <Divider orientation="vertical" label="End" labelAlignment="right" />
         <span>{"None"}</span>
       </div>
     </main>
