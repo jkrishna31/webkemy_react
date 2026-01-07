@@ -86,9 +86,9 @@ export const calculateRenderPosition = (
       }
       default: {
         position.left = (_leftSpace >= _rightSpace) ? (anchorBoundingRect.x - offset - targetBoundingRect.width) : offset;
-        position.maxWidth = overlap ? `calc(100vw - ${offset * 2})` : `${(_leftSpace >= _rightSpace) ? _leftSpace : _rightSpace}px`;
       }
     }
+    position.maxWidth = overlap ? `calc(100vw - ${offset * 2})` : `${(_leftSpace >= _rightSpace) ? _leftSpace : _rightSpace}px`;
 
     return position;
   }
@@ -148,9 +148,9 @@ export const calculateRenderPosition = (
       }
       default: {
         position.top = (_bottomSpace >= _topSpace) ? (anchorBoundingRect.y + anchorBoundingRect.height + offset) : offset;
-        position.maxHeight = overlap ? `calc(100vh - ${offset * 2})` : `${(_bottomSpace >= _topSpace) ? _bottomSpace : _topSpace}px`;
       }
     }
+    position.maxHeight = overlap ? `calc(100vh - ${offset * 2})` : `${(_bottomSpace >= _topSpace) ? _bottomSpace : _topSpace}px`;
 
     return position;
   }

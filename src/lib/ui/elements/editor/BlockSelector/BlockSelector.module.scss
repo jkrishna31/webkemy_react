@@ -23,17 +23,13 @@
 }
 
 .tools_list {
-    min-width: 24rem;
-    max-height: 46rem;
-    overflow: auto;
-    overscroll-behavior-y: contain;
-
     display: flex;
     flex-direction: column;
 
     border-radius: .6rem;
     background-color: var(--bg-s);
     scrollbar-width: thin;
+    padding-block: .4rem;
 }
 
 .list {
@@ -43,6 +39,12 @@
 
 .group {
     background-color: var(--bg-s);
+}
+
+.dropdown {
+    min-width: 24rem;
+    max-height: min(var(--popover-max-height, 46rem), 46rem);
+    padding-block: 0;
 }
 
 

@@ -21,7 +21,7 @@
   transform: translate3d(var(--popover-left-shift), var(--popover-top-shift), 0);
 
   animation-name: faded-slide-in;
-  animation-timing-function: var(--timing-fn-1);
+  animation-timing-function: ease;
   animation-duration: .2s;
 
   &[data-popover="tooltip"] {

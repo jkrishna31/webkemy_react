@@ -17,6 +17,7 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
             hintIcon={null}
             className={classes(styles.wrapper, wrapperClass)}
             triggerClass={classes(styles.selector, btnClass)}
+            dropdownClass={styles.dropdown}
             alignment="left"
             dropdown={
                 <ItemList className={classes(styles.tools_list, "scroll_thin", listClass)}>
