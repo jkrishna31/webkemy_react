@@ -46,6 +46,8 @@ const statusColorMap: { [key in string]: Color } = {
   "rejected": "red",
   "leave": "blue",
   "pending": "yellow",
+  "transferred": "pink",
+  "dead": "orange",
 };
 
 type TableData = {

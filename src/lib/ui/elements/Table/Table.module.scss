@@ -239,10 +239,13 @@
     transform: translate3d(-50%, -50%, 0);
     width: .6rem;
     height: 60%;
-    border: .15rem solid var(--yellow-1);
-    background-color: var(--yellow-1-10);
+    border: .15rem solid var(--border-p);
+    background-color: var(--ghost-1);
     border-radius: var(--br-pill);
     opacity: 0;
+    transition-property: opacity, border, background;
+    transition-duration: .3s;
+    transition-timing-function: ease;
   }
 
   &:hover,
@@ -250,6 +253,8 @@
   &.active_handle {
     &::after {
       opacity: 1;
+      border-color: var(--yellow-1);
+      background-color: var(--yellow-1-10);
     }
   }
 }
