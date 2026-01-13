@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { useScroll } from "@/lib/hooks/useScroll";
 import { classes } from "@/lib/utils/style.utils";

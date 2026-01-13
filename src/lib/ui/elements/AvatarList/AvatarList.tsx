@@ -1,4 +1,4 @@
-import React, { ComponentProps, ElementType } from "react";
+import { ComponentProps, ElementType } from "react";
 
 import { Avatar, type AvatarProps } from "@/lib/ui/elements/Avatar";
 import { classes } from "@/lib/utils/style.utils";

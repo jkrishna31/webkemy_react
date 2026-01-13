@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";

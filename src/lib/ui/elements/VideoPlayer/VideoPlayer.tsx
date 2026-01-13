@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
 
 import { useToastActions } from "@/data/stores";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";

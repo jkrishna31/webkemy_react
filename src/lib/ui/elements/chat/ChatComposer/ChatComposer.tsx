@@ -1,4 +1,4 @@
-import React, { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { useFiles } from "@/lib/hooks/useFiles";

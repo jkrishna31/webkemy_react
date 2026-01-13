@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";

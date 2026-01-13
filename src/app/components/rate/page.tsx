@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Rate } from "@/lib/ui/elements/Rate";
 import CircleIcon from "@/lib/ui/svgs/icons/CircleIcon";

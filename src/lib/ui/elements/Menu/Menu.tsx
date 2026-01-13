@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ElementType, ReactNode, useEffect, useRef, useState } from "react";
+import { ComponentProps, ElementType, ReactNode, useEffect, useRef, useState } from "react";
 
 import { TItem } from "@/lib/ui/elements/Item";
 import { Popover } from "@/lib/ui/elements/Popover";

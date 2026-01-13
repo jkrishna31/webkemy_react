@@ -1,4 +1,4 @@
-import React, { ComponentProps, FormEvent, useRef } from "react";
+import { ComponentProps, FormEvent, useRef } from "react";
 
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";

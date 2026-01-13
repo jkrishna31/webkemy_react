@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { Orientation } from "@/lib/types/general.types";
 import { classes } from "@/lib/utils/style.utils";

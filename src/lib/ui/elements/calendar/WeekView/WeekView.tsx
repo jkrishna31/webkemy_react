@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect } from "react";
+import { ComponentProps, useEffect } from "react";
 
 import { getWeekOfTheMonth } from "@/lib/utils/datetime.utils";
 

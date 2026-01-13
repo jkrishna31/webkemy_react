@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, CSSProperties, ReactNode, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentProps, CSSProperties, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";

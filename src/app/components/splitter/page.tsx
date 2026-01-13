@@ -1,7 +1,5 @@
 "use client";
 
-import React, { useCallback } from "react";
-
 import { PageSetup } from "@/components/managers";
 import { useSplitter } from "@/lib/hooks/useSplitter";
 import { SplitHandle, SplitSection, Splitter } from "@/lib/ui/elements/Splitter";
@@ -9,45 +7,35 @@ import { SplitHandle, SplitSection, Splitter } from "@/lib/ui/elements/Splitter"
 import styles from "./styles.module.scss";
 
 const Page = () => {
-  const { sizes, onResize } = useSplitter([100, 100, 100]);
-  const { sizes: sizes12, onResize: onResize12 } = useSplitter([100, 100]);
-  const { sizes: sizes67, onResize: onResize67 } = useSplitter([100, 100]);
-  const { sizes: sizes345, onResize: onResize345 } = useSplitter([100, 100, 100]);
-
-  const handleChangeFirst = useCallback((e: any) => onResize(Number(e.target.value)), [onResize]);
-  const handleChangeLast = useCallback((e: any) => onResize(Number(e.target.value), 1), [onResize]);
-  const handleChange12 = useCallback((e: any) => onResize12(Number(e.target.value)), [onResize12]);
-  const handleChange67 = useCallback((e: any) => onResize67(Number(e.target.value)), [onResize67]);
-  const handleChange345First = useCallback((e: any) => onResize345(Number(e.target.value)), [onResize345]);
-  const handleChange345Last = useCallback((e: any) => onResize345(Number(e.target.value), 1), [onResize345]);
+  const { sections, onResize, getSectionSize } = useSplitter([{ key: "1", children: ["2", "3"] }, { key: "4", children: ["5", "6", "7"] }, { key: "8", children: ["9", "10"] }]);
 
   return (
     <main className={styles.main}>
       <PageSetup pageKey="splitter" />
 
       <Splitter className={styles.root_splitter}>
-        <Splitter layout="v" value={sizes[0]}>
-          <SplitSection className={styles.split_section} size={sizes12[0]}>{"1"}</SplitSection>
-          <SplitHandle onChange={handleChange12} />
-          <SplitSection className={styles.split_section} size={sizes12[1]}>{"2"}</SplitSection>
+        <Splitter layout="v" size={getSectionSize("1")}>
+          <SplitSection size={getSectionSize("2")} className={styles.split_section}>{"1"}</SplitSection>
+          <SplitHandle onChange={value => onResize(value, [0, 0])} />
+          <SplitSection size={getSectionSize("3")} className={styles.split_section}>{"2"}</SplitSection>
         </Splitter>
 
-        <SplitHandle onChange={handleChangeFirst} />
+        <SplitHandle onChange={value => onResize(value, [0])} />
 
-        <Splitter layout="v" value={sizes[1]}>
-          <SplitSection className={styles.split_section} size={sizes345[0]}>{"3"}</SplitSection>
-          <SplitHandle onChange={handleChange345First} />
-          <SplitSection className={styles.split_section} size={sizes345[1]}>{"4"}</SplitSection>
-          <SplitHandle onChange={handleChange345Last} />
-          <SplitSection className={styles.split_section} size={sizes345[2]}>{"5"}</SplitSection>
+        <Splitter layout="v" size={getSectionSize("4")}>
+          <SplitSection size={getSectionSize("5")} className={styles.split_section}>{"3"}</SplitSection>
+          <SplitHandle onChange={value => onResize(value, [1, 0])} />
+          <SplitSection size={getSectionSize("6")} className={styles.split_section}>{"4"}</SplitSection>
+          <SplitHandle onChange={value => onResize(value, [1, 1])} />
+          <SplitSection size={getSectionSize("7")} className={styles.split_section}>{"5"}</SplitSection>
         </Splitter>
 
-        <SplitHandle onChange={handleChangeLast} />
+        <SplitHandle onChange={value => onResize(value, [1])} />
 
-        <Splitter layout="v" value={sizes[2]}>
-          <SplitSection className={styles.split_section} size={sizes67[0]}>{"6"}</SplitSection>
-          <SplitHandle onChange={handleChange67} />
-          <SplitSection className={styles.split_section} size={sizes67[1]}>{"7"}</SplitSection>
+        <Splitter layout="v" size={getSectionSize("8")}>
+          <SplitSection size={getSectionSize("9")} className={styles.split_section}>{"6"}</SplitSection>
+          <SplitHandle onChange={value => onResize(value, [2, 0])} />
+          <SplitSection size={getSectionSize("10")} className={styles.split_section}>{"7"}</SplitSection>
         </Splitter>
       </Splitter>
     </main>

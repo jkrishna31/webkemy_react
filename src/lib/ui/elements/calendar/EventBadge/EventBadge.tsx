@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { formatTime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";

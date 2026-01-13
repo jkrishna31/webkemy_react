@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { ChatItem } from "@/lib/ui/elements/chat/ChatItem";
 import { compareDateByPrecision, formatDate } from "@/lib/utils/datetime.utils";

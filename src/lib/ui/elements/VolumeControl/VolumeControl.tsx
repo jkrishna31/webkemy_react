@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Button } from "@/lib/ui/elements/butttons";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import MinusIcon from "@/lib/ui/svgs/icons/MinusIcon";

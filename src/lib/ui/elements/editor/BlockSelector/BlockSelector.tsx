@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Item } from "@/lib/ui/elements/Item";
@@ -11,7 +10,14 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./BlockSelector.module.scss";
 
-const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listClass, ...props }: any) => {
+export interface BlockSelectorProps {
+    options?: any[];
+    wrapperClass?: string;
+    btnClass?: string;
+    listClass?: string;
+}
+
+const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...props }: BlockSelectorProps) => {
     return (
         <Dropdown
             hintIcon={null}
@@ -22,7 +28,7 @@ const BlockSelector = ({ label, blocks, onSelect, wrapperClass, btnClass, listCl
             dropdown={
                 <ItemList className={classes(styles.tools_list, "scroll_thin", listClass)}>
                     {
-                        blocks?.map((group: any) => (
+                        options?.map((group: any) => (
                             <ItemGroup
                                 key={group.key}
                                 headerClass={classes(styles.group, group.className)}

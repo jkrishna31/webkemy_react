@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { TextArea } from "@/lib/ui/elements/inputs/TextArea";

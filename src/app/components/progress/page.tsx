@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Progress } from "@/lib/ui/elements/Progress";

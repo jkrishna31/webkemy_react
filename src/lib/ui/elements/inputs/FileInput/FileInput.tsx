@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import AddFileIcon from "@/lib/ui/svgs/icons/AddFileIcon";
 import { classes } from "@/lib/utils/style.utils";

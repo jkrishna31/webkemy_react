@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Radio } from "@/lib/ui/elements/inputs/Radio";

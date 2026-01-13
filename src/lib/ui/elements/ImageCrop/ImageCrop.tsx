@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { clampNumber } from "@/lib/utils/math.utils";
 import { classes } from "@/lib/utils/style.utils";

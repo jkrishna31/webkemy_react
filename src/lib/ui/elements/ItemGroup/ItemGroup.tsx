@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useRef } from "react";
+import { ComponentProps, ReactNode, useRef } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";

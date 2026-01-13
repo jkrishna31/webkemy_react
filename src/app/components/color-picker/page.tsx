@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { ColorPicker } from "@/lib/ui/elements/inputs/ColorPicker";
 

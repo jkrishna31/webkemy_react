@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  webkemy-web:
+    container_name: webkemy-web
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          memory: 6000M
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumens:
+      - .:/app
+      - /app/.next
+      - /app/node_modules
+    ports:
+      - 1111:1111
+    env_file:
+      - ./.env.local

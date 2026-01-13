@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useRef, useState } from "react";
+import { ComponentProps, useRef, useState } from "react";
 
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { Button } from "@/lib/ui/elements/butttons";

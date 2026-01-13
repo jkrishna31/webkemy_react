@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { ToastType, useToastActions } from "@/data/stores";

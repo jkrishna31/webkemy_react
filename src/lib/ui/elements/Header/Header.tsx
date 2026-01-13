@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 
@@ -15,7 +15,7 @@ const Header = ({
 }: HeaderProps) => {
   return (
     <header
-      className={classes(styles.header, className)}
+      className={classes(styles.header, !visible && styles.hide, className)}
       data-invisible={!visible}
       {...props}
     >

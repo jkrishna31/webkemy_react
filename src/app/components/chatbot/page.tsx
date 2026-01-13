@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Chatbot } from "@/lib/ui/elements/chatbot";
 

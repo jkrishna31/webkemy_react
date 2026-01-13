@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { useWindowSize } from "@/data/stores";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";

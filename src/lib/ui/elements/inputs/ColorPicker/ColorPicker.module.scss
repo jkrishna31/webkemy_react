@@ -1,7 +1,10 @@
 .wrapper {
-  --active-hue: 0;
-  --active-hsl: hsl(0, 100%, 50%);
-  --active-hsla: hsla(0, 100%, 50%, 100%);
+  --hue: 0;
+  --saturation: 100%;
+  --lightness: 50%;
+  --alpha: 100%;
+  --active-hsl: hsl(var(--hue), var(--saturation), var(--lightness));
+  --active-hsla: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha));
   --color-area-size: 24rem;
   display: grid;
   grid-template-rows: auto auto;
@@ -14,7 +17,7 @@
     // border-radius: 1.2rem;
 
     forced-color-adjust: none;
-    background: linear-gradient(to top, black, transparent), linear-gradient(to right, rgb(255, 255, 255), transparent), hsl(var(--active-hue), 100%, 50%);
+    background: linear-gradient(to top, black, transparent), linear-gradient(to right, rgb(255, 255, 255), transparent), hsl(var(--hue), 100%, 50%);
   }
 
   .area_thumb {
@@ -54,23 +57,23 @@
       repeating-conic-gradient(rgb(204, 204, 204) 0%, rgb(204, 204, 204) 25%, white 0%, white 50%) 50% center / 16px 16px;
 
     &::-webkit-slider-thumb {
-      background-color: hsl(var(--active-hue), 100%, 50%);
+      background-color: hsl(var(--hue), 100%, 50%);
       box-shadow: 0 0 .1rem var(--shadow-s);
     }
 
     &::-moz-range-thumb {
-      background-color: hsl(var(--active-hue), 100%, 50%);
+      background-color: hsl(var(--hue), 100%, 50%);
       box-shadow: 0 0 .1rem var(--shadow-s);
     }
 
     &:hover,
     &:focus {
       &::-webkit-slider-thumb {
-        background-color: hsl(var(--active-hue), 100%, 50%);
+        background-color: hsl(var(--hue), 100%, 50%);
       }
 
       &::-moz-range-thumb {
-        background-color: hsl(var(--active-hue), 100%, 50%);
+        background-color: hsl(var(--hue), 100%, 50%);
       }
     }
   }

@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { Color } from "@/lib/types/general.types";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";

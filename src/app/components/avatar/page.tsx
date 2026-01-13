@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Avatar } from "@/lib/ui/elements/Avatar";

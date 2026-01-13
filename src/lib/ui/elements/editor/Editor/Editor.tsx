@@ -23,24 +23,26 @@ const getPlaceholder = (type: any) => {
 };
 
 export interface EditorProps {
+    blocks?: any[];
+    setBlocks?: any;
     rootClass?: string;
     className?: string;
     children?: ReactNode;
 }
 
 const Editor = ({
+    blocks, setBlocks,
     rootClass, className, children,
     ...props
 }: EditorProps) => {
     const editorRef = useRef<HTMLDivElement>(null);
 
-    const [postBlocks, setPostBlocks] = useState<any[]>([]);
     const [activeBlock, setActiveBlock] = useState<any>(null);
     const [activeBlockElem, setActiveBlockElem] = useState<any>(null);
 
     useEffect(() => {
-        if (postBlocks.length === 0) {
-            setPostBlocks([{
+        if (blocks?.length === 0) {
+            setBlocks([{
                 type: editorBlocks.PARA,
                 id: getUniqueId(),
                 props: {
@@ -48,7 +50,7 @@ const Editor = ({
                 },
             }]);
         }
-    }, [postBlocks]);
+    }, [blocks, setBlocks]);
 
     const resetToolbar = useCallback(() => {
         // setBoxConfig({
@@ -59,10 +61,10 @@ const Editor = ({
         // setToolsState({});
     }, []);
 
-    const handleBlockActions = (op: "insert", blockId: string, type: any, dir: "up" | "down") => {
-        setPostBlocks(currPostBlocks => {
+    const handleBlockActions = useCallback((op: "insert", blockId: string, type: any, dir: "up" | "down") => {
+        setBlocks((currPostBlocks: any) => {
             const newPostBlocks: any[] = [];
-            currPostBlocks.forEach(block => {
+            currPostBlocks.forEach((block: any) => {
                 if (block.id === blockId && dir === "up") {
                     const newBlock = {
                         type: type,
@@ -93,13 +95,13 @@ const Editor = ({
             console.log("+++++ new post blocks +++++", newPostBlocks);
             return newPostBlocks;
         });
-    };
+    }, [setBlocks]);
 
-    const deleteBlock = (blockId: string,) => {
-        setPostBlocks(currPostBlocks => {
+    const deleteBlock = useCallback((blockId: string,) => {
+        setBlocks((currPostBlocks: any) => {
             const newPostBlocks: any[] = [];
             let prev: string, useNext: boolean;
-            currPostBlocks.forEach(block => {
+            currPostBlocks.forEach((block: any) => {
                 if (useNext) {
                     setActiveBlock(block);
                     useNext = false;
@@ -119,7 +121,7 @@ const Editor = ({
             });
             return newPostBlocks;
         });
-    };
+    }, [setBlocks]);
 
     const cleanSelection = useCallback((selection: Selection) => {
         const removeRanges = [];
@@ -137,12 +139,12 @@ const Editor = ({
     }, []);
 
     const updateActiveBlock = useCallback((blockId: string) => {
-        postBlocks.forEach(block => {
+        blocks?.forEach(block => {
             if (block.id === blockId) {
                 setActiveBlock(block);
             }
         });
-    }, [postBlocks]);
+    }, [blocks]);
 
     const handleClick = useCallback((e: any) => {
         const selection = document.getSelection();
@@ -167,6 +169,10 @@ const Editor = ({
         }
         return [anchorBlock, focusBlock];
     };
+
+    // on keydown
+    // - if block empty
+    // - if 
 
     const handleKeyDown = useCallback((e: any) => {
         console.log("=== 🥶 key down ===", e, e.key, e.charCode, e.keyCode, e.ctrlKey, e.metaKey, e.altKey, e.shiftKey);
@@ -247,34 +253,10 @@ const Editor = ({
             // e.preventDefault();
             // e.stopPropagation();
         }
-    }, [activeBlock?.children?.length]);
+    }, [activeBlock?.children?.length, deleteBlock, handleBlockActions]);
 
     const handleKeyUp = useCallback((e: any) => {
         // console.log("=== 🥶 key up ===", e);
-        /*
-            * on backspace key (review condition when deleting or modifying in any other way)
-                = if already empty (delete the block and move back to the prev block)
-                = if it is the only block then prevent deletion
-            
-            * on change
-                + if inserted
-                    - 
-                + if removed/deleted
-                + if selection
-                + if shortcuts activated
-
-            * if inside editor & not matching any allowed key prevent default and bubble up to window/browser
-
-            *** APPROACHES FOR EDITOR CHANGES
-                = hijack all keys/events (but changes can be from popup selections as well) - MAYBE
-                    + cut/copy/paste
-                    + 
-                    + keys - back/del
-                    + shortcuts - bold, italic, underline
-                    + ctrl+a (select the current block); ctrl+a again (select all blocks)
-                = listens to changes in dom changes (but issue with not allowed formatting) - NO
-                + can use the combination of both
-        */
     }, []);
 
     const handleFocus = useCallback((e: any) => {
@@ -402,8 +384,8 @@ const Editor = ({
                 onClick={handleClick}
             >
                 {
-                    postBlocks.length ? (
-                        postBlocks?.map((block: any) => {
+                    blocks?.length ? (
+                        blocks?.map((block: any) => {
                             return (
                                 <RenderBlock
                                     key={block.id}

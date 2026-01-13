@@ -1,7 +1,7 @@
 "use client";
 
 import * as d3 from "d3";
-import React, { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
+import { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
 
 import ccStyles from "@/lib/ui/styles/classes/chart.module.scss";
 import { addAxis, addAxisTitle, addBasicFocus, getTooltipAnchor, IAxes, IMargins, updateBasicFocus } from "@/lib/utils/chart.utils";

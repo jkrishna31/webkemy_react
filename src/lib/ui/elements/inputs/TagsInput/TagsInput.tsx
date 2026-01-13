@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useRef } from "react";
+import { ComponentProps, useRef } from "react";
 
 import { useKey } from "@/lib/hooks/useKey";
 import { Button } from "@/lib/ui/elements/butttons";

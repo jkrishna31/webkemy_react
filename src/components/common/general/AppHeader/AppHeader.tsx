@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import { SearchForm } from "@/components/common/forms";
 import { edges, SOURCE_CODE } from "@/constants/general.const";

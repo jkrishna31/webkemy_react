@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { pieChartData } from "@/data/dummy/pieChartData";
 import { PieChart } from "@/lib/ui/elements/charts/PieChart";

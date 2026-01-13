@@ -1,5 +1,3 @@
-import React from "react";
-
 import styles from "./DataTable.module.scss";
 
 export interface DataTableProps {

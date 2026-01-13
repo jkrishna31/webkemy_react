@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Breadcrumb, type Crumb } from "@/lib/ui/elements/Breadcrumb";
 

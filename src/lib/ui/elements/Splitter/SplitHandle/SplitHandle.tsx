@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
+import { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 
@@ -9,14 +9,14 @@ import styles from "./SplitHandle.module.scss";
 
 const ALLOWED_KEYS: string[] = [Keys.ARROW_DOWN, Keys.ARROW_LEFT, Keys.ARROW_RIGHT, Keys.ARROW_UP];
 
-export interface SplitHandleProps extends ComponentProps<"div"> {
+export interface SplitHandleProps extends Omit<ComponentProps<"div">, "onChange"> {
   layout?: "v" | "h";
   passive?: boolean;
   value?: number;
   min?: number;
   max?: number;
-  onChange?: (e: FormEvent<Element>) => void;
   step?: number;
+  onChange?: (value: number) => void;
 }
 
 const SplitHandle = ({
@@ -29,44 +29,59 @@ const SplitHandle = ({
 
   const handleRef = useRef<HTMLDivElement>(null);
 
-  const handlePointerDown = (e: React.PointerEvent) => {
-    e.preventDefault();
-
-    const splitter = (e.target as HTMLElement)?.closest("[data-splitter]");
-
-    if (splitter) {
-      setActive(true);
-      const cursorStyle = document.body.style.cursor;
-      document.body.style.cursor = window.getComputedStyle(e.currentTarget).cursor;
-
-      const _layout = splitter.getAttribute("data-layout");
-      const splitterRect = splitter.getBoundingClientRect();
-
-      const onMove = (moveEv: PointerEvent) => {
-        const dy = _layout === "v" ? Math.round(((moveEv.y - splitterRect.y) / splitterRect.height) * 100) : 0;
-        const dx = _layout === "h" ? Math.round(((moveEv.x - splitterRect.x) / splitterRect.width) * 100) : 0;
-
-        onChange?.({ target: { value: _layout === "v" ? dy : dx } } as unknown as FormEvent);
-      };
-
-      const onUp = () => {
-        document.body.style.cursor = cursorStyle;
-        setActive(false);
-        window.removeEventListener("pointermove", onMove);
-        window.removeEventListener("pointerup", onUp);
-      };
-
-      window.addEventListener("pointermove", onMove);
-      window.addEventListener("pointerup", onUp);
-    }
-  };
-
   // todo: direction aware
-  // todo: cancel on Esc for passive mode
-  // todo: passive mode
-  // - use another ghost handle or use psuedo-element
-  // - render at the same position by default
-  // - and based on move offset add the transform
+  // todo: lazy (cancel on esc, ghost handle)
+  // todo: fix step handling
+
+  useEffect(() => {
+    const handleElem = handleRef.current;
+    if (!handleElem) return;
+
+    let splitter: Element | null;
+    let bodyCursorStyle: string;
+    let _layout: string | null;
+    let splitterRect: DOMRect;
+
+    const handlePointerMove = (moveEv: PointerEvent) => {
+      const dy = _layout === "v" ? Math.round(((moveEv.y - splitterRect.y) / splitterRect.height) * 100) : 0;
+      const dx = _layout === "h" ? Math.round(((moveEv.x - splitterRect.x) / splitterRect.width) * 100) : 0;
+
+      onChange?.(_layout === "v" ? dy : dx);
+    };
+
+    const handlePointerUp = () => {
+      document.body.style.cursor = bodyCursorStyle;
+      setActive(false);
+      window.removeEventListener("pointermove", handlePointerMove);
+      window.removeEventListener("pointerup", handlePointerUp);
+    };
+
+    const handlePointerDown = (e: PointerEvent) => {
+      e.preventDefault();
+
+      splitter = (e.target as HTMLElement)?.closest("[data-splitter]");
+      if (!splitter || !e.target) return;
+
+      bodyCursorStyle = document.body.style.cursor;
+      document.body.style.cursor = window.getComputedStyle(e.target as HTMLElement).cursor;
+
+      _layout = splitter.getAttribute("data-layout");
+      splitterRect = splitter.getBoundingClientRect();
+
+      setActive(true);
+
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", handlePointerUp);
+    };
+
+    handleElem.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      handleElem.removeEventListener("pointerdown", handlePointerDown);
+      window.removeEventListener("pointermove", handlePointerDown);
+      window.removeEventListener("pointerup", handlePointerDown);
+    };
+  }, [onChange]);
 
   useEffect(() => {
     const handleElem = handleRef.current;
@@ -102,7 +117,7 @@ const SplitHandle = ({
             break;
         }
 
-        onChange?.({ target: { value: newValue } } as unknown as FormEvent);
+        onChange?.(newValue);
       };
 
       handleElem.addEventListener("keydown", keyDownHandler);
@@ -123,7 +138,6 @@ const SplitHandle = ({
       aria-valuenow={value}
       aria-valuemin={min}
       aria-valuemax={max}
-      onPointerDown={handlePointerDown}
       className={styles.handle}
       {...props}
     >

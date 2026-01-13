@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect } from "react";
+import { ComponentProps, useEffect } from "react";
 
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";

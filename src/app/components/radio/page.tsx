@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Radio } from "@/lib/ui/elements/inputs/Radio";

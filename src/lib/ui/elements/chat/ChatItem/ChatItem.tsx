@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { characters } from "@/constants/characters.const";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";

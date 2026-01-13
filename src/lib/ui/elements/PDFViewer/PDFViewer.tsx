@@ -1,5 +1,3 @@
-import React from "react";
-
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./PDFViewer.module.scss";

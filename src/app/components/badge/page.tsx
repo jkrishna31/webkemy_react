@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/ui/elements/Badge";
 import { Button } from "@/lib/ui/elements/butttons";

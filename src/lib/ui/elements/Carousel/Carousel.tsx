@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
+import { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
 
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";

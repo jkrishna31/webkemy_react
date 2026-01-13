@@ -8,12 +8,12 @@ import styles from "./ToolSelector.module.scss";
 
 export interface ToolSelectorProps extends ComponentProps<"div"> {
     toolsState?: any
-    tools?: any
+    options?: any
     onClick?: any
 }
 
 const ToolSelector = ({
-    toolsState, onClick, tools,
+    toolsState, onClick, options,
 }: ToolSelectorProps) => {
     return (
         <div className={styles.wrapper}>
@@ -24,7 +24,7 @@ const ToolSelector = ({
                 }}
             >
                 {
-                    tools?.map((toolGroup: any, toolGroupIdx: number) => (
+                    options?.map((toolGroup: any, toolGroupIdx: number) => (
                         <div className={styles.tool_group} key={toolGroupIdx}>
                             {
                                 toolGroup?.map((tool: any) => (

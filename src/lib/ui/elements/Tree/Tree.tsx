@@ -1,4 +1,4 @@
-import React, { ComponentProps, MouseEvent, ReactNode } from "react";
+import { ComponentProps, MouseEvent, ReactNode } from "react";
 
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";

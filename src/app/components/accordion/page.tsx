@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { useAccordion } from "@/lib/hooks/useAccordion";

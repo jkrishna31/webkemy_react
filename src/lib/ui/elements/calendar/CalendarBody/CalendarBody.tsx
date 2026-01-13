@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useEvents, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
 import { classes } from "@/lib/utils/style.utils";

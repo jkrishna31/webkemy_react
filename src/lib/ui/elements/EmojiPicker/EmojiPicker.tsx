@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { skinTones } from "@/constants/characters.const";
 import { Keys } from "@/constants/keys.const";

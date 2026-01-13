@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useCallback, useEffect, useId, useLayoutEffect, useRef } from "react";
+import { ComponentProps, useCallback, useEffect, useId, useLayoutEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";

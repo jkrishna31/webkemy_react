@@ -1,5 +1,3 @@
-import React from "react";
-
 import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";
 
 import styles from "./styles.module.scss";

@@ -1,6 +1,6 @@
 import "./styles.scss";
 
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { ComponentLayout } from "@/components/layouts";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
+import { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";

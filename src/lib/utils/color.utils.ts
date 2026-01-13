@@ -1,6 +1,6 @@
 export type ColorFormat = "hex" | "rgb" | "hsl" | "oklch" | "hsv";
 
-export const stringifyColor = (values: (number)[], format: ColorFormat, alpha?: boolean) => {
+export const stringifyColor = (values: (number | undefined)[], format: ColorFormat, alpha?: boolean) => {
   const alphaModifier = alpha ? "a" : "";
   const alphaValue = alpha ? `, ${values[3] ?? 100}%` : "";
   switch (format) {
@@ -38,6 +38,7 @@ export const hsvToHsl = (
   hue: number,
   saturation: number,
   value: number,
+  alpha?: number,
 ) => {
   const lightness = (value * (100 - saturation / 2)) / 100;
 
@@ -45,20 +46,21 @@ export const hsvToHsl = (
   if (lightness > 0 && lightness < 100) {
     _saturation = ((value - lightness) * 100) / Math.min(lightness, 100 - lightness);
   }
-  return [hue, Math.round(_saturation), Math.round(lightness)];
+  return [hue, Math.round(_saturation), Math.round(lightness), alpha];
 };
 
 export const hsvToRgb = (
   hue: number,
   saturation: number,
   value: number,
+  alpha?: number,
 ) => {
   const _saturation = saturation / 100;
   const _value = value / 100;
 
   const k = (n: number) => (n + hue / 60) % 6;
   const f = (n: number) => _value * (1 - _saturation * Math.max(0, Math.min(k(n), 4 - k(n), 1)));
-  return [Math.round(255 * f(5)), Math.round(255 * f(3)), Math.round(255 * f(1))];
+  return [Math.round(255 * f(5)), Math.round(255 * f(3)), Math.round(255 * f(1)), alpha];
 };
 
 export const hsvToHex = (

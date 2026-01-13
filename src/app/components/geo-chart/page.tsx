@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { geoChartData } from "@/data/dummy/geoChartData";
 import { GeoChart } from "@/lib/ui/elements/charts/GeoChart";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useCallback, useEffect, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import MicIcon from "@/lib/ui/svgs/icons/MicIcon";

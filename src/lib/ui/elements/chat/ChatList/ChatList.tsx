@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, ReactNode, useCallback, useEffect, useRef } from "react";
+import { ComponentProps, ReactNode, useCallback, useEffect, useRef } from "react";
 
 import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
 import { useScroll } from "@/lib/hooks/useScroll";

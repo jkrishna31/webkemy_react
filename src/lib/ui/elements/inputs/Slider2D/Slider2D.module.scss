@@ -1,4 +1,7 @@
 .wrapper {
+  --x: 0;
+  --y: 0;
+
   width: 20rem;
   height: 20rem;
   border: .1rem solid var(--border-s);
@@ -18,14 +21,10 @@
 
   &:focus-within {
     border-color: var(--blue-6);
-
-    // .thumb {
-    //   outline: .2rem dotted var(--blue-1);
-    // }
   }
 }
 
-.thumb {
+.handle {
   position: absolute;
   top: 0;
   left: 0;
@@ -35,5 +34,7 @@
   background: var(--fg-p);
   border-radius: .3rem;
   cursor: move;
-  // transition: transform 100ms ease;
+  touch-action: none;
+  user-select: none;
+  transform: translate3d(var(--x, 0), var(--y, 0), 0);
 }

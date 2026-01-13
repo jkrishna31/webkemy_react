@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useRef, useState } from "react";
+import { ComponentProps, useRef, useState } from "react";
 
 import { Overlay } from "@/components/common/containers";
 import { dummyChats } from "@/data/dummy/chatData";

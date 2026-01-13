@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { Popup } from "@/components/common/containers";
 import { classes } from "@/lib/utils/style.utils";

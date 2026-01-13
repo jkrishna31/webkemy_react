@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 
 import { menuItems } from "@/components/common/general";
 import { Text } from "@/lib/ui/elements/Text";

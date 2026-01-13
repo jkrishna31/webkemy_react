@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Divider } from "@/lib/ui/elements/Divider";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/ui/elements/Badge";
@@ -54,7 +54,7 @@ const Page = () => {
           primary="Circle"
           badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" style={{ marginLeft: "auto", zIndex: 1 }}>{"NEW"}</Badge>}
           minimized={!open}
-          data-tooltip="Circl"
+          data-tooltip="Circle"
           aria-current={activeItem === "1"}
           onClick={() => setActiveItem("1")}
         />

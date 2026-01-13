@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, Fragment, ReactNode, useEffect, useId, useState } from "react";
+import { ComponentProps, Fragment, ReactNode, useEffect, useId, useState } from "react";
 
 import { Color } from "@/lib/types/general.types";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";

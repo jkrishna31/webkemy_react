@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, FormEvent, useCallback, useEffect, useRef } from "react";
+import { ComponentProps, FormEvent, useCallback, useEffect, useRef } from "react";
 
 import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";

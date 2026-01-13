@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 import { months, monthsOrder } from "@/data/general/datetime";
 import { Button } from "@/lib/ui/elements/butttons";

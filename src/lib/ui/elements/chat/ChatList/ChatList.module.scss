@@ -1,6 +1,6 @@
 .wrapper {
   position: relative;
-  padding-block: 1.2rem;
+  padding-block: 0;
   border-bottom-left-radius: .8rem;
   border-bottom-right-radius: .8rem;
   flex: 1;
@@ -17,7 +17,7 @@
 .to_bottom_btn {
   position: absolute;
   left: 50%;
-  top: 100%;
+  bottom: 0%;
   transform: translate3d(-50%, 100%, 0) scale(.5);
   opacity: 0;
 
@@ -37,7 +37,7 @@
 }
 
 .to_bottom_btn[aria-hidden="false"] {
-  transform: translate3d(-50%, -100%, 0) scale(1);
+  transform: translate3d(-50%, -.4rem, 0) scale(1);
   opacity: 1;
 }
 

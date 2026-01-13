@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";

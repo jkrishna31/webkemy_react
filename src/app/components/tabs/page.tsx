@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Tabs } from "@/lib/ui/elements/Tabs";

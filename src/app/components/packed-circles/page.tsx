@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { pcData } from "@/data/dummy/pcData";
 import { PackedCircles } from "@/lib/ui/elements/charts/PackedCircles";

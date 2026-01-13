@@ -1,4 +1,4 @@
-import React, { ComponentProps, CSSProperties } from "react";
+import { ComponentProps, CSSProperties } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 

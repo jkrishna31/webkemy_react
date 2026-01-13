@@ -15,10 +15,9 @@
     background-color: var(--bg-overlay);
 
     transform: none;
+    opacity: 1;
 
-    transition-timing-function: cubic-bezier(0, 0, .2, 1);
-    transition-duration: 400ms;
-    transition-property: opacity;
+    transition: opacity .4s cubic-bezier(0, 0, .2, 1);
 
     &[inert] {
         transform: translate3d(105%, 0, 0);
@@ -33,6 +32,7 @@
     width: 100%;
     height: 100%;
     z-index: var(--zi-menu);
+    background-color: var(--bg-p);
 
     display: flex;
     flex-direction: column;
@@ -40,15 +40,11 @@
 
     width: 31rem;
 
-    background-color: var(--bg-p);
-    transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
-    transition-duration: 300ms;
-    transition-property: transform, opacity;
     transform: none;
+    transition: transform 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
     &[inert] {
         transform: translate3d(105%, 0, 0);
-        opacity: 0;
     }
 }
 

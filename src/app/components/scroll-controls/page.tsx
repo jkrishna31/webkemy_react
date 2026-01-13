@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import { classes } from "@/lib/utils/style.utils";

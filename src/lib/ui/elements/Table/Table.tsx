@@ -1,4 +1,4 @@
-import React, { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useState } from "react";
+import { ComponentProps, ComponentPropsWithoutRef, Fragment, ReactNode, useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
@@ -399,7 +399,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                         style={{
                           ...(width ? { minWidth: width } : {}),
                           ...getCellStyle(rootCols.length, hcIdx, sticky, true),
-                          ...(style ?? {}),
+                          ...style,
                         }}
                         data-dragging={draggingData?.col === id}
                         data-drag-over={
@@ -466,7 +466,7 @@ const Table = <T extends { id: string; children?: Array<T> }>({
                     key={`fc-${hCol.id}`}
                     {...restProps}
                     className={classes(getStickyClasses(sticky), className)}
-                    style={{ ...getCellStyle(rootCols.length, index, sticky, true), ...(style ?? {}) }}
+                    style={{ ...getCellStyle(rootCols.length, index, sticky, true), ...style }}
                   >
                     {render}
                   </Element>

@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 
 import { AppSidebar } from "@/components/common/general";
 import { AppLayout } from "@/components/layouts";

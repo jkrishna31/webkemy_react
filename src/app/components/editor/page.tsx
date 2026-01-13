@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
 import { FloatBox } from "@/components/common/general";
 import { PageSetup } from "@/components/managers";
@@ -80,7 +80,7 @@ const getPlaceholder = (type: any) => {
   }
 };
 
-const blocks = [
+const blockOptions = [
   {
     key: "general",
     group: "General",
@@ -191,7 +191,7 @@ const blocks = [
   }
 ];
 
-const tools = [
+const toolOptions = [
   [
     {
       name: "Undo", key: editorTools.UNDO, color: "yellow", disabled: false,
@@ -402,7 +402,7 @@ const convertTools = [
 ];
 
 const Page = () => {
-  const [postBlocks, setPostBlocks] = useState<any[]>([]);
+  const [blocks, setBlocks] = useState<any[]>([]);
   const [editorSelection, setEditorSelection] = useState<Selection | null>();
   const [toolsState, setToolsState] = useState<{ [key: string]: boolean }>({});
   const [boxConfig, setBoxConfig] = useState<{
@@ -443,7 +443,7 @@ const Page = () => {
       //   }
       // });
     } else {
-      setPostBlocks((currBlocks: any) => {
+      setBlocks((currBlocks: any) => {
         return [
           ...currBlocks,
           {
@@ -491,11 +491,12 @@ const Page = () => {
         <div className={styles.header}>
           <Text<"h2"> as="h2" className={styles.title}>{"Write"}</Text>
           <BlockSelector
-            label="Block" blocks={blocks} onSelect={handleBlockSelect}
+            options={blockOptions}
+            //  onSelect={handleBlockSelect}
             wrapperClass={styles.tool_selector_wrapper}
           />
         </div>
-        <Editor rootClass={styles.editor_wrapper}>
+        <Editor blocks={blocks} setBlocks={setBlocks} rootClass={styles.editor_wrapper}>
           <FloatBox
             className={styles.toolbar}
             style={boxConfig.active ? {
@@ -508,7 +509,7 @@ const Page = () => {
             } : undefined}
           >
             <ToolSelector
-              tools={tools}
+              options={toolOptions}
               toolsState={toolsState}
               onClick={handleToolSelect}
             />
@@ -523,7 +524,7 @@ const Page = () => {
             {
               !!toolsState?.[editorTools.CONVERT] ? (
                 <ToolSelector
-                  tools={convertTools}
+                  options={convertTools}
                   toolsState={[]}
                   onClick={undefined}
                 />

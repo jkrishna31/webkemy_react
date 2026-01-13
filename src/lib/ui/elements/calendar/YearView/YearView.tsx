@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { months, monthsOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";

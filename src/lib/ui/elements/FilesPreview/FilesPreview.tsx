@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useEffect, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";

@@ -13,6 +13,7 @@
   color: var(--fg-p);
   transition: transform 225ms cubic-bezier(0, 0, .2, 1);
 
+  // .hide,
   &[data-invisible="true"] {
     transform: translate3d(0, -100%, 0);
   }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useEffect, useRef } from "react";
+import { ComponentProps, useEffect, useRef } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";

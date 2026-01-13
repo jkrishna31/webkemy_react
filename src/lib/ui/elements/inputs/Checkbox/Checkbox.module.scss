@@ -1,31 +1,66 @@
 .input {
+    --checkbox-fg: var(--fg-p);
+    --checkbox-bg: var(--bg-s);
+    --checkbox-bg-checked: var(--blue-6);
+    --checkbox-border: var(--bg-s);
+
     flex-shrink: 0;
     position: relative;
     appearance: none;
     width: 2rem;
     height: 2rem;
     border-radius: .4rem;
-    background: var(--bg-s);
+    background: var(--checkbox-bg);
     color: var(--blue-1);
-    border: 1px solid var(--bg-s);
+    border: 1px solid var(--checkbox-border);
     overflow: hidden;
     cursor: pointer;
     font-size: 2rem;
 
     transition: border .2s linear, background .2s linear;
 
-    &:checked::after,
-    &[data-indeterminate="true"]::after {
-        font-size: inherit;
-        font-weight: 500;
-        color: inherit;
-        position: absolute;
-        top: 0;
-        left: 0;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    &:checked,
+    &:hover,
+    &:focus-within {
+        &~label {
+            transition: color .2s linear;
+            color: var(--checkbox-fg);
+        }
+    }
+
+    &:disabled {
+        opacity: .7;
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled):hover {
+        background-color: var(--bg-t);
+        border-color: var(--border-p);
+    }
+
+    &:focus-visible {
+        outline: auto;
+        outline: .2rem dotted var(--blue-1);
+        outline-offset: .2rem;
+    }
+
+    &:checked,
+    &[data-indeterminate="true"] {
+        background-color: var(--checkbox-bg-checked);
+        color: var(--checkbox-fg);
+
+        &::after {
+            font-size: inherit;
+            font-weight: 500;
+            color: inherit;
+            position: absolute;
+            top: 0;
+            left: 0;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     }
 
     &:checked::after {
@@ -39,33 +74,8 @@
         transform: translate3d(-50%, -50%, 0);
         width: 70%;
         height: .2rem;
-        background-color: var(--fg-s);
+        background-color: var(--fg-p);
         border-radius: .2rem;
-    }
-
-    &:focus-visible {
-        outline: auto;
-        outline: .2rem dotted var(--blue-1);
-        outline-offset: .2rem;
-    }
-
-    &:checked,
-    &:hover,
-    &:focus-within {
-        &~label {
-            transition: color .2s linear;
-            color: var(--fg-p);
-        }
-    }
-
-    &:disabled {
-        opacity: .7;
-        cursor: not-allowed;
-    }
-
-    &:not(:disabled):hover {
-        background-color: var(--bg-t);
-        border-color: var(--border-p);
     }
 }
 

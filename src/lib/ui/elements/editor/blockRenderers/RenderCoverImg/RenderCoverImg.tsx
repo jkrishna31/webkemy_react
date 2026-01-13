@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";

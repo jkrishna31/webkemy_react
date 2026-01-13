@@ -1,5 +1,3 @@
-import React from "react";
-
 import { SVGProps } from "@/lib/types/prop.types";
 
 const MontenegroFlag = (props: SVGProps) => {

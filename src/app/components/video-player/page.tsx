@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { VideoPlayer } from "@/lib/ui/elements/VideoPlayer";
 

@@ -33,6 +33,7 @@ import GridIcon from "@/lib/ui/svgs/icons/GridIcon";
 import HashtagIcon from "@/lib/ui/svgs/icons/HashtagIcon";
 import HierarchyIcon from "@/lib/ui/svgs/icons/HierarchyIcon";
 import InputIcon from "@/lib/ui/svgs/icons/InputIcon";
+import KanbanIcon from "@/lib/ui/svgs/icons/KanbanIcon";
 import KeyframesMultipleIcon from "@/lib/ui/svgs/icons/KeyframesMultipleIcon";
 import LineChartIcon from "@/lib/ui/svgs/icons/LineChartIcon";
 import ListCollapseIcon from "@/lib/ui/svgs/icons/ListCollapseIcon";
@@ -205,6 +206,20 @@ export const menuItems = [
                 href: "/components/divider",
                 primary: "Divider",
                 icon: <DividerIcon />,
+            },
+            {
+                key: "kanban",
+                href: "/components/kanban",
+                primary: "Kanban",
+                icon: <KanbanIcon />,
+                disabled: true,
+            },
+            {
+                key: "dynamic-grid",
+                href: "/components/dynamic-grid",
+                primary: "Dynamic Grid",
+                icon: <GridIcon />,
+                disabled: true,
             },
             {
                 key: "text",

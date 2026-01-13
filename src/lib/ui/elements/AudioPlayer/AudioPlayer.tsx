@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ComponentProps, useMemo, useRef, useState } from "react";
+import { ComponentProps, useMemo, useRef, useState } from "react";
 
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { Button } from "@/lib/ui/elements/butttons";

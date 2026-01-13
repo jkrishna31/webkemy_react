@@ -1,5 +1,3 @@
-import React from "react";
-
 import { SVGProps } from "@/lib/types/prop.types";
 
 const TextIcon3 = (props: SVGProps) => {

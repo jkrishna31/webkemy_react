@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import { ComponentProps } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 
@@ -20,7 +20,7 @@ const SplitSection = ({
       style={{
         flexBasis: size !== undefined ? `${size}%` : "auto",
         flexGrow: size !== undefined ? 0 : 1,
-        ...(style ?? {})
+        ...style
       }}
       {...props}>
       {children}

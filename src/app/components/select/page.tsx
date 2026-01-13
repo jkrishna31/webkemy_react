@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Chip } from "@/lib/ui/elements/Chip";

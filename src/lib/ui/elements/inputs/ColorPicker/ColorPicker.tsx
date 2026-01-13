@@ -1,6 +1,6 @@
 "use client";
 
-import React, { CSSProperties, useState } from "react";
+import { CSSProperties, useCallback, useMemo, useState } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
@@ -34,7 +34,13 @@ const ColorPicker = () => {
   const [openFormatSelector, setOpenFormatSelector] = useState(false);
 
   const colorInSelectedFormat = converters[selectedFormat]?.(...color);
-  const colorInHslFormat = hsvToHsl(color[0], color[1], color[2]);
+  const colorInHslFormat = hsvToHsl(color[0], color[1], color[2], color[3]);
+
+  const satLightness = useMemo(() => [color[1], color[2]], [color]);
+
+  const handleSatLightnessChange = useCallback((coords: number[]) => {
+    setColor(currColor => [currColor[0], Math.round(coords[0]), Math.round(coords[1]), currColor[3]]);
+  }, []);
 
   const handleValueChange = (field: string, value: string) => {
     setColor(currValues => {
@@ -57,19 +63,18 @@ const ColorPicker = () => {
     <div
       className={styles.wrapper}
       style={{
-        "--active-hue": color[0],
-        "--active-hsl": stringifyColor(colorInHslFormat, "hsl"),
-        "--active-hsla": stringifyColor([...colorInHslFormat, color[3]], "hsl", true)
+        "--hue": colorInHslFormat[0],
+        "--saturation": `${colorInHslFormat[1]}%`,
+        "--lightness": `${colorInHslFormat[2]}%`,
+        "--alpha": `${colorInHslFormat[3]}%`,
       } as CSSProperties}
     >
       <div className={styles.controls}>
         <Slider2D
           className={styles.color_area}
           thumbClass={styles.area_thumb}
-          value={[color[1], color[2]]}
-          onInput={(coords: number[]) => {
-            setColor(currColor => [currColor[0], Math.round(coords[0]), Math.round(coords[1]), currColor[3]]);
-          }}
+          value={satLightness as [number, number]}
+          onInput={handleSatLightnessChange}
         />
         <Slider
           orientation="vertical"

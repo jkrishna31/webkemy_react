@@ -1,4 +1,4 @@
-import React, { ComponentProps, ReactNode } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 import { months, monthsOrder } from "@/data/general/datetime";
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";

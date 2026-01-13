@@ -1,5 +1,3 @@
-import React from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Framer } from "@/lib/ui/elements/Framer";
 import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";

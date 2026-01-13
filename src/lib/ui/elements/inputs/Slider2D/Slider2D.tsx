@@ -1,8 +1,7 @@
 "use client";
 
-import React, { ComponentProps, MouseEvent, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, MouseEvent, useCallback, useEffect, useLayoutEffect, useRef } from "react";
 
-import { useEvent } from "@/lib/hooks/useEvent";
 import { usePointerFlow } from "@/lib/hooks/usePointerFlow";
 import { clampNumber } from "@/lib/utils/math.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -10,16 +9,16 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Slider2D.module.scss";
 
 export interface Props extends ComponentProps<any> {
-  thumbClass?: string
-  min?: [number, number]
-  max?: [number, number]
-  step?: [number, number]
-  disabled?: boolean
-  name?: string
-  onChange?: (coords: [number, number]) => void
-  onInput?: (coords: [number, number]) => void
-  defaultValue?: [number, number]
-  value?: [number, number]
+  thumbClass?: string;
+  min?: [number, number];
+  max?: [number, number];
+  step?: [number, number];
+  disabled?: boolean;
+  name?: string;
+  onChange?: (coords: [number, number]) => void;
+  onInput?: (coords: [number, number]) => void;
+  defaultValue?: [number, number];
+  value?: [number, number];
   className?: string;
 }
 
@@ -39,40 +38,24 @@ const Slider2D = ({
   ...props
 }: Props) => {
   const areaRef = useRef<HTMLDivElement>(null);
-  const thumbRef = useRef<HTMLDivElement>(null);
-
-  const [_value, setValue] = useState<[number, number]>();
+  const handleRef = useRef<HTMLDivElement>(null);
 
   // todo : min and max support
 
   const updateValue = useCallback((fromLeftPercent: number, fromBottomPercent: number) => {
-    if (!areaRef.current || !thumbRef.current) return;
-
-    const areaRect = areaRef.current?.getBoundingClientRect();
-    const thumbRect = thumbRef.current?.getBoundingClientRect();
-
-    const fromLeftPx = (fromLeftPercent / 100) * areaRect.width;
-    const fromTop = ((100 - fromBottomPercent) / 100) * areaRect.height;
-
-    const transformX = clampNumber(fromLeftPx - thumbRect.width / 2, 0, areaRect.width - thumbRect.width - 2);
-    const transformY = clampNumber(fromTop - thumbRect.height / 2, 0, areaRect.height - thumbRect.height - 2);
-
-    thumbRef.current.style.transform = `translate3d(${transformX}px, ${transformY}px, 0)`;
-
-    setValue([fromLeftPercent, fromBottomPercent]);
     onInput?.([fromLeftPercent, fromBottomPercent]);
     onChange?.([fromLeftPercent, fromBottomPercent]);
   }, [onChange, onInput]);
 
-  const updateValueBy = useEvent((by: [number, number]) => {
+  const updateValueBy = useCallback((by: [number, number]) => {
     updateValue(
       clampNumber((value?.[0] ?? 0) + by[0], 0, 100),
       clampNumber((value?.[1] ?? 0) + -by[1], 0, 100)
     );
-  });
+  }, [updateValue, value]);
 
-  const handlePointerUpdate = useEvent((event: MouseEvent | PointerEvent) => {
-    if (!areaRef.current || !thumbRef.current) return;
+  const handlePointerUpdate = useCallback((event: MouseEvent | PointerEvent) => {
+    if (!areaRef.current) return;
 
     const areaRect = areaRef.current?.getBoundingClientRect();
 
@@ -80,13 +63,29 @@ const Slider2D = ({
     const fromBottomPercent = 100 - clampNumber(((event.clientY - areaRect.top) / areaRect.height) * 100, 0, 100, step[1]);
 
     updateValue(fromLeftPercent, fromBottomPercent);
-  });
+  }, [step, updateValue]);
 
-  useEffect(() => {
-    if (value && (!_value?.length || _value[0] !== value[0] || _value[1] !== value[1])) {
-      updateValue(...value);
-    }
-  }, [_value, updateValue, value]);
+  const getHandlePosition = (fromLeftPercent: number, fromBottomPercent: number) => {
+    if (!handleRef.current || !areaRef.current) return;
+
+    const areaRect = areaRef.current.getBoundingClientRect();
+    const handleRect = handleRef.current.getBoundingClientRect();
+
+    if (!areaRect || !handleRect) return;
+
+    const fromLeftPx = (fromLeftPercent / 100) * areaRect.width;
+    const fromTop = ((100 - fromBottomPercent) / 100) * areaRect.height;
+
+    const transformX = clampNumber(fromLeftPx - handleRect.width / 2, 0, areaRect.width - handleRect.width - 2);
+    const transformY = clampNumber(fromTop - handleRect.height / 2, 0, areaRect.height - handleRect.height - 2);
+
+    areaRef.current.style.setProperty("--x", `${transformX}px`);
+    areaRef.current.style.setProperty("--y", `${transformY}px`);
+  };
+
+  useLayoutEffect(() => {
+    if (value) getHandlePosition(...value);
+  }, [value]);
 
   useEffect(() => {
     if (areaRef.current) {
@@ -131,9 +130,10 @@ const Slider2D = ({
       {...props}
     >
       <div
-        ref={thumbRef}
-        className={classes(styles.thumb, thumbClass)}
-      ></div>
+        ref={handleRef}
+        className={classes(styles.handle, thumbClass)}
+      >
+      </div>
     </div>
   );
 };

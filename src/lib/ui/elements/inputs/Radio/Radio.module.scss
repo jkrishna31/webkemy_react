@@ -35,8 +35,8 @@
 
     &:checked::after {
         content: '';
-        width: 56%;
-        height: 56%;
+        width: 60%;
+        height: 60%;
         border-radius: var(--br-pill);
         background-color: var(--blue-1);
         position: absolute;
@@ -44,6 +44,13 @@
         left: 50%;
         transform-origin: center;
         transform: translate3d(-50%, -50%, 0);
+        animation: scale-in .15s ease;
+    }
+
+    @keyframes scale-in {
+        from {
+            transform: translate3d(-50%, -50%, 0) scale(0);
+        }
     }
 
     &:disabled {

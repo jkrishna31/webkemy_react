@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { ComponentProps, ElementType, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { ComponentProps, ElementType, useCallback, useLayoutEffect, useRef, useState } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 

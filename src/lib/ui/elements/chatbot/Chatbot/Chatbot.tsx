@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useFocusRestore } from "@/lib/hooks/useFocusRestore";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";

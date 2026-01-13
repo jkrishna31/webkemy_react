@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { useToastActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
