@@ -3,150 +3,150 @@
   max-width: 32rem;
   display: grid;
   grid-template-rows: auto auto 1fr;
-}
 
-.search_wrapper {
-  margin-bottom: 1.4rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .4rem;
-}
-
-.skintone_btn {
-  min-height: 4rem;
-  min-width: 4rem;
-  border-radius: .6rem;
-  padding: 1rem;
-  background-color: transparent;
-  justify-content: center;
-
-  &:hover {
-    background-color: var(--bg-t);
+  .search_wrapper {
+    margin-bottom: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .4rem;
   }
-}
 
-.item {
-  padding: .8rem;
-}
+  .skintone_btn {
+    min-height: 4rem;
+    min-width: 4rem;
+    border-radius: .6rem;
+    padding: 1rem;
+    background-color: transparent;
+    justify-content: center;
 
-.search_input_wrapper {
-  border-radius: .6rem;
-}
-
-.search_btn,
-.reset_btn {
-  min-width: 3.8rem;
-  min-height: 3.8rem;
-  color: var(--fg-s);
-  transition: color .15s linear;
-}
-
-.reset_btn[hidden] {
-  display: none;
-}
-
-.reset_btn,
-.search_btn {
-
-  &:hover,
-  &:focus {
-    color: var(--fg-p);
+    &:hover {
+      background-color: var(--bg-t);
+    }
   }
-}
 
-.reset_icon,
-.search_icon {
-  stroke-width: .2rem;
-  width: 1.6rem;
-  height: 1.6rem;
-}
+  .item {
+    padding: .8rem;
+  }
 
-.tab {
-  padding: .4rem;
-}
+  .search_input_wrapper {
+    border-radius: .6rem;
+  }
 
-.tablist {
-  z-index: 0;
-}
+  .search_btn,
+  .reset_btn {
+    min-width: 3.8rem;
+    min-height: 3.8rem;
+    color: var(--fg-s);
+    transition: color .15s linear;
+  }
 
-.tablist :global(.scroll_btn svg) {
-  stroke-width: .15rem;
-}
+  .reset_btn[hidden] {
+    display: none;
+  }
 
-.tablist[aria-hidden="true"] {
-  opacity: .4;
-  pointer-events: none;
-  touch-action: none;
-}
+  .reset_btn,
+  .search_btn {
 
-.emojis_wrapper {
-  max-height: 26rem;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  overflow: auto;
-  margin-top: .8rem;
-  z-index: 0;
-  user-select: none;
-}
+    &:hover,
+    &:focus {
+      color: var(--fg-p);
+    }
+  }
 
-.category_wrapper {
-  margin-bottom: .6rem;
-}
+  .reset_icon,
+  .search_icon {
+    stroke-width: .2rem;
+    width: 1.6rem;
+    height: 1.6rem;
+  }
 
-.category_label {
-  font-weight: 500;
-  font-size: 1.4rem;
-  padding-block: 1rem;
-  color: var(--fg-s);
-  background-color: var(--gray-11-70);
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
+  .tab {
+    padding: .4rem;
+  }
 
-.category_icon {
-  width: 2rem;
-  height: 2rem;
-}
+  .tablist {
+    z-index: 0;
+  }
 
-.category_emojis {
-  display: grid;
-  grid-template-columns: repeat(8, 1fr);
-  gap: .1rem;
-}
+  .tablist :global(.scroll_btn svg) {
+    stroke-width: .15rem;
+  }
 
-.emoji {
-  position: relative;
-  min-width: 3.6rem;
-  min-height: 3.6rem;
-  display: grid;
-  place-items: center;
-  font-size: 2.4rem;
-  text-align: center;
-  cursor: pointer;
-  padding: .3rem;
-  border-radius: .4rem;
-  outline: none;
-}
+  .tablist[aria-hidden="true"] {
+    opacity: .4;
+    pointer-events: none;
+    touch-action: none;
+  }
 
-.emoji[data-skin-tone="true"]::after {
-  content: "•";
-  position: absolute;
-  bottom: .1rem;
-  right: .1rem;
-  font-size: 1.2rem;
-  line-height: .5;
-  color: var(--yellow-1);
-}
+  .emojis_wrapper {
+    max-height: 26rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    margin-top: .8rem;
+    z-index: 0;
+    user-select: none;
+  }
 
-.emoji:hover,
-.emoji:focus {
-  background-color: var(--bg-s);
+  .category_wrapper {
+    margin-bottom: .6rem;
+  }
 
-  &[data-skin-tone="true"]::after {
-    color: var(--fg-p);
+  .category_label {
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding-block: 1rem;
+    color: var(--fg-s);
+    background-color: var(--gray-11-70);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .category_icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .category_emojis {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: .1rem;
+  }
+
+  .emoji {
+    position: relative;
+    min-width: 3.6rem;
+    min-height: 3.6rem;
+    display: grid;
+    place-items: center;
+    font-size: 2.4rem;
+    text-align: center;
+    cursor: pointer;
+    padding: .3rem;
+    border-radius: .4rem;
+    outline: none;
+  }
+
+  .emoji[data-skin-tone="true"]::after {
+    content: "•";
+    position: absolute;
+    bottom: .1rem;
+    right: .1rem;
+    font-size: 1.2rem;
+    line-height: .5;
+    color: var(--yellow-1);
+  }
+
+  .emoji:hover,
+  .emoji:focus {
+    background-color: var(--bg-s);
+
+    &[data-skin-tone="true"]::after {
+      color: var(--fg-p);
+    }
   }
 }
 

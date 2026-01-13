@@ -14,8 +14,8 @@
     "test:e2e": "npx playwright test",
     "prepare": "husky",
     "format": "prettier --write --check ./src",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix ."
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.19.0",
@@ -36,7 +36,6 @@
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.2",
-    "@eslint/eslintrc": "^3",
     "@grafana/faro-webpack-plugin": "^0.7.0",
     "@playwright/test": "^1.55.0",
     "@tailwindcss/postcss": "^4",

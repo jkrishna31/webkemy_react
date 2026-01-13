@@ -1,16 +1,18 @@
 .main {
   min-height: 110vh;
   place-content: center;
-}
 
-.dd2 :global(.trigger) {
-  padding-inline: 1rem;
+  .dd2 :global(.trigger) {
+    padding-inline: 1rem;
+  }
 }
 
 
 @media screen and (max-width: 768px) {
-  .ellipsis_icon {
-    width: 2rem;
-    height: 2rem;
+  .main {
+    .ellipsis_icon {
+      width: 2rem;
+      height: 2rem;
+    }
   }
 }
