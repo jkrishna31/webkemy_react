@@ -2,7 +2,6 @@
 
 import { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-import { useScroll } from "@/lib/hooks/useScroll";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Virtualizer.module.scss";
@@ -18,36 +17,7 @@ const Virtualizer = <T extends object | string | number | boolean>({
   children, className, data, itemMaxSize, render, onBottom,
   ...props
 }: VirtualizerProps<T>) => {
-  const offsetTop = useRef(0);
-  const [renderStart, setRenderStart] = useState(0);
-  const heightMap = useRef<{ [key: number]: number }>({});
-  const ref = useRef<HTMLDivElement>(null);
-
-  const itemsPerWindow = Math.max(10, (ref.current as HTMLElement)?.clientHeight / itemMaxSize);
-
-  const handleScroll = useCallback((e: WheelEvent) => {
-    const el = e.target as HTMLElement;
-    const scrolled = el?.scrollTop;
-    // console.log("---- scrolled ----", scrolled);
-    const itemsScrolled = Math.floor(scrolled / itemMaxSize);
-    offsetTop.current = (scrolled);
-    setRenderStart(itemsScrolled);
-  }, [itemMaxSize]);
-
-  const { isOnBoundary } = useScroll({
-    target: ref, margin: 0, delay: 0, onScroll: handleScroll,
-  }, { passive: true });
-
-  useEffect(() => {
-    if (isOnBoundary && ref.current) {
-      // const windowHeight = (ref.current as HTMLElement).scrollHeight;
-      if (data.length <= renderStart + itemsPerWindow) {
-        onBottom?.();
-      }
-    }
-  }, [data.length, isOnBoundary, itemsPerWindow, onBottom, renderStart]);
-
-  // approaches
+  // approache
   // 1. USE INTERSECTION OBSERVER TO FIX THAT ITEM LEVEL JITTER BY SCROLLING UPTO HOW MUCH OF THE INTERSECTING ELEMENT IS ALREADY SCROLLED OUT OF VIEWPORT
   // 2. USE INTERSECTION OBSERVER ON THE CONTAINER AND OBSERVER ALL ITEMS
   // 2.a. use info like first & last intersecting item
@@ -62,19 +32,7 @@ const Virtualizer = <T extends object | string | number | boolean>({
   return (
     <div
       className={classes(styles.wrapper, className)}
-      ref={ref}
     >
-      {
-        data?.map((item, idx) => {
-          if (idx >= (renderStart) && idx <= (renderStart + itemsPerWindow)) {
-            return render(item, {
-              transform: `translate3d(0, ${offsetTop.current}px, 0)`
-            });
-          }
-          return null;
-        })
-      }
-      {children}
     </div>
   );
 };

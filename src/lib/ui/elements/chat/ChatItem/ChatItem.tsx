@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { ComponentProps } from "react";
 
 import { characters } from "@/constants/characters.const";
+import { Avatar } from "@/lib/ui/elements/Avatar";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import { formatTime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -22,27 +24,25 @@ const ChatItem = ({
       {...restProps}
     >
       {
-        chat.author.id !== "me" && false ? (
+        chat.author.id !== "me" ? (
           <div className={styles.left}>
-            <div className={styles.profile_container}>
+            <Avatar className={styles.profile_container}>
               <BotMessageIcon className={styles.profile} />
-              {/* <Image src="/images/face11.jpg" alt="" width={40} height={40} className={styles.profile} /> */}
-            </div>
+            </Avatar>
+            {/* <Image src="/images/face12.jpg" alt="" width={40} height={40} className={styles.profile} /> */}
           </div>
         ) : null
       }
       <div className={styles.right}>
-        <div className={styles.meta}>
-          {
-            chat.author.id !== "me" ? (
-              <>
-                <span className={styles.author}>{"Bot"}</span>
-                {characters.BULLET}
-              </>
-            ) : null
-          }
-          <time>{formatTime(chat.datetime)}</time>
-        </div>
+        {
+          chat.author.id !== "me" ? (
+            <div className={styles.meta}>
+              <span className={styles.author}>{"Bot"}</span>
+              {characters.BULLET}
+              <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
+            </div>
+          ) : null
+        }
         <div className={styles.chat_list}>
           {
             chat.content?.map((item: string, idx: number) => (
@@ -57,6 +57,11 @@ const ChatItem = ({
             + content.type (text/md, media/image, media/audio, media/video)
           */}
         </div>
+        {chat.author.id === "me" && (
+          <div className={styles.meta}>
+            <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
+          </div>
+        )}
       </div>
     </div>
   );

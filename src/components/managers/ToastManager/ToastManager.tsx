@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { useToastActions, useToasts } from "@/data/stores";
 import { useSwipe } from "@/lib/hooks/useSwipe";
@@ -20,10 +20,14 @@ const ToastManager = () => {
         toastActions.removeToast(id);
     }, [toastActions]);
 
-    useEffect(() => {
-        if (toasts.length === 0) {
+    const resetShowAll = useEffectEvent((len: number) => {
+        if (len === 0) {
             setShowAll(false);
         }
+    });
+
+    useEffect(() => {
+        resetShowAll(toasts.length);
     }, [toasts.length]);
 
     useSwipe(ref || null, (a, b, e) => {

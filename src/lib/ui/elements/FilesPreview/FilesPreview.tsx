@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useEffect, useEffectEvent, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
@@ -34,6 +34,10 @@ const FilesPreview = ({
   ...props
 }: FilesPreviewProps) => {
   const [previews, setPreviews] = useState<IPreview[]>([]);
+
+  const updatePeviews = useEffectEvent((_previews: IPreview[]) => {
+    setPreviews(_previews);
+  });
 
   useEffect(() => {
     const pLocal: IPreview[] = [];
@@ -71,7 +75,7 @@ const FilesPreview = ({
 
       }
     }
-    setPreviews(pLocal);
+    updatePeviews(pLocal);
   }, [files, mode, srcs]);
 
   const handleDelete = (item: IPreview) => {

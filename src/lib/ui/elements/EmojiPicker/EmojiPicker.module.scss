@@ -115,38 +115,38 @@
     grid-template-columns: repeat(8, 1fr);
     gap: .1rem;
   }
+}
 
-  .emoji {
-    position: relative;
-    min-width: 3.6rem;
-    min-height: 3.6rem;
-    display: grid;
-    place-items: center;
-    font-size: 2.4rem;
-    text-align: center;
-    cursor: pointer;
-    padding: .3rem;
-    border-radius: .4rem;
-    outline: none;
-  }
+.emoji {
+  position: relative;
+  min-width: 3.6rem;
+  min-height: 3.6rem;
+  display: grid;
+  place-items: center;
+  font-size: 2.4rem;
+  text-align: center;
+  cursor: pointer;
+  padding: .3rem;
+  border-radius: .4rem;
+  outline: none;
+}
 
-  .emoji[data-skin-tone="true"]::after {
-    content: "•";
-    position: absolute;
-    bottom: .1rem;
-    right: .1rem;
-    font-size: 1.2rem;
-    line-height: .5;
-    color: var(--yellow-1);
-  }
+.emoji[data-skin-tone="true"]::after {
+  content: "•";
+  position: absolute;
+  bottom: .1rem;
+  right: .1rem;
+  font-size: 1.2rem;
+  line-height: .5;
+  color: var(--yellow-1);
+}
 
-  .emoji:hover,
-  .emoji:focus {
-    background-color: var(--bg-s);
+.emoji:hover,
+.emoji:focus {
+  background-color: var(--bg-s);
 
-    &[data-skin-tone="true"]::after {
-      color: var(--fg-p);
-    }
+  &[data-skin-tone="true"]::after {
+    color: var(--fg-p);
   }
 }
 

@@ -21,6 +21,11 @@ const Page = () => {
         currentPage={currPage} totalRecords={totalRecords} recordsPerPage={recordsPerPage}
         onPageChange={setCurrPage}
       />
+      <Pagination
+        siblingCount={3}
+        currentPage={currPage} totalRecords={totalRecords} recordsPerPage={recordsPerPage}
+        onPageChange={setCurrPage}
+      />
     </main>
   );
 };

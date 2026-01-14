@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Progress } from "@/lib/ui/elements/Progress";
@@ -9,18 +9,17 @@ import styles from "./styles.module.scss";
 
 const Page = () => {
   const [value, setValue] = useState(0);
+  const intervalRef = useRef<NodeJS.Timeout>(null);
 
   useEffect(() => {
-    setInterval(() => {
-      setValue(oldVal => oldVal + 1);
+    if (intervalRef.current) clearTimeout(intervalRef.current);
+    intervalRef.current = setInterval(() => {
+      setValue(oldVal => oldVal + 1 >= 100 ? 0 : oldVal + 1);
     }, 200);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
   }, []);
-
-  useEffect(() => {
-    if (value >= 100) {
-      setValue(0);
-    }
-  }, [value]);
 
   return (
     <main className={styles.main}>

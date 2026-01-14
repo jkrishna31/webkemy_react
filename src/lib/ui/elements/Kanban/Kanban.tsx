@@ -12,7 +12,9 @@ const Kanban = ({
   className, children,
   ...restProps
 }: KanbanProps) => {
-  // columns
+  // columns (resize, add/remove, reorder)
+  // on mobile - cols to rows and each rows scrollable
+  // col item (add/remove, reorder, transfer across col)
 
   return (
     <div

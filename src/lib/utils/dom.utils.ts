@@ -31,10 +31,10 @@ export const calculateRenderPosition = (
   };
 
   if (!placement || placement === "left" || placement === "right") {
-    const _leftSpace = anchorBoundingRect.x + (overlap ? anchorBoundingRect.width : 0) - offset - (overlap ? 0 : offset);
-    const _rightSpace = vw - anchorBoundingRect.x - (overlap ? 0 : anchorBoundingRect.width) - offset - (overlap ? 0 : offset);
-    const _topSpace = anchorBoundingRect.y - offset;
-    const _bottomSpace = vh - anchorBoundingRect.y - anchorBoundingRect.height - offset;
+    const _leftSpace = Math.floor(anchorBoundingRect.x + (overlap ? anchorBoundingRect.width : 0) - offset - (overlap ? 0 : offset));
+    const _rightSpace = Math.floor(vw - anchorBoundingRect.x - (overlap ? 0 : anchorBoundingRect.width) - offset - (overlap ? 0 : offset));
+    const _topSpace = Math.floor(anchorBoundingRect.y - offset);
+    const _bottomSpace = Math.floor(vh - anchorBoundingRect.y - anchorBoundingRect.height - offset);
 
     const isCenterAlignPossible = ((_topSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset))
       && ((_bottomSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset));
@@ -94,10 +94,10 @@ export const calculateRenderPosition = (
   }
 
   if (!placement || placement === "top" || placement === "bottom") {
-    const _topSpace = anchorBoundingRect.y + (overlap ? anchorBoundingRect.height : 0) - offset - (overlap ? 0 : offset);
-    const _bottomSpace = vh - anchorBoundingRect.y - (overlap ? 0 : anchorBoundingRect.height) - offset - (overlap ? 0 : offset);
-    const _leftSpace = anchorBoundingRect.x + (alignment === "right" ? anchorBoundingRect.width : 0) - offset;
-    const _rightSpace = vw - anchorBoundingRect.x - (alignment === "left" ? 0 : anchorBoundingRect.width) - offset;
+    const _topSpace = Math.floor(anchorBoundingRect.y + (overlap ? anchorBoundingRect.height : 0) - offset - (overlap ? 0 : offset));
+    const _bottomSpace = Math.floor(vh - anchorBoundingRect.y - (overlap ? 0 : anchorBoundingRect.height) - offset - (overlap ? 0 : offset));
+    const _leftSpace = Math.floor(anchorBoundingRect.x + (alignment === "right" ? anchorBoundingRect.width : 0) - offset);
+    const _rightSpace = Math.floor(vw - anchorBoundingRect.x - (alignment === "left" ? 0 : anchorBoundingRect.width) - offset);
 
     const isCenterAlignPossible = ((_leftSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset)) && ((_rightSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset));
     const isLeftAlignPossible = _rightSpace >= (targetBoundingRect.width + offset);

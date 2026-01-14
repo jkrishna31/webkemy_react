@@ -17,34 +17,17 @@ export type ButtonProps<T extends ElementType> = {
     dataClass?: string
 } & ComponentProps<T>;
 
-const getColorClass = (color: Color) => {
-    switch (color) {
-        case "blue":
-            return styles.blue;
-        case "green":
-            return styles.green;
-        case "orange":
-            return styles.orange;
-        case "red":
-            return styles.red;
-        case "yellow":
-            return styles.yellow;
-        default:
-            return "";
-    }
-};
-
 const getVariantClass = (variant: Variant) => {
     switch (variant) {
         case "primary":
-            return styles.primary;
+            return styles.btn_primary;
         case "secondary":
-            return styles.secondary;
+            return styles.btn_secondary;
         case "tertiary":
-            return styles.tertiary;
+            return styles.btn_tertiary;
         case "text":
         default:
-            return styles.text;
+            return styles.btn_text;
     }
 };
 
@@ -60,7 +43,7 @@ const Button = <T extends ElementType = "button">({
         return (
             <>
                 {icon}
-                {data ? (<span className={classes(styles.data, dataClass)}>{data}</span>) : (null)}
+                {data ? (<span className={classes(styles.btn_data, dataClass)}>{data}</span>) : (null)}
                 {children}
             </>
         );

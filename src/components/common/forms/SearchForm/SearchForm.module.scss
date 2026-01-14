@@ -1,11 +1,11 @@
-.form {
+.search_form {
     flex-shrink: 0;
     height: fit-content;
     width: 100%;
     display: flex;
     align-items: center;
 
-    .wrapper {
+    .sf_input_wrapper {
         border-radius: 6rem;
         padding-inline: .6rem;
         border-color: transparent;
@@ -20,7 +20,7 @@
     }
 }
 
-.form_btn {
+.sf_btn {
     min-width: 3.8rem;
     min-height: 3.8rem;
     display: flex;
@@ -35,26 +35,25 @@
     }
 }
 
-.mic_btn {
+.sf_mic_btn {
     color: var(--fg-s);
     background-color: var(--bg-t);
     margin-left: .6rem;
     border-radius: 50%;
+
+    svg {
+        width: 1.8rem;
+        height: 1.8rem;
+    }
 }
 
-.reset_icon,
-.search_icon {
+.sf_btn svg {
     stroke-width: .2rem;
     width: 1.8rem;
     height: 1.8rem;
 }
 
-.mic_icon {
-    width: 1.8rem;
-    height: 1.8rem;
-}
-
-.dropdown {
+.sf_popover {
     max-height: min(70vh, 46rem);
     padding: 1rem .4rem 1rem 1.4rem;
     background-color: var(--bg-s);
@@ -74,18 +73,17 @@
 
 
 @media screen and (max-width: 768px) {
-    .form {
-        .reset_btn {
+    .search_form {
+        .sf_reset_btn {
             width: 3.4rem;
         }
 
-        .search_icon,
-        .reset_icon {
+        .sf_btn svg {
             width: 1.6rem;
             height: 1.6rem;
         }
 
-        .mic_icon {
+        .sf_mic_btn svg {
             width: 1.6rem;
             height: 1.6rem;
         }

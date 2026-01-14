@@ -39,6 +39,8 @@ const ScatterChart: FC<IScatterChart> = ({
   const renderChart = useCallback(() => {
     const refCurr = ref.current;
 
+    if (!refCurr) return;
+
     // chart dimension
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
@@ -205,12 +207,7 @@ const ScatterChart: FC<IScatterChart> = ({
     return () => {
       d3.select(refCurr).selectAll("*").remove();
     };
-  }, [
-    height, width, fit,
-    margin.bottom, margin.top, margin.left, margin.right,
-    axes.x?.title, axes.y?.title,
-    payload
-  ]);
+  }, [height, width, fit, margin, axes, payload]);
 
   useEffect(() => {
     return renderChart();

@@ -38,35 +38,31 @@ export function useMediaPlayer(
   };
 
   const updateCurrTime = (newCurrTime: number, trusted?: boolean) => {
-    if (target.current) {
-      if (trusted) {
-        target.current.currentTime = newCurrTime;
-      }
-      setCurrTime(Math.ceil(newCurrTime));
+    if (!target.current) return;
+    if (trusted) {
+      target.current.currentTime = newCurrTime;
     }
+    setCurrTime(Math.ceil(newCurrTime));
   };
 
   const updateVolume = (newVolume: number) => {
-    if (target.current) {
-      target.current.volume = newVolume / 100;
-      setVolume(newVolume);
-    }
+    if (!target.current) return;
+    target.current.volume = newVolume / 100;
+    setVolume(newVolume);
   };
 
   const updatePace = (newPace: number) => {
-    if (target.current) {
-      target.current.playbackRate = newPace;
-      setPace(newPace);
-    }
+    if (!target.current) return;
+    target.current.playbackRate = newPace;
+    setPace(newPace);
   };
 
   useEffect(() => {
     setLoading(true);
-    if (target.current) {
-      const elem = target.current;
-      if (elem.readyState >= 1) {
-        handleLoadedMetadata(elem);
-      }
+    if (!target.current) return;
+    const elem = target.current;
+    if (elem.readyState >= 1) {
+      handleLoadedMetadata(elem);
     }
   }, [target]);
 

@@ -17,8 +17,9 @@ export function useDebouncedCallback<T extends (...args: any) => any>(cb: T, del
   }, [cb]);
 
   const memoizedCallback = useMemo(() => {
+    const _cb = cbRef.current;
     return debounce((...args: Parameters<T>) => {
-      cbRef.current(...args);
+      _cb(...args);
     }, delay, { leading, trailing });
   }, [delay, leading, trailing]);
 

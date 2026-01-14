@@ -1,12 +1,16 @@
-import { useEffect, useState } from "react";
+import { useEffect, useEffectEvent, useState } from "react";
 
 export function useMounted() {
   const [isMounted, setIsMounted] = useState(false);
 
+  const updateMountedStatus = useEffectEvent((value: boolean) => {
+    setIsMounted(value);
+  });
+
   useEffect(() => {
-    setIsMounted(true);
+    updateMountedStatus(true);
     return () => {
-      setIsMounted(false);
+      updateMountedStatus(false);
     };
   }, []);
 

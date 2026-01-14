@@ -1,4 +1,4 @@
-.wrapper {
+.audio_player {
   position: relative;
 
   display: flex;
@@ -6,7 +6,14 @@
   align-items: center;
   gap: .8rem;
 
-  .slider {
+  &>div {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    width: 100%;
+  }
+
+  .ap_slider {
     border-radius: var(--br-pill);
     min-width: 6rem;
 
@@ -23,37 +30,30 @@
     }
   }
 
-  .row {
-    display: flex;
-    align-items: center;
-    gap: .8rem;
-    width: 100%;
-  }
-
   .player {
     flex: 1;
   }
 
-  .play_btn,
-  .speed_btn,
-  .mute_btn {
+  .ap_play_btn,
+  .ap_speed_btn,
+  .ap_mute_btn {
     padding: .9rem;
     color: var(--fg-p-alt);
   }
 
-  .btn_icon {
+  .bi {
     width: 2rem;
     height: 2rem;
   }
 
-  .speed_btn {
+  .ap_speed_btn {
     min-height: 4rem;
     min-width: 6rem;
     justify-content: center;
     padding-inline: .8rem;
   }
 
-  .mute_btn {
+  .ap_mute_btn {
     padding: .8rem;
 
     svg {
@@ -63,7 +63,7 @@
     }
   }
 
-  .duration {
+  .ap_btn_dur {
     display: flex;
     margin-left: auto;
     gap: .6rem;
@@ -81,17 +81,17 @@
   }
 }
 
-.speed_dropdown,
-.vol_dropdown {
+.ap_speed_popover,
+.ap_vol_popover {
   padding: 1.2rem .4rem;
   min-width: fit-content;
 }
 
 @media screen and (max-width: 768px) {
-  .wrapper {
+  .audio_player {
     width: 100%;
 
-    .duration {
+    .ap_btn_dur {
       font-size: 1.3rem;
     }
   }

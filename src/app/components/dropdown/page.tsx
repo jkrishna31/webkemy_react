@@ -74,7 +74,7 @@ const Page = () => {
           </ItemList>
         }
         hintIcon={null}
-        className={styles.dd2}
+        triggerClass={styles.trigger}
       >
         <EllipsisHIcon className={styles.ellipsis_icon} />
       </Dropdown>

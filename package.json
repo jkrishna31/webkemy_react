@@ -14,8 +14,8 @@
     "test:e2e": "npx playwright test",
     "prepare": "husky",
     "format": "prettier --write --check ./src",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^1.19.0",
@@ -45,7 +45,7 @@
     "@types/react-dom": "^19",
     "clsx": "^2.1.1",
     "eslint": "^9",
-    "eslint-config-next": "15.5.2",
+    "eslint-config-next": "^16.1.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^9.1.7",

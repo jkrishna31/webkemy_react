@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, Fragment, ReactNode, useEffect, useId, useState } from "react";
+import { ComponentProps, Fragment, ReactNode, useEffect, useEffectEvent, useId, useState } from "react";
 
 import { Color } from "@/lib/types/general.types";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
@@ -65,8 +65,12 @@ const Rate = ({
     setActive(null);
   };
 
+  const updateRate = useEffectEvent((val: number) => {
+    setRate(val);
+  });
+
   useEffect(() => {
-    setRate(value ?? defaultValue ?? 0);
+    updateRate(value ?? defaultValue ?? 0);
   }, [defaultValue, value]);
 
   return (

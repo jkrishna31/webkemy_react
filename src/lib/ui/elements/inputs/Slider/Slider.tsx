@@ -23,7 +23,7 @@ const Slider = ({
   // todo: start range
   return (
     <div
-      className={classes(styles.wrapper, showFill && styles.filled, wrapperClass)}
+      className={classes(styles.slider, showFill && styles.filled, wrapperClass)}
       data-variant={variant}
       data-is-progress={showFill}
       aria-orientation={props["aria-orientation"] || orientation}
@@ -37,7 +37,7 @@ const Slider = ({
     >
       <input
         type="range"
-        className={classes(styles.input, className)}
+        className={classes(styles.slider_input, className)}
         min={min} max={max} value={value}
         {...props}
         aria-orientation={props["aria-orientation"] || orientation}

@@ -27,27 +27,27 @@ const SearchForm = ({
     const inputRef = useRef<HTMLInputElement>(null);
 
     return (
-        <form className={classes(styles.form, formClass)} role="search" {...props}>
-            <InputFieldWrapper ref={inputRef} className={classes(styles.wrapper, wrapperClass)} onClick={onClick}>
+        <form className={classes(styles.search_form, formClass)} role="search" {...props}>
+            <InputFieldWrapper ref={inputRef} className={classes(styles.sf_input_wrapper, wrapperClass)} onClick={onClick}>
                 <GeneralInput
                     spellCheck="false" id="query"
                     onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
                     required
                     placeholder={placeholder}
-                    className={classes(styles.input, inputClass)}
+                    className={classes(inputClass)}
                     autoComplete="off"
                 />
                 {
                     allowClear ? (
-                        <button type="reset" className={classes(styles.form_btn, styles.reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
-                            <CrossIcon className={styles.reset_icon} />
+                        <button type="reset" className={classes(styles.sf_btn, styles.sf_reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
+                            <CrossIcon />
                         </button>
                     ) : null
                 }
                 {
                     allowSearch ? (
-                        <button type="submit" className={classes(styles.form_btn, styles.search_btn)} title="Search">
-                            <SearchIcon className={styles.search_icon} />
+                        <button type="submit" className={classes(styles.sf_btn, styles.sf_search_btn)} title="Search">
+                            <SearchIcon />
                         </button>
                     ) : null
                 }
@@ -57,7 +57,7 @@ const SearchForm = ({
                     anchor={inputRef.current}
                     placement="bottom"
                     alignment="right"
-                    className={styles.dropdown}
+                    className={styles.sf_popover}
                     closeOnScroll
                     onClose={onClose}
                     trapFocus={false}
@@ -67,10 +67,12 @@ const SearchForm = ({
             )}
             {audio ? (
                 <button
-                    type="button" className={classes(styles.form_btn, styles.mic_btn)} title="Mic"
+                    type="button"
+                    className={classes(styles.sf_btn, styles.sf_mic_btn)}
+                    title="Mic"
                     onClick={onMicClick}
                 >
-                    <MicIcon className={styles.mic_icon} />
+                    <MicIcon />
                 </button>
             ) : null}
         </form>

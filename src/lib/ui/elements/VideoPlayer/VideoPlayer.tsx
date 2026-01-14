@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useToastActions } from "@/data/stores";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
@@ -86,11 +86,13 @@ const VideoPlayer = ({
     }
   };
 
-  const toggleFullscreen = () => {
+  const toggleFullscreen = useCallback(() => {
+    const containerElem = containerRef.current;
+    if (!containerElem) return;
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
-      containerRef.current?.requestFullscreen()
+      containerElem.requestFullscreen()
         .catch(() => {
           addToast({
             id: getUniqueId(4),
@@ -100,13 +102,15 @@ const VideoPlayer = ({
           });
         });
     }
-  };
+  }, [addToast]);
 
-  const togglePictureInPicture = () => {
+  const togglePictureInPicture = useCallback(() => {
+    const videoElem = videoRef.current;
+    if (!videoElem) return;
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture();
-    } else if (typeof videoRef.current?.requestPictureInPicture === "function") {
-      videoRef.current?.requestPictureInPicture()
+    } else if (typeof videoElem.requestPictureInPicture === "function") {
+      videoElem.requestPictureInPicture()
         .catch(() => {
           addToast({
             id: getUniqueId(4),
@@ -123,9 +127,9 @@ const VideoPlayer = ({
         type: "error",
       });
     }
-  };
+  }, [addToast]);
 
-  const playerMoreOptions = [
+  const playerMoreOptions = useMemo(() => [
     {
       label: "Subtitles/Closed Captions", value: 0,
       // onClick: () => { },
@@ -139,7 +143,7 @@ const VideoPlayer = ({
       label: "Picture in Picture", value: 2,
       onClick: togglePictureInPicture,
     },
-  ];
+  ], [toggleFullscreen, togglePictureInPicture]);
 
   useEffect(() => {
     if (overlay && containerRef.current) {
@@ -158,7 +162,7 @@ const VideoPlayer = ({
 
   return (
     <div
-      className={classes(styles.wrapper, rootClass)}
+      className={classes(styles.video_player, rootClass)}
       ref={containerRef}
       data-overlay={overlay}
       onClick={handleClick}
@@ -181,21 +185,21 @@ const VideoPlayer = ({
           ))
         }
       </video>
-      <div className={styles.controls_wrapper} data-id="overlay">
-        <div className={styles.center}>
+      <div className={styles.vp_controls_wrapper} data-id="overlay">
+        <div className={styles.vp_controls_center}>
           {/* <button
-            className={styles.prev_btn}
+            className={"prev_btn"}
           >
             <SkipBackIcon />
           </button> */}
           <button
-            className={styles.rewind_btn}
+            className={styles.vp_rewind_btn}
             onClick={() => updateCurrTime(clampNumber(currTime - 5, 0, duration), true)}
           >
             <RewindIcon />
           </button>
           <button
-            className={styles.main_play_btn}
+            className={styles.vp_main_play_btn}
             onClick={togglePlayState}
             disabled={loading}
           >
@@ -206,31 +210,31 @@ const VideoPlayer = ({
             }
           </button>
           <button
-            className={styles.forward_btn}
+            className={styles.vp_forward_btn}
             onClick={() => updateCurrTime(clampNumber(currTime + 5, 0, duration), true)}
           >
             <FastForwardIcon />
           </button>
           {/* <button
-            className={styles.next_btn}
+            className={"next_btn"}
           >
             <SkipForwardIcon />
           </button> */}
         </div>
-        <div className={styles.all_controls}>
+        <div className={styles.vp_all_controls}>
           <div className={styles.top}>
             <Slider
               min={0} max={duration} step={1}
               value={currTime}
               onInput={(e) => updateCurrTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
-              className={styles.slider}
+              className={styles.vp_slider}
               variant="rod"
               showFill={true}
             />
           </div>
           <div className={styles.bottom}>
             <button
-              className={styles.play_btn}
+              className={styles.vp_play_btn}
               onClick={togglePlayState}
               disabled={loading}
             >
@@ -254,8 +258,8 @@ const VideoPlayer = ({
                 <PaceControl pace={pace} updatePace={updatePace} />
               }
               hintIcon={null}
-              triggerClass={styles.pace_btn}
-              dropdownClass={styles.speed_dropdown}
+              triggerClass={styles.vp_pace_btn}
+              dropdownClass={styles.vp_speed_popover}
               alignment="right"
             >
               {pace}{"x"}
@@ -268,8 +272,8 @@ const VideoPlayer = ({
                 />
               }
               hintIcon={null}
-              triggerClass={styles.vol_btn}
-              dropdownClass={styles.speed_dropdown}
+              triggerClass={styles.vp_vol_btn}
+              dropdownClass={styles.vp_vol_popover}
               alignment="right"
             >
               {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
@@ -285,7 +289,7 @@ const VideoPlayer = ({
                 </ItemList>
               }
               hintIcon={null}
-              triggerClass={styles.more_controls}
+              triggerClass={styles.vp_more_btn}
               alignment="right"
             >
               <EllipsisHIcon />

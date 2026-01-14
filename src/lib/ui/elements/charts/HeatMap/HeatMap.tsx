@@ -35,6 +35,8 @@ const HeatMap: FC<IHeatMapProps> = ({
   const renderGraph = useCallback(() => {
     const refCurr = ref.current;
 
+    if (!refCurr) return;
+
     // chart dimension
     const chartWidth = width - margin.left - margin.right;
     const chartHeight = height - margin.top - margin.bottom;
@@ -114,12 +116,7 @@ const HeatMap: FC<IHeatMapProps> = ({
     return () => {
       d3.select(refCurr).selectAll("*").remove();
     };
-  }, [
-    height, width,
-    margin.left, margin.bottom, margin.right, margin.top,
-    axes.x?.title, axes.y?.title,
-    payload, fit,
-  ]);
+  }, [height, width, margin, axes, payload, fit]);
 
   useEffect(() => {
     return renderGraph();

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ComponentProps, ElementType, useCallback, useLayoutEffect, useRef, useState } from "react";
+import { ComponentProps, ElementType, useEffectEvent, useLayoutEffect, useRef, useState } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 
@@ -28,7 +28,7 @@ const CollapsiblePanel = <T extends ElementType = "div">({
   const [destroyContent, setDestroyContent] = useState(!renderWhileClosed);
   const isFirstRender = useRef(true);
 
-  const updateHeight = useCallback(() => {
+  const updateHeight = useEffectEvent((_duration: number, _open: boolean, _renderWhileClosed: boolean) => {
     const elem = ref.current;
     if (elem && !isFirstRender.current) {
       clearTimeout(timeoutRef.current);
@@ -37,35 +37,35 @@ const CollapsiblePanel = <T extends ElementType = "div">({
       const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
       const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
       requestAnimationFrame(() => {
-        if (open) {
+        if (_open) {
           elem.style.overflow = "hidden";
-          elem.style.setProperty("--mxh", (currHeight && renderWhileClosed) ? `${currHeight}px` : "0px");
+          elem.style.setProperty("--mxh", (currHeight && _renderWhileClosed) ? `${currHeight}px` : "0px");
           void elem.offsetHeight;
           elem.style.setProperty("--mxh", `${contentHeight}px`);
           timeoutRef.current = setTimeout(() => {
             elem.style.overflow = "";
             elem.style.setProperty("--mxh", "none");
-          }, duration);
+          }, _duration);
         } else {
           elem.style.overflow = "hidden";
           elem.style.setProperty("--mxh", `${currHeight}px`);
           void elem.offsetHeight;
           elem.style.setProperty("--mxh", "0px");
-          if (!renderWhileClosed) {
+          if (!_renderWhileClosed) {
             destroyContentRef.current = setTimeout(() => {
               setDestroyContent(true);
-            }, duration);
+            }, _duration);
           }
         }
       });
     }
-  }, [duration, open, renderWhileClosed]);
+  });
 
   useLayoutEffect(() => {
     isFirstRender.current = false;
   }, []);
 
-  useLayoutEffect(updateHeight, [updateHeight]);
+  useLayoutEffect(() => updateHeight(duration, open, renderWhileClosed), [duration, open, renderWhileClosed]);
 
   if (destroyContent && !open) return null;
 

@@ -49,11 +49,11 @@ const Dropdown = ({
 
   return (
     <div
-      className={classes(styles.wrapper, className)}
+      className={classes(styles.dropdown, className)}
     >
       <Button
         ref={triggerRef}
-        className={classes(styles.trigger, triggerClass, "trigger")}
+        className={classes(styles.dropdown_trigger, triggerClass)}
         onClick={() => updateDropdownState()}
       >
         {children}
@@ -70,7 +70,7 @@ const Dropdown = ({
           anchor={triggerRef.current}
           onClose={handleClose}
           offset={6}
-          className={classes(styles.dropdown, dropdownClass)}
+          className={classes(styles.dropdown_popover, dropdownClass)}
           alignment={alignment}
           placement={placement}
         >

@@ -92,7 +92,6 @@ const Editor = ({
                     newPostBlocks.push(newBlock);
                 }
             });
-            console.log("+++++ new post blocks +++++", newPostBlocks);
             return newPostBlocks;
         });
     }, [setBlocks]);
@@ -138,6 +137,21 @@ const Editor = ({
         }
     }, []);
 
+    const selectionDetails = (selection: Selection | null) => {
+        let anchorBlock, focusBlock;
+        if (selection?.anchorNode?.nodeType === 3) {
+            anchorBlock = selection?.anchorNode?.parentElement?.closest("[data-block]");
+        } else {
+            anchorBlock = (selection?.anchorNode as HTMLElement)?.closest("[data-block]");
+        }
+        if (selection?.focusNode?.nodeType === 3) {
+            focusBlock = selection?.focusNode?.parentElement?.closest("[data-block]");
+        } else {
+            focusBlock = (selection?.focusNode as HTMLElement)?.closest("[data-block]");
+        }
+        return [anchorBlock, focusBlock];
+    };
+
     const updateActiveBlock = useCallback((blockId: string) => {
         blocks?.forEach(block => {
             if (block.id === blockId) {
@@ -154,21 +168,6 @@ const Editor = ({
             updateActiveBlock(activeBlockId);
         }
     }, [updateActiveBlock]);
-
-    const selectionDetails = (selection: Selection | null) => {
-        let anchorBlock, focusBlock;
-        if (selection?.anchorNode?.nodeType === 3) {
-            anchorBlock = selection?.anchorNode?.parentElement?.closest("[data-block]");
-        } else {
-            anchorBlock = (selection?.anchorNode as HTMLElement)?.closest("[data-block]");
-        }
-        if (selection?.focusNode?.nodeType === 3) {
-            focusBlock = selection?.focusNode?.parentElement?.closest("[data-block]");
-        } else {
-            focusBlock = (selection?.focusNode as HTMLElement)?.closest("[data-block]");
-        }
-        return [anchorBlock, focusBlock];
-    };
 
     // on keydown
     // - if block empty

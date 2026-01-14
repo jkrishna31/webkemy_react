@@ -5,8 +5,8 @@
     height: 100%;
     opacity: 0;
     background: var(--bg-overlay);
-    backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
     z-index: var(--zi-main-overlay);
 
     &.open {

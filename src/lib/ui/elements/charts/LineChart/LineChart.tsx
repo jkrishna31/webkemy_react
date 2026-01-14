@@ -39,6 +39,8 @@ const LineChart = ({
   const renderChart = useCallback(() => {
     const refCurr = ref.current;
 
+    if (!refCurr) return;
+
     const finalPayload: { division: string, date: Date, unemployment: number }[] = payload.map(
       item => ({ ...item, date: new Date(item.date) })
     ).sort((a: any, b: any) => a.date - b.date);
@@ -234,12 +236,7 @@ const LineChart = ({
     return () => {
       d3.select(refCurr).selectAll("*").remove();
     };
-  }, [
-    height, width, fit,
-    margin.bottom, margin.top, margin.left, margin.right,
-    axes.x?.title, axes.y?.title,
-    payload
-  ]);
+  }, [height, width, fit, margin, axes, payload]);
 
   useEffect(() => {
     return renderChart();

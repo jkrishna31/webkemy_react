@@ -1,23 +1,20 @@
-.pagination_bar {
-    width: 100%;
-    display: flex;
-    justify-content: center;
+.pagination {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     gap: 1.2rem;
-    height: auto;
+
+    .all_pages {
+        display: flex;
+        gap: 1.2rem;
+    }
 
     .pagination_btn {
         min-width: 8rem;
         min-height: 3.4rem;
         height: fit-content;
+        width: fit-content;
         gap: .3rem;
-
-        &:first-of-type {
-            padding-inline: 1rem 1.8rem;
-        }
-
-        &:last-of-type {
-            padding-inline: 1.8rem 1rem;
-        }
 
         .chevron_icon {
             height: 1.8rem;
@@ -26,7 +23,16 @@
         }
     }
 
-    .page_boundary_btn {
+    .prev {
+        padding-inline: 1rem 1.8rem;
+    }
+
+    .next {
+        padding-inline: 1.8rem 1rem;
+    }
+
+    .page_boundary_btn,
+    .page {
         font-size: 1.6rem;
         min-width: 4rem;
         min-height: 3.4rem;
@@ -35,19 +41,15 @@
         padding-inline: .6rem;
         border-radius: .4rem;
 
-        // &:nth-of-type(2) {
-        //     padding-right: .8rem;
-        // }
-
-        // &:nth-of-type(3) {
-        //     padding-left: .8rem;
-        // }
-
         svg {
             color: var(--fg-s);
         }
-    }
 
+        &[aria-pressed="true"] {
+            background-color: var(--blue-1-10);
+            border-color: var(--blue-1);
+        }
+    }
 
     .pagination_form {
         display: flex;
@@ -83,19 +85,50 @@
         min-height: auto;
         padding: .8rem 1.6rem;
     }
+
+    .pages {
+        display: flex;
+        align-items: center;
+        gap: 1.2rem;
+    }
+
+    .more {
+        color: var(--fg-t);
+        width: 2rem;
+        height: 2rem;
+        align-self: center;
+    }
 }
 
 
 @media screen and (max-width: 768px) {
-    .pagination_bar {
+    .pagination {
         width: 100%;
-        flex-wrap: wrap;
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas: "first last" "middle middle";
         gap: .8rem;
-        justify-content: space-between;
 
         .pagination_btn {
             min-width: 4.8rem;
             font-size: 1.6rem;
+        }
+
+        .prev {
+            grid-area: first;
+            justify-self: start;
+        }
+
+        .next {
+            grid-area: last;
+            justify-self: end;
+        }
+
+        .all_pages {
+            max-width: 100%;
+            grid-area: middle;
+            justify-self: center;
+            overflow: auto;
+            scrollbar-width: none;
         }
 
         .page_boundary_btn {
@@ -106,8 +139,6 @@
 
         .pagination_form {
             gap: 1rem;
-            order: 3;
-            margin-inline: auto;
         }
 
         .go_btn {

@@ -38,7 +38,8 @@ const Popover = ({
   alignment = "center",
   offset = 8,
   isTooltip,
-  className, children,
+  className,
+  children,
   closeOnScroll,
   closeOnOutsideClick = true,
   closeOnEsc = "capture",
@@ -175,7 +176,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, className)}
+        className={classes(styles.popover, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}
@@ -187,7 +188,7 @@ const Popover = ({
     : (
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.wrapper, className)}
+        className={classes(styles.popover, className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}

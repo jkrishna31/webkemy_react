@@ -46,7 +46,7 @@ const AudioPlayer = ({
   }, [currTime, duration, progressMode]);
 
   return (
-    <div className={classes(styles.wrapper, rootClass)}>
+    <div className={classes(styles.audio_player, rootClass)}>
       <audio
         {...props}
         muted={isMute}
@@ -65,25 +65,25 @@ const AudioPlayer = ({
         }
         {children}
       </audio>
-      <div className={styles.row}>
+      <div>
         <Button
           variant='tertiary'
-          className={styles.play_btn}
+          className={styles.ap_play_btn}
           onClick={togglePlayState}
           aria-label={isPlaying ? "Pause" : "Play"}
           disabled={loading}
         >
           {
             loading
-              ? <RippleLoader className={styles.btn_icon} />
-              : (isPlaying ? <PauseIcon className={styles.btn_icon} /> : <PlayIcon className={styles.btn_icon} />)
+              ? <RippleLoader className={styles.bi} />
+              : (isPlaying ? <PauseIcon className={styles.bi} /> : <PlayIcon className={styles.bi} />)
           }
         </Button>
         <div className={styles.player}>
           <button
             aria-pressed={progressMode === "remaining"}
             onClick={() => setProgressMode(progressMode === "remaining" ? "elapsed" : "remaining")}
-            className={styles.duration}
+            className={styles.ap_btn_dur}
           >
             <p className={styles.curr_timestamp}>{duration ? progressDisplay : "--:--"}</p>
             <span className={styles.separator}>{"/"}</span>
@@ -93,7 +93,7 @@ const AudioPlayer = ({
             min={0} max={duration ?? 0} step={1}
             value={currTime}
             onInput={(e) => updateCurrTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
-            className={styles.slider}
+            className={styles.ap_slider}
             variant="rod"
             showFill={true}
             aria-label="Seek"
@@ -104,8 +104,8 @@ const AudioPlayer = ({
             <PaceControl pace={pace} updatePace={updatePace} />
           }
           hintIcon={null}
-          triggerClass={styles.speed_btn}
-          dropdownClass={styles.speed_dropdown}
+          triggerClass={styles.ap_speed_btn}
+          dropdownClass={styles.ap_speed_popover}
           alignment="right"
         >
           {pace}{"x"}
@@ -114,8 +114,8 @@ const AudioPlayer = ({
           dropdown={
             <VolumeControl mute={isMute} setMute={setIsMute} volume={volume} updateVolume={updateVolume} />
           }
-          triggerClass={styles.mute_btn}
-          dropdownClass={styles.vol_dropdown}
+          triggerClass={styles.ap_mute_btn}
+          dropdownClass={styles.ap_vol_popover}
           hintIcon={null}
           alignment="right"
         >

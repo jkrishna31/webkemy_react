@@ -33,6 +33,12 @@ const AudioListener = ({
 }: AudioListenerProps) => {
   const [status, setStatus] = useState<number>(0);
 
+  const listen = (msObj: MediaStream) => {
+    setStatus(2);
+    const mediaRecorder = new MediaRecorder(msObj);
+    // console.log('--- media recoder ---', mediaRecorder);
+  };
+
   const start = useCallback(() => {
     if (hasDOM() && navigator.mediaDevices) {
       navigator
@@ -47,12 +53,6 @@ const AudioListener = ({
         });
     }
   }, []);
-
-  const listen = (msObj: MediaStream) => {
-    setStatus(2);
-    const mediaRecorder = new MediaRecorder(msObj);
-    // console.log('--- media recoder ---', mediaRecorder);
-  };
 
   const handleMicClick = () => {
     if (status === 0 || status === 1) {

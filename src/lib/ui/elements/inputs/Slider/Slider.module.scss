@@ -1,4 +1,4 @@
-.wrapper {
+.slider {
   position: relative;
   display: flex;
 
@@ -16,8 +16,8 @@
   }
 
   input {
-    appearance: none;
     -webkit-appearance: none;
+    appearance: none;
     transition: border .15s linear;
 
     min-width: 10rem;
@@ -123,7 +123,7 @@
   }
 }
 
-.wrapper[data-variant="rod"] {
+.slider[data-variant="rod"] {
   &::before {
     content: '';
     position: absolute;
@@ -164,7 +164,7 @@
   }
 }
 
-.wrapper {
+.slider {
   input {
     &:focus {
       &::-webkit-slider-thumb {
