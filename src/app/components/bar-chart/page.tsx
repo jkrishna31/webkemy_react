@@ -2,7 +2,7 @@ import { PageSetup } from "@/components/managers";
 import { barChartData } from "@/data/dummy/barChartData";
 import { BarChart } from "@/lib/ui/elements/charts/BarChart";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

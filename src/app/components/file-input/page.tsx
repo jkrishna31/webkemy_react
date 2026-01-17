@@ -6,7 +6,7 @@ import { useFiles } from "@/lib/hooks/useFiles";
 import { FilesPreview } from "@/lib/ui/elements/FilesPreview";
 import { FileInput } from "@/lib/ui/elements/inputs/FileInput";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const { filelist, setFilelist, deleteFileByName } = useFiles();

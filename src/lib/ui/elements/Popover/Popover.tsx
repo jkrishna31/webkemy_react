@@ -30,6 +30,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   adjustOnScroll?: boolean;
   overlap?: boolean;
   trapFocus?: boolean;
+  animation?: "fade" | "slide";
 }
 
 const Popover = ({
@@ -51,6 +52,7 @@ const Popover = ({
   ref,
   overlap,
   trapFocus = true,
+  animation = "fade",
   ...props
 }: PopoverProps) => {
   const popoverId = useId();
@@ -176,7 +178,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.popover, className)}
+        className={classes(styles.popover, styles[animation], className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}
@@ -188,7 +190,7 @@ const Popover = ({
     : (
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.popover, className)}
+        className={classes(styles.popover, styles[animation], className)}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}

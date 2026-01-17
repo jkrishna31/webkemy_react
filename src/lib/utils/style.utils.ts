@@ -1,12 +1,5 @@
-import { ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-
 export type ClassType = string | number | null | undefined | object | false;
 const SEPARATOR = " ";
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
-}
 
 export function stringifyItem(item: any) {
   if (typeof item === "object" && Array.isArray(item)) {

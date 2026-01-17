@@ -3,6 +3,7 @@
 import { ComponentProps, ReactNode, useEffect, useRef } from "react";
 
 import { Keys } from "@/constants/keys.const";
+import { BaseVariant } from "@/lib/types/general.types";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import { isDisabled } from "@/lib/utils/dom.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -17,16 +18,17 @@ export interface Tab extends ComponentProps<"button"> {
 }
 
 export interface TabListProps extends ComponentProps<"div"> {
-    wrapperInnerClass?: string
-    btnClass?: string
-    tabs: Tab[]
-    onChange: any
-    activeTab: string
-    showScrollBtns?: boolean
+    wrapperInnerClass?: string;
+    btnClass?: string;
+    tabs: Tab[];
+    onChange: any;
+    activeTab: string;
+    showScrollBtns?: boolean;
+    variant?: "solid" | "muted";
 }
 
 const Tabs = ({
-    wrapperInnerClass, btnClass, tabs, onChange, activeTab, showScrollBtns = false,
+    variant = "solid", wrapperInnerClass, btnClass, tabs, onChange, activeTab, showScrollBtns = false,
     className,
     ...rest
 }: TabListProps) => {
@@ -91,7 +93,7 @@ const Tabs = ({
             {...rest}
         >
             <Scrollable
-                className={classes(styles.tabs_wrapper, wrapperInnerClass)}
+                className={classes(styles.tabs_wrapper, variant && styles[variant], wrapperInnerClass)}
                 role="tablist"
                 ref={containerRef}
             >

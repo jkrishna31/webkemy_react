@@ -61,14 +61,6 @@
     overflow: auto;
     scrollbar-width: thin;
     box-shadow: var(--shadow-p) 0px 0px 6px 0px;
-    animation-name: slide-in;
-}
-
-@keyframes slide-in {
-    from {
-        opacity: 0;
-        transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) - 1rem), 0);
-    }
 }
 
 

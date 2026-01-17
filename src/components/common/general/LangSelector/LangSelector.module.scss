@@ -1,0 +1,16 @@
+.trigger {
+  color: var(--fg-p-alt);
+}
+
+.popover {
+  width: fit-content;
+  max-width: calc(100vw - 4rem);
+  overflow: auto;
+  background-color: var(--bg-s);
+  color: var(--fg-p);
+  border-radius: .6rem;
+  padding: .4rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+  scrollbar-width: thin;
+}

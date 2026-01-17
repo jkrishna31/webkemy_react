@@ -220,6 +220,7 @@ const Select = ({
                     offset={6}
                     className={styles.dropdown}
                     trapFocus={false}
+                    animation="slide"
                 >
                     <ItemList
                         role="listbox"

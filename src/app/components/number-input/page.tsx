@@ -5,7 +5,7 @@ import { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { NumberInput } from "@/lib/ui/elements/inputs/NumberInput";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [value, setValue] = useState<number>();

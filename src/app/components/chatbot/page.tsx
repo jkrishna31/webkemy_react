@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { Chatbot } from "@/lib/ui/elements/chatbot";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

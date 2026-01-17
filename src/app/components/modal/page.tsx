@@ -8,7 +8,7 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { Modal, ModalHeader } from "@/lib/ui/elements/Modal";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [open, setOpen] = useState<(typeof positions)[keyof typeof positions]>();

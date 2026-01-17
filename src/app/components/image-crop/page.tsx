@@ -13,7 +13,7 @@ import ZoomInIcon from "@/lib/ui/svgs/icons/ZoomInIcon";
 import ZoomOutIcon from "@/lib/ui/svgs/icons/ZoomOutIcon";
 import { clampNumber } from "@/lib/utils/math.utils";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [scale, setScale] = useState(1);

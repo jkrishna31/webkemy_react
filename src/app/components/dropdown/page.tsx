@@ -13,7 +13,7 @@ import PopoverLeftIcon from "@/lib/ui/svgs/icons/PopoverLeftIcon";
 import PuzzleIcon from "@/lib/ui/svgs/icons/PuzzleIcon";
 import { GithubLogo } from "@/lib/ui/svgs/logos";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [selected, setSelected] = useState<string>();

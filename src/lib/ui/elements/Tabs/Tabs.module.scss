@@ -57,9 +57,14 @@
     }
 }
 
-.tab_btn[aria-selected="true"] {
+.solid .tab_btn[aria-selected="true"] {
     background-color: var(--fg-p);
     color: var(--bg-p);
+}
+
+.muted .tab_btn[aria-selected="true"] {
+    background-color: var(--gray-30);
+    color: var(--fg-p);
 }
 
 @media screen and (max-width: 768px) {

@@ -76,9 +76,7 @@
         flex-direction: row-reverse;
         gap: 0rem;
 
-        .translate_btn,
-        .menu_close_btn,
-        .theme_btn {
+        .menu_header_ctrl {
             padding: 1rem;
             color: var(--fg-s);
 
@@ -87,21 +85,9 @@
             }
         }
 
-        .menu_close_btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close_icon,
-        .translate_icon,
-        .theme_icon {
+        .menu_header_ctrl svg {
             height: 2.4rem;
             width: 2.4rem;
-            stroke-width: .175rem;
-        }
-
-        .theme_icon path:nth-child(2) {
             stroke-width: .175rem;
         }
     }
@@ -199,9 +185,7 @@
             flex-direction: row;
             gap: 0rem;
 
-            .translate_icon,
-            .theme_icon,
-            .close_icon {
+            .menu_header_ctrl svg {
                 width: 2.2rem;
                 height: 2.2rem;
             }

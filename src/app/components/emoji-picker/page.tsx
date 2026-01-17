@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { EmojiPicker } from "@/lib/ui/elements/EmojiPicker";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const page = () => {
   return (

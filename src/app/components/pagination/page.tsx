@@ -5,7 +5,7 @@ import { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { Pagination } from "@/lib/ui/elements/Pagination";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const totalRecords = 1500;
 const recordsPerPage = 10;
@@ -22,7 +22,7 @@ const Page = () => {
         onPageChange={setCurrPage}
       />
       <Pagination
-        siblingCount={3}
+        siblingCount={2}
         currentPage={currPage} totalRecords={totalRecords} recordsPerPage={recordsPerPage}
         onPageChange={setCurrPage}
       />

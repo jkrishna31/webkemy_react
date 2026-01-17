@@ -2,7 +2,7 @@ import { PageSetup } from "@/components/managers";
 import { InfiniteScrollBanner } from "@/lib/ui/elements/InfiniteScrollBanner";
 import { AmexIcon, ApplePayIcon, BitcoinIcon, DinersClubIcon, DiscoverIcon, GooglePayIcon, JcbIcon, MastercardIcon, PaypalIcon, SepaIcon, StripeIcon, VisaIcon } from "@/lib/ui/svgs/payments";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const bannerItems = [
   { render: <AmexIcon /> },

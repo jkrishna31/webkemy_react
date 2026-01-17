@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { Carousel, Slide } from "@/lib/ui/elements/Carousel";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const slides: Slide[] = [
   {

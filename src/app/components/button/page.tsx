@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/ui/elements/butttons";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

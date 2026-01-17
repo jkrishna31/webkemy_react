@@ -6,7 +6,7 @@ import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/Drawer";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [open, setOpen] = useState(false);

@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { Progress } from "@/lib/ui/elements/Progress";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [value, setValue] = useState(0);

@@ -73,6 +73,7 @@ const Dropdown = ({
           className={classes(styles.dropdown_popover, dropdownClass)}
           alignment={alignment}
           placement={placement}
+          animation="slide"
         >
           {dropdown}
         </Popover>

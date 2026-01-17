@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { Breadcrumb, type Crumb } from "@/lib/ui/elements/Breadcrumb";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const crumbs: Crumb[] = [
   {

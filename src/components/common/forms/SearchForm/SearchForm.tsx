@@ -16,7 +16,7 @@ export interface SearchFormProps extends ComponentProps<"form"> {
 
 const SearchForm = ({
     formClass, inputClass, wrapperClass,
-    audio, placeholder = "Search (Ctrl+K)...",
+    audio, placeholder = "Search (Ctrl+K)",
     searchDd,
     onMicClick, onClick,
     query, onQueryChange,
@@ -61,6 +61,7 @@ const SearchForm = ({
                     closeOnScroll
                     onClose={onClose}
                     trapFocus={false}
+                    animation="slide"
                 >
                     {searchDd}
                 </Popover>

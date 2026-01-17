@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const page = () => {
   return (

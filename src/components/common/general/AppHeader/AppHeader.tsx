@@ -5,20 +5,18 @@ import { ComponentProps, useState } from "react";
 
 import { SearchForm } from "@/components/common/forms";
 import { edges, SOURCE_CODE } from "@/constants/general.const";
-import { useAppMenu, useLayoutActions, useModalActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
+import { useAppMenu, useLayoutActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Header } from "@/lib/ui/elements/Header";
 import AppLogo from "@/lib/ui/svgs/icons/AppLogo";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import GlobeIcon from "@/lib/ui/svgs/icons/GlobeIcon";
 import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
 import MenuIcon from "@/lib/ui/svgs/icons/MenuIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
-import ThemeIcon from "@/lib/ui/svgs/icons/ThemeIcon";
 import { GithubLogo } from "@/lib/ui/svgs/logos";
 import { classes } from "@/lib/utils/style.utils";
 
-import { AppMenu } from "..";
+import { AppMenu, LangSelector, ThemeSelector } from "..";
 import styles from "./AppHeader.module.scss";
 
 const history = [
@@ -42,7 +40,6 @@ const AppHeader = ({
     const scrollDir = useScrollDir();
     const { setSearch } = useSearchActions();
     const { setLayout } = useLayoutActions();
-    const { setField: updateModalField } = useModalActions();
     const appMenu = useAppMenu();
     const searchMenu = useSearchMenu();
 
@@ -100,22 +97,8 @@ const AppHeader = ({
                         >
                             <GithubLogo className={styles.github_icon} />
                         </Avatar>
-                        <button
-                            aria-label="change theme"
-                            className={classes(styles.hr_link, styles.theme_btn)}
-                            title="Change Theme"
-                            onClick={() => updateModalField("theme", true)}
-                        >
-                            <ThemeIcon className={styles.write_icon} />
-                        </button>
-                        <button
-                            aria-label="change language"
-                            className={classes(styles.hr_link, styles.lang_btn)}
-                            title="Change Language"
-                            onClick={() => updateModalField("lang", true)}
-                        >
-                            <GlobeIcon className={styles.write_icon} />
-                        </button>
+                        <ThemeSelector className={classes(styles.hr_link, styles.theme_btn)} />
+                        <LangSelector className={classes(styles.hr_link, styles.lang_btn)} />
                         <button
                             className={styles.menu_btn}
                             aria-expanded={appMenu} aria-controls="navigation-drawer" aria-label="open menu"

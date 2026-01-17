@@ -10,7 +10,7 @@ import FolderIcon from "@/lib/ui/svgs/icons/FolderIcon";
 import FolderOpenIcon from "@/lib/ui/svgs/icons/FolderOpenIcon";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const virtualIds = Array.from({ length: 2000 }).map((_, idx) => `${idx}-${getUniqueId(6)}`);
 

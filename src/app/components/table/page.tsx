@@ -24,7 +24,7 @@ import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { deepSort } from "@/lib/utils/object.utils";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const DEFAULT_LAYOUT = [
   { id: "select", },
@@ -92,6 +92,16 @@ const Page = () => {
   const handleSelection = (checked: boolean, id?: string) => {
     selectRows(id ? [id] : [], checked ? "select" : "deselect");
   };
+
+  const handleSort = useCallback((newSort: string) => {
+    setSort(newSort);
+    if (newSort) {
+      const isAsc = newSort.startsWith("-");
+      setData(currData => deepSort<any>(currData, isAsc ? newSort.slice(1) : newSort, isAsc));
+    } else {
+      setData(tableData.slice(0, 15));
+    }
+  }, []);
 
   const handleResize = (colKey: string, newWidth: number) => {
     setColWidths(currWidths => ({
@@ -410,15 +420,6 @@ const Page = () => {
       style: { zIndex: 12 },
     },
   };
-
-  useEffect(() => {
-    if (sort) {
-      const isAsc = sort.startsWith("-");
-      setData(currData => deepSort<any>(currData, isAsc ? sort.slice(1) : sort, isAsc));
-    } else {
-      setData(tableData.slice(0, 15));
-    }
-  }, [sort]);
 
   return (
     <main className={styles.main}>

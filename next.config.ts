@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
   reactCompiler: false,
   experimental: {
     scrollRestoration: true,
+    optimizeCss: true,
+    cssChunking: "strict",
+    useLightningcss: true,
   },
   images: {
     remotePatterns: [

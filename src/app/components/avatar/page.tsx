@@ -4,7 +4,7 @@ import { PageSetup } from "@/components/managers";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { AvatarList } from "@/lib/ui/elements/AvatarList";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const page = () => {
   return (

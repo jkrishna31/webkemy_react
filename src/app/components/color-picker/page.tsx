@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { ColorPicker } from "@/lib/ui/elements/inputs/ColorPicker";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const page = () => {
   return (

@@ -5,7 +5,7 @@ import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Radio } from "@/lib/ui/elements/inputs/Radio";
 import { Text } from "@/lib/ui/elements/Text";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const page = () => {
   return (

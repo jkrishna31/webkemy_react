@@ -6,7 +6,7 @@ import { PageSetup } from "@/components/managers";
 import { Slider2D } from "@/lib/ui/elements/inputs/Slider2D";
 import { Text } from "@/lib/ui/elements/Text";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const defaultValue: [number, number] = [0, 0];
 

@@ -6,7 +6,7 @@ import { PageSetup } from "@/components/managers";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { Text } from "@/lib/ui/elements/Text";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [value, setValue] = useState(0);

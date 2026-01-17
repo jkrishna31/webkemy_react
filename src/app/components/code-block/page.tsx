@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { CodeBlock, LineHighlight } from "@/lib/ui/elements/CodeBlock";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const codes1 = [
   "src/",

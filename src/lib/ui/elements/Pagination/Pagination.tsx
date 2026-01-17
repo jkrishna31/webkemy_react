@@ -86,17 +86,20 @@ const Pagination = ({
                         <div className={styles.pages}>
                             {moreBefore && <EllipsisHIcon className={styles.more} />}
                             {
-                                pagesAroundCurrent.map((page, idx) => (
-                                    <Button
-                                        key={idx}
-                                        variant="secondary"
-                                        aria-pressed={currentPage === page}
-                                        className={styles.page}
-                                        onClick={() => handleChange(page)}
-                                    >
-                                        {page}
-                                    </Button>
-                                ))
+                                pagesAroundCurrent.map((page) => {
+                                    const key = `${page < currentPage ? "p" : page > currentPage ? "n" : "c"}-${page}`;
+                                    return (
+                                        <Button
+                                            key={key}
+                                            variant="secondary"
+                                            aria-pressed={currentPage === page}
+                                            className={styles.page}
+                                            onClick={() => handleChange(page)}
+                                        >
+                                            {page}
+                                        </Button>
+                                    );
+                                })
                             }
                             {moreAfter && <EllipsisHIcon className={styles.more} />}
                         </div>

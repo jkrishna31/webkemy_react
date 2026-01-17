@@ -6,7 +6,7 @@ import { ToastType, useToastActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const toastActions = useToastActions();

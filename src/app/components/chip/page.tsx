@@ -5,7 +5,7 @@ import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/ui/elements/Badge";
 import { Chip } from "@/lib/ui/elements/Chip";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const handleRemove = () => {

@@ -20,11 +20,10 @@
     transition: border .2s linear, background .2s linear;
 
     &:checked,
-    &:hover,
-    &:focus-within {
+    &:hover {
         &~label {
             transition: color .2s linear;
-            color: var(--checkbox-fg);
+            color: var(--fg-p);
         }
     }
 

@@ -6,7 +6,7 @@ import { PageSetup } from "@/components/managers";
 import { Chip } from "@/lib/ui/elements/Chip";
 import { Select } from "@/lib/ui/elements/inputs/Select";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const options = [
   {

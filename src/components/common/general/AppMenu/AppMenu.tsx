@@ -1,5 +1,5 @@
-import { faro, LogLevel } from "@grafana/faro-web-sdk";
-
+import { LangSelector } from "@/components/common/general/LangSelector";
+import { ThemeSelector } from "@/components/common/general/ThemeSelector";
 import { useActivePage, useLayoutActions, useModalActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Item } from "@/lib/ui/elements/Item";
@@ -20,6 +20,7 @@ import ChevronsRightIcon from "@/lib/ui/svgs/icons/ChevronsRightIcon";
 import ColorPickerIcon from "@/lib/ui/svgs/icons/ColorPickerIcon";
 import CommentIcon from "@/lib/ui/svgs/icons/CommentIcon";
 import CompareIcon from "@/lib/ui/svgs/icons/CompareIcon";
+import ConferenceIcon from "@/lib/ui/svgs/icons/ConferenceIcon";
 import CropIcon from "@/lib/ui/svgs/icons/CropIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import DashboardIcon from "@/lib/ui/svgs/icons/DashboardIcon";
@@ -62,7 +63,6 @@ import TabsIcon from "@/lib/ui/svgs/icons/TabsIcon";
 import TagIcon from "@/lib/ui/svgs/icons/TagIcon";
 import TextIcon from "@/lib/ui/svgs/icons/TextIcon";
 import TextIcon3 from "@/lib/ui/svgs/icons/TextIcon3";
-import ThemeIcon from "@/lib/ui/svgs/icons/ThemeIcon";
 import ToggleSwitchIcon from "@/lib/ui/svgs/icons/ToggleSwitchIcon";
 import TreeListIcon from "@/lib/ui/svgs/icons/TreeListIcon";
 import UnorderedListIcon from "@/lib/ui/svgs/icons/UnorderedListIcon";
@@ -191,8 +191,8 @@ export const menuItems = [
         ],
     },
     {
-        key: "others",
-        group: "Others",
+        key: "general",
+        group: "General",
         collapsible: false,
         menu: [
             {
@@ -540,6 +540,13 @@ export const menuItems = [
                 icon: <DashboardIcon />,
                 disabled: true,
             },
+            {
+                key: "video-call",
+                href: "/templates/video-call",
+                primary: "Video Call",
+                icon: <ConferenceIcon />,
+                disabled: true,
+            },
         ],
     }
 ]
@@ -554,30 +561,10 @@ export interface AppMenuProps {
 
 const AppMenu = ({ open }: AppMenuProps) => {
     const page = useActivePage();
-    const { updateStore: updateModalStore } = useModalActions();
     const { setLayout } = useLayoutActions();
 
     const closeMenu = () => {
         setLayout("appMenu", false);
-    };
-
-    const handleThemeBtnClick = () => {
-        closeMenu();
-        updateModalStore("theme", true);
-        faro.api?.pushLog(
-            ["Theme popup opened"],
-            {
-                level: LogLevel.LOG,
-                context: {
-                    desc: "Theme Popup Opened"
-                }
-            }
-        );
-    };
-
-    const handleLangBtnClick = () => {
-        closeMenu();
-        updateModalStore("lang", true);
     };
 
     return (
@@ -601,27 +588,11 @@ const AppMenu = ({ open }: AppMenuProps) => {
                 <div className={styles.top_section}>
                     <AppLogo className={styles.logo_icon} />
                     <div className={styles.top_right}>
+                        <LangSelector className={styles.menu_header_ctrl} />
+                        <ThemeSelector className={styles.menu_header_ctrl} />
                         <Button
-                            className={classes(styles.menu_header_ctrl, styles.translate_btn)}
-                            icon={
-                                <GlobeIcon className={classes(styles.header_ctrl_icon, styles.translate_icon)} />
-                            }
-                            onClick={handleLangBtnClick}
-                            aria-label="Language"
-                        />
-                        <Button
-                            className={classes(styles.menu_header_ctrl, styles.theme_btn)}
-                            icon={
-                                <ThemeIcon className={classes(styles.header_ctrl_icon, styles.theme_icon)} />
-                            }
-                            onClick={handleThemeBtnClick}
-                            aria-label="Theme"
-                        />
-                        <Button
-                            className={classes(styles.menu_header_ctrl, styles.menu_close_btn)}
-                            icon={
-                                <CrossIcon className={classes(styles.header_ctrl_icon, styles.close_icon)} />
-                            }
+                            className={styles.menu_header_ctrl}
+                            icon={<CrossIcon />}
                             onClick={closeMenu}
                             aria-label="close menu"
                             title="Close Menu"

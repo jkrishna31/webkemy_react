@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

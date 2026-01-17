@@ -20,9 +20,8 @@
   transition-timing-function: ease;
   transform: translate3d(var(--popover-left-shift), var(--popover-top-shift), 0);
 
-  animation-name: faded-slide-in;
   animation-timing-function: ease;
-  animation-duration: .2s;
+  animation-duration: .3s;
 
   &[data-popover="tooltip"] {
     pointer-events: none;
@@ -30,9 +29,23 @@
   }
 }
 
-@keyframes faded-slide-in {
+.fade {
+  animation-name: fade;
+}
+
+.slide {
+  animation-name: slide;
+}
+
+@keyframes fade {
   from {
     opacity: 0;
-    // transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) + 1rem), 0);
+  }
+}
+
+@keyframes slide {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) - 1rem), 0);
   }
 }

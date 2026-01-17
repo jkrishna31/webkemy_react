@@ -1,0 +1,9 @@
+import { SVGProps } from "@/lib/types/prop.types";
+
+const ComputerIcon = (props: SVGProps) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" {...props}><rect width="18.5" height="15.031" x="2.75" y="2.75" rx="3.5" /><path d="M9.11 17.781v3.469m5.78-3.469v3.469m-8.382 0h10.984" /></svg>
+  );
+};
+
+export default ComputerIcon;

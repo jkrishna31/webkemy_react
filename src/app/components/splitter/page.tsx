@@ -4,10 +4,10 @@ import { PageSetup } from "@/components/managers";
 import { useSplitter } from "@/lib/hooks/useSplitter";
 import { SplitHandle, SplitSection, Splitter } from "@/lib/ui/elements/Splitter";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
-  const { sections, onResize, getSectionSize } = useSplitter([{ key: "1", children: ["2", "3"] }, { key: "4", children: ["5", "6", "7"] }, { key: "8", children: ["9", "10"] }]);
+  const { onResize, getSectionSize } = useSplitter([{ key: "1", children: ["2", "3"] }, { key: "4", children: ["5", "6", "7"] }, { key: "8", children: ["9", "10"] }]);
 
   return (
     <main className={styles.main}>

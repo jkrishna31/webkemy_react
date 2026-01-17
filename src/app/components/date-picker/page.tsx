@@ -8,7 +8,7 @@ import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Switch } from "@/lib/ui/elements/inputs/Switch";
 import { Text } from "@/lib/ui/elements/Text";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [range, setRange] = useState(false);

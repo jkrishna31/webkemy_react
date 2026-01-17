@@ -5,7 +5,7 @@ import { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { Tabs } from "@/lib/ui/elements/Tabs";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const tabs = [
   { id: "1", label: "Tab Item 1" },
@@ -27,6 +27,12 @@ const Page = () => {
       <PageSetup pageKey="tabs" />
 
       <Tabs
+        tabs={tabs} activeTab={activeTab} onChange={setActiveTab}
+        className={styles.tablist}
+      />
+
+      <Tabs
+        variant="muted"
         tabs={tabs} activeTab={activeTab} onChange={setActiveTab}
         className={styles.tablist}
       />

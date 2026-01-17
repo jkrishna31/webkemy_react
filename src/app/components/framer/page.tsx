@@ -2,7 +2,7 @@ import { PageSetup } from "@/components/managers";
 import { Framer } from "@/lib/ui/elements/Framer";
 import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const dummyPages = Array.from({ length: 20 }).map((_, idx) => idx + 1);
 

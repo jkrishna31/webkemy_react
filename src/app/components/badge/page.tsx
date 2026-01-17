@@ -3,7 +3,7 @@ import { Badge } from "@/lib/ui/elements/Badge";
 import { Button } from "@/lib/ui/elements/butttons";
 import BellIcon from "@/lib/ui/svgs/icons/BellIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

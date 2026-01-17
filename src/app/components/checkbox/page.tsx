@@ -3,7 +3,7 @@ import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Text } from "@/lib/ui/elements/Text";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

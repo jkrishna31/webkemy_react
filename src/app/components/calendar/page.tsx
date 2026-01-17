@@ -10,7 +10,7 @@ import { CalendarBody, CalendarHeader, CalendarWrapper } from "@/lib/ui/elements
 import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/Drawer";
 import CalendarPlusIcon from "@/lib/ui/svgs/icons/CalendarPlusIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [showEventForm, setShowEventForm] = useState(false);

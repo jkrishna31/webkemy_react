@@ -20,7 +20,7 @@ import SquareIcon from "@/lib/ui/svgs/icons/SquareIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
 import TriangleIcon from "@/lib/ui/svgs/icons/TriangleIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [activeItem, setActiveItem] = useState<string>();

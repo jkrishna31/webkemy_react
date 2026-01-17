@@ -57,13 +57,13 @@
 }
 
 .close_btn {
-  gap: .8rem;
+  gap: .6rem;
+  padding: .8rem 1rem .8rem 1.2rem;
 
   font-size: 1.4rem;
   font-weight: 500;
   border-radius: var(--br-pill);
 
-  padding: .8rem 1.2rem;
   background-color: var(--fg-p);
   color: var(--bg-p);
 }
@@ -130,7 +130,6 @@
 
   .close_btn {
     font-size: 1.4rem;
-    padding: 1rem 1.6rem;
   }
 
   .close_key_hint {

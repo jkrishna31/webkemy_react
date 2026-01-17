@@ -2,7 +2,7 @@ import { PageSetup } from "@/components/managers";
 import { scatterChartData } from "@/data/dummy/scatterChartData";
 import { ScatterChart } from "@/lib/ui/elements/charts/ScatterChart";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   return (

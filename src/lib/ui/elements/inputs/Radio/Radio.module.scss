@@ -25,8 +25,7 @@
     }
 
     &:checked,
-    &:hover,
-    &:focus-within {
+    &:hover {
         &~label {
             transition: color .2s linear;
             color: var(--fg-p);

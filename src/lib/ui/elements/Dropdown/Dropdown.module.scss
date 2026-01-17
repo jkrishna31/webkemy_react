@@ -32,15 +32,6 @@
   white-space: nowrap;
   box-shadow: var(--shadow-p) 0px 0px 6px 0px;
   scrollbar-width: thin;
-
-  animation-name: slide-in !important;
-}
-
-@keyframes slide-in {
-  from {
-    opacity: 0;
-    transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) - 1.2rem), 0);
-  }
 }
 
 

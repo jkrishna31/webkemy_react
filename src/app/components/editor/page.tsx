@@ -10,9 +10,6 @@ import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Text } from "@/lib/ui/elements/Text";
 import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
-import AlignCenterIcon from "@/lib/ui/svgs/icons/AlignCenterIcon";
-import AlignLeftIcon from "@/lib/ui/svgs/icons/AlignLeftIcon";
-import AlignRightIcon from "@/lib/ui/svgs/icons/AlignRightIcon";
 import BlockCautionIcon from "@/lib/ui/svgs/icons/BlockCautionIcon";
 import BlockCodeIcon from "@/lib/ui/svgs/icons/BlockCodeIcon";
 import BlockNoteIcon from "@/lib/ui/svgs/icons/BlockNoteIcon";
@@ -56,6 +53,9 @@ import SubscriptIcon from "@/lib/ui/svgs/icons/SubscriptIcon";
 import SuperscriptIcon from "@/lib/ui/svgs/icons/SuperscriptIcon";
 import SwapIcon from "@/lib/ui/svgs/icons/SwapIcon";
 import TableIcon from "@/lib/ui/svgs/icons/TableIcon";
+import TextAlignCenterIcon from "@/lib/ui/svgs/icons/TextAlignCenterIcon";
+import TextAlignLeftIcon from "@/lib/ui/svgs/icons/TextAlignLeftIcon";
+import TextAlignRightIcon from "@/lib/ui/svgs/icons/TextAlignRightIcon";
 import TextColorIcon from "@/lib/ui/svgs/icons/TextColorIcon";
 import TextFormattingRemoveIcon from "@/lib/ui/svgs/icons/TextFormattingRemoveIcon";
 import TextIcon from "@/lib/ui/svgs/icons/TextIcon";
@@ -66,7 +66,7 @@ import UndoIcon from "@/lib/ui/svgs/icons/UndoIcon";
 import UnorderedListIcon from "@/lib/ui/svgs/icons/UnorderedListIcon";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const getPlaceholder = (type: any) => {
   if (type === editorBlocks.PARA) {
@@ -319,15 +319,15 @@ const toolOptions = [
   [
     {
       name: "Align Left", key: "align_left",
-      render: <AlignLeftIcon className={styles.icon} />
+      render: <TextAlignLeftIcon className={styles.icon} />
     },
     {
       name: "Align Center", key: "align_center",
-      render: <AlignCenterIcon className={styles.icon} />
+      render: <TextAlignCenterIcon className={styles.icon} />
     },
     {
       name: "Align Right", key: "align_right",
-      render: <AlignRightIcon className={styles.icon} />
+      render: <TextAlignRightIcon className={styles.icon} />
     },
   ],
   [

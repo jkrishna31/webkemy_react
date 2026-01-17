@@ -8,7 +8,7 @@ import EmojiNeutralIcon from "@/lib/ui/svgs/icons/EmojiNeutralIcon";
 import EmojiSadIcon from "@/lib/ui/svgs/icons/EmojiSadIcon";
 import EmojiSmileIcon from "@/lib/ui/svgs/icons/EmojiSmileIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const characters = [
   <EmojiAngryIcon key={1} />,

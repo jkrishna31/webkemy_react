@@ -6,7 +6,7 @@ import { PageSetup } from "@/components/managers";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 
-import styles from "./styles.module.scss";
+import styles from "./page.module.scss";
 
 const Page = () => {
   const [open, setOpen] = useState(false);

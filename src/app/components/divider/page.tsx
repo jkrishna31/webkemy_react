@@ -8,8 +8,8 @@ const Page = () => {
 
       <Divider />
       <Divider label="Label" />
-      <Divider label="Label" labelAlignment="center" />
-      <Divider label="Label" labelAlignment="right" />
+      <Divider label="Label center" labelAlignment="center" />
+      <Divider label="Label End" labelAlignment="right" />
       <div className="flex items-center gap-[1.6rem]">
         <span>{"Left"}</span>
         <Divider orientation="vertical" label="Divider Start" />
