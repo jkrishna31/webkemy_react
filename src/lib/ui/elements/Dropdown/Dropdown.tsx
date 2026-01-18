@@ -48,9 +48,7 @@ const Dropdown = ({
   useEffect(() => setOpen(open), [open]);
 
   return (
-    <div
-      className={classes(styles.dropdown, className)}
-    >
+    <>
       <Button
         ref={triggerRef}
         className={classes(styles.dropdown_trigger, triggerClass)}
@@ -78,7 +76,7 @@ const Dropdown = ({
           {dropdown}
         </Popover>
       )}
-    </div>
+    </>
   );
 };
 

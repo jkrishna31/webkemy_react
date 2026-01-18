@@ -11,7 +11,6 @@
   background-color: var(--bg-s);
   border-radius: 4rem;
   min-height: 3.2rem;
-
   white-space: nowrap;
 }
 
@@ -37,7 +36,6 @@
 
 @media screen and (max-width: 767px) {
   .dropdown_trigger {
-    width: 100%;
     font-size: 1.4rem;
   }
 

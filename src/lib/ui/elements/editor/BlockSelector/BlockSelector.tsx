@@ -21,7 +21,6 @@ const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...props }:
     return (
         <Dropdown
             hintIcon={null}
-            className={classes(styles.wrapper, wrapperClass)}
             triggerClass={classes(styles.selector, btnClass)}
             dropdownClass={styles.dropdown}
             alignment="left"

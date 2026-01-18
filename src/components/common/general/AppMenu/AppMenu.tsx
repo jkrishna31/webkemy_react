@@ -219,7 +219,7 @@ export const menuItems = [
                 href: "/components/dynamic-grid",
                 primary: "Dynamic Grid",
                 icon: <GridIcon />,
-                disabled: true,
+                // disabled: true,
             },
             {
                 key: "text",

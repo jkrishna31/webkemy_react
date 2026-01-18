@@ -492,8 +492,7 @@ const Page = () => {
           <Text<"h2"> as="h2" className={styles.title}>{"Write"}</Text>
           <BlockSelector
             options={blockOptions}
-            //  onSelect={handleBlockSelect}
-            wrapperClass={styles.tool_selector_wrapper}
+          //  onSelect={handleBlockSelect}
           />
         </div>
         <Editor blocks={blocks} setBlocks={setBlocks} rootClass={styles.editor_wrapper}>

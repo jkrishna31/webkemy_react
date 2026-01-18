@@ -42,7 +42,7 @@ export default function FrontendObservability() {
         persistent: true,
         samplingRate: samplingFactor,
       },
-      trackWebVitalsAttribution: true,
+      // trackWebVitalsAttribution: true,
       webVitalsInstrumentation: {
         reportAllChanges: true,
       }

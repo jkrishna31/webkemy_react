@@ -14,7 +14,7 @@ const GridItem = ({
 }: GridItemProps) => {
   return (
     <div className={classes(styles.grid_item, className)} {...restProps}>
-
+      {children}
     </div>
   );
 };

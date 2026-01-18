@@ -4,6 +4,8 @@ import { ComponentProps } from "react";
 import { characters } from "@/constants/characters.const";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
+import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
+import DoubleCheckIcon from "@/lib/ui/svgs/icons/DoubleCheckIcon";
 import { formatTime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -36,7 +38,7 @@ const ChatItem = ({
       <div className={styles.right}>
         {
           chat.author.id !== "me" ? (
-            <div className={styles.meta}>
+            <div className={classes(styles.meta, styles.meta_head)}>
               <span className={styles.author}>{"Bot"}</span>
               {characters.BULLET}
               <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
@@ -59,7 +61,11 @@ const ChatItem = ({
         </div>
         {chat.author.id === "me" && (
           <div className={styles.meta}>
+            {/* Edited, Deleted */}
+            {/* <span>{"Edited"}  {characters.BULLET}</span> */}
             <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
+            {/* <CheckMarkIcon className={styles.msg_status} /> */}
+            <DoubleCheckIcon className={styles.msg_status} aria-label="Read" />
           </div>
         )}
       </div>

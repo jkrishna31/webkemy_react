@@ -5,13 +5,9 @@ const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["*"],
-  productionBrowserSourceMaps: true,
-  reactCompiler: false,
+  // productionBrowserSourceMaps: true,
   experimental: {
     scrollRestoration: true,
-    optimizeCss: true,
-    cssChunking: "strict",
-    useLightningcss: true,
   },
   images: {
     remotePatterns: [
