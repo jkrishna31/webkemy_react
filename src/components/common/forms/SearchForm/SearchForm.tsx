@@ -5,6 +5,7 @@ import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Popover } from "@/lib/ui/elements/Popover";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
+import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -73,7 +74,7 @@ const SearchForm = ({
                     title="Mic"
                     onClick={onMicClick}
                 >
-                    <MicIcon />
+                    <MicOnIcon />
                 </button>
             ) : null}
         </form>

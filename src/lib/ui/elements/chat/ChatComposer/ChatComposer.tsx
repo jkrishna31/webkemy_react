@@ -10,7 +10,9 @@ import { TextArea } from "@/lib/ui/elements/inputs/TextArea";
 import { Popover } from "@/lib/ui/elements/Popover";
 import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
 import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
+import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
 import PaperclipIcon from "@/lib/ui/svgs/icons/PaperclipIcon";
+import SendIcon from "@/lib/ui/svgs/icons/SendIcon";
 import SendSolidIcon from "@/lib/ui/svgs/icons/SendSolidIcon";
 import { isMobileDevice } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -104,7 +106,7 @@ const ChatComposer = ({
             aria-label="Speak"
             title="Speak"
           >
-            <MicIcon className={styles.mic_icon} />
+            <MicOnIcon className={styles.mic_icon} />
           </button>
           <button
             className={classes(styles.btn, styles.submit_btn)}
@@ -114,7 +116,7 @@ const ChatComposer = ({
             aria-label="Send Message"
             title="Send (Ctrl+Enter)"
           >
-            <SendSolidIcon />
+            <SendIcon />
           </button>
         </div>
       </InputFieldWrapper>

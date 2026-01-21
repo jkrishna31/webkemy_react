@@ -1,17 +1,20 @@
-import { ComponentProps } from "react";
+import { ComponentProps, Fragment } from "react";
 
 import { ChatItem } from "@/lib/ui/elements/chat/ChatItem";
+import { Divider } from "@/lib/ui/elements/Divider";
 import { compareDateByPrecision, formatDate } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ChatSection.module.scss";
 
 export interface ChatSectionProps extends ComponentProps<"div"> {
-  chats?: any
+  chats?: any;
+  lastReadMsgId?: string;
 }
 
 const ChatSection = ({
-  chats, className,
+  chats, lastReadMsgId,
+  className,
   ...restProps
 }: ChatSectionProps) => {
   return (
@@ -36,7 +39,22 @@ const ChatSection = ({
             }
           }
           return acc;
-        }, [])?.map((chat: any) => <ChatItem chat={chat} key={chat.id} />)
+        }, [])?.map((chat: any) => {
+          return (
+            <Fragment key={chat.id}>
+              <ChatItem chat={chat} />
+              {/* TODO: shift if next chat author is me */}
+              {lastReadMsgId === chat.id && (
+                <Divider
+                  labelAlignment="center"
+                  label="New Messages"
+                  style={{ fontWeight: 500 }}
+                  className={styles.divider_banner}
+                />
+              )}
+            </Fragment>
+          );
+        })
       }
     </div>
   );

@@ -35,6 +35,12 @@
     }
 }
 
+.sf_btn svg {
+    stroke-width: .2rem;
+    width: 1.8rem;
+    height: 1.8rem;
+}
+
 .sf_mic_btn {
     color: var(--fg-s);
     background-color: var(--bg-t);
@@ -42,15 +48,10 @@
     border-radius: 50%;
 
     svg {
-        width: 1.8rem;
-        height: 1.8rem;
+        width: 2.2rem;
+        height: 2.2rem;
+        stroke-width: .15rem;
     }
-}
-
-.sf_btn svg {
-    stroke-width: .2rem;
-    width: 1.8rem;
-    height: 1.8rem;
 }
 
 .sf_popover {
@@ -76,8 +77,8 @@
         }
 
         .sf_mic_btn svg {
-            width: 1.6rem;
-            height: 1.6rem;
+            width: 2rem;
+            height: 2rem;
         }
     }
 }

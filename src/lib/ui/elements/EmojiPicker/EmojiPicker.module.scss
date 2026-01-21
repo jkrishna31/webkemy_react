@@ -118,6 +118,7 @@
 }
 
 .emoji {
+  contain: content;
   position: relative;
   min-width: 3.6rem;
   min-height: 3.6rem;

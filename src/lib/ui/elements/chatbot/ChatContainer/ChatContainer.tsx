@@ -17,7 +17,7 @@ import { getUniqueId } from "@/lib/utils/crypto.utils";
 import styles from "./ChatContainer.module.scss";
 
 export interface ChatContainerProps extends ComponentProps<"div"> {
-  onClose: any
+  onClose: any;
 }
 
 const ChatContainer = ({
@@ -27,6 +27,8 @@ const ChatContainer = ({
   const [isMaximized, setIsMaximized] = useState(false);
 
   const mainContainerRef = useRef<HTMLDivElement>(null);
+
+  const lastReadMsgId = "ddaa";
 
   const onSend = (value?: string) => {
     const timestamp = new Date().toUTCString();
@@ -90,7 +92,7 @@ const ChatContainer = ({
             <CrossIcon />
           </button>
         </div>
-        <ChatList chats={chats} />
+        <ChatList chats={chats} lastReadMsgId={lastReadMsgId} />
         <ChatComposer className={styles.footer} onSend={onSend} />
       </div>
     </>

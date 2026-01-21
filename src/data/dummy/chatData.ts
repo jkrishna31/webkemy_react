@@ -15,6 +15,7 @@ export const dummyChats = [
     },
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
     datetime: (new Date(2025, 2, 11, 5, 34)).toUTCString(),
+    status: "read",
   },
   {
     id: "ds90",

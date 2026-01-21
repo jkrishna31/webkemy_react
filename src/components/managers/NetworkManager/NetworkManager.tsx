@@ -1,36 +1,26 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
-
 import { useClientActions, useToastActions } from "@/data/stores";
+import { useWindoEvent } from "@/lib/hooks/useWindowEvent";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 const NetworkManager = () => {
   const { updateStore: updateWindowStore } = useClientActions();
   const toastActions = useToastActions();
 
-  const handleOnline = useCallback(() => {
+  useWindoEvent("online", (e) => {
     updateWindowStore("isOnline", true);
     toastActions.addToast({
       id: getUniqueId(4), message: "You are back online!", type: "success", channel: "network",
     });
-  }, [toastActions, updateWindowStore]);
+  });
 
-  const handleOffline = useCallback(() => {
+  useWindoEvent("offline", () => {
     updateWindowStore("isOnline", false);
     toastActions.addToast({
       id: getUniqueId(4), message: "You are offline!", type: "warn", channel: "network",
     });
-  }, [toastActions, updateWindowStore]);
-
-  useEffect(() => {
-    window.addEventListener("online", handleOnline);
-    window.addEventListener("offline", handleOffline);
-    return () => {
-      window.removeEventListener("online", handleOnline);
-      window.removeEventListener("offline", handleOffline);
-    };
-  }, [handleOffline, handleOnline]);
+  });
 
   return null;
 };

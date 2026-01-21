@@ -19,7 +19,10 @@ const DynamicGrid = ({
   // show grid (when dragging, resizing)
 
   return (
-    <div className={classes(styles.dynamic_grid, className)} {...restProps}>
+    <div
+      className={classes(styles.dynamic_grid, className)}
+      {...restProps}
+    >
       {children}
     </div>
   );

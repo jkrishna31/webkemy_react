@@ -25,6 +25,7 @@ import CropIcon from "@/lib/ui/svgs/icons/CropIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import DashboardIcon from "@/lib/ui/svgs/icons/DashboardIcon";
 import DividerIcon from "@/lib/ui/svgs/icons/DividerIcon";
+import DynamicGridIcon from "@/lib/ui/svgs/icons/DynamicGridIcon";
 import EastWestArrowCircleIcon from "@/lib/ui/svgs/icons/EastWestArrowCircleIcon";
 import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
 import FilesIcon from "@/lib/ui/svgs/icons/FilesIcon";
@@ -218,7 +219,7 @@ export const menuItems = [
                 key: "dynamic-grid",
                 href: "/components/dynamic-grid",
                 primary: "Dynamic Grid",
-                icon: <GridIcon />,
+                icon: <DynamicGridIcon />,
                 // disabled: true,
             },
             {

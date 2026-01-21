@@ -409,7 +409,7 @@ const DayView = ({
         style={{
           ...getCoords(newEvSpan),
         }}
-        allowedResizers={["t", "b"]}
+        resizers={["t", "b"]}
         handleMove={debouncedMoveHandler}
         handleUp={debouncedUpHandler}
         payload="new"
@@ -535,7 +535,7 @@ const DayView = ({
                                 : "visible",
                             },
                           }}
-                          allowedResizers={resizers}
+                          resizers={resizers}
                           handleMove={debouncedMoveHandler}
                           handleUp={debouncedUpHandler}
                           payload={ev.id}

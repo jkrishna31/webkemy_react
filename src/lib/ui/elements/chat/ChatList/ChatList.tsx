@@ -14,12 +14,12 @@ import styles from "./ChatList.module.scss";
 
 export interface ChatListProps extends ComponentProps<"div"> {
   chats?: any;
-
+  lastReadMsgId?: string;
 }
 
 const ChatList = ({
+  chats, lastReadMsgId,
   ref, className,
-  chats,
   ...restProps
 }: ChatListProps) => {
   const _ref = useRef<HTMLDivElement>(null);
@@ -76,7 +76,7 @@ const ChatList = ({
 
     return (
       <>
-        <ChatSection chats={sec} />
+        <ChatSection chats={sec} lastReadMsgId={lastReadMsgId} />
         {renderChats(chats, i)}
       </>
     );

@@ -8,6 +8,7 @@
   --popover-top-shift: 0;
   --popover-transition-dur: 0;
 
+  contain: content;
   position: fixed;
   left: var(--popover-left);
   top: var(--popover-top);

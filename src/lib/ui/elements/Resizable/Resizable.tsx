@@ -11,7 +11,7 @@ export type Resizers = "l" | "r" | "t" | "b" | "tl" | "tr" | "bl" | "br";
 
 export type ResizableProps<T extends ElementType> = {
   as?: T;
-  allowedResizers?: Resizers[];
+  resizers?: Resizers[];
   contentClass?: string;
   handleMove?: (e: PointerEvent, payload?: any) => void;
   handleUp?: (e: PointerEvent, payload?: any) => void;
@@ -22,7 +22,7 @@ export type ResizableProps<T extends ElementType> = {
 
 const Resizable = <T extends ElementType = "div">({
   as = "div",
-  children, className, allowedResizers, contentClass,
+  children, className, resizers, contentClass,
   handleMove, handleUp, payload, xStep = 1, yStep = 1,
   ...props
 }: ResizableProps<T>) => {
@@ -46,7 +46,7 @@ const Resizable = <T extends ElementType = "div">({
     document.body.style.cursor = window.getComputedStyle(e.target as any).cursor;
 
     const onMove = (moveEv: PointerEvent) => {
-      if (!elem) return;
+      (moveEv.target as HTMLElement)?.setPointerCapture(e.pointerId);
 
       handleMove?.(moveEv, payload);
 
@@ -73,7 +73,8 @@ const Resizable = <T extends ElementType = "div">({
       setActiveResize(dir);
     };
 
-    const onUp = () => {
+    const onUp = (moveEv: PointerEvent) => {
+      (moveEv.target as HTMLElement)?.releasePointerCapture(e.pointerId);
       handleUp?.(payload);
       document.body.style.cursor = cursorStyle;
       window.removeEventListener("pointermove", onMove);
@@ -114,7 +115,7 @@ const Resizable = <T extends ElementType = "div">({
   };
 
   const renderResizer = (dir: Resizers, className: string) => {
-    if (!allowedResizers?.includes(dir)) return null;
+    if (!resizers?.includes(dir)) return null;
     return (
       <div
         tabIndex={0}

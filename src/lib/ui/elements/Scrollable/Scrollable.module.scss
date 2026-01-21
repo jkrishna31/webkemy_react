@@ -1,6 +1,7 @@
 .container {
   overflow: auto;
   overscroll-behavior: contain;
+  contain: content;
 }
 
 .scroll_btn {

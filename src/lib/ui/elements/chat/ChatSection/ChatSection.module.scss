@@ -18,9 +18,25 @@
   top: .4rem;
 }
 
+.divider_banner {
+  color: var(--purple-1);
+  --divider-color: var(--purple-1-50);
+
+  span {
+    background-color: var(--bg-t);
+    border-radius: var(--br-pill);
+    border: .1rem solid var(--divider-color);
+    padding: .3rem .8rem;
+  }
+}
+
 @media screen and (max-width: 768px) {
   .datetime {
     font-size: 1.2rem;
     background-color: var(--bg-t);
+  }
+
+  .divider_banner span {
+    background-color: var(--bg-p);
   }
 }

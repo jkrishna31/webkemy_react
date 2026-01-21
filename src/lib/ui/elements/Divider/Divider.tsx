@@ -23,6 +23,7 @@ const Divider = ({
       aria-orientation={orientation}
       {...restProps}
     >
+      <hr />
       {!!label && <span className={styles.label}>{label}</span>}
       {children}
     </div>

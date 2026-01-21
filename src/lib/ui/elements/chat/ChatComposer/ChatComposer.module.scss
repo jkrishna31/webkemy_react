@@ -43,6 +43,7 @@
     opacity: .5;
   }
 
+  .mic_btn svg,
   .submit_btn svg {
     width: 2.4rem;
     height: 2.4rem;
@@ -50,11 +51,6 @@
 
   .input_wrapper textarea {
     flex: 1;
-  }
-
-  .mic_icon {
-    width: 1.8rem;
-    height: 1.8rem;
   }
 
   .emoji_btn svg,

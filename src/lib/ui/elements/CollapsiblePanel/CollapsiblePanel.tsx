@@ -27,16 +27,20 @@ const CollapsiblePanel = <T extends ElementType = "div">({
 
   const [destroyContent, setDestroyContent] = useState(!renderWhileClosed);
   const isFirstRender = useRef(true);
+  const frameRef = useRef<number>(null);
 
   const updateHeight = useEffectEvent((_duration: number, _open: boolean, _renderWhileClosed: boolean) => {
     const elem = ref.current;
     if (elem && !isFirstRender.current) {
-      clearTimeout(timeoutRef.current);
-      clearTimeout(destroyContentRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (destroyContentRef.current) clearTimeout(destroyContentRef.current);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
       setDestroyContent(false);
+
       const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
       const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
-      requestAnimationFrame(() => {
+
+      frameRef.current = requestAnimationFrame(() => {
         if (_open) {
           elem.style.overflow = "hidden";
           elem.style.setProperty("--mxh", (currHeight && _renderWhileClosed) ? `${currHeight}px` : "0px");
@@ -65,7 +69,14 @@ const CollapsiblePanel = <T extends ElementType = "div">({
     isFirstRender.current = false;
   }, []);
 
-  useLayoutEffect(() => updateHeight(duration, open, renderWhileClosed), [duration, open, renderWhileClosed]);
+  useLayoutEffect(() => {
+    updateHeight(duration, open, renderWhileClosed);
+    return () => {
+      if (frameRef.current) {
+        cancelAnimationFrame(frameRef.current);
+      }
+    };
+  }, [duration, open, renderWhileClosed]);
 
   if (destroyContent && !open) return null;
 

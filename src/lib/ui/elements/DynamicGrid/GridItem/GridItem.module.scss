@@ -1,0 +1,13 @@
+.grid_item {
+  --row-start: 1;
+  --row-end: 1;
+  --col-start: 1;
+  --col-end: 1;
+
+  grid-row: var(--row-start)/var(--row-end);
+  grid-column: var(--col-start)/var(--col-end);
+
+  transition-property: grid-row, grid-col;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}

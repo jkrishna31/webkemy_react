@@ -392,3 +392,22 @@ export const isMobileDevice = () => {
     if (hasDOM() && ("ontouchstart" in window || navigator.maxTouchPoints > 0)) return true;
     return false;
 };
+
+export const getConnection = () => {
+    if (!navigator) return {};
+
+    const _navigator = navigator as any;
+
+    const connection = _navigator.connection || _navigator.mozConnection || _navigator.webkitConnection;
+
+    if (!connection) return {};
+
+    return {
+        downlink: connection.downlink,
+        downlinkMax: connection.downlinkMax,
+        effectiveType: connection.effectiveType,
+        rtt: connection.rtt,
+        saveData: connection.saveData,
+        type: connection.type,
+    };
+};
