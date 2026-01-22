@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { usePreferredLang } from "@/data/stores";
+import { useElementRef } from "@/lib/hooks/useElementRef";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
@@ -18,7 +19,7 @@ export interface LangSelectorProps {
 const LangSelector = ({
   className,
 }: LangSelectorProps) => {
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const { element: triggerElement, ref: triggerRef } = useElementRef<HTMLButtonElement>();
 
   const [open, setOpen] = useState(false);
 
@@ -35,9 +36,9 @@ const LangSelector = ({
       >
         <GlobeIcon />
       </button>
-      {(open && !!triggerRef.current) && (
+      {(open && !!triggerElement) && (
         <Popover
-          anchor={triggerRef.current as HTMLElement}
+          anchor={triggerElement}
           onClose={() => setOpen(!open)}
           animation="slide"
           className={styles.popover}

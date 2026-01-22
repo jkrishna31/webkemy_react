@@ -50,8 +50,6 @@ const ImageCrop = ({
 }: ImageCropProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [_translate, setTranslate] = useState([0, 0, 0]);
-
   const translate = useRef<number[]>([0, 0, 0]);
 
   // rotation

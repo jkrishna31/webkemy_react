@@ -1,9 +1,10 @@
 "use client";
 
-import { ComponentProps, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useMemo, useState } from "react";
 
 import { useToastActions } from "@/data/stores";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
+import { useElementRef } from "@/lib/hooks/useElementRef";
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
@@ -36,8 +37,8 @@ const VideoPlayer = ({
   sources, rootClass,
   ...props
 }: VideoPlayerProps) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const { element: videoElement, ref: videoRef } = useElementRef<HTMLVideoElement>();
+  const { element: containerElement, ref: containerRef } = useElementRef<HTMLDivElement>();
 
   const [overlay, setOverlay] = useState(false);
   const [progressMode, setProgressMode] = useState<"elapsed" | "remaining">("elapsed");
@@ -87,12 +88,11 @@ const VideoPlayer = ({
   };
 
   const toggleFullscreen = useCallback(() => {
-    const containerElem = containerRef.current;
-    if (!containerElem) return;
+    if (!containerElement) return;
     if (document.fullscreenElement) {
       document.exitFullscreen();
     } else {
-      containerElem.requestFullscreen()
+      containerElement.requestFullscreen()
         .catch(() => {
           addToast({
             id: getUniqueId(4),
@@ -102,15 +102,14 @@ const VideoPlayer = ({
           });
         });
     }
-  }, [addToast]);
+  }, [addToast, containerElement]);
 
   const togglePictureInPicture = useCallback(() => {
-    const videoElem = videoRef.current;
-    if (!videoElem) return;
+    if (!videoElement) return;
     if (document.pictureInPictureElement) {
       document.exitPictureInPicture();
-    } else if (typeof videoElem.requestPictureInPicture === "function") {
-      videoElem.requestPictureInPicture()
+    } else if (typeof videoElement.requestPictureInPicture === "function") {
+      videoElement.requestPictureInPicture()
         .catch(() => {
           addToast({
             id: getUniqueId(4),
@@ -127,7 +126,7 @@ const VideoPlayer = ({
         type: "error",
       });
     }
-  }, [addToast]);
+  }, [addToast, videoElement]);
 
   const playerMoreOptions = useMemo(() => [
     {
@@ -146,10 +145,9 @@ const VideoPlayer = ({
   ], [toggleFullscreen, togglePictureInPicture]);
 
   useEffect(() => {
-    if (overlay && containerRef.current) {
-      const elem = containerRef.current;
+    if (overlay && containerElement) {
       const handleClick = (e: MouseEvent) => {
-        if (!e.composedPath().includes(elem)) {
+        if (!e.composedPath().includes(containerElement)) {
           hideOverlay();
         }
       };
@@ -158,7 +156,7 @@ const VideoPlayer = ({
         window.removeEventListener("click", handleClick);
       };
     }
-  }, [overlay]);
+  }, [containerElement, overlay]);
 
   return (
     <div

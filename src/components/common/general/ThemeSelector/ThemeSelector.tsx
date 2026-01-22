@@ -1,8 +1,9 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { usePreferredTheme } from "@/data/stores";
+import { useElementRef } from "@/lib/hooks/useElementRef";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
@@ -23,7 +24,7 @@ const ThemeSelector = ({
 }: ThemeSelectorProps) => {
   const [open, setOpen] = useState(false);
 
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const { element: triggerElement, ref: triggerRef } = useElementRef<HTMLButtonElement>();
 
   const theme = usePreferredTheme();
 
@@ -48,9 +49,9 @@ const ThemeSelector = ({
       >
         <ThemeIcon />
       </button>
-      {(open && !!triggerRef.current) && (
+      {(open && !!triggerElement) && (
         <Popover
-          anchor={triggerRef.current as HTMLElement}
+          anchor={triggerElement}
           onClose={() => setOpen(!open)}
           animation="slide"
           className={styles.popover}

@@ -1,7 +1,8 @@
 "use client";
 
-import { ComponentProps, ReactNode, useEffect, useRef, useState } from "react";
+import { ComponentProps, ReactNode, useEffect, useEffectEvent, useState } from "react";
 
+import { useElementRef } from "@/lib/hooks/useElementRef";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
@@ -29,7 +30,7 @@ const Dropdown = ({
 }: DropdownProps) => {
   const [_open, setOpen] = useState(false);
 
-  const triggerRef = useRef<HTMLButtonElement>(null);
+  const { element: triggerElement, ref: triggerRef } = useElementRef<HTMLButtonElement>();
 
   const updateDropdownState = (isOpen?: boolean) => {
     let newState = false;
@@ -45,7 +46,11 @@ const Dropdown = ({
     updateDropdownState(false);
   };
 
-  useEffect(() => setOpen(open), [open]);
+  const syncOpen = useEffectEvent((value: boolean) => {
+    setOpen(value);
+  });
+
+  useEffect(() => syncOpen(open), [open]);
 
   return (
     <>
@@ -63,9 +68,9 @@ const Dropdown = ({
           )
         }
       </Button>
-      {(_open && !!triggerRef.current) && (
+      {(_open && !!triggerElement) && (
         <Popover
-          anchor={triggerRef.current}
+          anchor={triggerElement}
           onClose={handleClose}
           offset={6}
           className={classes(styles.dropdown_popover, dropdownClass)}
