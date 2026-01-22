@@ -1,10 +1,12 @@
-import { ComponentProps, FormEvent, useRef } from "react";
+"use client";
 
+import { ComponentProps, FormEvent, ReactNode } from "react";
+
+import { useElementRef } from "@/lib/hooks/useElementRef";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Popover } from "@/lib/ui/elements/Popover";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
 import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
 import { classes } from "@/lib/utils/style.utils";
@@ -13,49 +15,74 @@ import styles from "./SearchForm.module.scss";
 
 export interface SearchFormProps extends ComponentProps<"form"> {
     onClose?: () => void;
+    query?: string;
+    onQueryChange?: (value: string) => void;
+    allowClear?: boolean;
+    allowAudio?: boolean;
+    onMicClick?: (e: FormEvent<HTMLButtonElement>) => void;
+    placeholder?: string;
+    dropdown?: ReactNode;
 }
 
 const SearchForm = ({
-    formClass, inputClass, wrapperClass,
-    audio, placeholder = "Search (Ctrl+K)",
-    searchDd,
-    onMicClick, onClick,
-    query, onQueryChange,
-    allowClear = true, allowSearch = true,
-    xPos, onClose, ref,
-    ...props
-}: any) => {
-    const inputRef = useRef<HTMLInputElement>(null);
+    placeholder = "Search (Ctrl+K)",
+    dropdown,
+    query,
+    onQueryChange,
+    onMicClick,
+    onClose,
+    onClick,
+    allowAudio,
+    allowClear = true,
+    ref, className,
+    ...restProps
+}: SearchFormProps) => {
+    const { element: anchor, ref: inputRef } = useElementRef<HTMLInputElement>();
 
     return (
-        <form className={classes(styles.search_form, formClass)} role="search" {...props}>
-            <InputFieldWrapper ref={inputRef} className={classes(styles.sf_input_wrapper, wrapperClass)} onClick={onClick}>
+        <form
+            className={classes(styles.search_form, className)}
+            role="search"
+            {...restProps}
+        >
+            <InputFieldWrapper
+                ref={inputRef}
+                className={classes(styles.input_wrapper)}
+            >
                 <GeneralInput
-                    spellCheck="false" id="query"
-                    onInput={(e: FormEvent<HTMLInputElement>) => onQueryChange?.((e.target as HTMLInputElement).value)}
+                    spellCheck="false"
+                    id="query"
+                    value={query}
+                    onChange={e => onQueryChange?.(e.target.value)}
                     required
                     placeholder={placeholder}
-                    className={classes(inputClass)}
                     autoComplete="off"
+                    onClick={onClick as any}
                 />
                 {
                     allowClear ? (
-                        <button type="reset" className={classes(styles.sf_btn, styles.sf_reset_btn)} hidden={!query} onClick={() => onQueryChange?.("")} title="Clear">
+                        <button
+                            type="reset"
+                            title="Clear"
+                            className={classes(styles.btn, styles.reset_btn)}
+                            aria-hidden={!query}
+                            onClick={() => onQueryChange?.("")}
+                        >
                             <CrossIcon />
                         </button>
                     ) : null
                 }
-                {
-                    allowSearch ? (
-                        <button type="submit" className={classes(styles.sf_btn, styles.sf_search_btn)} title="Search">
-                            <SearchIcon />
-                        </button>
-                    ) : null
-                }
+                <button
+                    type="submit"
+                    className={classes(styles.btn, styles.search_btn)}
+                    title="Search"
+                >
+                    <SearchIcon />
+                </button>
             </InputFieldWrapper>
-            {!!(searchDd && inputRef?.current) && (
+            {!!(dropdown && anchor) && (
                 <Popover
-                    anchor={inputRef.current}
+                    anchor={anchor}
                     placement="bottom"
                     alignment="right"
                     className={styles.sf_popover}
@@ -64,13 +91,13 @@ const SearchForm = ({
                     trapFocus={false}
                     animation="slide"
                 >
-                    {searchDd}
+                    {dropdown}
                 </Popover>
             )}
-            {audio ? (
+            {allowAudio ? (
                 <button
                     type="button"
-                    className={classes(styles.sf_btn, styles.sf_mic_btn)}
+                    className={classes(styles.btn, styles.mic_btn)}
                     title="Mic"
                     onClick={onMicClick}
                 >

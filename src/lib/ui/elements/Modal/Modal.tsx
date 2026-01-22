@@ -7,6 +7,7 @@ import { Overlay } from "@/components/common/containers";
 import { positions } from "@/constants/general.const";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useKey } from "@/lib/hooks/useKey";
+import { useMounted } from "@/lib/hooks/useMounted";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Modal.module.scss";
@@ -26,20 +27,23 @@ export interface ModalProps extends ComponentProps<"div"> {
     pos?: (typeof positions)[keyof typeof positions];
     overlay?: boolean;
     onClose?: () => void;
+    unmountOnClose?: boolean;
 }
 
 const Modal = ({
-    pos, overlay, onClose, children, className,
+    pos, overlay, onClose, unmountOnClose, children, className,
     ...props
 }: ModalProps) => {
     // set aria-hidden and inert to true for .page element
     const ref = useRef<HTMLDivElement>(null);
 
+    const isMounted = useMounted();
+
     useFocusTrap(ref, true);
 
     useKey(onClose as any, ["Escape"], "keydown", { capture: true });
 
-    return createPortal((
+    return isMounted ? createPortal((
         <>
             {overlay && <Overlay className={styles.overlay} open={true} onClick={onClose} />}
             <div
@@ -51,7 +55,7 @@ const Modal = ({
                 {children}
             </div>
         </>
-    ), document.body);
+    ), document.body) : null;
 };
 
 export default Modal;

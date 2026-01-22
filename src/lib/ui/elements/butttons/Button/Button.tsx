@@ -6,7 +6,7 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Button.module.scss";
 
-export type Variant = "primary" | "secondary" | "tertiary" | "text" | "link";
+export type Variant = "primary" | "secondary" | "tertiary" | "quaternary" | "text" | "link";
 
 export type ButtonProps<T extends ElementType> = {
     as?: T
@@ -25,6 +25,8 @@ const getVariantClass = (variant: Variant) => {
             return styles.btn_secondary;
         case "tertiary":
             return styles.btn_tertiary;
+        case "quaternary":
+            return styles.btn_quaternary;
         case "text":
         default:
             return styles.btn_text;

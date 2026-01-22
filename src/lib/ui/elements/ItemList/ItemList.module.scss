@@ -1,6 +1,7 @@
 .list {
   display: grid;
   gap: .2rem;
+  // contain: content;
 
   [role="option"],
   [role="listitem"] {

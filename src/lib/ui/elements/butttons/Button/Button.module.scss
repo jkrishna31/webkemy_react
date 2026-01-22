@@ -127,6 +127,16 @@
     font-size: 1.4rem;
 }
 
+.btn[data-variant="quaternary"],
+.btn_quaternary {
+    color: var(--fg-s);
+    background-color: var(--bg-t);
+
+    &:hover {
+        color: var(--fg-p);
+    }
+}
+
 .btn:active {
     transform: scale(.95);
 }

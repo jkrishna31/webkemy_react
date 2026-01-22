@@ -18,27 +18,29 @@
   border: .1rem solid transparent;
 
   touch-action: none;
+  transition: opacity .2s linear;
 
-  &:hover,
-  &:focus-visible,
-  &[data-active="true"] {
-    opacity: 1;
-    z-index: 1;
-  }
-}
+  --transform-x: 0;
+  --transform-y: 0;
 
-.ret,
-.reb,
-.rel,
-.rer,
-.rc {
+  transform: translate3d(var(--transform-x), var(--transform-y), 0);
+
   &::before {
     content: '';
     position: absolute;
     border-radius: var(--br-pill);
     background: var(--bg-t);
     border: .15rem solid var(--yellow-1);
-    transition: background .2s linear, border .2s linear;
+    transition-property: opacity, background, border, transform;
+    transition-timing-function: ease;
+    transition-duration: .2s;
+  }
+
+  &:hover,
+  &:focus-visible,
+  &[data-active="true"] {
+    opacity: 1;
+    z-index: 1;
   }
 }
 
@@ -51,9 +53,17 @@
 
   &::before {
     left: 50%;
-    transform: translate3d(-50%, 0, 0);
+    transform: translate3d(-50%, 0, 0) scaleX(.7);
     height: 100%;
-    width: min(10rem, 50%);
+    width: min(8rem, 50%);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &[data-active="true"] {
+    &::before {
+      transform: translate3d(-50%, 0, 0);
+    }
   }
 }
 
@@ -66,34 +76,46 @@
 
   &::before {
     top: 50%;
-    transform: translate3d(0, -50%, 0);
+    transform: translate3d(0, -50%, 0) scaleY(.7);
     width: 100%;
-    height: min(10rem, 50%);
+    height: min(8rem, 50%);
+  }
+
+  &:hover,
+  &:focus-visible,
+  &[data-active="true"] {
+    &::before {
+      transform: translate3d(0, -50%, 0);
+    }
   }
 }
 
 .ret {
   top: 0;
   left: 50%;
-  transform: translate3d(-50%, -50%, 0);
+  --transform-x: -50%;
+  --transform-y: -50%;
 }
 
 .rer {
   top: 50%;
   right: 0;
-  transform: translate3d(50%, -50%, 0);
+  --transform-x: 50%;
+  --transform-y: -50%;
 }
 
 .reb {
   bottom: 0;
   left: 50%;
-  transform: translate3d(-50%, 50%, 0);
+  --transform-x: -50%;
+  --transform-y: 50%;
 }
 
 .rel {
   top: 50%;
   left: 0;
-  transform: translate3d(-50%, -50%, 0);
+  --transform-x: -50%;
+  --transform-y: -50%;
 }
 
 .rc {
@@ -111,27 +133,31 @@
 .rctl {
   top: 0;
   left: 0;
-  transform: translate3d(-50%, -50%, 0);
+  --transform-x: -50%;
+  --transform-y: -50%;
   cursor: nwse-resize;
 }
 
 .rctr {
   top: 0;
   right: 0;
-  transform: translate3d(50%, -50%, 0);
+  --transform-x: 50%;
+  --transform-y: -50%;
   cursor: nesw-resize;
 }
 
 .rcbr {
   bottom: 0;
   right: 0;
-  transform: translate3d(50%, 50%, 0);
+  --transform-x: 50%;
+  --transform-y: 50%;
   cursor: nwse-resize;
 }
 
 .rcbl {
   bottom: 0;
   left: 0;
-  transform: translate3d(-50%, 50%, 0);
+  --transform-x: -50%;
+  --transform-y: 50%;
   cursor: nesw-resize;
 }

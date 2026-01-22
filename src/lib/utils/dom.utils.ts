@@ -204,3 +204,14 @@ export function isDisabled(element?: Element) {
   if (element.hasAttribute("aria-disabled") && element.getAttribute("aria-disabled") !== "false") return true;
   return false;
 }
+
+export function getPosStats(
+  element?: Element,
+  options?: { margin: number | [number?, number?, number?, number?], side?: "in" | "out" | "both" }
+) {
+  if (!element) return;
+
+  // return false, if not
+  // return edge, if around edge
+  // return true, else
+}

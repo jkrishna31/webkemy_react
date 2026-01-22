@@ -4,11 +4,16 @@
     width: 100%;
     display: flex;
     align-items: center;
+    flex: 1;
 
-    .sf_input_wrapper {
+    .input_wrapper {
         border-radius: 6rem;
         padding-inline: .6rem;
         border-color: transparent;
+
+        &:hover {
+            border-color: var(--border-p);
+        }
 
         &:focus-within {
             border-color: var(--blue-6);
@@ -20,7 +25,7 @@
     }
 }
 
-.sf_btn {
+.btn {
     min-width: 3.8rem;
     min-height: 3.8rem;
     display: flex;
@@ -33,15 +38,28 @@
     &:focus {
         color: var(--fg-p);
     }
+
+    &[aria-hidden="true"] {
+        display: none !important;
+    }
 }
 
-.sf_btn svg {
-    stroke-width: .2rem;
-    width: 1.8rem;
-    height: 1.8rem;
+.reset_btn,
+.search_btn {
+    color: var(--fg-s);
+
+    svg {
+        width: 1.8rem;
+        height: 1.8rem;
+        stroke-width: .2rem;
+    }
+
+    &:hover {
+        color: var(--fg-p);
+    }
 }
 
-.sf_mic_btn {
+.mic_btn {
     color: var(--fg-s);
     background-color: var(--bg-t);
     margin-left: .6rem;
@@ -50,7 +68,6 @@
     svg {
         width: 2.2rem;
         height: 2.2rem;
-        stroke-width: .15rem;
     }
 }
 
@@ -67,18 +84,16 @@
 
 @media screen and (max-width: 768px) {
     .search_form {
-        .sf_reset_btn {
+        .reset_btn {
             width: 3.4rem;
         }
 
-        .sf_btn svg {
-            width: 1.6rem;
-            height: 1.6rem;
-        }
-
-        .sf_mic_btn svg {
-            width: 2rem;
-            height: 2rem;
+        .reset_btn,
+        .search_btn {
+            svg {
+                width: 1.6rem;
+                height: 1.6rem;
+            }
         }
     }
 }

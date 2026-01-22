@@ -91,12 +91,14 @@
         width: 1.8rem;
         height: 1.8rem;
         cursor: ns-resize;
+        touch-action: none;
       }
 
       &::-moz-range-thumb {
         width: 1.4rem;
         height: 1.4rem;
         cursor: ns-resize;
+        touch-action: none;
       }
     }
   }

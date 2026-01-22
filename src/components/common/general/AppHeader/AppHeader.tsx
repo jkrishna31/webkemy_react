@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { ComponentProps, useState } from "react";
 
@@ -15,6 +16,10 @@ import MenuIcon from "@/lib/ui/svgs/icons/MenuIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
 import { GithubLogo } from "@/lib/ui/svgs/logos";
 import { classes } from "@/lib/utils/style.utils";
+
+const AppSearchMobile = dynamic(() => import("@/components/common/general/AppSearchMobile/AppSearchMobile"), { ssr: false });
+
+import { DrawerBody } from "@/lib/ui/elements/Drawer";
 
 import { AppMenu, LangSelector, ThemeSelector } from "..";
 import styles from "./AppHeader.module.scss";
@@ -36,6 +41,7 @@ const AppHeader = ({
     ...props
 }: AppHeaderProps) => {
     const [query, setQuery] = useState("");
+    const [openAppSearch, setOpenAppSearch] = useState(false);
 
     const scrollDir = useScrollDir();
     const { setSearch } = useSearchActions();
@@ -57,12 +63,12 @@ const AppHeader = ({
                     <SearchForm
                         query={query}
                         onQueryChange={setQuery}
-                        audio
+                        allowAudio
                         onMicClick={() => setSearch("active", "audio")}
                         onClick={() => setLayout("searchMenu", true)}
                         onClose={() => setLayout("searchMenu", false)}
-                        formClass={styles.search_form}
-                        searchDd={
+                        className={styles.search_form}
+                        dropdown={
                             searchMenu ? (
                                 <ul>
                                     {
@@ -80,15 +86,39 @@ const AppHeader = ({
                             ) : null
                         }
                     />
+                    <AppSearchMobile
+                        open={openAppSearch}
+                        query={query}
+                        onQueryChange={setQuery}
+                        allowAudio
+                        onMicClick={() => setSearch("active", "audio")}
+                        onClose={() => setOpenAppSearch(!openAppSearch)}
+                    >
+                        <DrawerBody>
+                            <ul style={{ paddingInline: "2rem 1rem" }}>
+                                {
+                                    history.map((item, idx) => (
+                                        <li className={styles.history_item} key={idx}>
+                                            <HistoryIcon className={styles.history_icon} />
+                                            <span className={styles.query}>{item}</span>
+                                            <button className={styles.delete_btn}>
+                                                <CrossIcon className={styles.delete_icon} />
+                                            </button>
+                                        </li>
+                                    ))
+                                }
+                            </ul>
+                        </DrawerBody>
+                    </AppSearchMobile>
                     <div className={styles.hrc}>
-                        <Link
+                        <button
                             aria-label="search"
-                            href="#"
                             className={classes(styles.hr_link, styles.search_link)}
                             title="Search"
+                            onClick={() => setOpenAppSearch(!openAppSearch)}
                         >
                             <SearchIcon className={styles.header_search_icon} />
-                        </Link>
+                        </button>
                         <Avatar<"a">
                             as="a"
                             href={SOURCE_CODE} target="_blank"

@@ -1,0 +1,32 @@
+  .app_search {
+    .header {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      max-width: 100%;
+      min-height: var(--h-header);
+    }
+
+    .btn {
+      min-width: 3.8rem;
+      min-height: 3.8rem;
+      padding: .4rem;
+      width: fit-content;
+    }
+
+    .back_btn {
+      svg {
+        width: 2.2rem;
+        height: 2.2rem;
+      }
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .app_search {
+
+      .header {
+        padding-inline: 1.2rem;
+      }
+    }
+  }
