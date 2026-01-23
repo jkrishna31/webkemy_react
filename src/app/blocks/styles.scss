@@ -1,0 +1,29 @@
+.wrapper {
+  min-height: calc(100vh - var(--h-header));
+  width: 100%;
+  max-width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+main {
+  width: 100%;
+
+  padding-inline: 3rem 2rem;
+
+  display: grid;
+  grid-auto-rows: auto;
+  grid-auto-columns: 1fr;
+  align-content: start;
+  justify-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+  main {
+    padding-inline: 2rem;
+  }
+}

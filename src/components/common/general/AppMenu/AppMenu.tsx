@@ -549,6 +549,18 @@ export const menuItems = [
                 disabled: true,
             },
         ],
+    },
+    {
+        key: "blocks",
+        group: "Blocks",
+        collapsible: false,
+        menu: [
+            {
+                key: "pricing-plans",
+                href: "/blocks/pricing-plans",
+                primary: "Pricing Plans",
+            },
+        ]
     }
 ]
     .map(menuGroup => ({

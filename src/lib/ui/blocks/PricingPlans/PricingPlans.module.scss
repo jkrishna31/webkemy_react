@@ -1,0 +1,12 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  gap: 3rem 4rem;
+  width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    grid-auto-flow: row;
+  }
+}

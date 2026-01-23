@@ -10,7 +10,7 @@
         border-radius: 6rem;
         padding-inline: .6rem;
         border-color: transparent;
-        background-color: var(--bg-s);
+        background-color: var(--bg-q);
 
         &:hover {
             border-color: var(--border-p);
@@ -62,7 +62,7 @@
 
 .mic_btn {
     color: var(--fg-s);
-    background-color: var(--bg-s);
+    background-color: var(--bg-q);
     margin-left: .6rem;
     border-radius: 50%;
 
