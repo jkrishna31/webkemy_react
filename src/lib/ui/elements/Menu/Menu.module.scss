@@ -20,7 +20,8 @@
 .popover {
   color: var(--bg-p);
   background-color: var(--fg-p);
-  border-radius: .5rem;
-  padding: .6rem;
+  border-radius: .4rem;
+  padding: .4rem .6rem;
   box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+  font-size: 1.4rem;
 }

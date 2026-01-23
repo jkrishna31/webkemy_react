@@ -10,8 +10,8 @@
   transition-property: height, opacity;
 
   &[data-expanded="true"] {
-    --mxh: "none";
-    overflow: initial;
+    --mxh: auto;
+    overflow: unset;
     opacity: 1;
   }
 }

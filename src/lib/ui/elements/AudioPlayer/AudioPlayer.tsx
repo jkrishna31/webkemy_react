@@ -28,34 +28,33 @@ const AudioPlayer = ({
   children, sources, rootClass,
   ...props
 }: AudioPlayerProps) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
-
+  const ref = useRef<HTMLAudioElement>(null);
   const [progressMode, setProgressMode] = useState<"elapsed" | "remaining">("elapsed");
 
   const {
-    duration, isMute, isPlaying, currTime, pace, volume, loading,
-    setIsPlaying, setIsMute,
-    updateCurrTime, updatePace, updateVolume,
+    play, pause, toggleMute, togglePlay, seekTo,
+    isMute, isPlaying, currentTime, isLoading,
+    duration, pace, volume,
+    updateCurrentTime, updatePace, updateVolume,
     handleLoadedMetadata,
-    togglePlayState,
-  } = useMediaPlayer(audioRef);
+  } = useMediaPlayer<HTMLAudioElement>(ref);
 
   const durationParts: { [key in TimeField | "day"]?: number } = breakdownTime(duration, "second");
   const progressDisplay = useMemo(() => {
-    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currTime : duration - currTime, "second", "hour"));
-  }, [currTime, duration, progressMode]);
+    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currentTime : duration - currentTime, "second", "hour"));
+  }, [currentTime, duration, progressMode]);
 
   return (
     <div className={classes(styles.audio_player, rootClass)}>
       <audio
         {...props}
         muted={isMute}
-        ref={audioRef}
+        ref={ref}
         onLoadedMetadata={e => handleLoadedMetadata(e.target as HTMLAudioElement)}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        onPlay={play}
+        onPause={pause}
         onTimeUpdate={
-          (e: React.SyntheticEvent<HTMLAudioElement, Event>) => updateCurrTime((e.target as HTMLAudioElement).currentTime)
+          (e: React.SyntheticEvent<HTMLAudioElement, Event>) => updateCurrentTime((e.target as HTMLAudioElement).currentTime)
         }
       >
         {
@@ -69,12 +68,12 @@ const AudioPlayer = ({
         <Button
           variant='tertiary'
           className={styles.ap_play_btn}
-          onClick={togglePlayState}
+          onClick={togglePlay}
           aria-label={isPlaying ? "Pause" : "Play"}
-          disabled={loading}
+          disabled={isLoading}
         >
           {
-            loading
+            isLoading
               ? <RippleLoader className={styles.bi} />
               : (isPlaying ? <PauseIcon className={styles.bi} /> : <PlayIcon className={styles.bi} />)
           }
@@ -91,8 +90,8 @@ const AudioPlayer = ({
           </button>
           <Slider
             min={0} max={duration ?? 0} step={1}
-            value={currTime}
-            onInput={(e) => updateCurrTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
+            value={currentTime}
+            onInput={(e) => updateCurrentTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
             className={styles.ap_slider}
             variant="rod"
             showFill={true}
@@ -112,7 +111,7 @@ const AudioPlayer = ({
         </Dropdown>
         <Dropdown
           dropdown={
-            <VolumeControl mute={isMute} setMute={setIsMute} volume={volume} updateVolume={updateVolume} />
+            <VolumeControl mute={isMute} setMute={toggleMute} volume={volume} updateVolume={updateVolume} />
           }
           triggerClass={styles.ap_mute_btn}
           dropdownClass={styles.ap_vol_popover}

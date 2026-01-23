@@ -31,38 +31,46 @@ const CollapsiblePanel = <T extends ElementType = "div">({
 
   const updateHeight = useEffectEvent((_duration: number, _open: boolean, _renderWhileClosed: boolean) => {
     const elem = ref.current;
-    if (elem && !isFirstRender.current) {
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-      if (destroyContentRef.current) clearTimeout(destroyContentRef.current);
-      if (frameRef.current) cancelAnimationFrame(frameRef.current);
-      setDestroyContent(false);
+    if (!elem) return;
 
-      const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
-      const currHeight = Math.ceil((elem as HTMLElement).clientHeight);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    if (destroyContentRef.current) clearTimeout(destroyContentRef.current);
+    if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    setDestroyContent(false);
 
-      frameRef.current = requestAnimationFrame(() => {
-        if (_open) {
-          elem.style.overflow = "hidden";
-          elem.style.setProperty("--mxh", (currHeight && _renderWhileClosed) ? `${currHeight}px` : "0px");
-          void elem.offsetHeight;
+    const contentHeight = Math.ceil((elem as HTMLElement).scrollHeight);
+    const currentHeight = Math.ceil((elem as HTMLElement).clientHeight);
+
+    frameRef.current = requestAnimationFrame(() => {
+      if (_open) {
+        if (contentHeight === currentHeight && _renderWhileClosed) {
+          elem.style.setProperty("--mxh", "auto");
+          return;
+        }
+        elem.style.setProperty("overflow", "hidden");
+        elem.style.setProperty("--mxh", (currentHeight && _renderWhileClosed) ? `${currentHeight}px` : "0px");
+        // void elem.offsetHeight;
+        requestAnimationFrame(() => {
           elem.style.setProperty("--mxh", `${contentHeight}px`);
           timeoutRef.current = setTimeout(() => {
-            elem.style.overflow = "";
-            elem.style.setProperty("--mxh", "none");
+            elem.style.removeProperty("overflow");
+            elem.style.setProperty("--mxh", "auto");
           }, _duration);
-        } else {
-          elem.style.overflow = "hidden";
-          elem.style.setProperty("--mxh", `${currHeight}px`);
-          void elem.offsetHeight;
+        });
+      } else {
+        elem.style.setProperty("overflow", "hidden");
+        elem.style.setProperty("--mxh", `${currentHeight}px`);
+        // void elem.offsetHeight;
+        requestAnimationFrame(() => {
           elem.style.setProperty("--mxh", "0px");
           if (!_renderWhileClosed) {
             destroyContentRef.current = setTimeout(() => {
               setDestroyContent(true);
             }, _duration);
           }
-        }
-      });
-    }
+        });
+      }
+    });
   });
 
   useLayoutEffect(() => {

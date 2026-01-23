@@ -1,28 +1,56 @@
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useEffect, useEffectEvent, useState } from "react";
 
-export function useMediaPlayer(
-  target: RefObject<HTMLAudioElement | HTMLVideoElement | null>
-) {
-  const [duration, setDuration] = useState<number>(0);
+export function useMediaPlayer<T extends HTMLAudioElement | HTMLVideoElement>(ref: RefObject<T | null>) {
+  const [isLoading, setIsLoading] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMute, setIsMute] = useState(false);
-  const [currTime, setCurrTime] = useState(0);
+  const [duration, setDuration] = useState<number>(0);
   const [volume, setVolume] = useState(100);
   const [pace, setPace] = useState(1);
-  const [loading, setLoading] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
 
-  const handleTogglePlayState = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      target.current?.pause();
-    } else {
-      setIsPlaying(true);
-      target.current?.play();
-    }
+  const play = () => {
+    if (isPlaying) return;
+    setIsPlaying(true);
+    ref.current?.play();
+  };
+
+  const pause = () => {
+    if (!isPlaying) return;
+    setIsPlaying(false);
+    ref.current?.pause();
+  };
+
+  const togglePlay = () => {
+    if (isPlaying) pause();
+    else play();
+  };
+
+  const mute = () => {
+    setIsMute(true);
+    if (ref.current) ref.current.muted = true;
+  };
+
+  const unmute = () => {
+    setIsMute(false);
+    if (ref.current) ref.current.muted = false;
+  };
+
+  const toggleMute = () => {
+    if (isMute) unmute();
+    else mute();
+  };
+
+  const seekBy = () => {
+
+  };
+
+  const seekTo = () => {
+
   };
 
   const handleLoadedMetadata = (elem: HTMLAudioElement) => {
-    setLoading(false);
+    setIsLoading(false);
     const duration = Math.ceil(elem.duration);
     setDuration(duration);
     // todo: show buffered and seekable hint
@@ -37,47 +65,46 @@ export function useMediaPlayer(
     // );
   };
 
-  const updateCurrTime = (newCurrTime: number, trusted?: boolean) => {
-    if (!target.current) return;
+  const updateCurrentTime = (newCurrTime: number, trusted?: boolean) => {
+    if (!ref.current) return;
     if (trusted) {
-      target.current.currentTime = newCurrTime;
+      ref.current.currentTime = newCurrTime;
     }
-    setCurrTime(Math.ceil(newCurrTime));
+    setCurrentTime(Math.ceil(newCurrTime));
   };
 
   const updateVolume = (newVolume: number) => {
-    if (!target.current) return;
-    target.current.volume = newVolume / 100;
+    if (!ref.current) return;
+    ref.current.volume = newVolume / 100;
     setVolume(newVolume);
   };
 
   const updatePace = (newPace: number) => {
-    if (!target.current) return;
-    target.current.playbackRate = newPace;
+    if (!ref.current) return;
+    ref.current.playbackRate = newPace;
     setPace(newPace);
   };
 
-  useEffect(() => {
-    setLoading(true);
-    if (!target.current) return;
-    const elem = target.current;
+  const initialize = useEffectEvent(() => {
+    setIsLoading(true);
+    if (!ref.current) return;
+    const elem = ref.current;
     if (elem.readyState >= 1) {
       handleLoadedMetadata(elem);
     }
-  }, [target]);
+  });
+
+  useEffect(() => {
+    initialize();
+  }, []);
 
   return {
-    loading, setLoading,
-    duration, setDuration,
-    isPlaying, setIsPlaying,
-    isMute, setIsMute,
-    currTime, setCurrTime,
-    volume, setVolume,
-    pace, setPace,
-    togglePlayState: handleTogglePlayState,
-    updateCurrTime,
-    updateVolume,
-    updatePace,
+    isLoading, isPlaying, isMute, duration,
+    currentTime, volume, pace,
+    updateCurrentTime, updateVolume, updatePace,
     handleLoadedMetadata,
+    play, pause, togglePlay,
+    mute, unmute, toggleMute,
+    seekBy, seekTo,
   };
 }

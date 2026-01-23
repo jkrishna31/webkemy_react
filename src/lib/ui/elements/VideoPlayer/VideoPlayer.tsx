@@ -46,18 +46,18 @@ const VideoPlayer = ({
   const { addToast } = useToastActions();
 
   const {
-    duration, isMute, isPlaying, currTime, pace, volume, loading,
-    setIsPlaying, setIsMute,
-    updateCurrTime, updatePace, updateVolume,
+    play, pause, toggleMute, togglePlay, seekTo,
+    isMute, isPlaying, currentTime, isLoading,
+    pace, volume, duration,
+    updateCurrentTime, updatePace, updateVolume,
     handleLoadedMetadata,
-    togglePlayState,
-  } = useMediaPlayer(videoRef);
+  } = useMediaPlayer<HTMLVideoElement>(videoRef);
 
   const durationParts: { [key in TimeField | "day"]?: number } = breakdownTime(duration, "second");
 
   const progressDisplay = useMemo(() => {
-    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currTime : duration - currTime, "second", "hour"));
-  }, [currTime, duration, progressMode]);
+    return (progressMode === "remaining" ? "- " : "") + getFormattedTime(breakdownTime(progressMode === "elapsed" ? currentTime : duration - currentTime, "second", "hour"));
+  }, [currentTime, duration, progressMode]);
 
   const hideOverlay = () => {
     setOverlay(false);
@@ -82,7 +82,7 @@ const VideoPlayer = ({
     const containerRect = (containerRef.current)?.getBoundingClientRect();
     if (containerRect) {
       const xMid = containerRect.x + (containerRect.width / 2);
-      updateCurrTime(clampNumber(currTime + (e.clientX < xMid ? -5 : 5), 0, duration), true);
+      updateCurrentTime(clampNumber(currentTime + (e.clientX < xMid ? -5 : 5), 0, duration), true);
       hideOverlay();
     }
   };
@@ -171,10 +171,10 @@ const VideoPlayer = ({
         ref={videoRef}
         muted={isMute}
         onLoadedMetadata={e => handleLoadedMetadata(e.target as HTMLAudioElement)}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
+        onPlay={play}
+        onPause={pause}
         onTimeUpdate={
-          (e: React.SyntheticEvent<HTMLAudioElement, Event>) => updateCurrTime((e.target as HTMLAudioElement).currentTime)
+          (e: React.SyntheticEvent<HTMLAudioElement, Event>) => updateCurrentTime((e.target as HTMLAudioElement).currentTime)
         }
       >
         {
@@ -192,24 +192,24 @@ const VideoPlayer = ({
           </button> */}
           <button
             className={styles.vp_rewind_btn}
-            onClick={() => updateCurrTime(clampNumber(currTime - 5, 0, duration), true)}
+            onClick={() => updateCurrentTime(clampNumber(currentTime - 5, 0, duration), true)}
           >
             <RewindIcon />
           </button>
           <button
             className={styles.vp_main_play_btn}
-            onClick={togglePlayState}
-            disabled={loading}
+            onClick={togglePlay}
+            disabled={isLoading}
           >
             {
-              loading
+              isLoading
                 ? <RippleLoader className={styles.btn_icon} />
                 : (isPlaying ? <PauseIcon /> : <PlayIcon />)
             }
           </button>
           <button
             className={styles.vp_forward_btn}
-            onClick={() => updateCurrTime(clampNumber(currTime + 5, 0, duration), true)}
+            onClick={() => updateCurrentTime(clampNumber(currentTime + 5, 0, duration), true)}
           >
             <FastForwardIcon />
           </button>
@@ -223,8 +223,8 @@ const VideoPlayer = ({
           <div className={styles.top}>
             <Slider
               min={0} max={duration} step={1}
-              value={currTime}
-              onInput={(e) => updateCurrTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
+              value={currentTime}
+              onInput={(e) => updateCurrentTime((e.target as HTMLInputElement).valueAsNumber, e.isTrusted)}
               className={styles.vp_slider}
               variant="rod"
               showFill={true}
@@ -233,11 +233,11 @@ const VideoPlayer = ({
           <div className={styles.bottom}>
             <button
               className={styles.vp_play_btn}
-              onClick={togglePlayState}
-              disabled={loading}
+              onClick={togglePlay}
+              disabled={isLoading}
             >
               {
-                loading
+                isLoading
                   ? <RippleLoader className={styles.btn_icon} />
                   : (isPlaying ? <PauseIcon /> : <PlayIcon />)
               }
@@ -266,7 +266,7 @@ const VideoPlayer = ({
               dropdown={
                 <VolumeControl
                   mute={isMute} volume={volume}
-                  setMute={setIsMute} updateVolume={updateVolume}
+                  setMute={toggleMute} updateVolume={updateVolume}
                 />
               }
               hintIcon={null}
