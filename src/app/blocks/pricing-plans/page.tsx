@@ -38,6 +38,7 @@ const plans = [
       "Olixer AI Assistant",
     ],
     price: 199,
+    ogPrice: 249,
   },
   {
     id: "genius",

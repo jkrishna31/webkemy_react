@@ -9,7 +9,7 @@
 
   display: grid;
   width: 100%;
-  max-width: 36rem;
+  max-width: 38rem;
   border-radius: 2rem;
   background-color: var(--hint-bg);
   padding: 1rem;
@@ -84,20 +84,36 @@
 .plan_desc {
   color: var(--fg-s);
   margin-bottom: 1.6rem;
+  transition: color .3s ease;
 }
 
-.price {
-  font-size: 3.6rem;
+.card:hover .plan_desc {
+  color: var(--fg-p-alt);
+}
+
+.price,
+.og_price {
+  font-size: 4rem;
   font-weight: bolder;
   color: var(--fg-p-alt);
 }
 
-.currency {
+.og_price {
   color: var(--fg-s-alt);
 }
 
-.billed {
+.og_price del {
+  font-weight: 500;
+}
+
+.currency {
+  color: var(--fg-s-alt);
   font-size: 2rem;
+  font-weight: 500;
+}
+
+.billed {
+  font-size: 1.6rem;
   font-weight: 500;
   color: var(--fg-s);
 }
@@ -174,23 +190,23 @@
   position: absolute;
   top: 0;
   right: 1rem;
-  animation: fade-in .4s ease 1s forwards;
-  transition-property: opacity, transform;
-  transition-duration: .4s;
-  transition-timing-function: ease;
-  transform: translate3d(0, -100%, 0);
+  // animation: fade-in .5s ease forwards;
+  // transition-property: opacity, transform;
+  // transition-duration: .5s;
+  // transition-timing-function: ease;
+  // transform: translate3d(0, -100%, 0);
 
-  @keyframes fade-in {
-    from {
-      opacity: 0;
-      transform: translate3d(0, -1rem, 0);
-    }
+  // @keyframes fade-in {
+  //   from {
+  //     opacity: 0;
+  //     transform: translate3d(0, -1rem, 0);
+  //   }
 
-    to {
-      transform: none;
-      opacity: 1;
-    }
-  }
+  //   to {
+  //     transform: none;
+  //     opacity: 1;
+  //   }
+  // }
 }
 
 .presentation {

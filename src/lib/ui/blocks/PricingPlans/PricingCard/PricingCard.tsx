@@ -14,6 +14,7 @@ export interface PricingCardProps extends ComponentProps<"div"> {
   description: ReactNode;
   features: string[];
   price: number;
+  ogPrice?: number;
   currency: string;
   billed: string;
   color?: Color;
@@ -21,7 +22,7 @@ export interface PricingCardProps extends ComponentProps<"div"> {
 }
 
 const PricingCard = ({
-  planName, description, features, price, currency, billed, color, special,
+  planName, description, features, price, ogPrice, currency, billed, color, special,
   className,
   ...restProps
 }: PricingCardProps) => {
@@ -29,10 +30,15 @@ const PricingCard = ({
     <div className={classes(styles.card, className)} data-color={color} {...restProps}>
       <div className={styles.card_inner}>
         {<div className={styles.presentation}><div></div></div>}
-        {!!special && <div className={styles.chip}>{"Popular"}</div>}
+        {!!special && <div className={styles.chip}>{"Recommended"}</div>}
         <h3 className={styles.plan_name}>{planName}</h3>
         <p className={styles.plan_desc}>{description}</p>
-        <p><span className={styles.price}><span className={styles.currency}>{currency}</span>{price}</span><span className={styles.billed}>{" /"}{billed}</span></p>
+        <p>
+          {!!ogPrice && <span className={styles.og_price}><sup className={styles.currency}>{currency}</sup><del>{ogPrice}</del></span>}
+          &nbsp;
+          <span className={styles.price}><sup className={styles.currency}>{currency}</sup>{price}</span>
+          <span className={styles.billed}>{" USD /"}{billed}</span>
+        </p>
         <Button variant="primary" className={styles.cta}>{"Get "}{planName}</Button>
         <p className={styles.trial}>{"Start "}<span>{"Free 1 Month"}</span>{" Trial"}</p>
         <Divider
@@ -59,6 +65,10 @@ const PricingCard = ({
             ))
           }
         </ul>
+
+        <div className={styles.footer}>
+
+        </div>
       </div>
     </div>
   );
