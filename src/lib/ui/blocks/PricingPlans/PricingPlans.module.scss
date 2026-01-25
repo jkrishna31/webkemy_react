@@ -1,8 +1,31 @@
 .wrapper {
   display: grid;
   grid-auto-flow: column;
-  gap: 3rem 4rem;
+  gap: 3rem;
   width: fit-content;
+
+  .starter,
+  .pro,
+  .genius {
+    animation: expand-in .6s ease;
+    transform: none;
+    transition-property: transform, opacity;
+    transition-duration: .6s;
+    transition-timing-function: ease;
+
+    @keyframes expand-in {
+      from {
+        opacity: .05;
+        transform: translate3d(0, 8%, 0);
+      }
+    }
+  }
+
+  .starter,
+  .genius {
+    transition-duration: .8s;
+    animation-duration: .8s;
+  }
 }
 
 @media screen and (max-width: 768px) {

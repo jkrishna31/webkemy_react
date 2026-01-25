@@ -1,0 +1,14 @@
+.wrapper {
+  max-width: 100%;
+  display: grid;
+
+  .scroller>ul {
+    display: flex;
+    width: fit-content;
+  }
+
+  .testimonial {
+    margin-right: 1.6rem;
+    contain: content;
+  }
+}

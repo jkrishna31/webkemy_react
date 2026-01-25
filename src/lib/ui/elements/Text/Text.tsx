@@ -21,6 +21,8 @@ const Text = <T extends ElementType = "p">({
 }: TextProps<T>) => {
   const Element = as;
 
+  // TODO: effect = "shimmer-once", "shimmer-infinite", "gradient", "gradient-motion"
+
   return (
     <Element
       className={classes(styles[as], className)}

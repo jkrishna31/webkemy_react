@@ -27,7 +27,7 @@ const page = () => {
       <InfiniteScrollBanner className="max-w-[100rem]" repeat={2}>
         {
           bannerItems.map((item, idx) => (
-            <li key={idx}>{item.render}</li>
+            <li key={idx} style={{ contain: "content" }}>{item.render}</li>
           ))
         }
       </InfiniteScrollBanner>

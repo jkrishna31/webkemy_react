@@ -1,0 +1,59 @@
+.testimonial {
+  position: relative;
+  max-width: 28rem;
+  // padding: .8rem;
+  // background-color: var(--bg-t);
+  // border-radius: 1.8rem;
+  box-shadow: 0 0 .4rem var(--shadow-p);
+
+  .inner {
+    padding: 1.2rem;
+    background-color: var(--bg-s);
+    border-radius: 1.2rem;
+    box-shadow: 0 0 .4rem var(--shadow-p);
+  }
+
+  .content {
+    margin-bottom: 2rem;
+    font-style: italic;
+    line-height: 1.3;
+  }
+
+  .author {
+    display: flex;
+    align-items: center;
+    // justify-content: flex-end;
+    gap: 1.2rem;
+  }
+
+  .avatar {
+    width: 4rem;
+    height: 4rem;
+  }
+
+  .author_details {
+    // text-align: right;
+  }
+
+  .name {
+    font-weight: 500;
+    color: var(--fg-p-alt);
+  }
+
+  .role {
+    font-size: 1.4rem;
+    color: var(--fg-s);
+    margin-top: .4rem;
+  }
+
+  .presentation {
+    position: absolute;
+    bottom: -3rem;
+    right: -0rem;
+    color: var(--fg-p);
+    width: 10rem;
+    height: 10rem;
+    opacity: .05;
+    // transform: rotateZ(-25deg);
+  }
+}

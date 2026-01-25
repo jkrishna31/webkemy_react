@@ -1,21 +1,21 @@
 .input {
     --checkbox-fg: var(--fg-p);
-    --checkbox-bg: var(--bg-s);
+    --checkbox-bg: var(--bg-t);
     --checkbox-bg-checked: var(--blue-6);
-    --checkbox-border: var(--bg-s);
+    --checkbox-border: var(--border-s);
 
     flex-shrink: 0;
     position: relative;
     appearance: none;
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
     border-radius: .4rem;
     background: var(--checkbox-bg);
     color: var(--blue-1);
     border: 1px solid var(--checkbox-border);
     overflow: hidden;
     cursor: pointer;
-    font-size: 2rem;
+    font-size: 1.6rem;
 
     transition: border .2s linear, background .2s linear;
 
@@ -47,6 +47,7 @@
     &[data-indeterminate="true"] {
         background-color: var(--checkbox-bg-checked);
         color: var(--checkbox-fg);
+        border-color: var(--checkbox-bg-checked);
 
         &::after {
             font-size: inherit;

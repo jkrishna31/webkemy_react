@@ -5,22 +5,24 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./InfiniteScrollBanner.module.scss";
 
 export interface InfiniteScrollBannerProps extends ComponentProps<"div"> {
-  repeat?: number
+  repeat?: number;
+  direction?: "left" | "right" | "up" | "down";
 }
 
 const InfiniteScrollBanner = ({
-  children, className, repeat = 2,
+  repeat = 2, direction = "left",
+  children, className,
   ...props
 }: InfiniteScrollBannerProps) => {
   return (
-    <div className={classes(styles.wrapper, "scroll_thin", "className")} {...props}>
-      {
-        Array.from({ length: repeat }).map((_, idx) => (
-          <ul key={idx} aria-hidden={!!idx}>
-            {children}
-          </ul>
-        ))
-      }
+    <div
+      data-direction={direction}
+      className={classes(styles.wrapper, "scroll_thin", "className")}
+      {...props}
+    >
+      <div className={styles.track}>
+        {Array.from({ length: repeat }).map(() => children)}
+      </div>
     </div>
   );
 };

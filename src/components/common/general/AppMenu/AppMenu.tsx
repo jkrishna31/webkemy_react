@@ -10,6 +10,7 @@ import AppNotificationIcon from "@/lib/ui/svgs/icons/AppNotificationIcon";
 import BarChartIcon from "@/lib/ui/svgs/icons/BarChartIcon";
 import BellIcon from "@/lib/ui/svgs/icons/BellIcon";
 import BlockCodeIcon from "@/lib/ui/svgs/icons/BlockCodeIcon";
+import BlockquoteIcon from "@/lib/ui/svgs/icons/BlockquoteIcon";
 import BubbleChartIcon from "@/lib/ui/svgs/icons/BubbleChartIcon";
 import CalendarDaysIcon from "@/lib/ui/svgs/icons/CalendarDaysIcon";
 import CalendarPlusIcon from "@/lib/ui/svgs/icons/CalendarPlusIcon";
@@ -21,12 +22,15 @@ import ColorPickerIcon from "@/lib/ui/svgs/icons/ColorPickerIcon";
 import CommentIcon from "@/lib/ui/svgs/icons/CommentIcon";
 import CompareIcon from "@/lib/ui/svgs/icons/CompareIcon";
 import ConferenceIcon from "@/lib/ui/svgs/icons/ConferenceIcon";
+import CreditCardIcon from "@/lib/ui/svgs/icons/CreditCardIcon";
 import CropIcon from "@/lib/ui/svgs/icons/CropIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import DashboardIcon from "@/lib/ui/svgs/icons/DashboardIcon";
 import DividerIcon from "@/lib/ui/svgs/icons/DividerIcon";
+import DollarIcon from "@/lib/ui/svgs/icons/DollarIcon";
 import DynamicGridIcon from "@/lib/ui/svgs/icons/DynamicGridIcon";
 import EastWestArrowCircleIcon from "@/lib/ui/svgs/icons/EastWestArrowCircleIcon";
+import FileEditIcon from "@/lib/ui/svgs/icons/FileEditIcon";
 import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
 import FilesIcon from "@/lib/ui/svgs/icons/FilesIcon";
 import FlagIcon2 from "@/lib/ui/svgs/icons/FlagIcon2";
@@ -49,12 +53,16 @@ import PanelTopIcon from "@/lib/ui/svgs/icons/PanelTopIcon";
 import PieChartIcon from "@/lib/ui/svgs/icons/PieChartIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
 import PopoverLeftIcon from "@/lib/ui/svgs/icons/PopoverLeftIcon";
+import QuestionIcon from "@/lib/ui/svgs/icons/QuestionIcon";
+import QuoteBubbleIcon from "@/lib/ui/svgs/icons/QuoteBubbleIcon";
 import RadarChartIcon from "@/lib/ui/svgs/icons/RadarChartIcon";
 import RadioButtonIcon from "@/lib/ui/svgs/icons/RadioButtonIcon";
 import RectangleGogglesIcon from "@/lib/ui/svgs/icons/RectangleGogglesIcon";
 import RectangleHorizontalIcon from "@/lib/ui/svgs/icons/RectangleHorizontalIcon";
 import ScatterChartIcon from "@/lib/ui/svgs/icons/ScatterChartIcon";
 import ScrollIcon2 from "@/lib/ui/svgs/icons/ScrollIcon2";
+import ShieldIcon from "@/lib/ui/svgs/icons/ShieldIcon";
+import ShieldKeyholeIcon from "@/lib/ui/svgs/icons/ShieldKeyholeIcon";
 import ShopIcon from "@/lib/ui/svgs/icons/ShopIcon";
 import SliderIcon from "@/lib/ui/svgs/icons/SliderIcon";
 import SplitHorizontalIcon from "@/lib/ui/svgs/icons/SplitHorizontalIcon";
@@ -542,10 +550,17 @@ export const menuItems = [
                 disabled: true,
             },
             {
-                key: "video-call",
-                href: "/templates/video-call",
-                primary: "Video Call",
+                key: "conference",
+                href: "/templates/conference",
+                primary: "Conference",
                 icon: <ConferenceIcon />,
+                disabled: true,
+            },
+            {
+                key: "forum",
+                href: "/templates/forum",
+                primary: "Forum",
+                icon: <FileEditIcon />,
                 disabled: true,
             },
         ],
@@ -556,10 +571,29 @@ export const menuItems = [
         collapsible: false,
         menu: [
             {
+                key: "auth",
+                href: "/blocks/auth",
+                primary: "Auth",
+                icon: <ShieldKeyholeIcon />,
+            },
+            {
                 key: "pricing-plans",
                 href: "/blocks/pricing-plans",
                 primary: "Pricing Plans",
+                icon: <DollarIcon />,
             },
+            {
+                key: "testimonials",
+                href: "/blocks/testimonials",
+                primary: "Testimonials",
+                icon: <QuoteBubbleIcon />,
+            },
+            // {
+            //     key: "faqs",
+            //     href: "/blocks/faqs",
+            //     primary: "FAQs",
+            //     icon: <QuestionIcon />,
+            // },
         ]
     }
 ]

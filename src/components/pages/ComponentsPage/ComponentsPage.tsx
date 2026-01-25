@@ -17,7 +17,7 @@ const ComponentsPage = () => {
             <Text className={styles.group}>{group.group}</Text>
             <ul>
               {
-                group.menu.map(item => item.disabled ? null : (
+                group.menu.map((item: any) => item.disabled ? null : (
                   <Link href={item.href} key={item.key}>
                     {item.icon}
                     {item.primary}
