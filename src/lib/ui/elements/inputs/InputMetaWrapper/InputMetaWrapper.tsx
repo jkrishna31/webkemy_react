@@ -1,8 +1,16 @@
+import { ComponentProps } from "react";
+
+import { classes } from "@/lib/utils/style.utils";
+
 import styles from "./InputMetaWrapper.module.scss";
 
-const InputMetaWrapper = ({ children, ...props }: any) => {
+export interface InputMetaWrapperProps extends ComponentProps<"div"> {
+
+}
+
+const InputMetaWrapper = ({ children, className, ...restProps }: InputMetaWrapperProps) => {
     return (
-        <div className={styles.wrapper}>
+        <div className={classes(styles.wrapper, className)} {...restProps}>
             {children}
         </div>
     );

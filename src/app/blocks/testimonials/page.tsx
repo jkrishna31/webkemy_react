@@ -9,8 +9,16 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="testimonials" />
 
-      <Testimonials testimonials={testimonialsData} />
-      <Testimonials testimonials={testimonialsData} direction="right" />
+      <Testimonials
+        className={styles.testimonials}
+        testimonials={testimonialsData}
+      // direction="up"
+      />
+      <Testimonials
+        className={styles.testimonials}
+        testimonials={testimonialsData}
+        direction="right"
+      />
     </main>
   );
 };

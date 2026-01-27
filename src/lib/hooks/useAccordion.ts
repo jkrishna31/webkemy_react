@@ -1,9 +1,9 @@
 import { useState } from "react";
 
-export function useAccordion(mode: "single" | "multiple", defaultActive?: Array<number | string>) {
+export function useAccordion<T extends string | number>(mode: "single" | "multiple", defaultActive?: Array<T>) {
   const [activeSections, setActiveSections] = useState<Array<number | string>>(defaultActive ?? []);
 
-  const updateAccordion = (key: string) => {
+  const updateAccordion = (key: T) => {
     setActiveSections(currActiveSec => {
       if (currActiveSec.includes(key)) {
         return mode === "single" ? [] : [...currActiveSec.filter(item => item !== key)];

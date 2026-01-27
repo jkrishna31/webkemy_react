@@ -24,7 +24,14 @@ const PricingPlans = ({
             className={styles[plan.id]}
             {...plan}
             billed={billed}
-            color={plan.id === "pro" ? "red" : undefined}
+            color={
+              plan.id === "pro" ?
+                "red" :
+                // plan.id === "genius" ?
+                //   "red" :
+                //   "green"
+                undefined
+            }
             special={plan.id === "pro"}
           />
         ))

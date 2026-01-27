@@ -1,14 +1,12 @@
 .wrapper {
-  max-width: 100%;
   display: grid;
-
-  .scroller>ul {
-    display: flex;
-    width: fit-content;
-  }
+  max-width: 100%;
 
   .testimonial {
-    margin-right: 1.6rem;
     contain: content;
+  }
+
+  & :global(.track) {
+    --banner-spacing: 1.6rem;
   }
 }

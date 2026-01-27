@@ -588,12 +588,19 @@ export const menuItems = [
                 primary: "Testimonials",
                 icon: <QuoteBubbleIcon />,
             },
-            // {
-            //     key: "faqs",
-            //     href: "/blocks/faqs",
-            //     primary: "FAQs",
-            //     icon: <QuestionIcon />,
-            // },
+            {
+                key: "faqs",
+                href: "/blocks/faqs",
+                primary: "FAQs",
+                icon: <QuestionIcon />,
+            },
+            {
+                key: "comments",
+                href: "/blocks/comments",
+                primary: "Comments",
+                icon: <MessagesIcon />,
+                disabled: true,
+            },
         ]
     }
 ]

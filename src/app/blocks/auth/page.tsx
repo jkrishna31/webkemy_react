@@ -9,8 +9,8 @@ const Page = () => {
       <PageSetup pageKey="auth" />
 
       <SignUpForm />
-      <ResetPasswordForm />
       <SignInForm />
+      <ResetPasswordForm />
       <CreatePasswordForm />
     </main>
   );

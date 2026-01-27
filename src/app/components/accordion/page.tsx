@@ -29,7 +29,7 @@ const Details = ({ children, open }: { children?: ReactNode; open?: boolean }) =
 };
 
 const Page = () => {
-  const { activeSections, updateAccordion } = useAccordion("single", ["1"]);
+  const { activeSections, updateAccordion } = useAccordion<string>("single", ["1"]);
 
   return (
     <main className={styles.main}>

@@ -2,26 +2,50 @@
   display: flex;
   width: 100%;
   max-width: 100%;
-  padding-block: 1rem;
+  max-height: 100%;
   flex-wrap: nowrap;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, var(--bg-p) 10rem, var(--bg-p) calc(100% - 10rem), transparent);
+
+  --banner-spacing: 1.6rem;
 
   .track {
-    animation: auto-scroll-loop 15s linear infinite;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-name: auto-scroll-loop-x;
   }
 
-  &[data-direction="left"] .track {
-    animation: auto-scroll-loop 15s linear infinite;
+  &[data-direction="left"],
+  &[data-direction="right"] {
+    mask-image: linear-gradient(to right, transparent, var(--bg-p) 10rem, var(--bg-p) calc(100% - 10rem), transparent);
+
+    .track {
+      animation-name: auto-scroll-loop-x;
+      padding-inline: calc(var(--banner-spacing) / 2);
+    }
   }
 
-  &[data-direction="right"] .track {
-    animation: auto-scroll-loop 15s linear infinite reverse;
+  &[data-direction="up"],
+  &[data-direction="down"] {
+    mask-image: linear-gradient(to top, transparent, var(--bg-p) 10rem, var(--bg-p) calc(100% - 10rem), transparent);
+
+    .track {
+      flex-direction: column;
+      animation-name: auto-scroll-loop-y;
+      padding-block: calc(var(--banner-spacing) / 2);
+    }
   }
 
-  &[data-direction="top"] .track {}
+  &[data-direction="right"],
+  &[data-direction="down"] {
+    .track {
+      animation-direction: reverse;
+    }
+  }
 
-  &[data-direction="bottom"] {}
+  &:hover .track {
+    animation-play-state: paused;
+  }
 }
 
 .track {
@@ -29,24 +53,29 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  width: fit-content;
+  height: fit-content;
   will-change: transform;
-
-  &>li {
-    margin-inline: 1.6rem;
-  }
+  gap: var(--banner-spacing);
 }
 
-.wrapper:hover .track {
-  animation-play-state: paused;
-}
-
-@keyframes auto-scroll-loop {
+@keyframes auto-scroll-loop-x {
   from {
     transform: translate3d(0, 0, 0);
   }
 
   to {
     transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes auto-scroll-loop-y {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(0, -50%, 0);
   }
 }
 

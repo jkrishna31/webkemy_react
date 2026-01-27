@@ -1,6 +1,6 @@
 .testimonial {
   position: relative;
-  max-width: 28rem;
+  width: 28rem;
   // padding: .8rem;
   // background-color: var(--bg-t);
   // border-radius: 1.8rem;
@@ -48,12 +48,15 @@
 
   .presentation {
     position: absolute;
-    bottom: -3rem;
+    bottom: -0rem;
     right: -0rem;
     color: var(--fg-p);
     width: 10rem;
     height: 10rem;
     opacity: .05;
+    // transform: rotateX(180deg);
     // transform: rotateZ(-25deg);
+    // -webkit-filter: drop-shadow(0 0 4px var(--blue-1));
+    // filter: drop-shadow(0 0 4px var(--blue-1));
   }
 }

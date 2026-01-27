@@ -20,7 +20,7 @@ const InfiniteScrollBanner = ({
       className={classes(styles.wrapper, "scroll_thin", "className")}
       {...props}
     >
-      <div className={styles.track}>
+      <div className={classes(styles.track, "track")}>
         {Array.from({ length: repeat }).map(() => children)}
       </div>
     </div>

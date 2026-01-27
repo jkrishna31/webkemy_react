@@ -4,7 +4,7 @@
   --border-color: var(--border-p);
   --hint-color: var(--green-1);
 
-  --presentation-size: 150%;
+  --presentation-size: 160%;
   --presentation-bg: var(--gray-8);
 
   display: grid;
@@ -123,7 +123,8 @@
   margin-top: 3rem;
   background-color: var(--cta-bg);
 
-  &:hover {
+  &:hover,
+  &:focus-visible {
     color: var(--cta-bg);
     background-color: var(--bg-p);
     border-color: var(--cta-bg);
@@ -190,23 +191,20 @@
   position: absolute;
   top: 0;
   right: 1rem;
-  // animation: fade-in .5s ease forwards;
-  // transition-property: opacity, transform;
-  // transition-duration: .5s;
-  // transition-timing-function: ease;
-  // transform: translate3d(0, -100%, 0);
+  animation: fade-in .5s cubic-bezier(0, 0, .2, 1) forwards .3s;
+  transform: translate3d(0, -100%, 0);
 
-  // @keyframes fade-in {
-  //   from {
-  //     opacity: 0;
-  //     transform: translate3d(0, -1rem, 0);
-  //   }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -100%, 0);
+    }
 
-  //   to {
-  //     transform: none;
-  //     opacity: 1;
-  //   }
-  // }
+    to {
+      transform: none;
+      opacity: 1;
+    }
+  }
 }
 
 .presentation {

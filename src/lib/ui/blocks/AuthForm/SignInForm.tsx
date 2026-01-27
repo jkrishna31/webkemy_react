@@ -6,16 +6,14 @@ import { Button } from "@/lib/ui/elements/butttons";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
+import { PasswordInput } from "@/lib/ui/elements/inputs/PasswordInput";
 import { Switch } from "@/lib/ui/elements/inputs/Switch";
 import { Text } from "@/lib/ui/elements/Text";
-import EyeClosedIcon from "@/lib/ui/svgs/icons/EyeClosedIcon";
-import EyeOpenIcon from "@/lib/ui/svgs/icons/EyeOpenIcon";
 
 import styles from "./AuthForm.module.scss";
 
 const SignInForm = () => {
   const [usePassword, setUsePassword] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -39,16 +37,7 @@ const SignInForm = () => {
         {usePassword && (
           <InputItem>
             <Text<"label"> as="label">{"Password *"}</Text>
-            <InputFieldWrapper>
-              <GeneralInput type={showPassword ? "text" : "password"} placeholder="******" />
-              <Button
-                variant="quaternary"
-                onClick={() => setShowPassword(!showPassword)}
-                className={styles.visibility_toggle_btn}
-              >
-                {showPassword ? <EyeClosedIcon /> : <EyeOpenIcon />}
-              </Button>
-            </InputFieldWrapper>
+            <PasswordInput />
           </InputItem>
         )}
 
