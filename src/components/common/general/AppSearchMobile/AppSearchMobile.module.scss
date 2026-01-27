@@ -21,13 +21,34 @@
         height: 2.2rem;
       }
     }
+
+    .floating_close_btn {
+      position: absolute;
+      bottom: 1.2rem;
+      right: 1.2rem;
+      width: fit-content;
+      padding: .6rem 1rem .6rem 1.2rem;
+      min-height: fit-content;
+
+      svg {
+        width: 1.6rem;
+        height: 1.6rem;
+        stroke-width: .2rem;
+      }
+    }
   }
 
   @media screen and (max-width: 768px) {
     .app_search {
+      background: var(--gray-11-30);
 
       .header {
         padding-inline: 1.2rem;
       }
+    }
+
+    .overlay {
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
   }

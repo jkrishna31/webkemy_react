@@ -24,7 +24,15 @@ const page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="banner" />
 
-      <InfiniteScrollBanner className="max-w-[100rem]" repeat={4}>
+      <InfiniteScrollBanner className={styles.banner}>
+        {
+          bannerItems.map((item, idx) => (
+            <li key={idx} style={{ contain: "content" }}>{item.render}</li>
+          ))
+        }
+      </InfiniteScrollBanner>
+
+      <InfiniteScrollBanner className={styles.banner_vertical} direction="up">
         {
           bannerItems.map((item, idx) => (
             <li key={idx} style={{ contain: "content" }}>{item.render}</li>

@@ -4,6 +4,7 @@ import { SearchForm } from "@/components/common/forms";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Drawer } from "@/lib/ui/elements/Drawer";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
+import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./AppSearchMobile.module.scss";
@@ -29,6 +30,7 @@ const AppSearchMobile = ({
     <Drawer
       open={!!open}
       className={styles.app_search}
+      overlayClass={styles.overlay}
     >
       <div className={styles.header}>
         <Button
@@ -49,6 +51,14 @@ const AppSearchMobile = ({
         />
       </div>
       {children}
+      <Button
+        variant="primary"
+        className={styles.floating_close_btn}
+        onClick={onClose}
+      >
+        {"Close"}
+        <CrossIcon />
+      </Button>
     </Drawer>
   );
 };

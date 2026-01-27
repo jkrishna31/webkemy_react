@@ -16,10 +16,11 @@ export interface DrawerProps extends ComponentProps<"div"> {
     onClose?: () => void;
     hasOverlay?: boolean;
     unmountOnClose?: boolean;
+    overlayClass?: string;
 }
 
 const Drawer = ({
-    open, onClose, hasOverlay = true, unmountOnClose, children, className,
+    open, onClose, hasOverlay = true, unmountOnClose, children, className, overlayClass,
     ...props
 }: DrawerProps) => {
     // set aria-hidden and inert to true for .page element
@@ -33,16 +34,16 @@ const Drawer = ({
         onClose?.();
     }, ["Escape"]);
 
-    if (!open) return null;
+    if (!open || !isMounted) return null;
 
-    return isMounted ? createPortal((
+    return createPortal((
         <>
             {hasOverlay ? (
-                <Overlay open={open} onClick={onClose} className={styles.overlay} />
+                <Overlay open={open} onClick={onClose} className={classes(styles.overlay, overlayClass)} />
             ) : null}
             <div
                 ref={ref}
-                className={classes(styles.container, className, open && styles.open)}
+                className={classes(styles.container, open && styles.open, className)}
                 role="dialog"
                 aria-modal
                 {...props}
@@ -50,7 +51,7 @@ const Drawer = ({
                 {children}
             </div>
         </>
-    ), document?.body) : null;
+    ), document?.body);
 };
 
 export default Drawer;

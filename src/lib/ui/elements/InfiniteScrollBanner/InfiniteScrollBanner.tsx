@@ -17,7 +17,7 @@ const InfiniteScrollBanner = ({
   return (
     <div
       data-direction={direction}
-      className={classes(styles.wrapper, "scroll_thin", "className")}
+      className={classes(styles.wrapper, "scroll_thin", className)}
       {...props}
     >
       <div className={classes(styles.track, "track")}>

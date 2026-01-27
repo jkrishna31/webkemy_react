@@ -572,31 +572,31 @@ export const menuItems = [
         menu: [
             {
                 key: "auth",
-                href: "/blocks/auth",
+                href: "/components/auth",
                 primary: "Auth",
                 icon: <ShieldKeyholeIcon />,
             },
             {
                 key: "pricing-plans",
-                href: "/blocks/pricing-plans",
+                href: "/components/pricing-plans",
                 primary: "Pricing Plans",
                 icon: <DollarIcon />,
             },
             {
                 key: "testimonials",
-                href: "/blocks/testimonials",
+                href: "/components/testimonials",
                 primary: "Testimonials",
                 icon: <QuoteBubbleIcon />,
             },
             {
                 key: "faqs",
-                href: "/blocks/faqs",
+                href: "/components/faqs",
                 primary: "FAQs",
                 icon: <QuestionIcon />,
             },
             {
                 key: "comments",
-                href: "/blocks/comments",
+                href: "/components/comments",
                 primary: "Comments",
                 icon: <MessagesIcon />,
                 disabled: true,

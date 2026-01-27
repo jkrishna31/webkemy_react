@@ -43,7 +43,9 @@ const Modal = ({
 
     useKey(onClose as any, ["Escape"], "keydown", { capture: true });
 
-    return isMounted ? createPortal((
+    if (!isMounted) return;
+
+    return createPortal((
         <>
             {overlay && <Overlay className={styles.overlay} open={true} onClick={onClose} />}
             <div
@@ -55,7 +57,7 @@ const Modal = ({
                 {children}
             </div>
         </>
-    ), document.body) : null;
+    ), document.body);
 };
 
 export default Modal;
