@@ -14,6 +14,8 @@ export type TTestimonial = {
   profile?: string;
   date?: string;
   id?: string | number;
+  company?: string;
+  companyLogo?: string;
 }
 
 export interface TestimonialProps extends ComponentProps<"div"> {
@@ -41,10 +43,11 @@ const Testimonial = ({
           </Avatar>
           <div className={styles.author_details}>
             <p className={styles.name}>{testimonial?.name}</p>
-            <p className={styles.role}>{testimonial?.role}</p>
+            <p className={styles.role}>{testimonial?.role}{" at "}<span>{testimonial?.company}</span></p>
           </div>
         </div>
 
+        {/* <BlockquoteIcon className={styles.presentation_start} /> */}
         <BlockquoteIcon className={styles.presentation} />
       </div>
     </div>

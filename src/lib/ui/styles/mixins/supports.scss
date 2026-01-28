@@ -1,0 +1,5 @@
+@mixin backdrop-support {
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    @content;
+  }
+}

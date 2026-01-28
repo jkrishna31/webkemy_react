@@ -1,4 +1,4 @@
-import { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { useFiles } from "@/lib/hooks/useFiles";
@@ -9,11 +9,9 @@ import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { TextArea } from "@/lib/ui/elements/inputs/TextArea";
 import { Popover } from "@/lib/ui/elements/Popover";
 import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
-import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
 import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
 import PaperclipIcon from "@/lib/ui/svgs/icons/PaperclipIcon";
 import SendIcon from "@/lib/ui/svgs/icons/SendIcon";
-import SendSolidIcon from "@/lib/ui/svgs/icons/SendSolidIcon";
 import { isMobileDevice } from "@/lib/utils/client.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -29,7 +27,6 @@ const ChatComposer = ({
 }: ChatComposerProps) => {
   const [query, setQuery] = useState<string>();
   const [emojiPickerAnchor, setEmojiPickerAnchor] = useState<HTMLElement | null>(null);
-  const [entered, setEntered] = useState<boolean | "shift">(false);
 
   const inputRef = useRef<HTMLTextAreaElement>(null);
 
@@ -43,13 +40,16 @@ const ChatComposer = ({
     inputRef.current?.focus();
   }, [onSend]);
 
+  const handleKeyDown = useEffectEvent((e: KeyboardEvent) => {
+    if (e.key === Keys.ENTER && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(query);
+    }
+  });
+
   useEffect(() => {
     const inputElem = inputRef.current;
     if (inputElem && !isMobileDevice()) {
-      const handleKeyDown = (e: KeyboardEvent) => {
-        if (e.key === Keys.ENTER) setEntered(!e.shiftKey);
-        else setEntered(false);
-      };
       inputElem.addEventListener("keydown", handleKeyDown);
       return () => inputElem.removeEventListener("keydown", handleKeyDown);
     }
@@ -70,15 +70,7 @@ const ChatComposer = ({
           rows={1}
           placeholder="Ask your query..."
           value={query}
-          onInput={(e: any) => {
-            const val = e.target.value;
-            if (!isMobileDevice() && entered === true && val?.trim()?.length) {
-              setEntered(false);
-              handleSubmit(e.target.value);
-            } else {
-              setQuery(e.target.value);
-            }
-          }}
+          onInput={(e: any) => setQuery(e.target.value)}
           ref={inputRef}
           className={styles.input}
         // enterKeyHint="send"

@@ -1,7 +1,12 @@
+@use "@/lib/ui/styles/mixins/supports" as *;
+
 .header {
     background: var(--bg-overlay);
-    -webkit-backdrop-filter: blur(.4rem);
-    backdrop-filter: blur(.4rem);
+
+    @include backdrop-support {
+        -webkit-backdrop-filter: blur(.4rem);
+        backdrop-filter: blur(.4rem);
+    }
 }
 
 .search_form {

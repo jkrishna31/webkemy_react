@@ -1,3 +1,5 @@
+@use '@/lib/ui/styles/mixins/supports' as *;
+
 #navmenu_overlay {
     position: fixed;
     top: 0;
@@ -10,9 +12,13 @@
     cursor: pointer;
     z-index: var(--zi-main-overlay);
 
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
     background-color: var(--bg-overlay);
+
+    @include backdrop-support {
+        background-color: transparent;
+        -webkit-backdrop-filter: blur(4px);
+        backdrop-filter: blur(4px);
+    }
 
     transform: none;
     opacity: 1;

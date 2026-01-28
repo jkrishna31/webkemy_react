@@ -1,54 +1,58 @@
-  .app_search {
-    .header {
-      display: flex;
-      align-items: center;
-      gap: .6rem;
-      max-width: 100%;
-      min-height: var(--h-header);
-    }
+@use '@/lib/ui/styles/mixins/supports' as *;
 
-    .btn {
-      min-width: 3.8rem;
-      min-height: 3.8rem;
-      padding: .4rem;
-      width: fit-content;
-      background-color: var(--bg-q);
-    }
+.app_search {
+  .header {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    max-width: 100%;
+    min-height: var(--h-header);
+  }
 
-    .back_btn {
-      svg {
-        width: 2.2rem;
-        height: 2.2rem;
-      }
-    }
+  .btn {
+    min-width: 3.8rem;
+    min-height: 3.8rem;
+    padding: .4rem;
+    width: fit-content;
+    background-color: var(--bg-q);
+  }
 
-    .floating_close_btn {
-      position: absolute;
-      bottom: 1.2rem;
-      right: 1.2rem;
-      width: fit-content;
-      padding: .6rem 1rem .6rem 1.2rem;
-      min-height: fit-content;
-
-      svg {
-        width: 1.6rem;
-        height: 1.6rem;
-        stroke-width: .2rem;
-      }
+  .back_btn {
+    svg {
+      width: 2.2rem;
+      height: 2.2rem;
     }
   }
 
-  @media screen and (max-width: 768px) {
-    .app_search {
-      background: var(--gray-11-30);
+  .floating_close_btn {
+    position: absolute;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    width: fit-content;
+    padding: .6rem 1rem .6rem 1.2rem;
+    min-height: fit-content;
 
-      .header {
-        padding-inline: 1.2rem;
-      }
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .2rem;
     }
+  }
+}
 
-    .overlay {
+@media screen and (max-width: 768px) {
+  .app_search {
+    background: var(--gray-11-30);
+
+    .header {
+      padding-inline: 1.2rem;
+    }
+  }
+
+  .overlay {
+    @include backdrop-support {
       -webkit-backdrop-filter: blur(8px);
       backdrop-filter: blur(8px);
     }
   }
+}

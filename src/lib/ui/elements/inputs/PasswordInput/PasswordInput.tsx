@@ -8,6 +8,7 @@ import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import EyeClosedIcon from "@/lib/ui/svgs/icons/EyeClosedIcon";
 import EyeOpenIcon from "@/lib/ui/svgs/icons/EyeOpenIcon";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./PasswordInput.module.scss";
 
@@ -17,7 +18,7 @@ export interface PasswordInputProps extends ComponentProps<"input"> {
 
 const PasswordInput = ({
   autoHideDuration = 3000,
-  className,
+  className, style,
   ...restProps
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -36,10 +37,9 @@ const PasswordInput = ({
   }, [hide, showPassword]);
 
   return (
-    <InputFieldWrapper className={styles.wrapper}>
+    <InputFieldWrapper className={classes(styles.wrapper, className)} style={style}>
       <GeneralInput
         placeholder="******"
-        className={className}
         onInput={(e) => {
           hide();
           restProps.onInput?.(e);

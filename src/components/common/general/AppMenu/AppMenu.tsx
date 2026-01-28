@@ -1,6 +1,6 @@
 import { LangSelector } from "@/components/common/general/LangSelector";
 import { ThemeSelector } from "@/components/common/general/ThemeSelector";
-import { useActivePage, useLayoutActions, useModalActions } from "@/data/stores";
+import { useActivePage, useLayoutActions } from "@/data/stores";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
@@ -10,7 +10,6 @@ import AppNotificationIcon from "@/lib/ui/svgs/icons/AppNotificationIcon";
 import BarChartIcon from "@/lib/ui/svgs/icons/BarChartIcon";
 import BellIcon from "@/lib/ui/svgs/icons/BellIcon";
 import BlockCodeIcon from "@/lib/ui/svgs/icons/BlockCodeIcon";
-import BlockquoteIcon from "@/lib/ui/svgs/icons/BlockquoteIcon";
 import BubbleChartIcon from "@/lib/ui/svgs/icons/BubbleChartIcon";
 import CalendarDaysIcon from "@/lib/ui/svgs/icons/CalendarDaysIcon";
 import CalendarPlusIcon from "@/lib/ui/svgs/icons/CalendarPlusIcon";
@@ -22,7 +21,6 @@ import ColorPickerIcon from "@/lib/ui/svgs/icons/ColorPickerIcon";
 import CommentIcon from "@/lib/ui/svgs/icons/CommentIcon";
 import CompareIcon from "@/lib/ui/svgs/icons/CompareIcon";
 import ConferenceIcon from "@/lib/ui/svgs/icons/ConferenceIcon";
-import CreditCardIcon from "@/lib/ui/svgs/icons/CreditCardIcon";
 import CropIcon from "@/lib/ui/svgs/icons/CropIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import DashboardIcon from "@/lib/ui/svgs/icons/DashboardIcon";
@@ -50,6 +48,7 @@ import MessagesIcon from "@/lib/ui/svgs/icons/MessagesIcon";
 import NotificationRemoveIcon from "@/lib/ui/svgs/icons/NotificationRemoveIcon";
 import PanelLeftIcon from "@/lib/ui/svgs/icons/PanelLeftIcon";
 import PanelTopIcon from "@/lib/ui/svgs/icons/PanelTopIcon";
+import PasswordInputIcon from "@/lib/ui/svgs/icons/PasswordInputIcon";
 import PieChartIcon from "@/lib/ui/svgs/icons/PieChartIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
 import PopoverLeftIcon from "@/lib/ui/svgs/icons/PopoverLeftIcon";
@@ -61,7 +60,6 @@ import RectangleGogglesIcon from "@/lib/ui/svgs/icons/RectangleGogglesIcon";
 import RectangleHorizontalIcon from "@/lib/ui/svgs/icons/RectangleHorizontalIcon";
 import ScatterChartIcon from "@/lib/ui/svgs/icons/ScatterChartIcon";
 import ScrollIcon2 from "@/lib/ui/svgs/icons/ScrollIcon2";
-import ShieldIcon from "@/lib/ui/svgs/icons/ShieldIcon";
 import ShieldKeyholeIcon from "@/lib/ui/svgs/icons/ShieldKeyholeIcon";
 import ShopIcon from "@/lib/ui/svgs/icons/ShopIcon";
 import SliderIcon from "@/lib/ui/svgs/icons/SliderIcon";
@@ -85,7 +83,7 @@ import styles from "./AppMenu.module.scss";
 export const menuItems = [
     {
         key: "input",
-        group: "Input",
+        group: "Inputs",
         collapsible: false,
         menu: [
             {
@@ -111,6 +109,12 @@ export const menuItems = [
                 href: "/components/file-input",
                 primary: "File Input",
                 icon: <FileIcon />,
+            },
+            {
+                key: "password-input",
+                href: "/components/password-input",
+                primary: "Password Input",
+                icon: <PasswordInputIcon />,
             },
             {
                 key: "number-input",
@@ -218,7 +222,7 @@ export const menuItems = [
             },
             {
                 key: "kanban",
-                href: "/components/kanban",
+                href: "#",
                 primary: "Kanban",
                 icon: <KanbanIcon />,
                 disabled: true,
@@ -228,7 +232,6 @@ export const menuItems = [
                 href: "/components/dynamic-grid",
                 primary: "Dynamic Grid",
                 icon: <DynamicGridIcon />,
-                // disabled: true,
             },
             {
                 key: "text",
@@ -340,10 +343,10 @@ export const menuItems = [
             },
             {
                 key: "comparator",
-                href: "/components/comparator",
+                href: "#",
                 primary: "Comparator",
-                disabled: true,
                 icon: <CompareIcon />,
+                disabled: true,
             },
             {
                 key: "image-crop",
@@ -407,7 +410,7 @@ export const menuItems = [
             },
             {
                 key: "data-table",
-                href: "/components/data-table",
+                href: "#",
                 primary: "Data Table",
                 icon: <TableIcon />,
                 disabled: true,
@@ -420,17 +423,16 @@ export const menuItems = [
             },
             {
                 key: "virtualizer",
-                href: "/components/virtualizer",
+                href: "#",
                 primary: "Virtualizer",
-                disabled: true,
                 icon: <RectangleGogglesIcon />,
+                disabled: true,
             },
             {
                 key: "framer",
                 href: "/components/framer",
                 primary: "Framer",
                 icon: <KeyframesMultipleIcon />,
-                disabled: true,
             },
             {
                 key: "code-block",
@@ -446,10 +448,10 @@ export const menuItems = [
             },
             {
                 key: "notification",
-                href: "/components/notification",
+                href: "#",
                 primary: "Notification",
-                disabled: true,
                 icon: <BellIcon />,
+                disabled: true,
             },
             {
                 key: "tree",
@@ -524,6 +526,44 @@ export const menuItems = [
         ],
     },
     {
+        key: "blocks",
+        group: "Blocks",
+        collapsible: false,
+        menu: [
+            {
+                key: "auth",
+                href: "/components/auth",
+                primary: "Auth",
+                icon: <ShieldKeyholeIcon />,
+            },
+            {
+                key: "pricing-plans",
+                href: "/components/pricing-plans",
+                primary: "Pricing Plans",
+                icon: <DollarIcon />,
+            },
+            {
+                key: "testimonials",
+                href: "/components/testimonials",
+                primary: "Testimonials",
+                icon: <QuoteBubbleIcon />,
+            },
+            {
+                key: "faqs",
+                href: "/components/faqs",
+                primary: "FAQs",
+                icon: <QuestionIcon />,
+            },
+            {
+                key: "comments",
+                href: "#",
+                primary: "Comments",
+                icon: <MessagesIcon />,
+                disabled: true,
+            },
+        ]
+    },
+    {
         key: "templates",
         group: "Templates",
         collapsible: false,
@@ -565,44 +605,6 @@ export const menuItems = [
             },
         ],
     },
-    {
-        key: "blocks",
-        group: "Blocks",
-        collapsible: false,
-        menu: [
-            {
-                key: "auth",
-                href: "/components/auth",
-                primary: "Auth",
-                icon: <ShieldKeyholeIcon />,
-            },
-            {
-                key: "pricing-plans",
-                href: "/components/pricing-plans",
-                primary: "Pricing Plans",
-                icon: <DollarIcon />,
-            },
-            {
-                key: "testimonials",
-                href: "/components/testimonials",
-                primary: "Testimonials",
-                icon: <QuoteBubbleIcon />,
-            },
-            {
-                key: "faqs",
-                href: "/components/faqs",
-                primary: "FAQs",
-                icon: <QuestionIcon />,
-            },
-            {
-                key: "comments",
-                href: "/components/comments",
-                primary: "Comments",
-                icon: <MessagesIcon />,
-                disabled: true,
-            },
-        ]
-    }
 ]
     .map(menuGroup => ({
         ...menuGroup,
