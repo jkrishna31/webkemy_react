@@ -1,6 +1,5 @@
 "use client";
 
-
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
@@ -17,7 +16,7 @@ export interface BlockSelectorProps {
     listClass?: string;
 }
 
-const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...props }: BlockSelectorProps) => {
+const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...restProps }: BlockSelectorProps) => {
     return (
         <Dropdown
             hintIcon={null}

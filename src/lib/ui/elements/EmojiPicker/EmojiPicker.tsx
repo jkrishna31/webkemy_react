@@ -63,7 +63,7 @@ const categoryIcons: { [key: string]: ReactNode } = {
 };
 
 const categoryTabs = categoriesOrder.map((id: string) => ({
-  id, title: i18nNames[id], render: () => categoryIcons[id],
+  id, title: i18nNames[id], render: categoryIcons[id],
 }));
 
 const EmojiPicker = ({
@@ -302,7 +302,7 @@ const EmojiPicker = ({
         activeTab={query ? "" : activeCategory}
         tabs={categoryTabs}
         onChange={handleTabClick}
-        btnClass={styles.tab}
+        tabClass={styles.tab}
         className={styles.tablist}
         aria-hidden={!!query}
       />

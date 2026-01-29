@@ -1,0 +1,8 @@
+.item {
+  flex-shrink: 0;
+  min-width: 26rem;
+  width: fit-content;
+  border-radius: 1rem;
+  background-color: var(--bg-t);
+  border: .1rem solid var(--border-t);
+}

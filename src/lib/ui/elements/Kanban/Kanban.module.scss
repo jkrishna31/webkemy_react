@@ -1,0 +1,16 @@
+.kanban {
+  display: flex;
+  gap: 1.6rem;
+  max-height: 100%;
+
+  max-width: 100%;
+  overflow: auto;
+}
+
+.horizontal {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+}

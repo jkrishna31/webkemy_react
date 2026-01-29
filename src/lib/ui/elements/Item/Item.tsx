@@ -11,7 +11,7 @@ export type TItem<T extends ElementType> = {
   primary?: ReactNode;
   secondary?: ReactNode;
   badge?: ReactNode;
-
+  scope?: "menu" | "list";
   collapsible?: boolean;
   selected?: boolean;
   open?: boolean;
@@ -23,7 +23,7 @@ export type ItemProps<T extends ElementType> = TItem<T>;
 
 const Item = <T extends ElementType = "div">({
   as = "button",
-  icon, primary, secondary, badge,
+  icon, primary, secondary, badge, scope = "menu",
   collapsible = true, open, minimized, selected,
   className, children, disabled,
   ...restProps
@@ -36,7 +36,7 @@ const Item = <T extends ElementType = "div">({
       aria-disabled={disabled}
       data-minimized={minimized}
       {...(disabled ? { tabIndex: -1 } : {})}
-      className={classes(styles.item, className, "menu_item")}
+      className={classes(styles.item, className, styles[`scope_${scope}`], "menu_item")}
       aria-selected={selected}
       {...restProps}
     >

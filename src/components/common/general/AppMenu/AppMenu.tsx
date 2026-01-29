@@ -37,6 +37,7 @@ import GridIcon from "@/lib/ui/svgs/icons/GridIcon";
 import HashtagIcon from "@/lib/ui/svgs/icons/HashtagIcon";
 import HierarchyIcon from "@/lib/ui/svgs/icons/HierarchyIcon";
 import InputIcon from "@/lib/ui/svgs/icons/InputIcon";
+import InsertImgCenterIcon from "@/lib/ui/svgs/icons/InsertImgCenterIcon";
 import KanbanIcon from "@/lib/ui/svgs/icons/KanbanIcon";
 import KeyframesMultipleIcon from "@/lib/ui/svgs/icons/KeyframesMultipleIcon";
 import LineChartIcon from "@/lib/ui/svgs/icons/LineChartIcon";
@@ -57,7 +58,6 @@ import QuoteBubbleIcon from "@/lib/ui/svgs/icons/QuoteBubbleIcon";
 import RadarChartIcon from "@/lib/ui/svgs/icons/RadarChartIcon";
 import RadioButtonIcon from "@/lib/ui/svgs/icons/RadioButtonIcon";
 import RectangleGogglesIcon from "@/lib/ui/svgs/icons/RectangleGogglesIcon";
-import RectangleHorizontalIcon from "@/lib/ui/svgs/icons/RectangleHorizontalIcon";
 import ScatterChartIcon from "@/lib/ui/svgs/icons/ScatterChartIcon";
 import ScrollIcon2 from "@/lib/ui/svgs/icons/ScrollIcon2";
 import ShieldKeyholeIcon from "@/lib/ui/svgs/icons/ShieldKeyholeIcon";
@@ -162,7 +162,7 @@ export const menuItems = [
                 key: "input-item",
                 href: "/components/input-item",
                 primary: "Input Item",
-                icon: <RectangleHorizontalIcon />,
+                icon: <InsertImgCenterIcon />,
             },
             {
                 key: "color-picker",
@@ -222,16 +222,16 @@ export const menuItems = [
             },
             {
                 key: "kanban",
-                href: "#",
+                href: "/components/kanban",
                 primary: "Kanban",
                 icon: <KanbanIcon />,
-                disabled: true,
             },
             {
                 key: "dynamic-grid",
                 href: "/components/dynamic-grid",
                 primary: "Dynamic Grid",
                 icon: <DynamicGridIcon />,
+                disabled: true,
             },
             {
                 key: "text",

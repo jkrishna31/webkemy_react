@@ -3,7 +3,6 @@
 import { ComponentProps, ReactNode, useEffect, useRef } from "react";
 
 import { Keys } from "@/constants/keys.const";
-import { BaseVariant } from "@/lib/types/general.types";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import { isDisabled } from "@/lib/utils/dom.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -13,13 +12,13 @@ import styles from "./Tabs.module.scss";
 export interface Tab extends ComponentProps<"button"> {
     id: string;
     label?: ReactNode;
+    render?: ReactNode;
     disabled?: boolean;
-    render?: () => ReactNode;
 }
 
 export interface TabListProps extends ComponentProps<"div"> {
     wrapperInnerClass?: string;
-    btnClass?: string;
+    tabClass?: string;
     tabs: Tab[];
     onChange: any;
     activeTab: string;
@@ -28,7 +27,7 @@ export interface TabListProps extends ComponentProps<"div"> {
 }
 
 const Tabs = ({
-    variant = "solid", wrapperInnerClass, btnClass, tabs, onChange, activeTab, showScrollBtns = false,
+    variant = "solid", wrapperInnerClass, tabClass, tabs, onChange, activeTab, showScrollBtns = false,
     className,
     ...rest
 }: TabListProps) => {
@@ -102,7 +101,7 @@ const Tabs = ({
                         const isSelected = tab.id === activeTab;
                         return (
                             <button
-                                className={classes(styles.tab_btn, btnClass)}
+                                className={classes(styles.tab_btn, tabClass)}
                                 role="tab"
                                 key={tab.id}
                                 ref={isSelected ? activeTabRef : null}
@@ -113,7 +112,7 @@ const Tabs = ({
                                 tabIndex={isSelected ? 0 : -1}
                                 disabled={tab.disabled}
                             >
-                                {tab.render?.()}
+                                {tab.render}
                                 {tab.label ? (
                                     <span className={styles.tab_btn_label}>{tab.label}</span>
                                 ) : null}

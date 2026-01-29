@@ -1,7 +1,7 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  gap: 1.4rem;
+  gap: 1rem;
   position: relative;
   max-height: fit-content;
   margin-bottom: 1.6rem;
@@ -19,6 +19,7 @@
 }
 
 .divider_banner {
+  margin-top: .6rem;
   color: var(--purple-1);
   --divider-color: var(--purple-1-50);
 

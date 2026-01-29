@@ -1,0 +1,118 @@
+.column {
+  height: fit-content;
+  max-height: calc(100vh - 4rem - var(--h-header));
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+
+  z-index: 1;
+  padding: .6rem;
+  border-radius: .8rem;
+  background-color: var(--bg-p);
+
+  transition-property: padding;
+  transition-duration: .5s;
+  transition-timing-function: ease;
+}
+
+.column[data-collapsed="true"] .header {
+  background-color: var(--bg-s);
+  padding-inline-start: 1.2rem;
+}
+
+.horizontal[data-collapsed="true"] .header {
+  writing-mode: vertical-lr;
+  padding-inline: 1rem .2rem;
+}
+
+.vertical[data-collapsed="true"] .header {
+  padding-inline: 1.2rem 1rem;
+}
+
+.name {
+  font-weight: 500;
+  color: var(--fg-s);
+}
+
+.chip {
+  margin-inline-end: auto;
+  border-radius: var(--br-pill);
+  padding-block: .2rem;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  overflow: auto;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  flex: 1;
+  width: 100%;
+  height: fit-content;
+  padding: 0 .6rem;
+}
+
+.collapse_btn,
+.action_btn {
+  background-color: transparent;
+  border-radius: .4rem;
+  padding: .4rem;
+}
+
+.collapse_btn svg {
+  stroke-width: .2rem;
+  width: 2rem;
+  height: 2rem;
+  transition: transform .5s ease;
+}
+
+.action_btn svg {
+  width: 2.2rem;
+  height: 2.2rem;
+}
+
+.column[data-collapsed="true"] {
+  .collapse_btn svg {
+    transform: rotateZ(180deg);
+  }
+}
+
+.action_popover {
+  width: fit-content;
+  max-width: calc(100vw - 4rem);
+  overflow: auto;
+  background-color: var(--bg-s);
+  color: var(--fg-p);
+  border-radius: .6rem;
+  padding: .4rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+  scrollbar-width: thin;
+}
+
+.vertical .inner {
+  flex-direction: row;
+  padding-bottom: .6rem;
+}
+
+@media screen and (max-width: 768px) {
+  .name {
+    font-size: 1.4rem;
+  }
+
+  .inner {
+    padding: .6rem 0;
+  }
+}

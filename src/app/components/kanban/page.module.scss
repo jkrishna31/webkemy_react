@@ -1,0 +1,85 @@
+.main {
+  padding-block: 2rem;
+
+  .users_list {
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    overflow: auto;
+    padding-block: .4rem;
+  }
+
+  .user_btn {
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding-block: .4rem;
+    font-size: 1.4rem;
+
+    background-color: var(--bg-s);
+  }
+
+  .user_avatar {
+    width: 2.6rem;
+    height: 2.6rem;
+    margin-inline: -1rem .4rem;
+  }
+
+  .all_user_btn {
+    padding-inline: 1rem;
+  }
+
+  .layout_btn {
+    align-self: stretch;
+    margin-left: auto;
+    padding-inline: .8rem;
+    border-radius: 0;
+    background-color: transparent;
+
+    svg {
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+  }
+
+  .item_card {
+    padding: 1.2rem;
+    width: 100%;
+    height: 100%;
+    max-width: 26rem;
+    min-height: fit-content;
+
+    .item_title {
+      color: var(--fg-s);
+      font-weight: 500;
+      margin-bottom: 1rem;
+    }
+
+    .item_desc {
+      font-size: 1.4rem;
+      line-height: 1.3;
+    }
+
+    .assignee {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      color: var(--fg-s);
+      font-size: 1.4rem;
+
+      .user_avatar {
+        margin-inline: 0;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .main {
+    .user_avatar {
+      margin-inline: -.7rem .4rem;
+    }
+  }
+}

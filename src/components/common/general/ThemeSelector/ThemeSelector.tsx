@@ -57,9 +57,9 @@ const ThemeSelector = ({
           className={styles.popover}
         >
           <ItemList>
-            <Item primary="Light" icon={<SunIcon />} className={styles.item} selected={theme === "light"} disabled />
-            <Item primary="Dark" icon={<MoonIcon />} className={styles.item} selected={theme === "dark"} disabled />
-            <Item primary="System" icon={<ComputerIcon />} className={styles.item} selected={theme === "system"} />
+            <Item primary="Light" icon={<SunIcon />} scope="list" selected={theme === "light"} disabled />
+            <Item primary="Dark" icon={<MoonIcon />} scope="list" selected={theme === "dark"} disabled />
+            <Item primary="System" icon={<ComputerIcon />} scope="list" selected={theme === "system"} />
           </ItemList>
         </Popover>
       )}

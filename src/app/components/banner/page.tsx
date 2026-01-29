@@ -31,14 +31,31 @@ const page = () => {
           ))
         }
       </InfiniteScrollBanner>
-
-      <InfiniteScrollBanner className={styles.banner_vertical} direction="up">
+      <InfiniteScrollBanner className={styles.banner} direction="right">
         {
           bannerItems.map((item, idx) => (
             <li key={idx} style={{ contain: "content" }}>{item.render}</li>
           ))
         }
       </InfiniteScrollBanner>
+
+      <div style={{ display: "flex", gap: "2rem" }}>
+        <InfiniteScrollBanner className={styles.banner_vertical} direction="up">
+          {
+            bannerItems.map((item, idx) => (
+              <li key={idx} style={{ contain: "content" }}>{item.render}</li>
+            ))
+          }
+        </InfiniteScrollBanner>
+
+        <InfiniteScrollBanner className={styles.banner_vertical} direction="down">
+          {
+            bannerItems.map((item, idx) => (
+              <li key={idx} style={{ contain: "content" }}>{item.render}</li>
+            ))
+          }
+        </InfiniteScrollBanner>
+      </div>
     </main>
   );
 };
