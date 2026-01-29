@@ -3,7 +3,7 @@
 import { ComponentProps, ReactNode, useEffect, useEffectEvent, useState } from "react";
 
 import { useElementRef } from "@/lib/hooks/useElementRef";
-import { Button } from "@/lib/ui/elements/butttons";
+import { Button, Variant } from "@/lib/ui/elements/butttons";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
 import { LayoutPosition } from "@/lib/utils/dom.utils";
@@ -19,6 +19,7 @@ export interface DropdownProps extends ComponentProps<"div"> {
   dropdownClass?: string;
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
+  triggerVariant?: Variant;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }

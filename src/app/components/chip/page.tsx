@@ -17,6 +17,7 @@ const Page = () => {
       <PageSetup pageKey="chip" />
 
       <Chip label="Active" onRemove={handleRemove} />
+      <Chip color="gray" label="Testing" onRemove={handleRemove} />
       <Chip color="orange" label="Inactive" onRemove={handleRemove} />
       <Chip color="blue" label="Processing" onRemove={handleRemove} />
       <Chip color="red" label="Cancelled" onRemove={handleRemove} />

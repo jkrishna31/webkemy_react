@@ -1,8 +1,18 @@
 .item {
+  position: relative;
+
   flex-shrink: 0;
   min-width: 26rem;
   width: fit-content;
   border-radius: 1rem;
   background-color: var(--bg-t);
   border: .1rem solid var(--border-t);
+
+  transition-property: border;
+  transition-duration: .3s;
+  transition-timing-function: linear;
+
+  &[data-dragging-over="true"] {
+    border: .1rem solid var(--border-p);
+  }
 }

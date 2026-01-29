@@ -1,5 +1,5 @@
 .column {
-  height: fit-content;
+  height: 100%;
   max-height: calc(100vh - 4rem - var(--h-header));
   display: flex;
   flex-direction: column;
@@ -52,6 +52,7 @@
   flex: 1;
   width: 100%;
   overflow: auto;
+  scrollbar-width: thin;
 }
 
 .inner {
@@ -60,7 +61,7 @@
   gap: .8rem;
   flex: 1;
   width: 100%;
-  height: fit-content;
+  height: auto;
   padding: 0 .6rem;
 }
 

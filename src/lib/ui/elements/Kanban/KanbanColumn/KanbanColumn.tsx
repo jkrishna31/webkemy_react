@@ -15,6 +15,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./KanbanColumn.module.scss";
 
 export interface KanbanColProps extends ComponentProps<"div"> {
+  colKey?: string;
   layout?: "horizontal" | "vertical";
   color?: Color;
   name?: ReactNode;
@@ -26,7 +27,7 @@ export interface KanbanColProps extends ComponentProps<"div"> {
 }
 
 const KanbanColumn = ({
-  layout = "horizontal", color, name, count, header, footer, collapsed, onCollapseChange,
+  colKey, layout = "horizontal", color, name, count, header, footer, collapsed, onCollapseChange,
   children, className,
   ...restProps
 }: KanbanColProps) => {
@@ -36,6 +37,7 @@ const KanbanColumn = ({
 
   return (
     <div
+      data-col-key={colKey}
       data-layout={layout}
       data-collapsed={collapsed}
       className={classes(styles.column, layout && styles[layout], className)}

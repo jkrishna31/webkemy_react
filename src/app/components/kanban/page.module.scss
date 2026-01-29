@@ -1,13 +1,14 @@
 .main {
   padding-block: 2rem;
 
-  .users_list {
+  .controls {
     max-width: 100%;
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
     gap: .8rem;
-    overflow: auto;
     padding-block: .4rem;
+    max-width: 100%;
   }
 
   .user_btn {
@@ -16,7 +17,6 @@
     align-items: center;
     padding-block: .4rem;
     font-size: 1.4rem;
-
     background-color: var(--bg-s);
   }
 
@@ -43,6 +43,34 @@
     }
   }
 
+  .placeholder {
+    position: relative;
+    flex-shrink: 0;
+    border-radius: var(--br-pill);
+    border: .1rem solid var(--yellow-1);
+    background-color: var(--yellow-1-10);
+  }
+
+  .ph_item {
+    width: auto;
+    height: .6rem;
+
+    &[data-layout="vertical"] {
+      width: .6rem;
+      height: auto;
+    }
+  }
+
+  .ph_col {
+    width: .6rem;
+    height: auto;
+
+    &[data-layout="vertical"] {
+      width: auto;
+      height: .6rem;
+    }
+  }
+
   .item_card {
     padding: 1.2rem;
     width: 100%;
@@ -51,12 +79,12 @@
     min-height: fit-content;
 
     .item_title {
-      color: var(--fg-s);
       font-weight: 500;
       margin-bottom: 1rem;
     }
 
     .item_desc {
+      color: var(--fg-s);
       font-size: 1.4rem;
       line-height: 1.3;
     }
@@ -71,6 +99,25 @@
 
       .user_avatar {
         margin-inline: 0;
+      }
+    }
+
+    &[data-dragging="true"] {
+      opacity: .5;
+    }
+  }
+
+  .tags {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    margin-top: .8rem;
+
+    .tag {
+      border-radius: 5rem;
+
+      span {
+        padding-block: .2rem;
       }
     }
   }

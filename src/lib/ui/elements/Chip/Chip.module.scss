@@ -1,13 +1,16 @@
 .chip {
+  --chip-bg: var(--bg-t);
+  --chip-border: transparent;
+
   width: fit-content;
-  background-color: var(--bg-t);
+  background-color: var(--chip-bg);
   border-radius: .4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 1.4rem;
   padding-left: .7rem;
-  border: .1rem solid transparent;
+  border: .1rem solid var(--chip-border);
 
   &[data-removable="false"] {
     padding-inline: .7rem;
@@ -21,39 +24,76 @@
     overflow: hidden;
   }
 
+  &[data-color="gray"] {
+    --chip-border: var(--fg-s-alt);
+    --chip-bg: var(--gray-8-30);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--gray-8-50);
+    }
+  }
+
   &[data-color="red"] {
-    border-color: var(--red-4);
-    background-color: var(--red-1-10);
+    --chip-border: var(--red-4);
+    --chip-bg: var(--red-1-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--red-1-50);
+    }
   }
 
   &[data-color="orange"] {
-    border-color: var(--orange-2);
-    background-color: var(--orange-2-10);
+    --chip-border: var(--orange-2);
+    --chip-bg: var(--orange-2-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--orange-2-50);
+    }
   }
 
   &[data-color="green"] {
-    border-color: var(--green-1);
-    background-color: var(--green-1-10);
+    --chip-border: var(--green-1);
+    --chip-bg: var(--green-1-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--green-1-50);
+    }
   }
 
   &[data-color="blue"] {
-    border-color: var(--blue-1);
-    background-color: var(--blue-1-10);
+    --chip-border: var(--blue-1);
+    --chip-bg: var(--blue-1-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--blue-1-50);
+    }
   }
 
   &[data-color="yellow"] {
-    border-color: var(--yellow-1);
-    background-color: var(--yellow-1-10);
+    --chip-border: var(--yellow-1);
+    --chip-bg: var(--yellow-1-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--yellow-1-50);
+    }
   }
 
   &[data-color="purple"] {
-    border-color: var(--purple-1);
-    background-color: var(--purple-1-10);
+    --chip-border: var(--purple-1);
+    --chip-bg: var(--purple-1-10);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--purple-1-50);
+    }
   }
 
   &[data-color="pink"] {
-    border-color: var(--pink-1);
-    background-color: var(--pink-1-30);
+    --chip-border: var(--pink-1);
+    --chip-bg: var(--pink-1-30);
+
+    &[data-intensity="mid"] {
+      --chip-border: var(--pink-1-50);
+    }
   }
 }
 
