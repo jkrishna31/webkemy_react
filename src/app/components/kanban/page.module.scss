@@ -47,7 +47,7 @@
     position: relative;
     flex-shrink: 0;
     border-radius: var(--br-pill);
-    border: .1rem solid var(--yellow-1);
+    border: .1rem dashed var(--yellow-1);
     background-color: var(--yellow-1-10);
   }
 

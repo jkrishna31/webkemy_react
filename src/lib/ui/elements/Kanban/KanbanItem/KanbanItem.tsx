@@ -9,19 +9,19 @@ const resizers = ["b"];
 
 export interface KanbanItemProps extends ComponentProps<"div"> {
   itemKey?: string | number;
-  draggingOver?: boolean;
+  isDraggingOver?: boolean;
   layout?: "horizontal" | "vertical";
 }
 
 const KanbanItem = ({
-  itemKey, draggingOver, layout = "horizontal",
+  itemKey, isDraggingOver, layout = "horizontal",
   className, children,
   ...restProps
 }: KanbanItemProps) => {
   return (
     <Resizable
       data-item-key={itemKey}
-      data-dragging-over={draggingOver}
+      data-dragging-over={isDraggingOver}
       data-layout={layout}
       className={classes(styles.item, className)}
       // resizers={resizers}

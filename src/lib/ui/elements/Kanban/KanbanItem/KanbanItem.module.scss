@@ -12,7 +12,7 @@
   transition-duration: .3s;
   transition-timing-function: linear;
 
-  &[data-dragging-over="true"] {
-    border: .1rem solid var(--border-p);
-  }
+  // &[data-dragging-over="true"] {
+  //   border: .1rem solid var(--border-p);
+  // }
 }

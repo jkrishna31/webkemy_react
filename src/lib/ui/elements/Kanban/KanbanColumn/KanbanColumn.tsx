@@ -24,10 +24,11 @@ export interface KanbanColProps extends ComponentProps<"div"> {
   footer?: ReactNode | null;
   collapsed?: boolean;
   onCollapseChange?: (value: boolean) => void;
+  isDraggingOver?: boolean;
 }
 
 const KanbanColumn = ({
-  colKey, layout = "horizontal", color, name, count, header, footer, collapsed, onCollapseChange,
+  colKey, layout = "horizontal", color, name, count, header, footer, collapsed, onCollapseChange, isDraggingOver,
   children, className,
   ...restProps
 }: KanbanColProps) => {
@@ -40,7 +41,9 @@ const KanbanColumn = ({
       data-col-key={colKey}
       data-layout={layout}
       data-collapsed={collapsed}
+      data-dragging-over={isDraggingOver}
       className={classes(styles.column, layout && styles[layout], className)}
+      {...restProps}
     >
       {header !== null && (header ?? (
         <div

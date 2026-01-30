@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
 import { Color } from "@/lib/types/general.types";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Chip } from "@/lib/ui/elements/Chip";
@@ -357,21 +356,29 @@ const Page = () => {
   const [items, setItems] = useState(defaultItems);
 
   const [draggingCtx, setDraggingCtx] = useState<{
-    type?: "item" | "col", srcKey?: string; targetKey?: string; dir?: "before" | "after",
+    type?: "item" | "col",
+    srcKey?: string;
+    targetKey?: string;
+    targetColKey?: string;
+    dir?: "before" | "after";
   } | undefined>();
 
-  const timeoutRef = useRef<NodeJS.Timeout>(undefined);
+  const isDropped = useRef<boolean>(false);
 
   // todo:
   // columns (resize, reorder)
   // col item (reorder, transfer across col)
   // combined view
 
+  // todo: fix the flicker issue
+
   const getItems = (userId?: string, status?: string) => {
     return items.filter(item => (userId ? item.assigneeId === userId : true) && (status ? item.status === status : true));
   };
 
   const updateColsOrder = (srcKey: string, targetKey: string, dir: "before" | "after") => {
+    if (srcKey === targetKey) return;
+
     setColsOrder(currOrder => {
       const newOrder: string[] = [];
 
@@ -391,8 +398,10 @@ const Page = () => {
   };
 
   const updateItemsOrder = (srcKey: string, targetKey: string, dir: "before" | "after") => {
+    if (srcKey === targetKey) return;
+
     setItems(currItems => {
-      const newItems = [];
+      const newItems: any[] = [];
 
       const srcItem = currItems.find(item => item.id === srcKey);
       if (!srcItem) return currItems;
@@ -420,18 +429,9 @@ const Page = () => {
     }
   };
 
-  const clearDraggingTargetCtx = (delayed?: boolean) => {
-    clearTimeout(timeoutRef.current);
-    if (delayed) {
-      timeoutRef.current = setTimeout(() => {
-        setDraggingCtx(curr => ({ ...curr, targetKey: undefined }));
-      }, 300);
-    } else {
-      setDraggingCtx(curr => ({ ...curr, targetKey: undefined }));
-    }
-  };
-
   const handleDragStart = (e: React.DragEvent) => {
+    e.stopPropagation();
+
     let type: "col" | "item" = "item";
     let item = (e.target as HTMLElement).closest("[data-item-key]");
     if (!item) {
@@ -444,41 +444,90 @@ const Page = () => {
     }
   };
 
-  const handleDragOver = useThrottledCallback((e: React.DragEvent) => {
+  const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
 
-    const keyToSearch = draggingCtx?.type === "col" ? "data-col-key" : "data-item-key";
-    const item = (e.target as HTMLElement).closest(`[${keyToSearch}]`);
+    if (draggingCtx?.type === "col") {
+      const col = (e.target as HTMLElement).closest("[data-col-key]");
+      const colKey = col?.getAttribute("data-col-key") || undefined;
 
-    if (item) {
-      const itemKey = item.getAttribute(keyToSearch) || undefined;
+      if (!col) {
+        setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
+        return;
+      }
+
+      const colRect = col.getBoundingClientRect();
+      let dir: "before" | "after";
+
+      if (layout === "horizontal") {
+        if (colRect.left <= e.clientX && (colRect.left + colRect.width / 2) >= e.clientX) dir = "before";
+        else dir = "after";
+      } else {
+        if (colRect.top <= e.clientY && (colRect.top + colRect.height / 2) >= e.clientY) dir = "before";
+        else dir = "after";
+      }
+
+      setDraggingCtx(curr => ({ ...curr, dir, targetKey: undefined, targetColKey: colKey }));
+    } else {
+      const item = (e.target as HTMLElement).closest("[data-item-key]");
+      const itemKey = item?.getAttribute("data-item-key") || undefined;
+      const col = (e.target as HTMLElement).closest("[data-col-key]");
+      const colKey = col?.getAttribute("data-col-key") || undefined;
+
+      if (!item) {
+        const isPlaceholder = (e.target as HTMLElement).closest("[aria-placeholder]");
+        if (!isPlaceholder) setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
+        return;
+      }
+
       const itemRect = item.getBoundingClientRect();
       let dir: "before" | "after";
-      if (layout === "horizontal" && draggingCtx?.type === "item") {
+
+      if (layout === "horizontal") {
         if (itemRect.top <= e.clientY && (itemRect.top + itemRect.height / 2) >= e.clientY) dir = "before";
         else dir = "after";
       } else {
         if (itemRect.left <= e.clientX && (itemRect.left + itemRect.width / 2) >= e.clientX) dir = "before";
         else dir = "after";
       }
-      clearTimeout(timeoutRef.current);
-      setDraggingCtx(curr => ({ ...curr, targetKey: itemKey, dir }));
-    } else {
-      const isPlaceholder = (e.target as HTMLElement).closest("[aria-placeholder]");
-      if (!isPlaceholder) clearDraggingTargetCtx(true);
-    }
-  }, 150);
 
-  const handleDragEnd = () => {
-    handleDragOver.cancel();
-    if (draggingCtx?.srcKey && draggingCtx?.targetKey && draggingCtx?.dir) {
-      if (draggingCtx?.type === "col") {
-        updateColsOrder(draggingCtx.srcKey, draggingCtx.targetKey, draggingCtx.dir);
-      } else if (draggingCtx?.type === "item") {
+      setDraggingCtx(curr => ({ ...curr, targetKey: itemKey, dir, targetColKey: colKey }));
+    }
+  };
+
+  const handleDrop = () => {
+    if (!draggingCtx?.srcKey) return;
+
+    isDropped.current = true;
+
+    if (draggingCtx?.type === "col" && draggingCtx?.targetColKey && draggingCtx?.dir) {
+      updateColsOrder(draggingCtx.srcKey, draggingCtx.targetColKey, draggingCtx.dir);
+    } else if (draggingCtx?.type === "item") {
+      if (draggingCtx?.targetKey && draggingCtx?.dir) {
         updateItemsOrder(draggingCtx.srcKey, draggingCtx.targetKey, draggingCtx.dir);
+      } else if (draggingCtx?.targetColKey) {
+        const newItems: any[] = [];
+
+        const item = items.find(candidate => candidate.id === draggingCtx.srcKey);
+
+        for (let i = 0; i < items.length; i++) {
+          if (items[i].id === draggingCtx.srcKey) continue;
+          else newItems.push({ ...items[i] });
+        }
+        newItems.push({ ...item, status: draggingCtx.targetColKey });
+        setItems(newItems);
       }
     }
-    clearTimeout(timeoutRef.current);
+
+    setDraggingCtx(undefined);
+    isDropped.current = false;
+  };
+
+  const handleDragEnd = () => {
+    if (isDropped.current) {
+      isDropped.current = false;
+      return;
+    }
     setDraggingCtx(undefined);
   };
 
@@ -535,13 +584,15 @@ const Page = () => {
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
+        onDrop={handleDrop}
       >
         {
           colsOrder.map((colKey) => {
             const col = defaultCols[colKey];
             const colItems = getItems(selectedUser !== "all" ? selectedUser : undefined, colKey);
 
-            const isDraggingOverCol = draggingCtx?.type === "col" && draggingCtx?.targetKey === colKey && draggingCtx.srcKey !== draggingCtx.targetKey;
+            const isDraggingOverCol = draggingCtx?.type === "col" && draggingCtx?.targetColKey === colKey && draggingCtx.srcKey !== draggingCtx.targetColKey;
+            const isCollapsed = collapsedCols.includes(col.id);
 
             return (
               <Fragment key={col.id}>
@@ -553,9 +604,10 @@ const Page = () => {
                   color={col.color as Color}
                   name={col.name}
                   count={colItems.length ?? 0}
-                  collapsed={collapsedCols.includes(col.id)}
+                  collapsed={isCollapsed}
                   onCollapseChange={(value) => handleColCollapse(col.id, value)}
                   layout={layout}
+                  isDraggingOver={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isCollapsed)}
                 >
                   {
                     colItems.map((item) => {
@@ -568,7 +620,7 @@ const Page = () => {
                           )}
                           <KanbanItem
                             itemKey={item.id}
-                            draggingOver={isDraggingOverItem}
+                            isDraggingOver={isDraggingOverItem}
                             className={styles.item}
                           >
                             <div className={styles.item_card} data-dragging={draggingCtx?.srcKey === item.id}>
@@ -596,6 +648,9 @@ const Page = () => {
                       );
                     })
                   }
+                  {!!colItems.length && draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && (
+                    <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                  )}
                 </KanbanColumn>
                 {(isDraggingOverCol && draggingCtx.dir === "after") && (
                   <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
