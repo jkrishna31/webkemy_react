@@ -19,17 +19,19 @@ const KanbanItem = ({
   ...restProps
 }: KanbanItemProps) => {
   return (
-    <Resizable
-      data-item-key={itemKey}
-      data-dragging-over={isDraggingOver}
-      data-layout={layout}
-      className={classes(styles.item, className)}
-      // resizers={resizers}
-      draggable
-      {...restProps}
-    >
-      {children}
-    </Resizable>
+    <>
+      <Resizable
+        data-item-key={itemKey}
+        data-dragging-over={isDraggingOver}
+        data-layout={layout}
+        className={classes(styles.item, className)}
+        // resizers={resizers}
+        draggable
+        {...restProps}
+      >
+        {children}
+      </Resizable>
+    </>
   );
 };
 

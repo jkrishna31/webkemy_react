@@ -12,7 +12,20 @@
   transition-duration: .3s;
   transition-timing-function: linear;
 
-  // &[data-dragging-over="true"] {
-  //   border: .1rem solid var(--border-p);
-  // }
+  .placeholder {
+    --ph-size: .8rem;
+
+    flex-shrink: 0;
+    border-radius: 1rem;
+    border: .1rem solid var(--blue-1);
+    background-color: var(--blue-1-10);
+
+    width: auto;
+    height: var(--ph-size);
+
+    &[data-layout="vertical"] {
+      width: var(--ph-size);
+      height: auto;
+    }
+  }
 }

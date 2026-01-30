@@ -87,19 +87,13 @@ const KanbanColumn = ({
                     setOpenActionMenu(false);
                   }}
                 />
-                {/* <Item primary="Move Left" icon={<ChevronLeftIcon />} scope="list" />
-                <Item primary="Move Right" icon={<ChevronRightIcon />} scope="list" />
-                <Item primary="Move to Start" icon={<ChevronsLeftIcon />} scope="list" />
-                <Item primary="Move to End" icon={<ChevronsRightIcon />} scope="list" />
-                <Item primary="Add Col Left" icon={<ColAddLeftIcon />} scope="list" />
-                <Item primary="Add Col Right" icon={<ColAddRightIcon />} scope="list" /> */}
               </ItemList>
             </Popover>
           )}
         </div>
       ))}
 
-      {!collapsed && (
+      {!collapsed && !!children && (
         <div className={styles.body}>
           <div className={styles.inner}>
             {children}

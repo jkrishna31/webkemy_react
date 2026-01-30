@@ -364,13 +364,19 @@ const Page = () => {
   } | undefined>();
 
   const isDropped = useRef<boolean>(false);
+  const kanbanRef = useRef<HTMLDivElement>(null);
 
   // todo:
   // columns (resize, reorder)
   // col item (reorder, transfer across col)
   // combined view
 
-  // todo: fix the flicker issue
+  const isInsideKanban = (e: React.DragEvent) => {
+    if (!kanbanRef.current) return;
+    const kanbanRect = kanbanRef.current.getBoundingClientRect();
+    if (kanbanRect.top < e.pageY && (kanbanRect.top + kanbanRect.height) > e.pageY && kanbanRect.left < e.pageX && (kanbanRect.left + kanbanRect.width) > e.pageX) return true;
+    return;
+  };
 
   const getItems = (userId?: string, status?: string) => {
     return items.filter(item => (userId ? item.assigneeId === userId : true) && (status ? item.status === status : true));
@@ -452,7 +458,9 @@ const Page = () => {
       const colKey = col?.getAttribute("data-col-key") || undefined;
 
       if (!col) {
-        setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
+        if (!isInsideKanban(e)) {
+          setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
+        }
         return;
       }
 
@@ -475,8 +483,9 @@ const Page = () => {
       const colKey = col?.getAttribute("data-col-key") || undefined;
 
       if (!item) {
-        const isPlaceholder = (e.target as HTMLElement).closest("[aria-placeholder]");
-        if (!isPlaceholder) setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
+        if (colKey !== draggingCtx?.targetColKey) {
+          setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
+        }
         return;
       }
 
@@ -531,6 +540,11 @@ const Page = () => {
     setDraggingCtx(undefined);
   };
 
+  const handleDragLeave = (e: React.DragEvent) => {
+    if (isInsideKanban(e)) return;
+    setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
+  };
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="kanban" />
@@ -580,11 +594,13 @@ const Page = () => {
       </div>
 
       <Kanban
+        ref={kanbanRef}
         layout={layout}
         onDragStart={handleDragStart}
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
         onDrop={handleDrop}
+        onDragLeave={handleDragLeave}
       >
         {
           colsOrder.map((colKey) => {
@@ -608,49 +624,56 @@ const Page = () => {
                   onCollapseChange={(value) => handleColCollapse(col.id, value)}
                   layout={layout}
                   isDraggingOver={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isCollapsed)}
+                  className={styles.column}
+                  data-dragging={draggingCtx?.srcKey === col.id}
                 >
                   {
-                    colItems.map((item) => {
-                      const isDraggingOverItem = draggingCtx?.type === "item" && draggingCtx?.targetKey === item.id && draggingCtx?.srcKey !== draggingCtx?.targetKey;
+                    colItems.length ? (
+                      <>
+                        {colItems.map((item) => {
+                          const isDraggingOverItem = draggingCtx?.type === "item" && draggingCtx?.targetKey === item.id && draggingCtx?.srcKey !== draggingCtx?.targetKey;
 
-                      return (
-                        <Fragment key={item.id}>
-                          {(isDraggingOverItem && draggingCtx.dir === "before") && (
-                            <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
-                          )}
-                          <KanbanItem
-                            itemKey={item.id}
-                            isDraggingOver={isDraggingOverItem}
-                            className={styles.item}
-                          >
-                            <div className={styles.item_card} data-dragging={draggingCtx?.srcKey === item.id}>
-                              <h4 className={styles.item_title}>{item.name}</h4>
-                              <p className={styles.item_desc}>{item.desc}</p>
-                              <div className={styles.tags}>
-                                {item.tags.map(tag => (
-                                  <Chip key={tag} label={tag} color={defaultTags[tag]} intensity="mid" className={styles.tag} />
-                                ))}
-                              </div>
-                              {selectedUser === "all" && (
-                                <div className={styles.assignee}>
-                                  <Avatar className={styles.user_avatar}>
-                                    <Image src={defaultUsers[item.assigneeId].profile} alt={defaultUsers[item.assigneeId].name} width={34} height={34} />
-                                  </Avatar>
-                                  <p>{defaultUsers[item.assigneeId].name}</p>
-                                </div>
+                          return (
+                            <Fragment key={item.id}>
+                              {(isDraggingOverItem && draggingCtx.dir === "before") && (
+                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
                               )}
-                            </div>
-                          </KanbanItem>
-                          {(isDraggingOverItem && draggingCtx.dir === "after") && (
-                            <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
-                          )}
-                        </Fragment>
-                      );
-                    })
+                              <KanbanItem
+                                layout={layout}
+                                itemKey={item.id}
+                                isDraggingOver={isDraggingOverItem}
+                                className={styles.item}
+                              >
+                                <div className={styles.item_card} data-dragging={draggingCtx?.srcKey === item.id}>
+                                  <h4 className={styles.item_title}>{item.name}</h4>
+                                  <p className={styles.item_desc}>{item.desc}</p>
+                                  <div className={styles.tags}>
+                                    {item.tags.map(tag => (
+                                      <Chip key={tag} label={tag} color={defaultTags[tag]} intensity="mid" className={styles.tag} />
+                                    ))}
+                                  </div>
+                                  {selectedUser === "all" && (
+                                    <div className={styles.assignee}>
+                                      <Avatar className={styles.user_avatar}>
+                                        <Image src={defaultUsers[item.assigneeId].profile} alt={defaultUsers[item.assigneeId].name} width={34} height={34} />
+                                      </Avatar>
+                                      <p>{defaultUsers[item.assigneeId].name}</p>
+                                    </div>
+                                  )}
+                                </div>
+                              </KanbanItem>
+                              {(isDraggingOverItem && draggingCtx.dir === "after") && (
+                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                              )}
+                            </Fragment>
+                          );
+                        })}
+                        {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && (
+                          <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                        )}
+                      </>
+                    ) : null
                   }
-                  {!!colItems.length && draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && (
-                    <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
-                  )}
                 </KanbanColumn>
                 {(isDraggingOverCol && draggingCtx.dir === "after") && (
                   <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
