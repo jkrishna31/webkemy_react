@@ -4,12 +4,12 @@ export function useElementRef<T extends Element>() {
   const ref = useRef<T>(null);
   const [element, setElement] = useState<T | null>(null);
 
-  const updsateElement = useEffectEvent(() => {
+  const updateElement = useEffectEvent(() => {
     setElement(ref.current);
     return () => setElement(null);
   });
 
-  useEffect(updsateElement);
+  useEffect(updateElement);
 
   return { ref, element };
 }

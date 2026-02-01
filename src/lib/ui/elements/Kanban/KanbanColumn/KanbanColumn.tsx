@@ -8,6 +8,8 @@ import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
+import ChevronsDownUpIcon from "@/lib/ui/svgs/icons/ChevronsDownUpIcon";
+import ChevronsUpDownIcon from "@/lib/ui/svgs/icons/ChevronsUpDownIcon";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import MenuCollapseIcon from "@/lib/ui/svgs/icons/MenuCollapseIcon";
 import { classes } from "@/lib/utils/style.utils";
@@ -59,6 +61,7 @@ const KanbanColumn = ({
             onClick={() => onCollapseChange?.(!collapsed)}
           >
             <ChevronLeftIcon />
+            {/* {collapsed ? <ChevronsUpDownIcon /> : <ChevronsDownUpIcon />} */}
           </Button>
 
           <Button

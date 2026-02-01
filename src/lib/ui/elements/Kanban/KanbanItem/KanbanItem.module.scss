@@ -8,9 +8,14 @@
   background-color: var(--bg-t);
   border: .1rem solid var(--border-t);
 
-  transition-property: border;
+  transition-property: border, background;
   transition-duration: .3s;
   transition-timing-function: linear;
+
+  &:hover {
+    border-color: var(--border-p);
+    background: var(--bg-s);
+  }
 
   .placeholder {
     --ph-size: .8rem;

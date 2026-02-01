@@ -1,24 +1,12 @@
+// <!-- Icon from Meteor Icons by zkreations - https://github.com/zkreations/icons/blob/main/LICENSE -->
+// <!-- Icon from Mage Icons by MageIcons - https://github.com/Mage-Icons/mage-icons/blob/main/License.txt -->
+
 import { SVGProps } from "@/lib/types/prop.types";
 
 const ChevronDownIcon = (props: SVGProps) => {
     return (
-        <svg
-            width="9.0015249"
-            height="5.0017877"
-            viewBox="0 0 9.001525 5.0017878"
-            fill="currentColor"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            stroke="none"
-            strokeWidth={0}
-            strokeMiterlimit={4}
-            strokeDasharray="none"
-            {...props}
-        >
-            <path
-                d="m 0.14689378,0.14689378 a 0.5,0.5 0 0 1 0.708,0 L 4.5008938,3.793894 l 3.646,-3.64700022 a 0.5006316,0.5006316 0 0 1 0.708,0.708 l -4,4.00000022 a 0.5,0.5 0 0 1 -0.708,0 L 0.14689378,0.85489378 a 0.5,0.5 0 0 1 0,-0.708 z"
-            />
-        </svg>
+        // <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" {...props}><path d="m4 8l8 8l8-8" /></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" {...props}><path d="m4 8.417l6.587 6.587a2.013 2.013 0 0 0 2.826 0L20 8.417" /></svg>
     );
 };
 

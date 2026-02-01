@@ -1,4 +1,4 @@
-import { ComponentProps } from "react";
+import { ComponentProps, ReactNode } from "react";
 
 import { Color } from "@/lib/types/general.types";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
@@ -10,7 +10,7 @@ export interface ChipProps extends ComponentProps<"div"> {
   intensity?: "full" | "mid" | "low";
   variant?: "solid" | "outlined" | "ghost";
   onRemove?: () => void;
-  label?: string;
+  label?: ReactNode;
   color?: Color;
 }
 
