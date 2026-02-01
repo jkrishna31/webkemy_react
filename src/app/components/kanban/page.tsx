@@ -549,9 +549,7 @@ const Page = () => {
     setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
   };
 
-  // bug: 
-  // showing item-level placeholder in when hovering over items of other users
-  // don't show item-level placeholder if the dragging item is last element and hovering on the same col
+  // bug: showing item-level placeholder in when hovering over items of other users
 
   return (
     <main className={styles.main}>
@@ -634,8 +632,8 @@ const Page = () => {
                       {(isColDraggingOverCol && draggingCtx.dir === "before") && (
                         <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></td>
                       )}
-                      <th data-col-key={colKey}>
-                        <div className={styles.header_cell} draggable data-collapsed={isCollapsed}>
+                      <th data-col-key={colKey} draggable data-dragging={draggingCtx?.srcKey === colKey}>
+                        <div className={styles.header_cell} data-collapsed={isCollapsed}>
                           {!isCollapsed && (
                             <>
                               {defaultCols[colKey].name}
@@ -649,9 +647,6 @@ const Page = () => {
                           >
                             <ChevronLeftIcon />
                           </Button>
-                          {/* <Button variant="quaternary" className={styles.col_controls_btn}>
-                            <EllipsisHIcon />
-                          </Button> */}
                         </div>
                       </th>
                       {(isColDraggingOverCol && draggingCtx.dir === "after") && (
@@ -706,7 +701,7 @@ const Page = () => {
                                   {isColCollapsed ? (
                                     <td
                                       key={colKey}
-                                      className={styles.col_td}
+                                      className={classes(styles.col_td, styles.collapsed_col)}
                                       data-col-key={colKey}
                                       data-collapsed={isColCollapsed}
                                       data-dragging-over={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
@@ -720,7 +715,6 @@ const Page = () => {
                                     <td
                                       data-col-key={colKey}
                                       className={styles.col_td}
-                                    // data-dragging-over={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
                                     >
                                       <div className={styles.column_cell}>
                                         {colItems.map(item => {
@@ -754,7 +748,7 @@ const Page = () => {
                                           );
                                         })}
                                       </div>
-                                      {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === colKey && isDraggingItemBelongsThisUser && (
+                                      {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === colKey && isDraggingItemBelongsThisUser && !colItems.find(item => item.id === draggingCtx.srcKey) && (
                                         <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
                                       )}
                                     </td>
@@ -851,7 +845,7 @@ const Page = () => {
                               </Fragment>
                             );
                           })}
-                          {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && (
+                          {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && !colItems.find(item => item.id === draggingCtx.srcKey) && (
                             <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
                           )}
                         </>
