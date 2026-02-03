@@ -246,6 +246,101 @@ const Page = () => {
     ));
   };
 
+  // ["name", "dob", "status", "contact", "rating", "peers", "address", "startDate"]
+  const fields = {
+    name: (rowData: any, depth: number) => {
+      return (
+        <div
+          style={{ display: "flex", alignItems: "center", gap: ".8rem", paddingLeft: `${depth * 2}rem` }}
+        >
+          <div style={{ position: "relative" }}>
+            <Avatar>
+              <Image
+                src={rowData.profile ?? ""} alt={rowData.name} width={40} height={40}
+                style={{ width: "2.6rem", height: "2.6rem" }}
+              />
+            </Avatar>
+            <Badge color={statusColorMap[rowData.status!]} float="br" style={{ transform: "translate3d(7%, 7%, 0)" }} />
+          </div>
+          <div>
+            <p style={{ fontWeight: 500 }}>{rowData.name}</p>
+            <p style={{ color: "var(--fg-s)" }}>{rowData.role}</p>
+          </div>
+        </div>
+      );
+    },
+    dob: (rowData: any) => {
+      return (
+        <>
+          {formatDate(rowData.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{new Date().getUTCFullYear() - new Date(rowData.dob).getUTCFullYear()}{" Years"}{")"}</span>
+        </>
+      );
+    },
+    status: (rowData: any) => {
+      return (
+        <Chip
+          color={statusColorMap[rowData.status]}
+          style={{
+            textTransform: "capitalize",
+            borderRadius: "var(--br-pill)",
+            // paddingLeft: ".4rem"
+          }}
+        >
+          {rowData.status}
+        </Chip>
+      );
+    },
+    contact: (rowData: any) => {
+      return (
+        <>
+          {!!rowData.phone && (
+            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+              {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+              <a href={`tel:${rowData.phone}`} style={{ color: "var(--blue-1)" }}>{rowData.phone}</a>
+            </p>
+          )}
+          {!!rowData.email && (
+            <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
+              {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
+              <a href={`mailto:${rowData.email}`} style={{ color: "var(--blue-1)" }}>{rowData.email ?? "N/A"}</a>
+            </p>
+          )}
+        </>
+      );
+    },
+    rating: (rowData: any) => {
+      return (
+        <div style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
+          <Rate value={(rowData.rating ?? 0) / 5} className={styles.rate} readonly key={rowData.id} max={1} />
+          <p>{rowData.rating}</p>
+        </div>
+      );
+    },
+    peers: (rowData: any) => {
+      return rowData.peers?.length ? (
+        <AvatarList
+          expandable={false}
+          avatars={rowData.peers?.map((avatar: any) => (
+            {
+              id: avatar.name,
+              children: (
+                <Image src={avatar.profile} width={26} height={26} alt={avatar.name} style={{ width: "2.6rem", height: "2.6rem" }} />
+              )
+            }
+          ))}
+        />
+      ) : "N/A";
+    },
+    address: (rowData: any) => {
+      return (
+        <p style={{ minWidth: "20rem", whiteSpace: "wrap" }}>{rowData.address}</p>
+      );
+    },
+    startDate: (rowData: any) => {
+      return formatDate(rowData.startDate);
+    },
+  };
+
   const renderRow = (row: TreeItem, parent?: string, depth: number = 0) => {
     const isExpanded = expandedRows.includes(row.id);
     const isExpandable = !!row.children?.length;
@@ -266,7 +361,7 @@ const Page = () => {
               : undefined
           }
         >
-          <Table.Cell as="td" sticky="left">
+          <Table.Cell as="td" sticky="left" style={{ paddingRight: ".4rem" }}>
             <div
               style={{ display: "flex", alignItems: "center", gap: ".8rem" }}
             >
@@ -289,84 +384,14 @@ const Page = () => {
               )}
             </div>
           </Table.Cell>
-          <Table.Cell as="td">
-            <div
-              style={{ display: "flex", alignItems: "center", gap: ".8rem", paddingLeft: `${depth * 2}rem` }}
-            >
-              <div style={{ position: "relative" }}>
-                <Avatar>
-                  <Image
-                    src={rowData.profile ?? ""} alt={rowData.name} width={40} height={40}
-                    style={{ width: "2.6rem", height: "2.6rem" }}
-                  />
-                </Avatar>
-                <Badge color={statusColorMap[rowData.status!]} float="br" style={{ transform: "translate3d(7%, 7%, 0)" }} />
-              </div>
-              <div>
-                <p style={{ fontWeight: 500 }}>{rowData.name}</p>
-                <p style={{ color: "var(--fg-s)" }}>{rowData.role}</p>
-              </div>
-            </div>
-          </Table.Cell>
-          <Table.Cell as="td">
-            {formatDate(rowData.dob)} <span style={{ color: "var(--fg-s-alt)" }}>{"("}{new Date().getUTCFullYear() - new Date(rowData.dob).getUTCFullYear()}{" Years"}{")"}</span>
-          </Table.Cell>
-          <Table.Cell as="td">
-            <Chip
-              color={statusColorMap[rowData.status]}
-              style={{
-                textTransform: "capitalize",
-                borderRadius: "var(--br-pill)",
-                // paddingLeft: ".4rem"
-              }}
-            >
-              {rowData.status}
-            </Chip>
-          </Table.Cell>
-          <Table.Cell as="td">
-            <>
-              {!!rowData.phone && (
-                <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
-                  {/* <ContactIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-                  <a href={`tel:${rowData.phone}`} style={{ color: "var(--blue-1)" }}>{rowData.phone}</a>
-                </p>
-              )}
-              {!!rowData.email && (
-                <p style={{ display: "flex", alignItems: "center", gap: ".4rem" }}>
-                  {/* <EmailIcon style={{ width: "1.5rem", height: "1.5rem", color: "var(--fg-s)" }} /> */}
-                  <a href={`mailto:${rowData.email}`} style={{ color: "var(--blue-1)" }}>{rowData.email ?? "N/A"}</a>
-                </p>
-              )}
-            </>
-          </Table.Cell>
-          <Table.Cell as="td">
-            <div style={{ display: "flex", alignItems: "center", gap: ".6rem" }}>
-              <Rate value={(rowData.rating ?? 0) / 5} className={styles.rate} readonly key={rowData.id} max={1} />
-              <p>{rowData.rating}</p>
-            </div>
-          </Table.Cell>
-          <Table.Cell as="td">
-            <p style={{ minWidth: "20rem", whiteSpace: "wrap" }}>{rowData.address}</p>
-          </Table.Cell>
-          <Table.Cell as="td">
-            {rowData.peers?.length ? (
-              <AvatarList
-                expandable={false}
-                avatars={rowData.peers?.map((avatar: any) => (
-                  {
-                    id: avatar.name,
-                    children: (
-                      <Image src={avatar.profile} width={26} height={26} alt={avatar.name} style={{ width: "2.6rem", height: "2.6rem" }} />
-                    )
-                  }
-                ))}
-              />
-            ) : "N/A"}
-          </Table.Cell>
-          <Table.Cell as="td">
-            {formatDate(rowData.startDate)}
-          </Table.Cell>
-          <Table.Cell as="td" sticky="right">
+
+          {colsOrder.map((colKey) => (
+            <Table.Cell as="td" key={colKey}>
+              {(fields as any)[colKey](rowData, depth)}
+            </Table.Cell>
+          ))}
+
+          <Table.Cell as="td" sticky="right" style={{ paddingInline: "1rem" }}>
             <div className={styles.table_actions}>
               <Button variant="secondary" aria-label="Edit" title="Edit">
                 <EditIcon />

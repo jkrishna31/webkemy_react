@@ -185,12 +185,12 @@
   font-size: 1.4rem;
   color: var(--fg-p);
   background-color: var(--border-color);
-  border-bottom-left-radius: .8rem;
-  border-bottom-right-radius: .8rem;
+  border-bottom-left-radius: .6rem;
+  border-bottom-right-radius: .6rem;
   padding: .2rem .8rem .4rem .8rem;
   position: absolute;
   top: 0;
-  right: 1rem;
+  right: 1.2rem;
   animation: fade-in .5s cubic-bezier(0, 0, .2, 1) forwards .3s;
   transform: translate3d(0, -100%, 0);
 
@@ -229,6 +229,17 @@
     border-radius: 50%;
     background: radial-gradient(transparent, var(--presentation-bg), transparent, transparent, var(--presentation-bg), transparent, transparent, var(--presentation-bg), transparent, transparent, var(--presentation-bg), transparent, transparent);
 
-    transition: width .5s ease, height .5s ease;
+    transition-property: width, height;
+    transition-duration: .5s;
+    transition-timing-function: ease;
+
+    // animation: enlarge 1s ease;
+
+    // @keyframes enlarge {
+    //   from {
+    //     opacity: 0;
+    //     transform: translate3d(50%, -50%, 0) scale(.6);
+    //   }
+    // }
   }
 }

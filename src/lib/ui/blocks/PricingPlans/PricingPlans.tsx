@@ -26,7 +26,7 @@ const PricingPlans = ({
             billed={billed}
             color={
               plan.id === "pro" ?
-                "red" :
+                "blue" :
                 // plan.id === "genius" ?
                 //   "red" :
                 //   "green"
