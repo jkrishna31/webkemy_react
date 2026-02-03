@@ -38,7 +38,6 @@ export function useMultiLevelData<T>(payload: T[], options?: UseMultiLevelDataOp
 
         if (!orderOnly) {
           const _item = { ...item };
-          // delete _item[branch];
           _details[_item[id]] = _item;
         }
 

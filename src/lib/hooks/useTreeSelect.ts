@@ -1,11 +1,11 @@
-import { useCallback, useState } from "react";
+import { useState } from "react";
 
 export interface UseTreeSelectOptions<T> {
   id?: string;
   branch?: keyof T;
 }
 
-export function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
+export function useTreeSelect<T>(data?: T[], options?: UseTreeSelectOptions<T>) {
   const {
     id = "id",
     branch = "children",
@@ -15,7 +15,7 @@ export function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
 
   const getTotalItems = (_data = data) => {
     let count = 0;
-    const stack: T[] = [..._data];
+    const stack: T[] = [...(_data ?? [])];
 
     while (stack.length) {
       const node: any = stack.pop();
@@ -28,7 +28,8 @@ export function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
   };
 
   const findByKey = (key: string) => {
-    return (function _find(arr: T[]) {
+    return (function _find(arr?: T[]) {
+      if (!arr?.length) return;
       for (const item of arr) {
         const _item = item as any;
         if (_item[id] === key) return item;
@@ -53,7 +54,7 @@ export function useTreeSelect<T>(data: T[], options?: UseTreeSelectOptions<T>) {
         }
       };
 
-      const deepSelect = (arr: T[]) => {
+      const deepSelect = (arr?: T[]) => {
         if (!arr?.length) return;
         for (const item of arr) {
           const itemId = (item as any)[id];

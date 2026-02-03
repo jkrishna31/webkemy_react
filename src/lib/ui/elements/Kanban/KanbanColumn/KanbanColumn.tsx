@@ -1,17 +1,10 @@
 import { ComponentProps, ReactNode, useState } from "react";
 
-import { useElementRef } from "@/lib/hooks/useElementRef";
 import { Color } from "@/lib/types/general.types";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/Chip";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemList } from "@/lib/ui/elements/ItemList";
-import { Popover } from "@/lib/ui/elements/Popover";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
-import ChevronsDownUpIcon from "@/lib/ui/svgs/icons/ChevronsDownUpIcon";
-import ChevronsUpDownIcon from "@/lib/ui/svgs/icons/ChevronsUpDownIcon";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
-import MenuCollapseIcon from "@/lib/ui/svgs/icons/MenuCollapseIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./KanbanColumn.module.scss";
@@ -34,7 +27,6 @@ const KanbanColumn = ({
   children, className,
   ...restProps
 }: KanbanColProps) => {
-  const { element: actionTriggerElem, ref: actionTriggerElemRef } = useElementRef<HTMLButtonElement>();
 
   const [openActionMenu, setOpenActionMenu] = useState(false);
 
@@ -61,38 +53,7 @@ const KanbanColumn = ({
             onClick={() => onCollapseChange?.(!collapsed)}
           >
             <ChevronLeftIcon />
-            {/* {collapsed ? <ChevronsUpDownIcon /> : <ChevronsDownUpIcon />} */}
           </Button>
-
-          <Button
-            ref={actionTriggerElemRef}
-            variant="quaternary"
-            className={styles.action_btn}
-            onClick={() => setOpenActionMenu(!openActionMenu)}
-          >
-            <EllipsisHIcon />
-          </Button>
-
-          {(openActionMenu && !!actionTriggerElem) && (
-            <Popover
-              anchor={actionTriggerElem}
-              onClose={() => setOpenActionMenu(!openActionMenu)}
-              animation="slide"
-              className={styles.action_popover}
-            >
-              <ItemList>
-                <Item
-                  primary={collapsed ? "Expand" : "Collapse"}
-                  icon={<MenuCollapseIcon />}
-                  scope="list"
-                  onClick={() => {
-                    onCollapseChange?.(!collapsed);
-                    setOpenActionMenu(false);
-                  }}
-                />
-              </ItemList>
-            </Popover>
-          )}
         </div>
       ))}
 

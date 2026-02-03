@@ -70,6 +70,9 @@ const CalendarHeader = ({
       label: "Toggle Overlapping Days",
       onClick: () => setField("showOutsideDays", !showOutsideDays),
     },
+    {
+      label: "Export (iCalendar)", disabled: true,
+    },
   ];
 
   const handleDateControls = (step: number) => {

@@ -31,11 +31,11 @@
 
 .horizontal[data-collapsed="true"] .header {
   writing-mode: vertical-lr;
-  padding-inline: 1rem 0;
+  padding-inline: 1rem .6rem;
 }
 
 .vertical[data-collapsed="true"] .header {
-  padding-inline: 1.2rem 1rem;
+  padding-inline: 1.2rem .2rem;
 }
 
 .name {

@@ -40,6 +40,10 @@
     &[data-color="purple"] {
       background: var(--purple-5);
     }
+
+    &[data-color="pink"] {
+      background: var(--pink-1);
+    }
   }
 
   &[data-variant="text"] {

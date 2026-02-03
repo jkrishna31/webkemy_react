@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { Fragment, RefObject, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
+import { kanbanData } from "@/data/dummy/kanbanData";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import { Color } from "@/lib/types/general.types";
 import { Avatar } from "@/lib/ui/elements/Avatar";
@@ -110,249 +111,6 @@ const defaultTags: { [key: string]: Color } = {
   UAT: "green",
 };
 
-const defaultItems = [
-  {
-    id: "t1",
-    name: "Set up project repository",
-    desc: "Initialize Git repository, add README, ESLint, and basic project structure.",
-    tags: ["Setup"],
-    status: "backlog",
-    assigneeId: "u1"
-  },
-  {
-    id: "t2",
-    name: "Define coding standards",
-    desc: "Document linting rules, naming conventions, and folder structure.",
-    tags: ["Docs"],
-    status: "backlog",
-    assigneeId: "u2"
-  },
-  {
-    id: "t3",
-    name: "Design Kanban board UI",
-    desc: "Create layout and component structure for the Kanban board.",
-    tags: ["UI"],
-    status: "inProgress",
-    assigneeId: "u3"
-  },
-  {
-    id: "t4",
-    name: "Implement column layout",
-    desc: "Build column containers and basic card styling.",
-    tags: ["Frontend"],
-    status: "inProgress",
-    assigneeId: "u1"
-  },
-  {
-    id: "t5",
-    name: "Create task data model",
-    desc: "Define task schema and validation rules.",
-    tags: ["Backend", "Model"],
-    status: "prRaised",
-    assigneeId: "u4"
-  },
-  {
-    id: "t6",
-    name: "Implement task CRUD APIs",
-    desc: "Build APIs for creating, updating, and deleting tasks.",
-    tags: ["Backend", "API"],
-    status: "prRaised",
-    assigneeId: "u2"
-  },
-  {
-    id: "t7",
-    name: "Review API implementation",
-    desc: "Perform code review and suggest improvements.",
-    tags: ["Review", "Backend"],
-    status: "qaTesting",
-    assigneeId: "u5"
-  },
-  {
-    id: "t8",
-    name: "Finalize project requirements",
-    desc: "Confirm functional and non-functional requirements.",
-    tags: ["Planning"],
-    status: "done",
-    assigneeId: "u5"
-  },
-  {
-    id: "t9",
-    name: "Integrate drag and drop",
-    desc: "Enable drag-and-drop functionality for task movement.",
-    tags: ["Frontend"],
-    status: "inProgress",
-    assigneeId: "u3"
-  },
-  {
-    id: "t10",
-    name: "Add task filters",
-    desc: "Filter tasks by status, assignee, and tags.",
-    tags: ["Frontend", "Feature"],
-    status: "backlog",
-    assigneeId: "u4"
-  },
-  {
-    id: "t11",
-    name: "Implement auth middleware",
-    desc: "Protect APIs using authentication middleware.",
-    tags: ["Security", "Backend"],
-    status: "prRaised",
-    assigneeId: "u1"
-  },
-  {
-    id: "t12",
-    name: "Fix drag flicker bug",
-    desc: "Resolve UI flicker while dragging task cards.",
-    tags: ["Bug", "UI"],
-    status: "qaTesting",
-    assigneeId: "u3"
-  },
-  {
-    id: "t13",
-    name: "Write unit tests",
-    desc: "Add unit tests for task reducers and services.",
-    tags: ["Testing"],
-    status: "inProgress",
-    assigneeId: "u2"
-  },
-  {
-    id: "t14",
-    name: "Improve task card accessibility",
-    desc: "Add ARIA roles and keyboard navigation.",
-    tags: ["A11y", "Frontend"],
-    status: "backlog",
-    assigneeId: "u1"
-  },
-  {
-    id: "t15",
-    name: "Refactor state management",
-    desc: "Simplify task state logic and remove duplication.",
-    tags: ["Frontend"],
-    status: "prRaised",
-    assigneeId: "u4"
-  },
-  {
-    id: "t16",
-    name: "QA regression testing",
-    desc: "Test all flows after recent merges.",
-    tags: ["QA", "Testing"],
-    status: "qaTesting",
-    assigneeId: "u5"
-  },
-  {
-    id: "t17",
-    name: "Deploy to staging",
-    desc: "Deploy latest build and verify environment variables.",
-    tags: ["Deployment", "DevOps"],
-    status: "done",
-    assigneeId: "u2"
-  },
-  {
-    id: "t18",
-    name: "Optimize bundle size",
-    desc: "Analyze and reduce JS bundle size.",
-    tags: ["Performance", "Frontend"],
-    status: "backlog",
-    assigneeId: "u3"
-  },
-  {
-    id: "t19",
-    name: "Add empty state UI",
-    desc: "Show helpful empty states for columns with no tasks.",
-    tags: ["UI", "UX"],
-    status: "inProgress",
-    assigneeId: "u4"
-  },
-  {
-    id: "t20",
-    name: "Fix API error handling",
-    desc: "Standardize error responses across APIs.",
-    tags: ["Bug", "Backend"],
-    status: "prRaised",
-    assigneeId: "u1"
-  },
-  {
-    id: "t21",
-    name: "Verify permissions logic",
-    desc: "Ensure users can only modify allowed tasks.",
-    tags: ["Security", "QA"],
-    status: "qaTesting",
-    assigneeId: "u2"
-  },
-  {
-    id: "t22",
-    name: "Release notes draft",
-    desc: "Prepare initial release notes for v1.0.",
-    tags: ["Docs", "Release"],
-    status: "backlog",
-    assigneeId: "u5"
-  },
-  {
-    id: "t23",
-    name: "Clean up console warnings",
-    desc: "Remove unused logs and fix warnings.",
-    tags: ["Frontend"],
-    status: "done",
-    assigneeId: "u3"
-  },
-  {
-    id: "t24",
-    name: "Improve API performance",
-    desc: "Add caching and optimize DB queries.",
-    tags: ["Performance", "Backend"],
-    status: "inProgress",
-    assigneeId: "u2"
-  },
-  {
-    id: "t25",
-    name: "Add confirmation modals",
-    desc: "Confirm destructive actions like delete.",
-    tags: ["UX", "Frontend"],
-    status: "backlog",
-    assigneeId: "u4"
-  },
-  {
-    id: "t26",
-    name: "Fix mobile layout issues",
-    desc: "Resolve overflow and spacing issues on small screens.",
-    tags: ["Responsive", "UI"],
-    status: "qaTesting",
-    assigneeId: "u1"
-  },
-  {
-    id: "t27",
-    name: "Finalize UI polish",
-    desc: "Spacing, colors, and hover state refinements.",
-    tags: ["UI"],
-    status: "prRaised",
-    assigneeId: "u3"
-  },
-  {
-    id: "t28",
-    name: "Set up monitoring",
-    desc: "Add basic logging and error monitoring.",
-    tags: ["Monitoring", "DevOps"],
-    status: "backlog",
-    assigneeId: "u5"
-  },
-  {
-    id: "t29",
-    name: "User acceptance testing",
-    desc: "Validate features with stakeholders.",
-    tags: ["UAT", "Testing"],
-    status: "qaTesting",
-    assigneeId: "u4"
-  },
-  {
-    id: "t30",
-    name: "Production deployment",
-    desc: "Deploy application to production environment.",
-    tags: ["Deployment", "Release"],
-    status: "done",
-    assigneeId: "u5"
-  }
-];
-
 const Page = () => {
   const [variant, setVariant] = useState<"separate" | "combined">("combined");
   const [layout, setLayout] = useState<"horizontal" | "vertical">("horizontal");
@@ -360,7 +118,7 @@ const Page = () => {
   const [collapsedCols, setCollapsedCols] = useState<string[]>([]);
   const [selectedUser, setSelectedUser] = useState<string>("all");
   const [showKanbanOptions, setShowKanbanOptions] = useState(false);
-  const [items, setItems] = useState(defaultItems);
+  const [items, setItems] = useState(kanbanData);
 
   const [draggingCtx, setDraggingCtx] = useState<{
     type?: "item" | "col",
@@ -481,19 +239,24 @@ const Page = () => {
 
       setDraggingCtx(curr => ({ ...curr, dir, targetKey: undefined, targetColKey: colKey }));
     } else {
-      const item = (e.target as HTMLElement).closest("[data-item-key]");
-      const itemKey = item?.getAttribute("data-item-key") || undefined;
-      const col = (e.target as HTMLElement).closest("[data-col-key]");
-      const colKey = col?.getAttribute("data-col-key") || undefined;
+      const itemElem = (e.target as HTMLElement).closest("[data-item-key]");
+      let itemKey = itemElem?.getAttribute("data-item-key") || undefined; // only if the user of both item is same
+      const colElem = (e.target as HTMLElement).closest("[data-col-key]");
+      const colKey = colElem?.getAttribute("data-col-key") || undefined;
 
-      if (!item) {
+      const dragOverItem = items.find(candidate => candidate.id === itemKey);
+      const draggingItem = items.find(candidate => candidate.id === draggingCtx?.srcKey);
+
+      if (variant === "combined" && dragOverItem?.assigneeId !== draggingItem?.assigneeId) itemKey = undefined;
+
+      if (!itemElem) {
         if (colKey !== draggingCtx?.targetColKey) {
           setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
         }
         return;
       }
 
-      const itemRect = item.getBoundingClientRect();
+      const itemRect = itemElem.getBoundingClientRect();
       let dir: "before" | "after";
 
       if (layout === "horizontal") {
@@ -548,8 +311,6 @@ const Page = () => {
     if (isInsideKanban(e)) return;
     setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
   };
-
-  // bug: showing item-level placeholder in when hovering over items of other users
 
   return (
     <main className={styles.main}>
@@ -673,7 +434,10 @@ const Page = () => {
                         className={styles.user_row}
                         data-collapsed={!isOpen}
                       >
-                        <td colSpan={5} className={styles.user_td}>
+                        <td
+                          colSpan={draggingCtx?.type === "col" ? 6 : 5}
+                          className={styles.user_td}
+                        >
                           <div className={styles.user_cell}>
                             <div className={styles.user_details}>
                               <ChevronDownIcon />
@@ -715,6 +479,7 @@ const Page = () => {
                                     <td
                                       data-col-key={colKey}
                                       className={styles.col_td}
+                                      data-dragging-over={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
                                     >
                                       <div className={styles.column_cell}>
                                         {colItems.map(item => {
