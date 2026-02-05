@@ -1,6 +1,6 @@
 import { useEffect, useEffectEvent, useRef } from "react";
 
-export default function useMediaStream(msConstraints?: MediaStreamConstraints) {
+export function useMediaStream(msConstraints?: MediaStreamConstraints) {
   // get media stream
   const mediaStreamRef = useRef<MediaStream>(null);
   const mediaRecorderRef = useRef<MediaRecorder>(null);

@@ -15,11 +15,12 @@ const Page = () => {
   const renderImg = (style?: React.CSSProperties) => {
     return (
       <Image
-        src="https://images.unsplash.com/photo-1764069970723-eff3e12de883?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw3fHx8ZW58MHx8fHx8"
+        src="https://images.unsplash.com/photo-1499343162160-cd1441923dd3?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
         alt=""
         width={360}
         height={360}
         style={{ width: "100%", height: "100%", ...style }}
+        unoptimized
       />
     );
   };
@@ -40,7 +41,7 @@ const Page = () => {
           {renderImg({ filter: "hue-rotate(120deg)" })}
         </ComparatorItem>
         <ComparatorItem position="bottom_left" use="mask">
-          {renderImg({ filter: "invert(70%)" })}
+          {renderImg({ filter: "invert(100%)" })}
         </ComparatorItem>
         <ComparatorItem position="bottom_right" use="mask">
           {renderImg({ filter: "" })}
@@ -53,10 +54,10 @@ const Page = () => {
         onChange={setValue}
       >
         <ComparatorItem position="top_left" use="mask">
-          {renderImg({ filter: "grayscale(100%)" })}
+          {renderImg()}
         </ComparatorItem>
         <ComparatorItem position="top_right" use="mask">
-          {renderImg({ filter: "hue-rotate(120deg)" })}
+          {renderImg({ filter: "invert(100%)" })}
         </ComparatorItem>
       </Comparator>
 
@@ -66,7 +67,7 @@ const Page = () => {
         onChange={setValue}
       >
         <ComparatorItem position="top_left" use="mask">
-          {renderImg({ filter: "grayscale(100%)" })}
+          {renderImg()}
         </ComparatorItem>
         <ComparatorItem position="top_right" use="mask">
           {renderImg({ filter: "hue-rotate(120deg)" })}

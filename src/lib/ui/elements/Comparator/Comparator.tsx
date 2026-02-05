@@ -24,7 +24,9 @@ const Comparator = ({
       style={{ ...style, "--comparator-x": `${x}%`, "--comparator-y": `${y}%` } as React.CSSProperties}
       {...restProps}
     >
-      {children}
+      <div className={styles.inner}>
+        {children}
+      </div>
       <Slider2D
         value={value}
         onChange={onChange}

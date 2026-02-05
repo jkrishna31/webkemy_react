@@ -1,7 +1,11 @@
 .main {
+  padding-block: 2rem;
+  gap: 4rem;
 
   .comparator {
-    min-height: calc(100vh - var(--h-header) - 4rem);
     width: 100%;
+    max-width: 100rem;
+    height: auto;
+    object-fit: contain;
   }
 }

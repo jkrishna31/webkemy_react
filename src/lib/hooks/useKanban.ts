@@ -21,7 +21,7 @@ const isInsideKanban = (elem: HTMLElement, e: DragEvent) => {
   return;
 };
 
-export default function useKanban<T extends HTMLElement>(
+export function useKanban<T extends HTMLElement>(
   ref: RefObject<T | null>,
   options?: TOptions,
 ) {

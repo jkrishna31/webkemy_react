@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export default function useMediaDevices() {
+export function useMediaDevices() {
   const [devices, setDevices] = useState<Omit<MediaDeviceInfo, "toJSON">[]>([]);
 
   useEffect(() => {

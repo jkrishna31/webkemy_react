@@ -23,7 +23,7 @@ const setDragImage = (e: DragEvent, elem?: Node | null) => {
   }
 };
 
-export default function useTableColumn(
+export function useTableColumn(
   ref: RefObject<HTMLTableSectionElement | null>,
   options?: TOptions,
 ) {

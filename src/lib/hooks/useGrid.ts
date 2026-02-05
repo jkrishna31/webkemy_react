@@ -28,7 +28,7 @@ const normalizeGridLines = () => {
   // inc/dec [40px, 20px] from all items size
 };
 
-export default function useGrid(ref: RefObject<HTMLElement | null>, initialState?: TItems, options?: TOptions) {
+export function useGrid(ref: RefObject<HTMLElement | null>, initialState?: TItems, options?: TOptions) {
   const { step = "auto" } = options ?? {};
 
   const [items, setItems] = useState<TItems>(initialState ?? {});

@@ -6,7 +6,7 @@ import { Fragment, RefObject, useRef, useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { kanbanData } from "@/data/dummy/kanbanData";
 import { useAccordion } from "@/lib/hooks/useAccordion";
-import useKanban, { KanbanDragCtx } from "@/lib/hooks/useKanban";
+import { KanbanDragCtx, useKanban } from "@/lib/hooks/useKanban";
 import { Color } from "@/lib/types/general.types";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";

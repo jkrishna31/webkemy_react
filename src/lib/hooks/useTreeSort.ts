@@ -2,7 +2,7 @@ import { useCallback, useState } from "react";
 
 export type TTreeItem = { id: string; children?: TTreeItem[]; };
 
-export default function useTreeSort(data: TTreeItem[]) {
+export function useTreeSort(data: TTreeItem[]) {
   const [tree, setTree] = useState(data);
 
   const sort = useCallback((key: string, dir?: "+" | "-") => {
