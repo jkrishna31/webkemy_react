@@ -141,7 +141,7 @@ const TableHeader = ({
 
 
 export interface TableBody<T> extends ComponentProps<"tbody"> {
-  renderRow?: (row: T, parent?: string, depth?: number) => ReactNode;
+  renderRow?: (row: T, parent?: string[], depth?: number) => ReactNode;
   data?: T[];
 }
 
@@ -150,12 +150,12 @@ const TableBody = <T extends { id: string; children?: T[] }>({
   className, children,
   ...restProps
 }: TableBody<T>) => {
-  const renderRows = (rows?: T[], parent?: string, depth = 0) => {
+  const renderRows = (rows?: T[], parent: string[] = [], depth = 0) => {
     return rows?.map(row => {
       return (
         <Fragment key={row.id}>
           {renderRow?.(row, parent, depth)}
-          {renderRows(row.children, row.id, depth + 1)}
+          {renderRows(row.children, [...parent, row.id], depth + 1)}
         </Fragment>
       );
     });

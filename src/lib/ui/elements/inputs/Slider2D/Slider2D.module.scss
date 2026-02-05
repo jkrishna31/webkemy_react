@@ -1,6 +1,10 @@
 .wrapper {
   --x: 0;
   --y: 0;
+  --handle-width: 1.2rem;
+  --handle-height: 1.2rem;
+  --handle-width-half: calc(var(--handle-width) / 2);
+  --handle-height-half: calc(var(--handle-height) / 2);
 
   width: 20rem;
   height: 20rem;
@@ -22,19 +26,50 @@
   &:focus-within {
     border-color: var(--blue-6);
   }
+
+  .area_inner {
+    position: relative;
+    overflow: hidden;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .handle {
   position: absolute;
   top: 0;
   left: 0;
-  width: 1.2rem;
-  height: 1.2rem;
+  width: var(--handle-width);
+  height: var(--handle-height);
   border: .1rem solid var(--border-s);
   background: var(--fg-p);
   border-radius: .3rem;
   cursor: move;
   touch-action: none;
   user-select: none;
-  transform: translate3d(var(--x, 0), var(--y, 0), 0);
+  transform: translate3d(calc(var(--x) - var(--handle-width-half)), calc(var(--y) - var(--handle-height-half)), 0);
+}
+
+.crosshair_arm {
+  --ch-thickness: .1rem;
+  --ch-thickness-half: calc(var(--ch-thickness) / 2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--border-t);
+  touch-action: none;
+  user-select: none;
+}
+
+.x {
+  width: 100%;
+  height: var(--ch-thickness);
+  transform: translate3d(0, calc(var(--y) - var(--ch-thickness-half)), 0);
+}
+
+.y {
+  width: var(--ch-thickness);
+  height: 100%;
+  transform: translate3d(calc(var(--x) - var(--ch-thickness-half)), 0, 0);
 }

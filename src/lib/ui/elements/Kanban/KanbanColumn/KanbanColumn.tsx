@@ -4,7 +4,6 @@ import { Color } from "@/lib/types/general.types";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Chip } from "@/lib/ui/elements/Chip";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
-import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./KanbanColumn.module.scss";

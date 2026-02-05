@@ -1,0 +1,7 @@
+.main {
+
+  .comparator {
+    min-height: calc(100vh - var(--h-header) - 4rem);
+    width: 100%;
+  }
+}

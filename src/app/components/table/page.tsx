@@ -24,6 +24,7 @@ import DeleteIcon from "@/lib/ui/svgs/icons/DeleteIcon";
 import EditIcon from "@/lib/ui/svgs/icons/EditIcon";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
+import { findRecursive } from "@/lib/utils/array.utils";
 import { formatDate } from "@/lib/utils/datetime.utils";
 import { deepClone } from "@/lib/utils/object.utils";
 
@@ -117,21 +118,13 @@ const Page = () => {
   };
 
   const updateRowsOrder = (src: string, target: string, to: "before" | "after" | "in") => {
-    const findItem = (_data?: TreeItem[]): TreeItem | undefined => {
-      if (!_data?.length) return;
-      for (let i = 0; i < _data.length; i++) {
-        if (_data[i].id === src) {
-          return _data[i];
-        } else {
-          const _srcdata = findItem(_data[i].children);
-          if (_srcdata) return _srcdata;
-        }
-      }
-    };
+    if (!rowsOrder?.length) return;
 
-    const srcData = findItem(rowsOrder);
-
+    const srcData = findRecursive(src, rowsOrder);
     if (!srcData) return;
+
+    const isTargetInsideSrc = findRecursive(target, [srcData]);
+    if (isTargetInsideSrc) return;
 
     const getNewData = (_data?: TreeItem[]) => {
       if (!_data?.length) return [];
@@ -221,7 +214,6 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    // update rowsOrder
     // if (!sort?.dir) setRowsOrder();
   }, [sort]);
 
@@ -246,7 +238,6 @@ const Page = () => {
     ));
   };
 
-  // ["name", "dob", "status", "contact", "rating", "peers", "address", "startDate"]
   const fields = {
     name: (rowData: any, depth: number) => {
       return (
@@ -341,20 +332,21 @@ const Page = () => {
     },
   };
 
-  const renderRow = (row: TreeItem, parent?: string, depth: number = 0) => {
+  const renderRow = (row: TreeItem, parent?: string[], depth: number = 0) => {
     const isExpanded = expandedRows.includes(row.id);
     const isExpandable = !!row.children?.length;
+    const isDragging = draggingRow === row.id || parent?.some(parentKey => parentKey === draggingRow);
     const hasDetails = ["6", "11", "14", "15"].includes(row.id);
     const rowData = data[row.id];
 
-    if (parent && !expandedRows.includes(parent)) return null;
+    if (parent?.length && !expandedRows.includes(parent[parent.length - 1])) return null;
 
     return (
       <>
         <tr
           draggable
           data-row={row.id}
-          data-dragging={draggingRow === row.id}
+          data-dragging={isDragging}
           data-drag-over={
             (draggingRow && draggingOverRow === row.id)
               ? rowDragTo
@@ -404,7 +396,7 @@ const Page = () => {
         </tr>
         {hasDetails && (
           <tr
-            data-dragging={draggingRow === row.id}
+            data-dragging={isDragging}
             aria-hidden={!isExpanded}
           >
             <Table.Cell as="td" colSpan={colsOrder.length + 2} style={{ padding: 0, border: "none" }}>

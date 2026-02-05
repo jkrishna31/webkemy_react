@@ -1,0 +1,12 @@
+.wrapper {
+  position: relative;
+
+  --comparator-x: 50%;
+  --comparator-y: 50%;
+
+  .slider {
+    background: transparent;
+    width: 100%;
+    height: 100%;
+  }
+}

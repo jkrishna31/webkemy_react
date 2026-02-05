@@ -1,11 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import React, { Fragment, RefObject, useRef, useState } from "react";
+import { Fragment, RefObject, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { kanbanData } from "@/data/dummy/kanbanData";
 import { useAccordion } from "@/lib/hooks/useAccordion";
+import useKanban, { KanbanDragCtx } from "@/lib/hooks/useKanban";
 import { Color } from "@/lib/types/general.types";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
@@ -120,25 +121,9 @@ const Page = () => {
   const [showKanbanOptions, setShowKanbanOptions] = useState(false);
   const [items, setItems] = useState(kanbanData);
 
-  const [draggingCtx, setDraggingCtx] = useState<{
-    type?: "item" | "col",
-    srcKey?: string;
-    targetKey?: string;
-    targetColKey?: string;
-    dir?: "before" | "after";
-  } | undefined>();
-
-  const isDropped = useRef<boolean>(false);
   const kanbanRef = useRef<HTMLDivElement | HTMLTableElement>(null);
 
   const { activeSections, updateAccordion } = useAccordion("multiple", Object.keys(defaultUsers));
-
-  const isInsideKanban = (e: React.DragEvent) => {
-    if (!kanbanRef.current) return;
-    const kanbanRect = kanbanRef.current.getBoundingClientRect();
-    if (kanbanRect.top < e.pageY && (kanbanRect.top + kanbanRect.height) > e.pageY && kanbanRect.left < e.pageX && (kanbanRect.left + kanbanRect.width) > e.pageX) return true;
-    return;
-  };
 
   const getItems = (userId?: string, status?: string, _items = items) => {
     return _items.filter(item => (userId ? item.assigneeId === userId : true) && (status ? item.status === status : true));
@@ -197,120 +182,42 @@ const Page = () => {
     }
   };
 
-  const handleDragStart = (e: React.DragEvent) => {
-    e.stopPropagation();
-
-    let type: "col" | "item" = "item";
-    let item = (e.target as HTMLElement).closest("[data-item-key]");
-    if (!item) {
-      type = "col";
-      item = (e.target as HTMLElement).closest("[data-col-key]");
-    }
-    const itemKey = item?.getAttribute(`data-${type}-key`);
-    if (itemKey) {
-      setDraggingCtx({ srcKey: itemKey, type });
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-
-    if (draggingCtx?.type === "col") {
-      const col = (e.target as HTMLElement).closest("[data-col-key]");
-      const colKey = col?.getAttribute("data-col-key") || undefined;
-
-      if (!col) {
-        if (!isInsideKanban(e)) {
-          setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
-        }
-        return;
-      }
-
-      const colRect = col.getBoundingClientRect();
-      let dir: "before" | "after";
-
-      if (layout === "horizontal") {
-        if (colRect.left <= e.clientX && (colRect.left + colRect.width / 2) >= e.clientX) dir = "before";
-        else dir = "after";
-      } else {
-        if (colRect.top <= e.clientY && (colRect.top + colRect.height / 2) >= e.clientY) dir = "before";
-        else dir = "after";
-      }
-
-      setDraggingCtx(curr => ({ ...curr, dir, targetKey: undefined, targetColKey: colKey }));
-    } else {
-      const itemElem = (e.target as HTMLElement).closest("[data-item-key]");
-      let itemKey = itemElem?.getAttribute("data-item-key") || undefined; // only if the user of both item is same
-      const colElem = (e.target as HTMLElement).closest("[data-col-key]");
-      const colKey = colElem?.getAttribute("data-col-key") || undefined;
-
-      const dragOverItem = items.find(candidate => candidate.id === itemKey);
-      const draggingItem = items.find(candidate => candidate.id === draggingCtx?.srcKey);
-
-      if (variant === "combined" && dragOverItem?.assigneeId !== draggingItem?.assigneeId) itemKey = undefined;
-
-      if (!itemElem) {
-        if (colKey !== draggingCtx?.targetColKey) {
-          setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: colKey }));
-        }
-        return;
-      }
-
-      const itemRect = itemElem.getBoundingClientRect();
-      let dir: "before" | "after";
-
-      if (layout === "horizontal") {
-        if (itemRect.top <= e.clientY && (itemRect.top + itemRect.height / 2) >= e.clientY) dir = "before";
-        else dir = "after";
-      } else {
-        if (itemRect.left <= e.clientX && (itemRect.left + itemRect.width / 2) >= e.clientX) dir = "before";
-        else dir = "after";
-      }
-
-      setDraggingCtx(curr => ({ ...curr, targetKey: itemKey, dir, targetColKey: colKey }));
-    }
-  };
-
-  const handleDrop = () => {
-    if (!draggingCtx?.srcKey) return;
-
-    isDropped.current = true;
-
-    if (draggingCtx?.type === "col" && draggingCtx?.targetColKey && draggingCtx?.dir) {
-      updateColsOrder(draggingCtx.srcKey, draggingCtx.targetColKey, draggingCtx.dir);
-    } else if (draggingCtx?.type === "item") {
-      if (draggingCtx?.targetKey && draggingCtx?.dir) {
-        updateItemsOrder(draggingCtx.srcKey, draggingCtx.targetKey, draggingCtx.dir);
-      } else if (draggingCtx?.targetColKey) {
+  const handleDrop = (_: DragEvent, dragCtx: KanbanDragCtx) => {
+    if (!dragCtx.src) return;
+    if (dragCtx?.dragging === "col" && dragCtx?.targetCol && dragCtx?.to) {
+      updateColsOrder(dragCtx.src, dragCtx.targetCol, dragCtx.to);
+    } else if (dragCtx?.dragging === "item") {
+      if (dragCtx?.target && dragCtx?.to) {
+        updateItemsOrder(dragCtx.src, dragCtx.target, dragCtx.to);
+      } else if (dragCtx?.targetCol) {
         const newItems: any[] = [];
 
-        const item = items.find(candidate => candidate.id === draggingCtx.srcKey);
+        const item = items.find(candidate => candidate.id === dragCtx.src);
 
         for (let i = 0; i < items.length; i++) {
-          if (items[i].id === draggingCtx.srcKey) continue;
+          if (items[i].id === dragCtx.src) continue;
           else newItems.push({ ...items[i] });
         }
-        newItems.push({ ...item, status: draggingCtx.targetColKey });
+        newItems.push({ ...item, status: dragCtx.targetCol });
         setItems(newItems);
       }
     }
-
-    setDraggingCtx(undefined);
-    isDropped.current = false;
   };
 
-  const handleDragEnd = () => {
-    if (isDropped.current) {
-      isDropped.current = false;
-      return;
-    }
-    setDraggingCtx(undefined);
+  const isValidTarget = (targetKey: string, dragCtx?: KanbanDragCtx) => {
+    const dragOverItem = items?.find(candidate => candidate.id === targetKey);
+    const draggingItem = items?.find(candidate => candidate.id === dragCtx?.src);
+    if (dragOverItem?.assigneeId !== draggingItem?.assigneeId) return false;
+    return true;
   };
 
-  const handleDragLeave = (e: React.DragEvent) => {
-    if (isInsideKanban(e)) return;
-    setDraggingCtx(curr => ({ ...curr, targetKey: undefined, targetColKey: undefined }));
-  };
+  const { dragSrc, dragTarget, dragTargetCol, dragTo, dragging } = useKanban(
+    kanbanRef, {
+    layout,
+    variant,
+    onDrop: handleDrop,
+    isValidTarget,
+  });
 
   return (
     <main className={styles.main}>
@@ -374,26 +281,21 @@ const Page = () => {
         <div className={styles.table_wrapper}>
           <table
             ref={kanbanRef as RefObject<HTMLTableElement>}
-            onDragStart={handleDragStart}
-            onDragOver={handleDragOver}
-            onDragEnd={handleDragEnd}
-            onDrop={handleDrop}
-            onDragLeave={handleDragLeave}
             className={styles.table}
           >
             <thead>
               <tr>
                 {colsOrder.map(colKey => {
                   const colItems = getItems(undefined, colKey);
-                  const isColDraggingOverCol = draggingCtx?.type === "col" && draggingCtx?.targetColKey === colKey && draggingCtx.srcKey !== draggingCtx.targetColKey;
+                  const isColDraggingOverCol = dragging === "col" && dragTargetCol === colKey && dragSrc !== dragTargetCol;
                   const isCollapsed = collapsedCols.includes(colKey);
 
                   return (
                     <Fragment key={colKey}>
-                      {(isColDraggingOverCol && draggingCtx.dir === "before") && (
-                        <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></td>
+                      {(isColDraggingOverCol && dragTo === "before") && (
+                        <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></td>
                       )}
-                      <th data-col-key={colKey} draggable data-dragging={draggingCtx?.srcKey === colKey}>
+                      <th data-col-key={colKey} draggable data-dragging={dragSrc === colKey}>
                         <div className={styles.header_cell} data-collapsed={isCollapsed}>
                           {!isCollapsed && (
                             <>
@@ -410,8 +312,8 @@ const Page = () => {
                           </Button>
                         </div>
                       </th>
-                      {(isColDraggingOverCol && draggingCtx.dir === "after") && (
-                        <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></td>
+                      {(isColDraggingOverCol && dragTo === "after") && (
+                        <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></td>
                       )}
                     </Fragment>
                   );
@@ -425,7 +327,7 @@ const Page = () => {
                   const userItems = getItems(userId);
 
                   const isOpen = activeSections.includes(userId);
-                  const isDraggingItemBelongsThisUser = userItems.find(item => item.id === draggingCtx?.srcKey);
+                  const isDraggingItemBelongsThisUser = userItems.find(item => item.id === dragSrc);
 
                   return (
                     <Fragment key={userId}>
@@ -435,7 +337,7 @@ const Page = () => {
                         data-collapsed={!isOpen}
                       >
                         <td
-                          colSpan={draggingCtx?.type === "col" ? 6 : 5}
+                          colSpan={dragging === "col" ? 6 : 5}
                           className={styles.user_td}
                         >
                           <div className={styles.user_cell}>
@@ -455,12 +357,12 @@ const Page = () => {
                             colsOrder.map(colKey => {
                               const colItems = getItems(undefined, colKey, userItems);
                               const isColCollapsed = collapsedCols.includes(colKey);
-                              const isColDraggingOverCol = draggingCtx?.type === "col" && draggingCtx?.targetColKey === colKey && draggingCtx.srcKey !== draggingCtx.targetColKey;
+                              const isColDraggingOverCol = dragging === "col" && dragTargetCol === colKey && dragSrc !== dragTargetCol;
 
                               return (
                                 <Fragment key={colKey}>
-                                  {(isColDraggingOverCol && draggingCtx.dir === "before") && (
-                                    <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></td>
+                                  {(isColDraggingOverCol && dragTo === "before") && (
+                                    <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></td>
                                   )}
                                   {isColCollapsed ? (
                                     <td
@@ -468,7 +370,7 @@ const Page = () => {
                                       className={classes(styles.col_td, styles.collapsed_col)}
                                       data-col-key={colKey}
                                       data-collapsed={isColCollapsed}
-                                      data-dragging-over={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
+                                      data-dragging-over={dragging === "item" && dragTargetCol === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
                                     >
                                       <div className={styles.collapsed_details}>
                                         <Chip className={styles.chip} color={defaultCols[colKey].color as Color} label={colItems.length} />
@@ -479,16 +381,16 @@ const Page = () => {
                                     <td
                                       data-col-key={colKey}
                                       className={styles.col_td}
-                                      data-dragging-over={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
+                                      data-dragging-over={dragging === "item" && dragTargetCol === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
                                     >
                                       <div className={styles.column_cell}>
                                         {colItems.map(item => {
-                                          const isDraggingOverItem = draggingCtx?.type === "item" && draggingCtx?.targetKey === item.id && draggingCtx?.srcKey !== draggingCtx?.targetKey;
+                                          const isDraggingOverItem = dragging === "item" && dragTarget === item.id && dragSrc !== dragTarget;
 
                                           return (
                                             <Fragment key={item.id}>
-                                              {(isDraggingOverItem && draggingCtx.dir === "before") && (
-                                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                                              {(isDraggingOverItem && dragTo === "before") && (
+                                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                                               )}
                                               <KanbanItem
                                                 layout={layout}
@@ -496,7 +398,7 @@ const Page = () => {
                                                 isDraggingOver={isDraggingOverItem}
                                                 className={styles.item}
                                               >
-                                                <div className={styles.item_card} data-dragging={draggingCtx?.srcKey === item.id}>
+                                                <div className={styles.item_card} data-dragging={dragSrc === item.id}>
                                                   <h4 className={styles.item_title}>{item.name}</h4>
                                                   <p className={styles.item_desc}>{item.desc}</p>
                                                   <div className={styles.tags}>
@@ -506,20 +408,20 @@ const Page = () => {
                                                   </div>
                                                 </div>
                                               </KanbanItem>
-                                              {(isDraggingOverItem && draggingCtx.dir === "after") && (
-                                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                                              {(isDraggingOverItem && dragTo === "after") && (
+                                                <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                                               )}
                                             </Fragment>
                                           );
                                         })}
                                       </div>
-                                      {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === colKey && isDraggingItemBelongsThisUser && !colItems.find(item => item.id === draggingCtx.srcKey) && (
-                                        <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                                      {dragging === "item" && !dragTarget && dragTargetCol === colKey && isDraggingItemBelongsThisUser && !colItems.find(item => item.id === dragSrc) && (
+                                        <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                                       )}
                                     </td>
                                   )}
-                                  {(isColDraggingOverCol && draggingCtx.dir === "after") && (
-                                    <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></td>
+                                  {(isColDraggingOverCol && dragTo === "after") && (
+                                    <td className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></td>
                                   )}
                                 </Fragment>
                               );
@@ -538,24 +440,19 @@ const Page = () => {
         <Kanban
           ref={kanbanRef}
           layout={layout}
-          onDragStart={handleDragStart}
-          onDragOver={handleDragOver}
-          onDragEnd={handleDragEnd}
-          onDrop={handleDrop}
-          onDragLeave={handleDragLeave}
         >
           {
             colsOrder.map((colKey) => {
               const col = defaultCols[colKey];
               const colItems = getItems(selectedUser !== "all" ? selectedUser : undefined, colKey);
 
-              const isDraggingOverCol = draggingCtx?.type === "col" && draggingCtx?.targetColKey === colKey && draggingCtx.srcKey !== draggingCtx.targetColKey;
+              const isDraggingOverCol = dragging === "col" && dragTargetCol === colKey && dragSrc !== dragTargetCol;
               const isCollapsed = collapsedCols.includes(col.id);
 
               return (
                 <Fragment key={col.id}>
-                  {(isDraggingOverCol && draggingCtx.dir === "before") && (
-                    <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                  {(isDraggingOverCol && dragTo === "before") && (
+                    <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></div>
                   )}
                   <KanbanColumn
                     colKey={col.id}
@@ -565,20 +462,20 @@ const Page = () => {
                     collapsed={isCollapsed}
                     onCollapseChange={(value) => handleColCollapse(col.id, value)}
                     layout={layout}
-                    isDraggingOver={draggingCtx?.type === "item" && draggingCtx?.targetColKey === colKey && (!colItems.length || isCollapsed)}
+                    isDraggingOver={dragging === "item" && dragTargetCol === colKey && (!colItems.length || isCollapsed)}
                     className={styles.column}
-                    data-dragging={draggingCtx?.srcKey === col.id}
+                    data-dragging={dragSrc === col.id}
                   >
                     {
                       colItems.length ? (
                         <>
                           {colItems.map((item) => {
-                            const isDraggingOverItem = draggingCtx?.type === "item" && draggingCtx?.targetKey === item.id && draggingCtx?.srcKey !== draggingCtx?.targetKey;
+                            const isDraggingOverItem = dragging === "item" && dragTarget === item.id && dragSrc !== dragTarget;
 
                             return (
                               <Fragment key={item.id}>
-                                {(isDraggingOverItem && draggingCtx.dir === "before") && (
-                                  <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                                {(isDraggingOverItem && dragTo === "before") && (
+                                  <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                                 )}
                                 <KanbanItem
                                   layout={layout}
@@ -586,7 +483,7 @@ const Page = () => {
                                   isDraggingOver={isDraggingOverItem}
                                   className={styles.item}
                                 >
-                                  <div className={styles.item_card} data-dragging={draggingCtx?.srcKey === item.id}>
+                                  <div className={styles.item_card} data-dragging={dragSrc === item.id}>
                                     <h4 className={styles.item_title}>{item.name}</h4>
                                     <p className={styles.item_desc}>{item.desc}</p>
                                     <div className={styles.tags}>
@@ -604,21 +501,21 @@ const Page = () => {
                                     )}
                                   </div>
                                 </KanbanItem>
-                                {(isDraggingOverItem && draggingCtx.dir === "after") && (
-                                  <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                                {(isDraggingOverItem && dragTo === "after") && (
+                                  <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                                 )}
                               </Fragment>
                             );
                           })}
-                          {draggingCtx?.type === "item" && !draggingCtx?.targetKey && draggingCtx.targetColKey === col.id && !colItems.find(item => item.id === draggingCtx.srcKey) && (
-                            <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                          {dragging === "item" && !dragTarget && dragTargetCol === col.id && !colItems.find(item => item.id === dragSrc) && (
+                            <div className={classes(styles.placeholder, styles.ph_item)} aria-placeholder={dragSrc} data-layout={layout}></div>
                           )}
                         </>
                       ) : null
                     }
                   </KanbanColumn>
-                  {(isDraggingOverCol && draggingCtx.dir === "after") && (
-                    <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={draggingCtx.srcKey} data-layout={layout}></div>
+                  {(isDraggingOverCol && dragTo === "after") && (
+                    <div className={classes(styles.placeholder, styles.ph_col)} aria-placeholder={dragSrc} data-layout={layout}></div>
                   )}
                 </Fragment>
               );

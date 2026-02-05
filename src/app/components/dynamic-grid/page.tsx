@@ -1,5 +1,7 @@
 "use client";
 
+import { useRef } from "react";
+
 import { PageSetup } from "@/components/managers";
 import useGrid from "@/lib/hooks/useGrid";
 import { DynamicGrid, GridItem } from "@/lib/ui/elements/DynamicGrid";
@@ -7,7 +9,9 @@ import { DynamicGrid, GridItem } from "@/lib/ui/elements/DynamicGrid";
 import styles from "./page.module.scss";
 
 const Page = () => {
-  const { items, rows, cols, canMove, canResize, getResizers } = useGrid({
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const { items, rows, cols, canMove, canResize, getResizers } = useGrid(gridRef, {
     i1: { row: [4, 8], col: [1, 3] },
     i2: { row: [1, 7], col: [9, 12] },
     i3: { row: [4, 8], col: [3, 6] },
@@ -28,7 +32,10 @@ const Page = () => {
     <main>
       <PageSetup pageKey="dynamic-grid" />
 
-      <DynamicGrid className={styles.grid}>
+      <DynamicGrid
+        ref={gridRef}
+        className={styles.grid}
+      >
         <GridItem
           className={styles.grid_item}
           position={items.i1}

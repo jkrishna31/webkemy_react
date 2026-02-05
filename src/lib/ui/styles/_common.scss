@@ -51,6 +51,7 @@
 .skeleton[data-loading="true"] {
   position: relative;
   overflow: hidden;
+  cursor: progress;
 
   &::before,
   &::after {

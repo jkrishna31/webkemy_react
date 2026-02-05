@@ -11,10 +11,11 @@
   width: calc(var(--color-area-size) + 2.8rem + 2rem);
 
   .color_area {
+    --handle-width: 1.6rem;
+    --handle-height: 1.6rem;
+
     width: var(--color-area-size, 24rem);
     height: var(--color-area-size, 24rem);
-
-    // border-radius: 1.2rem;
 
     forced-color-adjust: none;
     background: linear-gradient(to top, black, transparent), linear-gradient(to right, rgb(255, 255, 255), transparent), hsl(var(--hue), 100%, 50%);
@@ -24,8 +25,6 @@
     border-width: .2rem;
     border-color: var(--light-p);
     border-radius: 50%;
-    width: 1.6rem;
-    height: 1.6rem;
     background-color: var(--active-hsl);
     box-shadow: 0 0 .1rem var(--shadow-s);
   }

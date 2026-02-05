@@ -10,12 +10,15 @@ import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Text } from "@/lib/ui/elements/Text";
 import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
+import AlignLeftIcon from "@/lib/ui/svgs/icons/AlignLeftIcon";
+import BackgroundColorIcon from "@/lib/ui/svgs/icons/BackgroundColorIcon";
 import BlockCautionIcon from "@/lib/ui/svgs/icons/BlockCautionIcon";
 import BlockCodeIcon from "@/lib/ui/svgs/icons/BlockCodeIcon";
 import BlockNoteIcon from "@/lib/ui/svgs/icons/BlockNoteIcon";
 import BlockquoteIcon from "@/lib/ui/svgs/icons/BlockquoteIcon";
 import BlockTipIcon from "@/lib/ui/svgs/icons/BlockTipIcon";
 import BoldIcon from "@/lib/ui/svgs/icons/BoldIcon";
+import ChecklistIcon from "@/lib/ui/svgs/icons/ChecklistIcon";
 import ColorPaletteIcon from "@/lib/ui/svgs/icons/ColorPaletteIcon";
 import CopyLinkIcon from "@/lib/ui/svgs/icons/CopyLinkIcon";
 import DeleteIcon from "@/lib/ui/svgs/icons/DeleteIcon";
@@ -27,7 +30,12 @@ import EmbedYoutubeIcon from "@/lib/ui/svgs/icons/EmbedYoutubeIcon";
 import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
 import FontIcon from "@/lib/ui/svgs/icons/FontIcon";
 import HashtagIcon from "@/lib/ui/svgs/icons/HashtagIcon";
-import HeadingIcon from "@/lib/ui/svgs/icons/HeadingIcon";
+import Heading1Icon from "@/lib/ui/svgs/icons/Heading1Icon";
+import Heading2Icon from "@/lib/ui/svgs/icons/Heading2Icon";
+import Heading3Icon from "@/lib/ui/svgs/icons/Heading3Icon";
+import Heading4Icon from "@/lib/ui/svgs/icons/Heading4Icon";
+import Heading5Icon from "@/lib/ui/svgs/icons/Heading5Icon";
+import Heading6Icon from "@/lib/ui/svgs/icons/Heading6Icon";
 import HighlightertIcon from "@/lib/ui/svgs/icons/HighlightertIcon";
 import HyperlinkIcon from "@/lib/ui/svgs/icons/HyperlinkIcon";
 import ImageIcon from "@/lib/ui/svgs/icons/ImageIcon";
@@ -48,12 +56,12 @@ import PanelTopCloseIcon from "@/lib/ui/svgs/icons/PanelTopCloseIcon";
 import PilcrowIcon from "@/lib/ui/svgs/icons/PilcrowIcon";
 import RedoIcon from "@/lib/ui/svgs/icons/RedoIcon";
 import SparklesIcon from "@/lib/ui/svgs/icons/SparklesIcon";
-import SubHeadingIcon from "@/lib/ui/svgs/icons/SubHeadingIcon";
 import SubscriptIcon from "@/lib/ui/svgs/icons/SubscriptIcon";
 import SuperscriptIcon from "@/lib/ui/svgs/icons/SuperscriptIcon";
 import SwapIcon from "@/lib/ui/svgs/icons/SwapIcon";
 import TableIcon from "@/lib/ui/svgs/icons/TableIcon";
 import TextAlignCenterIcon from "@/lib/ui/svgs/icons/TextAlignCenterIcon";
+import TextAlignJustifyIcon from "@/lib/ui/svgs/icons/TextAlignJustifyIcon";
 import TextAlignLeftIcon from "@/lib/ui/svgs/icons/TextAlignLeftIcon";
 import TextAlignRightIcon from "@/lib/ui/svgs/icons/TextAlignRightIcon";
 import TextColorIcon from "@/lib/ui/svgs/icons/TextColorIcon";
@@ -88,12 +96,28 @@ const blockOptions = [
     className: styles.block_group,
     menu: [
       {
-        key: editorBlocks.HEADING, primary: "Heading",
-        icon: <HeadingIcon />,
+        key: "h1", primary: "Heading 1",
+        icon: <Heading1Icon />,
       },
       {
-        key: editorBlocks.SUB_HEADING, primary: "Sub Heading",
-        icon: <SubHeadingIcon />
+        key: editorBlocks.HEADING, primary: "Heading 2",
+        icon: <Heading2Icon />,
+      },
+      {
+        key: editorBlocks.SUB_HEADING, primary: "Heading 3",
+        icon: <Heading3Icon />
+      },
+      {
+        key: "h4", primary: "Heading 4",
+        icon: <Heading4Icon />,
+      },
+      {
+        key: "h5", primary: "Heading 5",
+        icon: <Heading5Icon />,
+      },
+      {
+        key: "h6", primary: "Heading 6",
+        icon: <Heading6Icon />,
       },
       {
         key: editorBlocks.PARA, primary: "Paragraph",
@@ -110,6 +134,10 @@ const blockOptions = [
       {
         key: editorBlocks.UNORDERED_LIST, primary: "Unordered List",
         icon: <UnorderedListIcon />
+      },
+      {
+        key: "checklist", primary: "Check List",
+        icon: <ChecklistIcon />
       },
       {
         key: editorBlocks.IMAGE, primary: "Image",
@@ -248,12 +276,18 @@ const toolOptions = [
       render: <HashtagIcon className={styles.icon} />
     },
     {
-      name: "Color", key: "color",
-      render: <ColorPaletteIcon className={styles.icon} />
-    },
-    {
       name: "Emoji", key: "emoji",
       render: <AddEmojiIcon className={styles.icon} />
+    },
+  ],
+  [
+    {
+      name: "Color", key: "color",
+      render: <TextColorIcon className={styles.icon} />
+    },
+    {
+      name: "Background", key: "background",
+      render: <BackgroundColorIcon className={styles.icon} />
     },
   ],
   [
@@ -268,12 +302,8 @@ const toolOptions = [
   ],
   [
     {
-      name: "Text", key: "text",
-      render: <TextIcon className={styles.icon} />,
-    },
-    {
-      name: "Text Color", key: "text_color",
-      render: <TextColorIcon className={styles.icon} />,
+      name: "Font", key: "font",
+      render: <FontIcon className={styles.icon} />,
     },
     {
       name: "Text Size", key: "text_size",
@@ -288,31 +318,27 @@ const toolOptions = [
       render: <LineHeightIcon className={styles.icon} />,
     },
     {
-      name: "Text Outline", key: "text_outline",
-      render: <TextOutlineIcon className={styles.icon} />,
-    },
-    {
-      name: "Text Formatting", key: "text_formatting",
-      render: <FontIcon className={styles.icon} />,
-    },
-    {
       name: "Letter Case", key: "letter_case",
       render: <LetterCaseIcon className={styles.icon} />,
     },
+    // {
+    //   name: "Letter Case Upper", key: "letter_case_upper",
+    //   render: <LetterCaseUpperIcon className={styles.icon} />,
+    // },
+    // {
+    //   name: "Letter Case Lower", key: "letter_case_lower",
+    //   render: <LetterCaseLowerIcon className={styles.icon} />,
+    // },
+    // {
+    //   name: "Letter Case Toggle", key: "letter_case_toggle",
+    //   render: <LetterCaseToggleIcon className={styles.icon} />,
+    // },
     {
-      name: "Letter Case Upper", key: "letter_case_upper",
-      render: <LetterCaseUpperIcon className={styles.icon} />,
+      name: "Text Stroke", key: "text_outline",
+      render: <TextOutlineIcon className={styles.icon} />,
     },
     {
-      name: "Letter Case Lower", key: "letter_case_lower",
-      render: <LetterCaseLowerIcon className={styles.icon} />,
-    },
-    {
-      name: "Letter Case Toggle", key: "letter_case_toggle",
-      render: <LetterCaseToggleIcon className={styles.icon} />,
-    },
-    {
-      name: "Text Formatting Clear", key: "text_formatting_clear",
+      name: "Remove Formatting", key: "text_formatting_clear",
       render: <TextFormattingRemoveIcon className={styles.icon} />,
     },
   ],
@@ -328,6 +354,10 @@ const toolOptions = [
     {
       name: "Align Right", key: "align_right",
       render: <TextAlignRightIcon className={styles.icon} />
+    },
+    {
+      name: "Justify", key: "align_justify",
+      render: <TextAlignJustifyIcon className={styles.icon} />
     },
   ],
   [
@@ -356,11 +386,11 @@ const convertTools = [
   [
     {
       name: "Heading", key: editorBlocks.HEADING,
-      render: <HeadingIcon className={styles.icon} />,
+      render: <Heading2Icon className={styles.icon} />,
     },
     {
       name: "Subheading", key: editorBlocks.SUB_HEADING,
-      render: <SubHeadingIcon className={styles.icon} />,
+      render: <Heading3Icon className={styles.icon} />,
     },
     {
       name: "Paragraph", key: editorBlocks.PARA,
@@ -494,6 +524,7 @@ const Page = () => {
             options={blockOptions}
           //  onSelect={handleBlockSelect}
           />
+
         </div>
         <Editor blocks={blocks} setBlocks={setBlocks} rootClass={styles.editor_wrapper}>
           <FloatBox
@@ -530,11 +561,11 @@ const Page = () => {
                 // <div className={styles.blocks_list}>
                 //     <Button
                 //         className={styles.tool_btn}
-                //         icon={<HeadingIcon className={styles.tool_icon} />}
+                //         icon={<Heading2Icon className={styles.tool_icon} />}
                 //     />
                 //     <Button
                 //         className={styles.tool_btn}
-                //         icon={<SubHeadingIcon className={styles.tool_icon} />}
+                //         icon={<Heading3Icon className={styles.tool_icon} />}
                 //     />
                 //     <Button
                 //         className={styles.tool_btn}

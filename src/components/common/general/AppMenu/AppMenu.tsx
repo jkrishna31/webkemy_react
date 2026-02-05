@@ -116,6 +116,12 @@ export const menuItems = [
                 primary: "Password Input",
                 icon: <PasswordInputIcon />,
             },
+            // {
+            //     key: "otp-input",
+            //     href: "/components/otp-input",
+            //     primary: "OTP Input",
+            //     icon: <HashtagIcon />,
+            // },
             {
                 key: "number-input",
                 href: "/components/number-input",
@@ -231,7 +237,6 @@ export const menuItems = [
                 href: "/components/dynamic-grid",
                 primary: "Dynamic Grid",
                 icon: <DynamicGridIcon />,
-                disabled: true,
             },
             {
                 key: "text",
@@ -343,10 +348,9 @@ export const menuItems = [
             },
             {
                 key: "comparator",
-                href: "#",
+                href: "/components/comparator",
                 primary: "Comparator",
                 icon: <CompareIcon />,
-                disabled: true,
             },
             {
                 key: "image-crop",
@@ -408,13 +412,13 @@ export const menuItems = [
                 primary: "Table",
                 icon: <TableIcon />,
             },
-            {
-                key: "data-table",
-                href: "#",
-                primary: "Data Table",
-                icon: <TableIcon />,
-                disabled: true,
-            },
+            // {
+            //     key: "data-table",
+            //     href: "#",
+            //     primary: "Data Table",
+            //     icon: <TableIcon />,
+            //     disabled: true,
+            // },
             {
                 key: "timeline",
                 href: "/components/timeline",
