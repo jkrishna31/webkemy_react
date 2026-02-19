@@ -1,4 +1,3 @@
-export { default as RenderBox } from "./RenderBox/RenderBox";
 export { default as RenderCode } from "./RenderCode/RenderCode";
 export { default as RenderCollapsible } from "./RenderCollapsible/RenderCollapsible";
 export { default as RenderCoverImg } from "./RenderCoverImg/RenderCoverImg";
@@ -7,4 +6,3 @@ export { default as RenderImage } from "./RenderImage/RenderImage";
 export { default as RenderList } from "./RenderList/RenderList";
 export { default as RenderSubtitle } from "./RenderSubtitle/RenderSubtitle";
 export { default as RenderTable } from "./RenderTable/RenderTable";
-export { default as RenderTitle } from "./RenderTitle/RenderTitle";

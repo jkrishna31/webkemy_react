@@ -379,7 +379,7 @@ const Page = () => {
     insertBlock, deleteBlock,
   } = useEditor(editorRef, defaultBlocks);
 
-  console.log("--- data & selection ---", data, selection?.startBlock, selection?.startOffset);
+  // console.log("--- data & selection ---", data, selection?.startBlock, selection?.startOffset);
 
   const handleBlockSelect = useCallback((key: any) => {
     insertBlock(key);
