@@ -19,6 +19,7 @@ export interface PasswordInputProps extends ComponentProps<"input"> {
 const PasswordInput = ({
   autoHideDuration = 3000,
   className, style,
+  placeholder = "********",
   ...restProps
 }: PasswordInputProps) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -39,7 +40,7 @@ const PasswordInput = ({
   return (
     <InputFieldWrapper className={classes(styles.wrapper, className)} style={style}>
       <GeneralInput
-        placeholder="******"
+        placeholder={placeholder}
         onInput={(e) => {
           hide();
           restProps.onInput?.(e);

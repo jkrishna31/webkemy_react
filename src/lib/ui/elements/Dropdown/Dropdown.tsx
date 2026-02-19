@@ -15,6 +15,7 @@ export interface DropdownProps extends ComponentProps<"div"> {
   dropdown?: ReactNode;
   placeholder?: ReactNode;
   hintIcon?: ReactNode | null;
+  rootClass?: string;
   triggerClass?: string;
   dropdownClass?: string;
   placement?: Exclude<LayoutPosition, "center">;
@@ -25,7 +26,7 @@ export interface DropdownProps extends ComponentProps<"div"> {
 }
 
 const Dropdown = ({
-  open = false, onOpenChange, dropdown, hintIcon, triggerClass, dropdownClass, placement, alignment,
+  open = false, onOpenChange, dropdown, hintIcon, rootClass, triggerClass, dropdownClass, placement, alignment,
   className, children,
   ...restProps
 }: DropdownProps) => {
@@ -54,7 +55,7 @@ const Dropdown = ({
   useEffect(() => syncOpen(open), [open]);
 
   return (
-    <>
+    <div className={classes(styles.wrapper, rootClass)}>
       <Button
         ref={triggerRef}
         className={classes(styles.dropdown_trigger, triggerClass)}
@@ -82,7 +83,7 @@ const Dropdown = ({
           {dropdown}
         </Popover>
       )}
-    </>
+    </div>
   );
 };
 

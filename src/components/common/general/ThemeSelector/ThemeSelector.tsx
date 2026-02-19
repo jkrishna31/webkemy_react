@@ -55,10 +55,11 @@ const ThemeSelector = ({
           onClose={() => setOpen(!open)}
           animation="slide"
           className={styles.popover}
+          closeOnScroll
         >
           <ItemList>
-            <Item primary="Light" icon={<SunIcon />} scope="list" selected={theme === "light"} disabled />
-            <Item primary="Dark" icon={<MoonIcon />} scope="list" selected={theme === "dark"} disabled />
+            {/* <Item primary="Light" icon={<SunIcon />} scope="list" selected={theme === "light"} disabled /> */}
+            {/* <Item primary="Dark" icon={<MoonIcon />} scope="list" selected={theme === "dark"} disabled /> */}
             <Item primary="System" icon={<ComputerIcon />} scope="list" selected={theme === "system"} />
           </ItemList>
         </Popover>

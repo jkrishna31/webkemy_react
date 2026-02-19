@@ -42,6 +42,7 @@ const LangSelector = ({
           onClose={() => setOpen(!open)}
           animation="slide"
           className={styles.popover}
+          closeOnScroll
         >
           <ItemList>
             <Item primary="English" className={styles.item} selected={lang === "english"} />

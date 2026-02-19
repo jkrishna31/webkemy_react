@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
@@ -11,20 +13,25 @@ import styles from "./BlockSelector.module.scss";
 
 export interface BlockSelectorProps {
     options?: any[];
-    wrapperClass?: string;
-    btnClass?: string;
-    listClass?: string;
+    onSelect?: (key: string) => void;
 }
 
-const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...restProps }: BlockSelectorProps) => {
+const BlockSelector = ({
+    options, onSelect,
+}: BlockSelectorProps) => {
+    const [open, setOpen] = useState(false);
+
     return (
         <Dropdown
+            open={open}
+            onOpenChange={setOpen}
             hintIcon={null}
-            triggerClass={classes(styles.selector, btnClass)}
+            rootClass={styles.wrapper}
+            triggerClass={classes(styles.selector)}
             dropdownClass={styles.dropdown}
             alignment="left"
             dropdown={
-                <ItemList className={classes(styles.tools_list, "scroll_thin", listClass)}>
+                <ItemList className={classes(styles.tools_list, "scroll_thin")}>
                     {
                         options?.map((group: any) => (
                             <ItemGroup
@@ -37,8 +44,13 @@ const BlockSelector = ({ options, wrapperClass, btnClass, listClass, ...restProp
                                         group.menu?.map((item: any) => (
                                             <Item<"button">
                                                 as="button"
+                                                scope="list"
                                                 {...item}
                                                 key={item.key}
+                                                onClick={() => {
+                                                    onSelect?.(item.key);
+                                                    setOpen(false);
+                                                }}
                                             />
                                         ))
                                     }

@@ -9,6 +9,7 @@ export { default as GoogleLogo } from "./GoogleLogo";
 export { default as InstagramLogo } from "./InstagramLogo";
 export { default as LinkedInLogo } from "./LinkedInLogo";
 export { default as MastodonLogo } from "./MastodonLogo";
+export { default as MicrosoftColorLogo } from "./MicrosoftColorLogo";
 export { default as MicrosoftLogo } from "./MicrosoftLogo";
 export { default as RedditLogo } from "./RedditLogo";
 export { default as StackoverflowLogo } from "./StackoverflowLogo";

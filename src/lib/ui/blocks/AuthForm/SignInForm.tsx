@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 
+import AuthProviders from "@/lib/ui/blocks/AuthForm/AuthProviders";
 import { Button } from "@/lib/ui/elements/butttons";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
@@ -21,6 +23,8 @@ const SignInForm = () => {
         <h1>{"Sign In"}</h1>
       </div>
 
+      <AuthProviders />
+
       <form className={styles.form}>
         <InputItem>
           <Text<"label"> as="label">{"Email *"}</Text>
@@ -35,10 +39,14 @@ const SignInForm = () => {
         </InputItem>
 
         {usePassword && (
-          <InputItem>
-            <Text<"label"> as="label">{"Password *"}</Text>
-            <PasswordInput />
-          </InputItem>
+          <div>
+            <InputItem>
+              <Text<"label"> as="label">{"Password *"}</Text>
+              <PasswordInput />
+            </InputItem>
+
+            <button type="button" className={styles.forgot_password}>{"Forgot Password?"}</button>
+          </div>
         )}
 
         <Button
@@ -48,6 +56,10 @@ const SignInForm = () => {
           {"Submit"}
         </Button>
       </form>
+
+      <div className={styles.footer}>
+        <p>{"Don't have an account? "}<Link href="#">{"Create Account"}</Link></p>
+      </div>
     </div>
   );
 };

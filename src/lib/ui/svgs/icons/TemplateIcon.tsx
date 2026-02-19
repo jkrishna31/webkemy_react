@@ -1,3 +1,4 @@
+// <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
 import { SVGProps } from "@/lib/types/prop.types";
 
 const TemplateIcon = (props: SVGProps) => {

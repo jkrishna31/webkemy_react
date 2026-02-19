@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ComponentProps } from "react";
 
 import { Avatar } from "@/lib/ui/elements/Avatar";
-import BlockquoteIcon from "@/lib/ui/svgs/icons/BlockquoteIcon";
+import QuoteIcon from "@/lib/ui/svgs/icons/QuoteIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Testimonial.module.scss";
@@ -48,7 +48,7 @@ const Testimonial = ({
         </div>
 
         {/* <BlockquoteIcon className={styles.presentation_start} /> */}
-        <BlockquoteIcon className={styles.presentation} />
+        <QuoteIcon className={styles.presentation} />
       </div>
     </div>
   );

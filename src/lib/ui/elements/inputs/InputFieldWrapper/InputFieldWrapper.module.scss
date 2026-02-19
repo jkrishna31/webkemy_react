@@ -9,8 +9,8 @@
     background-color: var(--bg-t);
     color: var(--fg-p);
     transition-property: border, outline;
-    transition-duration: .2s;
-    transition-timing-function: ease;
+    transition-duration: .25s;
+    transition-timing-function: linear;
 
     &:hover {
         border-color: var(--border-p);

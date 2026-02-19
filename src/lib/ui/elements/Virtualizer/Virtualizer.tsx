@@ -1,16 +1,16 @@
 "use client";
 
-import { ComponentProps, CSSProperties, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, CSSProperties, ReactNode } from "react";
 
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Virtualizer.module.scss";
 
 export interface VirtualizerProps<T> extends ComponentProps<"div"> {
-  data: T[]
-  itemMaxSize: number
-  render: (data: T, style: CSSProperties) => ReactNode
-  onBottom?: any
+  data: T[];
+  itemMaxSize: number;
+  render: (data: T, style: CSSProperties) => ReactNode;
+  onBottom?: any;
 }
 
 const Virtualizer = <T extends object | string | number | boolean>({
@@ -33,6 +33,7 @@ const Virtualizer = <T extends object | string | number | boolean>({
     <div
       className={classes(styles.wrapper, className)}
     >
+
     </div>
   );
 };

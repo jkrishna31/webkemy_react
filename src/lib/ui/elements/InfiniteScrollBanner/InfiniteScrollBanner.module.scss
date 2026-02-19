@@ -7,9 +7,10 @@
   overflow: hidden;
 
   --banner-spacing: 1.6rem;
+  --banner-loop-duration: 20s;
 
   .track {
-    animation-duration: 20s;
+    animation-duration: var(--banner-loop-duration);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-name: auto-scroll-loop-x;

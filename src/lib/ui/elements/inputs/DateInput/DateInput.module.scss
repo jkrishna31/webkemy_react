@@ -16,7 +16,7 @@
     font-size: 1.6rem;
     cursor: pointer;
     // outline-color: transparent;
-    transition: border .15s linear, outline .15s linear;
+    transition: border .25s linear, outline .25s linear;
 
     &:hover {
         border-color: var(--border-p);

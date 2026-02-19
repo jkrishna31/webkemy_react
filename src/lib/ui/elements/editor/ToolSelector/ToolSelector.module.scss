@@ -1,13 +1,10 @@
 .wrapper {
     height: fit-content;
-    max-width: 100%;
+    // max-width: min(100%, 50rem);
     border-radius: .4rem;
     background-color: var(--bg-t);
     color: var(--fg-p);
     display: grid;
-}
-
-.wrapper {
     border: 1px solid var(--border-s);
 }
 
@@ -23,6 +20,7 @@
     overscroll-behavior-inline: contain;
     scrollbar-width: none;
     flex: 1;
+    flex-shrink: 0;
 }
 
 .inline_tool_btn {
@@ -35,6 +33,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    svg {
+        width: 2.2rem;
+        height: 2.2rem;
+    }
 
     &:disabled {
         opacity: 45%;

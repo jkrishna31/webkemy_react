@@ -18,7 +18,9 @@
     font-size: 1.6rem;
     padding-inline: 1rem .6rem;
     margin-right: .8rem;
-    transition: border .15s linear, outline .15s linear;
+    transition-timing-function: linear;
+    transition-duration: .25s;
+    transition-property: border, outline;
 
     &:hover {
         border-color: var(--border-p);

@@ -15,7 +15,7 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Popover.module.scss";
 
 export interface PopoverProps extends ComponentProps<"div"> {
-  anchor?: HTMLElement;
+  anchor?: HTMLElement | Selection;
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   isTooltip?: boolean;
@@ -67,7 +67,20 @@ const Popover = ({
     const elem = popoverRef.current;
     if (!elem || !anchor) return;
 
-    const anchorBoundingRect = anchor?.getBoundingClientRect();
+    let anchorBoundingRect: DOMRect | null = null;
+
+    if (anchor instanceof HTMLElement) anchorBoundingRect = anchor?.getBoundingClientRect();
+    else if (anchor instanceof Selection) {
+      const range = anchor.getRangeAt(0);
+      const rangeRect = range.getClientRects()[0] || range.getBoundingClientRect();
+      if (rangeRect.x || rangeRect.y) {
+        anchorBoundingRect = rangeRect;
+      } else if (range.startContainer instanceof HTMLElement) {
+        anchorBoundingRect = range.startContainer.getBoundingClientRect();
+      }
+    }
+    if (!anchorBoundingRect) return;
+
     elem.style.setProperty("--popover-min-width", `${anchorBoundingRect.width}px`);
 
     requestAnimationFrame(() => {
@@ -110,7 +123,7 @@ const Popover = ({
     const elem = popoverRef.current;
     if (!anchor || !elem) return;
     prevActiveElem.current = document.activeElement;
-    if (hasDOM() && "ResizeObserver" in window) {
+    if (hasDOM() && "ResizeObserver" in window && anchor instanceof HTMLElement) {
       const observer = new ResizeObserver(updatePopoverLayout);
       // observer.observe(elem);
       observer.observe(anchor);
@@ -137,7 +150,7 @@ const Popover = ({
   useEffect(() => {
     if (anchor && (isTooltip || closeOnScroll || adjustOnScroll)) {
       const handleScroll = (e: Event) => {
-        if ((isTooltip || closeOnScroll) && (e.target as HTMLElement).contains(anchor)) {
+        if ((isTooltip || closeOnScroll) && anchor instanceof HTMLElement && (e.target as HTMLElement).contains(anchor)) {
           onClose?.(e);
         }
         if (adjustOnScroll && !popoverRef.current?.contains(e.target as HTMLElement)) {

@@ -17,6 +17,18 @@
     z-index: 1;
   }
 
+  .tabs {
+    margin-left: auto;
+    background-color: var(--bg-t);
+    border-radius: var(--br-pill);
+    padding: .3rem;
+    border: .1rem solid var(--border-t);
+  }
+
+  .tab {
+    padding: .5rem 1.2rem;
+  }
+
   .title {
     width: fit-content;
     font-size: 2.2rem;
@@ -40,17 +52,15 @@
     border: 1px solid var(--border-t);
     border-radius: 1rem;
     position: relative;
-  }
+    transition: border .3s linear;
 
-  .toolbar {
-    width: fit-content;
-    margin-top: auto;
-    margin-inline: auto;
-    position: sticky;
-    bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: .2rem;
+    &:hover {
+      border-color: var(--border-p);
+    }
+
+    &:focus-within {
+      border-color: var(--blue-1);
+    }
   }
 
   .icon {
@@ -82,6 +92,14 @@
   }
 }
 
+.toolbar {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  max-width: min(62rem, var(--popover-max-width));
+}
+
 @media screen and (max-width: 768px) {
   .main {
     .header {
@@ -100,11 +118,6 @@
       width: 100%;
       border-radius: 0;
       border: none;
-    }
-
-    .toolbar {
-      margin-inline: 0;
-      bottom: .2rem;
     }
 
     .link_input {

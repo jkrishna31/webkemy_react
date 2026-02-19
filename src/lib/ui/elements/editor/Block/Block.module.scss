@@ -1,0 +1,26 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
+.block {
+  margin-bottom: 3rem;
+}
+
+.divider:focus {
+  outline: .2rem solid var(--blue-1);
+}
+
+.empty::before {
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+  touch-action: none;
+  color: var(--fg-t);
+  // @include line_clamp(1);
+}
+
+
+@media screen and (max-width: 768px) {
+  .block {
+    margin-bottom: 2.4rem;
+  }
+}

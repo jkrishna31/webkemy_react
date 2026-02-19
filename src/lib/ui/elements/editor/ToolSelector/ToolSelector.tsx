@@ -2,6 +2,7 @@
 
 import { ComponentProps } from "react";
 
+import ChevronDownIcon from "@/lib/ui/svgs/icons/ChevronDownIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ToolSelector.module.scss";
@@ -15,6 +16,7 @@ export interface ToolSelectorProps extends ComponentProps<"div"> {
 const ToolSelector = ({
     toolsState, onClick, options,
 }: ToolSelectorProps) => {
+    // witch, dropdown, radio-group
     return (
         <div className={styles.wrapper}>
             <div

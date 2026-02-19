@@ -87,6 +87,7 @@ const Menu = <T extends ElementType>({
           isTooltip
           placement="right"
           alignment="center"
+          role="tooltip"
         >
           <div className={styles.popover}>
             {tooltip}

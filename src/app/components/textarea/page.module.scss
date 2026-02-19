@@ -1,5 +1,9 @@
-.field_wrapper {
-  height: fit-content;
-  flex: 0;
-  max-width: 60rem;
+.main {
+  padding-block: 2rem;
+
+  .field_wrapper {
+    height: fit-content;
+    flex: 0;
+    max-width: 60rem;
+  }
 }

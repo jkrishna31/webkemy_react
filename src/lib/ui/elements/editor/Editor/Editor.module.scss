@@ -5,6 +5,7 @@
 
 .editor {
   min-height: 100vh;
-  margin-bottom: 4rem;
   outline: none;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }

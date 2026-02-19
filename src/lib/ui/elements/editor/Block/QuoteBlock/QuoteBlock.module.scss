@@ -1,0 +1,20 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem 2rem;
+  white-space: pre-wrap;
+  font-size: 1.8rem;
+  line-height: 1.6;
+  color: var(--fg-s);
+  background-color: var(--bg-p);
+  border-left: .1rem solid var(--quote-bg);
+  border-left-width: .4rem;
+}
+
+@media screen and (max-width: 768px) {
+  .box {
+    padding: 1.4rem 1.2rem;
+    font-size: 1.6rem;
+    line-height: 1.6;
+  }
+}

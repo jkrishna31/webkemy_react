@@ -1,15 +1,10 @@
-export { default as RenderBlock } from "./RenderBlock/RenderBlock";
 export { default as RenderBox } from "./RenderBox/RenderBox";
 export { default as RenderCode } from "./RenderCode/RenderCode";
 export { default as RenderCollapsible } from "./RenderCollapsible/RenderCollapsible";
 export { default as RenderCoverImg } from "./RenderCoverImg/RenderCoverImg";
-export { default as RenderDivider } from "./RenderDivider/RenderDivider";
 export { default as RenderEmbed } from "./RenderEmbed/RenderEmbed";
-export { default as RenderHeading } from "./RenderHeading/RenderHeading";
 export { default as RenderImage } from "./RenderImage/RenderImage";
 export { default as RenderList } from "./RenderList/RenderList";
-export { default as RenderPara } from "./RenderPara/RenderPara";
-export { default as RenderSubheading } from "./RenderSubheading/RenderSubheading";
 export { default as RenderSubtitle } from "./RenderSubtitle/RenderSubtitle";
 export { default as RenderTable } from "./RenderTable/RenderTable";
 export { default as RenderTitle } from "./RenderTitle/RenderTitle";
