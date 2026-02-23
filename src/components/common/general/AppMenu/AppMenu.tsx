@@ -17,6 +17,7 @@ import CapsuleIcon from "@/lib/ui/svgs/icons/CapsuleIcon";
 import CarouselVerticalIcon from "@/lib/ui/svgs/icons/CarouselVerticalIcon";
 import CheckboxIcon from "@/lib/ui/svgs/icons/CheckboxIcon";
 import ChevronsRightIcon from "@/lib/ui/svgs/icons/ChevronsRightIcon";
+import ClockIcon from "@/lib/ui/svgs/icons/ClockIcon";
 import ColorPickerIcon from "@/lib/ui/svgs/icons/ColorPickerIcon";
 import CommentIcon from "@/lib/ui/svgs/icons/CommentIcon";
 import CompareIcon from "@/lib/ui/svgs/icons/CompareIcon";
@@ -566,6 +567,18 @@ export const menuItems = [
                 disabled: true,
             },
         ]
+    },
+    {
+        key: "widgets",
+        group: "Widgets",
+        menu: [
+            {
+                key: "clock",
+                href: "/components/clock",
+                primary: "Clock",
+                icon: <ClockIcon />,
+            },
+        ],
     },
     {
         key: "templates",

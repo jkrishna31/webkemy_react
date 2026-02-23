@@ -100,6 +100,10 @@
   max-width: min(62rem, var(--popover-max-width));
 }
 
+.toolbar_mobile {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .main {
     .header {
@@ -133,5 +137,11 @@
       width: 1.8rem;
       height: 1.8rem;
     }
+  }
+
+  .toolbar_mobile {
+    display: flex;
+    position: sticky;
+    bottom: .6rem;
   }
 }

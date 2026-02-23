@@ -2,9 +2,11 @@ import { RefObject, useCallback, useEffect, useEffectEvent, useLayoutEffect, use
 
 import { editorBlocks, inputTypes } from "@/constants/editor.const";
 import { Keys } from "@/constants/keys.const";
-import { LeafValues } from "@/lib/types/general.types";
+import { Color } from "@/lib/types/general.types";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { deepClone } from "@/lib/utils/object.utils";
+
+export type CaretActionDir = "backward" | "forward";
 
 export interface BlockChild {
   id: string;
@@ -12,11 +14,72 @@ export interface BlockChild {
   text: string;
   children?: BlockChild[];
 }
+
+export interface BlockConfig {
+  textAlign?: "left" | "right" | "center";
+  direction?: "lrt" | "rtl";
+}
 export interface EditorBlockBase {
   id: string;
   type: keyof typeof editorBlocks;
-  config?: any;
+  config?: BlockConfig;
+}
+
+export interface TextBlock {
   children?: BlockChild[];
+}
+
+export interface ImageBlock {
+  sources?: { src: string; width: string; }[];
+  caption?: BlockChild[];
+  alt?: string;
+  autoSize?: "width" | "height";
+}
+
+export interface CodeBlock {
+  // codes - array of string; or single string with newline
+  // config
+}
+
+export interface TableBlock {
+  // rows & cols
+}
+
+export interface ListBlockBase {
+  // will have child
+}
+
+export interface OListBlock {
+  startIndex?: number;
+}
+
+export interface UListBlock {
+}
+
+export interface CListBlock {
+  // will have child but each child have whether the item is checked or not
+}
+
+export interface DividerBlock {
+}
+
+export interface CollapsibleBlock {
+  summary?: BlockChild[];
+  details?: BlockChild[];
+}
+
+export interface QuoteBlock {
+  content: BlockChild[];
+}
+
+export interface BoxBlock {
+  title?: string;
+  content?: BlockChild[];
+  color?: Color;
+}
+
+export interface EmbedBlock {
+  link: string;
 }
 
 export interface EditorOptions {
@@ -53,21 +116,20 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     try {
       const activeBlock = ref.current?.querySelector(`[data-block="${selection?.startBlock}"]`);
       const _selection = window.getSelection();
-      console.log("*** ACTIVE BLOK ***", activeBlock, selection?.startOffset);
-      if (activeBlock && _selection) {
-        const range = document.createRange();
-        // _selection.setBaseAndExtent(activeBlock, selection?.startOffset ?? 0, activeBlock, selection?.startOffset ?? 0);
-        range.setStart(activeBlock, selection?.startOffset ?? 0);
-        range.setEnd(activeBlock, selection?.startOffset ?? 0);
-        range.collapse(true);
+      if (!activeBlock || !_selection) return;
+      if (!_selection.isCollapsed) return;
 
-        _selection.removeAllRanges();
-        _selection.addRange(range);
-      }
+      const range = document.createRange();
+      range.setStart(activeBlock, selection?.startOffset ?? 0);
+      range.setEnd(activeBlock, selection?.startOffset ?? 0);
+      range.collapse(true);
+
+      _selection.removeAllRanges();
+      _selection.addRange(range);
     } catch (error) {
 
     }
-  }, [ref, selection?.startBlock, selection?.startOffset]);
+  }, [ref, selection]);
 
   // HISTORY ==================================================================
 
@@ -142,7 +204,6 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
         newBlock.children[0].text += text;
         // go upto the fragment using the offset
         newData.push(newBlock);
-        console.log("---- text length ----", text.length);
         // @ts-ignore
         setSelection(currSelection => ({ ...currSelection, startOffset: (currSelection?.startOffset ?? 0) + text.length }));
       } else {
@@ -171,22 +232,22 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     setData(newBlocks);
   };
 
-  const deleteLineBreak = () => { };
+  const deleteContent = (dir: CaretActionDir = "backward") => {
+    // deleteContent, deleteContentBackward, deleteContentForward
 
-  const deleteWord = () => { }; // deleteWordBackward, deleteWordForward
-  const deleteCotent = () => { }; // deleteContent, deleteContentBackward, deleteContentForward
-  const deleteSoftLine = () => { }; // deleteSoftLineBackward, deleteSoftLineForward, deleteEntireSoftLine
-  const deleteHardLine = () => { }; // deleteHardLineBackward, deleteHardLineForward
+    // req: blockId, offset
+    // go upto the offset: check which formatting the offset belongs
+  };
+
+  const deleteWord = (dir: CaretActionDir = "backward") => {
+    // deleteWordBackward, deleteWordForward
+  };
+
+  const deleteSoftLine = (dir?: CaretActionDir) => { }; // deleteSoftLineBackward, deleteSoftLineForward, deleteEntireSoftLine
+  const deleteHardLine = (dir: CaretActionDir = "backward") => { }; // deleteHardLineBackward, deleteHardLineForward
 
   const deleteByCut = () => { };
   const deleteByDrag = () => { };
-
-  // INPUT ====================================================================
-
-  const handleInputCore = (inputType: LeafValues<typeof inputTypes>) => {
-    // based on inputType
-    // call this function from handleBeforeInput
-  };
 
   // UTILITIES ================================================================
 
@@ -208,14 +269,6 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     return !hasContent(_block.children);
   };
 
-  const getBlockIndex = (el?: Element | null) => {
-    let index = 0;
-    while (el = el?.previousElementSibling) {
-      index++;
-    }
-    return index + 1; // 1-based index
-  };
-
   const normalizeBlocks = (ids: string[], parentType: string) => {
     // normalize/collapse text>text>text>text to one text 
     // [on iterating on children, if type is same as parent then just return the childen otherwise return same]
@@ -228,40 +281,13 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
 
   }, []);
 
-  const insertChar = () => {
-    // if selection.isCaret
-    // = 
-    // else
-    // = first delete those charaters in the selection [& normalize different scenarios]
-    // = then insert the character 
-  };
-
-  const deleteChar = () => {
-
-  };
-
   const replace = () => {
 
   };
 
   // DOM ACTIONS ==============================================================
 
-  const selectionDetails = (selection: Selection | null) => {
-    let anchorBlock, focusBlock;
-    if (selection?.anchorNode?.nodeType === 3) {
-      anchorBlock = selection?.anchorNode?.parentElement?.closest("[data-block]");
-    } else {
-      anchorBlock = (selection?.anchorNode as HTMLElement)?.closest("[data-block]");
-    }
-    if (selection?.focusNode?.nodeType === 3) {
-      focusBlock = selection?.focusNode?.parentElement?.closest("[data-block]");
-    } else {
-      focusBlock = (selection?.focusNode as HTMLElement)?.closest("[data-block]");
-    }
-    return [anchorBlock, focusBlock];
-  };
-
-  const cleanSelection = useCallback((selection: Selection) => {
+  const cleanSelection = useCallback(() => {
     // const removeRanges = [];
     // for (let i = 0; i < selection.rangeCount; i++) {
     //   const rangeItem = selection.getRangeAt(i);
@@ -320,56 +346,32 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
   });
 
   const handleBeforeInput = useEffectEvent((e: InputEvent) => {
-    console.log("=== 😎 before input ===", e.inputType, e.data, e);
+    console.log("=== 😎 before input ===", e.inputType, e.data,);
     // if processed here, then prevent input [issue: others won't be able to listen to input event]
 
-    // TYPESCRIPT
-    // inputType.insert.BR {}
-    // inputType.insert.PARAGRAPH {Enter}
-    // inputType.insert.OL {}
-    // inputType.insert.UL {}
-    // inputType.insert.HR {}
+    // delete -----------------------------------------------------------------
+    if (e.inputType === inputTypes.delete.CONTENT_BACKWARD) {
 
-    // inputType.delete.WORD_BACKWARD {Ctrl+Backspace}
-    // inputType.delete.WORD_FORWARD {Ctrl+Shift+Backspace}
+    } else if (e.inputType === inputTypes.delete.CONTENT_FORWARD) {
+
+    } else if (e.inputType === inputTypes.delete.WORD_BACKWARD) {
+
+    } else if (e.inputType === inputTypes.delete.WORD_FORWARD) {
+
+    }
+    // insert -----------------------------------------------------------------
+    else if (e.inputType === inputTypes.insert.TEXT) {
+      if (e.data) {
+        insertText(e.data);
+        e.preventDefault();
+      }
+    }
+
     // inputType.delete.SOFT_LINE_BACKWARD {}
     // inputType.delete.SOFT_LINE_FORWARD {}
     // inputType.delete.ENTIRE_SOFT_LINE {}
     // inputType.delete.HARD_LINE_BACKWARD {}
     // inputType.delete.HARD_LINE_FORWARD {}
-    // inputType.delete.CONTENT {}
-    // inputType.delete.CONTENT_BACKWARD {Shift?+Backspace}
-    // inputType.delete.CONTENT_FORWARD {}
-
-    switch (e.inputType) {
-      case "insertText": {
-        // console.log("--- INPUT TYPE ---", e.data);
-        if (e.data) {
-          insertText(e.data);
-          e.preventDefault();
-          // e.stopPropagation();
-        }
-        break;
-      }
-      case "insertReplacementText":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-      case "":
-        break;
-    }
   });
 
   const handleInput = useEffectEvent((e: Event) => {
@@ -379,33 +381,48 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
   });
 
   const handleKeyDown = useEffectEvent((e: KeyboardEvent) => {
-    // console.log("=== 🥶 key down ===",
-    //   e,
-    //   e.key, e.code, e.charCode, e.keyCode,
-    //   "ctrl:", e.ctrlKey, "meta:", e.metaKey, "alt:", e.altKey, "shift:", e.shiftKey,
-    // );
+    // console.log("=== 🥶 key down ===", "key:", e.key, "code:", e.code);
     if (e.code === Keys.ENTER) {
       if (e.shiftKey && e.ctrlKey) {
-        insertBlock(undefined, { to: "before" }); // TODO: place caret
-        e.preventDefault();
+        insertBlock(undefined, { to: "before" });
       } else if (e.shiftKey) {
-        // TODO: insert a br
+        insertLineBreak();
       } else {
-        insertBlock(); // TODO: place caret
-        e.preventDefault();
+        insertBlock();
       }
+      e.preventDefault();
     } else if (e.code === Keys.SPACE && e.ctrlKey) {
       setShowToolbar(true);
-    } else if (e.code === Keys.DEL || e.code === Keys.BACKSPACE) {
-      if (data?.length === 1 && isBlockEmpty(undefined, data[0])) {
-        // e.preventDefault();
+    } else if (e.key === Keys.BACKSPACE) {
+      // if (data?.length === 1 && isBlockEmpty(undefined, data[0])) { }
+      if (e.ctrlKey && e.shiftKey) {
+        deleteSoftLine("backward");
+      } else if (e.ctrlKey) {
+        deleteWord();
+      } else {
+        deleteContent();
       }
-    } else {
+    } else if (e.key === Keys.DEL) {
+      if (e.ctrlKey) {
+        deleteWord("forward");
+      } else {
+        deleteContent("forward");
+      }
+    } else if (e.key === "b" && e.ctrlKey) {
+      formatBold();
+    } else if (e.key === "i" && e.ctrlKey) {
+      formatItalic();
+    } else if (e.key === "u" && e.ctrlKey) {
+      formatUnderline();
+    } else if (e.key === "s" && e.ctrlKey && e.shiftKey) {
+      formatStrikeThrough();
+    } else if (e.key === "`" && e.ctrlKey) {
+      formatInlikeCode();
+    } else if (e.key === "k" && e.ctrlKey) {
+      formatLink();
+    } else if (e.key === "f" && e.ctrlKey) {
+      // show find popup
     }
-    // Ctrl+B [if selection, then make it bold (check how caret is placed after formatting); otherwise insert a empty formatted field]
-    // Ctrl+I
-    // Ctrl+U
-    // Ctrl+F (find and replace)
   });
 
   const handleKeyUp = useEffectEvent((e: KeyboardEvent) => {
@@ -457,9 +474,13 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
 
   });
 
-  // const handleContextMenu = useEffectEvent((e: PointerEvent) => {
-
-  // });
+  const handleContextMenu = useEffectEvent((e: PointerEvent) => {
+    // if (e.pointerType === "touch") {
+    //   if (!showToolbar) {
+    //     e.preventDefault();
+    //   }
+    // }
+  });
 
   // const handleCompositionStart = useEffectEvent((e: any) => {
   //   // console.log("=== 🔷 comp start ===", e);
@@ -519,7 +540,6 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     data, selection,
     showToolbar, setShowToolbar, toggleToolbarVisibility,
     insertBlock, deleteBlock, moveBlock,
-    insertChar, deleteChar,
     normalizeBlocks,
   };
 }

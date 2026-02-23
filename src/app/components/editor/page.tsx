@@ -479,6 +479,9 @@ const Page = () => {
             </Popover>
           )}
         </Editor>
+        <div className={styles.toolbar_mobile}>
+          {renderToolbar()}
+        </div>
       </div>
     </main>
   );

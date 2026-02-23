@@ -1,0 +1,105 @@
+.clock {
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  border: .6rem double var(--fg-t);
+  background: var(--bg-t);
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.center {
+  width: 2rem;
+  height: 2rem;
+  border: .3rem solid var(--border-s);
+  background: var(--fg-s);
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.hour_hand,
+.min_hand,
+.sec_hand {
+  --angle: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top center;
+  padding-top: 1.6rem;
+  height: 50%;
+}
+
+.hour_hand {
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
+  transition: transform .2s linear;
+
+  &>div {
+    width: .6rem;
+    height: 40%;
+    border-radius: var(--br-pill);
+    background: var(--fg-p-alt);
+  }
+}
+
+.min_hand {
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
+  transition: transform .2s linear;
+
+  &>div {
+    width: .8rem;
+    height: 65%;
+    border-radius: var(--br-pill);
+    border: .2rem solid var(--fg-p-alt);
+  }
+}
+
+.sec_hand {
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
+
+  &>div {
+    width: .2rem;
+    height: 70%;
+    background: var(--red-4);
+    border-radius: var(--br-pill);
+  }
+}
+
+.hr_mark,
+.min_mark {
+  --angle: 0;
+
+  height: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: top center;
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding-block-end: .8rem;
+}
+
+.hr_mark>div {
+  height: 1.2rem;
+  width: .4rem;
+  background: var(--fg-p-alt);
+  border-radius: var(--br-pill);
+}
+
+.min_mark>div {
+  height: .6rem;
+  width: .6rem;
+  background: var(--border-s);
+  border-radius: 50%;
+}

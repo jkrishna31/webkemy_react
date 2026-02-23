@@ -1,19 +1,20 @@
 "use client";
 
-import { ComponentProps, useCallback, useMemo, useRef, useState } from "react";
+import { ComponentProps, CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";
+import { useCurrentDateTime } from "@/lib/hooks/useCurrentTime";
 import { CalendarDay } from "@/lib/types/calendar.types";
 import { CalendarEvent, EventBadge } from "@/lib/ui/elements/calendar/EventBadge";
 import { Resizable, Resizers } from "@/lib/ui/elements/Resizable";
-import { getRelativeMonth } from "@/lib/utils/datetime.utils";
-import { debounce, isNullish } from "@/lib/utils/general.utils";
+import { getRelativeMonth, getTimeParts } from "@/lib/utils/datetime.utils";
+import { isNullish } from "@/lib/utils/general.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./DayView.module.scss";
 
-export const DAY_CELL_SIZE_IN_PX = 50;
+export const DAY_CELL_SIZE_IN_PX = 60;
 
 export interface DayViewProps extends ComponentProps<"div"> {
   day: number;
@@ -25,25 +26,27 @@ export interface DayViewProps extends ComponentProps<"div"> {
   days?: number;
   onAdd?: any;
   events?: CalendarEvent[];
+  topOffset?: number;
+  cellSize?: number;
 }
 
-const getCoords = (ev: Partial<CalendarEvent>) => {
-  let fromTopInRem = null, fromBottomInRem = null;
+const timeToPx = (date: Date, blockSize: number) => {
+  const hoursPassedInPx = date.getHours() * blockSize;
+  const minsPassedInPx = date.getMinutes() * (60 / blockSize);
+  return hoursPassedInPx + minsPassedInPx;
+};
+
+const getCoords = (ev: Partial<CalendarEvent>, offset: number = 0, cellSize = DAY_CELL_SIZE_IN_PX) => {
+  let fromTopInPx = null, fromBottomInPx = null;
   const width = "100%";
 
   if (ev.start) {
     const date = new Date(ev.start);
-    const startHour = date.getHours();
-    const startMinutes = date.getMinutes();
-    const startInMins = startHour * 60 + startMinutes;
-    fromTopInRem = Math.fround((1 / 12) * startInMins); // 1/12 = rem per min
+    fromTopInPx = timeToPx(date, cellSize);
   }
   if (ev.end) {
     const date = new Date(ev.end);
-    const endHours = date.getHours();
-    const endMinutes = date.getMinutes();
-    const endInMins = endHours * 60 + endMinutes;
-    fromBottomInRem = Math.fround((1 / 12) * endInMins);
+    fromBottomInPx = timeToPx(date, cellSize);
   }
 
   if (!ev.start && !ev.end) {
@@ -55,26 +58,26 @@ const getCoords = (ev: Partial<CalendarEvent>) => {
     };
   }
 
-  if (fromTopInRem !== null && fromBottomInRem !== null) {
+  if (fromTopInPx !== null && fromBottomInPx !== null) {
     return {
-      top: `${fromTopInRem}rem`,
+      top: `${fromTopInPx}px`,
       left: 0,
-      height: `${fromBottomInRem - fromTopInRem}rem`,
+      height: `${fromBottomInPx - fromTopInPx}px`,
       width,
     };
-  } else if (fromTopInRem !== null) {
+  } else if (fromTopInPx !== null) {
     return {
-      top: `${fromTopInRem}rem`,
+      top: `${fromTopInPx}px`,
       left: 0,
       bottom: 0,
-      height: `${120 - fromTopInRem}rem`, // 120 = DAY_CELL_SIZE_IN_PX/10 * 24
+      height: `${(cellSize / 10 * 24) - fromTopInPx}px`,
       width,
     };
-  } else if (fromBottomInRem !== null) {
+  } else if (fromBottomInPx !== null) {
     return {
       top: 0,
       left: 0,
-      height: `${fromBottomInRem}rem`,
+      height: `${fromBottomInPx}px`,
       width,
     };
   }
@@ -121,14 +124,16 @@ const DayView = ({
   onAdd,
   className,
   days = 1,
+  topOffset = 12,
+  cellSize = DAY_CELL_SIZE_IN_PX,
 }: DayViewProps) => {
   const { setStore, setField, getSegregatedEvents } = useCalendarActions();
 
   const segregatedEvents = getSegregatedEvents();
 
+  const currDatetime = useCurrentDateTime();
+
   const ref = useRef<HTMLDivElement>(null);
-  const timeLineRef = useRef<HTMLDivElement>(null);
-  const timeBadgeRef = useRef<HTMLDivElement>(null);
 
   const [timeMarker, setTimeMarker] = useState(false);
   const [draggingEvent, setDraggingEvent] = useState<string>();
@@ -140,6 +145,12 @@ const DayView = ({
     end: string
   }>();
   const [hideDraggable, setHideDraggable] = useState(false);
+  const [dropTime, setDropTime] = useState<string>();
+
+  const [dragTimeToPx, setDragTimeToPx] = useState<number>();
+  const [currTimeToPx, setCurrTimeToPx] = useState<number>();
+
+  const currTimeParts = getTimeParts(currDatetime);
 
   const currDate = new Date();
   const currMonthAndYear = month === currDate.getMonth() && year === currDate.getFullYear();
@@ -291,30 +302,29 @@ const DayView = ({
     handleDragEnd();
   };
 
+  useEffect(() => {
+    setCurrTimeToPx(timeToPx(currDatetime, cellSize));
+  }, [cellSize, currDatetime]);
+
   const handleMove = useCallback((e: PointerEvent, evId?: any) => {
-    const rect = ref.current?.getBoundingClientRect();
-    if (rect && ref.current && timeLineRef.current && timeBadgeRef.current) {
-      const y = e.clientY - rect?.top + ref.current?.scrollTop;
-      const step = DAY_CELL_SIZE_IN_PX / 4;
-      const stepMultiplier = Math.round(y / step);
-      const yPosInPx = stepMultiplier * step;
-      timeLineRef.current.style.top = `${yPosInPx}px`;
-      timeBadgeRef.current.style.top = `${yPosInPx}px`;
-      timeBadgeRef.current.textContent = getTime(yPosInPx / DAY_CELL_SIZE_IN_PX);
-      setTimeMarker(true);
-      setResizingEvent(evId);
-    }
-  }, [getTime]);
+    const elem = ref.current;
+    if (!elem) return;
+    const rect = elem.getBoundingClientRect();
+    const y = e.clientY - rect.top + elem.scrollTop - topOffset;
+    const step = cellSize / 4;
+    const stepMultiplier = Math.round(y / step);
+    const yPosInPx = stepMultiplier * step;
+    setDragTimeToPx(yPosInPx);
+    setDropTime(getTime(yPosInPx / cellSize));
+    setTimeMarker(true);
+    setResizingEvent(evId);
+  }, [cellSize, getTime, topOffset]);
 
   const handleUp = useCallback(() => {
     // get the updated time which was saved from handleMove last call in state
     setTimeMarker(false);
     setResizingEvent(undefined);
   }, []);
-
-  const debouncedMoveHandler = useMemo(() => debounce(handleMove, 6), [handleMove]);
-
-  const debouncedUpHandler = useMemo(() => debounce(handleUp, 6), [handleUp]);
 
   const dragEvts: {
     [key: string]: React.DragEventHandler<HTMLDivElement>
@@ -407,11 +417,11 @@ const DayView = ({
         key="new"
         className={styles.ev_wrapper}
         style={{
-          ...getCoords(newEvSpan),
+          ...getCoords(newEvSpan, topOffset, cellSize),
         }}
         resizers={["t", "b"]}
-        handleMove={debouncedMoveHandler}
-        handleUp={debouncedUpHandler}
+        handleMove={handleMove}
+        handleUp={handleUp}
         payload="new"
       >
         <EventBadge
@@ -429,6 +439,7 @@ const DayView = ({
   return (
     <div
       className={classes(styles.container, className)}
+
     >
       <div className={classes(styles.col, styles.hr_col)}>
         {
@@ -441,15 +452,24 @@ const DayView = ({
             Array.from({ length: 24 }).map((_, idx) => {
               return (
                 <div key={`hr-${idx}`} className={styles.hr_cell}>
-                  {getTime(idx)}
+                  <div className={styles.hr_marker}>
+                    {getTime(idx)}
+                  </div>
                 </div>
               );
             })
           }
           <div
-            className={styles.time_badge} ref={timeBadgeRef}
-            style={{ display: !timeMarker ? "none" : "" }}
+            className={styles.curr_time_badge}
+            style={{ "--time-px": `${currTimeToPx}px` } as CSSProperties}
           >
+            {currTimeParts[1]}{":"}{String(currTimeParts[2]).padStart(2, "0")} {currTimeParts[0]}
+          </div>
+          <div
+            className={styles.time_badge}
+            style={{ display: !timeMarker ? "none" : "", "--time-px": `${dragTimeToPx}px` } as CSSProperties}
+          >
+            {dropTime}
           </div>
         </div>
       </div>
@@ -462,7 +482,8 @@ const DayView = ({
                   const weekDayKey: string = weekDaysOrder[(weekDayStart + idx) % weekDaysOrder.length];
                   return (
                     <div
-                      key={weekDayKey} className={styles.weekday_header_cell}
+                      key={weekDayKey}
+                      className={styles.weekday_header_cell}
                       data-month={weekDetails[idx].monthType}
                       data-day-state={
                         (currMonthAndYear && currDate.getDate() === weekDetails[idx].date[2])
@@ -489,7 +510,8 @@ const DayView = ({
           ) : null
         }
         <div
-          className={styles.day_cols_wrapper} ref={ref}
+          ref={ref}
+          className={styles.day_cols_wrapper}
           {...dragEvts}
           // onPointerDown={windowSize[0] > 700 ? handlePointerDown : undefined}
           onDoubleClick={handleDoubleClick}
@@ -519,7 +541,7 @@ const DayView = ({
                   }
                   {
                     segregatedEvents[yr]?.[mon]?.[weekDetails[idx].date[2]]?.map(ev => {
-                      const coords = getCoords(ev);
+                      const coords = getCoords(ev, topOffset, cellSize);
                       const resizers: Resizers[] = [];
                       if (ev.start) resizers.push("t");
                       if (ev.end) resizers.push("b");
@@ -536,8 +558,8 @@ const DayView = ({
                             },
                           }}
                           resizers={resizers}
-                          handleMove={debouncedMoveHandler}
-                          handleUp={debouncedUpHandler}
+                          handleMove={handleMove}
+                          handleUp={handleUp}
                           payload={ev.id}
                         >
                           <EventBadge
@@ -558,9 +580,13 @@ const DayView = ({
             })
           }
           <div
-            ref={timeLineRef}
+            className={styles.curr_time_crosshair}
+            style={{ "--time-px": `${currTimeToPx}px` } as CSSProperties}
+          >
+          </div>
+          <div
             className={styles.time_crosshair}
-            style={{ display: !timeMarker ? "none" : "" }}
+            style={{ display: !timeMarker ? "none" : "", "--time-px": `${dragTimeToPx}px` } as CSSProperties}
           >
           </div>
         </div>

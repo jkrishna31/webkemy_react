@@ -37,7 +37,7 @@ export function useGrid(ref: RefObject<HTMLElement | null>, initialState?: TItem
   const cols = useMemo(() => Object.keys(items).reduce((total, itemKey) => Math.max(...(items[itemKey].col ?? [0]), total), 0), [items]);
   const rows = useMemo(() => Object.keys(items).reduce((total, itemKey) => Math.max(...(items[itemKey].row ?? [0]), total), 0), [items]);
 
-  console.log("=== grid size ===", gridSize);
+  // console.log("=== grid size ===", gridSize);
 
   // use gridWidth as cols & gridHeight as rows [ISSUE - gap (optional)] (for step as "grid")
   // on resize, allow only +-1 of cols/rows

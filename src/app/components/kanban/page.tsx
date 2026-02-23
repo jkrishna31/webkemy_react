@@ -219,6 +219,22 @@ const Page = () => {
     isValidTarget,
   });
 
+  const tabs = [
+    { id: "all", label: "All" },
+    ...(variant === "combined" ? [] : Object.keys(defaultUsers).map(userKey => {
+      const user = defaultUsers[userKey];
+      return {
+        id: userKey,
+        render: (
+          <Avatar className={styles.user_avatar}>
+            <Image src={user.profile} alt={user.name} width={34} height={34} />
+          </Avatar>
+        ),
+        label: user.name,
+      };
+    }))
+  ];
+
   return (
     <main className={styles.main}>
       <PageSetup pageKey="kanban" />
@@ -228,21 +244,7 @@ const Page = () => {
           variant="muted"
           activeTab={selectedUser}
           onChange={setSelectedUser}
-          tabs={[
-            { id: "all", label: "All" },
-            ...Object.keys(defaultUsers).map(userKey => {
-              const user = defaultUsers[userKey];
-              return {
-                id: userKey,
-                render: (
-                  <Avatar className={styles.user_avatar}>
-                    <Image src={user.profile} alt={user.name} width={34} height={34} />
-                  </Avatar>
-                ),
-                label: user.name,
-              };
-            })
-          ]}
+          tabs={tabs}
           tabClass={styles.user_btn}
         />
         <Dropdown

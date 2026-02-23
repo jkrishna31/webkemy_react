@@ -66,7 +66,7 @@ export const inputTypes = {
   insert: {
     BLOCK: "insertBlock",
 
-    CONTENT: "",
+    TEXT: "insertText",
 
     PARA: "insertParagraph",
 

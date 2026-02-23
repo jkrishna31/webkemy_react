@@ -263,3 +263,19 @@ export const breakdownTime = (value: number, unit: DateTimeField = "ms", capUnit
 
     return result;
 };
+
+export const getTimeParts = (input = new Date()) => {
+    const date = new Date(input);
+
+    const hours24 = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const ms = date.getMilliseconds();
+
+    const ampm = hours24 >= 12 ? "pm" : "am";
+    const hours12 = hours24 % 12 || 12;
+
+    const pad = (num: number, size = 2) => String(num).padStart(size, "0");
+
+    return [ampm, hours12, minutes, seconds, ms];
+};

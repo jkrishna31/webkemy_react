@@ -1,4 +1,7 @@
 .container {
+  --top-offset: 1.2rem;
+  --day-cell-height: 6rem;
+
   width: 100%;
   font-size: 1.4rem;
   display: flex;
@@ -24,6 +27,7 @@
   flex-direction: column;
   height: fit-content;
   white-space: nowrap;
+  padding-top: var(--top-offset);
 }
 
 .days_wrapper,
@@ -32,6 +36,10 @@
   display: flex;
   height: fit-content;
   position: relative;
+}
+
+.day_cols_wrapper {
+  padding-top: var(--top-offset);
 }
 
 .day_col {
@@ -140,6 +148,10 @@
   color: var(--fg-s);
 }
 
+.hr_marker {
+  transform: translate3d(0, -50%, 0);
+}
+
 .day_cell {
   width: 100%;
   border-top: .1rem solid var(--border-t);
@@ -175,35 +187,52 @@
   height: 100%;
 }
 
-.time_crosshair {
-  position: absolute;
-  width: 100%;
-  top: 12rem;
+.time_crosshair,
+.curr_time_crosshair {
+  --time-px: 0px;
   height: .1rem;
   background-color: var(--border-p);
-  transition: all .15s linear;
+  position: absolute;
+  width: 100%;
+  isolation: isolate;
+  top: 0;
+  transform: translate3d(0, calc(var(--time-px) + var(--top-offset) - 50%), 0);
+  transition: transform .15s linear;
 }
 
-.time_badge {
+.curr_time_crosshair {
+  background-color: var(--purple-1);
+  transition: none;
+}
+
+.time_badge,
+.curr_time_badge {
+  --time-px: 0px;
   display: grid;
   place-items: center;
-  transform-origin: center;
-  transform: translate3d(0, -50%, 0);
   background-color: var(--fg-p-alt);
   color: var(--bg-p);
-  position: absolute;
-  top: 200px;
-  left: 0;
-  width: 100%;
   border-radius: 2rem;
   padding: .3rem .8rem;
-  z-index: 3;
-  transition: all .15s linear;
+  // z-index: 3;
+  isolation: isolate;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform-origin: center;
+  transform: translate3d(0, calc(var(--time-px) + var(--top-offset) - 50%), 0);
+  transition: transform .15s linear;
+}
+
+.curr_time_badge {
+  background-color: var(--purple-1);
+  transition: none;
 }
 
 .hr_cell,
 .day_cell,
 .weekday_header_cell,
 .week_number {
-  height: 5rem;
+  height: var(--day-cell-height);
 }
