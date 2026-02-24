@@ -3,7 +3,7 @@
   height: 30rem;
   border-radius: 50%;
   border: .6rem double var(--fg-t);
-  background: var(--bg-t);
+  background: var(--bg-s);
   display: grid;
   place-items: center;
   position: relative;
@@ -19,12 +19,20 @@
   top: 50%;
   left: 50%;
   transform: translate3d(-50%, -50%, 0);
+  animation: fade-center .5s ease;
+
+  @keyframes fade-center {
+    from {
+      opacity: 0;
+      transform: translate3d(-50%, -50%, 0) scale(.7);
+    }
+  }
 }
 
 .hour_hand,
 .min_hand,
 .sec_hand {
-  --angle: 0;
+  --angle-hand: 0;
 
   display: flex;
   justify-content: center;
@@ -34,72 +42,104 @@
   top: 50%;
   left: 50%;
   transform-origin: top center;
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle-hand));
   padding-top: 1.6rem;
   height: 50%;
-}
+  animation: fade-hand .5s ease;
 
-.hour_hand {
-  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
-  transition: transform .2s linear;
-
-  &>div {
-    width: .6rem;
-    height: 40%;
-    border-radius: var(--br-pill);
-    background: var(--fg-p-alt);
+  @keyframes fade-hand {
+    from {
+      opacity: 0;
+      transform: translate3d(-50%, 0, 0) rotateZ(var(--angle-hand)) translate3d(0, -1rem, 0);
+    }
   }
 }
 
-.min_hand {
-  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
-  transition: transform .2s linear;
-
-  &>div {
-    width: .8rem;
-    height: 65%;
-    border-radius: var(--br-pill);
-    border: .2rem solid var(--fg-p-alt);
-  }
+.hour_hand>div {
+  width: .6rem;
+  height: 35%;
+  border-radius: var(--br-pill);
+  background: var(--fg-p-alt);
 }
 
-.sec_hand {
-  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
-
-  &>div {
-    width: .2rem;
-    height: 70%;
-    background: var(--red-4);
-    border-radius: var(--br-pill);
-  }
+.min_hand>div {
+  width: .8rem;
+  height: 55%;
+  border-radius: var(--br-pill);
+  border: .2rem solid var(--fg-p-alt);
 }
 
-.hr_mark,
-.min_mark {
-  --angle: 0;
+.sec_hand>div {
+  width: .2rem;
+  height: 60%;
+  background: var(--red-4);
+  border-radius: var(--br-pill);
+}
+
+.mark {
+  --angle-mark: 0;
 
   height: 50%;
   position: absolute;
   top: 50%;
   left: 50%;
   transform-origin: top center;
-  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle));
+  transform: translate3d(-50%, 0, 0) rotateZ(var(--angle-mark));
 
   display: flex;
-  justify-content: center;
-  align-items: flex-end;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   padding-block-end: .8rem;
 }
 
-.hr_mark>div {
-  height: 1.2rem;
-  width: .4rem;
-  background: var(--fg-p-alt);
-  border-radius: var(--br-pill);
+.mark[data-hour="major"] {
+  padding-block-end: 0;
+
+  &>div {
+    height: 1.4rem;
+    width: .2rem;
+    background: var(--fg-t);
+    // border-radius: var(--br-pill);
+    border-top-left-radius: var(--br-pill);
+    border-top-right-radius: var(--br-pill);
+  }
 }
 
-.min_mark>div {
-  height: .6rem;
-  width: .6rem;
-  background: var(--border-s);
-  border-radius: 50%;
+.mark[data-hour="minor"] {
+  animation: fade-mark .5s ease;
+
+  &>div {
+    height: 1.4rem;
+    width: .3rem;
+    background: var(--fg-s);
+    border-radius: var(--br-pill);
+  }
+}
+
+.mark[data-sec="true"] {
+  animation: fade-mark .5s ease;
+
+  &>div {
+    height: .6rem;
+    width: .6rem;
+    background: var(--border-s);
+    border-radius: 50%;
+  }
+}
+
+@keyframes fade-mark {
+  from {
+    opacity: 0;
+    transform: translate3d(-50%, 0, 0) rotateZ(var(--angle-mark)) translate3d(0, 1rem, 0);
+  }
+}
+
+.label_hr {
+  transform: translate3d(-50%, -1rem, 0);
+  line-height: 1;
+  margin-block-end: .8rem;
+  font-weight: bold;
+  color: var(--fg-t);
+  font-size: 2.4rem;
 }

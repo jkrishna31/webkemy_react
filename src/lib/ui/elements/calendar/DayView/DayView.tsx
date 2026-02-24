@@ -516,6 +516,11 @@ const DayView = ({
           // onPointerDown={windowSize[0] > 700 ? handlePointerDown : undefined}
           onDoubleClick={handleDoubleClick}
         >
+          <div
+            className={styles.curr_time_crosshair}
+            style={{ "--time-px": `${currTimeToPx}px` } as CSSProperties}
+          >
+          </div>
           {
             Array.from({ length: days }).map((_, idx) => {
               const mon = getRelativeMonth(month, weekDetails[idx].monthType);
@@ -579,11 +584,6 @@ const DayView = ({
               );
             })
           }
-          <div
-            className={styles.curr_time_crosshair}
-            style={{ "--time-px": `${currTimeToPx}px` } as CSSProperties}
-          >
-          </div>
           <div
             className={styles.time_crosshair}
             style={{ display: !timeMarker ? "none" : "", "--time-px": `${dragTimeToPx}px` } as CSSProperties}
