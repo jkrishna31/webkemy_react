@@ -463,7 +463,11 @@ const DayView = ({
             className={styles.curr_time_badge}
             style={{ "--time-px": `${currTimeToPx}px` } as CSSProperties}
           >
-            {currTimeParts[1]}{":"}{String(currTimeParts[2]).padStart(2, "0")} {currTimeParts[0]}
+            {
+              timeFormat === "12h"
+                ? `${currTimeParts[1]}:${String(currTimeParts[2]).padStart(2, "0")} ${currTimeParts[0]}`
+                : `${currDatetime.getHours()}:${currDatetime.getMinutes()}`
+            }
           </div>
           <div
             className={styles.time_badge}

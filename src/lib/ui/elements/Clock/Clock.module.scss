@@ -3,7 +3,7 @@
   height: 30rem;
   border-radius: 50%;
   border: .6rem double var(--fg-t);
-  background: var(--bg-s);
+  background: var(--bg-t);
   display: grid;
   place-items: center;
   position: relative;
@@ -121,8 +121,8 @@
   animation: fade-mark .5s ease;
 
   &>div {
-    height: .6rem;
-    width: .6rem;
+    height: .4rem;
+    width: .4rem;
     background: var(--border-s);
     border-radius: 50%;
   }
@@ -140,6 +140,6 @@
   line-height: 1;
   margin-block-end: .8rem;
   font-weight: bold;
-  color: var(--fg-t);
+  color: var(--fg-s-alt);
   font-size: 2.4rem;
 }
