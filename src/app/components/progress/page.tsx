@@ -25,8 +25,8 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="progress" />
 
-      <Progress variant="circular" />
-      <Progress variant="linear" />
+      <Progress variant="circular" indeterminate />
+      <Progress variant="linear" indeterminate />
       <Progress variant="circular" value={value} />
       <Progress variant="linear" value={value} />
     </main>

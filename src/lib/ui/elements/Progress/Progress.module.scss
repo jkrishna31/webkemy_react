@@ -27,36 +27,14 @@
     transition: width .1s linear;
   }
 
-  &:not([data-value="true"]) .progress {
+  &:not([data-indeterminate="false"]) .progress {
     width: var(--value);
   }
 
-  &[data-value="true"] .progress {
+  &[data-indeterminate="true"] .progress {
     width: 25%;
     animation: indeterminate-linear 1s linear alternate infinite;
   }
-
-  // &::after {
-  //   content: '';
-  //   position: absolute;
-  //   top: 0;
-  //   left: 0;
-  //   width: 100%;
-  //   height: 100%;
-  //   border-radius: var(--br-pill);
-  //   transition: background;
-  // }
-
-  // &:not([data-value="true"])::after {
-  //   background: linear-gradient(to right, var(--fg-p-alt) var(--value), var(--border-t) var(--value));
-  // }
-
-  // &[data-value="true"]::after {
-  //   width: 20%;
-  //   background: var(--fg-p-alt);
-  //   transform: none;
-  //   animation: indeterminate-linear 1s linear alternate infinite;
-  // }
 }
 
 @keyframes indeterminate-linear {
@@ -74,15 +52,18 @@
 .circular {
   width: 3.2rem;
   height: 3.2rem;
+}
+
+.circular[data-svg="false"] {
   border-radius: 50%;
   background-color: var(--border-t);
   transition: background;
 
-  &:not([data-value="true"]) {
+  &:not([data-indeterminate="false"]) {
     background: conic-gradient(var(--fg-p-alt) var(--value), var(--border-t) var(--value));
   }
 
-  &[data-value="true"] {
+  &[data-indeterminate="false"] {
     background: conic-gradient(var(--fg-p-alt) 25%, var(--border-t) 25%);
     animation: indeterminate-circular 1s linear infinite;
   }
@@ -97,6 +78,26 @@
     height: calc(100% - 1.2rem);
     background: var(--bg-p);
     border-radius: 50%;
+  }
+}
+
+.circular_progress {
+  position: absolute;
+  inset: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotateZ(-90deg);
+
+  transition: stroke-dashoffset .3s linear;
+
+  .track {
+    stroke: var(--border-t);
+  }
+
+  &[data-indeterminate="true"] {
+    animation: indeterminate-circular 1s linear infinite;
   }
 }
 

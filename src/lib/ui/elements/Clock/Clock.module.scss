@@ -55,25 +55,33 @@
   }
 }
 
-.hour_hand>div {
-  width: .6rem;
-  height: 35%;
-  border-radius: var(--br-pill);
-  background: var(--fg-p-alt);
+.hour_hand {
+  &>div {
+    width: .6rem;
+    height: 35%;
+    border-radius: var(--br-pill);
+    background: var(--fg-p-alt);
+  }
 }
 
-.min_hand>div {
-  width: .8rem;
-  height: 55%;
-  border-radius: var(--br-pill);
-  border: .2rem solid var(--fg-p-alt);
+.min_hand {
+  &>div {
+    width: .8rem;
+    height: 55%;
+    border-radius: var(--br-pill);
+    border: .2rem solid var(--fg-p-alt);
+  }
 }
 
-.sec_hand>div {
-  width: .2rem;
-  height: 60%;
-  background: var(--red-4);
-  border-radius: var(--br-pill);
+.sec_hand {
+  // transition: transform .1s linear;
+
+  &>div {
+    width: .2rem;
+    height: 60%;
+    background: var(--red-4);
+    border-radius: var(--br-pill);
+  }
 }
 
 .mark {
@@ -91,6 +99,12 @@
   justify-content: flex-end;
   align-items: center;
   padding-block-end: .8rem;
+
+  &>div {
+    transition-property: background;
+    transition-duration: .2s;
+    transition-timing-function: ease;
+  }
 }
 
 .mark[data-hour="major"] {
@@ -100,7 +114,6 @@
     height: 1.4rem;
     width: .2rem;
     background: var(--fg-t);
-    // border-radius: var(--br-pill);
     border-top-left-radius: var(--br-pill);
     border-top-right-radius: var(--br-pill);
   }
@@ -126,6 +139,10 @@
     background: var(--border-s);
     border-radius: 50%;
   }
+}
+
+.mark[data-active="true"]>div {
+  background: var(--red-4);
 }
 
 @keyframes fade-mark {
