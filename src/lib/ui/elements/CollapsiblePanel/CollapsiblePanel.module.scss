@@ -1,12 +1,13 @@
 .container {
   --mxh: 0;
+  --cp-trans-dur: 500ms;
 
   height: var(--mxh);
   overflow: hidden;
   opacity: 0;
 
   transition-timing-function: ease;
-  transition-duration: 500ms;
+  transition-duration: var(--cp-trans-dur);
   transition-property: height, opacity;
 
   &[data-expanded="true"] {

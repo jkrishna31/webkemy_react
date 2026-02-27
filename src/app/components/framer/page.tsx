@@ -7,16 +7,13 @@ import styles from "./page.module.scss";
 const dummyPages = Array.from({ length: 20 }).map((_, idx) => idx + 1);
 
 const page = () => {
-  // === in the container
   // currFrame, prevFrame, nextFrame
   // onChange function return newCurr frame number
   // auto render the content in prev, curr, and next frame container as per the frame count
 
-  // === inside the component
+  // inside the component
   // WHEN REACT BOTTOM (how to know when reach bottom)
   // use pointerevents 
-
-  // WHEN REACT TOP
 
   return (
     <main>

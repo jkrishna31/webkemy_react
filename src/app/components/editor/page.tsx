@@ -5,7 +5,7 @@ import { useCallback, useRef, useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { editorBlocks, editorTools } from "@/constants/editor.const";
 import { useEditor } from "@/lib/hooks/useEditor";
-import { BlockSelector, Editor, ToolSelector } from "@/lib/ui/elements/editor";
+import { BlockSelector, Editor, FindReplace, ToolSelector } from "@/lib/ui/elements/editor";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Popover } from "@/lib/ui/elements/Popover";
@@ -55,6 +55,7 @@ import OrderedListIcon from "@/lib/ui/svgs/icons/OrderedListIcon";
 import PanelTopCloseIcon from "@/lib/ui/svgs/icons/PanelTopCloseIcon";
 import PilcrowIcon from "@/lib/ui/svgs/icons/PilcrowIcon";
 import RedoIcon from "@/lib/ui/svgs/icons/RedoIcon";
+import SearchReplaceIcon from "@/lib/ui/svgs/icons/SearchReplaceIcon";
 import SparklesIcon from "@/lib/ui/svgs/icons/SparklesIcon";
 import SubscriptIcon from "@/lib/ui/svgs/icons/SubscriptIcon";
 import SuperscriptIcon from "@/lib/ui/svgs/icons/SuperscriptIcon";
@@ -345,6 +346,11 @@ const toolOptions = [
   [
     {
       type: "popover",
+      name: "Find & Replace", key: "find_replace",
+      render: <SearchReplaceIcon className={styles.icon} />,
+    },
+    {
+      type: "popover",
       name: "Convert", key: editorTools.CONVERT,
       render: <SwapIcon className={styles.icon} />
     },
@@ -370,6 +376,7 @@ const toolOptions = [
 
 const Page = () => {
   const [mode, setMode] = useState<"edit" | "preview">("edit");
+  const [showFinder, setShowFinder] = useState(false);
 
   const editorRef = useRef<HTMLDivElement>(null);
 
@@ -425,8 +432,11 @@ const Page = () => {
         break;
       case editorTools.COPY_LINK:
         break;
+      case "find_replace":
+        setShowFinder(!showFinder);
+        break;
     }
-  }, []);
+  }, [showFinder]);
 
   const renderToolbar = () => {
     return (
@@ -479,8 +489,13 @@ const Page = () => {
             </Popover>
           )}
         </Editor>
+        {!!showFinder && (
+          <div className={styles.finder_wrapper}>
+            <FindReplace onClose={() => setShowFinder(false)} />
+          </div>
+        )}
         <div className={styles.toolbar_mobile}>
-          {renderToolbar()}
+          {!showFinder && renderToolbar()}
         </div>
       </div>
     </main>

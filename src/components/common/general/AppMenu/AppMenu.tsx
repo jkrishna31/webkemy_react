@@ -71,7 +71,7 @@ import TabsIcon from "@/lib/ui/svgs/icons/TabsIcon";
 import TagIcon from "@/lib/ui/svgs/icons/TagIcon";
 import TextIcon from "@/lib/ui/svgs/icons/TextIcon";
 import TextIcon3 from "@/lib/ui/svgs/icons/TextIcon3";
-import ToggleSwitchIcon from "@/lib/ui/svgs/icons/ToggleSwitchIcon";
+import ToggleOnIcon from "@/lib/ui/svgs/icons/ToggleOnIcon";
 import TreeListIcon from "@/lib/ui/svgs/icons/TreeListIcon";
 import UnorderedListIcon from "@/lib/ui/svgs/icons/UnorderedListIcon";
 import UserCircleIcon from "@/lib/ui/svgs/icons/UserCircleIcon";
@@ -151,7 +151,7 @@ export const menuItems = [
                 key: "switch",
                 href: "/components/switch",
                 primary: "Switch",
-                icon: <ToggleSwitchIcon />,
+                icon: <ToggleOnIcon />,
             },
             {
                 key: "textarea",

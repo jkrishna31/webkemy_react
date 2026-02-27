@@ -6,6 +6,7 @@ import { useElementRef } from "@/lib/hooks/useElementRef";
 import { Button, Variant } from "@/lib/ui/elements/butttons";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
+import ExpandVerticalIcon from "@/lib/ui/svgs/icons/ExpandVerticalIcon";
 import { LayoutPosition } from "@/lib/utils/dom.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -65,7 +66,7 @@ const Dropdown = ({
         {
           hintIcon ?? (
             hintIcon !== null ? (
-              <ExpandSolidIcon className={styles.hint_icon} />
+              <ExpandVerticalIcon className={styles.hint_icon} />
             ) : null
           )
         }

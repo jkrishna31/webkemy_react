@@ -39,9 +39,16 @@
         color: var(--fg-p);
     }
 
-    .down_icon {
+    .clear_icon {
         width: 1.8rem;
         height: 1.8rem;
+        stroke-width: .175rem;
+    }
+
+    .down_icon {
+        width: 2rem;
+        height: 2rem;
+        stroke-width: .175rem;
     }
 }
 
@@ -86,10 +93,5 @@
 
     .label {
         font-size: 1.4rem;
-    }
-
-    .down_icon {
-        width: 1.6rem;
-        height: 1.6rem;
     }
 }

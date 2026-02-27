@@ -74,8 +74,9 @@ const CollapsiblePanel = <T extends ElementType = "div">({
   });
 
   useLayoutEffect(() => {
+    if (ref.current) ref.current.style.setProperty("--cp-trans-dur", `${duration}ms`);
     isFirstRender.current = false;
-  }, []);
+  }, [duration]);
 
   useLayoutEffect(() => {
     updateHeight(duration, open, renderWhileClosed);

@@ -6,8 +6,7 @@
     background-color: transparent;
     border-radius: var(--br-pill);
     font-weight: 500;
-    will-change: transform;
-    transition: border-color .2s linear, background .2s linear, color .2s linear, transform .15s ease;
+    transition: border .2s linear, background .2s linear, color .2s linear, transform .15s ease;
 
     &:disabled {
         opacity: .5;

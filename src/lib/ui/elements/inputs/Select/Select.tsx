@@ -11,6 +11,7 @@ import { Popover } from "@/lib/ui/elements/Popover";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import ExpandSolidIcon from "@/lib/ui/svgs/icons/ExpandSolidIcon";
+import ExpandVerticalIcon from "@/lib/ui/svgs/icons/ExpandVerticalIcon";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./Select.module.scss";
@@ -196,7 +197,7 @@ const Select = ({
                             title="Clear"
                             aria-label="Clear Select"
                         >
-                            <CrossIcon strokeWidth={2} className={styles.down_icon} />
+                            <CrossIcon className={styles.clear_icon} />
                         </button>
                     ) : null
                 }
@@ -210,7 +211,7 @@ const Select = ({
                     title="Options Dropdown"
                     aria-label={open ? "Open Options" : "Close Options"}
                 >
-                    <ExpandSolidIcon className={styles.down_icon} />
+                    <ExpandVerticalIcon className={styles.down_icon} />
                 </button>
             </InputFieldWrapper>
             {(open && !!anchorRef.current) && (
