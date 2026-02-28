@@ -112,9 +112,10 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
 
   const toggleToolbarVisibility = () => setShowToolbar(!showToolbar);
 
-  useLayoutEffect(() => {
+  const updateCaret = useEffectEvent(() => {
     try {
-      const activeBlock = ref.current?.querySelector(`[data-block="${selection?.startBlock}"]`);
+      if (!ref.current) return;
+      const activeBlock = ref.current.querySelector(`[data-block="${selection?.startBlock}"]`);
       const _selection = window.getSelection();
       if (!activeBlock || !_selection) return;
       if (!_selection.isCollapsed) return;
@@ -129,7 +130,11 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     } catch (error) {
 
     }
-  }, [ref, selection]);
+  });
+
+  useLayoutEffect(() => {
+    updateCaret();
+  }, [selection]);
 
   // HISTORY ==================================================================
 
@@ -206,6 +211,7 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
         newData.push(newBlock);
         // @ts-ignore
         setSelection(currSelection => ({ ...currSelection, startOffset: (currSelection?.startOffset ?? 0) + text.length }));
+        // todo: update the formattings
       } else {
         newData.push(deepClone(data[i]));
       }
@@ -232,11 +238,18 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     setData(newBlocks);
   };
 
+  const iterateTextBlock = (block: BlockChild[], offset: number, cb: () => any) => {
+    const newBlock: BlockChild[] = [];
+
+    const _iterate = () => {
+
+    };
+
+    return newBlock;
+  };
+
   const deleteContent = (dir: CaretActionDir = "backward") => {
     // deleteContent, deleteContentBackward, deleteContentForward
-
-    // req: blockId, offset
-    // go upto the offset: check which formatting the offset belongs
   };
 
   const deleteWord = (dir: CaretActionDir = "backward") => {
@@ -422,6 +435,10 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
       formatLink();
     } else if (e.key === "f" && e.ctrlKey) {
       // show find popup
+    } else if (e.key === "z" && e.ctrlKey) {
+      historyUndo();
+    } else if (e.key === "y" && e.ctrlKey) {
+      historyRedo();
     }
   });
 

@@ -388,6 +388,15 @@ const Page = () => {
 
   // console.log("--- data & selection ---", data, selection?.startBlock, selection?.startOffset);
 
+  const updateFinderVisibility = useCallback((show: boolean) => {
+    if (show) {
+      setShowFinder(true);
+      // toggleToolbarVisibility();
+    } else {
+      setShowFinder(false);
+    }
+  }, []);
+
   const handleBlockSelect = useCallback((key: any) => {
     insertBlock(key);
   }, [insertBlock]);
@@ -433,10 +442,10 @@ const Page = () => {
       case editorTools.COPY_LINK:
         break;
       case "find_replace":
-        setShowFinder(!showFinder);
+        updateFinderVisibility(!showFinder);
         break;
     }
-  }, [showFinder]);
+  }, [showFinder, updateFinderVisibility]);
 
   const renderToolbar = () => {
     return (
@@ -489,13 +498,11 @@ const Page = () => {
             </Popover>
           )}
         </Editor>
-        {!!showFinder && (
-          <div className={styles.finder_wrapper}>
-            <FindReplace onClose={() => setShowFinder(false)} />
-          </div>
-        )}
-        <div className={styles.toolbar_mobile}>
-          {!showFinder && renderToolbar()}
+        <div className={styles.finder_wrapper}>
+          {!!showFinder && (
+            <FindReplace className={styles.finder} onClose={() => setShowFinder(false)} />
+          )}
+          {renderToolbar()}
         </div>
       </div>
     </main>
