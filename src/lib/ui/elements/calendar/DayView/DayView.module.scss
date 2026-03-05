@@ -1,6 +1,7 @@
 .container {
-  --top-offset: 1.2rem;
+  --top-offset: 1.6rem;
   --day-cell-height: 6rem;
+  --ade-height: 3.4rem;
 
   width: 100%;
   font-size: 1.4rem;
@@ -50,17 +51,32 @@
   flex-direction: column;
 }
 
+.header_row {
+  position: sticky;
+  top: 0;
+  background-color: var(--bg-p);
+}
+
 .weekday_header_row {
   display: flex;
   align-items: centere;
   width: 100%;
   height: fit-content;
-  position: sticky;
-  top: 0;
 }
 
-.weekday_header_row,
-.week_number {
+.all_day_events,
+.all_day_label {
+  min-height: var(--ade-height);
+  border-bottom: .2rem solid var(--border-t);
+  border-top: .1rem solid var(--border-t);
+}
+
+.all_day_label {
+  padding-top: .8rem;
+}
+
+.header_row,
+.labels_wrapper {
   z-index: 2; // so that event badges will be below
 }
 
@@ -78,20 +94,19 @@
   flex: 1;
 }
 
-.week_number {
+.labels_wrapper {
   position: sticky;
   top: 0;
   left: 0;
-  text-align: end;
   z-index: 3;
   background-color: var(--bg-p);
+  text-align: end;
 }
 
 .weekday_header_cell,
 .week_number {
   font-size: 1.4rem;
   font-weight: 500;
-  background-color: var(--bg-p);
   color: var(--fg-s);
   display: flex;
   align-items: center;
@@ -137,9 +152,15 @@
 }
 
 .week_number,
-.hr_cell {
-  padding-inline: .6rem 1rem;
+.hr_cell,
+.all_day_label {
+  padding-inline: .4rem 1rem;
   background-color: var(--bg-p);
+}
+
+.all_day_label {
+  color: var(--fg-s);
+  font-weight: 500;
 }
 
 .hr_cell {
@@ -229,9 +250,12 @@
   transition: none;
 }
 
+.week_number,
+.weekday_header_cell {
+  height: 5rem;
+}
+
 .hr_cell,
-.day_cell,
-.weekday_header_cell,
-.week_number {
+.day_cell {
   height: var(--day-cell-height);
 }

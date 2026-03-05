@@ -62,13 +62,14 @@ const ChatComposer = ({
     >
       <InputFieldWrapper className={styles.input_wrapper}>
         <FilesPreview
-          files={Array.from(filelist?.length ? filelist : [])} mode="file" noHeading
+          files={Array.from(filelist?.length ? filelist : [])}
+          noHeading
           className={styles.files_preview}
           onDelete={deleteFileByName}
         />
         <TextArea
           rows={1}
-          placeholder="Ask your query..."
+          placeholder="Write..."
           value={query}
           onInput={(e: any) => setQuery(e.target.value)}
           ref={inputRef}

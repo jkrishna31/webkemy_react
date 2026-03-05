@@ -1,0 +1,61 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .6rem;
+  margin: .4rem .8rem;
+  background-color: var(--bg-s);
+  border-radius: var(--br-pill);
+
+  .pin_icon {
+    width: 1.8rem;
+    height: 1.8rem;
+    stroke-width: .175rem;
+    color: var(--fg-s-alt);
+    margin-left: .6rem;
+    flex-shrink: 0;
+    // transform: rotateY(180deg);
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: var(--fg-s);
+    @include line_clamp(1);
+
+    &:hover {
+      color: var(--fg-p-alt);
+    }
+  }
+
+  .all_pinned {
+    margin-left: auto;
+    min-height: fit-content;
+    padding: .2rem .8rem;
+    color: var(--fg-s-alt);
+    border-color: var(--border-p-alt);
+
+    &:hover {
+      color: var(--fg-p-alt);
+      border-color: var(--border-p);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .pin_icon {
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+
+    p {
+      font-size: 1.4rem;
+    }
+
+    .all_pinned {
+      font-size: 1.5rem;
+    }
+  }
+}

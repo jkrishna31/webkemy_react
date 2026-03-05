@@ -4,18 +4,21 @@
   gap: 1rem;
   position: relative;
   max-height: fit-content;
-  margin-bottom: 1.6rem;
+  margin-bottom: 1.8rem;
 }
 
 .datetime {
   align-self: center;
   font-size: 1.3rem;
+  font-weight: 500;
   color: var(--fg-s);
   background-color: var(--bg-p);
   padding: .3rem .8rem .4rem .8rem;
   border-radius: var(--br-pill);
   position: sticky;
   top: .4rem;
+  z-index: 2;
+  isolation: isolate;
 }
 
 .divider_banner {

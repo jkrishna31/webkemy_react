@@ -1,0 +1,62 @@
+.wrapper {
+  display: flex;
+  align-items: flex-start;
+  gap: .4rem;
+  width: fit-content;
+  margin-top: .2rem;
+  max-width: 100%;
+
+  .reactions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .4rem;
+  }
+
+  .item {
+    display: flex;
+    align-items: center;
+    gap: .4rem;
+    color: var(--fg-s);
+    font-weight: 500;
+    background-color: var(--bg-s);
+    border: .1rem solid transparent;
+    border-radius: 999.6rem;
+    padding: .3rem .8rem;
+    cursor: pointer;
+
+    span:last-child {
+      font-size: 1.4rem;
+    }
+
+    &:hover {
+      background-color: var(--bg-hover);
+      color: var(--fg-p-alt);
+    }
+
+    &[aria-pressed="true"] {
+      background-color: var(--red-1-10);
+      color: var(--red-1);
+      border-color: var(--red-1-50);
+    }
+  }
+
+  .add_reaction_btn {
+    min-height: fit-content;
+    padding: .5rem;
+    color: var(--fg-s);
+
+    svg {
+      width: 1.9rem;
+      height: 1.9rem;
+      stroke-width: .175rem;
+    }
+
+    &:hover {
+      background-color: var(--bg-hover);
+      color: var(--fg-p-alt);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {}

@@ -1,0 +1,135 @@
+.wrapper {
+  margin-top: .4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.gallary {
+  position: relative;
+  width: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: .6rem;
+  padding: .4rem;
+  border-radius: .8rem;
+  background-color: var(--blue-1-10);
+  transition: background .2s linear;
+}
+
+.img_item {
+  width: 10rem;
+  height: 10rem;
+  border-radius: .6rem;
+  background-color: var(--bg-q);
+  overflow: hidden;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.more {
+  position: relative;
+}
+
+.individual {
+  grid-template-columns: 1fr;
+
+  .img_item {
+    width: 20rem;
+    height: 20rem;
+  }
+}
+
+.img_more {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--gray-12-70);
+  color: var(--fg-p-alt);
+  // backdrop-filter: blur(2px);
+  font-size: 2rem;
+  font-weight: bold;
+  border-radius: .6rem;
+}
+
+.audios,
+.videos,
+.others {
+  width: fit-content;
+  display: grid;
+  gap: .4rem;
+}
+
+// .audio_player {
+//   --ap-controls-bg: var(--blue-1-10);
+//   --ap-controls-bg-hover: var(--blue-1-25);
+//   background-color: var(--bg-s);
+//   border-radius: var(--br-pill);
+//   padding: .8rem;
+// }
+
+.other_item {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  border-radius: .8rem;
+  padding: .6rem;
+  background-color: var(--blue-1-10);
+  transition: background .2s linear;
+
+  .details {
+    margin-inline: .2rem;
+  }
+
+  button {
+    color: var(--fg-s);
+    min-height: fit-content;
+    padding: .6rem;
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke-width: .175rem;
+    }
+  }
+}
+
+.filename {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: .3rem;
+  color: var(--blue-1);
+}
+
+.meta {
+  font-size: 1.4rem;
+  color: var(--fg-s);
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.separator {
+  font-size: 1rem;
+}
+
+.type {
+  text-transform: uppercase;
+}
+
+.wrapper[data-selected="true"] {
+
+  .gallary,
+  .other_item {
+    background-color: var(--blue-1-25);
+  }
+}

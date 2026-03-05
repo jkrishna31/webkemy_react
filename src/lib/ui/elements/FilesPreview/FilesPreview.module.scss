@@ -20,27 +20,37 @@
 .pi_img {
   position: relative;
   width: fit-content;
-  border-radius: .4rem;
+  border-radius: .8rem;
 }
 
 .pi_file {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--bg-t);
-  border-radius: .6rem;
-  padding: .6rem 1rem;
+  background-color: var(--bg-s);
+  border-radius: .8rem;
+  padding: .6rem;
+
+  img {
+    display: block;
+    border-radius: .6rem;
+    width: 3.6rem;
+    height: 3.6rem;
+    background-color: var(--bg-p);
+    object-fit: cover;
+    margin-right: .8rem;
+  }
 }
 
-.fn {
+.filename {
   font-size: 1.5rem;
-  line-height: 1.5;
+  margin-bottom: .2rem;
   text-wrap: nowrap;
   font-weight: 500;
   color: var(--fg-p);
 }
 
-.fs {
+.filesize {
   font-size: 1.3rem;
   color: var(--fg-s);
   text-wrap: nowrap;
@@ -50,7 +60,7 @@
   width: 9rem;
   height: 9rem;
   object-fit: cover;
-  border-radius: .4rem;
+  border-radius: .6rem;
   background-color: var(--bg-t);
 }
 
@@ -60,24 +70,27 @@
   right: .4rem;
   min-width: 2.6rem;
   min-height: 2.6rem;
-  border-radius: 50%;
+  border-radius: .6rem;
   padding-inline: 0;
   padding-block: 0;
   background-color: var(--bg-t);
 
   &:hover {
-    color: var(--red-6);
+    color: var(--red-1);
+    background-color: var(--red-1-25);
   }
 }
 
 .pif_db {
-  background-color: var(--bg-p);
+  color: var(--red-1);
+  background-color: var(--red-1-10);
   min-width: 3.6rem;
   min-height: 3.6rem;
-  margin-left: 1.2rem;
+  margin-left: 1rem;
+  border-radius: .8rem;
 
   &:hover {
-    color: var(--red-6);
+    background-color: var(--red-1-25);
   }
 }
 
@@ -90,11 +103,11 @@
 
 
 @media screen and (max-width: 768px) {
-  .fn {
+  .filename {
     font-size: 1.4rem;
   }
 
-  .fs {
+  .filesize {
     font-size: 1.2rem;
   }
 }

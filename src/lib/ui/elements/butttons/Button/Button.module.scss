@@ -2,9 +2,10 @@
     display: flex;
     align-items: center;
     text-align: center;
+    line-height: 1;
     gap: .4rem;
     background-color: transparent;
-    border-radius: var(--br-pill);
+    border-radius: 6rem;
     font-weight: 500;
     transition: border .2s linear, background .2s linear, color .2s linear, transform .15s ease;
 

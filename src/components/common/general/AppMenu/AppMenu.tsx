@@ -342,9 +342,9 @@ export const menuItems = [
                 icon: <CarouselVerticalIcon />,
             },
             {
-                key: "chatbot",
-                href: "/components/chatbot",
-                primary: "Chatbot",
+                key: "chat",
+                href: "/components/chat",
+                primary: "Chat",
                 icon: <MessagesIcon />,
             },
             {

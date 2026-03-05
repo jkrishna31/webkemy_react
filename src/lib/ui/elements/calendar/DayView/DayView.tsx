@@ -124,7 +124,7 @@ const DayView = ({
   onAdd,
   className,
   days = 1,
-  topOffset = 12,
+  topOffset = 16,
   cellSize = DAY_CELL_SIZE_IN_PX,
 }: DayViewProps) => {
   const { setStore, setField, getSegregatedEvents } = useCalendarActions();
@@ -442,11 +442,18 @@ const DayView = ({
 
     >
       <div className={classes(styles.col, styles.hr_col)}>
-        {
-          days > 1 ? (
-            <div className={styles.week_number}>{"W"}{week}</div>
-          ) : null
-        }
+        <div className={styles.labels_wrapper}>
+          {
+            days > 1 ? (
+              <div className={styles.week_number}>
+                {"W"}{week}
+              </div>
+            ) : null
+          }
+          <div className={styles.all_day_label}>
+            {"All Day"}
+          </div>
+        </div>
         <div className={styles.hour_marks}>
           {
             Array.from({ length: 24 }).map((_, idx) => {
@@ -478,41 +485,46 @@ const DayView = ({
         </div>
       </div>
       <div className={styles.days_wrapper}>
-        {
-          days > 1 ? (
-            <div className={styles.weekday_header_row}>
-              {
-                Array.from({ length: days }).map((_, idx) => {
-                  const weekDayKey: string = weekDaysOrder[(weekDayStart + idx) % weekDaysOrder.length];
-                  return (
-                    <div
-                      key={weekDayKey}
-                      className={styles.weekday_header_cell}
-                      data-month={weekDetails[idx].monthType}
-                      data-day-state={
-                        (currMonthAndYear && currDate.getDate() === weekDetails[idx].date[2])
-                          ? "today"
-                          : day === weekDetails[idx].date[2]
-                            ? "active"
-                            : ""
-                      }
-                    >
-                      <button
-                        onClick={() => setStore({
-                          activeDay: weekDetails[idx].date[2],
-                          activeMonth: weekDetails[idx].date[1],
-                          mode: "day",
-                        })}
+        <div className={styles.header_row}>
+          {
+            days > 1 ? (
+              <div className={styles.weekday_header_row}>
+                {
+                  Array.from({ length: days }).map((_, idx) => {
+                    const weekDayKey: string = weekDaysOrder[(weekDayStart + idx) % weekDaysOrder.length];
+                    return (
+                      <div
+                        key={weekDayKey}
+                        className={styles.weekday_header_cell}
+                        data-month={weekDetails[idx].monthType}
+                        data-day-state={
+                          (currMonthAndYear && currDate.getDate() === weekDetails[idx].date[2])
+                            ? "today"
+                            : day === weekDetails[idx].date[2]
+                              ? "active"
+                              : ""
+                        }
                       >
-                        {weekDetails[idx].date[2]} {weekDays[weekDayKey].label.slice(0, 3)}
-                      </button>
-                    </div>
-                  );
-                })
-              }
-            </div>
-          ) : null
-        }
+                        <button
+                          onClick={() => setStore({
+                            activeDay: weekDetails[idx].date[2],
+                            activeMonth: weekDetails[idx].date[1],
+                            mode: "day",
+                          })}
+                        >
+                          {weekDetails[idx].date[2]} {weekDays[weekDayKey].label.slice(0, 3)}
+                        </button>
+                      </div>
+                    );
+                  })
+                }
+              </div>
+            ) : null
+          }
+          <div className={styles.all_day_events}>
+
+          </div>
+        </div>
         <div
           ref={ref}
           className={styles.day_cols_wrapper}

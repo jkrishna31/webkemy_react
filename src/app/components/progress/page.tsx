@@ -15,7 +15,7 @@ const Page = () => {
     if (intervalRef.current) clearTimeout(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setValue(oldVal => oldVal + 1 >= 100 ? 0 : oldVal + 1);
-    }, 200);
+    }, 100);
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };

@@ -18,7 +18,7 @@ interface IPreview {
   src?: string
   size?: number
   label?: string
-  type: "file" | "src"
+  type: "file" | "src" | "image";
 }
 
 export interface FilesPreviewProps extends ComponentProps<"ul"> {
@@ -35,6 +35,8 @@ const FilesPreview = ({
 }: FilesPreviewProps) => {
   const [previews, setPreviews] = useState<IPreview[]>([]);
 
+  const isAllImages = previews.every(item => item.type === "image");
+
   const updatePeviews = useEffectEvent((_previews: IPreview[]) => {
     setPreviews(_previews);
   });
@@ -43,23 +45,21 @@ const FilesPreview = ({
     const pLocal: IPreview[] = [];
     if (hasDOM() && files?.length) {
       for (let i = 0; i < files.length; i++) {
-        if (mode !== "file" && files[i].type.startsWith("image")) {
-          pLocal.push({
-            name: files[i].name,
-            src: URL.createObjectURL(files[i]),
-            type: "file",
-          });
-        } else if (mode === "file" && files[i].type !== "application/json") {
-          // first 5 chars of name + .ext (split on last .)
-          const nameParts = files[i].name.split(".");
-          const formattedName = (nameParts[0].length <= 10 ? nameParts[0] : nameParts[0].substring(0, 10)) + "..." + nameParts.at(-1);
-          pLocal.push({
-            name: files[i].name,
-            label: formattedName,
-            size: files[i].size,
-            type: "file",
-          });
+        const fileType = files[i].type;
+        // first 5 chars of name + .ext (split on last .)
+        const nameParts = files[i].name.split(".");
+        const formattedName = (nameParts[0].length <= 10 ? nameParts[0] : nameParts[0].substring(0, 10)) + "..." + nameParts.at(-1);
+        const isImage = fileType.startsWith("image/");
+        const payload: IPreview = {
+          name: files[i].name,
+          label: formattedName,
+          size: files[i].size,
+          type: isImage ? "image" : "file",
+        };
+        if (isImage) {
+          payload.src = URL.createObjectURL(files[i]);
         }
+        pLocal.push(payload);
       }
     }
     if (srcs?.length) {
@@ -92,22 +92,34 @@ const FilesPreview = ({
       <ul className={styles.pc} {...props}>
         {
           previews?.map((preview) => {
-            if (mode !== "file") {
+            if (isAllImages) {
               return (
-                <li className={styles.pi_img} key={preview.name}>
+                <li
+                  key={preview.name}
+                  className={styles.pi_img}
+                >
                   <Image width={60} height={60} src={preview?.src ?? ""} alt={preview.name} className={styles.img} />
                   <Button
-                    className={styles.pii_db} icon={<CrossIcon className={styles.del_icon} />}
+                    className={styles.pii_db}
+                    icon={<CrossIcon className={styles.del_icon} />}
                     onClick={() => handleDelete(preview)}
                   />
                 </li>
               );
-            } else if (mode === "file") {
+            } else {
               return (
-                <li className={styles.pi_file} key={preview.name}>
+                <li
+                  key={preview.name}
+                  className={styles.pi_file}
+                >
+                  {preview.type === "image" && (
+                    <div>
+                      <Image width={60} height={60} src={preview?.src ?? ""} alt={preview.name} className={styles.img} />
+                    </div>
+                  )}
                   <div className={styles.pi_left}>
-                    <b className={styles.fn}>{preview.label}</b>
-                    <p className={styles.fs}>{formatSize(preview.size ?? 0)}</p>
+                    <p className={styles.filename}>{preview.label}</p>
+                    <p className={styles.filesize}>{formatSize(preview.size ?? 0)}</p>
                   </div>
                   <div className={styles.pi_right}>
                     <Button

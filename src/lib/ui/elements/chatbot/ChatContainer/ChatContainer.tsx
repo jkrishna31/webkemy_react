@@ -7,8 +7,10 @@ import { dummyChats } from "@/data/dummy/chatData";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { ChatComposer } from "@/lib/ui/elements/chat/ChatComposer";
 import { ChatList } from "@/lib/ui/elements/chat/ChatList";
+import { PinnedBanner } from "@/lib/ui/elements/chat/PinnedBanner";
 import CircleInfoIcon from "@/lib/ui/svgs/icons/CircleInfoIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import MaximizeIcon from "@/lib/ui/svgs/icons/MaximizeIcon";
 import MinimizeIcon from "@/lib/ui/svgs/icons/MinimizeIcon";
 import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
@@ -64,6 +66,12 @@ const ChatContainer = ({
         <div className={styles.header}>
           <h3>{"HelpBot"}</h3>
           <button
+            className={styles.more_btn}
+          >
+            <EllipsisHIcon />
+          </button>
+          {/* Pinned, Starred, */}
+          <button
             className={styles.info_btn}
           >
             <CircleInfoIcon />
@@ -92,6 +100,7 @@ const ChatContainer = ({
             <CrossIcon />
           </button>
         </div>
+        <PinnedBanner />
         <ChatList chats={chats} lastReadMsgId={lastReadMsgId} />
         <ChatComposer className={styles.footer} onSend={onSend} />
       </div>

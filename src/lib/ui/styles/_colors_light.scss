@@ -17,6 +17,7 @@
 
     --red-1: rgb(248, 53, 89);
     --red-1-10: rgba(201, 57, 98, 0.1);
+    --red-1-25: rgba(201, 57, 98, 0.25);
     --red-1-50: rgba(201, 57, 98, 0.5);
     --red-4: rgb(242, 57, 66);
     --red-5: rgb(232, 51, 84);
@@ -31,6 +32,7 @@
 
     --green-1: rgb(22, 174, 124);
     --green-1-10: rgba(34, 204, 147, 0.1);
+    --green-1-25: rgba(34, 204, 147, 0.25);
     --green-1-50: rgba(34, 204, 147, 0.5);
     --green-2: #09835d;
     --green-3: rgb(30, 157, 36);
@@ -40,6 +42,7 @@
 
     --blue-1: rgb(67, 141, 238);
     --blue-1-10: rgba(44, 98, 184, 0.1);
+    --blue-1-25: rgba(44, 98, 184, 0.25);
     --blue-1-50: rgba(44, 98, 184, 0.5);
     --blue-2: #37a5ff;
     --blue-6: #4c82ef;
@@ -68,12 +71,13 @@
     --gray-11: rgb(252, 254, 255);
     --gray-11-30: rgba(252, 254, 255, 0.3);
     --gray-11-70: rgba(252, 254, 255, 0.6);
+    --gray-11-80: rgba(252, 254, 255, 0.8);
     --gray-12: rgb(240, 242, 244);
     --gray-12-70: rgba(240, 242, 244, .7);
     --gray-13: rgb(246, 248, 250);
     --gray-13-70: rgba(246, 248, 250, .7);
     --gray-14: #f1f3f5;
-    --gray-15: #eff0f1;
+    --gray-15: rgb(234, 236, 238);
     --gray-16: rgb(14, 20, 27);
     --gray-17: rgb(37, 38, 42);
     --gray-24: #414655;
@@ -106,6 +110,7 @@
     --bg-selection: var(--ghost-4);
     --bg-hover: var(--ghost-1);
     --bg-highlight: var(--gray-24);
+    --bg-active: var(--gray-30);
     --bg-scrollbar-thumb: var(--gray-6);
     --bg-scrollbar-track: transparent;
 

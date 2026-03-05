@@ -382,7 +382,7 @@ const Page = () => {
 
   const {
     data, selection,
-    showToolbar, toggleToolbarVisibility,
+    showToolbar, toggleToolbarVisibility, setShowToolbar,
     insertBlock, deleteBlock,
   } = useEditor(editorRef, defaultBlocks);
 
@@ -391,11 +391,11 @@ const Page = () => {
   const updateFinderVisibility = useCallback((show: boolean) => {
     if (show) {
       setShowFinder(true);
-      // toggleToolbarVisibility();
+      setShowToolbar(false);
     } else {
       setShowFinder(false);
     }
-  }, []);
+  }, [setShowToolbar]);
 
   const handleBlockSelect = useCallback((key: any) => {
     insertBlock(key);
@@ -502,7 +502,7 @@ const Page = () => {
           {!!showFinder && (
             <FindReplace className={styles.finder} onClose={() => setShowFinder(false)} />
           )}
-          {renderToolbar()}
+          {!showToolbar && renderToolbar()}
         </div>
       </div>
     </main>

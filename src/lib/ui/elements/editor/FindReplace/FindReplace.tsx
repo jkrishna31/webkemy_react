@@ -1,9 +1,8 @@
 "use client";
 
-import { ComponentProps, useEffect, useState } from "react";
+import { ComponentProps, useState } from "react";
 
 import { Button } from "@/lib/ui/elements/butttons";
-import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
@@ -86,7 +85,7 @@ const FindReplace = ({
           </Button>
         </InputFieldWrapper>
       </div>
-      <CollapsiblePanel open={showAll} duration={300} className={styles.collapsible_panel}>
+      {!!showAll && (
         <div className={styles.controls_panel}>
           <div className={styles.row}>
             <InputFieldWrapper>
@@ -124,8 +123,7 @@ const FindReplace = ({
             )}
           </div>
         </div>
-      </CollapsiblePanel>
-      {/* {!!search && ( */}
+      )}
       <div className={classes(styles.row, styles.action_row)}>
         <p className={styles.match_status}><span>{0}</span>{"/"}{0}{" matches"}</p>
         <div className={styles.split_btns}>
@@ -156,7 +154,6 @@ const FindReplace = ({
           </Button>
         )}
       </div>
-      {/* )} */}
       {/* todo: include/exclude */}
     </div>
   );

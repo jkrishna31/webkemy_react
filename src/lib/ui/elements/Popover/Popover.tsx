@@ -125,7 +125,7 @@ const Popover = ({
     prevActiveElem.current = document.activeElement;
     if (hasDOM() && "ResizeObserver" in window && anchor instanceof HTMLElement) {
       const observer = new ResizeObserver(updatePopoverLayout);
-      // observer.observe(elem);
+      observer.observe(elem);
       observer.observe(anchor);
       observer.observe(window.document.body);
       return () => {

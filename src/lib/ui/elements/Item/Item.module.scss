@@ -53,7 +53,7 @@
   &[aria-current="step"],
   &[aria-current="true"],
   &[aria-selected="true"] {
-    background: var(--gray-30);
+    background: var(--bg-active);
 
     &[data-minimized="true"] {
       & svg {

@@ -23,7 +23,6 @@ const Page = () => {
         aria-label="Choose File(s)"
       />
       <FilesPreview
-        mode="file"
         files={filelist?.length ? Array.from(filelist) : []}
         onDelete={deleteFileByName}
         className={styles.preview}

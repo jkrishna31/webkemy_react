@@ -1,4 +1,7 @@
 .audio_player {
+  --ap-controls-bg: var(--bg-s);
+  --ap-controls-bg-hover: var(--bg-hover);
+
   position: relative;
 
   display: flex;
@@ -37,8 +40,13 @@
   .ap_play_btn,
   .ap_speed_btn,
   .ap_mute_btn {
+    background-color: var(--ap-controls-bg);
     padding: .9rem;
     color: var(--fg-p-alt);
+
+    &:hover {
+      background-color: var(--ap-controls-bg-hover);
+    }
   }
 
   .bi {

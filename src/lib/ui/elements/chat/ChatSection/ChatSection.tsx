@@ -10,10 +10,11 @@ import styles from "./ChatSection.module.scss";
 export interface ChatSectionProps extends ComponentProps<"div"> {
   chats?: any;
   lastReadMsgId?: string;
+  selectedChats?: string | string[];
 }
 
 const ChatSection = ({
-  chats, lastReadMsgId,
+  chats, lastReadMsgId, selectedChats,
   className,
   ...restProps
 }: ChatSectionProps) => {
@@ -21,40 +22,47 @@ const ChatSection = ({
     <div className={classes(styles.wrapper, className)} {...restProps}>
       <time className={styles.datetime}>{formatDate(chats[0].datetime)}</time>
       {
-        chats?.reduce((acc: any[], item: any, idx: number) => {
-          if (!acc.length) {
-            acc.push({
-              ...item,
-              content: [item.content]
-            });
-          } else {
-            const last = acc[acc.length - 1];
-            if (last.author.id === item.author.id && !compareDateByPrecision(last.datetime, item.datetime, ["hour", "minute"])) {
-              last.content.push(item.content);
-            } else {
+        chats
+          ?.reduce((acc: any[], item: any, idx: number) => {
+            if (!acc.length) {
               acc.push({
                 ...item,
-                content: [item.content]
+                content: [{ ...item }]
               });
+            } else {
+              const last = acc[acc.length - 1];
+              if (
+                last.author.id === item.author.id &&
+                !item.reactions?.length &&
+                !last.reactions?.length &&
+                !compareDateByPrecision(last.datetime, item.datetime, ["hour", "minute"])
+              ) {
+                last.content.push({ ...item });
+              } else {
+                acc.push({
+                  ...item,
+                  content: [{ ...item }]
+                });
+              }
             }
-          }
-          return acc;
-        }, [])?.map((chat: any) => {
-          return (
-            <Fragment key={chat.id}>
-              <ChatItem chat={chat} />
-              {/* TODO: shift if next chat author is me */}
-              {lastReadMsgId === chat.id && (
-                <Divider
-                  labelAlignment="center"
-                  label="New Messages"
-                  style={{ fontWeight: 500 }}
-                  className={styles.divider_banner}
-                />
-              )}
-            </Fragment>
-          );
-        })
+            return acc;
+          }, [])
+          ?.map((chat: any) => {
+            return (
+              <Fragment key={chat.id}>
+                <ChatItem chat={chat} selectedChats={selectedChats} />
+                {/* TODO: shift if next chat author is me */}
+                {lastReadMsgId === chat.id && (
+                  <Divider
+                    labelAlignment="center"
+                    label="New Messages"
+                    style={{ fontWeight: 500 }}
+                    className={styles.divider_banner}
+                  />
+                )}
+              </Fragment>
+            );
+          })
       }
     </div>
   );

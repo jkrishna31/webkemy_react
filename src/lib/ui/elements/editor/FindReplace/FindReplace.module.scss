@@ -47,20 +47,20 @@
 .split_btns {
   display: flex;
   align-items: center;
-  gap: .2rem;
+  gap: .3rem;
 }
 
 .replace_btn {
   margin-left: auto;
   padding-inline: 1.4rem .8rem;
-  border-top-right-radius: .6rem;
-  border-bottom-right-radius: .6rem;
+  border-top-right-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;
 }
 
 .replace_all_btn {
   padding-inline: .8rem 1.4rem;
-  border-top-left-radius: .6rem;
-  border-bottom-left-radius: .6rem;
+  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 1.2rem;
 }
 
 .ctrl_btn {
@@ -91,14 +91,14 @@
 
 .prev_btn {
   padding-right: .8rem;
-  border-top-right-radius: .8rem;
-  border-bottom-right-radius: .8rem;
+  border-top-right-radius: 1.2rem;
+  border-bottom-right-radius: 1.2rem;
 }
 
 .next_btn {
   padding-left: .8rem;
-  border-top-left-radius: .8rem;
-  border-bottom-left-radius: .8rem;
+  border-top-left-radius: 1.2rem;
+  border-bottom-left-radius: 1.2rem;
 }
 
 .match_status {

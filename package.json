@@ -15,7 +15,8 @@
     "prepare": "husky",
     "format": "prettier --write --check ./src",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "doctor": "npx -y react-doctor@latest ."
   },
   "dependencies": {
     "@grafana/faro-web-sdk": "^2.1.0",

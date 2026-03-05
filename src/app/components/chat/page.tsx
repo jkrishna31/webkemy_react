@@ -6,7 +6,7 @@ import styles from "./page.module.scss";
 const Page = () => {
   return (
     <main className={styles.main}>
-      <PageSetup pageKey="chatbot" />
+      <PageSetup pageKey="chat" />
 
       <Chatbot />
     </main>
