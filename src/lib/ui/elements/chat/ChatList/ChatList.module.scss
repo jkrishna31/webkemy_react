@@ -35,7 +35,7 @@
 }
 
 .options_popover {
-  min-width: min(fit-content, var(--popover-min-width));
+  min-width: min(fit-content, var(--popover-min-width)) !important; // temporary: css module resolution is not consistent in dev & prod build
   width: fit-content;
 
 }
