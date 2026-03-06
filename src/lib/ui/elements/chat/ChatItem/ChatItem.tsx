@@ -18,10 +18,12 @@ import styles from "./ChatItem.module.scss";
 export interface ChatItemProps extends ComponentProps<"div"> {
   chat?: any;
   selectedChats?: string | string[];
+  onMediaClick?: (chatId: string, mediaId?: string) => void;
+
 }
 
 const ChatItem = ({
-  chat, selectedChats,
+  chat, selectedChats, onMediaClick,
   className,
   ...restProps
 }: ChatItemProps) => {
@@ -34,7 +36,6 @@ const ChatItem = ({
   return (
     <div
       data-author={chat.author.id}
-      // data-id={chat.id}
       className={classes(styles.wrapper, className)}
       {...restProps}
     >
@@ -107,9 +108,11 @@ const ChatItem = ({
                         </div>
                         {!!item.media?.length && (
                           <ChatMedia
+                            chatId={item.id}
                             media={item.media}
                             className={styles.chat_media}
                             data-selected={_isSelected}
+                            onMediaClick={onMediaClick}
                           />
                         )}
                       </div>

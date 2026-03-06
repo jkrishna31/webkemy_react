@@ -126,6 +126,13 @@ export const dummyChats = [
         src: "https://images.unsplash.com/photo-1769937060137-22671294c3cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D",
         type: "image",
       },
+      {
+        id: "mp80ds09",
+        src: "/assets/sample-local-pdf.pdf",
+        name: "ADA Health History.pdf",
+        size: 899150,
+        type: "pdf",
+      },
     ]
   },
   {
@@ -148,15 +155,17 @@ export const dummyChats = [
       // },
       {
         id: "mp80ds09",
-        name: "ADA Health History.pdf",
+        src: "/assets/sample-pdf.pdf",
+        name: "sample-local.pdf",
         size: 899150,
         type: "pdf",
       },
       {
         id: "mz80ds09",
-        name: "rss(1).xml",
+        src: "/assets/sample-zip-file.zip",
+        name: "rss(1).zip",
         size: 353540,
-        type: "xml"
+        type: "zip"
       },
     ]
   }

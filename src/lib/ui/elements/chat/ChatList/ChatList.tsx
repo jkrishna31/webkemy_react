@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, ReactNode, useCallback, useEffect, useRef, useState } from "react";
+import { ComponentProps, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { useLongPress } from "@/lib/hooks/useLongPress";
 import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
@@ -97,7 +97,46 @@ const ChatList = ({
   const [showAllOptionsFor, setShowAllOptionsFor] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedChats, setSelectedChats] = useState<string | string[]>();
-  const [showMedia, setShowMedia] = useState<{ mediaId: string; chatId?: string; }>();
+  const [showMedia, setShowMedia] = useState<{ mediaId?: string; chatId?: string; }>();
+
+  const mediaList = useMemo(() => {
+    if (showMedia?.chatId) {
+      return chats.find((item: any) => item.id === showMedia.chatId).media;
+    }
+    return [];
+  }, [chats, showMedia?.chatId]);
+
+  // TODOS:
+  // + on click of quoted msg, go to that message
+  // + on quote show that quoted msg ui or specific selection in the chat composer
+  // + on edit [append in the chat composer both msg & date; & also highlight the og msg]
+  // + on delete [show delete confirmation modal & on confirm delete; after delete show the]
+  // = handle unread messages on opening chat [if new messages add the unread banner before that]
+  // = handle read status [so that sender will know]
+  // = if at bottom & new messages comes, then scrolling to bottom
+  // = if new messages comes but not at bottom, then show 'new messages' scroll to btn
+  // = show the list of individual reactions details on long press
+  // = on copy [copy from element content with formatting (but how to handle ); or copy from data but lose formatting]
+  // = lightbox ui with for media files
+  // = retry btn to send an msg item or any of it's media item
+  // = full msg view for large messages
+
+  // starred message ui (this is personal)
+  // + 
+
+  // chat group controls
+  // + group icon
+  // + group name
+  // + members count
+  // + members management page [member permission(read/write)]
+  // + pinned page
+  // + starred page
+  // + thread replies page
+
+  // todo
+  // + edit ui [with remove btn]
+  // + quote in reply ui [with remove btn]
+  // + lightbox ui for media gallary
 
   const { isOnBoundary, handleScroll } = useScroll({ target: _ref, margin: 50, delay: 150, initialState: true });
 
@@ -155,6 +194,10 @@ const ChatList = ({
     }
   };
 
+  const handleMediaClick = useCallback((chatId: string, mediaId?: string) => {
+    setShowMedia({ chatId, mediaId: mediaId });
+  }, []);
+
   useMutationObserver(_ref, handleMutation);
 
   useLongPress(_ref, handleMsgContext);
@@ -189,7 +232,12 @@ const ChatList = ({
 
     return (
       <>
-        <ChatSection chats={sec} lastReadMsgId={lastReadMsgId} selectedChats={selectedChats} />
+        <ChatSection
+          chats={sec}
+          lastReadMsgId={lastReadMsgId}
+          selectedChats={selectedChats}
+          onMediaClick={handleMediaClick}
+        />
         {renderChats(chats, i)}
       </>
     );
@@ -263,7 +311,7 @@ const ChatList = ({
       {!!showMedia?.chatId && (
         <MediaViewer
           mediaId={showMedia.mediaId}
-          media={[]}
+          media={mediaList}
           open
           onClose={() => setShowMedia(undefined)}
         />

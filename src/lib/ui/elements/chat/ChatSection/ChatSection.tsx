@@ -11,10 +11,11 @@ export interface ChatSectionProps extends ComponentProps<"div"> {
   chats?: any;
   lastReadMsgId?: string;
   selectedChats?: string | string[];
+  onMediaClick?: (chatId: string, mediaId?: string) => void;
 }
 
 const ChatSection = ({
-  chats, lastReadMsgId, selectedChats,
+  chats, lastReadMsgId, selectedChats, onMediaClick,
   className,
   ...restProps
 }: ChatSectionProps) => {
@@ -50,7 +51,7 @@ const ChatSection = ({
           ?.map((chat: any) => {
             return (
               <Fragment key={chat.id}>
-                <ChatItem chat={chat} selectedChats={selectedChats} />
+                <ChatItem chat={chat} selectedChats={selectedChats} onMediaClick={onMediaClick} />
                 {/* TODO: shift if next chat author is me */}
                 {lastReadMsgId === chat.id && (
                   <Divider

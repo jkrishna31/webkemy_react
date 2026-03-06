@@ -15,6 +15,7 @@
   border-radius: .8rem;
   background-color: var(--blue-1-10);
   transition: background .2s linear;
+  border: .1rem solid transparent;
 }
 
 .img_item {
@@ -23,6 +24,7 @@
   border-radius: .6rem;
   background-color: var(--bg-q);
   overflow: hidden;
+  cursor: pointer;
 
   img {
     object-fit: cover;
@@ -55,7 +57,6 @@
   justify-content: center;
   background-color: var(--gray-12-70);
   color: var(--fg-p-alt);
-  // backdrop-filter: blur(2px);
   font-size: 2rem;
   font-weight: bold;
   border-radius: .6rem;
@@ -82,13 +83,9 @@
   align-items: center;
   gap: .8rem;
   border-radius: .8rem;
-  padding: .6rem;
+  padding: .8rem 1rem;
   background-color: var(--blue-1-10);
   transition: background .2s linear;
-
-  .details {
-    margin-inline: .2rem;
-  }
 
   button {
     color: var(--fg-s);

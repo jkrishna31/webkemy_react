@@ -12,6 +12,11 @@
   background-color: var(--gray-11-70);
   z-index: var(--zi-drawer);
   animation: slide-fade-in .24s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 @keyframes slide-fade-in {
@@ -44,15 +49,14 @@
   justify-content: center;
   gap: 2.4rem;
 
-  position: absolute;
-  top: unset;
+  position: sticky;
   bottom: 0;
   left: 0;
   width: 100%;
   padding-block: 2rem;
   padding-inline: 1rem;
 
-  background: linear-gradient(to top, var(--gray-11-80, transparent));
+  background: linear-gradient(to top, var(--gray-11-80), transparent);
 
   .zoom_controls,
   .nav_controls {
@@ -96,8 +100,8 @@
   align-items: center;
   justify-content: space-between;
 
-  padding: 1rem 1rem 0 2rem;
-  background: linear-gradient(to bottom, var(--gray-11-80, transparent));
+  padding: 1rem 1rem 1rem 2rem;
+  background: linear-gradient(to bottom, var(--gray-11-80), transparent);
 
   .name {
     font-size: 2rem;
@@ -118,6 +122,19 @@
       color: var(--fg-p-alt);
     }
   }
+}
+
+.content {
+  flex: 1;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.showing {
+  font-size: 1.4rem;
 }
 
 @media screen and (max-width: 768px) {

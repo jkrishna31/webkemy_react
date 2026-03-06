@@ -1,8 +1,11 @@
 import { RefObject, useEffect } from "react";
 
+import { useMounted } from "@/lib/hooks/useMounted";
 import { FOCUS_SELECTOR, focusable, scopeTab, tabbable } from "@/lib/utils/tabbable.utils";
 
 export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) {
+  const isMounted = useMounted();
+
   const focusNode = (node: HTMLElement) => {
     let focusElement: HTMLElement | null = node?.querySelector("[data-autofocus]");
 
@@ -22,7 +25,7 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) 
   useEffect(() => {
     const elem = ref.current;
 
-    if (!active || !elem) return undefined;
+    if (!active || !elem || !isMounted) return undefined;
 
     setTimeout(() => focusNode(elem));
 
@@ -32,5 +35,5 @@ export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) 
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [active, ref]);
+  }, [active, isMounted, ref]);
 }

@@ -8,15 +8,15 @@
   margin: .4rem .8rem;
   background-color: var(--bg-s);
   border-radius: var(--br-pill);
+  // box-shadow: 0 .1rem .2rem var(--shadow-p), 0 -.1rem .2rem var(--shadow-p);
 
   .pin_icon {
     width: 1.8rem;
     height: 1.8rem;
     stroke-width: .175rem;
-    color: var(--fg-s-alt);
+    color: var(--fg-s);
     margin-left: .6rem;
     flex-shrink: 0;
-    // transform: rotateY(180deg);
   }
 
   p {
@@ -30,10 +30,11 @@
   }
 
   .all_pinned {
+    font-size: 1.5rem;
     margin-left: auto;
     min-height: fit-content;
-    padding: .2rem .8rem;
-    color: var(--fg-s-alt);
+    padding: .2rem .6rem;
+    color: var(--fg-s);
     border-color: var(--border-p-alt);
 
     &:hover {

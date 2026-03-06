@@ -70,7 +70,7 @@ const ChatContainer = ({
           >
             <EllipsisHIcon />
           </button>
-          {/* Pinned, Starred, */}
+          {/* todo: Pinned, Starred, */}
           <button
             className={styles.info_btn}
           >

@@ -30,9 +30,7 @@ const Drawer = ({
 
     useFocusTrap(ref, open);
 
-    useKey(() => {
-        onClose?.();
-    }, ["Escape"]);
+    useKey(onClose, ["Escape"]);
 
     if (!open || !isMounted) return null;
 

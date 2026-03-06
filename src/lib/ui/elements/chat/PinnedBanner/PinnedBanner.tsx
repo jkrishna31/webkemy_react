@@ -10,6 +10,7 @@ export interface PinnedBannerProps {
 const PinnedBanner = ({
 
 }: PinnedBannerProps) => {
+  // todo: media only pinned []
   return (
     <div className={styles.wrapper}>
       <PinIcon className={styles.pin_icon} />

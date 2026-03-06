@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ComponentProps } from "react";
 
 import { characters } from "@/constants/characters.const";
@@ -20,12 +21,13 @@ export interface MediaItem {
 }
 
 export interface ChatMediaProps extends ComponentProps<"div"> {
+  chatId: string;
   media?: MediaItem[];
-  selectedChats?: string | string[];
+  onMediaClick?: (chatId: string, mediaId?: string) => void;
 }
 
 const ChatMedia = ({
-  media, selectedChats,
+  chatId, media, onMediaClick,
   className,
   ...restProps
 }: ChatMediaProps) => {
@@ -43,7 +45,11 @@ const ChatMedia = ({
       {images.length >= 1 && (
         <div className={classes(styles.gallary, images.length === 1 && styles.individual)}>
           {images.slice(0, images.length > 4 ? 4 : undefined).map((item, idx) => (
-            <div key={item.id} className={classes(styles.img_item, idx === 3 && styles.more)}>
+            <div
+              key={item.id}
+              className={classes(styles.img_item, idx === 3 && styles.more)}
+              onClick={() => onMediaClick?.(chatId, item.id)}
+            >
               <Image src={item.src} width={80} height={80} alt={item.name || item.id} unoptimized />
               {(idx === 3 && images.length > 4) && (
                 <Button variant="tertiary" className={styles.img_more}>
@@ -52,7 +58,6 @@ const ChatMedia = ({
               )}
             </div>
           ))}
-          {/* todo: show download manager [download btn/progress] */}
         </div>
       )}
       {!!audio.length && (
@@ -78,14 +83,14 @@ const ChatMedia = ({
                   <DownloadIcon />
                 </Button>
               </div>
-              <div className={styles.details}>
+              <Link href={item.src ?? "#"} target="_blank" className={styles.details}>
                 <p className={styles.filename}>{item.name}</p>
                 <p className={styles.meta}>
                   <span className={styles.size}>{formatSize(item.size ?? 0)}</span>
                   <span className={styles.separator}>{characters.BULLET}</span>
                   <span className={styles.type}>{item.type}</span>
                 </p>
-              </div>
+              </Link>
             </div>
           ))}
         </div>

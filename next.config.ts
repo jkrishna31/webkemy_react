@@ -46,7 +46,7 @@ const nextConfig: NextConfig = {
           {
             // indicates whether the site should be allowed to be displayed within an iframe (can prevent against clickjacking attacks)
             key: "X-Frame-Options",
-            value: "DENY",
+            value: "SAMEORIGIN",
           },
           {
             // controls how much info the browser includes when navigating cross origin

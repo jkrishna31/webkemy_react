@@ -86,6 +86,69 @@ export interface EditorOptions {
 
 }
 
+/**
+ * BLOCK OPERATIONS =======================================
+ * + add block [before, after, start, end]
+ * + remove block [active]
+ * + move block
+ * + normalize block
+ * 
+ * 
+ * FORMATTERS =============================================
+ * - inline elements
+ *    + bold, italic, strike-through, underline, sub, sup, highlight
+ *    + link
+ *        = target [_blank, blank, top, ...]
+ *        = src
+ *        = other attrs... [in ellipsis]
+ *    + quote
+ *    + img
+ * - inline formatters
+ *    + color[c], bg-color[bgc]
+ *    + font-size[fs], font-weight[fw], font-family[ff], line-height[lh]
+ *    + letter-spacing[ls], word-spacing[ws], letter-case[ls]
+ *    + mention, hashtag; emoji
+ * 
+ *    + text-align[ta], dir[dir]
+ * 
+ * - indent
+ *    + inc/dec
+ * - text align
+ * - dir/bdi/bdo [rtl, ltr, auto]
+ * 
+ * 
+ * HISOTYR MANAGEMENT =====================================
+ * + on editor modification save the block being changed and later use the block id to revert the change
+ * + for continuous typing either use delay interval or space as separation for history snapshot
+ * 
+ * 
+ * ALGOS ==================================================
+ * - finding the start and end block and inline mutation of the selection
+ *    + start & end block is same, means start & end mutation is in same, but still can at different depth
+ *        > start & end mutation can be at any depth
+ *            = need to find the common ancestor [it can be the block itself]
+ *    + start and end block is different, means start & end mutation is also different
+ * - sort the start & end block before operations
+ * 
+ * 
+ * - while removing a inline mutation, if it ends up no mutation then convert it to text type mutation, so that no need to merge it to prev/next child item
+ * - how to know all the inline mutations applied to the current cursor
+ * 
+ * 
+ * ALL POSSIBLE SITUATIONS ===============================
+ * + core --------------
+ *    = insert text at the cursor position []
+ *    = delete content at the cursor position
+ *    = delete selection
+ *    = replace selection
+ *    = drop 
+ *    = on enter at cursor split into two block [consider if: selection, shiftKey]
+ * + others ------------
+ *    = dragging and dropping text/fragment somewhere on the editor block
+ *    = dragging block
+ */
+
+
 export interface SelectionDetails {
   selection: Selection | null;
   isCaret?: boolean;
@@ -109,6 +172,8 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
   const [showToolbar, setShowToolbar] = useState(false);
   const [dragCtx, setDragCtx] = useState<{}>();
   const [inputProcessed, setInputProcessed] = useState(false);
+
+  // todo: content metadata: words, characters [to limit max characters/words]
 
   const toggleToolbarVisibility = () => setShowToolbar(!showToolbar);
 
@@ -250,6 +315,15 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
 
   const deleteContent = (dir: CaretActionDir = "backward") => {
     // deleteContent, deleteContentBackward, deleteContentForward
+
+    // req: blockId, offset
+    // go upto the offset: check which formatting the offset belongs
+    // once a formatting is empty remove it completely
+
+    // todo: function to traverse on block
+    // go dfs
+    // take ofset as argument
+    // if offset reached, call the callback with the text 
   };
 
   const deleteWord = (dir: CaretActionDir = "backward") => {
