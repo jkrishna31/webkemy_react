@@ -1,4 +1,8 @@
 .wrapper {
+  --chat-fg: var(--blue-1);
+  --chat-bg: var(--blue-1-10);
+  --chat-bg-active: var(--blue-1-25);
+
   margin-top: .4rem;
   display: flex;
   flex-direction: column;
@@ -13,7 +17,7 @@
   gap: .6rem;
   padding: .4rem;
   border-radius: .8rem;
-  background-color: var(--blue-1-10);
+  background-color: var(--chat-bg);
   transition: background .2s linear;
   border: .1rem solid transparent;
 }
@@ -22,7 +26,7 @@
   width: 10rem;
   height: 10rem;
   border-radius: .6rem;
-  background-color: var(--bg-q);
+  background-color: var(--bg-s);
   overflow: hidden;
   cursor: pointer;
 
@@ -71,7 +75,7 @@
 }
 
 // .audio_player {
-//   --ap-controls-bg: var(--blue-1-10);
+//   --ap-controls-bg: var(--chat-bg);
 //   --ap-controls-bg-hover: var(--blue-1-25);
 //   background-color: var(--bg-s);
 //   border-radius: var(--br-pill);
@@ -84,7 +88,7 @@
   gap: .8rem;
   border-radius: .8rem;
   padding: .8rem 1rem;
-  background-color: var(--blue-1-10);
+  background-color: var(--chat-bg);
   transition: background .2s linear;
 
   button {
@@ -104,7 +108,7 @@
   font-weight: 500;
   font-size: 1.5rem;
   margin-bottom: .3rem;
-  color: var(--blue-1);
+  color: var(--chat-fg);
 }
 
 .meta {
@@ -127,6 +131,6 @@
 
   .gallary,
   .other_item {
-    background-color: var(--blue-1-25);
+    background-color: var(--chat-bg-active);
   }
 }

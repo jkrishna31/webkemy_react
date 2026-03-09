@@ -9,7 +9,9 @@ import { Reactions } from "@/lib/ui/elements/chat/Reactions";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import DoubleCheckIcon from "@/lib/ui/svgs/icons/DoubleCheckIcon";
+import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
 import ReplyIcon from "@/lib/ui/svgs/icons/ReplyIcon";
+import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
 import { formatTime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
 
@@ -75,11 +77,15 @@ const ChatItem = ({
                   <div className={classes(styles.meta, styles.meta_head)}>
                     <span className={styles.author}>{chat.author?.name ?? "Bot"}</span>
                     <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
+                    {!!chat.pinned && <PinIcon className={styles.pinned} />}
+                    {!!chat.starred && <StarIcon className={styles.starred} />}
                   </div>
                 ) : null
               }
               {chat.author.id === "me" && (
                 <div className={styles.meta}>
+                  {!!chat.starred && <StarIcon className={styles.starred} />}
+                  {!!chat.pinned && <PinIcon className={styles.pinned} />}
                   {/* <span>{"Edited"}</span>
                   <span className={styles.separator}>{characters.BULLET}</span> */}
                   <time className={styles.msg_time}>{formatTime(chat.datetime)}</time>
@@ -99,7 +105,7 @@ const ChatItem = ({
                         data-id={item.id}
                       >
                         <div
-                          className={styles.chat}
+                          className={classes(styles.chat, chat.author.id === "me" && styles.green)}
                           data-selected={_isSelected}
                         >
                           {item.content?.split("\n")?.map((part, pIdx) => (
@@ -110,7 +116,7 @@ const ChatItem = ({
                           <ChatMedia
                             chatId={item.id}
                             media={item.media}
-                            className={styles.chat_media}
+                            className={classes(styles.chat_media, chat.author.id === "me" && styles.green)}
                             data-selected={_isSelected}
                             onMediaClick={onMediaClick}
                           />

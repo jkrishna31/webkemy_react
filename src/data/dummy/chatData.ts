@@ -26,11 +26,14 @@ export const dummyChats = [
     },
     content: "Expedita deleniti cum sapiente?",
     datetime: (new Date(2025, 2, 16, 5, 34)).toUTCString(),
+    starred: true,
+    pinned: true,
     media: [
       {
         id: "mdump89d",
         src: "https://images.unsplash.com/photo-1769937060137-22671294c3cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D",
         type: "image",
+        name: "blossom-landscape.jpg",
       },
     ]
   },
@@ -60,6 +63,7 @@ export const dummyChats = [
     content: "Hey, did you check the new API docs?",
     datetime: (new Date(2025, 2, 17, 15, 34)).toUTCString(),
     status: "read",
+    starred: true,
   },
   {
     id: "vc89vc",
@@ -72,6 +76,7 @@ export const dummyChats = [
     datetime: (new Date(2025, 2, 17, 15, 41)).toUTCString(),
     status: "read",
     replies: 16,
+    pinned: true,
   },
   {
     id: "ds90",
@@ -91,6 +96,7 @@ export const dummyChats = [
     },
     content: "Hi there!",
     datetime: (new Date(2025, 5, 28, 6, 18)).toUTCString(),
+    pinned: true,
   },
   {
     id: "ds78",
@@ -105,6 +111,7 @@ export const dummyChats = [
         id: "mfd89fd",
         src: "https://images.unsplash.com/photo-1767431199061-3237ddd5de9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8",
         type: "image",
+        name: "landscape.png",
       },
       {
         id: "mdump89d",
@@ -115,6 +122,7 @@ export const dummyChats = [
         id: "m8f8f8f",
         src: "https://images.unsplash.com/photo-1772211506168-1cbfcb361be8?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwyMXx8fGVufDB8fHx8fA%3D%3D",
         type: "image",
+        name: "rocks-on-table.jpg",
       },
       {
         id: "m3f3f6",

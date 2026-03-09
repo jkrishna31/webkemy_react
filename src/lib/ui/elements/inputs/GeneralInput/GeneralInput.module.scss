@@ -9,7 +9,24 @@
     border: none;
     border-radius: .4rem;
     color: inherit;
-    background-color: transparent;
+    border: .1rem solid var(--border-s);
+    background-color: var(--bg-t);
+
+    transition-property: border, outline, background;
+    transition-duration: .25s;
+    transition-timing-function: linear;
+
+    &:hover {
+        border-color: var(--border-p);
+    }
+
+    &:focus {
+        border-color: var(--blue-6);
+    }
+
+    // &:invalid {
+    //     border-color: var(--red-5);
+    // }
 
     &:disabled {
         opacity: .5;

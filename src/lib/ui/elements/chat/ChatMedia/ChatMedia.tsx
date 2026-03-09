@@ -47,6 +47,7 @@ const ChatMedia = ({
           {images.slice(0, images.length > 4 ? 4 : undefined).map((item, idx) => (
             <div
               key={item.id}
+              data-id={item.id}
               className={classes(styles.img_item, idx === 3 && styles.more)}
               onClick={() => onMediaClick?.(chatId, item.id)}
             >
@@ -77,7 +78,11 @@ const ChatMedia = ({
       {!!others.length && (
         <div className={styles.others}>
           {others.map(item => (
-            <div key={item.id} className={styles.other_item}>
+            <div
+              key={item.id}
+              data-id={item.id}
+              className={styles.other_item}
+            >
               <div className={styles.controls}>
                 <Button variant="tertiary">
                   <DownloadIcon />

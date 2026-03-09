@@ -56,6 +56,7 @@ const otherOptions = [
     id: "thread_reply",
     label: "Reply in Thread",
     icon: <SpoolIcon />,
+    disabled: true,
   },
   {
     id: "copy",
@@ -98,6 +99,7 @@ const ChatList = ({
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedChats, setSelectedChats] = useState<string | string[]>();
   const [showMedia, setShowMedia] = useState<{ mediaId?: string; chatId?: string; }>();
+  const [editChat, setEditChat] = useState();
 
   const mediaList = useMemo(() => {
     if (showMedia?.chatId) {
@@ -107,36 +109,13 @@ const ChatList = ({
   }, [chats, showMedia?.chatId]);
 
   // TODOS:
-  // + on click of quoted msg, go to that message
-  // + on quote show that quoted msg ui or specific selection in the chat composer
-  // + on edit [append in the chat composer both msg & date; & also highlight the og msg]
-  // + on delete [show delete confirmation modal & on confirm delete; after delete show the]
   // = handle unread messages on opening chat [if new messages add the unread banner before that]
   // = handle read status [so that sender will know]
   // = if at bottom & new messages comes, then scrolling to bottom
   // = if new messages comes but not at bottom, then show 'new messages' scroll to btn
   // = show the list of individual reactions details on long press
-  // = on copy [copy from element content with formatting (but how to handle ); or copy from data but lose formatting]
-  // = lightbox ui with for media files
   // = retry btn to send an msg item or any of it's media item
   // = full msg view for large messages
-
-  // starred message ui (this is personal)
-  // + 
-
-  // chat group controls
-  // + group icon
-  // + group name
-  // + members count
-  // + members management page [member permission(read/write)]
-  // + pinned page
-  // + starred page
-  // + thread replies page
-
-  // todo
-  // + edit ui [with remove btn]
-  // + quote in reply ui [with remove btn]
-  // + lightbox ui for media gallary
 
   const { isOnBoundary, handleScroll } = useScroll({ target: _ref, margin: 50, delay: 150, initialState: true });
 
@@ -191,6 +170,20 @@ const ChatList = ({
   const handleMenuClick = (key: string) => {
     if (key === "add_reaction") {
       setShowEmojiPicker(true);
+    } else if (key === "quote_reply") {
+      // on quote show that quoted msg ui or specific selection in the chat composer, & on click of that goto that msg
+      // remove btn
+    } else if (key === "edit") {
+      // append in the chat composer both msg & date; & also highlight the og msg
+      // cancel btn
+    } else if (key === "copy") {
+      // copy from element content with formatting (but how to handle media); or copy from data but lose formatting
+    } else if (key === "pin") {
+
+    } else if (key === "star") {
+
+    } else if (key === "delete") {
+      // show delete confirmation modal & on confirm delete; after delete show the
     }
   };
 
@@ -301,6 +294,7 @@ const ChatList = ({
                     key={item.id} as="button" scope="list"
                     primary={item.label} icon={item.icon}
                     onClick={() => handleMenuClick(item.id)}
+                    disabled={item.disabled}
                   />
                 ))
               }

@@ -1,0 +1,15 @@
+.wrapper {
+  padding: 2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  flex: 1;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+  justify-content: flex-end;
+  margin-top: auto;
+}

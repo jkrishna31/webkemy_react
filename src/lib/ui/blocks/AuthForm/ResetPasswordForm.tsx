@@ -1,6 +1,5 @@
 import { Button } from "@/lib/ui/elements/butttons";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Text } from "@/lib/ui/elements/Text";
 
@@ -16,9 +15,7 @@ const ResetPasswordForm = () => {
       <form className={styles.form}>
         <InputItem>
           <Text<"label"> as="label">{"Email *"}</Text>
-          <InputFieldWrapper>
-            <GeneralInput placeholder="example@email.com" />
-          </InputFieldWrapper>
+          <GeneralInput placeholder="example@email.com" />
         </InputItem>
 
         <Button

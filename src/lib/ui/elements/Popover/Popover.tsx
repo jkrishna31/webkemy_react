@@ -179,6 +179,8 @@ const Popover = ({
         return;
         // TODO: (preserve only if closes [also check if another popover directly gets enabled])
       }
+      if (elem.contains(e.target as Node) || elem.contains(document.activeElement)) return;
+
       onClose?.(e);
     };
     window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");

@@ -3,7 +3,6 @@
 import { ComponentProps } from "react";
 
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import MinusIcon from "@/lib/ui/svgs/icons/MinusIcon";
 import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style.utils";
@@ -38,21 +37,6 @@ const NumberInput = ({
     }
   };
 
-  const renderInput = () => {
-    return (
-      <GeneralInput
-        type="number"
-        inputMode="decimal"
-        value={String(value)}
-        onInput={e => {
-          // logic to allow only number
-          onInput?.(e);
-        }}
-        {...props}
-      />
-    );
-  };
-
   return (
     <div className={classes(enclosedControls && "input_like", styles.wrapper, className)}>
       {
@@ -68,15 +52,16 @@ const NumberInput = ({
           </button>
         ) : null
       }
-      {
-        enclosedControls ? (
-          renderInput()
-        ) : (
-          <InputFieldWrapper className={styles.input_wrapper}>
-            {renderInput()}
-          </InputFieldWrapper>
-        )
-      }
+      <GeneralInput
+        type="number"
+        inputMode="decimal"
+        value={String(value)}
+        onInput={e => {
+          // logic to allow only number
+          onInput?.(e);
+        }}
+        {...props}
+      />
       {
         !hideControls ? (
           <button

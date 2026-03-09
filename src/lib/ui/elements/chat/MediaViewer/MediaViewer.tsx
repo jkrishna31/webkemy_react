@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { Button } from "@/lib/ui/elements/butttons";
 import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { ImageViewer } from "@/lib/ui/elements/ImageViewer";
 import { Lightbox } from "@/lib/ui/elements/Lightbox";
@@ -45,7 +46,7 @@ const MediaViewer = ({
 
     } else {
       return (
-        <div>
+        <div className={styles.unsupported}>
           <p>{"Unsupported File Type. This file cannot be opened."}</p>
         </div>
       );

@@ -5,7 +5,6 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./GeneralInput.module.scss";
 
 export interface GeneralInputProps extends ComponentProps<"input"> {
-
 }
 
 const GeneralInput = ({ className, ...props }: GeneralInputProps) => {

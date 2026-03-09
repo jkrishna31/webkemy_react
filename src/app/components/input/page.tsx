@@ -1,6 +1,5 @@
 import { PageSetup } from "@/components/managers";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 
 import styles from "./page.module.scss";
 
@@ -9,9 +8,7 @@ const page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="input" />
 
-      <InputFieldWrapper className={styles.wrapper}>
-        <GeneralInput placeholder="Write here..." />
-      </InputFieldWrapper>
+      <GeneralInput placeholder="Write here..." className={styles.input} />
     </main>
   );
 };

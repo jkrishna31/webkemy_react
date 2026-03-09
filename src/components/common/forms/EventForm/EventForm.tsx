@@ -3,10 +3,8 @@
 import { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { DateInput } from "@/lib/ui/elements/inputs/DateInput";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
 import { Select } from "@/lib/ui/elements/inputs/Select";
 import { Switch } from "@/lib/ui/elements/inputs/Switch";
@@ -75,16 +73,12 @@ const EventForm = ({
     <form className={styles.form}>
       <InputItem>
         <Text<"label"> as="label" htmlFor="title">{"Title"}</Text>
-        <InputFieldWrapper>
-          <GeneralInput id="title" />
-        </InputFieldWrapper>
+        <GeneralInput id="title" />
       </InputItem>
 
       <InputItem>
         <Text<"label"> as="label" htmlFor="desc">{"Description"}</Text>
-        <InputFieldWrapper>
-          <TextArea id="desc" />
-        </InputFieldWrapper>
+        <TextArea id="desc" />
       </InputItem>
 
       <InputItem>

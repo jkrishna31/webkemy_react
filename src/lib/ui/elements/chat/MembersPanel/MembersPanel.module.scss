@@ -1,0 +1,105 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.header {
+  padding-inline: 1.4rem;
+  padding-block: 1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+
+  h3 {
+    font-weight: 500;
+    margin-right: auto;
+  }
+
+  .add_btn {
+    font-size: 1.4rem;
+    gap: .2rem;
+    min-height: fit-content;
+    padding-block: .3rem;
+    padding-inline: .6rem 1rem;
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke-width: .175rem;
+    }
+  }
+}
+
+.search_form {
+  flex: 0;
+  padding-inline: 1.4rem;
+  margin-bottom: 1.6rem;
+}
+
+.content {
+  padding-inline: 1.4rem;
+  margin-bottom: 1rem;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+}
+
+.table_wrapper {
+  flex: 1;
+  overflow: auto;
+}
+
+.last_col {
+  width: fit-content;
+
+  &>div {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+}
+
+.profile {
+  width: 3rem;
+  height: 3rem;
+}
+
+.name {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+.email {
+  font-size: 1.4rem;
+  color: var(--fg-s);
+}
+
+.action_btn {
+  padding: .6rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.copy_btn {
+  padding: .4rem .6rem;
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    stroke-width: .175rem;
+  }
+}
+
+.role_trigger {
+  font-size: 1.4rem;
+}

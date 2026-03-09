@@ -1,4 +1,5 @@
 import { Button } from "@/lib/ui/elements/butttons";
+import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
 import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
 
 import styles from "./PinnedBanner.module.scss";
@@ -19,7 +20,8 @@ const PinnedBanner = ({
         variant="tertiary"
         className={styles.all_pinned}
       >
-        {"+8"}
+        {"8"}
+        <ChevronRightIcon />
       </Button>
     </div>
   );

@@ -13,7 +13,7 @@ export interface SliderProps extends ComponentProps<"input"> {
 }
 
 const Slider = ({
-  min, max, value, style,
+  min = 0, max = 100, value, style,
   orientation = "horizontal",
   variant = "tube",
   className, wrapperClass,

@@ -6,8 +6,6 @@ import { PageSetup } from "@/components/managers";
 import { editorBlocks, editorTools } from "@/constants/editor.const";
 import { useEditor } from "@/lib/hooks/useEditor";
 import { BlockSelector, Editor, FindReplace, ToolSelector } from "@/lib/ui/elements/editor";
-import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Popover } from "@/lib/ui/elements/Popover";
 import { Tabs } from "@/lib/ui/elements/Tabs";
 import { Text } from "@/lib/ui/elements/Text";
@@ -449,20 +447,10 @@ const Page = () => {
 
   const renderToolbar = () => {
     return (
-      <>
-        <ToolSelector
-          options={toolOptions}
-          onClick={handleToolSelect}
-        />
-        {/* {
-          !!toolsState?.[editorTools.LINK] ? (
-            <InputFieldWrapper className={styles.link_input_wrapper}>
-              <GeneralInput type="text" className={styles.link_input} />
-              <GeneralInput type="url" defaultValue="" className={styles.link_input} placeholder="Insert link..." />
-            </InputFieldWrapper>
-          ) : null
-        } */}
-      </>
+      <ToolSelector
+        options={toolOptions}
+        onClick={handleToolSelect}
+      />
     );
   };
 

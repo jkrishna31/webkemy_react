@@ -9,7 +9,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--gray-11-70);
+  background-color: var(--gray-11-80);
   z-index: var(--zi-drawer);
   animation: slide-fade-in .24s ease;
 
@@ -99,6 +99,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
 
   padding: 1rem 1rem 1rem 2rem;
   background: linear-gradient(to bottom, var(--gray-11-80), transparent);
@@ -139,8 +140,8 @@
 
 @media screen and (max-width: 768px) {
   .header {
-    .left {
-      font-size: 1.6rem;
+    .name {
+      font-size: 1.8rem;
     }
   }
 

@@ -60,21 +60,12 @@ const ChatComposer = ({
       className={classes(styles.wrapper, className)}
       {...restProps}
     >
-      <InputFieldWrapper className={styles.input_wrapper}>
+      <InputFieldWrapper className={styles.wrapper_inner}>
         <FilesPreview
           files={Array.from(filelist?.length ? filelist : [])}
           noHeading
           className={styles.files_preview}
           onDelete={deleteFileByName}
-        />
-        <TextArea
-          rows={1}
-          placeholder="Write..."
-          value={query}
-          onInput={(e: any) => setQuery(e.target.value)}
-          ref={inputRef}
-          className={styles.input}
-        // enterKeyHint="send"
         />
         <div className={styles.controls}>
           <FileInput
@@ -94,6 +85,17 @@ const ChatComposer = ({
           >
             <AddEmojiIcon className={styles.emoji_icon} />
           </button>
+
+          <TextArea
+            rows={1}
+            placeholder="Message..."
+            value={query}
+            onInput={(e: any) => setQuery(e.target.value)}
+            ref={inputRef}
+            className={classes(styles.input, query?.trim().length && styles.max)}
+          // enterKeyHint="send"
+          />
+
           <button
             className={classes(styles.btn, styles.mic_btn)}
             aria-label="Speak"

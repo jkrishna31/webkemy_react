@@ -3,8 +3,8 @@
 import { CSSProperties, useCallback, useMemo, useState } from "react";
 
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
+import { HueSlider } from "@/lib/ui/elements/inputs/ColorPicker/HueSlider";
 import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { Slider2D } from "@/lib/ui/elements/inputs/Slider2D";
 import { Item } from "@/lib/ui/elements/Item";
@@ -76,14 +76,10 @@ const ColorPicker = () => {
           value={satLightness as [number, number]}
           onInput={handleSatLightnessChange}
         />
-        <Slider
+        <HueSlider
           orientation="vertical"
-          id="hue" name="hue"
-          className={classes(styles.slider, styles.hue_slider)}
-          min={0} max={360} step={1}
           value={color[0]}
           onInput={(e) => handleValueChange("hue", (e.target as HTMLInputElement).value)}
-          aria-label="Hue Slider"
         />
         <Slider
           orientation="vertical"
@@ -123,14 +119,12 @@ const ColorPicker = () => {
         >
           {colorFormatOpts.find(item => item.value === selectedFormat)?.label}
         </Dropdown>
-        <InputFieldWrapper>
-          <GeneralInput
-            value={stringifyColor(colorInSelectedFormat, selectedFormat, true)}
-            onInput={(e) => { }}
-            className={styles.color_input}
-            aria-label="Color Value"
-          />
-        </InputFieldWrapper>
+        <GeneralInput
+          value={stringifyColor(colorInSelectedFormat, selectedFormat, true)}
+          onInput={(e) => { }}
+          className={styles.color_input}
+          aria-label="Color Value"
+        />
       </div>
     </div>
   );

@@ -2,16 +2,36 @@
     width: 100%;
     max-width: 100%;
     height: fit-content;
-    border: none;
-    background-color: transparent;
     color: inherit;
     resize: none;
     flex-shrink: 0;
-    // field-sizing: content;
-
     border-radius: .4rem;
     padding: 1rem;
     font-size: 1.6rem;
+    border: .1rem solid var(--border-s);
+    background-color: var(--bg-t);
+    // field-sizing: content;
+
+    transition-property: border, outline, background;
+    transition-duration: .25s;
+    transition-timing-function: linear;
+
+    &:hover {
+        border-color: var(--border-p);
+    }
+
+    &:focus {
+        border-color: var(--blue-6);
+    }
+
+    // &:invalid {
+    //     border-color: var(--red-5);
+    // }
+
+    &:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
 }
 
 

@@ -38,9 +38,7 @@ const SignUpForm = () => {
       <form className={styles.form}>
         <InputItem>
           <Text<"label"> as="label">{"Email *"}</Text>
-          <InputFieldWrapper>
-            <GeneralInput placeholder="example@email.com" />
-          </InputFieldWrapper>
+          <GeneralInput placeholder="example@email.com" />
         </InputItem>
 
         <InputItem>

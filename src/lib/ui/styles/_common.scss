@@ -26,7 +26,15 @@
   background-color: var(--bg-t);
   color: var(--fg-p);
 
-  transition: border .15s linear;
+  transition-property: border, outline, background;
+  transition-duration: .25s;
+  transition-timing-function: linear;
+
+  input,
+  textarea {
+    border: none;
+    background-color: transparent;
+  }
 
   &:hover {
     border-color: var(--border-p);

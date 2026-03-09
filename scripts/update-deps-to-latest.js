@@ -58,8 +58,6 @@ const install = (cmd) => {
   }
 };
 
-console.log(`🔄 Updating ${depNames.length} dependencies to latest...\n`);
-
 if (FLAGS.sequential) {
   // safer, one-by-one installs
   for (const { name, dev } of packages) {

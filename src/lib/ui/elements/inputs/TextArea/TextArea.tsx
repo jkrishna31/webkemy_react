@@ -7,6 +7,11 @@ import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./TextArea.module.scss";
 
+const getNumber = (val: string) => {
+    const parsed = parseFloat(val);
+    return isNaN(parsed) ? 0 : parsed;
+};
+
 export interface TextAreaProps extends ComponentProps<"textarea"> {
     focused?: boolean;
     autoResize?: boolean;
@@ -24,9 +29,12 @@ const TextArea = ({
     const resize = useCallback(() => {
         // if (CSS.supports && CSS.supports("field-sizing", "content")) return;
         // handles content-sizing: content-box (subtract padding and border width from scrollHeight)
-        if (_ref.current && autoResize) {
-            _ref.current.style.height = "auto";
-            _ref.current.style.height = `${_ref.current.scrollHeight}px`;
+        const elem = _ref.current;
+        if (elem && autoResize) {
+            elem.style.setProperty("height", "auto");
+            const currStyles = window.getComputedStyle(elem);
+            const borderSize = getNumber(currStyles.borderTopWidth) + getNumber(currStyles.borderBottomWidth);
+            elem.style.setProperty("height", `${elem.scrollHeight + borderSize}px`);
         }
     }, [autoResize]);
 
