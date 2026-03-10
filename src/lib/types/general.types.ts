@@ -15,4 +15,7 @@ export type Page = {
   }
 };
 
+export type DirectKeys<T> = T extends object ? keyof T : never;
+
+export type LeafPrimitive = | string | number | boolean | bigint | symbol | null | undefined;
 export type LeafValues<T> = T extends object ? { [K in keyof T]: LeafValues<T[K]> }[keyof T] : T;

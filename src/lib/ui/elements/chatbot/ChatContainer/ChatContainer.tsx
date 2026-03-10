@@ -14,6 +14,7 @@ import { GroupDetails } from "@/lib/ui/elements/chat/GroupDetails";
 import { MembersPanel } from "@/lib/ui/elements/chat/MembersPanel";
 import { PinnedBanner } from "@/lib/ui/elements/chat/PinnedBanner";
 import { PinnedPanel } from "@/lib/ui/elements/chat/PinnedPanel";
+import { SearchPanel } from "@/lib/ui/elements/chat/SearchPanel";
 import { SharedPanel } from "@/lib/ui/elements/chat/SharedPanel";
 import { StarredPanel } from "@/lib/ui/elements/chat/StarredPanel";
 import { ThreadsPanel } from "@/lib/ui/elements/chat/ThreadsPanel";
@@ -23,6 +24,7 @@ import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ArrowLeftIcon from "@/lib/ui/svgs/icons/ArrowLeftIcon";
 import BellOffIcon from "@/lib/ui/svgs/icons/BellOffIcon";
+import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import CircleInfoIcon from "@/lib/ui/svgs/icons/CircleInfoIcon";
 import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
 import DeleteIcon from "@/lib/ui/svgs/icons/DeleteIcon";
@@ -42,6 +44,12 @@ import { getUniqueId } from "@/lib/utils/crypto.utils";
 
 import styles from "./ChatContainer.module.scss";
 
+const groupDetails = {
+  name: "Help",
+  profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
+  members: 34,
+};
+
 export interface ChatContainerProps extends ComponentProps<"div"> {
   onClose: any;
 }
@@ -54,6 +62,7 @@ const ChatContainer = ({
   const [showGroupOptions, setShowGroupOptions] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showPanel, setShowPanel] = useState<string>();
+  const [showThread, setShowThread] = useState<string>();
 
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -92,13 +101,34 @@ const ChatContainer = ({
   };
 
   const renderPanel = () => {
-    if (showPanel === "details") return <GroupDetails onClose={handleClosePanel} />;
-    else if (showPanel === "settings") return null;
-    else if (showPanel === "members") return <MembersPanel onClose={handleClosePanel} />;
-    else if (showPanel === "pinned") return <PinnedPanel onClose={handleClosePanel} />;
-    else if (showPanel === "starred") return <StarredPanel onClose={handleClosePanel} />;
-    else if (showPanel === "threads") return <ThreadsPanel onClose={handleClosePanel} />;
-    else if (showPanel === "shared") return <SharedPanel onClose={handleClosePanel} />;
+    if (showPanel === "search") {
+      return <SearchPanel onClose={handleClosePanel} />;
+    }
+    if (showPanel === "details") {
+      return <GroupDetails onClose={handleClosePanel} data={groupDetails} />;
+    }
+    else if (showPanel === "settings") {
+      return null;
+    }
+    else if (showPanel === "members") {
+      return <MembersPanel onClose={handleClosePanel} />;
+    }
+    else if (showPanel === "pinned") {
+      return <PinnedPanel onClose={handleClosePanel} />;
+    }
+    else if (showPanel === "starred") {
+      return <StarredPanel onClose={handleClosePanel} />;
+    }
+    else if (showPanel === "threads") {
+      return <ThreadsPanel onClose={handleClosePanel} />;
+    }
+    else if (showPanel === "shared") {
+      const media = chats.reduce((acc, item) => {
+        item?.media?.forEach((mediaItem: any) => acc.push({ ...mediaItem, author: item.author, datetime: item.datetime }));
+        return acc;
+      }, []);
+      return <SharedPanel onClose={handleClosePanel} data={media} />;
+    }
   };
 
   return (
@@ -119,7 +149,7 @@ const ChatContainer = ({
               className={styles.back_btn}
               onClick={() => setShowPanel(undefined)}
             >
-              <ArrowLeftIcon />
+              <ChevronLeftIcon />
             </button>
           )}
           <div
@@ -130,13 +160,13 @@ const ChatContainer = ({
           >
             <Avatar className={styles.avatar}>
               <Image
-                src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?w=500&auto=format&fit=crop&q=60"
-                alt="webkemy" width={34} height={34} objectFit="cover"
+                src={groupDetails.profile}
+                alt={groupDetails.name} width={34} height={34} objectFit="cover"
               />
             </Avatar>
             <div>
-              <h3>{"Help"}</h3>
-              <p>{"34 Members"}</p>
+              <h3>{groupDetails.name}</h3>
+              <p>{groupDetails.members}{" Members"}</p>
             </div>
           </div>
 
@@ -152,6 +182,7 @@ const ChatContainer = ({
               className={styles.search_btn}
               aria-label="Search"
               title="Search"
+              onClick={() => setShowPanel("search")}
             >
               <SearchIcon />
             </button>

@@ -3,9 +3,8 @@
   max-width: min(100%, 60rem);
   height: auto;
   max-height: fit-content;
-  overflow: auto;
-  position: relative;
   flex-shrink: 0;
+  min-width: 0;
   display: flex;
 }
 

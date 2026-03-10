@@ -1,3 +1,5 @@
+import { SearchForm } from "@/components/common/forms";
+
 import styles from "./StarredPanel.module.scss";
 
 export interface StarredPanelProps {
@@ -13,6 +15,9 @@ const StarredPanel = ({
       <div className={styles.header}>
         <h3>{"Starred"}</h3>
       </div>
+
+      <SearchForm className={styles.search_form} placeholder="Search..." />
+
     </div>
   );
 };

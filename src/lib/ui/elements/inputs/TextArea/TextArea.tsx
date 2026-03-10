@@ -15,20 +15,22 @@ const getNumber = (val: string) => {
 export interface TextAreaProps extends ComponentProps<"textarea"> {
     focused?: boolean;
     autoResize?: boolean;
+    onChange?: (event: FormEvent<HTMLTextAreaElement>) => void;
     onInput?: (event: FormEvent<HTMLTextAreaElement>) => void;
     multiline?: boolean;
     maxRows?: number;
+    onValueChange?: (value: string) => void;
 }
 
 const TextArea = ({
-    focused, className, autoResize = true, id, onInput, ref, value, multiline = true, rows, maxRows,
+    focused, className, autoResize = true, id, onInput, onChange, ref, value, multiline = true, rows, maxRows,
     ...props
 }: TextAreaProps) => {
     const _ref = useRef<HTMLTextAreaElement>(null);
 
     const resize = useCallback(() => {
-        // if (CSS.supports && CSS.supports("field-sizing", "content")) return;
-        // handles content-sizing: content-box (subtract padding and border width from scrollHeight)
+        // if (CSS.supports && CSS.supports("field-sizing", "content")) return; // and it is set
+        // todo: handles content-sizing: content-box (subtract padding and border width from scrollHeight)
         const elem = _ref.current;
         if (elem && autoResize) {
             elem.style.setProperty("height", "auto");
@@ -46,7 +48,8 @@ const TextArea = ({
         }
         resize();
         onInput?.(e);
-    }, [multiline, resize, onInput]);
+        onChange?.(e);
+    }, [multiline, resize, onInput, onChange]);
 
     useEffect(() => {
         if (_ref.current) _ref.current.value = (value ?? "") as string;

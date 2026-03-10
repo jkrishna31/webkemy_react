@@ -21,7 +21,7 @@ const roleLabels = {
 const dummyMembers = [
   {
     id: "1", name: "John Snow", email: "lopez_tk88@outlook.com", role: "admin",
-    profile: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&auto=format&fit=crop&q=60",
+    profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
   },
   {
     id: "2", name: "Julio Vincent Gambuto", email: "lucy.g22@yahoo.com", role: "member",

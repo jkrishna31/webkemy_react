@@ -13,3 +13,40 @@
   justify-content: flex-end;
   margin-top: auto;
 }
+
+.file_input {
+  min-width: 10rem;
+  width: 10rem;
+  height: 10rem;
+
+  img {
+    border-radius: 50%;
+  }
+
+  label {
+    border-radius: var(--br-pill);
+  }
+}
+
+.avatar_picker {
+  width: fit-content;
+  height: fit-content;
+  margin-inline: auto;
+  position: relative;
+}
+
+.clear_icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+  padding: .5rem;
+  min-height: fit-content;
+  border-radius: var(--br-pill);
+
+  svg {
+    width: 1.6rem;
+    height: 1.6rem;
+    stroke-width: .2rem;
+  }
+}

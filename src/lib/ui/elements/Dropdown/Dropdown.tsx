@@ -61,6 +61,7 @@ const Dropdown = ({
         ref={triggerRef}
         className={classes(styles.dropdown_trigger, triggerClass)}
         onClick={() => updateDropdownState()}
+        aria-pressed={restProps["aria-pressed"]}
       >
         {children}
         {

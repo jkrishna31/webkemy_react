@@ -3,6 +3,11 @@
   flex-direction: column;
   min-height: 0;
   max-height: 100%;
+
+  .search_form {
+    padding-inline: 1.4rem;
+    margin-bottom: 1.6rem;
+  }
 }
 
 .header {
@@ -30,12 +35,6 @@
       stroke-width: .175rem;
     }
   }
-}
-
-.search_form {
-  flex: 0;
-  padding-inline: 1.4rem;
-  margin-bottom: 1.6rem;
 }
 
 .content {

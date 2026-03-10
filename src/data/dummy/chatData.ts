@@ -12,6 +12,7 @@ export const dummyChats = [
     id: "n3lnk",
     author: {
       id: "me",
+      profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
     datetime: (new Date(2025, 2, 16, 5, 34)).toUTCString(),
@@ -23,6 +24,7 @@ export const dummyChats = [
     id: "n3f9k",
     author: {
       id: "me",
+      profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Expedita deleniti cum sapiente?",
     datetime: (new Date(2025, 2, 16, 5, 34)).toUTCString(),
@@ -91,8 +93,9 @@ export const dummyChats = [
   {
     id: "fdio23",
     author: {
-      id: "bot",
-      name: "Bot"
+      id: "john",
+      name: "John",
+      profile: "https://images.unsplash.com/photo-1718391963402-e2011890093f?q=80&w=687&auto=format&fit=crop",
     },
     content: "Hi there!",
     datetime: (new Date(2025, 5, 28, 6, 18)).toUTCString(),
@@ -101,8 +104,9 @@ export const dummyChats = [
   {
     id: "ds78",
     author: {
-      id: "bot",
-      name: "Bot"
+      id: "john",
+      name: "John",
+      profile: "https://images.unsplash.com/photo-1718391963402-e2011890093f?q=80&w=687&auto=format&fit=crop",
     },
     content: "How are you?",
     datetime: (new Date(2025, 5, 28, 6, 18)).toUTCString(),
@@ -114,7 +118,7 @@ export const dummyChats = [
         name: "landscape.png",
       },
       {
-        id: "mdump89d",
+        id: "mdump89d2",
         src: "https://images.unsplash.com/photo-1598476543599-72c8a60894d7?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDd8fHJlZHxlbnwwfHwwfHx8MA%3D%3D",
         type: "image",
       },
@@ -147,6 +151,7 @@ export const dummyChats = [
     id: "ff8fcx7",
     author: {
       id: "me",
+      profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Verify these files",
     datetime: (new Date(2025, 5, 28, 6, 23)).toUTCString(),
@@ -162,7 +167,7 @@ export const dummyChats = [
       //   type: "video",
       // },
       {
-        id: "mp80ds09",
+        id: "mp80ds092",
         src: "/assets/sample-pdf.pdf",
         name: "sample-local.pdf",
         size: 899150,

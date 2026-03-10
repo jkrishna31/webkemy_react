@@ -1,8 +1,14 @@
-.wrapper {}
+.wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+}
 
 .header {
-  padding-inline: 1.4rem .4rem;
-  padding-block: 1rem 1.4rem;
+  padding-inline: 1.4rem;
+  padding-block: 1.4rem;
   display: flex;
   align-items: center;
   gap: .4rem;
@@ -11,29 +17,11 @@
     font-weight: 500;
     margin-right: auto;
   }
-
-  svg {
-    width: 2.2rem;
-    height: 2.2rem;
-    stroke-width: .175rem;
-    color: var(--fg-s);
-  }
-
-  .close_btn {
-    padding-block: .6rem;
-  }
-
-  .search_btn {
-    svg {
-      width: 1.8rem;
-      height: 1.8rem;
-    }
-  }
 }
 
 .search_form {
   padding-inline: 1rem;
-  margin-bottom: .8rem;
+  margin-bottom: 1.6rem;
 }
 
 .section {
@@ -61,7 +49,6 @@
   transition: background .2s linear;
 
   h4 {
-    // font-size: 1.4rem;
     font-weight: 500;
   }
 
@@ -86,4 +73,51 @@
       transform: rotateZ(90deg);
     }
   }
+}
+
+.action_btn {
+  padding: .6rem;
+
+  svg {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+.last_col {
+  width: fit-content;
+
+  &>div {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.files_table {
+
+  th,
+  td {
+    white-space: nowrap;
+  }
+}
+
+.filename {
+  font-size: 1.4rem;
+}
+
+.filetype {
+  color: var(--fg-s);
+  font-size: 1.4rem;
+  text-transform: capitalize;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+}
+
+.author_avatar {
+  width: 3rem;
+  height: 3rem;
 }

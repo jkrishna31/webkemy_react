@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useEffectEvent, useState } from "react";
 
-import { isNumber } from "@/lib/utils/general.utils";
+import { DirectKeys } from "@/lib/types/general.types";
+import { deepClone } from "@/lib/utils/object.utils";
 
 export interface IValidation {
   key: string | number
@@ -12,107 +13,157 @@ export interface IValidation {
   max?: number
   minLength?: number
   maxLength?: number
+  required?: boolean
 }
 
-export interface IOption {
-  key: string
-  label: string
-  value: string
-}
+type Key = string | number | symbol;
 
-export interface IFormField {
-  key: string;
-  label?: string;
-  required?: boolean;
-  type?: "text" | "number" | "date" | "email" | "select" | "checkbox" | "radio" | "file";
-  validations?: number[];
-  multiple?: boolean;
-  value: string;
-  errors?: any[];
-  dependee?: any[]; // fields on which this field depends on
-  dependent?: any[]; // fields depending on this field
-}
+export type ObjPathAt<T, P extends any[] = []> =
+  P["length"] extends 0
+  ? DirectKeys<T>[]
+  : P extends [infer First, ...infer Rest]
+  ? Rest extends []
+  ? DirectKeys<T[Extract<First, keyof T>]>[]
+  : ObjPathAt<T[Extract<First, keyof T>], Rest>
+  : never;
 
-export interface IForm {
-  [key: string]: IFormField
-}
+export type ObjPath<T> = T extends object
+  ? {
+    [K in keyof T]: [K] | [K, ...ObjPath<T[K]>]
+  }[keyof T]
+  : [];
 
-// how to handle array of values
-// change validation (min/max) based on the value of other field value (ex: from to date range)
+type IsPlainObject<T> =
+  T extends Function ? false :
+  T extends Array<any> ? true :
+  T extends object ? true :
+  false;
 
-// approach
-// divide in two parts - ui and data
-// ui parts - order of fields, layout, min/max/minLenght/maxLength (based on validation and depending field value)
+type LeafValues<T> =
+  IsPlainObject<T> extends true
+  ? T[keyof T] extends infer V
+  ? LeafValues<V>
+  : never
+  : T;
 
-export const useForm = (initial: IForm) => {
-  const [form, setForm] = useState<IForm>(initial);
+const config = {
+  name: {
+    firstName: {
+      required: true,
+      minLength: 3,
+    },
+    // middleName: {},
+    lastName: {
+      required: true,
+      minLength: 2,
+    },
+  },
+  address: {
+    streetAddress: { required: true },
+    city: { required: true },
+    state: { required: true },
+    zipCode: { required: true },
+    country: { required: true },
+    // landmark: {},
+  },
+  contact: {
+    phone: { mask: "(000) 000-0000" },
+    email: {
+      required: true,
+      validations: [{ pattern: "", message: "" }]
+    },
+  },
+  dob: { mask: "00/00/0000" },
+  skills: { multiple: true },
+  profile: { type: "file", pattern: "", accept: "image/*" }, // pattern to allow only characters/order mentioned
+};
 
-  const validateField = (fieldKey: string, validations: IValidation[], value?: string) => {
-    const validationsToSatisty = form[fieldKey].validations;
-    const errors: number[] = [];
-    const valueToValidate = value || form[fieldKey].value;
-    if (validationsToSatisty && validationsToSatisty.length) {
-      validationsToSatisty.forEach((validationId: number) => {
-        const validation = validations[validationId];
-        if (validation.max != null && isNumber(validation.max) && Number(valueToValidate) > validation.max) {
-          errors.push(validationId);
-        }
-        if (validation.min != null && isNumber(validation.max) && Number(valueToValidate) < validation.min) {
-          errors.push(validationId);
-        }
-        if (validation.maxLength && valueToValidate.length > validation.maxLength) {
-          errors.push(validationId);
-        }
-        if (validation.minLength && valueToValidate.length < validation.minLength) {
-          errors.push(validationId);
-        }
-        if (validation.pattern && !validation.pattern.test(valueToValidate) && !valueToValidate.match(validation.pattern)) {
-          errors.push(validationId);
-        }
-      });
+export const useForm = <T extends { [key: string]: any }>(
+  initialValues?: T,
+  config?: {
+    validations: any;
+    validateOn: "change" | "focusOut" | "all";
+    // if has dependent field, then also validate them on change [or handle this explicitly since it's rare]
+  },
+) => {
+  const [dirty, setDirty] = useState(false);
+  const [errors, setErrors] = useState(); // todo: follow the same structure
+  const [values, setValues] = useState<T>(initialValues ?? {} as T);
+
+  const _get = (path: ObjPath<T>) => {
+    let _value = values;
+
+    if (typeof path !== "object") return _value?.[path];
+
+    for (let i = 0; i < path.length; i++) {
+      if (_value == undefined) return undefined;
+      _value = _value[path[i]];
     }
-    setFieldProp(fieldKey, "errors", errors);
-    return errors;
+
+    return _value;
   };
 
-  const validateForm = (validations: IValidation[]) => {
-    let isValid = true;
-    Object.keys(form).forEach((key: string) => {
-      const errors = validateField(key, validations);
-      if (errors.length && isValid) {
-        isValid = false;
+  const _set = useCallback((obj: T, path: ObjPath<T>, value: LeafValues<T>) => {
+    let _obj = obj;
+
+    if (typeof path !== "object") {
+
+    } else {
+      for (let i = 0; i < path.length - 1; i++) {
+        const key = path[i];
+        if (_obj[key] == undefined) (_obj as any)[key] = {};
+        _obj = _obj[key];
       }
-    });
-    return isValid;
+
+      (_obj as any)[path[path.length - 1]] = value;
+    }
+    return obj;
+  }, []);
+
+  const setFieldValue = useCallback((path: ObjPath<T>, value: LeafValues<T>) => {
+    const newValues = deepClone(values);
+    _set(newValues, path, value);
+    setValues(newValues);
+  }, [_set, values]);
+
+  const resetFieldValue = useCallback(() => {
+    // todo: set field value to initialValue
+  }, []);
+
+  const isDirty = () => {
+    // todo: set dirty with dirty fields path
+    // todo: be called on change of field
   };
 
-  const setFieldProp = (fieldKey: string, fieldProp: string, value: any[]) => {
-    setForm(currForm => ({ ...currForm, [fieldKey]: { ...currForm[fieldKey], [fieldProp]: value } }));
+  function coreValidation(path: ObjPath<T>,) {
+    // required, min, max, minLength, maxLength, mask, pattern
+  }
+
+  const validateField = (path: ObjPath<T>) => {
+    // todo: set errors
+    // core validation: required, min, max, minLength, maxLength, pattern, {what about other validations?}
   };
 
-  const setFieldValue = (fieldKey: string, value: string) => {
-    setForm(currForm => ({ ...currForm, [fieldKey]: { ...currForm[fieldKey], value } }));
-  };
+  const resetForm = useCallback(() => {
 
-  const resetFieldValue = (fieldKey: string) => {
-    setForm(currForm => ({ ...currForm, [fieldKey]: { ...currForm[fieldKey], value: "" } }));
-  };
+  }, []);
 
-  const resetForm = () => {
-    setForm(initial);
-  };
+  const clearForm = useCallback(() => {
 
-  const clearForm = () => {
+  }, []);
 
-  };
+  const _setValues = useEffectEvent((values?: T) => {
+    setValues(values ?? {} as T);
+  });
 
   useEffect(() => {
-    setForm(initial);
-  }, [initial]);
+    _setValues(initialValues);
+  }, [initialValues]);
 
   return {
-    form, setFieldValue,
-    resetFieldValue, resetForm, clearForm,
-    validateField, validateForm,
+    values,
+    setFieldValue, resetFieldValue,
+    resetForm, clearForm,
+    validateField,
   };
 };

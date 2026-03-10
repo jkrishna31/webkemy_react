@@ -16,11 +16,13 @@ import styles from "./Scrollable.module.scss";
 export interface ScrollableProps extends ComponentProps<"div"> {
   vertical?: boolean
   scrollStep?: number
+  rootClass?: string
 }
 
 const Scrollable = ({
   children,
   className,
+  rootClass,
   id,
   vertical,
   scrollStep = 100,
@@ -78,7 +80,7 @@ const Scrollable = ({
   }, [updateScrollArea, windowSize]);
 
   return (
-    <>
+    <div className={classes(styles.wrapper, rootClass)}>
       {
         hasXScroll[0] ? (
           <button
@@ -113,7 +115,7 @@ const Scrollable = ({
           </button>
         ) : null
       }
-    </>
+    </div>
   );
 };
 

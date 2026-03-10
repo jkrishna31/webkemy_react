@@ -1,36 +1,41 @@
+import Image from "next/image";
+
 import { SearchForm } from "@/components/common/forms";
 import { useAccordion } from "@/lib/hooks/useAccordion";
+import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
+import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { Table } from "@/lib/ui/elements/Table";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
-import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
+import { formatDate } from "@/lib/utils/datetime.utils";
 
 import styles from "./SharedPanel.module.scss";
 
 export interface SharedPanelProps {
   onClose?: () => void;
+  data?: (MediaItem & { author: any; datetime: string; })[];
 }
 
 const SharedPanel = ({
+  data,
   onClose,
   ...restProps
 }: SharedPanelProps) => {
-  const { activeSections, updateAccordion } = useAccordion("multiple", ["media", "links"]);
+  const { activeSections, updateAccordion } = useAccordion("multiple", ["media", "links", "files"]);
 
-  const isMediaSecOpen = activeSections.includes("media");
+  const isFilesSecOpen = activeSections.includes("files");
   const isLinksSecOpen = activeSections.includes("links");
+  const isMediaSecOpen = activeSections.includes("media");
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
         <h3>{"Shared"}</h3>
-        <Button className={styles.search_btn}>
-          <SearchIcon />
-        </Button>
       </div>
 
-      {/* <SearchForm className={styles.search_form} /> */}
+      <SearchForm className={styles.search_form} placeholder="Search media..." />
 
       <div className={styles.section}>
         <div
@@ -42,20 +47,61 @@ const SharedPanel = ({
           <ChevronRightIcon />
         </div>
         <CollapsiblePanel open={isMediaSecOpen}>
-          <Table>
+
+        </CollapsiblePanel>
+      </div>
+
+      <div className={styles.section}>
+        <div
+          className={styles.sec_header}
+          aria-expanded={activeSections.includes("files")}
+          onClick={() => updateAccordion("files")}
+        >
+          <h4>{"Files"}</h4>
+          <ChevronRightIcon />
+        </div>
+        <CollapsiblePanel open={isFilesSecOpen}>
+          <Table className={styles.files_table}>
             <Table.Header>
               <tr>
                 <Table.Cell>{"File"}</Table.Cell>
                 <Table.Cell>{"Shared By"}</Table.Cell>
-                <Table.Cell></Table.Cell>
+                <Table.Cell>{"Shared On"}</Table.Cell>
+                <Table.Cell className={styles.last_col}></Table.Cell>
               </tr>
             </Table.Header>
             <Table.Body>
-              <tr>
-                <Table.Cell<"td"> as="td" colSpan={3}>
-                  {"No files shared yet."}
-                </Table.Cell>
-              </tr>
+              {!data?.length && (
+                <tr>
+                  <Table.Cell<"td"> as="td" colSpan={3}>
+                    {"No files shared yet."}
+                  </Table.Cell>
+                </tr>
+              )}
+              {data?.filter(item => !item.type?.includes("image"))?.map(item => (
+                <tr key={item.id}>
+                  <Table.Cell<"td"> as="td">
+                    {!!item.name && <p className={styles.filename}>{item.name}</p>}
+                    <p className={styles.filetype}>{item.type}</p>
+                  </Table.Cell>
+                  <Table.Cell<"td"> as="td">
+                    <div className={styles.author}>
+                      <Avatar className={styles.author_avatar}>
+                        <Image src={item.author.profile} alt={item.author.name ?? "Me"} width={30} height={30} />
+                      </Avatar>
+                      <p>{item.author.name ?? "Me"}</p>
+                    </div>
+                  </Table.Cell>
+                  <Table.Cell<"td"> as="td">
+                    {formatDate(item.datetime)}
+                  </Table.Cell>
+                  <Table.Cell<"td"> as="td" className={styles.last_col}>
+                    <Button variant="quaternary" className={styles.action_btn}>
+                      <EllipsisHIcon />
+                    </Button>
+                  </Table.Cell>
+                </tr>
+              ))}
             </Table.Body>
           </Table>
         </CollapsiblePanel>

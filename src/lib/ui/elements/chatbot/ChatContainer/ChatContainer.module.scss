@@ -44,7 +44,8 @@
   align-items: center;
   justify-content: space-between;
   gap: .4rem;
-  padding: .4rem .2rem .4rem 1.2rem;
+  padding-block: .4rem;
+  padding-inline: .8rem .2rem;
   border-bottom: .1rem solid var(--border-t);
 }
 
@@ -64,7 +65,7 @@
 }
 
 .back_btn {
-  margin-left: -1rem;
+  margin-left: -.8rem;
   stroke-width: .175rem;
 }
 
@@ -86,10 +87,17 @@
   cursor: pointer;
   margin-right: auto;
 
+  border-radius: .8rem;
+  padding: .6rem;
+
   p {
     font-size: 1.4rem;
     color: var(--fg-s);
     margin-top: .4rem;
+  }
+
+  &:hover {
+    background-color: var(--bg-s);
   }
 }
 

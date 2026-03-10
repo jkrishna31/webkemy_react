@@ -1,3 +1,5 @@
+import { SearchForm } from "@/components/common/forms";
+
 import styles from "./PinnedPanel.module.scss";
 
 export interface PinnedPanelProps {
@@ -13,6 +15,8 @@ const PinnedPanel = ({
       <div className={styles.header}>
         <h3>{"Pinned"}</h3>
       </div>
+
+      <SearchForm className={styles.search_form} placeholder="Search..." />
     </div>
   );
 };
