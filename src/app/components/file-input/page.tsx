@@ -19,7 +19,7 @@ const Page = () => {
         className={styles.input}
         files={filelist}
         multiple
-        onInput={(e) => setFilelist((e.target as HTMLInputElement)?.files)}
+        onInput={(e) => setFilelist((e.target as HTMLInputElement)?.files ?? undefined)}
         aria-label="Choose File(s)"
       />
       <FilesPreview

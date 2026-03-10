@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export function useFiles() {
-  const [filelist, setFilelist] = useState<FileList | null>(null);
+  const [filelist, setFilelist] = useState<FileList>();
 
   // todo: handle json object for uploaded files
 
