@@ -42,7 +42,7 @@ const Table = ({
   const _ref = useRef<HTMLDivElement>(null);
 
   const [isOnLeftEnd, setIsOnLeftEnd] = useState(true);
-  const [isOnRightEnd, setIsOnRightEnd] = useState(false);
+  const [isOnRightEnd, setIsOnRightEnd] = useState(true);
 
   useEffect(() => {
     const elem = _ref.current;

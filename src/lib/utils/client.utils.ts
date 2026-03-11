@@ -411,3 +411,7 @@ export const getConnection = () => {
         type: connection.type,
     };
 };
+
+export const getStorage = () => {
+
+};

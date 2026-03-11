@@ -19,7 +19,7 @@ export interface EventBadgeProps extends ComponentProps<"div"> {
   day?: number
   month?: number
   year?: number
-  badgeColor?: "green" | "red" | "blue" | "yellow" | "orange"
+  badgeColor?: "green" | "red" | "blue" | "yellow" | "orange" | "purple" | "pink"
   compact?: boolean
   timeFormat?: "12h" | "24h"
   event: CalendarEvent

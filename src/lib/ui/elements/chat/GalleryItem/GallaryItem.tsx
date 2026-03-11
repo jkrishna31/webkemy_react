@@ -30,7 +30,7 @@ const GallaryItem = ({
   const isVideo = !isAudio && media.type?.includes("video");
 
   if (!isImage) return null;
-  // if video, use thumbnail
+  // if video, use thumbnail & show the duration
   // if audio, ...
 
   return (

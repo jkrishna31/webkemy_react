@@ -30,13 +30,14 @@ export const allEvents: CalendarEvent[] = [
     title: "Workshop A",
     start: new Date(_year, 0, 10, 10).toUTCString(),
     end: new Date(_year, 0, 10, 10, 45).toUTCString(),
+    color: "purple",
   },
   {
     id: "cxmj32nlk",
     title: "Early Strategy Metting",
     start: new Date(_year, 0, 18, 9, 15).toUTCString(),
     end: new Date(_year, 0, 18, 10, 30).toUTCString(),
-    color: "blue",
+    color: "pink",
   },
   {
     id: " ds32k",
@@ -105,13 +106,14 @@ export const allEvents: CalendarEvent[] = [
     title: "Workshop A",
     start: new Date(_year, _month || 5, 10, 10).toUTCString(),
     end: new Date(_year, _month || 5, 10, 10, 45).toUTCString(),
+    color: "purple",
   },
   {
     id: "cxmj",
     title: "Early Strategy Metting",
     start: new Date(_year, _month || 5, 18, 9, 15).toUTCString(),
     end: new Date(_year, _month || 5, 18, 10, 30).toUTCString(),
-    color: "blue",
+    color: "pink",
   },
   {
     id: " ds",

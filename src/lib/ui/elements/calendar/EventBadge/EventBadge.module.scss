@@ -96,6 +96,24 @@
   background-color: var(--blue-1);
 }
 
+.purple {
+  border-color: var(--purple-1);
+  background-color: var(--purple-1-10);
+}
+
+.purple_bg {
+  background-color: var(--purple-1);
+}
+
+.pink {
+  border-color: var(--pink-1);
+  background-color: var(--pink-1-10);
+}
+
+.pink_bg {
+  background-color: var(--pink-1);
+}
+
 .time {
   color: var(--fg-s);
   white-space: preserve;

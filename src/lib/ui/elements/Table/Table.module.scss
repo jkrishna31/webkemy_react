@@ -134,7 +134,7 @@
       top: 0;
       pointer-events: none;
       height: 100%;
-      width: .6rem;
+      width: .4rem;
     }
   }
 
@@ -145,7 +145,7 @@
     &::before {
       right: 0;
       transform: translate3d(100%, 0, 0);
-      background: linear-gradient(to right, var(--shadow-p), transparent);
+      background: linear-gradient(to right, var(--gray-27-50), transparent);
     }
   }
 
@@ -156,7 +156,7 @@
     &::before {
       left: 0;
       transform: translate3d(-100%, 0, 0);
-      background: linear-gradient(to left, var(--shadow-p), transparent);
+      background: linear-gradient(to left, var(--gray-27-50), transparent);
     }
   }
 }

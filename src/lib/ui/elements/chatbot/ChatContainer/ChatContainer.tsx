@@ -22,6 +22,7 @@ import { ThreadsPanel } from "@/lib/ui/elements/chat/ThreadsPanel";
 import { Divider } from "@/lib/ui/elements/Divider";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
+import { MediaGallery } from "@/lib/ui/elements/MediaGallery";
 import { Popover } from "@/lib/ui/elements/Popover";
 import ArrowLeftIcon from "@/lib/ui/svgs/icons/ArrowLeftIcon";
 import BellOffIcon from "@/lib/ui/svgs/icons/BellOffIcon";
@@ -103,32 +104,54 @@ const ChatContainer = ({
 
   const renderPanel = () => {
     if (showPanel === "search") {
-      return <SearchPanel onClose={handleClosePanel} />;
+      return (
+        <SearchPanel onClose={handleClosePanel} />
+      );
     }
     if (showPanel === "details") {
-      return <GroupDetails onClose={handleClosePanel} data={groupDetails} />;
+      return (
+        <GroupDetails onClose={handleClosePanel} data={groupDetails} />
+      );
     }
     else if (showPanel === "settings") {
-      return <GroupSettings />;
+      return (
+        <GroupSettings />
+      );
     }
     else if (showPanel === "members") {
       return <MembersPanel onClose={handleClosePanel} />;
     }
     else if (showPanel === "pinned") {
-      return <PinnedPanel onClose={handleClosePanel} />;
+      return (
+        <PinnedPanel onClose={handleClosePanel} />
+      );
     }
     else if (showPanel === "starred") {
-      return <StarredPanel onClose={handleClosePanel} />;
+      return (
+        <StarredPanel onClose={handleClosePanel} />
+      );
     }
     else if (showPanel === "threads") {
-      return <ThreadsPanel onClose={handleClosePanel} />;
+      return (
+        <ThreadsPanel onClose={handleClosePanel} />
+      );
     }
     else if (showPanel === "shared") {
       const media = chats.reduce((acc, item) => {
         item?.media?.forEach((mediaItem: any) => acc.push({ ...mediaItem, author: item.author, datetime: item.datetime }));
         return acc;
       }, []);
-      return <SharedPanel onClose={handleClosePanel} data={media} />;
+      return (
+        <SharedPanel
+          data={media}
+          onClose={handleClosePanel}
+          onShowAll={(key) => setShowPanel(key === "media" ? "gallery" : undefined)}
+        />
+      );
+    } else if (showPanel === "gallery") {
+      return (
+        <MediaGallery />
+      );
     }
   };
 
