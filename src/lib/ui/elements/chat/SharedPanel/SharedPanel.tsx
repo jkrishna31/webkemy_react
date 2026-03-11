@@ -5,6 +5,7 @@ import { useAccordion } from "@/lib/hooks/useAccordion";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
+import { GallaryItem } from "@/lib/ui/elements/chat/GalleryItem";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { Table } from "@/lib/ui/elements/Table";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
@@ -29,6 +30,18 @@ const SharedPanel = ({
   const isLinksSecOpen = activeSections.includes("links");
   const isMediaSecOpen = activeSections.includes("media");
 
+  const showAllLinks = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  const showAllMedia = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
+  const showAllFiles = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -44,10 +57,25 @@ const SharedPanel = ({
           onClick={() => updateAccordion("media")}
         >
           <h4>{"Media"}</h4>
+          <Button
+            variant="secondary"
+            className={styles.show_all_btn}
+            onClick={showAllMedia}
+          >
+            {"Show All"}
+          </Button>
           <ChevronRightIcon />
         </div>
         <CollapsiblePanel open={isMediaSecOpen}>
-
+          <div className={styles.media_list}>
+            {
+              data
+                ?.filter(item => item.type?.includes("image") || item.type?.includes("video") || item.type?.includes("audio"))?.slice(1, 5)
+                .map(item => (
+                  <GallaryItem media={item} user={item.author} datetime={item.datetime} key={item.id} />
+                ))
+            }
+          </div>
         </CollapsiblePanel>
       </div>
 
@@ -58,6 +86,13 @@ const SharedPanel = ({
           onClick={() => updateAccordion("files")}
         >
           <h4>{"Files"}</h4>
+          <Button
+            variant="secondary"
+            className={styles.show_all_btn}
+            onClick={showAllFiles}
+          >
+            {"Show All"}
+          </Button>
           <ChevronRightIcon />
         </div>
         <CollapsiblePanel open={isFilesSecOpen}>
@@ -67,7 +102,7 @@ const SharedPanel = ({
                 <Table.Cell>{"File"}</Table.Cell>
                 <Table.Cell>{"Shared By"}</Table.Cell>
                 <Table.Cell>{"Shared On"}</Table.Cell>
-                <Table.Cell className={styles.last_col}></Table.Cell>
+                <Table.Cell sticky="right" className={styles.last_col}></Table.Cell>
               </tr>
             </Table.Header>
             <Table.Body>
@@ -95,7 +130,7 @@ const SharedPanel = ({
                   <Table.Cell<"td"> as="td">
                     {formatDate(item.datetime)}
                   </Table.Cell>
-                  <Table.Cell<"td"> as="td" className={styles.last_col}>
+                  <Table.Cell<"td"> as="td" sticky="right" className={styles.last_col}>
                     <Button variant="quaternary" className={styles.action_btn}>
                       <EllipsisHIcon />
                     </Button>
@@ -114,6 +149,13 @@ const SharedPanel = ({
           onClick={() => updateAccordion("links")}
         >
           <h4>{"Links"}</h4>
+          {/* <Button
+            variant="secondary"
+            className={styles.show_all_btn}
+            onClick={showAllLinks}
+          >
+            {"Show All"}
+          </Button> */}
           <ChevronRightIcon />
         </div>
         <CollapsiblePanel open={isLinksSecOpen}>

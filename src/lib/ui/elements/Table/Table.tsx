@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, ElementType, Fragment, ReactNode } from "react";
+import { ComponentProps, ElementType, Fragment, ReactNode, useEffect, useRef, useState } from "react";
 
 import { SortBtn } from "@/lib/ui/elements/butttons";
 import { classes } from "@/lib/utils/style.utils";
@@ -35,12 +35,37 @@ const getStickyClasses = (sticky?: StickType) => {
 };
 
 const Table = ({
+  ref,
   className, rootClass, children,
   ...restProps
 }: TableProps) => {
+  const _ref = useRef<HTMLDivElement>(null);
+
+  const [isOnLeftEnd, setIsOnLeftEnd] = useState(true);
+  const [isOnRightEnd, setIsOnRightEnd] = useState(false);
+
+  useEffect(() => {
+    const elem = _ref.current;
+
+    if (!elem) return;
+
+    const handleScroll = () => {
+      setIsOnLeftEnd(elem.scrollLeft === 0);
+      setIsOnRightEnd(elem.scrollLeft + elem.clientWidth >= elem.scrollWidth);
+    };
+    handleScroll();
+
+    elem.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      elem.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <div
-      className={classes(styles.wrapper, rootClass)}
+      ref={_ref}
+      className={classes(styles.wrapper, isOnLeftEnd && styles.on_left_end, isOnRightEnd && styles.on_right_end, rootClass)}
       {...restProps}
     >
       <table

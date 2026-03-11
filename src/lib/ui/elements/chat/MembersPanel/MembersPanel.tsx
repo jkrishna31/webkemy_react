@@ -14,17 +14,18 @@ import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
 import styles from "./MembersPanel.module.scss";
 
 const roleLabels = {
+  owner: "Owner",
   admin: "Admin",
   member: "Member",
 } as const;
 
 const dummyMembers = [
   {
-    id: "1", name: "John Snow", email: "lopez_tk88@outlook.com", role: "admin",
+    id: "1", name: "John Snow", email: "lopez_tk88@outlook.com", role: "owner",
     profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
   },
   {
-    id: "2", name: "Julio Vincent Gambuto", email: "lucy.g22@yahoo.com", role: "member",
+    id: "2", name: "Julio Vincent Gambuto", email: "lucy.g22@yahoo.com", role: "admin",
     profile: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60",
   },
   {
@@ -122,6 +123,7 @@ const MembersPanel = ({
                     triggerClass={styles.role_trigger}
                     dropdown={
                       <ItemList>
+                        <Item scope="list" primary="Owner" selected={item.role === "owner"} />
                         <Item scope="list" primary="Admin" selected={item.role === "admin"} />
                         <Item scope="list" primary="Member" selected={item.role === "member"} />
                       </ItemList>

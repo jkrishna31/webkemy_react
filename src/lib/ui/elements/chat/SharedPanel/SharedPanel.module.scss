@@ -84,6 +84,14 @@
   }
 }
 
+.show_all_btn {
+  margin-left: auto;
+  margin-right: 1.6rem;
+  min-height: fit-content;
+  padding: .4rem 1rem;
+  font-size: 1.4rem;
+}
+
 .last_col {
   width: fit-content;
 
@@ -120,4 +128,10 @@
 .author_avatar {
   width: 3rem;
   height: 3rem;
+}
+
+.media_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
 }

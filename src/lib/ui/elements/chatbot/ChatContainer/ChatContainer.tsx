@@ -11,6 +11,7 @@ import { Avatar } from "@/lib/ui/elements/Avatar";
 import { ChatComposer } from "@/lib/ui/elements/chat/ChatComposer";
 import { ChatList } from "@/lib/ui/elements/chat/ChatList";
 import { GroupDetails } from "@/lib/ui/elements/chat/GroupDetails";
+import { GroupSettings } from "@/lib/ui/elements/chat/GroupSettings";
 import { MembersPanel } from "@/lib/ui/elements/chat/MembersPanel";
 import { PinnedBanner } from "@/lib/ui/elements/chat/PinnedBanner";
 import { PinnedPanel } from "@/lib/ui/elements/chat/PinnedPanel";
@@ -108,7 +109,7 @@ const ChatContainer = ({
       return <GroupDetails onClose={handleClosePanel} data={groupDetails} />;
     }
     else if (showPanel === "settings") {
-      return null;
+      return <GroupSettings />;
     }
     else if (showPanel === "members") {
       return <MembersPanel onClose={handleClosePanel} />;
