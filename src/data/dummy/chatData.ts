@@ -12,6 +12,7 @@ export const dummyChats = [
     id: "n3lnk",
     author: {
       id: "me",
+      name: "Julio V. Gambuto",
       profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing.",
@@ -24,6 +25,7 @@ export const dummyChats = [
     id: "n3f9k",
     author: {
       id: "me",
+      name: "Julio V. Gambuto",
       profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Expedita deleniti cum sapiente?",
@@ -66,6 +68,12 @@ export const dummyChats = [
     datetime: (new Date(2025, 2, 17, 15, 34)).toUTCString(),
     status: "read",
     starred: true,
+    media: [{
+      id: "random_audio",
+      name: "gamelan-bass-groove.wav.mp3",
+      src: "https://sampleswap.org/samples-ghost/REMIXABLE%20COLLECTIONS/078%20gamelon%20bass%20groove/4249[kb]078_gamelan-bass-groove.wav.mp3",
+      type: "audio",
+    }]
   },
   {
     id: "vc89vc",
@@ -151,16 +159,17 @@ export const dummyChats = [
     id: "ff8fcx7",
     author: {
       id: "me",
+      name: "Julio V. Gambuto",
       profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
     },
     content: "Verify these files",
     datetime: (new Date(2025, 5, 28, 6, 23)).toUTCString(),
     media: [
-      // {
-      //   id: "ma80ds09",
-      //   src: "https://sampleswap.org/samples-ghost/VOCAL%20ACAPELLAS/Snowflake/9218[kb]snowflake-In-Peace-cc-by.mp3.mp3",
-      //   type: "audio",
-      // },
+      {
+        id: "ma80ds09",
+        src: "https://sampleswap.org/samples-ghost/VOCAL%20ACAPELLAS/Snowflake/9218[kb]snowflake-In-Peace-cc-by.mp3.mp3",
+        type: "audio",
+      },
       // {
       //   id: "mv80ds09",
       //   src: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
@@ -182,4 +191,57 @@ export const dummyChats = [
       },
     ]
   }
+];
+
+
+export const dummyMembers = [
+  {
+    id: "1", name: "Julio Vincent Gambuto", email: "lopez_tk88@outlook.com", role: "owner",
+    profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
+  },
+  {
+    id: "2", name: "John Snow", email: "lucy.g22@yahoo.com", role: "admin",
+    profile: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=500&auto=format&fit=crop&q=60",
+  },
+  {
+    id: "3", name: "Ethan Brooks", email: "liam.baker@example.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1502685104226-ee32379fefbe?w=500&auto=format&fit=crop&q=60",
+  },
+  {
+    id: "4", name: "Amelia Green", email: "isabella.ward@example.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=500&auto=format&fit=crop&q=60",
+  },
+  {
+    id: "5", name: "Michael", email: "c.rivera84@gmail.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=764&auto=format&fit=crop",
+  },
+  {
+    id: "6", name: "Leo Gonzalez", email: "noah.mitchell@example.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1631&auto=format&fit=crop",
+  },
+  {
+    id: "7", name: "Emma Hill", email: "sophia_p29@icloud.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1543610892-0b1f7e6d8ac1?q=80&w=687&auto=format&fit=crop",
+  },
+
+  {
+    id: "8", name: "Lela Glover", email: "lelaglover46@aol.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=687&auto=format&fit=crop",
+  },
+  {
+    id: "9", name: "Carlos Rivera", email: "c.rivera84@gmail.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=761&auto=format&fit=crop",
+  },
+  {
+    id: "10", name: "Sophia Patel", email: "sophia_p29@icloud.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1623184663796-f0eb7e46d6ab?q=80&w=1112&auto=format&fit=crop",
+  },
+  {
+    id: "11", name: "Henry Thompson", email: "hthompson52@comcast.net", role: "member",
+    profile: "https://images.unsplash.com/flagged/photo-1573603867003-89f5fd7a7576?q=80&w=746&auto=format&fit=crop",
+  },
+  {
+    id: "12", name: "Mia Chen", email: "miac_041@gmail.com", role: "member",
+    profile: "https://images.unsplash.com/photo-1718391963402-e2011890093f?q=80&w=687&auto=format&fit=crop",
+  },
 ];

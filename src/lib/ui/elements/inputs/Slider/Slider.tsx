@@ -37,8 +37,8 @@ const Slider = ({
     >
       <input
         type="range"
-        className={classes(styles.slider_input, className)}
         min={min} max={max} value={value}
+        className={classes(styles.slider_input, className)}
         {...props}
         aria-orientation={props["aria-orientation"] || orientation}
       />

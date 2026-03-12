@@ -18,6 +18,10 @@ export interface MediaItem {
   src: string;
   type?: string;
   size?: number;
+  thumbnails?: MediaItem[];
+  createdOn?: string;
+  updatedOn?: string;
+  user?: any;
 }
 
 export interface ChatMediaProps extends ComponentProps<"div"> {
@@ -35,8 +39,8 @@ const ChatMedia = ({
 
   media?.forEach(item => {
     if (item.type === "image") images.push(item);
-    else if (item.type === "video") video.push(item);
     else if (item.type === "audio") audio.push(item);
+    else if (item.type === "video") video.push(item);
     else others.push(item);
   });
 
@@ -64,14 +68,14 @@ const ChatMedia = ({
       {!!audio.length && (
         <div className={styles.audios}>
           {audio.map(item => (
-            <AudioPlayer key={item.id} src={item.src} rootClass={styles.audio_player} />
+            <AudioPlayer key={item.id} src={item.src} rootClass={styles.audio_player} allowVolumeControl={false} />
           ))}
         </div>
       )}
       {!!video.length && (
         <div className={styles.videos}>
           {video.map(item => (
-            <VideoPlayer key={item.id} src={item.src} />
+            <VideoPlayer key={item.id} src={item.src} rootClass={styles.video_player} />
           ))}
         </div>
       )}

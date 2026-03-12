@@ -22,9 +22,12 @@ import styles from "./AudioPlayer.module.scss";
 export interface AudioPlayerProps extends ComponentProps<"audio"> {
   sources?: ComponentProps<"source">[];
   rootClass?: string;
+  allowVolumeControl?: boolean;
+  allowPaceControl?: boolean;
 }
 
 const AudioPlayer = ({
+  allowVolumeControl = true, allowPaceControl = true,
   children, sources, rootClass,
   ...props
 }: AudioPlayerProps) => {
@@ -98,28 +101,32 @@ const AudioPlayer = ({
             aria-label="Seek"
           />
         </div>
-        <Dropdown
-          dropdown={
-            <PaceControl pace={pace} updatePace={updatePace} />
-          }
-          hintIcon={null}
-          triggerClass={styles.ap_speed_btn}
-          dropdownClass={styles.ap_speed_popover}
-          alignment="right"
-        >
-          {pace}{"x"}
-        </Dropdown>
-        <Dropdown
-          dropdown={
-            <VolumeControl mute={isMute} setMute={toggleMute} volume={volume} updateVolume={updateVolume} />
-          }
-          triggerClass={styles.ap_mute_btn}
-          dropdownClass={styles.ap_vol_popover}
-          hintIcon={null}
-          alignment="right"
-        >
-          {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
-        </Dropdown>
+        {!!allowPaceControl && (
+          <Dropdown
+            dropdown={
+              <PaceControl pace={pace} updatePace={updatePace} />
+            }
+            hintIcon={null}
+            triggerClass={styles.ap_speed_btn}
+            dropdownClass={styles.ap_speed_popover}
+            alignment="right"
+          >
+            {pace}{"x"}
+          </Dropdown>
+        )}
+        {!!allowVolumeControl && (
+          <Dropdown
+            dropdown={
+              <VolumeControl mute={isMute} setMute={toggleMute} volume={volume} updateVolume={updateVolume} />
+            }
+            triggerClass={styles.ap_mute_btn}
+            dropdownClass={styles.ap_vol_popover}
+            hintIcon={null}
+            alignment="right"
+          >
+            {isMute ? <VolumenMuteIcon /> : <VolumeHighIcon />}
+          </Dropdown>
+        )}
       </div>
     </div>
   );

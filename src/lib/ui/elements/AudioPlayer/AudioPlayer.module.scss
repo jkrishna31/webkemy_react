@@ -1,4 +1,5 @@
 .audio_player {
+  --ap-controls-fg: var(--fg-p-alt);
   --ap-controls-bg: var(--bg-s);
   --ap-controls-bg-hover: var(--bg-hover);
 
@@ -40,9 +41,10 @@
   .ap_play_btn,
   .ap_speed_btn,
   .ap_mute_btn {
+    color: var(--ap-controls-fg);
     background-color: var(--ap-controls-bg);
-    padding: .9rem;
-    color: var(--fg-p-alt);
+    padding: .7rem;
+    min-height: 3.6rem;
 
     &:hover {
       background-color: var(--ap-controls-bg-hover);
@@ -55,18 +57,16 @@
   }
 
   .ap_speed_btn {
-    min-height: 4rem;
-    min-width: 6rem;
+    min-width: 3.6rem;
     justify-content: center;
     padding-inline: .8rem;
+    font-family: var(--font-mono);
   }
 
   .ap_mute_btn {
-    padding: .8rem;
-
     svg {
-      width: 2.4rem;
-      height: 2.4rem;
+      width: 2.2rem;
+      height: 2.2rem;
       stroke-width: .1rem;
     }
   }

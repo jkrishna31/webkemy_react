@@ -1,10 +1,13 @@
 import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
-import { GallaryItem } from "@/lib/ui/elements/chat/GalleryItem";
+import { GalleryItem } from "@/lib/ui/elements/chat/GalleryItem";
+import { MediaViewer } from "@/lib/ui/elements/chat/MediaViewer";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
 import { Table } from "@/lib/ui/elements/Table";
 import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
@@ -15,7 +18,7 @@ import styles from "./SharedPanel.module.scss";
 
 export interface SharedPanelProps {
   onClose?: () => void;
-  data?: (MediaItem & { author: any; datetime: string; })[];
+  data?: MediaItem[];
   onShowAll?: (key: "files" | "links" | "media") => void;
 }
 
@@ -24,11 +27,16 @@ const SharedPanel = ({
   onClose, onShowAll,
   ...restProps
 }: SharedPanelProps) => {
+  const [showMedia, setShowMedia] = useState<MediaItem>();
+
   const { activeSections, updateAccordion } = useAccordion("multiple", ["media", "links", "files"]);
 
   const isFilesSecOpen = activeSections.includes("files");
   const isLinksSecOpen = activeSections.includes("links");
   const isMediaSecOpen = activeSections.includes("media");
+
+  const media = data?.filter(item => item.type?.includes("image") || item.type?.includes("video") || item.type?.includes("audio"));
+  const files = data?.filter(item => !item.type?.includes("image"));
 
   const showAllLinks = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -72,11 +80,9 @@ const SharedPanel = ({
         <CollapsiblePanel open={isMediaSecOpen}>
           <div className={styles.media_list}>
             {
-              data
-                ?.filter(item => item.type?.includes("image") || item.type?.includes("video") || item.type?.includes("audio"))?.slice(1, 5)
-                .map(item => (
-                  <GallaryItem media={item} user={item.author} datetime={item.datetime} key={item.id} />
-                ))
+              media?.slice(1, 5).map(item => (
+                <GalleryItem media={item} key={item.id} onClick={() => setShowMedia(item)} />
+              ))
             }
           </div>
         </CollapsiblePanel>
@@ -118,26 +124,30 @@ const SharedPanel = ({
                   </Table.Cell>
                 </tr>
               )}
-              {data?.filter(item => !item.type?.includes("image"))?.map(item => (
+              {files?.map(item => (
                 <tr key={item.id}>
                   <Table.Cell<"td"> as="td">
-                    {!!item.name && <p className={styles.filename}>{item.name}</p>}
+                    {!!item.name && <Link href={item.src} className={styles.filename}>{item.name}</Link>}
                     <p className={styles.filetype}>{item.type}</p>
                   </Table.Cell>
                   <Table.Cell<"td"> as="td">
                     <div className={styles.author}>
                       <Avatar className={styles.author_avatar}>
-                        <Image src={item.author.profile} alt={item.author.name ?? "Me"} width={30} height={30} />
+                        <Image src={item.user.profile} alt={item.user.name ?? "Me"} width={30} height={30} />
                       </Avatar>
-                      <p>{item.author.name ?? "Me"}</p>
+                      <p>{item.user.name ?? "Me"}</p>
                     </div>
                   </Table.Cell>
                   <Table.Cell<"td"> as="td" className={styles.shared_on}>
-                    {formatDate(item.datetime)}
+                    {formatDate(item.createdOn)}
                   </Table.Cell>
                   <Table.Cell<"td"> as="td" sticky="right" className={styles.last_col}>
-                    <Button variant="quaternary" className={styles.action_btn}>
+                    <Button
+                      variant="quaternary"
+                      className={styles.action_btn}
+                    >
                       <EllipsisHIcon />
+                      {/* todo: show in conversation */}
                     </Button>
                   </Table.Cell>
                 </tr>
@@ -185,9 +195,14 @@ const SharedPanel = ({
         </CollapsiblePanel>
       </div>
 
-      {/* col 1 -- filename, filetype, filesize */}
-      {/* col 2 -- author profile, author name, date */}
-      {/* col 3 -- options: Show in Conversation, */}
+      {!!showMedia && (
+        <MediaViewer
+          open
+          mediaId={showMedia?.id}
+          media={data ?? []}
+          onClose={() => setShowMedia(undefined)}
+        />
+      )}
     </div>
   );
 };

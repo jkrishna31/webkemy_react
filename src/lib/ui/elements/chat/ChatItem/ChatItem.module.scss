@@ -122,7 +122,6 @@
   line-height: 1.35;
   padding: .8rem 1rem;
   background-color: var(--chat-bg);
-  // border: .1rem solid var(--chat-border);
   transition: background .2s linear;
 
   &[data-selected="true"] {
@@ -200,6 +199,34 @@
   width: 1.5rem;
   height: 1.5rem;
 }
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: .2rem;
+  background-color: var(--bg-s);
+  border-radius: var(--br-pill);
+  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+  width: fit-content;
+  padding: .4rem;
+
+  button {
+    min-height: fit-content;
+    padding: .7rem;
+    background-color: transparent;
+
+    &:hover {
+      background-color: var(--bg-p);
+    }
+  }
+
+  svg {
+    width: 1.8rem;
+    height: 1.8rem;
+    stroke-width: .175rem;
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .meta {

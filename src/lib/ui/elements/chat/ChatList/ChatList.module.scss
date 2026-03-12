@@ -7,33 +7,6 @@
   min-height: 0;
 }
 
-.actions {
-  display: flex;
-  align-items: center;
-  gap: .2rem;
-  background-color: var(--bg-s);
-  border-radius: var(--br-pill);
-  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
-  width: fit-content;
-  padding: .4rem;
-
-  button {
-    min-height: fit-content;
-    padding: .7rem;
-    background-color: transparent;
-
-    &:hover {
-      background-color: var(--bg-p);
-    }
-  }
-
-  svg {
-    width: 1.8rem;
-    height: 1.8rem;
-    stroke-width: .175rem;
-  }
-}
-
 .options_popover {
   min-width: min(fit-content, var(--popover-min-width)) !important; // temporary: css module resolution is not consistent in dev & prod build
   width: fit-content;

@@ -15,10 +15,13 @@ const page = () => {
       <AudioPlayer
         src="https://sampleswap.org/samples-ghost/PUBLIC%20DOMAIN%20SPOKEN%20WORD/7715[kb]Martin-Luther-King-I-Have-A-Dream.mp3.mp3"
         rootClass={styles.player}
+        allowVolumeControl={false}
       />
       <AudioPlayer
         src="https://sampleswap.org/samples-ghost/REMIXABLE%20COLLECTIONS/078%20gamelon%20bass%20groove/4249[kb]078_gamelan-bass-groove.wav.mp3"
         rootClass={styles.player}
+        allowPaceControl={false}
+        allowVolumeControl={false}
       />
     </main>
   );

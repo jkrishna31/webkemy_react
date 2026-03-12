@@ -1,2 +1,2 @@
-export type * from "./GallaryItem";
-export { default as GallaryItem } from "./GallaryItem";
+export type * from "./GalleryItem";
+export { default as GalleryItem } from "./GalleryItem";

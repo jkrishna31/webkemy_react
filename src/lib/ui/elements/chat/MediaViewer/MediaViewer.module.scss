@@ -1,5 +1,16 @@
 .unsupported {
   text-align: center;
   padding-inline: 2rem;
-  line-height: 1.35;
+
+  p {
+    font-size: 1.8rem;
+    line-height: 1.35;
+    text-shadow: 0 0 60px var(--shadow-p);
+    margin-bottom: 1.6rem;
+  }
+}
+
+.download_btn {
+  min-height: fit-content;
+  margin-inline: auto;
 }

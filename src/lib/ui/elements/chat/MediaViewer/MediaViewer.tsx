@@ -1,10 +1,12 @@
 import { useState } from "react";
 
+import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { ImageViewer } from "@/lib/ui/elements/ImageViewer";
 import { Lightbox } from "@/lib/ui/elements/Lightbox";
 import { PDFViewer } from "@/lib/ui/elements/PDFViewer";
+import { VideoPlayer } from "@/lib/ui/elements/VideoPlayer";
 
 import styles from "./MediaViewer.module.scss";
 
@@ -32,22 +34,34 @@ const MediaViewer = ({
   };
 
   const renderMedia = () => {
-    const _media = currentMedia;
-
-    if (_media.type === "image") {
+    if (currentMedia.type === "image") {
       return (
-        <ImageViewer media={_media} />
+        <ImageViewer media={currentMedia} />
       );
-    } else if (_media.type === "pdf") {
-      return <PDFViewer src={currentMedia.src} />;
-    } else if (_media.type === "audio") {
-
-    } else if (_media.type === "video") {
-
+    } else if (currentMedia.type === "pdf") {
+      return (
+        <PDFViewer src={currentMedia.src} />
+      );
+    } else if (currentMedia.type === "audio") {
+      return (
+        <AudioPlayer src={currentMedia.src} />
+      );
+    } else if (currentMedia.type === "video") {
+      return (
+        <VideoPlayer src={currentMedia.src} />
+      );
     } else {
       return (
         <div className={styles.unsupported}>
-          <p>{"Unsupported File Type. This file cannot be opened."}</p>
+          <p>{"Unsupported File format. This file cannot be opened."}</p>
+          <Button<"a">
+            as="a"
+            href={currentMedia.src}
+            variant="primary"
+            className={styles.download_btn}
+          >
+            {"Download File"}
+          </Button>
         </div>
       );
     }

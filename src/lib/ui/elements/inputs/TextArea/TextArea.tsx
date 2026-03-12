@@ -46,23 +46,27 @@ const TextArea = ({
             val = val.slice(0, -1);
             (e.target as HTMLTextAreaElement).value = val;
         }
-        resize();
         onInput?.(e);
         onChange?.(e);
-    }, [multiline, resize, onInput, onChange]);
+    }, [multiline, onInput, onChange]);
 
     useEffect(() => {
-        if (_ref.current) _ref.current.value = (value ?? "") as string;
-    }, [value]);
-
-    useEffect(resize, [resize, value]);
+        if (!_ref.current) return;
+        const ro = new ResizeObserver(resize);
+        ro.observe(_ref.current);
+        return () => ro.disconnect();
+    }, [resize]);
 
     useEffect(() => {
-        if (_ref.current) {
-            if (focused) _ref.current.focus();
-            resize();
-        }
-    }, [focused, resize]);
+        if (!_ref.current) return;
+        _ref.current.value = (value ?? "") as string;
+        resize();
+    }, [resize, value]);
+
+    useEffect(() => {
+        if (!_ref.current) return;
+        if (focused) _ref.current.focus();
+    }, [focused]);
 
     return (
         <textarea

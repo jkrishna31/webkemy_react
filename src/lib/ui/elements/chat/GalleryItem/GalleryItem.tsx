@@ -6,25 +6,25 @@ import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
-import { formatDate } from "@/lib/utils/datetime.utils";
+import { formatDate, formatTime } from "@/lib/utils/datetime.utils";
 
-import styles from "./GallaryItem.module.scss";
+import styles from "./GalleryItem.module.scss";
 
-export interface GallaryItemProps {
+export interface GalleryItemProps {
   media: MediaItem;
-  user?: any;
-  datetime?: string;
+  showTime?: boolean;
   onClick?: () => void;
   selectable?: boolean;
   selected?: boolean;
   onSelect?: () => void;
   onUserClick?: () => void;
+  onOptions?: () => void;
 }
 
-const GallaryItem = ({
-  media, user, datetime, selectable, selected, onSelect, onUserClick, onClick,
+const GalleryItem = ({
+  media, showTime, selectable, selected, onSelect, onUserClick, onClick, onOptions,
   ...restProps
-}: GallaryItemProps) => {
+}: GalleryItemProps) => {
   const isImage = media.type?.includes("image");
   const isAudio = !isImage && media.type?.includes("audio");
   const isVideo = !isAudio && media.type?.includes("video");
@@ -37,17 +37,18 @@ const GallaryItem = ({
     <div
       className={styles.wrapper}
       title={media.name}
+      onClick={onClick}
     >
       <Image src={media.src} alt={media.name || media.id} width={80} height={80} unoptimized className={styles.thumbnail} />
 
       <div className={styles.overlay}>
         <div className={styles.header}>
-          {!!user?.profile && (
+          {!!media.user?.profile && (
             <div className={styles.user}>
               <Avatar className={styles.user_avatar}>
-                <Image src={user.profile} alt={user.name ?? user.id} width={30} height={30} />
+                <Image src={media.user?.profile} alt={media.user?.name ?? media.user?.id} width={30} height={30} />
               </Avatar>
-              <p className={styles.username}>{user.name}</p>
+              <p className={styles.username}>{media.user?.name}</p>
             </div>
           )}
           {!!selectable && <Checkbox className={styles.checkbox} />}
@@ -60,13 +61,14 @@ const GallaryItem = ({
         <div className={styles.footer}>
           <div className={styles.details}>
             <p className={styles.filename}>{media.name}</p>
-            {!!datetime && (
-              <p className={styles.datetime}>{formatDate(datetime)}</p>
+            {!!media.createdOn && (
+              <p className={styles.datetime}>{showTime ? formatTime(media.createdOn) : formatDate(media.createdOn)}</p>
             )}
           </div>
           <Button
             variant="tertiary"
             className={styles.actions_btn}
+            onClick={onOptions}
           >
             <EllipsisHIcon />
           </Button>
@@ -76,4 +78,4 @@ const GallaryItem = ({
   );
 };
 
-export default GallaryItem;
+export default GalleryItem;

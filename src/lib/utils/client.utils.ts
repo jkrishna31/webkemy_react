@@ -412,6 +412,11 @@ export const getConnection = () => {
     };
 };
 
-export const getStorage = () => {
-
+export const getStorageStats = async () => {
+    try {
+        const estimated = await navigator.storage.estimate();
+        return estimated;
+    } catch (error) {
+        return;
+    }
 };

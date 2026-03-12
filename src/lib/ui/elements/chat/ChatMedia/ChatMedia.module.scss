@@ -6,7 +6,7 @@
   margin-top: .4rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .8rem;
 }
 
 .gallary {
@@ -74,13 +74,17 @@
   gap: .4rem;
 }
 
-// .audio_player {
-//   --ap-controls-bg: var(--chat-bg);
-//   --ap-controls-bg-hover: var(--blue-1-25);
-//   background-color: var(--bg-s);
-//   border-radius: var(--br-pill);
-//   padding: .8rem;
-// }
+.audio_player {
+  --ap-controls-fg: var(--bg-p);
+  --ap-controls-bg: var(--chat-fg);
+  --ap-controls-bg-hover: var(--chat-fg);
+  background-color: var(--chat-bg);
+  border-radius: var(--br-pill);
+  padding: .8rem;
+  max-width: 28rem;
+
+  transition: background .3s linear;
+}
 
 .other_item {
   display: flex;
@@ -131,6 +135,10 @@
 
   .gallary,
   .other_item {
+    background-color: var(--chat-bg-active);
+  }
+
+  .audio_player {
     background-color: var(--chat-bg-active);
   }
 }

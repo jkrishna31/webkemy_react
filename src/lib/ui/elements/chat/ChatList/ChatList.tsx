@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, ReactNode, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { ComponentProps, ReactNode, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 
 import { useLongPress } from "@/lib/hooks/useLongPress";
 import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
@@ -83,23 +83,26 @@ const otherOptions = [
 export interface ChatListProps extends ComponentProps<"div"> {
   chats?: any;
   lastReadMsgId?: string;
+  onShowReplies?: (chat: any) => void;
+  onReact?: () => void;
+  onShowReaction?: () => void;
 }
 
 const ChatList = ({
   chats, lastReadMsgId,
+  onShowReplies,
   ref, className,
   ...restProps
 }: ChatListProps) => {
   const _ref = useRef<HTMLDivElement>(null);
   const prevChatWindowSize = useRef<{ height: number; width: number; }>({ height: 0, width: 0 });
 
-  const [autoScroll, setAutoScroll] = useState(true); // auto scroll to latest message, off when manually scrolled up, reset when reach bottom
+  // auto scroll to latest message, off when manually scrolled up, reset when reach bottom
+  const [autoScroll, setAutoScroll] = useState(true);
   const [showOptionsFor, setShowOptionsFor] = useState<HTMLElement | null>(null);
-  const [showAllOptionsFor, setShowAllOptionsFor] = useState(false);
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedChats, setSelectedChats] = useState<string | string[]>();
   const [showMedia, setShowMedia] = useState<{ mediaId?: string; chatId?: string; }>();
-  const [editChat, setEditChat] = useState();
 
   const mediaList = useMemo(() => {
     if (showMedia?.chatId) {
@@ -119,22 +122,20 @@ const ChatList = ({
 
   const { isOnBoundary, handleScroll } = useScroll({ target: _ref, margin: 50, delay: 150, initialState: true });
 
-  const handleScrollToBottom = () => {
+  const handleScrollToBottom = (behavior: "smooth" | "instant" = "smooth") => {
     if (_ref.current && _ref.current.scrollHeight !== _ref.current.clientHeight) {
       _ref.current.scrollTo({
         top: _ref.current.scrollHeight,
-        behavior: "smooth",
+        behavior,
       });
     }
   };
 
-  const handleMutation = useCallback((mutations: MutationRecord[]) => {
-    if (mutations.length) {
-      if (mutations[0].addedNodes?.length) {
-        handleScrollToBottom();
-      }
-    }
-  }, []);
+  // const handleMutation = useCallback((mutations: MutationRecord[]) => {
+  //   if (mutations.length && mutations[mutations.length - 1].addedNodes?.length) {
+  //     handleScrollToBottom();
+  //   }
+  // }, []);
 
   const closeMenu = () => {
     setShowOptionsFor(null);
@@ -191,9 +192,24 @@ const ChatList = ({
     setShowMedia({ chatId, mediaId: mediaId });
   }, []);
 
-  useMutationObserver(_ref, handleMutation);
-
   useLongPress(_ref, handleMsgContext);
+
+  // useMutationObserver(_ref, handleMutation);
+
+  const scrollToBottomEvent = useEffectEvent(() => {
+    if (autoScroll) handleScrollToBottom();
+  });
+
+  useEffect(() => handleScrollToBottom, []);
+
+  useEffect(() => {
+    if (chats[chats.length - 1].author.id === "me") handleScrollToBottom();
+    else scrollToBottomEvent();
+  }, [chats]);
+
+  useEffect(() => {
+    setAutoScroll(isOnBoundary ?? false);
+  }, [isOnBoundary]);
 
   useEffect(() => {
     const elem = _ref.current;
@@ -247,13 +263,6 @@ const ChatList = ({
           ref={mergeRefs(_ref, ref)}
           onContextMenu={handleContextMenu}
         >
-          {/* <div className={styles.actions}>
-          {defaultOptions.map((item) => (
-            <Button key={item.id} variant="quaternary">
-              {item.icon}
-            </Button>
-          ))}
-        </div> */}
           {renderChats(chats, 0)}
         </div>
         <button

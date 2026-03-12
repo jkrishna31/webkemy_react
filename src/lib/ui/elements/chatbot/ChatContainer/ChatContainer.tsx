@@ -43,6 +43,7 @@ import SpoolIcon from "@/lib/ui/svgs/icons/SpoolIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
 import UsersIcon from "@/lib/ui/svgs/icons/UsersIcon";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { compareDateByPrecision } from "@/lib/utils/datetime.utils";
 
 import styles from "./ChatContainer.module.scss";
 
@@ -112,33 +113,29 @@ const ChatContainer = ({
       return (
         <GroupDetails onClose={handleClosePanel} data={groupDetails} />
       );
-    }
-    else if (showPanel === "settings") {
+    } else if (showPanel === "settings") {
       return (
         <GroupSettings />
       );
-    }
-    else if (showPanel === "members") {
-      return <MembersPanel onClose={handleClosePanel} />;
-    }
-    else if (showPanel === "pinned") {
+    } else if (showPanel === "members") {
+      return (
+        <MembersPanel onClose={handleClosePanel} />
+      );
+    } else if (showPanel === "pinned") {
       return (
         <PinnedPanel onClose={handleClosePanel} />
       );
-    }
-    else if (showPanel === "starred") {
+    } else if (showPanel === "starred") {
       return (
         <StarredPanel onClose={handleClosePanel} />
       );
-    }
-    else if (showPanel === "threads") {
+    } else if (showPanel === "threads") {
       return (
         <ThreadsPanel onClose={handleClosePanel} />
       );
-    }
-    else if (showPanel === "shared") {
+    } else if (showPanel === "shared") {
       const media = chats.reduce((acc, item) => {
-        item?.media?.forEach((mediaItem: any) => acc.push({ ...mediaItem, author: item.author, datetime: item.datetime }));
+        item?.media?.forEach((mediaItem: any) => acc.push({ ...mediaItem, user: item.author, createdOn: item.datetime }));
         return acc;
       }, []);
       return (
@@ -149,8 +146,35 @@ const ChatContainer = ({
         />
       );
     } else if (showPanel === "gallery") {
+      const media = chats.reduce((acc, item) => {
+        item?.media?.forEach((mediaItem: any) => {
+          if (mediaItem.type?.startsWith("image") || mediaItem.type?.startsWith("video")) {
+            acc.push({ ...mediaItem, user: item.author, createdOn: item.datetime });
+          }
+        });
+        return acc;
+      }, []);
+      const groupedByDate = [];
+      for (let i = 0; i < media.length; i++) {
+        const continueDate = media[i === 0 ? i : i - 1].createdOn;
+        if (compareDateByPrecision(continueDate, media[i].createdOn) === 0) {
+          if (groupedByDate.length) {
+            groupedByDate[groupedByDate.length - 1].media.push(media[i]);
+          } else {
+            groupedByDate.push({
+              date: media[i].createdOn,
+              media: [media[i]],
+            });
+          }
+        } else {
+          groupedByDate.push({
+            date: media[i].createdOn,
+            media: [media[i]],
+          });
+        }
+      }
       return (
-        <MediaGallery />
+        <MediaGallery media={media} grouped={groupedByDate} />
       );
     }
   };
@@ -231,7 +255,7 @@ const ChatContainer = ({
         {!showPanel && (
           <>
             <PinnedBanner />
-            <ChatList chats={chats} lastReadMsgId={lastReadMsgId} />
+            <ChatList chats={chats} lastReadMsgId={lastReadMsgId} onShowReplies={() => { }} />
             <ChatComposer className={styles.footer} onSend={handleSend} />
           </>
         )}

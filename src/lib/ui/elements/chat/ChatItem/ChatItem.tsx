@@ -104,7 +104,16 @@ const ChatItem = ({
                         data-author={chat.author.id}
                         data-id={item.id}
                       >
+                        {/* <div className={styles.actions}>
+                          {defaultOptions.map((item) => (
+                            <Button key={item.id} variant="quaternary">
+                              {item.icon}
+                            </Button>
+                          ))}
+                        </div> */}
+                        {/* retry/delete */}
                         <div
+                          // data-loading="true"
                           className={classes(styles.chat, chat.author.id === "me" && styles.green)}
                           data-selected={_isSelected}
                         >
