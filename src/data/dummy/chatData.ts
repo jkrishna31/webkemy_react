@@ -1,3 +1,10 @@
+export const groupDetails = {
+  name: "Help",
+  profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
+  members: 12,
+  description: "",
+};
+
 export const dummyChats = [
   {
     id: "ddaa",

@@ -56,11 +56,15 @@
     height: 2rem;
   }
 
+  .ap_play_btn svg {
+    stroke-width: .2rem;
+  }
+
   .ap_speed_btn {
     min-width: 3.6rem;
     justify-content: center;
     padding-inline: .8rem;
-    font-family: var(--font-mono);
+    font-weight: 500;
   }
 
   .ap_mute_btn {
@@ -101,6 +105,10 @@
 
     .ap_btn_dur {
       font-size: 1.3rem;
+    }
+
+    .ap_speed_btn {
+      font-size: 1.6rem;
     }
   }
 }

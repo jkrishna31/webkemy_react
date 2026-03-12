@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ComponentProps, useRef, useState } from "react";
 
 import { Overlay } from "@/components/common/containers";
-import { dummyChats } from "@/data/dummy/chatData";
+import { dummyChats, groupDetails } from "@/data/dummy/chatData";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { Avatar } from "@/lib/ui/elements/Avatar";
@@ -46,12 +46,6 @@ import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { compareDateByPrecision } from "@/lib/utils/datetime.utils";
 
 import styles from "./ChatContainer.module.scss";
-
-const groupDetails = {
-  name: "Help",
-  profile: "https://images.unsplash.com/photo-1772371272141-0fbd644b65c4?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNhcnRvb24lMjBwcm9maWxlfGVufDB8fDB8fHww",
-  members: 34,
-};
 
 export interface ChatContainerProps extends ComponentProps<"div"> {
   onClose: any;
