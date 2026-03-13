@@ -47,6 +47,8 @@ import { compareDateByPrecision } from "@/lib/utils/datetime.utils";
 
 import styles from "./ChatContainer.module.scss";
 
+const mfuReactions = ["👍️", "💯", "👀", "❤️"];
+
 export interface ChatContainerProps extends ComponentProps<"div"> {
   onClose: any;
 }
@@ -249,7 +251,12 @@ const ChatContainer = ({
         {!showPanel && (
           <>
             <PinnedBanner />
-            <ChatList chats={chats} lastReadMsgId={lastReadMsgId} onShowReplies={() => { }} />
+            <ChatList
+              chats={chats}
+              lastReadMsgId={lastReadMsgId}
+              onShowReplies={() => { }}
+              quickReactions={mfuReactions}
+            />
             <ChatComposer className={styles.footer} onSend={handleSend} />
           </>
         )}

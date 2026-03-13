@@ -40,11 +40,17 @@ export const dummyChats = [
     starred: true,
     pinned: true,
     media: [
+      // {
+      //   id: "mdump89d",
+      //   src: "https://images.unsplash.com/photo-1769937060137-22671294c3cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D",
+      //   type: "image",
+      //   name: "blossom-landscape.jpg",
+      // },
       {
-        id: "mdump89d",
-        src: "https://images.unsplash.com/photo-1769937060137-22671294c3cc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHwxMHx8fGVufDB8fHx8fA%3D%3D",
+        id: "auods7ds23",
+        src: "https://images.unsplash.com/photo-1672036855093-eb274a6f2507?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGdsaXR0ZXIlMjBleHBsb3Npb258ZW58MHx8MHx8fDA%3D",
         type: "image",
-        name: "blossom-landscape.jpg",
+        name: "lanterns.webp"
       },
     ]
   },
@@ -108,7 +114,7 @@ export const dummyChats = [
       id: "bot",
       name: "Bot",
     },
-    content: "Labore sit iste explicabo, et hic voluptate eius fuga recusandae fugiat iusto optio porro in. Expedita deleniti cum sapiente? Sit enim, modi alias dolor veritatis aut porro velit adipisci voluptate, maiores odit!",
+    content: "Labore sit iste explicabo, et hic voluptate eius fuga recusandae fugiat iusto optio porro in. Expedita deleniti cum sapiente? Sit enim, modi alias dolor veritatis aut porro velit adipisci voluptate, maiores odit!\nIt is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\nThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.",
     datetime: (new Date(2025, 5, 28, 6, 17)).toUTCString(),
     reactions: [{ key: "thumbs_up", emoji: "👍️", count: "162" }, { key: "heart", emoji: "❤️", count: 57 }, { key: "fire", emoji: "🔥", count: "23" }, { key: "raising_hands", emoji: "🙌", count: "15" }, { key: "mind_blown", emoji: "🤯", count: "9" }],
   },
@@ -133,6 +139,12 @@ export const dummyChats = [
     content: "How are you?",
     datetime: (new Date(2025, 5, 28, 6, 18)).toUTCString(),
     media: [
+      // {
+      //   id: "auods7ds",
+      //   src: "https://images.unsplash.com/photo-1672036855093-eb274a6f2507?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGdsaXR0ZXIlMjBleHBsb3Npb258ZW58MHx8MHx8fDA%3D",
+      //   type: "image",
+      //   name: "lanterns.webp"
+      // },
       {
         id: "mfd89fd",
         src: "https://images.unsplash.com/photo-1767431199061-3237ddd5de9f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxmZWF0dXJlZC1waG90b3MtZmVlZHw1fHx8ZW58MHx8fHx8",
@@ -210,6 +222,15 @@ export const dummyChats = [
         type: "zip"
       },
     ]
+  },
+  {
+    id: "ds90me",
+    author: {
+      id: "me",
+      name: "Julio V. Gambuto",
+    },
+    content: "Contrary to popular belief, Lorem Ipsum is not simply random text.\nIt has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\nIt uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
+    datetime: (new Date(2025, 5, 29, 14, 17)).toUTCString(),
   }
 ];
 

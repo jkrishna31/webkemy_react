@@ -2,6 +2,7 @@
 
 import { ComponentProps, ReactNode, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 
+import useFirstRender from "@/lib/hooks/useFirstRender";
 import { useLongPress } from "@/lib/hooks/useLongPress";
 import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
 import { useScroll } from "@/lib/hooks/useScroll";
@@ -86,15 +87,18 @@ export interface ChatListProps extends ComponentProps<"div"> {
   onShowReplies?: (chat: any) => void;
   onReact?: () => void;
   onShowReaction?: () => void;
+  quickReactions?: string[];
 }
 
 const ChatList = ({
-  chats, lastReadMsgId,
+  chats, lastReadMsgId, quickReactions,
   onShowReplies,
   ref, className,
   ...restProps
 }: ChatListProps) => {
   const _ref = useRef<HTMLDivElement>(null);
+  const sentinalRef = useRef<HTMLDivElement>(null);
+
   const prevChatWindowSize = useRef<{ height: number; width: number; }>({ height: 0, width: 0 });
 
   // auto scroll to latest message, off when manually scrolled up, reset when reach bottom
@@ -122,20 +126,17 @@ const ChatList = ({
 
   const { isOnBoundary, handleScroll } = useScroll({ target: _ref, margin: 50, delay: 150, initialState: true });
 
-  const handleScrollToBottom = (behavior: "smooth" | "instant" = "smooth") => {
-    if (_ref.current && _ref.current.scrollHeight !== _ref.current.clientHeight) {
-      _ref.current.scrollTo({
-        top: _ref.current.scrollHeight,
-        behavior,
-      });
-    }
+  const handleScrollToBottom = (behavior: "smooth" | "instant" = "instant") => {
+    requestAnimationFrame(() => {
+      if (_ref.current && _ref.current.scrollHeight !== _ref.current.clientHeight) {
+        _ref.current.scrollTo({
+          top: _ref.current.scrollHeight,
+          behavior,
+        });
+        // sentinalRef.current?.scrollIntoView({ block: "end", behavior });
+      }
+    });
   };
-
-  // const handleMutation = useCallback((mutations: MutationRecord[]) => {
-  //   if (mutations.length && mutations[mutations.length - 1].addedNodes?.length) {
-  //     handleScrollToBottom();
-  //   }
-  // }, []);
 
   const closeMenu = () => {
     setShowOptionsFor(null);
@@ -192,15 +193,19 @@ const ChatList = ({
     setShowMedia({ chatId, mediaId: mediaId });
   }, []);
 
-  useLongPress(_ref, handleMsgContext);
+  // const handleMutation = useCallback((mutations: MutationRecord[]) => {
+  //   if (mutations.length && mutations[mutations.length - 1].addedNodes?.length) {
+  //     handleScrollToBottom();
+  //   }
+  // }, []);
 
   // useMutationObserver(_ref, handleMutation);
+
+  useLongPress(_ref, handleMsgContext);
 
   const scrollToBottomEvent = useEffectEvent(() => {
     if (autoScroll) handleScrollToBottom();
   });
-
-  useEffect(() => handleScrollToBottom, []);
 
   useEffect(() => {
     if (chats[chats.length - 1].author.id === "me") handleScrollToBottom();
@@ -246,6 +251,7 @@ const ChatList = ({
           lastReadMsgId={lastReadMsgId}
           selectedChats={selectedChats}
           onMediaClick={handleMediaClick}
+          quickReactions={quickReactions}
         />
         {renderChats(chats, i)}
       </>
@@ -264,6 +270,7 @@ const ChatList = ({
           onContextMenu={handleContextMenu}
         >
           {renderChats(chats, 0)}
+          {/* <div ref={sentinalRef} className={styles.sentinal}></div> */}
         </div>
         <button
           className={styles.to_bottom_btn}
@@ -285,6 +292,7 @@ const ChatList = ({
           className={classes(styles.options_popover, showEmojiPicker ? styles.emoji_popover : styles.all_options_popover)}
           trapFocus
           closeOnEsc
+        // overlap
         >
           {showEmojiPicker ? (
             <EmojiPicker />

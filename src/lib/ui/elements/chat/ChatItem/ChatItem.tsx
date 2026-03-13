@@ -24,11 +24,11 @@ export interface ChatItemProps extends ComponentProps<"div"> {
   chat?: any;
   selectedChats?: string | string[];
   onMediaClick?: (chatId: string, mediaId?: string) => void;
-
+  quickReactions?: string[];
 }
 
 const ChatItem = ({
-  chat, selectedChats, onMediaClick,
+  chat, selectedChats, onMediaClick, quickReactions,
   className,
   ...restProps
 }: ChatItemProps) => {
@@ -100,6 +100,7 @@ const ChatItem = ({
                 {
                   chat.content?.map((item: { id: string; content: string; media: any[] }, idx: number) => {
                     const _isSelected = isSelected(item.id);
+                    const isTruncated = item.content.length > 500; // && not expanded
                     return (
                       <div
                         key={idx}
@@ -107,28 +108,22 @@ const ChatItem = ({
                         data-author={chat.author.id}
                         data-id={item.id}
                       >
-                        <div className={styles.actions}>
-                          <Button variant="quaternary">{"👍️"}</Button>
-                          <Button variant="quaternary">{"💯"}</Button>
-                          <Button variant="quaternary">{"👀"}</Button>
-                          <Button variant="quaternary">{"❤️"}</Button>
-                          <Divider orientation="vertical" style={{ margin: ".4rem" }} />
-                          <Button variant="quaternary">
-                            <AddEmojiIcon />
-                          </Button>
-                          <Button variant="quaternary">
-                            <EllipsisHIcon />
-                          </Button>
-                        </div>
                         {/* retry/delete */}
                         <div
                           // data-loading="true"
-                          className={classes(styles.chat, chat.author.id === "me" && styles.green)}
+                          className={classes(styles.chat, chat.author.id === "me" && styles.green, isTruncated && styles.trunc)}
                           data-selected={_isSelected}
                         >
                           {item.content?.split("\n")?.map((part, pIdx) => (
                             <p key={`${idx}-${pIdx}`}>{part}</p>
                           ))}
+                          {isTruncated && (
+                            <Button className={styles.show_more_btn}>
+                              <span>
+                                {"Show More"}
+                              </span>
+                            </Button>
+                          )}
                         </div>
                         {!!item.media?.length && (
                           <ChatMedia
@@ -139,6 +134,18 @@ const ChatItem = ({
                             onMediaClick={onMediaClick}
                           />
                         )}
+                        <div className={styles.actions}>
+                          {quickReactions?.map(item => (
+                            <Button variant="quaternary" key={item}>{item}</Button>
+                          ))}
+                          <Divider orientation="vertical" style={{ margin: ".4rem" }} />
+                          <Button variant="quaternary">
+                            <AddEmojiIcon />
+                          </Button>
+                          <Button variant="quaternary">
+                            <EllipsisHIcon />
+                          </Button>
+                        </div>
                       </div>
                     );
                   })

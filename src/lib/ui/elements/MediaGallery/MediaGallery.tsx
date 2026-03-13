@@ -97,6 +97,22 @@ const MediaGallery = ({
         <Dropdown
           dropdown={
             <ItemList>
+              <Item scope="list" primary="All" />
+              <Divider style={{ marginBlock: ".2rem" }} />
+              <Item scope="list" primary="Image" />
+              <Item scope="list" primary="Video" />
+              <Item scope="list" primary="Audio" />
+            </ItemList>
+          }
+          triggerClass={styles.filter_trigger}
+          aria-pressed={true}
+        >
+          {"Type"}
+          <Badge color="blue" float={null}>{"All"}</Badge>
+        </Dropdown>
+        <Dropdown
+          dropdown={
+            <ItemList>
               <Item scope="list" primary="Last 7 days" />
               <Item scope="list" primary="Last 15 days" />
               <Item scope="list" primary="Last 1 month" />
@@ -117,24 +133,8 @@ const MediaGallery = ({
             </div>
           }
           triggerClass={styles.filter_trigger}
-          aria-pressed={true}
         >
           {"Person"}
-          <Badge color="blue" float={null}>{"2"}</Badge>
-        </Dropdown>
-        <Dropdown
-          dropdown={
-            <ItemList>
-              <Item scope="list" primary="All" />
-              <Divider style={{ marginBlock: ".2rem" }} />
-              <Item scope="list" primary="Image" />
-              <Item scope="list" primary="Video" />
-              <Item scope="list" primary="Audio" />
-            </ItemList>
-          }
-          triggerClass={styles.filter_trigger}
-        >
-          {"Type"}
         </Dropdown>
       </Scrollable>
 
