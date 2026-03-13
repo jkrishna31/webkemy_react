@@ -1,3 +1,5 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
 .wrapper {
   flex: 1;
   display: flex;
@@ -104,8 +106,11 @@
   }
 
   .filename {
+    max-width: 20rem;
     font-size: 1.4rem;
     color: var(--blue-1);
+    @include line_clamp(1);
+    display: block;
   }
 
   .filetype {

@@ -90,6 +90,8 @@ export const useForm = <T extends { [key: string]: any }>(
   const [errors, setErrors] = useState(); // todo: follow the same structure
   const [values, setValues] = useState<T>(initialValues ?? {} as T);
 
+  // dirty, og value
+
   const _get = (path: ObjPath<T>) => {
     let _value = values;
 
@@ -136,7 +138,7 @@ export const useForm = <T extends { [key: string]: any }>(
   };
 
   function coreValidation(path: ObjPath<T>,) {
-    // required, min, max, minLength, maxLength, mask, pattern
+    // todo: required, min, max, minLength, maxLength, mask, pattern
   }
 
   const validateField = (path: ObjPath<T>) => {

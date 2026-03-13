@@ -94,6 +94,13 @@ export const dummyChats = [
     status: "read",
     replies: 16,
     pinned: true,
+    media: [{
+      id: "vsi798",
+      name: "blue-glitter-particle-explosion-abstract-light-burst-background-animation-video-purple.webm",
+      src: "https://www.shutterstock.com/shutterstock/videos/3922523297/preview/stock-footage--k-blue-glitter-particle-explosion-abstract-light-burst-background-animation-video-purple.webm",
+      type: "video",
+      thumbnails: [{ id: "vtn34", src: "/assets/video-thumbnail-1.png", duration: 14, name: "blue-glitter-particle-explosion-abstract-light-burst-background-animation-video-purple.webm" }]
+    }]
   },
   {
     id: "ds90",
@@ -176,12 +183,18 @@ export const dummyChats = [
         id: "ma80ds09",
         src: "https://sampleswap.org/samples-ghost/VOCAL%20ACAPELLAS/Snowflake/9218[kb]snowflake-In-Peace-cc-by.mp3.mp3",
         type: "audio",
+        duration: 0,
       },
-      // {
-      //   id: "mv80ds09",
-      //   src: "https://archive.org/download/BigBuckBunny_124/Content/big_buck_bunny_720p_surround.mp4",
-      //   type: "video",
-      // },
+      {
+        id: "mv80ds09",
+        name: "big_buck_bunny_720p_surround.mp4",
+        src: "https://www.pexels.com/download/video/7213891/",
+        duration: 597,
+        thumbnails: [
+          { id: "tnv1", src: "/assets/video-thumbnail-2.png", name: "big_buck_bunny_720p_surround.mp4", duration: 597, },
+        ],
+        type: "video",
+      },
       {
         id: "mp80ds092",
         src: "/assets/sample-pdf.pdf",

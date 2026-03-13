@@ -29,10 +29,11 @@
 
 .vertical {
   width: auto;
-  height: 100%;
+  height: auto;
   max-height: 100%;
   display: inline-flex;
   writing-mode: vertical-lr;
+  align-self: stretch;
 
   hr {
     width: 0;

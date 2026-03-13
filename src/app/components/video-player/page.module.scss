@@ -1,4 +1,9 @@
+.main {
+  padding-block: 2rem;
+}
+
 .player {
+  width: calc(min(100vh, 100vw) - 4rem);
   max-width: 60rem;
   height: auto;
 }

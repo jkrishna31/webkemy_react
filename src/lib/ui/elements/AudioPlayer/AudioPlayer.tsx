@@ -6,7 +6,7 @@ import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
 import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
-import { RippleLoader } from "@/lib/ui/elements/loaders";
+import { DotsLoader } from "@/lib/ui/elements/loaders";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
 import { VolumeControl } from "@/lib/ui/elements/VolumeControl";
 import PauseIcon from "@/lib/ui/svgs/icons/PauseIcon";
@@ -70,22 +70,24 @@ const AudioPlayer = ({
       <div>
         <Button
           variant='tertiary'
-          className={styles.ap_play_btn}
+          className={classes(styles.ap_play_btn, "ap_play_btn")}
           onClick={togglePlay}
           aria-label={isPlaying ? "Pause" : "Play"}
           disabled={isLoading}
         >
           {
             isLoading
-              ? <RippleLoader className={styles.bi} />
-              : (isPlaying ? <PauseIcon className={styles.bi} /> : <PlayIcon className={styles.bi} />)
+              ? <DotsLoader />
+              : isPlaying
+                ? <PauseIcon />
+                : <PlayIcon />
           }
         </Button>
         <div className={styles.player}>
           <button
             aria-pressed={progressMode === "remaining"}
             onClick={() => setProgressMode(progressMode === "remaining" ? "elapsed" : "remaining")}
-            className={styles.ap_btn_dur}
+            className={classes(styles.ap_btn_dur, "ap_dur_btn")}
           >
             <p className={styles.curr_timestamp}>{duration ? progressDisplay : "--:--"}</p>
             <span className={styles.separator}>{"/"}</span>
@@ -107,8 +109,8 @@ const AudioPlayer = ({
               <PaceControl pace={pace} updatePace={updatePace} />
             }
             hintIcon={null}
-            triggerClass={styles.ap_speed_btn}
-            dropdownClass={styles.ap_speed_popover}
+            triggerClass={classes(styles.ap_pace_btn, "ap_pace_btn")}
+            dropdownClass={styles.ap_pace_popover}
             alignment="right"
           >
             {pace}{"x"}
@@ -119,7 +121,7 @@ const AudioPlayer = ({
             dropdown={
               <VolumeControl mute={isMute} setMute={toggleMute} volume={volume} updateVolume={updateVolume} />
             }
-            triggerClass={styles.ap_mute_btn}
+            triggerClass={classes(styles.ap_vol_btn, "ap_vol_btn")}
             dropdownClass={styles.ap_vol_popover}
             hintIcon={null}
             alignment="right"

@@ -6,7 +6,7 @@ import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import PlayIcon from "@/lib/ui/svgs/icons/PlayIcon";
-import { formatDate, formatTime } from "@/lib/utils/datetime.utils";
+import { breakdownTime, formatDate, formatTime } from "@/lib/utils/datetime.utils";
 
 import styles from "./GalleryItem.module.scss";
 
@@ -29,9 +29,10 @@ const GalleryItem = ({
   const isAudio = !isImage && media.type?.includes("audio");
   const isVideo = !isAudio && media.type?.includes("video");
 
-  if (!isImage) return null;
-  // if video, use thumbnail & show the duration
-  // if audio, ...
+  if (isAudio) return null;
+
+  const src = isImage ? media.src : isVideo ? media?.thumbnails?.[0]?.src : "";
+  const duration = breakdownTime(media.thumbnails?.[0].duration ?? 0, "second");
 
   return (
     <div
@@ -39,7 +40,7 @@ const GalleryItem = ({
       title={media.name}
       onClick={onClick}
     >
-      <Image src={media.src} alt={media.name || media.id} width={80} height={80} unoptimized className={styles.thumbnail} />
+      <Image src={src ?? ""} alt={media.name || media.id} width={80} height={80} unoptimized className={styles.thumbnail} />
 
       <div className={styles.overlay}>
         <div className={styles.header}>
@@ -54,9 +55,12 @@ const GalleryItem = ({
           {!!selectable && <Checkbox className={styles.checkbox} />}
         </div>
         {!!isVideo && (
-          <div className={styles.body}>
-            <PlayIcon className={styles.play_icon} />
-          </div>
+          <>
+            <div className={styles.body}>
+              <PlayIcon className={styles.play_icon} />
+            </div>
+            <div className={styles.duration}>{duration.minute}{":"}{duration.second}</div>
+          </>
         )}
         <div className={styles.footer}>
           <div className={styles.details}>

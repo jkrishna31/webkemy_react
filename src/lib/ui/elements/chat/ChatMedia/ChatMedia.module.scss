@@ -83,6 +83,22 @@
   padding: .8rem;
   max-width: 28rem;
 
+  & :global(.ap_play_btn) {
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke-width: .2rem;
+    }
+  }
+
+  transition: background .3s linear;
+}
+
+.video_player {
+  --vp-bg: var(--chat-bg);
+  --vp-fg: var(--chat-fg);
+  padding: .4rem;
+
   transition: background .3s linear;
 }
 
@@ -139,6 +155,10 @@
   }
 
   .audio_player {
+    background-color: var(--chat-bg-active);
+  }
+
+  .video_player {
     background-color: var(--chat-bg-active);
   }
 }

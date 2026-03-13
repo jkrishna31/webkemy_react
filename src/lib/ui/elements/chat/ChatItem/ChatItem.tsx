@@ -6,9 +6,12 @@ import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
 import { ChatMedia } from "@/lib/ui/elements/chat/ChatMedia";
 import { Reactions } from "@/lib/ui/elements/chat/Reactions";
+import { Divider } from "@/lib/ui/elements/Divider";
+import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import DoubleCheckIcon from "@/lib/ui/svgs/icons/DoubleCheckIcon";
+import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
 import ReplyIcon from "@/lib/ui/svgs/icons/ReplyIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
@@ -104,13 +107,19 @@ const ChatItem = ({
                         data-author={chat.author.id}
                         data-id={item.id}
                       >
-                        {/* <div className={styles.actions}>
-                          {defaultOptions.map((item) => (
-                            <Button key={item.id} variant="quaternary">
-                              {item.icon}
-                            </Button>
-                          ))}
-                        </div> */}
+                        <div className={styles.actions}>
+                          <Button variant="quaternary">{"👍️"}</Button>
+                          <Button variant="quaternary">{"💯"}</Button>
+                          <Button variant="quaternary">{"👀"}</Button>
+                          <Button variant="quaternary">{"❤️"}</Button>
+                          <Divider orientation="vertical" style={{ margin: ".4rem" }} />
+                          <Button variant="quaternary">
+                            <AddEmojiIcon />
+                          </Button>
+                          <Button variant="quaternary">
+                            <EllipsisHIcon />
+                          </Button>
+                        </div>
                         {/* retry/delete */}
                         <div
                           // data-loading="true"

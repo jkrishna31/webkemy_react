@@ -5,7 +5,7 @@ import { ComponentProps } from "react";
 import { characters } from "@/constants/characters.const";
 import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
-import { VideoPlayer } from "@/lib/ui/elements/VideoPlayer";
+import { VideoPlayer, VideoPreview } from "@/lib/ui/elements/VideoPlayer";
 import DownloadIcon from "@/lib/ui/svgs/icons/DownloadIcon";
 import { formatSize } from "@/lib/utils/format.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -22,20 +22,24 @@ export interface MediaItem {
   createdOn?: string;
   updatedOn?: string;
   user?: any;
+  duration?: number;
 }
 
 export interface ChatMediaProps extends ComponentProps<"div"> {
   chatId: string;
   media?: MediaItem[];
   onMediaClick?: (chatId: string, mediaId?: string) => void;
+  useVideoPreview?: boolean;
 }
 
 const ChatMedia = ({
-  chatId, media, onMediaClick,
+  chatId, media, onMediaClick, useVideoPreview,
   className,
   ...restProps
 }: ChatMediaProps) => {
   const images: MediaItem[] = [], audio: MediaItem[] = [], video: MediaItem[] = [], others: MediaItem[] = [];
+
+  // if useVideoPreview, then show video thumbnail with play icon & duration
 
   media?.forEach(item => {
     if (item.type === "image") images.push(item);
@@ -68,14 +72,27 @@ const ChatMedia = ({
       {!!audio.length && (
         <div className={styles.audios}>
           {audio.map(item => (
-            <AudioPlayer key={item.id} src={item.src} rootClass={styles.audio_player} allowVolumeControl={false} />
+            <AudioPlayer
+              key={item.id}
+              // data-id={item.id}
+              src={item.src}
+              rootClass={styles.audio_player}
+              allowVolumeControl={false}
+            />
           ))}
         </div>
       )}
       {!!video.length && (
         <div className={styles.videos}>
           {video.map(item => (
-            <VideoPlayer key={item.id} src={item.src} rootClass={styles.video_player} />
+            <VideoPreview
+              key={item.id}
+              data-id={item.id}
+              thumbnails={item.thumbnails}
+              className={styles.video_player}
+              onClick={() => onMediaClick?.(chatId, item.id)}
+            />
+            // <VideoPlayer key={item.id} src={item.src} rootClass={styles.video_player} />
           ))}
         </div>
       )}

@@ -27,6 +27,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "archive.org",
       },
+      {
+        protocol: "https",
+        hostname: "www.shutterstock.com",
+      }
     ]
   },
   async headers() {

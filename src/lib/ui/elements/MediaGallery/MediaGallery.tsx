@@ -3,18 +3,23 @@ import { useState } from "react";
 import { SearchForm } from "@/components/common/forms";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import { useElementRef } from "@/lib/hooks/useElementRef";
+import { Badge } from "@/lib/ui/elements/Badge";
 import { Button } from "@/lib/ui/elements/butttons";
 import { MediaItem } from "@/lib/ui/elements/chat/ChatMedia";
 import { GalleryItem } from "@/lib/ui/elements/chat/GalleryItem";
 import { MediaViewer } from "@/lib/ui/elements/chat/MediaViewer";
 import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
+import { Divider } from "@/lib/ui/elements/Divider";
+import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
 import { Popover } from "@/lib/ui/elements/Popover";
+import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import ChevronDownIcon from "@/lib/ui/svgs/icons/ChevronDownIcon";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import FilterIcon from "@/lib/ui/svgs/icons/FilterIcon";
+import SortIcon from "@/lib/ui/svgs/icons/SortIcon";
 import { formatDate } from "@/lib/utils/datetime.utils";
 
 import styles from "./MediaGallery.module.scss";
@@ -37,6 +42,9 @@ const MediaGallery = ({
   const { element: filterTriggerElement, ref: filterTriggerRef } = useElementRef<HTMLButtonElement>();
   const { element: optionTriggerElement, ref: optionTriggerRef } = useElementRef<HTMLButtonElement>();
 
+  // filters: date; type[all, image, video, audio]; user
+  // sort: recent first, oldest first
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
@@ -47,12 +55,12 @@ const MediaGallery = ({
           className={styles.filter_btn}
           onClick={() => setShowFilters(!showFilters)}
         >
-          <FilterIcon />
+          <SortIcon />
         </Button>
         <Button
           ref={optionTriggerRef}
           variant="quaternary"
-          className={styles.filter_btn}
+          className={styles.more_btn}
           onClick={() => setShowOptions(!showOptions)}
         >
           <EllipsisHIcon />
@@ -65,12 +73,9 @@ const MediaGallery = ({
             onClose={() => setShowFilters(false)}
           >
             <ItemList>
-              <Item scope="list" primary="All" />
-              <Item scope="list" primary="Image" />
-              <Item scope="list" primary="Video" />
-              <Item scope="list" primary="Audio" />
+              <Item scope="list" primary="Recent First" />
+              <Item scope="list" primary="Oldest First" />
             </ItemList>
-            {/* date: from,to */}
           </Popover>
         )}
         {!!(showOptions && optionTriggerElement) && (
@@ -87,6 +92,51 @@ const MediaGallery = ({
           </Popover>
         )}
       </div>
+
+      <Scrollable className={styles.filters}>
+        <Dropdown
+          dropdown={
+            <ItemList>
+              <Item scope="list" primary="Last 7 days" />
+              <Item scope="list" primary="Last 15 days" />
+              <Item scope="list" primary="Last 1 month" />
+              <Item scope="list" primary="Last 3 month" />
+              <Item scope="list" primary="Last 6 month" />
+              <Divider style={{ marginBlock: ".2rem" }} />
+              <Item scope="list" primary="Custom Range" />
+            </ItemList>
+          }
+          triggerClass={styles.filter_trigger}
+        >
+          {"Date"}
+        </Dropdown>
+        <Dropdown
+          dropdown={
+            <div>
+
+            </div>
+          }
+          triggerClass={styles.filter_trigger}
+          aria-pressed={true}
+        >
+          {"Person"}
+          <Badge color="blue" float={null}>{"2"}</Badge>
+        </Dropdown>
+        <Dropdown
+          dropdown={
+            <ItemList>
+              <Item scope="list" primary="All" />
+              <Divider style={{ marginBlock: ".2rem" }} />
+              <Item scope="list" primary="Image" />
+              <Item scope="list" primary="Video" />
+              <Item scope="list" primary="Audio" />
+            </ItemList>
+          }
+          triggerClass={styles.filter_trigger}
+        >
+          {"Type"}
+        </Dropdown>
+      </Scrollable>
 
       {grouped?.toReversed()?.map(item => {
         const isOpen = activeSections.includes(item.date);

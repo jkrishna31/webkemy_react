@@ -39,40 +39,35 @@
   }
 
   .ap_play_btn,
-  .ap_speed_btn,
-  .ap_mute_btn {
+  .ap_pace_btn,
+  .ap_vol_btn {
     color: var(--ap-controls-fg);
     background-color: var(--ap-controls-bg);
     padding: .7rem;
     min-height: 3.6rem;
+    min-width: 3.6rem;
 
     &:hover {
       background-color: var(--ap-controls-bg-hover);
     }
   }
 
-  .bi {
+  .ap_play_btn svg {
     width: 2rem;
     height: 2rem;
   }
 
-  .ap_play_btn svg {
-    stroke-width: .2rem;
+  .ap_vol_btn svg {
+    width: 2.2rem;
+    height: 2.2rem;
+    stroke-width: .1rem;
   }
 
-  .ap_speed_btn {
+  .ap_pace_btn {
     min-width: 3.6rem;
     justify-content: center;
     padding-inline: .8rem;
     font-weight: 500;
-  }
-
-  .ap_mute_btn {
-    svg {
-      width: 2.2rem;
-      height: 2.2rem;
-      stroke-width: .1rem;
-    }
   }
 
   .ap_btn_dur {
@@ -93,7 +88,7 @@
   }
 }
 
-.ap_speed_popover,
+.ap_pace_popover,
 .ap_vol_popover {
   padding: 1.2rem .4rem;
   min-width: fit-content;
@@ -107,7 +102,7 @@
       font-size: 1.3rem;
     }
 
-    .ap_speed_btn {
+    .ap_pace_btn {
       font-size: 1.6rem;
     }
   }

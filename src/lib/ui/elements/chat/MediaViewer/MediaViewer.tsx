@@ -48,7 +48,7 @@ const MediaViewer = ({
       );
     } else if (currentMedia.type === "video") {
       return (
-        <VideoPlayer src={currentMedia.src} />
+        <VideoPlayer src={currentMedia.src} rootClass={styles.video_player} />
       );
     } else {
       return (
@@ -75,6 +75,7 @@ const MediaViewer = ({
       current={current.index}
       total={media.length}
       onNav={handleNav}
+      className={styles.wrapper}
     >
       {renderMedia()}
     </Lightbox>

@@ -10,7 +10,7 @@ import { Dropdown } from "@/lib/ui/elements/Dropdown";
 import { Slider } from "@/lib/ui/elements/inputs/Slider";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
-import { RippleLoader } from "@/lib/ui/elements/loaders";
+import { DotsLoader } from "@/lib/ui/elements/loaders";
 import { PaceControl } from "@/lib/ui/elements/PaceControl";
 import { VolumeControl } from "@/lib/ui/elements/VolumeControl";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
@@ -203,7 +203,7 @@ const VideoPlayer = ({
           >
             {
               isLoading
-                ? <RippleLoader className={styles.btn_icon} />
+                ? <DotsLoader className={styles.btn_icon} />
                 : (isPlaying ? <PauseIcon /> : <PlayIcon />)
             }
           </button>
@@ -238,7 +238,7 @@ const VideoPlayer = ({
             >
               {
                 isLoading
-                  ? <RippleLoader className={styles.btn_icon} />
+                  ? <DotsLoader className={styles.btn_icon} />
                   : (isPlaying ? <PauseIcon /> : <PlayIcon />)
               }
             </button>

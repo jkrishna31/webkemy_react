@@ -127,7 +127,7 @@ const SharedPanel = ({
               {files?.map(item => (
                 <tr key={item.id}>
                   <Table.Cell<"td"> as="td">
-                    {!!item.name && <Link href={item.src} className={styles.filename}>{item.name}</Link>}
+                    {!!item.name && <Link href={item.src} target="_blank" className={styles.filename}>{item.name}</Link>}
                     <p className={styles.filetype}>{item.type}</p>
                   </Table.Cell>
                   <Table.Cell<"td"> as="td">

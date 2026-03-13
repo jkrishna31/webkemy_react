@@ -109,6 +109,9 @@
     font-weight: 500;
     color: var(--fg-s);
     @include line_clamp(1);
+    min-width: 0;
+    display: block;
+    white-space: nowrap;
   }
 
   .close_btn {

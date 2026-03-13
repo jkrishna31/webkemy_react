@@ -1,3 +1,7 @@
+.wrapper {
+  padding-inline: 2rem;
+}
+
 .unsupported {
   text-align: center;
   padding-inline: 2rem;
@@ -13,4 +17,9 @@
 .download_btn {
   min-height: fit-content;
   margin-inline: auto;
+}
+
+.video_player {
+  width: 100%;
+  max-width: calc(min(100vh, 100vw) - 4rem);
 }

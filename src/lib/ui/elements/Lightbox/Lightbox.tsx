@@ -31,6 +31,7 @@ export interface LightboxProps extends ComponentProps<"div"> {
   total?: number;
   onNav?: (offset: number) => void;
   usePortal?: boolean;
+  rootClass?: string;
 }
 
 const Lightbox = ({
@@ -38,6 +39,7 @@ const Lightbox = ({
   current, total,
   scaleStops = defaultScaleStops, defaultScaleStopPointer = 3, scale, onScaleChange,
   usePortal = true,
+  rootClass,
   className, children,
   ...props
 }: LightboxProps) => {
@@ -71,13 +73,14 @@ const Lightbox = ({
 
   const render = () => {
     return (
-      <div className={styles.wrapper} ref={ref}>
+      <div
+        className={classes(styles.wrapper, rootClass)}
+        ref={ref}
+      >
         <div className={styles.header}>
-          <div className={styles.left}>
-            <div className={styles.name}>
-              {title}
-            </div>
-          </div>
+          {/* <div className={styles.left}> */}
+          <h3 className={styles.name}>{title}</h3>
+          {/* </div> */}
           <div className={styles.right}>
             {/* download, print btns */}
             {/* dropdown */}
@@ -93,7 +96,7 @@ const Lightbox = ({
           </div>
         </div>
 
-        <div className={styles.content}>
+        <div className={classes(styles.content, className)}>
           {children}
         </div>
 
