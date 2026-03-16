@@ -82,6 +82,7 @@
   border-radius: var(--br-pill);
   padding: .8rem;
   max-width: 28rem;
+  transition: background .3s linear;
 
   & :global(.ap_play_btn) {
     svg {
@@ -90,20 +91,17 @@
       stroke-width: .2rem;
     }
   }
-
-  transition: background .3s linear;
 }
 
 .video_player {
   --vp-bg: var(--chat-bg);
   --vp-fg: var(--chat-fg);
   padding: .4rem;
-  // max-height: 40rem;
-
   transition: background .3s linear;
 }
 
 .other_item {
+  width: 100%;
   display: flex;
   align-items: center;
   gap: .8rem;
@@ -200,7 +198,17 @@
     svg {
       width: 2.2rem;
       height: 2.2rem;
-      stroke-width: .15rem;
+      stroke-width: .2rem;
     }
   }
+}
+
+.other_item_wrapper,
+.audio_item_wrapper,
+.video_item_wrapper {
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  gap: .4rem;
 }

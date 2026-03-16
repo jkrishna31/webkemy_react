@@ -232,7 +232,10 @@ const ChatList = ({
     }
     if (chatId) {
       handleChatSelection(chatId);
-      setShowOptionsFor({ coords: (e.clientX || e.clientY) ? [e.clientX, e.clientY] : undefined, element: e.target as HTMLElement });
+      setShowOptionsFor({
+        // coords: (e.clientX || e.clientY) ? [e.clientX, e.clientY] : undefined,
+        element: e.target as HTMLElement,
+      });
     }
   };
 

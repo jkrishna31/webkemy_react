@@ -93,7 +93,6 @@ const Popover = ({
         anchorBoundingRect = range.startContainer.getBoundingClientRect();
       }
     } else {
-      // TODO: no need to check for close on scroll with anchor.target & only check for anchor/anchor.anchorNode/anchor.focusNode
       anchorBoundingRect = {
         x: (anchor as MouseEvent).pageX,
         y: (anchor as MouseEvent).pageY,
@@ -208,27 +207,47 @@ const Popover = ({
     const elem = popoverRef.current;
     if (!elem || !anchor || !closeOnOutsideClick || !isMounted) return;
 
-    const handleClick = (e: PointerEvent) => {
-      const popoverRect = elem.getBoundingClientRect();
+    const handleClick = (pStart: PointerEvent) => {
+      let move: number[] = [];
 
-      if (e.buttons >= 2) return;
+      const handlePointerMove = (pMove: PointerEvent) => {
+        move = [pStart.clientX - pMove.clientX, pStart.clientY - pMove.clientY];
+      };
 
-      if (
-        popoverRect.x <= e.clientX && (popoverRect.x + popoverRect.width) >= e.clientX
-        &&
-        popoverRect.y <= e.clientY && (popoverRect.y + popoverRect.height) >= e.clientY
-      ) return;
+      // using pointerup event, since pointerdown fires on touchstart as well causing trigger on on swipe
+      const handlePointerUp = () => {
+        window.removeEventListener("pointermove", handlePointerMove);
+        window.removeEventListener("pointerup", handlePointerUp);
+        window.removeEventListener("pointercancel", handlePointerUp);
 
-      if (!e.pointerType) {
-        const isContained = elem.contains(document.activeElement);
-        if (prevActiveElem.current && !isContained) (prevActiveElem.current as HTMLElement).focus();
-        return;
-        // TODO: (preserve only if closes [also check if another popover directly gets enabled])
-      }
+        if (Math.abs(move[0]) > 4 || Math.abs(move[1]) > 4) return;
 
-      if (elem.contains(e.target as Node) || (anchor instanceof Selection && elem.contains(document.activeElement))) return;
+        const popoverRect = elem.getBoundingClientRect();
 
-      onClose?.(e);
+        if (pStart.buttons >= 2) return;
+
+        if (
+          popoverRect.x <= pStart.clientX && (popoverRect.x + popoverRect.width) >= pStart.clientX
+          &&
+          popoverRect.y <= pStart.clientY && (popoverRect.y + popoverRect.height) >= pStart.clientY
+        ) return;
+
+        if (!pStart.pointerType) {
+          const isContained = elem.contains(document.activeElement);
+          if (prevActiveElem.current && !isContained) (prevActiveElem.current as HTMLElement).focus();
+          return;
+          // TODO: (preserve only if closes [also check if another popover directly gets enabled])
+        }
+
+        if (elem.contains(pStart.target as Node)) return;
+        // if (anchor instanceof Element && anchor.contains(e.target as Node)) return;
+
+        onClose?.(pStart);
+      };
+
+      window.addEventListener("pointermove", handlePointerMove);
+      window.addEventListener("pointerup", handlePointerUp);
+      window.addEventListener("pointercancel", handlePointerUp);
     };
 
     window.addEventListener("pointerdown", handleClick, closeOnOutsideClick === "capture");

@@ -99,6 +99,13 @@
     position: relative;
   }
 
+  .chat_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: .4rem;
+  }
+
   .chat {
     --chat-fg: var(--blue-1);
     --chat-bg: var(--blue-1-10);
@@ -122,6 +129,32 @@
 
   .trunc {
     padding-bottom: 0;
+  }
+
+  .chat_controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+
+    position: sticky;
+    top: 1.6rem;
+    bottom: .2rem;
+  }
+
+  .retry_btn {
+    padding: .5rem;
+    color: var(--red-1);
+    background-color: var(--red-1-10);
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .2rem;
+    }
+
+    &:hover {
+      background-color: var(--red-1-25);
+    }
   }
 
   .show_more_btn {
@@ -190,6 +223,14 @@
     .content_item,
     .chat_media {
       align-items: flex-end;
+    }
+
+    .chat_wrapper {
+      justify-content: flex-end;
+    }
+
+    .chat_controls {
+      justify-content: flex-end;
     }
 
     .chat {

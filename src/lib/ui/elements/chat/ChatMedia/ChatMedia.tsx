@@ -5,6 +5,7 @@ import { ComponentProps, MouseEvent } from "react";
 import { characters } from "@/constants/characters.const";
 import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
+import { ChatControls } from "@/lib/ui/elements/chat/ChatItem";
 import { Progress } from "@/lib/ui/elements/Progress";
 import { VideoPreview } from "@/lib/ui/elements/VideoPlayer";
 import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
@@ -25,6 +26,7 @@ export interface MediaItem {
   updatedOn?: string;
   user?: any;
   duration?: number;
+  status?: string;
 }
 
 export interface ChatMediaProps extends ComponentProps<"div"> {
@@ -41,6 +43,7 @@ const ChatMedia = ({
   ...restProps
 }: ChatMediaProps) => {
   const images: MediaItem[] = [], audio: MediaItem[] = [], video: MediaItem[] = [], others: MediaItem[] = [];
+
 
   media?.forEach(item => {
     if (item.type === "image") images.push(item);
@@ -93,27 +96,30 @@ const ChatMedia = ({
       {!!audio.length && (
         <div className={styles.audios}>
           {audio.map(item => (
-            <AudioPlayer
-              key={item.id}
-              // data-id={item.id}
-              src={item.src}
-              rootClass={styles.audio_player}
-              allowVolumeControl={false}
-            />
+            <div key={item.id} className={styles.audio_item_wrapper}>
+              {item.status === "failed" && <ChatControls />}
+              <AudioPlayer
+                data-id={item.id}
+                src={item.src}
+                rootClass={styles.audio_player}
+                allowVolumeControl={false}
+              />
+            </div>
           ))}
-          {/* {renderStatus(audio)} */}
         </div>
       )}
       {!!video.length && (
         <div className={styles.videos}>
           {video.map(item => (
-            <VideoPreview
-              key={item.id}
-              data-id={item.id}
-              thumbnails={item.thumbnails}
-              className={styles.video_player}
-              onClick={() => onMediaClick?.(chatId, item.id)}
-            />
+            <div key={item.id} className={styles.video_item_wrapper}>
+              {item.status === "failed" && <ChatControls />}
+              <VideoPreview
+                data-id={item.id}
+                thumbnails={item.thumbnails}
+                className={styles.video_player}
+                onClick={() => onMediaClick?.(chatId, item.id)}
+              />
+            </div>
           ))}
           {/* {renderStatus(video)} */}
         </div>
@@ -121,24 +127,27 @@ const ChatMedia = ({
       {!!others.length && (
         <div className={styles.others}>
           {others.map(item => (
-            <div
-              key={item.id}
-              data-id={item.id}
-              className={styles.other_item}
-            >
-              <div className={styles.controls}>
-                <Button variant="tertiary">
-                  <DownloadIcon />
-                </Button>
+            <div key={item.id} className={styles.other_item_wrapper}>
+              {item.status === "failed" && <ChatControls />}
+              <div
+                key={item.id}
+                data-id={item.id}
+                className={styles.other_item}
+              >
+                <div className={styles.controls}>
+                  <Button variant="tertiary">
+                    <DownloadIcon />
+                  </Button>
+                </div>
+                <Link href={item.src ?? "#"} target="_blank" className={styles.details}>
+                  <p className={styles.filename}>{item.name}</p>
+                  <p className={styles.meta}>
+                    <span className={styles.size}>{formatSize(item.size ?? 0)}</span>
+                    <span className={styles.separator}>{characters.BULLET}</span>
+                    <span className={styles.type}>{item.type}</span>
+                  </p>
+                </Link>
               </div>
-              <Link href={item.src ?? "#"} target="_blank" className={styles.details}>
-                <p className={styles.filename}>{item.name}</p>
-                <p className={styles.meta}>
-                  <span className={styles.size}>{formatSize(item.size ?? 0)}</span>
-                  <span className={styles.separator}>{characters.BULLET}</span>
-                  <span className={styles.type}>{item.type}</span>
-                </p>
-              </Link>
             </div>
           ))}
         </div>

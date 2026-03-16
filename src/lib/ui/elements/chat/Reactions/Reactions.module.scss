@@ -18,11 +18,13 @@
     align-items: center;
     gap: .4rem;
     color: var(--fg-s);
+    font-size: 1.8rem;
     font-weight: 500;
+    line-height: 1;
     background-color: var(--bg-s);
     border: .1rem solid transparent;
     border-radius: 999.6rem;
-    padding: .3rem .8rem;
+    padding: .5rem .8rem;
     cursor: pointer;
 
     span:last-child {
@@ -59,4 +61,10 @@
   }
 }
 
-@media screen and (max-width: 768px) {}
+@media screen and (max-width: 768px) {
+  .wrapper {
+    .item {
+      font-size: 1.6rem;
+    }
+  }
+}

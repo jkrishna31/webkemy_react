@@ -39,6 +39,7 @@ export const dummyChats = [
     datetime: (new Date(2025, 2, 16, 5, 34)).toUTCString(),
     starred: true,
     pinned: true,
+    reactions: [{ key: "laughing", emoji: "🤣", count: 9 }],
     media: [
       // {
       //   id: "mdump89d",
@@ -50,9 +51,9 @@ export const dummyChats = [
         id: "auods7ds23",
         src: "https://images.unsplash.com/photo-1672036855093-eb274a6f2507?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDZ8fGdsaXR0ZXIlMjBleHBsb3Npb258ZW58MHx8MHx8fDA%3D",
         type: "image",
-        name: "lanterns.webp"
+        name: "lanterns.webp",
       },
-    ]
+    ],
   },
   {
     id: "ffd8f9f",
@@ -179,6 +180,13 @@ export const dummyChats = [
         size: 899150,
         type: "pdf",
       },
+      {
+        id: "supersupersup",
+        src: "/assets/dummy-md-file.md",
+        name: "dummy-md-file.md",
+        size: 12,
+        type: "md",
+      }
     ]
   },
   {
@@ -196,6 +204,7 @@ export const dummyChats = [
         src: "https://sampleswap.org/samples-ghost/VOCAL%20ACAPELLAS/Snowflake/9218[kb]snowflake-In-Peace-cc-by.mp3.mp3",
         type: "audio",
         duration: 0,
+        status: "failed",
       },
       {
         id: "mv80ds09",
@@ -219,7 +228,8 @@ export const dummyChats = [
         src: "/assets/sample-zip-file.zip",
         name: "rss(1).zip",
         size: 353540,
-        type: "zip"
+        type: "zip",
+        status: "failed",
       },
     ]
   },
@@ -231,6 +241,7 @@ export const dummyChats = [
     },
     content: "Contrary to popular belief, Lorem Ipsum is not simply random text.\nIt has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.\nThe standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from \"de Finibus Bonorum et Malorum\" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.\nIt uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.",
     datetime: (new Date(2025, 5, 29, 14, 17)).toUTCString(),
+    status: "failed",
   }
 ];
 

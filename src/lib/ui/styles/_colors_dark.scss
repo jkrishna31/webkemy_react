@@ -2,7 +2,7 @@
     --color-scheme-abs: #000000;
     --color-scheme-abs-inverse: #ffffff;
 
-    --orange-1: rgb(255, 166, 65);
+    --orange-1: rgb(255, 166, 71);
     --orange-2: rgb(255, 126, 66);
     --orange-2-10: rgba(255, 126, 66, 0.15);
     --orange-2-25: rgba(255, 126, 66, 0.25);
@@ -13,6 +13,7 @@
     --yellow-1-10: rgba(241, 162, 59, 0.15);
     --yellow-1-50: rgba(241, 162, 59, 0.5);
     --yellow-2: rgb(255, 202, 79);
+    --yellow-3: rgb(255, 218, 70);
     --yellow-4: #ecc92e;
     --yellow-6: rgb(255, 218, 126);
 
@@ -38,7 +39,7 @@
     --yellow-green-1-25: rgba(124, 209, 40, 0.25);
     --yellow-green-1-50: rgba(124, 209, 40, 0.5);
 
-    --light-green-1: rgb(29, 200, 60);
+    --light-green-1: rgb(36, 224, 33);
     --light-green-1-10: rgba(29, 200, 60, 0.15);
     --light-green-1-25: rgba(29, 200, 60, 0.25);
     --light-green-1-50: rgba(29, 200, 60, 0.5);
@@ -53,19 +54,29 @@
     --green-9: rgb(112, 209, 175);
     --green-10: rgb(40, 49, 45);
 
-    --blue-1: rgb(74, 149, 255);
-    --blue-1-10: rgba(74, 149, 255, 0.15);
-    --blue-1-25: rgba(74, 149, 255, 0.25);
-    --blue-1-50: rgba(74, 149, 255, 0.5);
+    --light-blue-1: rgb(74, 219, 255);
+    --light-blue-10: rgba(74, 219, 255, .15);
+    --light-blue-25: rgba(74, 255, 228, 0.25);
+    --light-blue-50: rgba(74, 219, 255, .50);
+
+    --blue-1: rgb(74, 164, 255);
+    --blue-1-10: rgba(74, 164, 255, 0.15);
+    --blue-1-25: rgba(74, 164, 255, 0.25);
+    --blue-1-50: rgba(74, 164, 255, 0.5);
     --blue-2: #277dc3;
     --blue-6: #3b7ce5;
     --blue-7: #94c0ff;
     --blue-8: #305fe1;
 
-    --purple-1: rgb(177, 104, 255);
-    --purple-1-10: rgba(177, 104, 255, .15);
-    --purple-1-25: rgba(177, 104, 255, .25);
-    --purple-1-50: rgba(177, 104, 255, .5);
+    --violet-1: rgb(212, 104, 255);
+    --violet-1-10: rgba(212, 104, 255, .15);
+    --violet-1-25: rgba(212, 104, 255, .25);
+    --violet-1-50: rgba(212, 104, 255, .50);
+
+    --purple-1: rgb(152, 104, 255);
+    --purple-1-10: rgba(152, 104, 255, .15);
+    --purple-1-25: rgba(152, 104, 255, .25);
+    --purple-1-50: rgba(152, 104, 255, .5);
     --purple-2: #7a45dc;
     --purple-3: rgb(168, 63, 254);
     --purple-4: rgb(254, 63, 200);

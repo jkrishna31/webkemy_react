@@ -9,6 +9,7 @@ import { Reactions } from "@/lib/ui/elements/chat/Reactions";
 import { RepliesBtn } from "@/lib/ui/elements/chat/RepliesBtn";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
+import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
 import DoubleCheckIcon from "@/lib/ui/svgs/icons/DoubleCheckIcon";
 import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
@@ -24,6 +25,16 @@ export interface ChatItemProps extends ComponentProps<"div"> {
   quickReactions?: string[];
   onQuickActionClick?: (e: MouseEvent, key?: string, chatId?: string) => void;
 }
+
+export const ChatControls = () => {
+  return (
+    <div className={styles.chat_controls}>
+      <Button variant="quaternary" className={styles.retry_btn} aria-label="Retry" title="Retry">
+        <ClockwiseIcon />
+      </Button>
+    </div>
+  );
+};
 
 const ChatItem = ({
   chat, selectedChats, onMediaClick, quickReactions, onQuickActionClick,
@@ -100,7 +111,7 @@ const ChatItem = ({
               )}
               <div className={styles.chat_list}>
                 {
-                  chat.content?.map((item: { id: string; content: string; media: any[] }, idx: number) => {
+                  chat.content?.map((item: { id: string; content: string; media: any[]; status?: string }, idx: number) => {
                     const _isSelected = isSelected(item.id);
                     const isTruncated = item.content.length > 500; // && not expanded
                     return (
@@ -110,22 +121,22 @@ const ChatItem = ({
                         data-author={chat.author.id}
                         data-id={item.id}
                       >
-                        {/* retry/delete */}
-                        <div
-                          // data-loading="true"
-                          className={classes(styles.chat, chat.author.id === "me" && styles.green, isTruncated && styles.trunc)}
-                          data-selected={_isSelected}
-                        >
-                          {item.content?.split("\n")?.map((part, pIdx) => (
-                            <p key={`${idx}-${pIdx}`}>{part}</p>
-                          ))}
-                          {isTruncated && (
-                            <Button className={styles.show_more_btn}>
-                              <span>
-                                {"Show More"}
-                              </span>
-                            </Button>
-                          )}
+                        <div className={styles.chat_wrapper}>
+                          {item.status === "failed" && <ChatControls />}
+                          <div
+                            // data-loading="true"
+                            className={classes(styles.chat, chat.author.id === "me" && styles.green, isTruncated && styles.trunc)}
+                            data-selected={_isSelected}
+                          >
+                            {item.content?.split("\n")?.map((part, pIdx) => (
+                              <p key={`${idx}-${pIdx}`}>{part}</p>
+                            ))}
+                            {isTruncated && (
+                              <Button className={styles.show_more_btn}>
+                                <span>{"Show More"}</span>
+                              </Button>
+                            )}
+                          </div>
                         </div>
                         {!!item.media?.length && (
                           <ChatMedia

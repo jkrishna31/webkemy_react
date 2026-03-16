@@ -41,8 +41,31 @@
   background-color: var(--bg-s);
   border-color: var(--chat-card-fg);
 
+  &[aria-pressed="false"] {
+    opacity: 0;
+  }
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+
   &[aria-pressed="true"] {
     background-color: var(--chat-card-fg);
     color: var(--bg-p);
+  }
+}
+
+.item:hover {
+  .follow_btn {
+    opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .follow_btn {
+    &[aria-pressed="false"] {
+      opacity: 1;
+    }
   }
 }

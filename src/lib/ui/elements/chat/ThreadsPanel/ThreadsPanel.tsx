@@ -35,6 +35,7 @@ const ThreadsPanel = ({
                 {!!idx ? "Following" : "Follow"}
               </Button>
             }
+            className={styles.item}
           />
         ))}
       </div>

@@ -1,2 +1,2 @@
 export type * from "./ChatItem";
-export { default as ChatItem } from "./ChatItem";
+export { ChatControls, default as ChatItem } from "./ChatItem";
