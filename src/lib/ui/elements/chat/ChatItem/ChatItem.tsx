@@ -1,19 +1,16 @@
 import Image from "next/image";
-import { ComponentProps } from "react";
+import { ComponentProps, MouseEvent } from "react";
 
-import { characters } from "@/constants/characters.const";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
 import { ChatMedia } from "@/lib/ui/elements/chat/ChatMedia";
+import { QuickActions } from "@/lib/ui/elements/chat/QuickActions";
 import { Reactions } from "@/lib/ui/elements/chat/Reactions";
-import { Divider } from "@/lib/ui/elements/Divider";
-import AddEmojiIcon from "@/lib/ui/svgs/icons/AddEmojiIcon";
+import { RepliesBtn } from "@/lib/ui/elements/chat/RepliesBtn";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import DoubleCheckIcon from "@/lib/ui/svgs/icons/DoubleCheckIcon";
-import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
 import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
-import ReplyIcon from "@/lib/ui/svgs/icons/ReplyIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
 import { formatTime } from "@/lib/utils/datetime.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -25,10 +22,11 @@ export interface ChatItemProps extends ComponentProps<"div"> {
   selectedChats?: string | string[];
   onMediaClick?: (chatId: string, mediaId?: string) => void;
   quickReactions?: string[];
+  onQuickActionClick?: (e: MouseEvent, key?: string, chatId?: string) => void;
 }
 
 const ChatItem = ({
-  chat, selectedChats, onMediaClick, quickReactions,
+  chat, selectedChats, onMediaClick, quickReactions, onQuickActionClick,
   className,
   ...restProps
 }: ChatItemProps) => {
@@ -36,6 +34,10 @@ const ChatItem = ({
     if (typeof selectedChats === "string" && selectedChats === chatId) return true;
     if (Array.isArray(selectedChats) && selectedChats?.includes(chatId)) return true;
     return false;
+  };
+
+  const handleReactionClick = (e: MouseEvent, key?: string) => {
+    onQuickActionClick?.(e, key ?? "ADD_REACTION", chat.id);
   };
 
   return (
@@ -134,35 +136,18 @@ const ChatItem = ({
                             onMediaClick={onMediaClick}
                           />
                         )}
-                        <div className={styles.actions}>
-                          {quickReactions?.map(item => (
-                            <Button variant="quaternary" key={item}>{item}</Button>
-                          ))}
-                          <Divider orientation="vertical" style={{ margin: ".4rem" }} />
-                          <Button variant="quaternary">
-                            <AddEmojiIcon />
-                          </Button>
-                          <Button variant="quaternary">
-                            <EllipsisHIcon />
-                          </Button>
-                        </div>
+                        <QuickActions
+                          quickReactions={quickReactions}
+                          onClick={onQuickActionClick ? (e, key) => onQuickActionClick?.(e, key, chat.id) : undefined}
+                          className={styles.actions}
+                        />
                       </div>
                     );
                   })
                 }
               </div>
-              {!!chat.reactions?.length && <Reactions reactions={chat.reactions} />}
-              {chat.replies > 0 && (
-                <Button
-                  variant="tertiary"
-                  className={styles.replies_btn}
-                >
-                  {/* todo: if replies count is same as unread count then don't show like: 4 replies with blue color */}
-                  {chat.author.id !== "me" && <ReplyIcon />}
-                  {chat.replies} {"Replies"} <span className={styles.separator}>{characters.BULLET}</span> <span className={styles.unread}>{4}{" Unread"}</span>
-                  {chat.author.id === "me" && <ReplyIcon />}
-                </Button>
-              )}
+              {!!chat.reactions?.length && <Reactions reactions={chat.reactions} onClick={handleReactionClick} />}
+              {chat.replies > 0 && <RepliesBtn chat={chat} className={styles.replies_btn} />}
             </div>
           </>
         )

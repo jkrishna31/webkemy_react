@@ -7,10 +7,28 @@ export interface CircularProgressProps {
   value?: number;
   padding?: number;
   indeterminate?: boolean;
+  thickness?: number;
+}
+
+function polarToCartesian(cx: number, cy: number, r: number, angle: number) {
+  const rad = (angle * Math.PI) / 180;
+  return {
+    x: cx + r * Math.cos(rad),
+    y: cy + r * Math.sin(rad),
+  };
+}
+
+function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
+  const start = polarToCartesian(cx, cy, r, startAngle);
+  const end = polarToCartesian(cx, cy, r, endAngle);
+
+  const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+
+  return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`;
 }
 
 const CircularProgress = ({
-  indeterminate, size = 0,
+  indeterminate, size = 0, thickness = 16,
   value = 0, padding = 10,
 }: CircularProgressProps) => {
   const ref = useRef<SVGSVGElement>(null);
@@ -20,31 +38,14 @@ const CircularProgress = ({
   const visibleSize = _size - padding * 2;
   const radius = visibleSize / 2;
 
-  const dasharray = 2 * Math.PI * radius;
-  const dashoffset = dasharray - ((indeterminate ? 30 : value) / 100 * dasharray);
+  // const dasharray = 2 * Math.PI * radius;
+  // const dashoffset = dasharray - ((indeterminate ? 30 : value) / 100 * dasharray);
 
   const centerX = _size / 2;
   const centerY = _size / 2;
   const startAngle = 0;
   const endAngle = 359.99;
   const progressAngle = startAngle + ((indeterminate ? 30 : value) / 100) * (endAngle - startAngle);
-
-  function polarToCartesian(cx: number, cy: number, r: number, angle: number) {
-    const rad = (angle * Math.PI) / 180;
-    return {
-      x: cx + r * Math.cos(rad),
-      y: cy + r * Math.sin(rad),
-    };
-  };
-
-  function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
-    const start = polarToCartesian(cx, cy, r, startAngle);
-    const end = polarToCartesian(cx, cy, r, endAngle);
-
-    const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
-
-    return `M ${start.x} ${start.y} A ${r} ${r} 0 ${largeArcFlag} 1 ${end.x} ${end.y}`;
-  };
 
   useLayoutEffect(() => {
     if (ref.current) {
@@ -84,16 +85,18 @@ const CircularProgress = ({
         className={styles.track}
         fill="none"
         stroke="currentColor"
-        strokeWidth={16}
+        strokeWidth={thickness}
         strokeLinecap="round"
+        strokeLinejoin="round"
         d={describeArc(centerX, centerY, radius, startAngle, endAngle)}
       />
       <path
         className={styles.progress}
         fill="none"
         stroke="currentColor"
-        strokeWidth={16}
-        strokeLinecap="round"
+        strokeWidth={thickness}
+        strokeLinecap={(value > 0 || indeterminate) ? "round" : "butt"}
+        strokeLinejoin="round"
         d={describeArc(centerX, centerY, radius, startAngle, progressAngle)}
       />
     </svg>

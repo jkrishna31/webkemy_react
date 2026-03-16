@@ -10,7 +10,6 @@
 .options_popover {
   min-width: min(fit-content, var(--popover-min-width)) !important; // temporary: css module resolution is not consistent in dev & prod build
   width: fit-content;
-
 }
 
 .all_options_popover {
@@ -31,6 +30,10 @@
   border-radius: 1.2rem;
   border: .1rem solid var(--border-s);
   display: flex;
+}
+
+.mobile_popover {
+  border-radius: var(--br-pill);
 }
 
 .chats {

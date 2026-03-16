@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ComponentProps } from "react";
+import { ComponentProps, MouseEvent } from "react";
 
 import { characters } from "@/constants/characters.const";
 import { AudioPlayer } from "@/lib/ui/elements/AudioPlayer";
 import { Button } from "@/lib/ui/elements/butttons";
-import { VideoPlayer, VideoPreview } from "@/lib/ui/elements/VideoPlayer";
+import { Progress } from "@/lib/ui/elements/Progress";
+import { VideoPreview } from "@/lib/ui/elements/VideoPlayer";
+import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
 import DownloadIcon from "@/lib/ui/svgs/icons/DownloadIcon";
 import { formatSize } from "@/lib/utils/format.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -30,6 +32,7 @@ export interface ChatMediaProps extends ComponentProps<"div"> {
   media?: MediaItem[];
   onMediaClick?: (chatId: string, mediaId?: string) => void;
   useVideoPreview?: boolean;
+  onQuickActionClick?: (e: MouseEvent, key: string) => void;
 }
 
 const ChatMedia = ({
@@ -39,8 +42,6 @@ const ChatMedia = ({
 }: ChatMediaProps) => {
   const images: MediaItem[] = [], audio: MediaItem[] = [], video: MediaItem[] = [], others: MediaItem[] = [];
 
-  // if useVideoPreview, then show video thumbnail with play icon & duration
-
   media?.forEach(item => {
     if (item.type === "image") images.push(item);
     else if (item.type === "audio") audio.push(item);
@@ -48,10 +49,29 @@ const ChatMedia = ({
     else others.push(item);
   });
 
+  const renderStatus = (_media: MediaItem[]) => {
+    return (
+      <div className={styles.gallery_controls}>
+        {
+          images.length > 1 ? (
+            <Button
+              variant="tertiary"
+              className={styles.retry_btn}
+            >
+              <ClockwiseIcon className={styles.retry} />
+            </Button>
+          ) : (
+            <Progress variant="circular" thickness={12} className={styles.progress} />
+          )
+        }
+      </div>
+    );
+  };
+
   return (
     <div className={classes(styles.wrapper, className)} {...restProps}>
       {images.length >= 1 && (
-        <div className={classes(styles.gallary, images.length === 1 && styles.individual)}>
+        <div className={classes(styles.gallery, images.length === 1 && styles.individual)}>
           {images.slice(0, images.length > 4 ? 4 : undefined).map((item, idx) => (
             <div
               key={item.id}
@@ -67,6 +87,7 @@ const ChatMedia = ({
               )}
             </div>
           ))}
+          {renderStatus(images)}
         </div>
       )}
       {!!audio.length && (
@@ -80,6 +101,7 @@ const ChatMedia = ({
               allowVolumeControl={false}
             />
           ))}
+          {/* {renderStatus(audio)} */}
         </div>
       )}
       {!!video.length && (
@@ -92,8 +114,8 @@ const ChatMedia = ({
               className={styles.video_player}
               onClick={() => onMediaClick?.(chatId, item.id)}
             />
-            // <VideoPlayer key={item.id} src={item.src} rootClass={styles.video_player} />
           ))}
+          {/* {renderStatus(video)} */}
         </div>
       )}
       {!!others.length && (

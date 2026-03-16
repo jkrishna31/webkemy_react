@@ -1,4 +1,4 @@
-import { ComponentProps, Fragment } from "react";
+import { ComponentProps, Fragment, MouseEvent } from "react";
 
 import { ChatItem } from "@/lib/ui/elements/chat/ChatItem";
 import { Divider } from "@/lib/ui/elements/Divider";
@@ -13,10 +13,11 @@ export interface ChatSectionProps extends ComponentProps<"div"> {
   selectedChats?: string | string[];
   onMediaClick?: (chatId: string, mediaId?: string) => void;
   quickReactions?: string[];
+  onQuickActionClick?: (e: MouseEvent, key?: string, chatId?: string) => void;
 }
 
 const ChatSection = ({
-  chats, lastReadMsgId, selectedChats, onMediaClick, quickReactions,
+  chats, lastReadMsgId, selectedChats, onMediaClick, quickReactions, onQuickActionClick,
   className,
   ...restProps
 }: ChatSectionProps) => {
@@ -52,7 +53,13 @@ const ChatSection = ({
           ?.map((chat: any) => {
             return (
               <Fragment key={chat.id}>
-                <ChatItem chat={chat} selectedChats={selectedChats} quickReactions={quickReactions} onMediaClick={onMediaClick} />
+                <ChatItem
+                  chat={chat}
+                  selectedChats={selectedChats}
+                  quickReactions={quickReactions}
+                  onMediaClick={onMediaClick}
+                  onQuickActionClick={onQuickActionClick}
+                />
                 {/* TODO: shift if next chat author is me */}
                 {lastReadMsgId === chat.id && (
                   <Divider

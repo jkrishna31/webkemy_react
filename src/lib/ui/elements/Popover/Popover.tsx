@@ -15,7 +15,8 @@ import { classes } from "@/lib/utils/style.utils";
 import styles from "./Popover.module.scss";
 
 export interface PopoverProps extends ComponentProps<"div"> {
-  anchor?: HTMLElement | Selection;
+  anchor?: Element | Selection;
+  coords?: number[];
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   isTooltip?: boolean;
@@ -23,7 +24,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   closeOnScroll?: boolean;
   closeOnOutsideClick?: boolean | "capture";
   lockScroll?: boolean;
-  offset?: number;
+  anchorMargin?: number;
   usePortal?: boolean;
   useTransform?: boolean;
   closeOnEsc?: boolean | "capture";
@@ -35,9 +36,10 @@ export interface PopoverProps extends ComponentProps<"div"> {
 
 const Popover = ({
   anchor,
+  coords,
   placement = "bottom",
   alignment = "center",
-  offset = 8,
+  anchorMargin = 8,
   isTooltip,
   className,
   children,
@@ -69,8 +71,20 @@ const Popover = ({
 
     let anchorBoundingRect: DOMRect | null = null;
 
-    if (anchor instanceof HTMLElement) anchorBoundingRect = anchor?.getBoundingClientRect();
-    else if (anchor instanceof Selection) {
+    if (anchor instanceof Element && coords) {
+      anchorBoundingRect = {
+        x: coords[0],
+        y: coords[1],
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+        bottom: 0,
+        right: 0,
+      } as DOMRect;
+    } else if (anchor instanceof Element) {
+      anchorBoundingRect = anchor?.getBoundingClientRect();
+    } else if (anchor instanceof Selection) {
       const range = anchor.getRangeAt(0);
       const rangeRect = range.getClientRects()[0] || range.getBoundingClientRect();
       if (rangeRect.x || rangeRect.y) {
@@ -78,6 +92,18 @@ const Popover = ({
       } else if (range.startContainer instanceof HTMLElement) {
         anchorBoundingRect = range.startContainer.getBoundingClientRect();
       }
+    } else {
+      // TODO: no need to check for close on scroll with anchor.target & only check for anchor/anchor.anchorNode/anchor.focusNode
+      anchorBoundingRect = {
+        x: (anchor as MouseEvent).pageX,
+        y: (anchor as MouseEvent).pageY,
+        left: 0,
+        top: 0,
+        width: 0,
+        height: 0,
+        bottom: 0,
+        right: 0,
+      } as DOMRect;
     }
     if (!anchorBoundingRect) return;
 
@@ -88,7 +114,7 @@ const Popover = ({
 
       const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
         anchorBoundingRect, popoverBoundingRect,
-        { placement, alignment, offset, overlap },
+        { placement, alignment, offset: anchorMargin, overlap },
       );
 
       if (maxHeight) elem.style.setProperty("--popover-max-height", String(maxHeight));
@@ -108,7 +134,7 @@ const Popover = ({
         requestAnimationFrame(() => elem.style.setProperty("--popover-transition-dur", ".2s"));
       });
     });
-  }, [alignment, anchor, offset, overlap, placement, useTransform]);
+  }, [alignment, anchor, anchorMargin, coords, overlap, placement, useTransform]);
 
   useFocusTrap(popoverRef, trapFocus && !isTooltip);
 
@@ -123,10 +149,13 @@ const Popover = ({
     const elem = popoverRef.current;
     if (!anchor || !elem) return;
     prevActiveElem.current = document.activeElement;
-    if (hasDOM() && "ResizeObserver" in window && anchor instanceof HTMLElement) {
+    if (
+      hasDOM()
+      && "ResizeObserver" in window
+    ) {
       const observer = new ResizeObserver(updatePopoverLayout);
       observer.observe(elem);
-      observer.observe(anchor);
+      if (anchor instanceof Element) observer.observe(anchor);
       observer.observe(window.document.body);
       return () => {
         observer.disconnect();
@@ -150,10 +179,23 @@ const Popover = ({
   useEffect(() => {
     if (anchor && (isTooltip || closeOnScroll || adjustOnScroll)) {
       const handleScroll = (e: Event) => {
-        if ((isTooltip || closeOnScroll) && anchor instanceof HTMLElement && (e.target as HTMLElement).contains(anchor)) {
-          onClose?.(e);
+        if (isTooltip || closeOnScroll) {
+          if (
+            (anchor instanceof Element && (e.target as Element).contains(anchor))
+            || (
+              anchor instanceof Selection && (
+                (e.target as Element).contains(anchor.anchorNode) || (e.target as Element).contains(anchor.focusNode)
+              )
+            )
+          ) {
+            onClose?.(e);
+          }
         }
-        if (adjustOnScroll && !popoverRef.current?.contains(e.target as HTMLElement)) {
+        if (
+          adjustOnScroll
+          &&
+          !popoverRef.current?.contains(e.target as Element)
+        ) {
           updatePopoverLayout();
         }
       };
@@ -165,27 +207,33 @@ const Popover = ({
   useEffect(() => {
     const elem = popoverRef.current;
     if (!elem || !anchor || !closeOnOutsideClick || !isMounted) return;
+
     const handleClick = (e: PointerEvent) => {
       const popoverRect = elem.getBoundingClientRect();
 
+      if (e.buttons >= 2) return;
+
       if (
-        popoverRect.x <= e.x && (popoverRect.x + popoverRect.width) >= e.x
+        popoverRect.x <= e.clientX && (popoverRect.x + popoverRect.width) >= e.clientX
         &&
-        popoverRect.y <= e.y && (popoverRect.y + popoverRect.height) >= e.y
+        popoverRect.y <= e.clientY && (popoverRect.y + popoverRect.height) >= e.clientY
       ) return;
+
       if (!e.pointerType) {
         const isContained = elem.contains(document.activeElement);
         if (prevActiveElem.current && !isContained) (prevActiveElem.current as HTMLElement).focus();
         return;
         // TODO: (preserve only if closes [also check if another popover directly gets enabled])
       }
-      if (elem.contains(e.target as Node) || elem.contains(document.activeElement)) return;
+
+      if (elem.contains(e.target as Node) || (anchor instanceof Selection && elem.contains(document.activeElement))) return;
 
       onClose?.(e);
     };
-    window.addEventListener("click", handleClick, closeOnOutsideClick === "capture");
+
+    window.addEventListener("pointerdown", handleClick, closeOnOutsideClick === "capture");
     return () => {
-      window.removeEventListener("click", handleClick, closeOnOutsideClick === "capture");
+      window.removeEventListener("pointerdown", handleClick, closeOnOutsideClick === "capture");
     };
   }, [anchor, closeOnOutsideClick, isMounted, onClose]);
 

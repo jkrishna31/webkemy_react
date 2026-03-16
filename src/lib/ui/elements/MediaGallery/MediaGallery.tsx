@@ -18,7 +18,6 @@ import { Popover } from "@/lib/ui/elements/Popover";
 import { Scrollable } from "@/lib/ui/elements/Scrollable";
 import ChevronDownIcon from "@/lib/ui/svgs/icons/ChevronDownIcon";
 import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
-import FilterIcon from "@/lib/ui/svgs/icons/FilterIcon";
 import SortIcon from "@/lib/ui/svgs/icons/SortIcon";
 import { formatDate } from "@/lib/utils/datetime.utils";
 
@@ -41,9 +40,6 @@ const MediaGallery = ({
 
   const { element: filterTriggerElement, ref: filterTriggerRef } = useElementRef<HTMLButtonElement>();
   const { element: optionTriggerElement, ref: optionTriggerRef } = useElementRef<HTMLButtonElement>();
-
-  // filters: date; type[all, image, video, audio]; user
-  // sort: recent first, oldest first
 
   return (
     <div className={styles.wrapper}>
@@ -147,7 +143,7 @@ const MediaGallery = ({
               aria-expanded={isOpen}
             >
               <p className={styles.date}>{formatDate(item.date)}</p>
-              <Checkbox className={styles.checkbox} />
+              {/* <Checkbox className={styles.checkbox} /> */}
               <Button
                 variant="quaternary"
                 className={styles.collapse_btn}

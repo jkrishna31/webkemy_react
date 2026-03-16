@@ -10,11 +10,12 @@ export interface ProgressProps extends ComponentProps<"progress"> {
   value?: number;
   useSvg?: boolean;
   indeterminate?: boolean;
+  thickness?: number;
 }
 
 const Progress = ({
-  variant = "linear", useSvg = true, indeterminate,
-  className, children, value,
+  variant = "linear", useSvg = true, indeterminate, thickness,
+  className, children, value, onChange, onInput, onInputCapture, onChangeCapture,
   ...props
 }: ProgressProps) => {
   const isIndeterminate = value == undefined || indeterminate;
@@ -32,10 +33,12 @@ const Progress = ({
       aria-valuemax={100}
     >
       {(variant === "circular" && useSvg) && (
-        <CircularProgress value={value ?? 0} indeterminate={isIndeterminate} />
+        <CircularProgress value={value ?? 0} indeterminate={isIndeterminate} thickness={thickness} />
       )}
       <div className={styles.progress}></div>
-      <progress value={value} {...props}></progress>
+      {!!(onChange || onInput || onInputCapture || onChangeCapture) && (
+        <progress value={value} {...props}></progress>
+      )}
       {children}
     </div>
   );

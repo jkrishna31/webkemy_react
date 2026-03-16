@@ -1,0 +1,24 @@
+  .btn {
+    width: fit-content;
+    min-height: fit-content;
+    padding: .4rem .8rem;
+    font-size: 1.4rem;
+    gap: 1rem;
+    color: var(--fg-s);
+    background-color: transparent;
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .175rem;
+      transform: rotateZ(180deg);
+    }
+
+    .unread {
+      color: var(--orange-1);
+    }
+
+    &:hover {
+      background-color: var(--bg-s);
+    }
+  }

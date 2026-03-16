@@ -1,7 +1,8 @@
 import { SearchForm } from "@/components/common/forms";
+import { dummyChats } from "@/data/dummy/chatData";
+import { ChatCard } from "@/lib/ui/elements/chat/ChatCard";
 
 import styles from "./PinnedPanel.module.scss";
-
 export interface PinnedPanelProps {
   onClose?: () => void;
 }
@@ -16,7 +17,13 @@ const PinnedPanel = ({
         <h3>{"Pinned"}</h3>
       </div>
 
-      <SearchForm className={styles.search_form} placeholder="Search..." />
+      <SearchForm className={styles.search_form} placeholder="Search in pinned..." />
+
+      <div className={styles.body}>
+        {dummyChats.filter(item => !!item.pinned).map(item => (
+          <ChatCard chat={item} key={item.id} />
+        ))}
+      </div>
     </div>
   );
 };

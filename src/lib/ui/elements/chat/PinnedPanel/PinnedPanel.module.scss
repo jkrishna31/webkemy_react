@@ -1,6 +1,12 @@
+.wrapper {
+  min-height: 0;
+  flex: 1;
+  overflow: auto;
+}
+
 .header {
   padding-inline: 1.4rem;
-  padding-block: 1.4rem;
+  padding-block: 1.4rem .4rem;
   display: flex;
   align-items: center;
   gap: .4rem;
@@ -12,6 +18,17 @@
 }
 
 .search_form {
+  padding-block: 1rem;
   padding-inline: 1rem;
-  margin-bottom: 1.6rem;
+  margin-bottom: .6rem;
+  position: sticky;
+  top: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  padding-inline: 1rem;
+  padding-block: 0 1rem;
 }

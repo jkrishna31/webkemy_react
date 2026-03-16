@@ -76,7 +76,7 @@ const Dropdown = ({
         <Popover
           anchor={triggerElement}
           onClose={handleClose}
-          offset={6}
+          anchorMargin={6}
           className={classes(styles.dropdown_popover, dropdownClass)}
           alignment={alignment}
           placement={placement}

@@ -218,7 +218,7 @@ const Select = ({
                 <Popover
                     anchor={anchorRef.current}
                     onClose={() => setOpen(false)}
-                    offset={6}
+                    anchorMargin={6}
                     className={styles.dropdown}
                     trapFocus={false}
                     animation="slide"

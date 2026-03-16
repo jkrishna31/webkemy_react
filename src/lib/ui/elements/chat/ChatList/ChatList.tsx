@@ -1,14 +1,13 @@
 "use client";
 
-import { ComponentProps, ReactNode, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
+import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 
-import useFirstRender from "@/lib/hooks/useFirstRender";
 import { useLongPress } from "@/lib/hooks/useLongPress";
 import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
 import { useScroll } from "@/lib/hooks/useScroll";
-import { Button } from "@/lib/ui/elements/butttons";
 import { ChatSection } from "@/lib/ui/elements/chat/ChatSection";
 import { MediaViewer } from "@/lib/ui/elements/chat/MediaViewer";
+import { QuickActions } from "@/lib/ui/elements/chat/QuickActions";
 import { EmojiPicker } from "@/lib/ui/elements/EmojiPicker";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
@@ -23,6 +22,7 @@ import PinIcon from "@/lib/ui/svgs/icons/PinIcon";
 import ReplyIcon from "@/lib/ui/svgs/icons/ReplyIcon";
 import SpoolIcon from "@/lib/ui/svgs/icons/SpoolIcon";
 import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
+import { isMobileDevice } from "@/lib/utils/client.utils";
 import { compareDateByPrecision } from "@/lib/utils/datetime.utils";
 import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";
@@ -97,16 +97,15 @@ const ChatList = ({
   ...restProps
 }: ChatListProps) => {
   const _ref = useRef<HTMLDivElement>(null);
-  const sentinalRef = useRef<HTMLDivElement>(null);
 
   const prevChatWindowSize = useRef<{ height: number; width: number; }>({ height: 0, width: 0 });
 
-  // auto scroll to latest message, off when manually scrolled up, reset when reach bottom
   const [autoScroll, setAutoScroll] = useState(true);
-  const [showOptionsFor, setShowOptionsFor] = useState<HTMLElement | null>(null);
+  const [showOptionsFor, setShowOptionsFor] = useState<{ coords?: number[]; element?: HTMLElement } | null>();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [selectedChats, setSelectedChats] = useState<string | string[]>();
   const [showMedia, setShowMedia] = useState<{ mediaId?: string; chatId?: string; }>();
+  const [showAllOptions, setShowAllOptions] = useState(false);
 
   const mediaList = useMemo(() => {
     if (showMedia?.chatId) {
@@ -118,13 +117,11 @@ const ChatList = ({
   // TODOS:
   // = handle unread messages on opening chat [if new messages add the unread banner before that]
   // = handle read status [so that sender will know]
-  // = if at bottom & new messages comes, then scrolling to bottom
-  // = if new messages comes but not at bottom, then show 'new messages' scroll to btn
-  // = show the list of individual reactions details on long press
-  // = retry btn to send an msg item or any of it's media item
-  // = full msg view for large messages
+  // = show the list of individual reactions details on long-press/hover
 
   const { isOnBoundary, handleScroll } = useScroll({ target: _ref, margin: 50, delay: 150, initialState: true });
+
+  const isMobile = isMobileDevice();
 
   const handleScrollToBottom = (behavior: "smooth" | "instant" = "instant") => {
     requestAnimationFrame(() => {
@@ -133,7 +130,6 @@ const ChatList = ({
           top: _ref.current.scrollHeight,
           behavior,
         });
-        // sentinalRef.current?.scrollIntoView({ block: "end", behavior });
       }
     });
   };
@@ -141,6 +137,7 @@ const ChatList = ({
   const closeMenu = () => {
     setShowOptionsFor(null);
     setShowEmojiPicker(false);
+    setShowAllOptions(false);
     setSelectedChats(undefined);
   };
 
@@ -158,14 +155,31 @@ const ChatList = ({
     const msgId = msgElem?.getAttribute("data-id");
     if (msgElem && msgId) {
       e.preventDefault();
-      setShowOptionsFor(msgElem as HTMLElement);
+      let coords: number[] = [];
+      if ((e as any).pageX != undefined && (e as any).pageY != undefined) coords = [(e as any).pageX, (e as any).pageY];
+      else if (typeof TouchEvent !== "undefined" && e instanceof TouchEvent) coords = [e.touches[0].pageX, e.touches[0].pageY];
       handleChatSelection(msgId);
+      setShowOptionsFor({ element: msgElem as HTMLElement, coords: [...coords] });
     }
   }, [handleChatSelection]);
 
   const handleContextMenu = (e: React.MouseEvent) => {
+    // if (isMobileDevice()) return;
     if (!showOptionsFor) {
+      const selection = window.getSelection();
+      if (selection) {
+        const removeRanges = [];
+        for (let i = 0; i < (selection?.rangeCount ?? 0); i++) {
+          const rangeItem = selection?.getRangeAt(i);
+          removeRanges.push(rangeItem);
+        }
+        for (let i = 0; i < removeRanges.length; i++) {
+          selection.removeRange(removeRanges[i]);
+        }
+      }
       handleMsgContext(e);
+    } else {
+      // setShowOptionsFor(null);
     }
   };
 
@@ -201,11 +215,26 @@ const ChatList = ({
 
   // useMutationObserver(_ref, handleMutation);
 
-  useLongPress(_ref, handleMsgContext);
+  // useLongPress(_ref, handleMsgContext);
 
   const scrollToBottomEvent = useEffectEvent(() => {
     if (autoScroll) handleScrollToBottom();
   });
+
+  const handleQuickActions = (e: MouseEvent, key?: string, chatId?: string) => {
+    if (key === "MORE") {
+      setShowAllOptions(true);
+    } else if (key === "ADD_REACTION") {
+      setShowEmojiPicker(true);
+    } else {
+      // todo: add reaction
+      return;
+    }
+    if (chatId) {
+      handleChatSelection(chatId);
+      setShowOptionsFor({ coords: (e.clientX || e.clientY) ? [e.clientX, e.clientY] : undefined, element: e.target as HTMLElement });
+    }
+  };
 
   useEffect(() => {
     if (chats[chats.length - 1].author.id === "me") handleScrollToBottom();
@@ -231,6 +260,43 @@ const ChatList = ({
     }
   }, [handleScroll]);
 
+  const renderPopoverContent = () => {
+    if (showEmojiPicker) {
+      return <EmojiPicker />;
+    }
+    if (isMobile && !showAllOptions) {
+      return (
+        <QuickActions
+          quickReactions={quickReactions}
+          onClick={handleQuickActions}
+        />
+      );
+    }
+    if (showAllOptions || !isMobile) {
+      return (
+        <ItemList>
+          {defaultOptions.slice(0, -1).map(item => (
+            <Item<"button">
+              key={item.id} as="button" scope="list"
+              primary={item.label} icon={item.icon}
+              onClick={() => handleMenuClick(item.id)}
+            />
+          ))}
+          {
+            otherOptions.map(item => (
+              <Item<"button">
+                key={item.id} as="button" scope="list"
+                primary={item.label} icon={item.icon}
+                onClick={() => handleMenuClick(item.id)}
+                disabled={item.disabled}
+              />
+            ))
+          }
+        </ItemList>
+      );
+    }
+  };
+
   const renderChats = (chats: any, idx: number): ReactNode => {
     if (idx >= chats.length) return null;
 
@@ -252,6 +318,7 @@ const ChatList = ({
           selectedChats={selectedChats}
           onMediaClick={handleMediaClick}
           quickReactions={quickReactions}
+          onQuickActionClick={handleQuickActions}
         />
         {renderChats(chats, i)}
       </>
@@ -270,7 +337,6 @@ const ChatList = ({
           onContextMenu={handleContextMenu}
         >
           {renderChats(chats, 0)}
-          {/* <div ref={sentinalRef} className={styles.sentinal}></div> */}
         </div>
         <button
           className={styles.to_bottom_btn}
@@ -279,51 +345,35 @@ const ChatList = ({
           inert={isOnBoundary}
         >
           {"Scroll to Bottom"}
+          {/* {"New Messages"} */}
           <ChevronsDownIcon />
         </button>
       </div>
       {!!showOptionsFor && (
         <Popover
-          anchor={showOptionsFor}
+          anchor={showOptionsFor.element}
+          coords={showOptionsFor.coords}
           onClose={closeMenu}
           placement="top"
           alignment="right"
           animation="slide"
-          className={classes(styles.options_popover, showEmojiPicker ? styles.emoji_popover : styles.all_options_popover)}
+          className={classes(
+            styles.options_popover,
+            showEmojiPicker ? styles.emoji_popover : styles.all_options_popover,
+            !showEmojiPicker && isMobile && !showAllOptions && styles.mobile_popover,
+          )}
           trapFocus
           closeOnEsc
-        // overlap
+          overlap
         >
-          {showEmojiPicker ? (
-            <EmojiPicker />
-          ) : (
-            <ItemList>
-              {defaultOptions.slice(0, -1).map(item => (
-                <Item<"button">
-                  key={item.id} as="button" scope="list"
-                  primary={item.label} icon={item.icon}
-                  onClick={() => handleMenuClick(item.id)}
-                />
-              ))}
-              {
-                otherOptions.map(item => (
-                  <Item<"button">
-                    key={item.id} as="button" scope="list"
-                    primary={item.label} icon={item.icon}
-                    onClick={() => handleMenuClick(item.id)}
-                    disabled={item.disabled}
-                  />
-                ))
-              }
-            </ItemList>
-          )}
+          {renderPopoverContent()}
         </Popover>
       )}
       {!!showMedia?.chatId && (
         <MediaViewer
+          open
           mediaId={showMedia.mediaId}
           media={mediaList}
-          open
           onClose={() => setShowMedia(undefined)}
         />
       )}
