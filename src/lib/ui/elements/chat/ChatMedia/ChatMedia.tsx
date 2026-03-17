@@ -73,6 +73,21 @@ const ChatMedia = ({
 
   return (
     <div className={classes(styles.wrapper, className)} {...restProps}>
+      {!!audio.length && (
+        <div className={styles.audios}>
+          {audio.map(item => (
+            <div key={item.id} className={styles.audio_item_wrapper}>
+              {item.status === "failed" && <ChatControls retry />}
+              <AudioPlayer
+                data-id={item.id}
+                src={item.src}
+                rootClass={styles.audio_player}
+                allowVolumeControl={false}
+              />
+            </div>
+          ))}
+        </div>
+      )}
       {images.length >= 1 && (
         <div className={classes(styles.gallery, images.length === 1 && styles.individual)}>
           {images.slice(0, images.length > 4 ? 4 : undefined).map((item, idx) => (
@@ -91,21 +106,6 @@ const ChatMedia = ({
             </div>
           ))}
           {renderStatus(images)}
-        </div>
-      )}
-      {!!audio.length && (
-        <div className={styles.audios}>
-          {audio.map(item => (
-            <div key={item.id} className={styles.audio_item_wrapper}>
-              {item.status === "failed" && <ChatControls />}
-              <AudioPlayer
-                data-id={item.id}
-                src={item.src}
-                rootClass={styles.audio_player}
-                allowVolumeControl={false}
-              />
-            </div>
-          ))}
         </div>
       )}
       {!!video.length && (
@@ -128,16 +128,31 @@ const ChatMedia = ({
         <div className={styles.others}>
           {others.map(item => (
             <div key={item.id} className={styles.other_item_wrapper}>
-              {item.status === "failed" && <ChatControls />}
               <div
                 key={item.id}
                 data-id={item.id}
                 className={styles.other_item}
               >
                 <div className={styles.controls}>
-                  <Button variant="tertiary">
-                    <DownloadIcon />
-                  </Button>
+                  {item.status === "uploading" && (
+                    <Progress variant="circular" thickness={12} className={styles.other_progress} />
+                  )}
+                  {item.status === "failed" && (
+                    <Button variant="tertiary" className={styles.retry_file_btn} aria-label="Retry" title="Retry">
+                      <ClockwiseIcon />
+                    </Button>
+                  )}
+                  {!item.status && (
+                    <Button<"a">
+                      as="a"
+                      href={item.src ?? "#"}
+                      variant="tertiary"
+                      className={styles.dl_file_btn}
+                      download={item.src ?? "#"}
+                    >
+                      <DownloadIcon />
+                    </Button>
+                  )}
                 </div>
                 <Link href={item.src ?? "#"} target="_blank" className={styles.details}>
                   <p className={styles.filename}>{item.name}</p>

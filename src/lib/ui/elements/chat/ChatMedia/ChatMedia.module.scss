@@ -108,18 +108,23 @@
     padding: .8rem 1rem;
     background-color: var(--chat-bg);
     transition: background .2s linear;
+  }
 
-    button {
-      color: var(--fg-s);
-      min-height: fit-content;
-      padding: .6rem;
+  .dl_file_btn,
+  .retry_file_btn {
+    color: var(--fg-s);
+    min-height: fit-content;
+    padding: .6rem;
 
-      svg {
-        width: 1.8rem;
-        height: 1.8rem;
-        stroke-width: .175rem;
-      }
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke-width: .175rem;
     }
+  }
+
+  .retry_file_btn {
+    color: var(--red-1);
   }
 
   .filename {
@@ -155,34 +160,49 @@
     flex-shrink: 0;
     width: fit-content;
     height: fit-content;
+  }
 
-    .progress {
-      background-color: var(--bg-p);
-      border-radius: var(--br-pill);
-      padding: .3rem;
-      width: fit-content;
-      height: fit-content;
-      display: grid;
-      place-items: center;
+  .progress {
+    background-color: var(--bg-p);
+    border-radius: var(--br-pill);
+    padding: .3rem;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-      svg {
-        position: static;
-        width: 2.8rem;
-        height: 2.8rem;
-      }
+    svg {
+      position: static;
+      width: 2.8rem;
+      height: 2.8rem;
     }
+  }
 
-    .retry_btn {
-      color: var(--red-4);
-      min-height: fit-content;
-      min-width: fit-content;
-      padding: .6rem;
+  .retry_btn {
+    color: var(--red-4);
+    min-height: fit-content;
+    min-width: fit-content;
+    padding: .6rem;
 
-      svg {
-        width: 2.2rem;
-        height: 2.2rem;
-        stroke-width: .2rem;
-      }
+    svg {
+      width: 2.2rem;
+      height: 2.2rem;
+      stroke-width: .2rem;
+    }
+  }
+
+  .other_progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bg-s);
+
+    svg {
+      position: static;
+      width: 2rem;
+      height: 2rem;
     }
   }
 
@@ -194,6 +214,11 @@
     align-items: flex-end;
     justify-content: flex-end;
     gap: .4rem;
+  }
+
+  .audio_item_wrapper {
+    align-items: center;
+    gap: .6rem;
   }
 
   &[data-selected="true"] {

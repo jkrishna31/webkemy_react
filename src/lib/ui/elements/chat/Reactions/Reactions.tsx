@@ -18,14 +18,15 @@ const Reactions = ({
       <div className={styles.reactions}>
         {
           reactions?.map((item, idx) => (
-            <div
+            <Button<"div">
+              as="div"
               key={item.key}
               className={styles.item}
               aria-pressed={idx === 2}
             >
               <span>{item.emoji}</span>
               <span>{item.count}</span>
-            </div>
+            </Button>
           ))
         }
       </div>

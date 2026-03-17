@@ -222,6 +222,7 @@ export const dummyChats = [
         name: "sample-local.pdf",
         size: 899150,
         type: "pdf",
+        status: "uploading",
       },
       {
         id: "mz80ds09",

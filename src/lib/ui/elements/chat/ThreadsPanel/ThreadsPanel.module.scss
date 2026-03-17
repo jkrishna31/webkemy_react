@@ -40,6 +40,8 @@
     background-color: var(--bg-s);
     border-color: var(--chat-card-fg);
 
+    transition-property: transform, opacity, border, background;
+
     &[aria-pressed="false"] {
       opacity: 0;
     }

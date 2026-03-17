@@ -90,8 +90,6 @@ export const useForm = <T extends { [key: string]: any }>(
   const [errors, setErrors] = useState(); // todo: follow the same structure
   const [values, setValues] = useState<T>(initialValues ?? {} as T);
 
-  // dirty, og value
-
   const _get = (path: ObjPath<T>) => {
     let _value = values;
 
@@ -107,7 +105,7 @@ export const useForm = <T extends { [key: string]: any }>(
 
   const _set = useCallback((obj: T, path: ObjPath<T>, value: LeafValues<T>) => {
     let _obj = obj;
-
+    // todo: keep og values
     if (typeof path !== "object") {
 
     } else {

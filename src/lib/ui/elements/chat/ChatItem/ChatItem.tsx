@@ -7,6 +7,7 @@ import { ChatMedia } from "@/lib/ui/elements/chat/ChatMedia";
 import { QuickActions } from "@/lib/ui/elements/chat/QuickActions";
 import { Reactions } from "@/lib/ui/elements/chat/Reactions";
 import { RepliesBtn } from "@/lib/ui/elements/chat/RepliesBtn";
+import { Progress } from "@/lib/ui/elements/Progress";
 import BotMessageIcon from "@/lib/ui/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/ui/svgs/icons/CheckMarkIcon";
 import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
@@ -26,12 +27,28 @@ export interface ChatItemProps extends ComponentProps<"div"> {
   onQuickActionClick?: (e: MouseEvent, key?: string, chatId?: string) => void;
 }
 
-export const ChatControls = () => {
+export interface ChatControlsProps {
+  loading?: boolean;
+  retry?: boolean;
+  className?: string;
+}
+
+export const ChatControls = ({ loading, retry, className }: ChatControlsProps) => {
   return (
-    <div className={styles.chat_controls}>
-      <Button variant="quaternary" className={styles.retry_btn} aria-label="Retry" title="Retry">
-        <ClockwiseIcon />
-      </Button>
+    <div className={classes(styles.chat_controls, className)}>
+      {!!loading && (
+        <Progress variant="circular" thickness={12} className={styles.progress} />
+      )}
+      {!!retry && (
+        <Button
+          variant="quaternary"
+          className={styles.retry_btn}
+          aria-label="Retry"
+          title="Retry"
+        >
+          <ClockwiseIcon />
+        </Button>
+      )}
     </div>
   );
 };
@@ -122,7 +139,7 @@ const ChatItem = ({
                         data-id={item.id}
                       >
                         <div className={styles.chat_wrapper}>
-                          {item.status === "failed" && <ChatControls />}
+                          {item.status === "failed" && <ChatControls retry />}
                           <div
                             // data-loading="true"
                             className={classes(styles.chat, chat.author.id === "me" && styles.green, isTruncated && styles.trunc)}

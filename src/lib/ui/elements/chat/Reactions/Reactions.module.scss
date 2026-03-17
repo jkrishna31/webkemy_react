@@ -24,7 +24,8 @@
     background-color: var(--bg-s);
     border: .1rem solid transparent;
     border-radius: 999.6rem;
-    padding: .5rem .8rem;
+    padding-block: .5rem;
+    padding-inline: .8rem;
     cursor: pointer;
 
     span:last-child {

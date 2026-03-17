@@ -157,6 +157,22 @@
     }
   }
 
+  .progress {
+    background-color: var(--bg-p);
+    border-radius: var(--br-pill);
+    padding: .3rem;
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    place-items: center;
+
+    svg {
+      position: static;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
   .show_more_btn {
     width: 100%;
     font-weight: 500;
