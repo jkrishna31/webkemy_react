@@ -1,25 +1,28 @@
-.dropdown_trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: .6rem;
-  font-size: 1.6rem;
-  font-weight: 500;
-  text-transform: capitalize;
-  color: var(--fg-p);
-  padding: .8rem 1rem .8rem 1.4rem;
-  background-color: var(--bg-s);
-  border-radius: 4rem;
-  min-height: 3.2rem;
-  white-space: nowrap;
+.wrapper {
+  .dropdown_trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: .6rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    text-transform: capitalize;
+    color: var(--fg-p);
+    padding: .8rem 1rem .8rem 1.4rem;
+    background-color: var(--bg-s);
+    border-radius: 4rem;
+    min-height: 3.2rem;
+    white-space: nowrap;
+  }
+
+  .hint_icon {
+    color: var(--fg-s);
+    width: 2rem;
+    height: 2rem;
+    stroke-width: .175rem;
+  }
 }
 
-.hint_icon {
-  color: var(--fg-s);
-  width: 2rem;
-  height: 2rem;
-  stroke-width: .175rem;
-}
 
 .dropdown_popover {
   width: fit-content;
@@ -36,12 +39,14 @@
 
 
 @media screen and (max-width: 767px) {
-  .dropdown_trigger {
-    font-size: 1.4rem;
-  }
+  .wrapper {
+    .dropdown_trigger {
+      font-size: 1.4rem;
+    }
 
-  .hint_icon {
-    width: 1.8rem;
-    height: 1.8rem;
+    .hint_icon {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
   }
 }
