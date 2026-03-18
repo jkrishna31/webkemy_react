@@ -27,6 +27,15 @@ export const dummyChats = [
     status: "read",
     reactions: [{ key: "thumbs_up", emoji: "👀", count: "73" }, { key: "fire", emoji: "💯", count: "23" }, { key: "raising_hands", emoji: "🙌", count: "11" }, { key: "mind_blown", emoji: "🤯", count: "3" }],
     replies: 4,
+    quoted: {
+      id: "ddaa",
+      author: {
+        id: "bot",
+        name: "Bot",
+      },
+      content: "Hi there! It seems like you might have a question or need help with something. Could you clarify what you're looking for? 😊",
+      datetime: (new Date(2024, 10, 27, 14, 46)).toUTCString(),
+    },
   },
   {
     id: "n3f9k",
@@ -107,7 +116,17 @@ export const dummyChats = [
       src: "https://www.shutterstock.com/shutterstock/videos/3922523297/preview/stock-footage--k-blue-glitter-particle-explosion-abstract-light-burst-background-animation-video-purple.webm",
       type: "video",
       thumbnails: [{ id: "vtn34", src: "/assets/video-thumbnail-1.png", duration: 14, name: "blue-glitter-particle-explosion-abstract-light-burst-background-animation-video-purple.webm" }]
-    }]
+    }],
+    quoted: {
+      id: "fd8fd",
+      author: {
+        id: "alice",
+        name: "Alice",
+        profile: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=500&auto=format&fit=crop&q=60",
+      },
+      content: "Hey, did you check the new API docs?",
+      datetime: (new Date(2025, 2, 17, 15, 34)).toUTCString(),
+    },
   },
   {
     id: "ds90",

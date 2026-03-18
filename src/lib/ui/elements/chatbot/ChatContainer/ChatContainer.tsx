@@ -10,6 +10,7 @@ import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { ChatComposer } from "@/lib/ui/elements/chat/ChatComposer";
 import { ChatList } from "@/lib/ui/elements/chat/ChatList";
+import { ChatQuoteCard } from "@/lib/ui/elements/chat/ChatQuoteCard";
 import { GroupDetails } from "@/lib/ui/elements/chat/GroupDetails";
 import { GroupSettings } from "@/lib/ui/elements/chat/GroupSettings";
 import { MembersPanel } from "@/lib/ui/elements/chat/MembersPanel";
@@ -61,7 +62,10 @@ const ChatContainer = ({
   const [showGroupOptions, setShowGroupOptions] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
   const [showPanel, setShowPanel] = useState<string>();
+
   const [showThread, setShowThread] = useState<string>();
+  const [editMsg, setEditMsg] = useState<any>();
+  const [quoteMsg, setQuoteMsg] = useState<any>(); // todo: quote multiple message
 
   const mainContainerRef = useRef<HTMLDivElement>(null);
 
@@ -254,10 +258,20 @@ const ChatContainer = ({
             <ChatList
               chats={chats}
               lastReadMsgId={lastReadMsgId}
-              onShowReplies={() => { }}
               quickReactions={mfuReactions}
+              onShowReplies={() => { }}
+              onQuote={(chatId) => {
+                const selectedChat = chats.find(item => item.id === chatId);
+                setQuoteMsg(selectedChat);
+              }}
             />
-            <ChatComposer className={styles.footer} onSend={handleSend} />
+            <ChatComposer
+              className={styles.footer}
+              onSend={handleSend}
+            >
+              {!!quoteMsg && <ChatQuoteCard chat={quoteMsg} className={styles.quoted} onCancel={() => setQuoteMsg(undefined)} />}
+              {/* editMsg: [just populate the input field] */}
+            </ChatComposer>
           </>
         )}
         {renderPanel()}

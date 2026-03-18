@@ -1,0 +1,77 @@
+@use '@/lib/ui/styles/mixins/general' as *;
+
+.wrapper {
+  border-radius: .6rem;
+  background-color: var(--bg-t);
+  border-color: var(--chat-bg-active);
+  padding: .6rem .8rem;
+  margin-bottom: .8rem;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  cursor: pointer;
+  transition: background .2s linear;
+
+  .wrapper_inner {
+    width: 100%;
+  }
+
+  .quoted_header {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 500;
+    color: var(--fg-s);
+    font-size: 1.3rem;
+    margin-bottom: .2rem;
+
+    svg {
+      width: 1.2rem;
+      height: 1.2rem;
+      stroke-width: 0;
+      fill: var(--fg-s);
+      color: var(--fg-s);
+    }
+  }
+
+  .quoted_msg {
+    font-size: 1.5rem;
+    @include line_clamp(1);
+  }
+
+  .cancel_btn {
+    background-color: var(--bg-highlight);
+    padding: .6rem;
+    border-radius: .6rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      stroke-width: .175rem;
+    }
+
+    &:hover {
+      color: var(--red-1);
+      background-color: var(--red-1-10);
+    }
+  }
+
+  &:hover {
+    background-color: var(--bg-s);
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    padding: .8rem;
+
+    .quoted_header {
+      font-size: 1.2rem;
+    }
+
+    .quoted_msg {
+      font-size: 1.4rem;
+    }
+  }
+}

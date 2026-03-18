@@ -4,6 +4,7 @@ import { ComponentProps, MouseEvent } from "react";
 import { Avatar } from "@/lib/ui/elements/Avatar";
 import { Button } from "@/lib/ui/elements/butttons";
 import { ChatMedia } from "@/lib/ui/elements/chat/ChatMedia";
+import { ChatQuoteCard } from "@/lib/ui/elements/chat/ChatQuoteCard";
 import { QuickActions } from "@/lib/ui/elements/chat/QuickActions";
 import { Reactions } from "@/lib/ui/elements/chat/Reactions";
 import { RepliesBtn } from "@/lib/ui/elements/chat/RepliesBtn";
@@ -128,7 +129,7 @@ const ChatItem = ({
               )}
               <div className={styles.chat_list}>
                 {
-                  chat.content?.map((item: { id: string; content: string; media: any[]; status?: string }, idx: number) => {
+                  chat.content?.map((item: { id: string; content: string; media: any[]; status?: string; quoted?: any }, idx: number) => {
                     const _isSelected = isSelected(item.id);
                     const isTruncated = item.content.length > 500; // && not expanded
                     return (
@@ -145,6 +146,7 @@ const ChatItem = ({
                             className={classes(styles.chat, chat.author.id === "me" && styles.green, isTruncated && styles.trunc)}
                             data-selected={_isSelected}
                           >
+                            {!!item.quoted && <ChatQuoteCard chat={item.quoted} />}
                             {item.content?.split("\n")?.map((part, pIdx) => (
                               <p key={`${idx}-${pIdx}`}>{part}</p>
                             ))}

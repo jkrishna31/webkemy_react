@@ -22,7 +22,7 @@ export interface ChatComposerProps extends ComponentProps<"div"> {
 }
 
 const ChatComposer = ({
-  onSend, className,
+  onSend, className, children,
   ...restProps
 }: ChatComposerProps) => {
   const [query, setQuery] = useState<string>();
@@ -61,6 +61,7 @@ const ChatComposer = ({
       {...restProps}
     >
       <InputFieldWrapper className={styles.wrapper_inner}>
+        {children}
         <FilesPreview
           files={Array.from(filelist?.length ? filelist : [])}
           noHeading

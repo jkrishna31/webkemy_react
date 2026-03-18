@@ -2,7 +2,7 @@
   width: 30rem;
   height: 30rem;
   border-radius: 50%;
-  border: .6rem double var(--fg-t);
+  border: .2rem solid var(--fg-t);
   background: var(--bg-t);
   display: grid;
   place-items: center;
@@ -12,7 +12,7 @@
 .center {
   width: 2rem;
   height: 2rem;
-  border: .3rem solid var(--border-s);
+  border: .3rem solid var(--border-t);
   background: var(--fg-s);
   border-radius: 50%;
   position: absolute;
@@ -81,6 +81,20 @@
     height: 60%;
     background: var(--red-4);
     border-radius: var(--br-pill);
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      width: 1.2rem;
+      height: 1.2rem;
+      background-color: var(--red-4);
+      bottom: 1.2rem;
+      left: 50%;
+      transform: translate3d(-50%, 0, 0) rotate(45deg);
+      border: .2rem solid var(--bg-t);
+      border-radius: 2.2rem;
+    }
   }
 }
 

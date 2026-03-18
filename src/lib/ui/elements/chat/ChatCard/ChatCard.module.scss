@@ -43,7 +43,8 @@
     width: fit-content;
     padding: .6rem;
     opacity: 0;
-    background-color: transparent;
+    background-color: var(--chat-card-bg);
+    color: var(--chat-card-fg);
 
     svg {
       width: 1.8rem;
@@ -52,9 +53,10 @@
     }
 
     &:hover,
-    &:hover {
+    &:focus {
       opacity: 1;
-      background-color: var(--bg-s);
+      background-color: var(--red-1-25);
+      color: var(--red-1);
     }
   }
 

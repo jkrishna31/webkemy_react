@@ -88,11 +88,13 @@ export interface ChatListProps extends ComponentProps<"div"> {
   onReact?: () => void;
   onShowReaction?: () => void;
   quickReactions?: string[];
+
+  onQuote?: (chat: any) => void;
 }
 
 const ChatList = ({
   chats, lastReadMsgId, quickReactions,
-  onShowReplies,
+  onShowReplies, onQuote,
   ref, className,
   ...restProps
 }: ChatListProps) => {
@@ -187,6 +189,8 @@ const ChatList = ({
     if (key === "add_reaction") {
       setShowEmojiPicker(true);
     } else if (key === "quote_reply") {
+      onQuote?.(selectedChats);
+      closeMenu();
       // on quote show that quoted msg ui or specific selection in the chat composer, & on click of that goto that msg
       // remove btn
     } else if (key === "edit") {

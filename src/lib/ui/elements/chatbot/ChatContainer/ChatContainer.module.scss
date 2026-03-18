@@ -119,6 +119,12 @@
   max-height: 34rem;
 }
 
+.quoted {
+  margin-inline: .4rem;
+  margin-top: .4rem;
+  background-color: var(--bg-s);
+}
+
 @media screen and (max-width: 768px) {
   .container {
     position: fixed;

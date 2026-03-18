@@ -8,7 +8,7 @@
     background-color: transparent;
     border-radius: 6rem;
     font-weight: 500;
-    transition: border .2s linear, background .2s linear, color .2s linear, transform .15s ease;
+    transition: border .2s linear, background .2s linear, color .2s linear, transform .15s ease, opacity .2s linear;
 
     &:disabled {
         opacity: .5;
