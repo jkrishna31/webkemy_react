@@ -32,7 +32,9 @@ const GroupDetails = ({
     description?: string;
     guidelines?: string;
     profile?: FileList | FileMeta[];
-  }>(initialValues);
+  }>(
+    initialValues,
+  );
 
   return (
     <div className={styles.wrapper}>

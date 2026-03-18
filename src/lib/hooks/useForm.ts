@@ -2,7 +2,6 @@
 
 import { useCallback, useEffect, useEffectEvent, useState } from "react";
 
-import { DirectKeys } from "@/lib/types/general.types";
 import { deepClone } from "@/lib/utils/object.utils";
 
 export interface IValidation {
@@ -17,15 +16,6 @@ export interface IValidation {
 }
 
 type Key = string | number | symbol;
-
-export type ObjPathAt<T, P extends any[] = []> =
-  P["length"] extends 0
-  ? DirectKeys<T>[]
-  : P extends [infer First, ...infer Rest]
-  ? Rest extends []
-  ? DirectKeys<T[Extract<First, keyof T>]>[]
-  : ObjPathAt<T[Extract<First, keyof T>], Rest>
-  : never;
 
 export type ObjPath<T> = T extends object
   ? {
@@ -46,42 +36,31 @@ type LeafValues<T> =
   : never
   : T;
 
-const config = {
-  name: {
-    firstName: {
-      required: true,
-      minLength: 3,
-    },
-    // middleName: {},
-    lastName: {
-      required: true,
-      minLength: 2,
-    },
-  },
-  address: {
-    streetAddress: { required: true },
-    city: { required: true },
-    state: { required: true },
-    zipCode: { required: true },
-    country: { required: true },
-    // landmark: {},
-  },
-  contact: {
-    phone: { mask: "(000) 000-0000" },
-    email: {
-      required: true,
-      validations: [{ pattern: "", message: "" }]
-    },
-  },
-  dob: { mask: "00/00/0000" },
-  skills: { multiple: true },
-  profile: { type: "file", pattern: "", accept: "image/*" }, // pattern to allow only characters/order mentioned
+type FromValue = string | number | boolean | Date | FileList;
+type Validation = {
+  id: string;
+  required?: boolean;
+  min?: number;
+  max?: number;
+  minLength: number;
+  maxLength: number;
+  pattern?: RegExp;
+  accept: RegExp;
 };
+
+type ValidationSchema<T> =
+  T extends FromValue
+  ? Validation[]
+  : T extends Array<infer U>
+  ? ValidationSchema<U>[]
+  : T extends object
+  ? { [K in keyof T]?: ValidationSchema<T[K]> }
+  : never;
 
 export const useForm = <T extends { [key: string]: any }>(
   initialValues?: T,
+  validations?: ValidationSchema<T>,
   config?: {
-    validations: any;
     validateOn: "change" | "focusOut" | "all";
     // if has dependent field, then also validate them on change [or handle this explicitly since it's rare]
   },
@@ -141,15 +120,14 @@ export const useForm = <T extends { [key: string]: any }>(
 
   const validateField = (path: ObjPath<T>) => {
     // todo: set errors
-    // core validation: required, min, max, minLength, maxLength, pattern, {what about other validations?}
   };
 
   const resetForm = useCallback(() => {
-
+    // todo: reset to initial values
   }, []);
 
   const clearForm = useCallback(() => {
-
+    // todo: clear values
   }, []);
 
   const _setValues = useEffectEvent((values?: T) => {

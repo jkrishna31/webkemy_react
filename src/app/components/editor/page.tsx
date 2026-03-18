@@ -486,7 +486,7 @@ const Page = () => {
             </Popover>
           )}
         </Editor>
-        <div className={styles.finder_wrapper}>
+        <div className={styles.sticky_container}>
           {!!showFinder && (
             <FindReplace className={styles.finder} onClose={() => setShowFinder(false)} />
           )}

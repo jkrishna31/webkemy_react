@@ -19,7 +19,7 @@ const Badge = ({
   return (
     <div
       className={classes(styles.badge, float && styles.float, float && styles[float], className)}
-      data-variant={children ? "text" : "dot"}
+      data-variant={children != undefined ? "text" : "dot"}
       data-color={color}
       data-animate={animate}
       {...props}

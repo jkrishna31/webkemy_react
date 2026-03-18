@@ -9,6 +9,11 @@
 
   &[data-inline="true"] {
     margin-bottom: 0;
+    transition: color .25s linear;
+
+    &:hover {
+      color: var(--fg-p-alt);
+    }
   }
 
   &[data-normal="true"] {

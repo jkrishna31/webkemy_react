@@ -14,11 +14,11 @@ export interface ToolSelectorProps extends ComponentProps<"div"> {
 }
 
 const ToolSelector = ({
-    toolsState, onClick, options,
+    toolsState, onClick, options, className,
 }: ToolSelectorProps) => {
     // witch, dropdown, radio-group
     return (
-        <div className={styles.wrapper}>
+        <div className={classes(styles.wrapper, className)}>
             <div
                 className={styles.toolbar}
                 onMouseDown={(e) => {
