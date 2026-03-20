@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100%;
+}
+
+.header {
+  padding-inline: 1.4rem;
+  padding-block: 1rem 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+
+  h3 {
+    font-weight: 500;
+    margin-right: auto;
+  }
+
+  .follow_btn {
+    font-size: 1.4rem;
+    gap: .2rem;
+    min-height: fit-content;
+    padding-block: .4rem;
+    padding-inline: 1rem;
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .175rem;
+    }
+
+    &[aria-pressed="true"] {
+      color: var(--bg-p);
+    }
+
+    &[data-color="blue"][aria-pressed="true"] {
+      background-color: var(--blue-1);
+      border-color: var(--blue-1);
+    }
+
+    &[data-color="green"][aria-pressed="true"] {
+      background-color: var(--green-1);
+      border-color: var(--green-1);
+    }
+  }
+}

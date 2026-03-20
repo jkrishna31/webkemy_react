@@ -13,10 +13,15 @@
     gap: .8rem;
   }
 
+  .user {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+  }
+
   .avatar {
-    width: 3rem;
-    height: 3rem;
-    // border-color: var(--chat-card-fg);
+    width: 2.8rem;
+    height: 2.8rem;
   }
 
   .author {
@@ -41,7 +46,7 @@
     min-height: fit-content;
     min-width: fit-content;
     width: fit-content;
-    padding: .6rem;
+    padding: .5rem;
     opacity: 0;
     background-color: var(--chat-card-bg);
     color: var(--chat-card-fg);
@@ -49,7 +54,7 @@
     svg {
       width: 1.8rem;
       height: 1.8rem;
-      stroke-width: .175rem;
+      stroke-width: .2rem;
     }
 
     &:hover,

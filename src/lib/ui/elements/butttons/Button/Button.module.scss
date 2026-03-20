@@ -62,22 +62,27 @@
 
     &[data-color="red"] {
         color: var(--red-6);
+        border-color: var(--red-1-50);
     }
 
     &[data-color="blue"] {
         color: var(--blue-1);
+        border-color: var(--blue-1-50);
     }
 
     &[data-color="green"] {
-        color: var(--green-2);
+        color: var(--green-1);
+        border-color: var(--green-1-50);
     }
 
     &[data-color="yellow"] {
         color: var(--yellow-2);
+        border-color: var(--yellow-1-50);
     }
 
     &[data-color="orange"] {
         color: var(--orange-2);
+        border-color: var(--orange-2-50);
     }
 
     &:hover {

@@ -36,11 +36,11 @@
     min-height: fit-content;
     margin-left: auto;
     font-size: 1.4rem;
-    padding-inline: 1rem;
+    padding: .6rem 1rem;
     background-color: var(--bg-s);
     border-color: var(--chat-card-fg);
 
-    transition-property: transform, opacity, border, background;
+    transition-property: transform, opacity, border, background, color;
 
     &[aria-pressed="false"] {
       opacity: 0;
@@ -49,6 +49,7 @@
     &:hover,
     &:focus {
       opacity: 1;
+      color: var(--chat-card-fg);
     }
 
     &[aria-pressed="true"] {

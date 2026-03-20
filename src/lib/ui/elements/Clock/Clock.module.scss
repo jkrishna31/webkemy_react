@@ -125,7 +125,7 @@
   padding-block-end: 0;
 
   &>div {
-    height: 1.4rem;
+    height: 1.2rem;
     width: .2rem;
     background: var(--fg-t);
     border-top-left-radius: var(--br-pill);
@@ -137,9 +137,9 @@
   animation: fade-mark .5s ease;
 
   &>div {
-    height: 1.4rem;
+    height: 1.2rem;
     width: .3rem;
-    background: var(--fg-s);
+    background: var(--fg-t);
     border-radius: var(--br-pill);
   }
 }

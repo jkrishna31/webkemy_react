@@ -2,8 +2,6 @@
 
 import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 
-import { useLongPress } from "@/lib/hooks/useLongPress";
-import { useMutationObserver } from "@/lib/hooks/useMutationObserver";
 import { useScroll } from "@/lib/hooks/useScroll";
 import { ChatSection } from "@/lib/ui/elements/chat/ChatSection";
 import { MediaViewer } from "@/lib/ui/elements/chat/MediaViewer";
@@ -191,11 +189,8 @@ const ChatList = ({
     } else if (key === "quote_reply") {
       onQuote?.(selectedChats);
       closeMenu();
-      // on quote show that quoted msg ui or specific selection in the chat composer, & on click of that goto that msg
-      // remove btn
     } else if (key === "edit") {
-      // append in the chat composer both msg & date; & also highlight the og msg
-      // cancel btn
+
     } else if (key === "copy") {
       // copy from element content with formatting (but how to handle media); or copy from data but lose formatting
     } else if (key === "pin") {
@@ -210,16 +205,6 @@ const ChatList = ({
   const handleMediaClick = useCallback((chatId: string, mediaId?: string) => {
     setShowMedia({ chatId, mediaId: mediaId });
   }, []);
-
-  // const handleMutation = useCallback((mutations: MutationRecord[]) => {
-  //   if (mutations.length && mutations[mutations.length - 1].addedNodes?.length) {
-  //     handleScrollToBottom();
-  //   }
-  // }, []);
-
-  // useMutationObserver(_ref, handleMutation);
-
-  // useLongPress(_ref, handleMsgContext);
 
   const scrollToBottomEvent = useEffectEvent(() => {
     if (autoScroll) handleScrollToBottom();

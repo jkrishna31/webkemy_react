@@ -1,31 +1,20 @@
 "use client";
 
 import Image from "next/image";
-import { ComponentProps, useRef, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
 
 import { Overlay } from "@/components/common/containers";
 import { dummyChats, groupDetails } from "@/data/dummy/chatData";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { Avatar } from "@/lib/ui/elements/Avatar";
-import { ChatComposer } from "@/lib/ui/elements/chat/ChatComposer";
-import { ChatList } from "@/lib/ui/elements/chat/ChatList";
-import { ChatQuoteCard } from "@/lib/ui/elements/chat/ChatQuoteCard";
-import { GroupDetails } from "@/lib/ui/elements/chat/GroupDetails";
-import { GroupSettings } from "@/lib/ui/elements/chat/GroupSettings";
-import { MembersPanel } from "@/lib/ui/elements/chat/MembersPanel";
-import { PinnedBanner } from "@/lib/ui/elements/chat/PinnedBanner";
-import { PinnedPanel } from "@/lib/ui/elements/chat/PinnedPanel";
-import { SearchPanel } from "@/lib/ui/elements/chat/SearchPanel";
-import { SharedPanel } from "@/lib/ui/elements/chat/SharedPanel";
-import { StarredPanel } from "@/lib/ui/elements/chat/StarredPanel";
-import { ThreadsPanel } from "@/lib/ui/elements/chat/ThreadsPanel";
+import { ChatComposer, ChatList, ChatQuoteCard, GroupDetails, GroupSettings, MembersPanel, PinnedBanner, PinnedPanel, SearchPanel, SharedPanel, StarredPanel, ThreadsPanel } from "@/lib/ui/elements/chat";
+import { ThreadPanel } from "@/lib/ui/elements/chat/ThreadPanel";
 import { Divider } from "@/lib/ui/elements/Divider";
 import { Item } from "@/lib/ui/elements/Item";
 import { ItemList } from "@/lib/ui/elements/ItemList";
 import { MediaGallery } from "@/lib/ui/elements/MediaGallery";
 import { Popover } from "@/lib/ui/elements/Popover";
-import ArrowLeftIcon from "@/lib/ui/svgs/icons/ArrowLeftIcon";
 import BellOffIcon from "@/lib/ui/svgs/icons/BellOffIcon";
 import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
 import CircleInfoIcon from "@/lib/ui/svgs/icons/CircleInfoIcon";
@@ -45,10 +34,11 @@ import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
 import UsersIcon from "@/lib/ui/svgs/icons/UsersIcon";
 import { getUniqueId } from "@/lib/utils/crypto.utils";
 import { compareDateByPrecision } from "@/lib/utils/datetime.utils";
+import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ChatContainer.module.scss";
 
-const mfuReactions = ["👍️", "💯", "👀", "❤️"];
+const personalizedQuickReactions = ["👍️", "💯", "👀", "❤️"];
 
 export interface ChatContainerProps extends ComponentProps<"div"> {
   onClose: any;
@@ -68,6 +58,7 @@ const ChatContainer = ({
   const [quoteMsg, setQuoteMsg] = useState<any>(); // todo: quote multiple message
 
   const mainContainerRef = useRef<HTMLDivElement>(null);
+  const chatInputRef = useRef<HTMLTextAreaElement>(null);
 
   const { element: groupElement, ref: groupRef } = useElementRef<HTMLDivElement>();
   const { element: optionsTriggerElement, ref: optionsTriggerRef } = useElementRef<HTMLButtonElement>();
@@ -77,18 +68,26 @@ const ChatContainer = ({
   const handleSend = (value?: string) => {
     const timestamp = new Date().toUTCString();
     setChats(currChats => {
+      const newChat: any = {
+        id: getUniqueId(4),
+        author: {
+          id: "me",
+          name: "Julia V. Gambuto",
+        },
+        content: value,
+        datetime: timestamp,
+      };
+      if (quoteMsg) {
+        newChat.quoted = {
+          ...quoteMsg,
+        };
+      }
       return [
         ...currChats,
-        {
-          id: getUniqueId(4),
-          author: {
-            id: "me",
-          },
-          content: value,
-          datetime: timestamp,
-        }
+        newChat,
       ];
     });
+    setQuoteMsg(undefined);
   };
 
   const handleOptionClick = (key: string) => {
@@ -97,7 +96,16 @@ const ChatContainer = ({
     setShowPanel(key);
   };
 
+  const handleQuote = useCallback((chatId: string) => {
+    const selectedChat = chats.find(item => item.id === chatId);
+    setQuoteMsg(selectedChat);
+  }, [chats]);
+
   useFocusTrap(mainContainerRef, true);
+
+  useEffect(() => {
+    if (quoteMsg) chatInputRef.current?.focus();
+  }, [quoteMsg]);
 
   const handleClosePanel = () => {
     setShowPanel(undefined);
@@ -132,6 +140,10 @@ const ChatContainer = ({
     } else if (showPanel === "threads") {
       return (
         <ThreadsPanel onClose={handleClosePanel} />
+      );
+    } else if (showPanel === "thread") {
+      return (
+        <ThreadPanel />
       );
     } else if (showPanel === "shared") {
       const media = chats.reduce((acc, item) => {
@@ -258,19 +270,22 @@ const ChatContainer = ({
             <ChatList
               chats={chats}
               lastReadMsgId={lastReadMsgId}
-              quickReactions={mfuReactions}
-              onShowReplies={() => { }}
-              onQuote={(chatId) => {
-                const selectedChat = chats.find(item => item.id === chatId);
-                setQuoteMsg(selectedChat);
-              }}
+              quickReactions={personalizedQuickReactions}
+              onShowReplies={setShowThread}
+              onQuote={handleQuote}
             />
             <ChatComposer
+              ref={chatInputRef}
               className={styles.footer}
               onSend={handleSend}
             >
-              {!!quoteMsg && <ChatQuoteCard chat={quoteMsg} className={styles.quoted} onCancel={() => setQuoteMsg(undefined)} />}
-              {/* editMsg: [just populate the input field] */}
+              {!!quoteMsg && (
+                <ChatQuoteCard
+                  chat={quoteMsg}
+                  onCancel={() => setQuoteMsg(undefined)}
+                  className={classes(styles.quoted, quoteMsg.author?.id === "me" && styles.green)}
+                />
+              )}
             </ChatComposer>
           </>
         )}

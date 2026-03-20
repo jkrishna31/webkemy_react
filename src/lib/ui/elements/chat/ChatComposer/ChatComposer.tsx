@@ -1,4 +1,4 @@
-import { ComponentProps, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
+import { ComponentPropsWithoutRef, RefObject, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { Keys } from "@/constants/keys.const";
 import { useFiles } from "@/lib/hooks/useFiles";
@@ -13,16 +13,18 @@ import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
 import PaperclipIcon from "@/lib/ui/svgs/icons/PaperclipIcon";
 import SendIcon from "@/lib/ui/svgs/icons/SendIcon";
 import { isMobileDevice } from "@/lib/utils/client.utils";
+import { mergeRefs } from "@/lib/utils/react.utils";
 import { classes } from "@/lib/utils/style.utils";
 
 import styles from "./ChatComposer.module.scss";
 
-export interface ChatComposerProps extends ComponentProps<"div"> {
+export interface ChatComposerProps extends ComponentPropsWithoutRef<"div"> {
   onSend?: (value?: string) => void;
+  ref?: RefObject<HTMLTextAreaElement | null>;
 }
 
 const ChatComposer = ({
-  onSend, className, children,
+  onSend, className, children, ref,
   ...restProps
 }: ChatComposerProps) => {
   const [query, setQuery] = useState<string>();
@@ -92,7 +94,7 @@ const ChatComposer = ({
             placeholder="Message..."
             value={query}
             onInput={(e: any) => setQuery(e.target.value)}
-            ref={inputRef}
+            ref={mergeRefs(inputRef, ref)}
             className={classes(styles.input, query?.trim().length && styles.max)}
           // enterKeyHint="send"
           />

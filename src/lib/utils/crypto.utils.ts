@@ -1,4 +1,4 @@
-import { customAlphabet, nanoid, urlAlphabet } from "nanoid";
+import { customAlphabet, nanoid } from "nanoid";
 
 export const getUniqueId = (size: number = 6, charSet?: string) => {
   if (charSet) {

@@ -41,7 +41,7 @@ export default function Home() {
           {/* {"WEBKEMY"} */}
           <AppLogo className={styles.logo} />
         </Text>
-        <Text<"p"> as="p" className={styles.desc}>{"Minimal. Accessible. Fully Responsive. Easily-Extensible. UI Elements."}</Text>
+        <Text<"p"> as="p" className={styles.desc}>{"Minimal. Accessible. Responsive. Extensible. UI Elements."}</Text>
         <Button<"a"> variant="primary" href="/components">{"Components"}</Button>
       </div>
     </main>

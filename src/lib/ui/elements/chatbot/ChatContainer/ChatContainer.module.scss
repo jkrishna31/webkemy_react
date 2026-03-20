@@ -120,9 +120,18 @@
 }
 
 .quoted {
+  --chat-card-bg: var(--bg-s);
+  // --cc-remove-bg: var(--blue-1-10);
+  // --cc-remove-fg: var(--blue-1);
+
   margin-inline: .4rem;
   margin-top: .4rem;
-  background-color: var(--bg-s);
+}
+
+.green {
+  // --chat-card-bg: var(--green-1-10);
+  // --cc-remove-bg: var(--green-1-10);
+  // --cc-remove-fg: var(--green-1);
 }
 
 @media screen and (max-width: 768px) {
