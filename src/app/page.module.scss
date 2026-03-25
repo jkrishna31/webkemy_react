@@ -31,47 +31,10 @@
   text-align: center;
 }
 
-.glow {
-  position: absolute;
-}
-
-.line {
-  --line-w: max(140rem, 80vw);
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
-  width: var(--line-w);
-  height: var(--line-w);
-  border-top: .4rem solid var(--blue-1);
-  border-radius: 100%;
-}
-
-.line_1 {
-  transform: translate3d(-50%, -12rem, 0);
-}
-
-.line_2 {
-  transform: translate3d(-50%, 4rem, 0);
-  width: calc(var(--line-w) - 20rem);
-  height: calc(var(--line-w) - 20rem);
-}
-
-.line_3 {
-  transform: translate3d(-50%, 16rem, 0);
-}
-
-// @property --margin {
-//   syntax: "<number>";
-//   initial-value: 4rem;
-//   inherits: false;
-// }
-
 .mark {
   --margin: 4rem;
   position: absolute;
   background-color: var(--border-t);
-  // box-shadow: 0 0 6px var(--shadow-p);
 
   &::before,
   &::after {
@@ -86,7 +49,6 @@
     height: 1.4rem;
     background-color: var(--bg-t);
     border: .1rem solid var(--border-s);
-    // box-shadow: 0 0 6px var(--shadow-p);
   }
 
   &::after {
@@ -173,18 +135,16 @@
 .shape {
   --shape-margin: 2.4rem;
   position: absolute;
-  // width: calc(calc(min(100vw, 100vh) - 16rem) / 2);
-  // height: calc(calc(min(100vw, 100vh) - 16rem) / 2);
   width: 6rem;
   height: 6rem;
-  color: var(--border-t);
+  color: var(--border-s);
   fill: var(--border-t);
+  filter: drop-shadow(0 0 6px var(--shadow-p));
 }
 
 .shape_tr {
   top: var(--shape-margin);
   right: var(--shape-margin);
-
   // transform: rotate(180deg);
 }
 
@@ -192,7 +152,6 @@
   top: var(--shape-margin);
   left: var(--shape-margin);
   transform: rotate(-90deg);
-
   // transform: rotate(90deg);
 }
 
@@ -206,7 +165,6 @@
   bottom: var(--shape-margin);
   right: var(--shape-margin);
   transform: rotate(90deg);
-
   // transform: rotate(-90deg);
 }
 

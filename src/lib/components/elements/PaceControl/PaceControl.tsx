@@ -29,6 +29,7 @@ const PaceControl = ({
       </div>
       <div className={styles.slider_controls}>
         <Button
+          variant="muted"
           className={styles.speed_dec_btn}
           onClick={() => updatePace(Math.max(.2, parseFloat((pace - .1).toFixed(2))))}
         >
@@ -43,6 +44,7 @@ const PaceControl = ({
           showFill
         />
         <Button
+          variant="muted"
           className={styles.speed_inc_btn}
           onClick={() => updatePace(Math.min(3, parseFloat((pace + .1).toFixed(2))))}
         >

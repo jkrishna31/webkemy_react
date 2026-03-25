@@ -9,12 +9,6 @@ import styles from "./page.module.scss";
 export default function Home() {
   return (
     <main className={styles.main}>
-      {/* <div className={styles.glow}>
-        <div className={classes(styles.line, styles.line_1)}></div>
-        <div className={classes(styles.line, styles.line_2)}></div>
-        <div className={classes(styles.line, styles.line_3)}></div>
-      </div> */}
-
       <div className={classes(styles.mark, styles.mark_top)}></div>
       <div className={classes(styles.mark, styles.mark_right)}></div>
       <div className={classes(styles.mark, styles.mark_bottom)}></div>
@@ -29,8 +23,8 @@ export default function Home() {
       <div className={styles.card_wrapper}>
         <div className={styles.card}>
           <Text<"h1"> as="h1" className={styles.title}>
-            {/* {"WEBKEMY"} */}
-            <AppLogo className={styles.logo} />
+            {"WEBKEMY"}
+            {/* <AppLogo className={styles.logo} /> */}
           </Text>
           <Text<"p"> as="p" className={styles.desc}>{"Minimal. Accessible. Responsive. Extensible. UI Elements."}</Text>
           <Button<"a"> variant="solid" href="/components">{"Components"}</Button>

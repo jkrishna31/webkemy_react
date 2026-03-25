@@ -41,15 +41,23 @@
   .ap_play_btn,
   .ap_pace_btn,
   .ap_vol_btn {
+    // --btn-fgc: var(--ap-controls-fg);
+    // --btn-bgc: var(--ap-controls-bg);
+    // --btn-highlight-fgc: var(--ap-controls-fg);
+    // --btn-highlight-bgc: var(--ap-controls-bg-hover);
+
     color: var(--ap-controls-fg);
     background-color: var(--ap-controls-bg);
+
+    &:hover,
+    &:focus-visible {
+      color: var(--ap-controls-fg);
+      background-color: var(--ap-controls-bg-hover);
+    }
+
     padding: .7rem;
     min-height: 3.6rem;
     min-width: 3.6rem;
-
-    &:hover {
-      background-color: var(--ap-controls-bg-hover);
-    }
   }
 
   .ap_play_btn svg {

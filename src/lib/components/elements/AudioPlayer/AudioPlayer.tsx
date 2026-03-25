@@ -109,6 +109,7 @@ const AudioPlayer = ({
               <PaceControl pace={pace} updatePace={updatePace} />
             }
             hintIcon={null}
+            triggerVariant="muted"
             triggerClass={classes(styles.ap_pace_btn, "ap_pace_btn")}
             dropdownClass={styles.ap_pace_popover}
             alignment="right"
@@ -121,6 +122,7 @@ const AudioPlayer = ({
             dropdown={
               <VolumeControl mute={isMute} setMute={toggleMute} volume={volume} updateVolume={updateVolume} />
             }
+            triggerVariant="muted"
             triggerClass={classes(styles.ap_vol_btn, "ap_vol_btn")}
             dropdownClass={styles.ap_vol_popover}
             hintIcon={null}

@@ -27,7 +27,7 @@ export interface DropdownProps extends ComponentProps<"div"> {
 }
 
 const Dropdown = ({
-  open = false, onOpenChange, dropdown, hintIcon, rootClass, triggerClass, dropdownClass, placement, alignment,
+  open = false, onOpenChange, dropdown, hintIcon, rootClass, triggerClass, dropdownClass, placement, alignment, triggerVariant,
   className, children,
   ...restProps
 }: DropdownProps) => {
@@ -62,6 +62,7 @@ const Dropdown = ({
         className={classes(styles.dropdown_trigger, triggerClass)}
         onClick={() => updateDropdownState()}
         aria-pressed={restProps["aria-pressed"]}
+        variant={triggerVariant}
       >
         {children}
         {

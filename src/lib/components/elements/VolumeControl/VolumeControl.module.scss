@@ -37,7 +37,8 @@
 
   .vol_inc_btn,
   .vol_dec_btn {
-    padding-block: .6rem;
+    --btn-fgc: var(--fg-s);
+    padding: .6rem .8rem;
 
     svg {
       width: 2rem;

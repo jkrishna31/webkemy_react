@@ -31,6 +31,7 @@ const VolumeControl = ({
       </div>
       <div className={styles.vol_controls}>
         <Button
+          variant="muted"
           className={styles.vol_dec_btn}
           onClick={() => updateVolume(Math.max(0, volume - 5))}
           disabled={mute}
@@ -47,6 +48,7 @@ const VolumeControl = ({
           variant="rod"
         />
         <Button
+          variant="muted"
           className={styles.vol_inc_btn}
           onClick={() => updateVolume(Math.min(100, volume + 5))}
           disabled={mute}

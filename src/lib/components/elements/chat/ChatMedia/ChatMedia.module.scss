@@ -77,6 +77,7 @@
     --ap-controls-fg: var(--bg-p);
     --ap-controls-bg: var(--chat-fg);
     --ap-controls-bg-hover: var(--chat-fg);
+
     background-color: var(--chat-bg);
     border-radius: var(--br-pill);
     padding: .8rem;
@@ -95,6 +96,7 @@
   .video_player {
     --vp-bg: var(--chat-bg);
     --vp-fg: var(--chat-fg);
+
     padding: .4rem;
     transition: background .3s linear;
   }
@@ -183,8 +185,11 @@
   }
 
   .retry_btn {
-    --btn-bgc: var(--bg-t);
-    --btn-highlight-bgc: var(--bg-q);
+    &[data-color="red"] {
+      --btn-bgc: var(--bg-t);
+      --btn-highlight-bgc: var(--bg-q);
+    }
+
     min-height: fit-content;
     min-width: fit-content;
     padding: .6rem;
