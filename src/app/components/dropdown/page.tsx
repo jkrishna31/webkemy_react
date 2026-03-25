@@ -5,13 +5,13 @@ import { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { SOURCE_CODE } from "@/constants/general.const";
 import { months, monthsOrder } from "@/data/general/datetime";
-import { Dropdown } from "@/lib/ui/elements/Dropdown";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemList } from "@/lib/ui/elements/ItemList";
-import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
-import PopoverLeftIcon from "@/lib/ui/svgs/icons/PopoverLeftIcon";
-import PuzzleIcon from "@/lib/ui/svgs/icons/PuzzleIcon";
-import { GithubLogo } from "@/lib/ui/svgs/logos";
+import { Dropdown } from "@/lib/components/elements/Dropdown";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemList } from "@/lib/components/elements/ItemList";
+import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
+import PopoverLeftIcon from "@/lib/svgs/icons/PopoverLeftIcon";
+import PuzzleIcon from "@/lib/svgs/icons/PuzzleIcon";
+import { GithubLogo } from "@/lib/svgs/logos";
 
 import styles from "./page.module.scss";
 

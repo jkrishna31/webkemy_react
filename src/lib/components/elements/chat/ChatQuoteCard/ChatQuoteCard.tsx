@@ -1,0 +1,38 @@
+import { ComponentProps } from "react";
+
+import { Button } from "@/lib/components/elements/butttons";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
+import QuoteIcon from "@/lib/svgs/icons/QuoteIcon";
+import { classes } from "@/lib/utils/style";
+
+import styles from "./ChatQuoteCard.module.scss";
+
+export interface ChatQuoteCardProps extends ComponentProps<"div"> {
+  chat?: any;
+  onCancel?: () => void;
+}
+
+const ChatQuoteCard = ({
+  chat, onCancel,
+  className, children,
+  ...restProps
+}: ChatQuoteCardProps) => {
+  return (
+    <div className={classes(styles.wrapper, className)} {...restProps}>
+      <div className={styles.wrapper_inner}>
+        <div className={styles.quoted_header}>
+          <QuoteIcon />
+          <p>{chat.author.name}</p>
+        </div>
+        <p className={styles.quoted_msg}>{chat.content.slice(0, 80)}</p>
+      </div>
+      {!!onCancel && (
+        <Button variant="muted" className={styles.cancel_btn} onClick={onCancel}>
+          <CrossIcon />
+        </Button>
+      )}
+    </div>
+  );
+};
+
+export default ChatQuoteCard;

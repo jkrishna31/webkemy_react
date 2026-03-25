@@ -7,19 +7,19 @@ import { ComponentProps, useState } from "react";
 import { SearchForm } from "@/components/common/forms";
 import { edges, SOURCE_CODE } from "@/constants/general.const";
 import { useAppMenu, useLayoutActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
-import { Avatar } from "@/lib/ui/elements/Avatar";
-import { Header } from "@/lib/ui/elements/Header";
-import AppLogo from "@/lib/ui/svgs/icons/AppLogo";
-import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import HistoryIcon from "@/lib/ui/svgs/icons/HistoryIcon";
-import MenuIcon from "@/lib/ui/svgs/icons/MenuIcon";
-import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
-import { GithubLogo } from "@/lib/ui/svgs/logos";
-import { classes } from "@/lib/utils/style.utils";
+import { Avatar } from "@/lib/components/elements/Avatar";
+import { Header } from "@/lib/components/elements/Header";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
+import HistoryIcon from "@/lib/svgs/icons/HistoryIcon";
+import MenuIcon from "@/lib/svgs/icons/MenuIcon";
+import SearchIcon from "@/lib/svgs/icons/SearchIcon";
+import { GithubLogo } from "@/lib/svgs/logos";
+import AppLogo from "@/lib/svgs/logos/AppLogo";
+import { classes } from "@/lib/utils/style";
 
 const AppSearchMobile = dynamic(() => import("@/components/common/general/AppSearchMobile/AppSearchMobile"), { ssr: false });
 
-import { DrawerBody } from "@/lib/ui/elements/Drawer";
+import { DrawerBody } from "@/lib/components/elements/Drawer";
 
 import { AppMenu, LangSelector, ThemeSelector } from "..";
 import styles from "./AppHeader.module.scss";

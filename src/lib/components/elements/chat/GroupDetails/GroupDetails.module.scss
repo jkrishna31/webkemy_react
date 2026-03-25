@@ -1,0 +1,57 @@
+.wrapper {
+  padding: 2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  flex: 1;
+  overflow: auto;
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    justify-content: flex-end;
+    margin-top: auto;
+  }
+
+  .file_input {
+    min-width: 10rem;
+    width: 10rem;
+    height: 10rem;
+
+    img {
+      border-radius: 50%;
+    }
+
+    label {
+      border-radius: var(--br-pill);
+    }
+  }
+
+  .avatar_picker {
+    width: fit-content;
+    height: fit-content;
+    margin-inline: auto;
+    position: relative;
+  }
+
+  .clear_icon {
+    --btn-fgc: var(--fg-s);
+    --btn-bgc: var(--bg-t);
+    --btn-highlight-fgc: var(--fg-p);
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    padding: .5rem;
+    min-height: fit-content;
+    border-radius: var(--br-pill);
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .2rem;
+    }
+  }
+}

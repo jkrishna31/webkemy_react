@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Chip } from "@/lib/ui/elements/Chip";
-import { Select } from "@/lib/ui/elements/inputs/Select";
+import { Chip } from "@/lib/components/elements/Chip";
+import { Select } from "@/lib/components/elements/inputs/Select";
 
 import styles from "./page.module.scss";
 

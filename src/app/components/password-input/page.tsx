@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { PasswordInput } from "@/lib/ui/elements/inputs/PasswordInput";
+import { PasswordInput } from "@/lib/components/elements/inputs/PasswordInput";
 
 const Page = () => {
   return (

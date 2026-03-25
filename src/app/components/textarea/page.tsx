@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { TextArea } from "@/lib/ui/elements/inputs/TextArea";
+import { TextArea } from "@/lib/components/elements/inputs/TextArea";
 
 import styles from "./page.module.scss";
 

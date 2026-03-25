@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/ui/elements/butttons";
-import { MediaViewer } from "@/lib/ui/elements/chat/MediaViewer";
+import { Button } from "@/lib/components/elements/butttons";
+import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";
 
 import styles from "./page.module.scss";
 
@@ -74,7 +74,7 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="lightbox" />
 
-      <Button variant="secondary" onClick={() => setOpen(true)}>
+      <Button variant="outlined" onClick={() => setOpen(true)}>
         {"Open Lightbox"}
       </Button>
 

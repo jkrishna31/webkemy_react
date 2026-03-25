@@ -3,15 +3,15 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/ui/elements/butttons";
-import { ImageCrop } from "@/lib/ui/elements/ImageCrop";
-import ClockwiseIcon from "@/lib/ui/svgs/icons/ClockwiseIcon";
-import CounterClockwiseIcon from "@/lib/ui/svgs/icons/CounterClockwiseIcon";
-import FlipHorizontalIcon from "@/lib/ui/svgs/icons/FlipHorizontalIcon";
-import FlipVerticalIcon from "@/lib/ui/svgs/icons/FlipVerticalIcon";
-import ZoomInIcon from "@/lib/ui/svgs/icons/ZoomInIcon";
-import ZoomOutIcon from "@/lib/ui/svgs/icons/ZoomOutIcon";
-import { clampNumber } from "@/lib/utils/math.utils";
+import { Button } from "@/lib/components/elements/butttons";
+import { ImageCrop } from "@/lib/components/elements/ImageCrop";
+import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
+import CounterClockwiseIcon from "@/lib/svgs/icons/CounterClockwiseIcon";
+import FlipHorizontalIcon from "@/lib/svgs/icons/FlipHorizontalIcon";
+import FlipVerticalIcon from "@/lib/svgs/icons/FlipVerticalIcon";
+import ZoomInIcon from "@/lib/svgs/icons/ZoomInIcon";
+import ZoomOutIcon from "@/lib/svgs/icons/ZoomOutIcon";
+import { clampNumber } from "@/lib/utils/math";
 
 import styles from "./page.module.scss";
 
@@ -36,7 +36,7 @@ const Page = () => {
       />
       <div className={styles.controls}>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Zoom Out" title="Zoom Out"
           disabled={scale === .5}
@@ -48,7 +48,7 @@ const Page = () => {
           {`${Math.round(scale * 100)}%`}
         </div>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Zoom In" title="Zoom In"
           disabled={scale === 3}
@@ -59,7 +59,7 @@ const Page = () => {
       </div>
       <div className={styles.controls}>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Flip Horizontally" title="Flip Horizontally"
           aria-pressed={xFlipped}
@@ -68,7 +68,7 @@ const Page = () => {
           <FlipHorizontalIcon />
         </Button>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Flip Vertically" title="Flip Vertically"
           aria-pressed={yFlipped}
@@ -77,7 +77,7 @@ const Page = () => {
           <FlipVerticalIcon />
         </Button>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Rotate Counter-Clockwise" title="Rotate Counter-Clockwise"
         // onClick={() => setYFlipped(!yFlipped)}
@@ -85,7 +85,7 @@ const Page = () => {
           <CounterClockwiseIcon />
         </Button>
         <Button
-          variant="tertiary"
+          variant="muted"
           className={styles.ctrl_btn}
           aria-label="Rotate Clockwise" title="Rotate Clockwise"
         // onClick={() => setYFlipped(!yFlipped)}

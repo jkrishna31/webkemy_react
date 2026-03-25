@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { barChartData } from "@/data/dummy/barChartData";
-import { BarChart } from "@/lib/ui/elements/charts/BarChart";
+import { BarChart } from "@/lib/components/elements/charts/BarChart";
 
 import styles from "./page.module.scss";
 

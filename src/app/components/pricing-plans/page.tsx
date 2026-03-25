@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { PricingPlans } from "@/lib/ui/blocks/PricingPlans";
-import { Tabs } from "@/lib/ui/elements/Tabs";
+import { PricingPlans } from "@/lib/components/blocks/PricingPlans";
+import { Tabs } from "@/lib/components/elements/Tabs";
 
 import styles from "./page.module.scss";
 

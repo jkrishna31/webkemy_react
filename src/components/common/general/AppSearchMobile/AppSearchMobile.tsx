@@ -1,11 +1,11 @@
 import { FormEvent, ReactNode } from "react";
 
 import { SearchForm } from "@/components/common/forms";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Drawer } from "@/lib/ui/elements/Drawer";
-import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
-import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import { classes } from "@/lib/utils/style.utils";
+import { Button } from "@/lib/components/elements/butttons";
+import { Drawer } from "@/lib/components/elements/Drawer";
+import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./AppSearchMobile.module.scss";
 
@@ -35,7 +35,7 @@ const AppSearchMobile = ({
       <div className={styles.header}>
         <Button
           type="button"
-          variant="quaternary"
+          variant="muted"
           className={classes(styles.btn, styles.back_btn)}
           onClick={onClose}
         >
@@ -52,7 +52,7 @@ const AppSearchMobile = ({
       </div>
       {children}
       <Button
-        variant="primary"
+        variant="solid"
         className={styles.floating_close_btn}
         onClick={onClose}
       >

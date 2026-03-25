@@ -1,0 +1,131 @@
+.column {
+  height: 100%;
+  max-height: calc(100vh - 4rem - var(--h-header));
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: .8rem;
+  border: .1rem solid transparent;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.2rem;
+
+    z-index: 1;
+    padding-block: .6rem;
+    padding-inline: 1rem .6rem;
+    border-radius: .8rem;
+    background-color: var(--bg-p);
+
+    transition-property: padding, border;
+    transition-duration: .3s;
+    transition-timing-function: ease;
+  }
+
+  .name {
+    font-weight: 500;
+    color: var(--fg-s);
+  }
+
+  .chip {
+    margin-inline-end: auto;
+    border-radius: var(--br-pill);
+    padding-block: .2rem;
+  }
+
+  .body {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    overflow: auto;
+    scrollbar-width: thin;
+  }
+
+  .inner {
+    display: flex;
+    flex-direction: column;
+    gap: .8rem;
+    flex: 1;
+    width: 100%;
+    height: auto;
+    padding: 0 .6rem;
+  }
+
+  .collapse_btn,
+  .action_btn {
+    background-color: transparent;
+    border-radius: .4rem;
+    padding: .4rem;
+  }
+
+  .collapse_btn {
+    --btn-fgc: var(--fg-s);
+    min-width: fit-content;
+    min-height: fit-content;
+
+    svg {
+      stroke-width: .2rem;
+      width: 2rem;
+      height: 2rem;
+      transition: transform .5s ease;
+    }
+  }
+
+  .action_btn svg {
+    width: 2.2rem;
+    height: 2.2rem;
+  }
+
+  &[data-collapsed="true"] .header {
+    background-color: var(--bg-s);
+  }
+
+  &[data-dragging-over="true"] {
+    border-color: var(--blue-1);
+  }
+
+  &[data-collapsed="true"] {
+    .collapse_btn svg {
+      transform: rotateZ(180deg);
+    }
+  }
+}
+
+.horizontal[data-collapsed="true"] .header {
+  writing-mode: vertical-lr;
+  padding-inline: 1rem .6rem;
+}
+
+.vertical[data-collapsed="true"] .header {
+  padding-inline: 1.2rem .2rem;
+}
+
+.action_popover {
+  width: fit-content;
+  max-width: calc(100vw - 4rem);
+  overflow: auto;
+  background-color: var(--bg-s);
+  color: var(--fg-p);
+  border-radius: .6rem;
+  padding: .4rem;
+  white-space: nowrap;
+  box-shadow: var(--shadow-p) 0px 0px 6px 0px;
+  scrollbar-width: thin;
+}
+
+.vertical .inner {
+  flex-direction: row;
+  padding-bottom: .6rem;
+}
+
+@media screen and (max-width: 768px) {
+  .name {
+    font-size: 1.4rem;
+  }
+
+  .inner {
+    padding: .6rem 0;
+  }
+}

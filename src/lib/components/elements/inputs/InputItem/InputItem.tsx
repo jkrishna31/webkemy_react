@@ -1,0 +1,30 @@
+import { ComponentProps, ElementType } from "react";
+
+import { classes } from "@/lib/utils/style";
+
+import styles from "./InputItem.module.scss";
+
+export type InputItemProps<T extends ElementType> = {
+    inline?: boolean
+    as?: T
+} & ComponentProps<T>;
+
+const InputItem = <T extends ElementType>({
+    inline = false, as = "div",
+    children, className,
+    ...props
+}: InputItemProps<T>) => {
+    const Tag = as;
+
+    return (
+        <Tag
+            className={classes(styles.wrapper, inline && styles.inline, className)}
+            aria-disabled={props.disabled}
+            {...props}
+        >
+            {children}
+        </Tag>
+    );
+};
+
+export default InputItem;

@@ -1,8 +1,8 @@
-@use "@/lib/ui/styles/colors_light" as *;
-@use "@/lib/ui/styles/colors_dark" as *;
-@use "@/lib/ui/styles/variables";
-@use "@/lib/ui/styles/reset";
-@use "@/lib/ui/styles/common";
+@use "@/lib/styles/colors_light" as *;
+@use "@/lib/styles/colors_dark" as *;
+@use "@/lib/styles/variables";
+@use "@/lib/styles/reset";
+@use "@/lib/styles/common";
 
 // @import "tailwindcss";
 @tailwind components;

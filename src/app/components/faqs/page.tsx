@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { faqsData } from "@/data/dummy/faqsData";
-import { FAQs } from "@/lib/ui/blocks/FAQs";
+import { FAQs } from "@/lib/components/blocks/FAQs";
 
 import styles from "./page.module.scss";
 

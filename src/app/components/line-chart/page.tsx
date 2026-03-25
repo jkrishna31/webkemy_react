@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { lineChartData2 } from "@/data/dummy/lineChartData";
-import { LineChart } from "@/lib/ui/elements/charts/LineChart";
+import { LineChart } from "@/lib/components/elements/charts/LineChart";
 
 import styles from "./page.module.scss";
 

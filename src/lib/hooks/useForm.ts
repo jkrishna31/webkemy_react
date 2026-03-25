@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useEffectEvent, useState } from "react";
 
-import { deepClone } from "@/lib/utils/object.utils";
+import { deepClone } from "@/lib/utils/object";
 
 export interface IValidation {
   key: string | number

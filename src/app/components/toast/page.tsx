@@ -3,8 +3,8 @@
 
 import { PageSetup } from "@/components/managers";
 import { ToastType, useToastActions } from "@/data/stores";
-import { Button } from "@/lib/ui/elements/butttons";
-import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { Button } from "@/lib/components/elements/butttons";
+import { getUniqueId } from "@/lib/utils/crypto";
 
 import styles from "./page.module.scss";
 
@@ -25,22 +25,22 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="toast" />
 
-      <Button variant="secondary" className={styles.button} onClick={() => addToast()}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast()}>
         {"Add Toast"}
       </Button>
-      <Button variant="secondary" className={styles.button} onClick={() => addToast("success")}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast("success")}>
         {"Add Success Toast"}
       </Button>
-      <Button variant="secondary" className={styles.button} onClick={() => addToast("info")}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast("info")}>
         {"Add Info Toast"}
       </Button>
-      <Button variant="secondary" className={styles.button} onClick={() => addToast("warn")}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast("warn")}>
         {"Add Warn Toast"}
       </Button>
-      <Button variant="secondary" className={styles.button} onClick={() => addToast("error")}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast("error")}>
         {"Add Error Toast"}
       </Button>
-      <Button variant="secondary" className={styles.button} onClick={() => addToast("critical")}>
+      <Button variant="outlined" className={styles.button} onClick={() => addToast("critical")}>
         {"Add Critical Toast"}
       </Button>
     </main>

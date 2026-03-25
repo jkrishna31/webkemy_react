@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 import { usePreferredLang } from "@/data/stores";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemList } from "@/lib/components/elements/ItemList";
+import { Popover } from "@/lib/components/elements/Popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemList } from "@/lib/ui/elements/ItemList";
-import { Popover } from "@/lib/ui/elements/Popover";
-import GlobeIcon from "@/lib/ui/svgs/icons/GlobeIcon";
-import { classes } from "@/lib/utils/style.utils";
+import GlobeIcon from "@/lib/svgs/icons/GlobeIcon";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./LangSelector.module.scss";
 

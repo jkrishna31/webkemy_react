@@ -3,16 +3,16 @@
 import { ComponentProps, useState } from "react";
 
 import { weekDays, weekDaysOrder } from "@/data/general/datetime";
-import { DateInput } from "@/lib/ui/elements/inputs/DateInput";
-import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
-import { Select } from "@/lib/ui/elements/inputs/Select";
-import { Switch } from "@/lib/ui/elements/inputs/Switch";
-import { TagsInput } from "@/lib/ui/elements/inputs/TagsInput";
-import { TextArea } from "@/lib/ui/elements/inputs/TextArea";
-import { TimeInput } from "@/lib/ui/elements/inputs/TimeInput";
-import { Text } from "@/lib/ui/elements/Text";
-import { classes } from "@/lib/utils/style.utils";
+import { DateInput } from "@/lib/components/elements/inputs/DateInput";
+import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { InputItem } from "@/lib/components/elements/inputs/InputItem";
+import { Select } from "@/lib/components/elements/inputs/Select";
+import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { TagsInput } from "@/lib/components/elements/inputs/TagsInput";
+import { TextArea } from "@/lib/components/elements/inputs/TextArea";
+import { TimeInput } from "@/lib/components/elements/inputs/TimeInput";
+import { Text } from "@/lib/components/elements/Text";
+import { classes } from "@/lib/utils/style";
 
 import { FormControls } from "..";
 import styles from "./EventForm.module.scss";

@@ -3,15 +3,15 @@
 import { useState } from "react";
 
 import { usePreferredTheme } from "@/data/stores";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemList } from "@/lib/components/elements/ItemList";
+import { Popover } from "@/lib/components/elements/Popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemList } from "@/lib/ui/elements/ItemList";
-import { Popover } from "@/lib/ui/elements/Popover";
-import ComputerIcon from "@/lib/ui/svgs/icons/ComputerIcon";
-import MoonIcon from "@/lib/ui/svgs/icons/MoonIcon";
-import SunIcon from "@/lib/ui/svgs/icons/SunIcon";
-import ThemeIcon from "@/lib/ui/svgs/icons/ThemeIcon";
-import { classes } from "@/lib/utils/style.utils";
+import ComputerIcon from "@/lib/svgs/icons/ComputerIcon";
+import MoonIcon from "@/lib/svgs/icons/MoonIcon";
+import SunIcon from "@/lib/svgs/icons/SunIcon";
+import ThemeIcon from "@/lib/svgs/icons/ThemeIcon";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./ThemeSelector.module.scss";
 

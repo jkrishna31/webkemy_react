@@ -1,5 +1,5 @@
-import { Button } from "@/lib/ui/elements/butttons";
-import { Text } from "@/lib/ui/elements/Text";
+import { Button } from "@/lib/components/elements/butttons";
+import { Text } from "@/lib/components/elements/Text";
 
 const NotFoundPage = () => {
   return (
@@ -15,7 +15,7 @@ const NotFoundPage = () => {
       }}
     >
       <Text<"h1"> as="h1" style={{ fontSize: "3.6rem" }}>{"404 - Not Found."}</Text>
-      <Button<"a"> as="a" variant="secondary" href="/">{"Go Home"}</Button>
+      <Button<"a"> as="a" variant="outlined" href="/">{"Go Home"}</Button>
     </main>
   );
 };

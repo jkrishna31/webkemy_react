@@ -1,3 +1,11 @@
 .main {
   justify-items: center;
+
+  .chips {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .8rem;
+    flex-wrap: wrap;
+  }
 }

@@ -1,4 +1,4 @@
-import { CalendarEvent } from "@/lib/ui/elements/calendar/EventBadge";
+import { CalendarEvent } from "@/lib/components/elements/calendar/EventBadge";
 
 const _date = new Date();
 const _year = _date.getUTCFullYear();

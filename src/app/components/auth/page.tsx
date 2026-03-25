@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { CreatePasswordForm, ResetPasswordForm, SignInForm, SignUpForm } from "@/lib/ui/blocks/AuthForm";
+import { CreatePasswordForm, ResetPasswordForm, SignInForm, SignUpForm } from "@/lib/components/blocks/AuthForm";
 
 import styles from "./page.module.scss";
 

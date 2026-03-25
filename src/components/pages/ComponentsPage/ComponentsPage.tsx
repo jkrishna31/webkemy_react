@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { menuItems } from "@/components/common/general";
-import { Text } from "@/lib/ui/elements/Text";
+import { Text } from "@/lib/components/elements/Text";
 
 import styles from "./ComponentsPage.module.scss";
 
@@ -9,7 +9,7 @@ const ComponentsPage = () => {
   return (
     <main className={styles.main}>
       <Text<"h1"> as="h1">{"All Components"}</Text>
-      {/* <Text className={styles.desc}>{"All components."}</Text> */}
+      <Text className={styles.desc}>{"More coming."}</Text>
 
       {
         menuItems.map((group, idx) => idx > 3 ? null : (

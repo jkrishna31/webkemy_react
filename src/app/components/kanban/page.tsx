@@ -1,25 +1,24 @@
 "use client";
 
-import Image from "next/image";
 import { Fragment, RefObject, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { kanbanData } from "@/data/dummy/kanbanData";
+import { Avatar } from "@/lib/components/elements/Avatar";
+import { Button } from "@/lib/components/elements/butttons";
+import { Chip } from "@/lib/components/elements/Chip";
+import { Dropdown } from "@/lib/components/elements/Dropdown";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemList } from "@/lib/components/elements/ItemList";
+import { Kanban, KanbanColumn, KanbanItem } from "@/lib/components/elements/Kanban";
+import { Tabs } from "@/lib/components/elements/Tabs";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import { KanbanDragCtx, useKanban } from "@/lib/hooks/useKanban";
+import ChevronDownIcon from "@/lib/svgs/icons/ChevronDownIcon";
+import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
+import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import { Color } from "@/lib/types/general.types";
-import { Avatar } from "@/lib/ui/elements/Avatar";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Chip } from "@/lib/ui/elements/Chip";
-import { Dropdown } from "@/lib/ui/elements/Dropdown";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemList } from "@/lib/ui/elements/ItemList";
-import { Kanban, KanbanColumn, KanbanItem } from "@/lib/ui/elements/Kanban";
-import { Tabs } from "@/lib/ui/elements/Tabs";
-import ChevronDownIcon from "@/lib/ui/svgs/icons/ChevronDownIcon";
-import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
-import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
-import { classes } from "@/lib/utils/style.utils";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./page.module.scss";
 
@@ -226,9 +225,7 @@ const Page = () => {
       return {
         id: userKey,
         render: (
-          <Avatar className={styles.user_avatar}>
-            <Image src={user.profile} alt={user.name} width={34} height={34} />
-          </Avatar>
+          <Avatar className={styles.user_avatar} src={user.profile} alt={user.name} />
         ),
         label: user.name,
       };
@@ -306,7 +303,7 @@ const Page = () => {
                             </>
                           )}
                           <Button
-                            variant="quaternary"
+                            variant="muted"
                             className={styles.col_collapse_btn}
                             onClick={() => handleColCollapse(colKey)}
                           >
@@ -345,9 +342,7 @@ const Page = () => {
                           <div className={styles.user_cell}>
                             <div className={styles.user_details}>
                               <ChevronDownIcon />
-                              <Avatar className={styles.user_avatar}>
-                                <Image src={user.profile} alt={user.name} width={34} height={34} />
-                              </Avatar>
+                              <Avatar className={styles.user_avatar} src={user.profile} alt={user.name} />
                               <p>{user.name}</p>
                             </div>
                           </div>
@@ -495,9 +490,11 @@ const Page = () => {
                                     </div>
                                     {selectedUser === "all" && (
                                       <div className={styles.assignee}>
-                                        <Avatar className={styles.user_avatar}>
-                                          <Image src={defaultUsers[item.assigneeId].profile} alt={defaultUsers[item.assigneeId].name} width={34} height={34} />
-                                        </Avatar>
+                                        <Avatar
+                                          className={styles.user_avatar}
+                                          src={defaultUsers[item.assigneeId].profile}
+                                          alt={defaultUsers[item.assigneeId].name}
+                                        />
                                         <p>{defaultUsers[item.assigneeId].name}</p>
                                       </div>
                                     )}

@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { pcData } from "@/data/dummy/pcData";
-import { PackedCircles } from "@/lib/ui/elements/charts/PackedCircles";
+import { PackedCircles } from "@/lib/components/elements/charts/PackedCircles";
 
 import styles from "./page.module.scss";
 

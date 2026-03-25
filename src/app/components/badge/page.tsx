@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/Badge";
-import { Button } from "@/lib/ui/elements/butttons";
-import BellIcon from "@/lib/ui/svgs/icons/BellIcon";
+import { Badge } from "@/lib/components/elements/Badge";
+import { Button } from "@/lib/components/elements/butttons";
+import BellIcon from "@/lib/svgs/icons/BellIcon";
 
 import styles from "./page.module.scss";
 
@@ -10,27 +10,27 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="badge" />
 
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge className={styles.dot_badge} />
       </Button>
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge color="red" className={styles.dot_badge} />
       </Button>
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge color="green" className={styles.dot_badge} animate="ripple" />
       </Button>
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge color="blue" className={styles.dot_badge} />
       </Button>
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge color="yellow" className={styles.dot_badge} />
       </Button>
-      <Button variant="tertiary" className={styles.btn} aria-label="Notifications">
+      <Button variant="muted" className={styles.btn} aria-label="Notifications">
         <BellIcon />
         <Badge color="blue" className={styles.dot_badge}>{"99+"}</Badge>
       </Button>

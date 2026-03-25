@@ -5,28 +5,28 @@ import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
+import { Avatar } from "@/lib/components/elements/Avatar";
+import { AvatarList } from "@/lib/components/elements/AvatarList";
+import { Badge } from "@/lib/components/elements/Badge";
+import { Button } from "@/lib/components/elements/butttons";
+import { Chip } from "@/lib/components/elements/Chip";
+import { CollapsiblePanel } from "@/lib/components/elements/CollapsiblePanel";
+import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
+import { SkeletonLoader } from "@/lib/components/elements/loaders";
+import { Rate } from "@/lib/components/elements/Rate";
+import { Table } from "@/lib/components/elements/Table";
 import { useTableColumn } from "@/lib/hooks/useTableColumn";
 import { useTableRows } from "@/lib/hooks/useTableRows";
 import { useTreeSelect } from "@/lib/hooks/useTreeSelect";
+import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
+import DeleteIcon from "@/lib/svgs/icons/DeleteIcon";
+import EditIcon from "@/lib/svgs/icons/EditIcon";
+import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
+import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 import { Color } from "@/lib/types/general.types";
-import { Avatar } from "@/lib/ui/elements/Avatar";
-import { AvatarList } from "@/lib/ui/elements/AvatarList";
-import { Badge } from "@/lib/ui/elements/Badge";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Chip } from "@/lib/ui/elements/Chip";
-import { CollapsiblePanel } from "@/lib/ui/elements/CollapsiblePanel";
-import { Checkbox } from "@/lib/ui/elements/inputs/Checkbox";
-import { SkeletonLoader } from "@/lib/ui/elements/loaders";
-import { Rate } from "@/lib/ui/elements/Rate";
-import { Table } from "@/lib/ui/elements/Table";
-import ChevronRightIcon from "@/lib/ui/svgs/icons/ChevronRightIcon";
-import DeleteIcon from "@/lib/ui/svgs/icons/DeleteIcon";
-import EditIcon from "@/lib/ui/svgs/icons/EditIcon";
-import EllipsisHIcon from "@/lib/ui/svgs/icons/EllipsisHIcon";
-import PlusIcon from "@/lib/ui/svgs/icons/PlusIcon";
-import { findRecursive } from "@/lib/utils/array.utils";
-import { formatDate } from "@/lib/utils/datetime.utils";
-import { deepClone } from "@/lib/utils/object.utils";
+import { findRecursive } from "@/lib/utils/array";
+import { formatDate } from "@/lib/utils/datetime";
+import { deepClone } from "@/lib/utils/object";
 
 import styles from "./page.module.scss";
 
@@ -314,9 +314,9 @@ const Page = () => {
           avatars={rowData.peers?.map((avatar: any) => (
             {
               id: avatar.name,
-              children: (
-                <Image src={avatar.profile} width={26} height={26} alt={avatar.name} style={{ width: "2.6rem", height: "2.6rem" }} />
-              )
+              src: avatar.profile,
+              alt: avatar.name,
+              style: { width: "3rem", height: "3rem" }
             }
           ))}
         />
@@ -385,10 +385,10 @@ const Page = () => {
 
           <Table.Cell as="td" sticky="right" style={{ paddingInline: "1rem" }}>
             <div className={styles.table_actions}>
-              <Button variant="secondary" aria-label="Edit" title="Edit">
+              <Button variant="outlined" aria-label="Edit" title="Edit">
                 <EditIcon />
               </Button>
-              <Button variant="secondary" aria-label="Delete" title="Delete">
+              <Button variant="outlined" aria-label="Delete" title="Delete">
                 <DeleteIcon />
               </Button>
             </div>

@@ -61,27 +61,28 @@
     padding: 0;
     border: none;
   }
-}
 
-.table_actions {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: .2rem;
+  .table_actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: .2rem;
 
-  button {
-    padding: .3rem 1rem;
-    min-height: fit-content;
-    border-color: transparent;
-    color: var(--fg-s);
+    button {
+      --btn-bc: transparent;
+      --btn-fgc: var(--fg-s);
+      padding: .3rem 1rem;
+      min-height: fit-content;
 
-    svg {
-      width: 1.8rem;
-      height: 1.8rem;
-      stroke-width: .175rem;
+      svg {
+        width: 1.8rem;
+        height: 1.8rem;
+        stroke-width: .175rem;
+      }
     }
   }
 }
+
 
 .expand_btn {
   height: fit-content;

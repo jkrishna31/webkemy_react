@@ -3,12 +3,12 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/Badge";
-import { Tree } from "@/lib/ui/elements/Tree";
-import FileIcon from "@/lib/ui/svgs/icons/FileIcon";
-import FolderIcon from "@/lib/ui/svgs/icons/FolderIcon";
-import FolderOpenIcon from "@/lib/ui/svgs/icons/FolderOpenIcon";
-import { getUniqueId } from "@/lib/utils/crypto.utils";
+import { Badge } from "@/lib/components/elements/Badge";
+import { Tree } from "@/lib/components/elements/Tree";
+import FileIcon from "@/lib/svgs/icons/FileIcon";
+import FolderIcon from "@/lib/svgs/icons/FolderIcon";
+import FolderOpenIcon from "@/lib/svgs/icons/FolderOpenIcon";
+import { getUniqueId } from "@/lib/utils/crypto";
 
 import styles from "./page.module.scss";
 

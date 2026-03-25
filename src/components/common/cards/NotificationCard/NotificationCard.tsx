@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { Popup } from "@/components/common/containers";
-import { classes } from "@/lib/utils/style.utils";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./NotificationCard.module.scss";
 

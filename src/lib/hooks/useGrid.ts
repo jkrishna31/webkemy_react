@@ -1,8 +1,8 @@
 import { RefObject, useCallback, useLayoutEffect, useMemo, useState } from "react";
 
 import { edges } from "@/constants/general.const";
-import { Resizers } from "@/lib/ui/elements/Resizable";
-import { deepClone } from "@/lib/utils/object.utils";
+import { Resizers } from "@/lib/components/elements/Resizable";
+import { deepClone } from "@/lib/utils/object";
 
 export type TGridItem = { row?: [number, number]; col?: [number, number] };
 export type TItems = { [key: string]: TGridItem };

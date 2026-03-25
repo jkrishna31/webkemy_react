@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
-import { CalendarEvent } from "@/lib/ui/elements/calendar";
-import { forEachDateBetween } from "@/lib/utils/datetime.utils";
+import { CalendarEvent } from "@/lib/components/elements/calendar";
+import { forEachDateBetween } from "@/lib/utils/datetime";
 
 export interface SegregatedEvents {
   [key: string]: {

@@ -1,8 +1,8 @@
 "use client";
 
 import { PageSetup } from "@/components/managers";
+import { SplitHandle, SplitSection, Splitter } from "@/lib/components/elements/Splitter";
 import { useSplitter } from "@/lib/hooks/useSplitter";
-import { SplitHandle, SplitSection, Splitter } from "@/lib/ui/elements/Splitter";
 
 import styles from "./page.module.scss";
 

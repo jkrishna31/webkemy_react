@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Progress } from "@/lib/ui/elements/Progress";
+import { Progress } from "@/lib/components/elements/Progress";
 
 import styles from "./page.module.scss";
 

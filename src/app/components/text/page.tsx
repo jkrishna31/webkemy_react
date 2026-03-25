@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Text } from "@/lib/ui/elements/Text";
+import { Text } from "@/lib/components/elements/Text";
 
 import styles from "./page.module.scss";
 

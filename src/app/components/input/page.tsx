@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
+import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
 
 import styles from "./page.module.scss";
 

@@ -1,0 +1,11 @@
+.main {
+  gap: 3rem;
+
+  .btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    align-items: center;
+    justify-content: center;
+  }
+}

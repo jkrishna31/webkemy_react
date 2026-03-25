@@ -3,22 +3,22 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/ui/elements/Badge";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
-import { Menu } from "@/lib/ui/elements/Menu";
-import CircleIcon from "@/lib/ui/svgs/icons/CircleIcon";
-import ConeIcon from "@/lib/ui/svgs/icons/ConeIcon";
-import CylinderIcon from "@/lib/ui/svgs/icons/CylinderIcon";
-import DiamondIcon from "@/lib/ui/svgs/icons/DiamondIcon";
-import HexagonIcon from "@/lib/ui/svgs/icons/HexagonIcon";
-import OctagonIcon from "@/lib/ui/svgs/icons/OctagonIcon";
-import PentagonIcon from "@/lib/ui/svgs/icons/PentagonIcon";
-import RectangleVerticalIcon from "@/lib/ui/svgs/icons/RectangleVerticalIcon";
-import SquareIcon from "@/lib/ui/svgs/icons/SquareIcon";
-import StarIcon from "@/lib/ui/svgs/icons/StarIcon";
-import TriangleIcon from "@/lib/ui/svgs/icons/TriangleIcon";
+import { Badge } from "@/lib/components/elements/Badge";
+import { Button } from "@/lib/components/elements/butttons";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemGroup } from "@/lib/components/elements/ItemGroup";
+import { Menu } from "@/lib/components/elements/Menu";
+import CircleIcon from "@/lib/svgs/icons/CircleIcon";
+import ConeIcon from "@/lib/svgs/icons/ConeIcon";
+import CylinderIcon from "@/lib/svgs/icons/CylinderIcon";
+import DiamondIcon from "@/lib/svgs/icons/DiamondIcon";
+import HexagonIcon from "@/lib/svgs/icons/HexagonIcon";
+import OctagonIcon from "@/lib/svgs/icons/OctagonIcon";
+import PentagonIcon from "@/lib/svgs/icons/PentagonIcon";
+import RectangleVerticalIcon from "@/lib/svgs/icons/RectangleVerticalIcon";
+import SquareIcon from "@/lib/svgs/icons/SquareIcon";
+import StarIcon from "@/lib/svgs/icons/StarIcon";
+import TriangleIcon from "@/lib/svgs/icons/TriangleIcon";
 
 import styles from "./page.module.scss";
 
@@ -40,7 +40,7 @@ const Page = () => {
       <PageSetup pageKey="menu" />
 
       <Button
-        variant="secondary"
+        variant="outlined"
         style={{ fontSize: "1.4rem" }}
         onClick={() => setOpen(!open)}
       >

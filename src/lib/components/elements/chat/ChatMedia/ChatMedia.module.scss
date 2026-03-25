@@ -1,0 +1,245 @@
+.wrapper {
+  --chat-fg: var(--blue-1);
+  --chat-bg: var(--blue-1-10);
+  --chat-bg-active: var(--blue-1-25);
+
+  margin-top: .4rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+
+  .gallery {
+    position: relative;
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: .6rem;
+    padding: .4rem;
+    border-radius: .8rem;
+    background-color: var(--chat-bg);
+    transition: background .2s linear;
+    border: .1rem solid transparent;
+  }
+
+  .img_item {
+    width: 10rem;
+    height: 10rem;
+    border-radius: .6rem;
+    background-color: var(--bg-s);
+    overflow: hidden;
+    cursor: pointer;
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .more {
+    position: relative;
+  }
+
+  .individual {
+    grid-template-columns: 1fr;
+
+    .img_item {
+      width: 20rem;
+      height: 20rem;
+    }
+  }
+
+  .img_more {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-12-70);
+    color: var(--fg-p-alt);
+    font-size: 2rem;
+    font-weight: bold;
+    border-radius: .6rem;
+  }
+
+  .audios,
+  .videos,
+  .others {
+    width: fit-content;
+    display: grid;
+    gap: .4rem;
+  }
+
+  .audio_player {
+    --ap-controls-fg: var(--bg-p);
+    --ap-controls-bg: var(--chat-fg);
+    --ap-controls-bg-hover: var(--chat-fg);
+    background-color: var(--chat-bg);
+    border-radius: var(--br-pill);
+    padding: .8rem;
+    max-width: 28rem;
+    transition: background .3s linear;
+
+    & :global(.ap_play_btn) {
+      svg {
+        width: 1.8rem;
+        height: 1.8rem;
+        stroke-width: .2rem;
+      }
+    }
+  }
+
+  .video_player {
+    --vp-bg: var(--chat-bg);
+    --vp-fg: var(--chat-fg);
+    padding: .4rem;
+    transition: background .3s linear;
+  }
+
+  .other_item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    border-radius: .8rem;
+    padding: .8rem 1rem;
+    background-color: var(--chat-bg);
+    transition: background .2s linear;
+  }
+
+  .dl_file_btn,
+  .retry_file_btn {
+    min-height: fit-content;
+    padding: .5rem;
+
+    svg {
+      width: 1.8rem;
+      height: 1.8rem;
+      stroke-width: .175rem;
+    }
+  }
+
+  .dl_file_btn {
+    --btn-fgc: var(--fg-s);
+  }
+
+  .retry_file_btn {
+    --btn-bgc: var(--bg-t);
+  }
+
+  .filename {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: .3rem;
+    color: var(--chat-fg);
+  }
+
+  .meta {
+    font-size: 1.4rem;
+    color: var(--fg-s);
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+  }
+
+  .separator {
+    font-size: 1rem;
+  }
+
+  .type {
+    text-transform: uppercase;
+  }
+
+  .gallery_controls {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: fit-content;
+    height: fit-content;
+  }
+
+  .progress {
+    background-color: var(--bg-p);
+    border-radius: var(--br-pill);
+    padding: .3rem;
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      position: static;
+      width: 2.8rem;
+      height: 2.8rem;
+    }
+  }
+
+  .retry_btn {
+    --btn-bgc: var(--bg-t);
+    --btn-highlight-bgc: var(--bg-q);
+    min-height: fit-content;
+    min-width: fit-content;
+    padding: .6rem;
+
+    svg {
+      width: 2.2rem;
+      height: 2.2rem;
+      stroke-width: .2rem;
+    }
+  }
+
+  .other_progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--bg-s);
+    width: 3rem;
+    height: 3rem;
+
+    svg {
+      position: static;
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  .other_item_wrapper,
+  .audio_item_wrapper,
+  .video_item_wrapper {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    gap: .4rem;
+  }
+
+  .audio_item_wrapper {
+    align-items: center;
+    gap: .6rem;
+  }
+
+  &[data-selected="true"] {
+
+    .gallery,
+    .other_item {
+      background-color: var(--chat-bg-active);
+    }
+
+    .audio_player {
+      background-color: var(--chat-bg-active);
+    }
+
+    .video_player {
+      background-color: var(--chat-bg-active);
+    }
+  }
+}

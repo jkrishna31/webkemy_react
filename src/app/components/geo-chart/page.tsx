@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { geoChartData } from "@/data/dummy/geoChartData";
-import { GeoChart } from "@/lib/ui/elements/charts/GeoChart";
+import { GeoChart } from "@/lib/components/elements/charts/GeoChart";
 
 import styles from "./page.module.scss";
 

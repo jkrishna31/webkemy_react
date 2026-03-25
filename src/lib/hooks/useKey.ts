@@ -1,6 +1,6 @@
 import { useEffect, useEffectEvent } from "react";
 
-import { hasDOM } from "@/lib/utils/client.utils";
+import { hasDOM } from "@/lib/utils/dom";
 
 export function useKey(
   onKey: ((event: KeyboardEvent) => void) | undefined,

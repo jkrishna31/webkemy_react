@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { scatterChartData } from "@/data/dummy/scatterChartData";
-import { ScatterChart } from "@/lib/ui/elements/charts/ScatterChart";
+import { ScatterChart } from "@/lib/components/elements/charts/ScatterChart";
 
 import styles from "./page.module.scss";
 

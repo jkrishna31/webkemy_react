@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
-import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
-import { Radio } from "@/lib/ui/elements/inputs/Radio";
-import { Text } from "@/lib/ui/elements/Text";
+import { InputItem } from "@/lib/components/elements/inputs/InputItem";
+import { Radio } from "@/lib/components/elements/inputs/Radio";
+import { Text } from "@/lib/components/elements/Text";
 
 import styles from "./page.module.scss";
 

@@ -3,10 +3,10 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
-import { Switch } from "@/lib/ui/elements/inputs/Switch";
-import { Text } from "@/lib/ui/elements/Text";
-import { Timeline } from "@/lib/ui/elements/Timeline";
+import { InputItem } from "@/lib/components/elements/inputs/InputItem";
+import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { Text } from "@/lib/components/elements/Text";
+import { Timeline } from "@/lib/components/elements/Timeline";
 
 import styles from "./page.module.scss";
 

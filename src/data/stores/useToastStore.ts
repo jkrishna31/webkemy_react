@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { RequireOnly } from "@/lib/types/utility.types";
+import { RequireOnly } from "@/lib/types/utility";
 
 export type ToastType =
   | "info"

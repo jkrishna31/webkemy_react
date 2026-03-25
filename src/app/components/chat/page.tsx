@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Chatbot } from "@/lib/ui/elements/chatbot";
+import { Chatbot } from "@/lib/components/elements/chatbot";
 
 import styles from "./page.module.scss";
 

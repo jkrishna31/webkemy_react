@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 
-import { throttle } from "@/lib/utils/general.utils";
+import { throttle } from "@/lib/utils/rateLimit";
 
 export function useThrottledCallback<T extends (...args: any) => any>(cb: T, delay?: number) {
   const cbRef = useRef(cb);
@@ -11,6 +11,7 @@ export function useThrottledCallback<T extends (...args: any) => any>(cb: T, del
 
   const memoizedCallback = useMemo(() => {
     return throttle(
+      // eslint-disable-next-line react-hooks/refs
       (...args: Parameters<T>) => {
         cbRef.current(...args);
       },

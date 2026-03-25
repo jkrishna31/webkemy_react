@@ -2,11 +2,11 @@
 
 import { ComponentProps, useEffect, useEffectEvent, useState } from "react";
 
+import { Button } from "@/lib/components/elements/butttons";
 import { useMediaStream } from "@/lib/hooks/useMediaStream";
-import { Button } from "@/lib/ui/elements/butttons";
-import MicIcon from "@/lib/ui/svgs/icons/MicIcon";
-import { hasDOM } from "@/lib/utils/client.utils";
-import { classes } from "@/lib/utils/style.utils";
+import MicIcon from "@/lib/svgs/icons/MicIcon";
+import { hasDOM } from "@/lib/utils/dom";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./AudioListener.module.scss";
 

@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { pieChartData } from "@/data/dummy/pieChartData";
-import { PieChart } from "@/lib/ui/elements/charts/PieChart";
+import { PieChart } from "@/lib/components/elements/charts/PieChart";
 
 import styles from "./page.module.scss";
 

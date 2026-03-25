@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef } from "react";
 
-import { debounce } from "@/lib/utils/general.utils";
+import { debounce } from "@/lib/utils/rateLimit";
 
 export interface UseDebouncedCallbackOptions {
   leading: boolean
@@ -18,9 +18,14 @@ export function useDebouncedCallback<T extends (...args: any) => any>(cb: T, del
 
   const memoizedCallback = useMemo(() => {
     const _cb = cbRef.current;
-    return debounce((...args: Parameters<T>) => {
-      _cb(...args);
-    }, delay, { leading, trailing });
+    return debounce(
+      // eslint-disable-next-line react-hooks/refs
+      (...args: Parameters<T>) => {
+        _cb(...args);
+      },
+      delay,
+      { leading, trailing }
+    );
   }, [delay, leading, trailing]);
 
   useEffect(() => {

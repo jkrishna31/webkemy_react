@@ -1,8 +1,8 @@
 "use client";
 
-
-import { KeyboardManager, NetworkManager, NotificationManager, PreferenceManager, SearchManager, ToastManager, WindowResizeManager, WindowScrollManager } from "@/components/managers";
+import { KeyboardManager, NotificationManager, PreferenceManager, SearchManager } from "@/components/managers";
 import { useSearchActive } from "@/data/stores";
+import { NetworkManager, ToastManager, WindowResizeManager, WindowScrollManager } from "@/lib/components/managers";
 
 const ClientSetup = () => {
     const search = useSearchActive();
@@ -11,11 +11,11 @@ const ClientSetup = () => {
         <>
             {search && <SearchManager />}
             <NotificationManager />
-            <ToastManager />
             <PreferenceManager />
+            <KeyboardManager />
+            <ToastManager />
             <WindowScrollManager />
             <WindowResizeManager />
-            <KeyboardManager />
             <NetworkManager />
         </>
     );

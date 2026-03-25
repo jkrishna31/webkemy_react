@@ -1,9 +1,9 @@
 import { PageSetup } from "@/components/managers";
-import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
-import { InputItem } from "@/lib/ui/elements/inputs/InputItem";
-import { Radio } from "@/lib/ui/elements/inputs/Radio";
-import { Text } from "@/lib/ui/elements/Text";
+import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
+import { InputItem } from "@/lib/components/elements/inputs/InputItem";
+import { Radio } from "@/lib/components/elements/inputs/Radio";
+import { Text } from "@/lib/components/elements/Text";
 
 import styles from "./page.module.scss";
 

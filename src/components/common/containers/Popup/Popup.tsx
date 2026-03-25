@@ -2,7 +2,7 @@
 
 import { PropsWithChildren, useCallback, useEffect, useState } from "react";
 
-import { classes } from "@/lib/utils/style.utils";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./Popup.module.scss";
 

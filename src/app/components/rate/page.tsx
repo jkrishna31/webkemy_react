@@ -1,12 +1,12 @@
 import { PageSetup } from "@/components/managers";
-import { Rate } from "@/lib/ui/elements/Rate";
-import CircleIcon from "@/lib/ui/svgs/icons/CircleIcon";
-import DiamondIcon from "@/lib/ui/svgs/icons/DiamondIcon";
-import EmojiAngryIcon from "@/lib/ui/svgs/icons/EmojiAngryIcon";
-import EmojiLaughIcon from "@/lib/ui/svgs/icons/EmojiLaughIcon";
-import EmojiNeutralIcon from "@/lib/ui/svgs/icons/EmojiNeutralIcon";
-import EmojiSadIcon from "@/lib/ui/svgs/icons/EmojiSadIcon";
-import EmojiSmileIcon from "@/lib/ui/svgs/icons/EmojiSmileIcon";
+import { Rate } from "@/lib/components/elements/Rate";
+import CircleIcon from "@/lib/svgs/icons/CircleIcon";
+import DiamondIcon from "@/lib/svgs/icons/DiamondIcon";
+import EmojiAngryIcon from "@/lib/svgs/icons/EmojiAngryIcon";
+import EmojiLaughIcon from "@/lib/svgs/icons/EmojiLaughIcon";
+import EmojiNeutralIcon from "@/lib/svgs/icons/EmojiNeutralIcon";
+import EmojiSadIcon from "@/lib/svgs/icons/EmojiSadIcon";
+import EmojiSmileIcon from "@/lib/svgs/icons/EmojiSmileIcon";
 
 import styles from "./page.module.scss";
 

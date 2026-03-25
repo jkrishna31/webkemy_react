@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Resizable } from "@/lib/ui/elements/Resizable";
+import { Resizable } from "@/lib/components/elements/Resizable";
 
 import styles from "./page.module.scss";
 

@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { classes } from "@/lib/utils/style.utils";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./Overlay.module.scss";
 

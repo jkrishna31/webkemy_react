@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
-import { Framer } from "@/lib/ui/elements/Framer";
-import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";
+import { Framer } from "@/lib/components/elements/Framer";
+import TriangleWarningIcon from "@/lib/svgs/icons/TriangleWarningIcon";
 
 import styles from "./page.module.scss";
 

@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Drawer, DrawerBody, DrawerHeader } from "@/lib/ui/elements/Drawer";
+import { Button } from "@/lib/components/elements/butttons";
+import { Drawer, DrawerBody, DrawerHeader } from "@/lib/components/elements/Drawer";
 
 import styles from "./page.module.scss";
 
@@ -15,7 +15,7 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="drawer" />
 
-      <Button variant="secondary" onClick={() => setOpen(true)}>
+      <Button variant="outlined" onClick={() => setOpen(true)}>
         {"Open Drawer in Center"}
       </Button>
       {

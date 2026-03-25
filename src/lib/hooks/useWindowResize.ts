@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { hasDOM } from "@/lib/utils/client.utils";
+import { hasDOM } from "@/lib/utils/dom";
 
 export function useWindowResize() {
   const [size, setSize] = useState<[number | undefined, number | undefined]>();

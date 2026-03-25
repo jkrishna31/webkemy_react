@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { TagsInput } from "@/lib/ui/elements/inputs/TagsInput";
+import { TagsInput } from "@/lib/components/elements/inputs/TagsInput";
 
 import styles from "./page.module.scss";
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-import { getConnection } from "@/lib/utils/client.utils";
+import { getConnection } from "@/lib/utils/client";
 
 export interface TNetwork {
   online: boolean;

@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 
-import { deepClone } from "@/lib/utils/object.utils";
+import { deepClone } from "@/lib/utils/object";
 
 export type TSplitLayout = string | { key: string; children?: TSplitLayout[] };
 export type TSplitSection = { size: number; min?: number; max?: number; };

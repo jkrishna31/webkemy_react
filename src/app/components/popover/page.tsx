@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import TriangleWarningIcon from "@/lib/ui/svgs/icons/TriangleWarningIcon";
+import TriangleWarningIcon from "@/lib/svgs/icons/TriangleWarningIcon";
 
 import styles from "./page.module.scss";
 

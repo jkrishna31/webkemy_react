@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { CodeBlock, LineHighlight } from "@/lib/ui/elements/CodeBlock";
+import { CodeBlock, LineHighlight } from "@/lib/components/elements/CodeBlock";
 
 import styles from "./page.module.scss";
 

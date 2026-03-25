@@ -1,4 +1,4 @@
-@use '@/lib/ui/styles/mixins/supports' as *;
+@use '@/lib/styles/mixins/supports' as *;
 
 .app_search {
   .header {
@@ -18,6 +18,9 @@
   }
 
   .back_btn {
+    --btn-bgc: var(--bg-s);
+    --btn-fgc: var(--fg-s);
+
     svg {
       width: 2.2rem;
       height: 2.2rem;

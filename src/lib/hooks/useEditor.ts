@@ -3,8 +3,8 @@ import { RefObject, useCallback, useEffect, useEffectEvent, useLayoutEffect, use
 import { editorBlocks, inputTypes } from "@/constants/editor.const";
 import { Keys } from "@/constants/keys.const";
 import { Color } from "@/lib/types/general.types";
-import { getUniqueId } from "@/lib/utils/crypto.utils";
-import { deepClone } from "@/lib/utils/object.utils";
+import { getUniqueId } from "@/lib/utils/crypto";
+import { deepClone } from "@/lib/utils/object";
 
 export type CaretActionDir = "backward" | "forward";
 

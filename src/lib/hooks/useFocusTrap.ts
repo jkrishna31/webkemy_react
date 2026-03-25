@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
 
 import { useMounted } from "@/lib/hooks/useMounted";
-import { FOCUS_SELECTOR, focusable, scopeTab, tabbable } from "@/lib/utils/tabbable.utils";
+import { FOCUS_SELECTOR, focusable, scopeTab, tabbable } from "@/lib/utils/tabbable";
 
 export function useFocusTrap(ref: RefObject<HTMLElement | null>, active = true) {
   const isMounted = useMounted();

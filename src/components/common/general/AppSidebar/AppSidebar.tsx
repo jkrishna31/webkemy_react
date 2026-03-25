@@ -4,11 +4,11 @@ import { ComponentProps, useEffect } from "react";
 
 import { menuItems } from "@/components/common/general/AppMenu";
 import { useActivePage, useLayoutActions, useSidebar, useWindowSize } from "@/data/stores";
-import { Item } from "@/lib/ui/elements/Item";
-import { ItemGroup } from "@/lib/ui/elements/ItemGroup";
-import { Menu } from "@/lib/ui/elements/Menu";
-import ChevronLeftIcon from "@/lib/ui/svgs/icons/ChevronLeftIcon";
-import { classes } from "@/lib/utils/style.utils";
+import { Item } from "@/lib/components/elements/Item";
+import { ItemGroup } from "@/lib/components/elements/ItemGroup";
+import { Menu } from "@/lib/components/elements/Menu";
+import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./AppSidebar.module.scss";
 

@@ -37,6 +37,7 @@ export function useQueryParams<
     searchParams.forEach((value, key) => {
       updated[key] = value;
     });
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setInternalState(updated);
     latestStateRef.current = updated;
   }, [searchParams]);

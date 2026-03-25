@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 import { AppHeader } from "@/components/common/general";
 import { ClientSetup } from "@/components/managers";
-import { classes } from "@/lib/utils/style.utils";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./AppLayout.module.scss";
 

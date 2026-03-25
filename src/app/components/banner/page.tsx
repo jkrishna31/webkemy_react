@@ -1,22 +1,22 @@
 import { PageSetup } from "@/components/managers";
-import { InfiniteScrollBanner } from "@/lib/ui/elements/InfiniteScrollBanner";
-import { AmexIcon, ApplePayIcon, BitcoinIcon, DinersClubIcon, DiscoverIcon, GooglePayIcon, JcbIcon, MastercardIcon, PaypalIcon, SepaIcon, StripeIcon, VisaIcon } from "@/lib/ui/svgs/payments";
+import { InfiniteScrollBanner } from "@/lib/components/elements/InfiniteScrollBanner";
+import { Amex, ApplePay, Bitcoin, DinersClub, Discover, GooglePay, Jcb, Mastercard, Paypal, Sepa, Stripe, Visa } from "@/lib/svgs/payments";
 
 import styles from "./page.module.scss";
 
 const bannerItems = [
-  { render: <AmexIcon /> },
-  { render: <ApplePayIcon /> },
-  { render: <GooglePayIcon /> },
-  { render: <DinersClubIcon /> },
-  { render: <DiscoverIcon /> },
-  { render: <PaypalIcon /> },
-  { render: <JcbIcon /> },
-  { render: <SepaIcon /> },
-  { render: <BitcoinIcon /> },
-  { render: <StripeIcon /> },
-  { render: <MastercardIcon /> },
-  { render: <VisaIcon /> },
+  { render: <Amex /> },
+  { render: <ApplePay /> },
+  { render: <GooglePay /> },
+  { render: <DinersClub /> },
+  { render: <Discover /> },
+  { render: <Paypal /> },
+  { render: <Jcb /> },
+  { render: <Sepa /> },
+  { render: <Bitcoin /> },
+  { render: <Stripe /> },
+  { render: <Mastercard /> },
+  { render: <Visa /> },
 ];
 
 const page = () => {

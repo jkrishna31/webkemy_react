@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { hasDOM } from "@/lib/utils/client.utils";
+import { hasDOM } from "@/lib/utils/dom";
 
 export interface ClientActions {
   updateStore: any

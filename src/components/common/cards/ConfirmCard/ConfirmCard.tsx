@@ -1,8 +1,8 @@
 import { ReactNode } from "react";
 
-import { Button } from "@/lib/ui/elements/butttons";
-import { Modal } from "@/lib/ui/elements/Modal";
-import { classes } from "@/lib/utils/style.utils";
+import { Button } from "@/lib/components/elements/butttons";
+import { Modal } from "@/lib/components/elements/Modal";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./ConfirmCard.module.scss";
 
@@ -59,7 +59,7 @@ const ConfirmCard = ({
                                         if (control.type === "primary") {
                                             return (
                                                 <Button
-                                                    variant="primary"
+                                                    variant="solid"
                                                     className={styles.control_btn}
                                                     key={control.id}
                                                     onClick={control.onClick}
@@ -70,7 +70,7 @@ const ConfirmCard = ({
                                         } else {
                                             return (
                                                 <Button
-                                                    variant="secondary"
+                                                    variant="outlined"
                                                     className={classes(styles.control_btn, styles.secondary_btn)}
                                                     onClick={control.onClick}
                                                     key={control.id}

@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { BarsLoader, DotsLoader, LineLoader, RippleLoader, SkeletonLoader } from "@/lib/ui/elements/loaders";
+import { BarsLoader, DotsLoader, LineLoader, RippleLoader, SkeletonLoader } from "@/lib/components/elements/loaders";
 
 import styles from "./page.module.scss";
 

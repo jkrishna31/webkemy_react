@@ -4,9 +4,9 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { positions } from "@/constants/general.const";
-import { Button } from "@/lib/ui/elements/butttons";
-import { Modal, ModalHeader } from "@/lib/ui/elements/Modal";
-import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
+import { Button } from "@/lib/components/elements/butttons";
+import { Modal, ModalHeader } from "@/lib/components/elements/Modal";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 
 import styles from "./page.module.scss";
 
@@ -19,13 +19,13 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="modal" />
 
-      <Button variant="secondary" onClick={() => setOpen(positions.TOP_CENTER)}>
+      <Button variant="outlined" onClick={() => setOpen(positions.TOP_CENTER)}>
         {"Open Top-Center Modal"}
       </Button>
-      <Button variant="secondary" onClick={() => setOpen(positions.CENTER)}>
+      <Button variant="outlined" onClick={() => setOpen(positions.CENTER)}>
         {"Open Center Modal"}
       </Button>
-      <Button variant="secondary" onClick={() => setOpen(positions.BOTTOM_CENTER)}>
+      <Button variant="outlined" onClick={() => setOpen(positions.BOTTOM_CENTER)}>
         {"Open Bottom-Center Modal"}
       </Button>
 

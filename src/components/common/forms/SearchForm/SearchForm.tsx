@@ -2,14 +2,14 @@
 
 import { ComponentProps, FormEvent, ReactNode } from "react";
 
+import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
+import { Popover } from "@/lib/components/elements/Popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
-import { GeneralInput } from "@/lib/ui/elements/inputs/GeneralInput";
-import { InputFieldWrapper } from "@/lib/ui/elements/inputs/InputFieldWrapper";
-import { Popover } from "@/lib/ui/elements/Popover";
-import CrossIcon from "@/lib/ui/svgs/icons/CrossIcon";
-import MicOnIcon from "@/lib/ui/svgs/icons/MicOnIcon";
-import SearchIcon from "@/lib/ui/svgs/icons/SearchIcon";
-import { classes } from "@/lib/utils/style.utils";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
+import MicOnIcon from "@/lib/svgs/icons/MicOnIcon";
+import SearchIcon from "@/lib/svgs/icons/SearchIcon";
+import { classes } from "@/lib/utils/style";
 
 import styles from "./SearchForm.module.scss";
 

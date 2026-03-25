@@ -1,0 +1,154 @@
+@mixin colors_dark {
+    --color-scheme-abs: #000000;
+    --color-scheme-abs-inverse: #ffffff;
+
+    --orange-1: rgb(255, 166, 71);
+    --orange-2: rgb(255, 126, 66);
+    --orange-2-10: rgba(255, 126, 66, 0.15);
+    --orange-2-25: rgba(255, 126, 66, 0.25);
+    --orange-2-50: rgba(255, 126, 66, 0.5);
+    --orange-6: #ffa075;
+
+    --yellow-1: rgb(241, 163, 59);
+    --yellow-1-10: rgba(241, 162, 59, 0.15);
+    --yellow-1-50: rgba(241, 162, 59, 0.5);
+    --yellow-2: rgb(255, 202, 79);
+    --yellow-3: rgb(255, 218, 70);
+    --yellow-4: #ecc92e;
+    --yellow-6: rgb(255, 218, 126);
+
+    --red-1: rgb(255, 71, 86);
+    --red-1-10: rgba(254, 65, 81, 0.15);
+    --red-1-25: rgba(254, 65, 81, 0.25);
+    --red-1-50: rgba(254, 65, 81, 0.5);
+    --red-4: rgb(255, 68, 68);
+    --red-5: rgb(245, 55, 90);
+    --red-6: rgb(255, 80, 95);
+    --red-7: rgb(216, 48, 79);
+    --red-8: #ff7979;
+    --red-9: #322b2b;
+
+    --pink-1: rgb(251, 45, 168);
+    --pink-1-10: rgba(251, 45, 168, .15);
+    --pink-1-25: rgba(251, 45, 168, .25);
+    --pink-1-30: rgba(251, 45, 168, .1);
+    --pink-1-50: rgba(251, 45, 168, .5);
+
+    --green-1: rgb(27, 199, 136);
+    --green-1-10: rgba(27, 199, 136, 0.15);
+    --green-1-25: rgba(27, 199, 136, 0.25);
+    --green-1-50: rgba(27, 199, 136, 0.5);
+    --green-2: rgb(9, 131, 93);
+    --green-3: rgb(110 231 183);
+    --green-5: rgb(26, 200, 139);
+    --green-9: rgb(112, 209, 175);
+    --green-10: rgb(40, 49, 45);
+
+    --blue-1: rgb(75, 165, 255);
+    --blue-1-10: rgba(75, 165, 255, 0.15);
+    --blue-1-25: rgba(75, 165, 255, 0.25);
+    --blue-1-50: rgba(75, 165, 255, 0.5);
+    --blue-2: #277dc3;
+    --blue-6: #3b7ce5;
+    --blue-7: #94c0ff;
+    --blue-8: #305fe1;
+
+    --purple-1: rgb(152, 104, 255);
+    --purple-1-10: rgba(152, 104, 255, .15);
+    --purple-1-25: rgba(152, 104, 255, .25);
+    --purple-1-50: rgba(152, 104, 255, .5);
+    --purple-2: #7a45dc;
+    --purple-3: rgb(168, 63, 254);
+    --purple-4: rgb(254, 63, 200);
+    --purple-5: rgb(142, 93, 255);
+    --purple-5-10: rgba(142, 93, 255, .1);
+    --purple-5-25: rgba(142, 93, 255, .25);
+
+    --gray-1: rgb(155, 159, 161);
+    --gray-2: rgb(81, 84, 86);
+    --gray-3: rgb(58, 60, 61);
+    --gray-5: #2a2f3d;
+    --gray-6: rgb(122, 124, 131);
+    --gray-7: rgb(232, 237, 249);
+    --gray-7-10: rgba(232, 237, 249, .1);
+    --gray-7-25: rgba(232, 237, 249, .2);
+    --gray-7-50: rgba(232, 237, 249, .50);
+    --gray-8: rgb(169, 178, 181);
+    --gray-8-10: rgba(169, 178, 181, .15);
+    --gray-8-25: rgba(169, 178, 181, .25);
+    --gray-8-30: rgba(169, 178, 181, 0.1);
+    --gray-8-50: rgba(168, 178, 181, 0.5);
+    --gray-9: rgb(127, 135, 137);
+    --gray-10: rgb(153, 156, 158);
+    --gray-11: rgb(24, 26, 27);
+    --gray-11-30: rgba(24, 26, 27, 0.3);
+    --gray-11-70: rgba(24, 26, 27, 0.6);
+    --gray-11-80: rgba(24, 26, 27, 0.8);
+    --gray-12: rgb(34, 36, 37);
+    --gray-12-70: rgba(34, 36, 37, .7);
+    --gray-13: rgb(28, 30, 31);
+    --gray-13-70: rgba(28, 30, 31, .7);
+    --gray-14: rgb(42, 45, 46);
+    --gray-15: rgb(40, 42, 43);
+    --gray-16: #181a1e;
+    --gray-17: #83878f;
+    --gray-18: rgb(190, 199, 202);
+    --gray-24: rgb(59, 63, 64);
+    --gray-25: rgb(217, 222, 234);
+    --gray-26: rgb(111, 116, 121);
+    --gray-27: rgb(20, 24, 26);
+    --gray-27-50: rgba(20, 24, 26, .5);
+    --gray-28: #999a9e;
+    --gray-29: #797b80;
+    --gray-30: rgb(56, 60, 61);
+
+    --ghost-1: rgba(227, 235, 250, 0.1);
+    --ghost-2: rgba(157, 175, 240, 0.1);
+    --ghost-3: rgba(157, 164, 174, 0.2);
+    --ghost-4: rgba(245, 245, 246, 0.9);
+
+    --light-p: var(--gray-7);
+
+    --bg-p: var(--gray-11);
+    --bg-p-alt: var(--gray-11);
+    --bg-s: var(--gray-12);
+    --bg-s-alt: var(--gray-15);
+    --bg-s-70: var(--gray-12-70);
+    --bg-t: var(--gray-13);
+    --bg-t-alt: var(--gray-16);
+    --bg-t-70: var(--gray-13-70);
+    --bg-q: var(--gray-14);
+
+    --bg-overlay: var(--gray-11-30);
+    --bg-selection: var(--ghost-4);
+    --bg-hover: var(--ghost-1);
+    --bg-highlight: var(--gray-24);
+    --bg-active: var(--gray-30);
+    --bg-scrollbar-thumb: var(--gray-6);
+    --bg-scrollbar-track: transparent;
+
+    --fg-p: var(--gray-7);
+    --fg-p-alt: var(--gray-25);
+    --fg-s: var(--gray-8);
+    --fg-s-alt: var(--gray-28);
+    --fg-t: var(--gray-9);
+    --fg-t-alt: var(--gray-29);
+    --fg-q: var(--gray-10);
+    --fg-q-alt: var(--gray-18);
+
+    --fg-selection: var(--bg-p);
+
+    --border-p: var(--gray-1);
+    --border-p-alt: var(--gray-26);
+    --border-s: var(--gray-2);
+    --border-t: var(--gray-3);
+
+    --shadow-p: var(--gray-27);
+    --shadow-s: var(--gray-28);
+    --shadow-t: var(--gray-29);
+
+    --note-bg: var(--blue-8);
+    --tip-bg: var(--green-5);
+    --caution-bg: var(--yellow-4);
+    --quote-bg: var(--gray-17);
+}

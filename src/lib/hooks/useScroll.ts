@@ -2,7 +2,7 @@
 
 import { RefObject, useCallback, useEffect, useMemo, useState } from "react";
 
-import { throttle } from "@/lib/utils/general.utils";
+import { throttle } from "@/lib/utils/rateLimit";
 
 export interface UseScrollProps {
   target: RefObject<HTMLElement | null>
@@ -29,6 +29,7 @@ export function useScroll({
   }, delay), [delay, target, margin, isOnBoundary, onScroll]);
   // works with target, but not with target.current because ref is a stable object and ref.current is not reactive, and the important thing is that useEffect runs after the dom is mounted, so that time we will have ref, but if we use ref.current we lost the stable ref and as earlier mentioned, it's not a reactive so it won't cause rerender
 
+  // eslint-disable-next-line react-hooks/use-memo
   const handleScroll = useCallback(throttledScrollHandler, [throttledScrollHandler]);
 
   useEffect(() => {

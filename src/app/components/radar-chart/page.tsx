@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { radarChartData } from "@/data/dummy/radarChartData";
-import { RadarChart } from "@/lib/ui/elements/charts/RadarChart";
+import { RadarChart } from "@/lib/components/elements/charts/RadarChart";
 
 import styles from "./page.module.scss";
 
