@@ -1,0 +1,15 @@
+export const Characters = {
+  BULLET: "•",
+  ELLIPSIS: "…",
+  PENTAGRAM: "⛥",
+  TEARDROP_ASTERISK: "❊",
+  STRESS_OUTLINED_STAR: "✩",
+  CIRCLED_STAR: "✪",
+  SOLID_RIGHT_CARET: "▶",
+  CHECKMARK: "✓",
+  CROSSMARK: "✗",
+  BOX_SQUARE: "☐",
+  BOX_CIRCLE: "◯",
+  COPYRIGHT: "©",
+  LOADER: ["⠷", "⠯", "⠟", "⠻", "⠽", "⠾", "⠿"],
+} as const;

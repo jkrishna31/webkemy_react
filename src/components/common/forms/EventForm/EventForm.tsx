@@ -2,7 +2,6 @@
 
 import { ComponentProps, useState } from "react";
 
-import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { DateInput } from "@/lib/components/elements/inputs/DateInput";
 import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
@@ -12,6 +11,7 @@ import { TagsInput } from "@/lib/components/elements/inputs/TagsInput";
 import { TextArea } from "@/lib/components/elements/inputs/TextArea";
 import { TimeInput } from "@/lib/components/elements/inputs/TimeInput";
 import { Text } from "@/lib/components/elements/Text";
+import { weekDays, weekDaysOrder } from "@/lib/data/datetime";
 import { classes } from "@/lib/utils/style";
 
 import { FormControls } from "..";

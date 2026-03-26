@@ -2,7 +2,7 @@
 
 import { ComponentProps, useEffect, useRef } from "react";
 
-import { Keys } from "@/constants/keys.const";
+import { Keys } from "@/lib/constants/keys";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
 import { isMobileDevice } from "@/lib/utils/client";
 import { findNextCandidate } from "@/lib/utils/dom";

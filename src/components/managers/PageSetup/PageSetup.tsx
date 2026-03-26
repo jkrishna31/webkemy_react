@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 
-import { edges } from "@/constants/general.const";
 import { useClientActions, useScrollActions } from "@/data/stores";
+import { Edges } from "@/lib/constants/position";
 
 const PageSetup = ({ pageKey }: { pageKey?: string }) => {
   const { setField } = useClientActions();
@@ -11,7 +11,7 @@ const PageSetup = ({ pageKey }: { pageKey?: string }) => {
 
   useEffect(() => {
     setField("activePage", pageKey);
-    updateScrollStore("dir", edges.TOP);
+    updateScrollStore("dir", Edges.TOP);
     return () => {
       setField("activePage", undefined);
     };

@@ -1,5 +1,5 @@
-import { characters } from "@/constants/characters.const";
 import { Button, ButtonProps } from "@/lib/components/elements/butttons";
+import { Characters } from "@/lib/constants/characters";
 import ReplyIcon from "@/lib/svgs/icons/ReplyIcon";
 import { classes } from "@/lib/utils/style";
 
@@ -23,7 +23,7 @@ const RepliesBtn = ({
     >
       {/* todo: if replies count is same as unread count then don't show like: 4 replies with blue color */}
       {(!isConversation || (isConversation && chat.author.id !== "me")) && <ReplyIcon />}
-      {chat.replies} {"Replies"} <span className={styles.separator}>{characters.BULLET}</span> <span className={styles.unread}>{4}{" Unread"}</span>
+      {chat.replies} {"Replies"} <span className={styles.separator}>{Characters.BULLET}</span> <span className={styles.unread}>{4}{" Unread"}</span>
       {(isConversation && chat.author.id === "me") && <ReplyIcon />}
     </Button>
   );

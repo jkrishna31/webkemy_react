@@ -1,9 +1,9 @@
 "use client";
 
 import { AudioListener } from "@/components/common/general";
-import { positions } from "@/constants/general.const";
 import { useSearchActions, useSearchActive } from "@/data/stores";
 import { Modal } from "@/lib/components/elements/Modal";
+import { Positions } from "@/lib/constants/position";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 
 import styles from "./SearchManager.module.scss";
@@ -32,7 +32,7 @@ const SearchManager = ({ overlayClass, wrapperClass, ...props }: SearchBoxProps)
 
   return active ? (
     <Modal
-      overlay pos={positions.TOP_CENTER} onClose={handleClose}
+      overlay pos={Positions.TOP_CENTER} onClose={handleClose}
       className={styles.component}
     >
       {active === "audio" ? (

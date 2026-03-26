@@ -3,11 +3,11 @@
 import { useCallback, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { editorBlocks, editorTools } from "@/constants/editor.const";
 import { BlockSelector, Editor, FindReplace, ToolSelector } from "@/lib/components/elements/editor";
 import { Popover } from "@/lib/components/elements/Popover";
 import { Tabs } from "@/lib/components/elements/Tabs";
 import { Text } from "@/lib/components/elements/Text";
+import { EditorBlocks, EditorTools } from "@/lib/constants/editor";
 import { useEditor } from "@/lib/hooks/useEditor";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 import AlignLeftIcon from "@/lib/svgs/icons/AlignLeftIcon";
@@ -73,7 +73,7 @@ import UnorderedListIcon from "@/lib/svgs/icons/UnorderedListIcon";
 import styles from "./page.module.scss";
 
 const getPlaceholder = (type: string) => {
-  if (type === editorBlocks.PARA || type.startsWith("h")) {
+  if (type === EditorBlocks.PARA || type.startsWith("h")) {
     return "Enter \"/\" for blocks...";
   } else {
     return "";
@@ -82,12 +82,12 @@ const getPlaceholder = (type: string) => {
 
 const defaultBlocks = [
   {
-    type: editorBlocks.H1,
+    type: EditorBlocks.H1,
     id: "1",
     children: [],
   },
   {
-    type: editorBlocks.PARA,
+    type: EditorBlocks.PARA,
     id: "99",
     children: [
       { text: "Hi there," },
@@ -96,10 +96,10 @@ const defaultBlocks = [
     ],
   },
   {
-    type: editorBlocks.PARA,
+    type: EditorBlocks.PARA,
     id: "2",
     props: {
-      "data-placeholder": getPlaceholder(editorBlocks.PARA),
+      "data-placeholder": getPlaceholder(EditorBlocks.PARA),
     },
     children: [
       { text: "Another paragraph with some " },
@@ -108,26 +108,26 @@ const defaultBlocks = [
     ],
   },
   {
-    type: editorBlocks.DIVIDER,
+    type: EditorBlocks.DIVIDER,
     id: "3",
   },
   {
-    type: editorBlocks.H2,
+    type: EditorBlocks.H2,
     id: "4",
   },
   {
-    type: editorBlocks.H3,
+    type: EditorBlocks.H3,
     id: "5",
   },
   {
-    type: editorBlocks.H4,
+    type: EditorBlocks.H4,
     id: "6",
   },
   {
-    type: editorBlocks.PARA,
+    type: EditorBlocks.PARA,
     id: "7",
     props: {
-      "data-placeholder": getPlaceholder(editorBlocks.PARA),
+      "data-placeholder": getPlaceholder(EditorBlocks.PARA),
     },
   },
 ];
@@ -139,23 +139,23 @@ const blockOptions = [
     collapsible: false,
     className: styles.block_group,
     menu: [
-      { key: editorBlocks.PARA, primary: "Paragraph", icon: <PilcrowIcon /> },
-      { key: editorBlocks.H1, primary: "Heading 1", icon: <Heading1Icon />, },
-      { key: editorBlocks.H2, primary: "Heading 2", icon: <Heading2Icon />, },
-      { key: editorBlocks.H3, primary: "Heading 3", icon: <Heading3Icon /> },
-      { key: editorBlocks.H4, primary: "Heading 4", icon: <Heading4Icon />, },
-      // { key: editorBlocks.H5, primary: "Heading 5", icon: <Heading5Icon />, },
-      // { key: editorBlocks.H6, primary: "Heading 6", icon: <Heading6Icon />, },
-      { key: editorBlocks.ORDERED_LIST, primary: "Ordered List", icon: <OrderedListIcon /> },
-      { key: editorBlocks.UNORDERED_LIST, primary: "Unordered List", icon: <UnorderedListIcon /> },
-      { key: editorBlocks.CHECK_LIST, primary: "Check List", icon: <ChecklistIcon /> },
-      { key: editorBlocks.CODE, primary: "Code", icon: <BlockCodeIcon /> },
-      { key: editorBlocks.IMAGE, primary: "Image", icon: <ImageIcon /> },
-      { key: editorBlocks.TABLE, primary: "Table", icon: <TableIcon /> },
-      { key: editorBlocks.DIVIDER, primary: "Divider", icon: <DividerIcon /> },
-      { key: editorBlocks.COLLAPSIBLE, primary: "Collapsible", icon: <PanelTopCloseIcon /> },
-      { key: editorBlocks.QUOTE, primary: "Quote", icon: <BlockquoteIcon /> },
-      { key: editorBlocks.NOTE, primary: "Note", icon: <NoteIcon /> },
+      { key: EditorBlocks.PARA, primary: "Paragraph", icon: <PilcrowIcon /> },
+      { key: EditorBlocks.H1, primary: "Heading 1", icon: <Heading1Icon />, },
+      { key: EditorBlocks.H2, primary: "Heading 2", icon: <Heading2Icon />, },
+      { key: EditorBlocks.H3, primary: "Heading 3", icon: <Heading3Icon /> },
+      { key: EditorBlocks.H4, primary: "Heading 4", icon: <Heading4Icon />, },
+      // { key: EditorBlocks.H5, primary: "Heading 5", icon: <Heading5Icon />, },
+      // { key: EditorBlocks.H6, primary: "Heading 6", icon: <Heading6Icon />, },
+      { key: EditorBlocks.ORDERED_LIST, primary: "Ordered List", icon: <OrderedListIcon /> },
+      { key: EditorBlocks.UNORDERED_LIST, primary: "Unordered List", icon: <UnorderedListIcon /> },
+      { key: EditorBlocks.CHECK_LIST, primary: "Check List", icon: <ChecklistIcon /> },
+      { key: EditorBlocks.CODE, primary: "Code", icon: <BlockCodeIcon /> },
+      { key: EditorBlocks.IMAGE, primary: "Image", icon: <ImageIcon /> },
+      { key: EditorBlocks.TABLE, primary: "Table", icon: <TableIcon /> },
+      { key: EditorBlocks.DIVIDER, primary: "Divider", icon: <DividerIcon /> },
+      { key: EditorBlocks.COLLAPSIBLE, primary: "Collapsible", icon: <PanelTopCloseIcon /> },
+      { key: EditorBlocks.QUOTE, primary: "Quote", icon: <BlockquoteIcon /> },
+      { key: EditorBlocks.NOTE, primary: "Note", icon: <NoteIcon /> },
     ],
   },
   {
@@ -164,10 +164,10 @@ const blockOptions = [
     collapsible: false,
     className: styles.block_group,
     menu: [
-      { key: editorBlocks.YOUTUBE, primary: "Youtube", icon: <EmbedYoutubeIcon /> },
-      { key: editorBlocks.GITHUB, primary: "Github Gist", icon: <EmbedGithubIcon /> },
-      { key: editorBlocks.CODEPEN, primary: "CodePen", icon: <EmbedCodepenIcon /> },
-      { key: editorBlocks.CODESANDBOX, primary: "CodeSandbox", icon: <EmbedCSBIcon /> }
+      { key: EditorBlocks.YOUTUBE, primary: "Youtube", icon: <EmbedYoutubeIcon /> },
+      { key: EditorBlocks.GITHUB, primary: "Github Gist", icon: <EmbedGithubIcon /> },
+      { key: EditorBlocks.CODEPEN, primary: "CodePen", icon: <EmbedCodepenIcon /> },
+      { key: EditorBlocks.CODESANDBOX, primary: "CodeSandbox", icon: <EmbedCSBIcon /> }
     ],
   },
 ];
@@ -176,64 +176,64 @@ const toolOptions = [
   [
     {
       type: "button",
-      name: "Undo", key: editorTools.UNDO, color: "yellow", disabled: false,
+      name: "Undo", key: EditorTools.UNDO, color: "yellow", disabled: false,
       render: <UndoIcon className={styles.icon} />
     },
     {
       type: "button",
-      name: "Redo", key: editorTools.REDO, color: "yellow", disabled: true,
+      name: "Redo", key: EditorTools.REDO, color: "yellow", disabled: true,
       render: <RedoIcon className={styles.icon} />
     }
   ],
   [
     {
       type: "switch",
-      name: "Bold", key: editorTools.BOLD,
+      name: "Bold", key: EditorTools.BOLD,
       render: <BoldIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Italic", key: editorTools.ITALIC,
+      name: "Italic", key: EditorTools.ITALIC,
       render: <ItalicIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Underline", key: editorTools.UNDERLINE,
+      name: "Underline", key: EditorTools.UNDERLINE,
       render: <UnderlineIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Line Through", key: editorTools.LINE_THROUGH,
+      name: "Line Through", key: EditorTools.LINE_THROUGH,
       render: <LineThroughIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Hyperlink", key: editorTools.LINK,
+      name: "Hyperlink", key: EditorTools.LINK,
       render: <HyperlinkIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Inline Code", key: editorTools.INLINE_CODE,
+      name: "Inline Code", key: EditorTools.INLINE_CODE,
       render: <InlineCodeIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Highlight", key: editorTools.HIGHLIGHT,
+      name: "Highlight", key: EditorTools.HIGHLIGHT,
       render: <HighlightertIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Subscript", key: editorTools.SUBSCRIPT,
+      name: "Subscript", key: EditorTools.SUBSCRIPT,
       render: <SubscriptIcon className={styles.icon} />
     },
     {
       type: "switch",
-      name: "Superscript", key: editorTools.SUPERSCRIPT,
+      name: "Superscript", key: EditorTools.SUPERSCRIPT,
       render: <SuperscriptIcon className={styles.icon} />
     },
     // {
     //   type: "button",
-    //   name: "Mention", key: editorTools.MENTION,
+    //   name: "Mention", key: EditorTools.MENTION,
     //   render: <MentionIcon className={styles.icon} />
     // },
     // {
@@ -262,12 +262,12 @@ const toolOptions = [
   [
     {
       type: "popover",
-      name: "Indent", key: editorTools.INDENT,
+      name: "Indent", key: EditorTools.INDENT,
       render: <IndentIncIcon className={styles.icon} />
     },
     // {
     //   type: "button",
-    //   name: "Indent Decrease", key: editorTools.OUTDENT,
+    //   name: "Indent Decrease", key: EditorTools.OUTDENT,
     //   render: <IndentDecIcon className={styles.icon} />
     // },
   ],
@@ -349,24 +349,24 @@ const toolOptions = [
     },
     {
       type: "popover",
-      name: "Convert", key: editorTools.CONVERT,
+      name: "Convert", key: EditorTools.CONVERT,
       render: <SwapIcon className={styles.icon} />
     },
     {
       type: "button",
-      name: "Copy Link", key: editorTools.COPY_LINK,
+      name: "Copy Link", key: EditorTools.COPY_LINK,
       render: <CopyLinkIcon className={styles.icon} />
     },
     {
       type: "button",
-      name: "Delete Block", key: editorTools.DELETE, color: "red",
+      name: "Delete Block", key: EditorTools.DELETE, color: "red",
       render: <DeleteIcon className={styles.icon} />
     },
   ],
   [
     {
       type: "popover",
-      name: "AI", key: editorTools.AI, color: "blue",
+      name: "AI", key: EditorTools.AI, color: "blue",
       render: <SparklesIcon className={styles.icon} />
     }
   ]
@@ -401,43 +401,43 @@ const Page = () => {
 
   const handleToolSelect = useCallback((e: any, key: string) => {
     switch (key) {
-      case editorTools.BOLD:
+      case EditorTools.BOLD:
         break;
-      case editorTools.ITALIC:
+      case EditorTools.ITALIC:
         break;
-      case editorTools.UNDERLINE:
+      case EditorTools.UNDERLINE:
         break;
-      case editorTools.LINE_THROUGH:
+      case EditorTools.LINE_THROUGH:
         break;
-      case editorTools.LINK:
+      case EditorTools.LINK:
         break;
-      case editorTools.INLINE_CODE:
+      case EditorTools.INLINE_CODE:
         break;
-      case editorTools.HIGHLIGHT:
+      case EditorTools.HIGHLIGHT:
         break;
-      case editorTools.SUBSCRIPT:
+      case EditorTools.SUBSCRIPT:
         break;
-      case editorTools.SUPERSCRIPT:
+      case EditorTools.SUPERSCRIPT:
         break;
-      case editorTools.EMOJI:
+      case EditorTools.EMOJI:
         break;
-      case editorTools.COLOR:
+      case EditorTools.COLOR:
         break;
-      case editorTools.BACKGROUND:
+      case EditorTools.BACKGROUND:
         break;
-      case editorTools.INDENT:
+      case EditorTools.INDENT:
         break;
-      case editorTools.SPACING:
+      case EditorTools.SPACING:
         break;
-      case editorTools.LINE_HEIGHT:
+      case EditorTools.LINE_HEIGHT:
         break;
-      case editorTools.LETTER_CASE:
+      case EditorTools.LETTER_CASE:
         break;
-      case editorTools.TEXT_ALIGN:
+      case EditorTools.TEXT_ALIGN:
         break;
-      case editorTools.CONVERT:
+      case EditorTools.CONVERT:
         break;
-      case editorTools.COPY_LINK:
+      case EditorTools.COPY_LINK:
         break;
       case "find_replace":
         updateFinderVisibility(!showFinder);

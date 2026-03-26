@@ -1,7 +1,7 @@
 import { ComponentProps } from "react";
 
-import { months, monthsOrder } from "@/data/general/datetime";
 import { useCalendarActions } from "@/data/stores";
+import { months, monthsOrder } from "@/lib/data/datetime";
 
 import { MonthView } from "..";
 import styles from "./YearView.module.scss";

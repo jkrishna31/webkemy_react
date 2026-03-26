@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-import { edges } from "@/constants/general.const";
+import { Edges } from "@/lib/constants/position";
 
 export interface ScrollStore {
   isLocked: boolean
@@ -16,7 +16,7 @@ export interface ScrollStore {
 }
 
 const useScrollStore = create<ScrollStore>((set) => ({
-  dir: edges.TOP,
+  dir: Edges.TOP,
   xEdge: "top",
   yEdge: "left",
   margin: 300,

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import { themes } from "@/constants/general.const";
+import { Themes } from "@/lib/constants/general";
 import { LangType, ThemeType } from "@/lib/types/general.types";
 
 export interface PreferenceStore {
@@ -17,7 +17,7 @@ export interface PreferenceStore {
 }
 
 const usePreferenceStore = create<PreferenceStore>()(persist((set) => ({
-    theme: themes.SYSTEM,
+    theme: Themes.SYSTEM,
     lang: "english",
     actions: {
         setTheme: (theme: ThemeType) => set((state) => ({ ...state, theme: theme })),

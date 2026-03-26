@@ -1,6 +1,6 @@
-import { edges } from "@/constants/general.const";
+import { Edges } from "@/lib/constants/position";
 
-export type LayoutPosition = typeof edges[keyof typeof edges] | "center";
+export type LayoutPosition = typeof Edges[keyof typeof Edges] | "center";
 
 export const hasDOM = () => {
   return typeof window !== "undefined" && typeof window.document !== "undefined" && typeof window.document.createElement !== "undefined";

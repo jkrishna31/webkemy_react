@@ -2,8 +2,8 @@
 
 import { ComponentProps, useRef, useState } from "react";
 
-import { weekDays, weekDaysOrder } from "@/data/general/datetime";
 import { useCalendarActions, useWindowSize } from "@/data/stores";
+import { weekDays, weekDaysOrder } from "@/lib/data/datetime";
 import { useMounted } from "@/lib/hooks/useMounted";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 import { compareDateByPrecision, getDaysInMonth, getFirstDayOfMonth, getRelativeMonth } from "@/lib/utils/datetime";

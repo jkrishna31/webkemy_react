@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata, Viewport } from "next";
 
 import { FrontendObservability } from "@/components/managers";
-import { THEME_BG_DARK, THEME_BG_LIGHT } from "@/constants/colors.const";
+import { THEME_BG_DARK, THEME_BG_LIGHT } from "@/constants/app.const";
 
 export const metadata: Metadata = {
   title: "Webkemy React",

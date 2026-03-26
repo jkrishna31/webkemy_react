@@ -2,8 +2,8 @@
 
 import { ComponentProps, ReactNode, useEffect, useRef } from "react";
 
-import { Keys } from "@/constants/keys.const";
 import { Scrollable } from "@/lib/components/elements/Scrollable";
+import { Keys } from "@/lib/constants/keys";
 import { isDisabled } from "@/lib/utils/dom";
 import { classes } from "@/lib/utils/style";
 

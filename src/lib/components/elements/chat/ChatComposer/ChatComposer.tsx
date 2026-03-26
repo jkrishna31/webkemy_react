@@ -1,12 +1,12 @@
 import { ComponentPropsWithoutRef, RefObject, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
-import { Keys } from "@/constants/keys.const";
 import { EmojiPicker } from "@/lib/components/elements/EmojiPicker";
 import { FilesPreview } from "@/lib/components/elements/FilesPreview";
 import { FileInput } from "@/lib/components/elements/inputs/FileInput";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
 import { TextArea } from "@/lib/components/elements/inputs/TextArea";
 import { Popover } from "@/lib/components/elements/Popover";
+import { Keys } from "@/lib/constants/keys";
 import { useFiles } from "@/lib/hooks/useFiles";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 import MicOnIcon from "@/lib/svgs/icons/MicOnIcon";

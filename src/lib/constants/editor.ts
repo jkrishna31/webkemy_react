@@ -1,4 +1,4 @@
-export const editorBlocks = {
+export const EditorBlocks = {
   H1: "h1",
   H2: "h2",
   H3: "h3",
@@ -23,7 +23,7 @@ export const editorBlocks = {
   MARKDOWN: "markdown",
 } as const;
 
-export const editorTools = {
+export const EditorTools = {
   UNDO: "undo",
   REDO: "redo",
   BOLD: "bold",
@@ -62,7 +62,7 @@ export const editorTools = {
 } as const;
 
 
-export const inputTypes = {
+export const InputTypes = {
   insert: {
     BLOCK: "insertBlock",
 

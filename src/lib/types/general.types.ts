@@ -1,8 +1,9 @@
-import { directions, themes } from "@/constants/general.const";
+import { Themes } from "@/lib/constants/general";
+import { Directions } from "@/lib/constants/position";
 
-export type ThemeType = Exclude<typeof themes[keyof typeof themes], "theme">;
+export type ThemeType = Exclude<typeof Themes[keyof typeof Themes], "theme">;
 export type LangType = "english";
-export type DirType = typeof directions[keyof typeof directions];
+export type DirType = typeof Directions[keyof typeof Directions];
 export type Color = "red" | "blue" | "green" | "yellow" | "orange" | "purple" | "pink" | "gray" | "lightblue" | "yellowgreen";
 export type BaseVariant = "solid" | "ghost" | "outlined" | "muted";
 export type Orientation = "vertical" | "horizontal";

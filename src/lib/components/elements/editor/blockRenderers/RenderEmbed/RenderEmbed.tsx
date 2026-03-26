@@ -1,4 +1,4 @@
-import { editorBlocks as b } from "@/constants/editor.const";
+import { EditorBlocks as b } from "@/lib/constants/editor";
 import { classes } from "@/lib/utils/style";
 
 import cStyles from "../block.module.scss";

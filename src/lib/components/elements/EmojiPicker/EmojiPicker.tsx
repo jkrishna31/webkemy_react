@@ -2,9 +2,6 @@
 
 import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-import { skinTones } from "@/constants/characters.const";
-import { Keys } from "@/constants/keys.const";
-import { categories, categoriesOrder } from "@/data/general/emojis";
 import emojisJSON from "@/data/json/emojis.json";
 import { Dropdown } from "@/lib/components/elements/Dropdown";
 import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
@@ -13,6 +10,9 @@ import { Item } from "@/lib/components/elements/Item";
 import { ItemList } from "@/lib/components/elements/ItemList";
 import { Popover } from "@/lib/components/elements/Popover";
 import { Tabs } from "@/lib/components/elements/Tabs";
+import { SkinTonesChars } from "@/lib/constants/colors";
+import { Keys } from "@/lib/constants/keys";
+import { categories, categoriesOrder } from "@/lib/data/emojis";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
@@ -35,7 +35,7 @@ export interface EmojiPickerProps extends ComponentProps<"div"> {
   onEmojiSelect?: () => void
 }
 
-const skinToneOptions = skinTones.map((sk, idx) => ({ label: sk, value: idx }));
+const skinToneOptions = SkinTonesChars.map((sk, idx) => ({ label: sk, value: idx }));
 
 // TODO: move to locales
 const i18nNames: { [key: string]: string } = {

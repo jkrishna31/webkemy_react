@@ -1,6 +1,6 @@
 import axios, { AxiosResponse, InternalAxiosRequestConfig } from "axios";
 
-import { contentTypes } from "@/constants/api.const";
+import { MIMETypes } from "@/lib/constants/mimeTypes";
 
 const axiosInstance = axios.create();
 
@@ -9,7 +9,7 @@ const axiosReqFulfilledInterceptor = (config: InternalAxiosRequestConfig) => {
     config.baseURL = process.env.NEXT_PUBLIC_SERVER_BASE_URL;
   }
   if (!config.headers["Content-Type"]) {
-    config.headers["Content-Type"] = contentTypes.JSON;
+    config.headers["Content-Type"] = MIMETypes.JSON;
   }
   return config;
 };

@@ -2,7 +2,7 @@
 
 import { ComponentProps, ElementType, memo, useCallback, useRef, useState } from "react";
 
-import { Keys } from "@/constants/keys.const";
+import { Keys } from "@/lib/constants/keys";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Resizable.module.scss";

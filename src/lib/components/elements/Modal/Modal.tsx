@@ -4,7 +4,7 @@ import { ComponentProps, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { Overlay } from "@/components/common/containers";
-import { positions } from "@/constants/general.const";
+import { Positions } from "@/lib/constants/position";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useKey } from "@/lib/hooks/useKey";
 import { useMounted } from "@/lib/hooks/useMounted";
@@ -12,11 +12,11 @@ import { classes } from "@/lib/utils/style";
 
 import styles from "./Modal.module.scss";
 
-const getClass = (pos?: (typeof positions)[keyof typeof positions]) => {
+const getClass = (pos?: (typeof Positions)[keyof typeof Positions]) => {
     switch (pos) {
-        case positions.BOTTOM_CENTER:
+        case Positions.BOTTOM_CENTER:
             return styles.bc;
-        case positions.TOP_CENTER:
+        case Positions.TOP_CENTER:
             return styles.tc;
         default:
             return styles.center;
@@ -24,7 +24,7 @@ const getClass = (pos?: (typeof positions)[keyof typeof positions]) => {
 };
 
 export interface ModalProps extends ComponentProps<"div"> {
-    pos?: (typeof positions)[keyof typeof positions];
+    pos?: (typeof Positions)[keyof typeof Positions];
     overlay?: boolean;
     onClose?: () => void;
     unmountOnClose?: boolean;

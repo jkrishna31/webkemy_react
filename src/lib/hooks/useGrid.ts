@@ -1,13 +1,13 @@
 import { RefObject, useCallback, useLayoutEffect, useMemo, useState } from "react";
 
-import { edges } from "@/constants/general.const";
 import { Resizers } from "@/lib/components/elements/Resizable";
+import { Edges } from "@/lib/constants/position";
 import { deepClone } from "@/lib/utils/object";
 
 export type TGridItem = { row?: [number, number]; col?: [number, number] };
 export type TItems = { [key: string]: TGridItem };
 
-export type Edge = typeof edges[keyof typeof edges];
+export type Edge = typeof Edges[keyof typeof Edges];
 
 export type TOptions = {
   step: number | "auto" | "grid";
@@ -47,7 +47,7 @@ export function useGrid(ref: RefObject<HTMLElement | null>, initialState?: TItem
   // when placing on the inline edge of the grid, increase the cols with the no. of col consumed by that item
   // when placing on the block edge of the grid, increase the rows with the no. of row consumed by that item
 
-  // don't allow resizing on the grid edges
+  // don't allow resizing on the grid Edges
 
   const addColumn = useCallback(() => {
 

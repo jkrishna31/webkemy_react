@@ -1,7 +1,7 @@
 import { RefObject, useCallback, useEffect, useEffectEvent, useLayoutEffect, useState } from "react";
 
-import { editorBlocks, inputTypes } from "@/constants/editor.const";
-import { Keys } from "@/constants/keys.const";
+import { EditorBlocks, InputTypes } from "@/lib/constants/editor";
+import { Keys } from "@/lib/constants/keys";
 import { Color } from "@/lib/types/general.types";
 import { getUniqueId } from "@/lib/utils/crypto";
 import { deepClone } from "@/lib/utils/object";
@@ -21,7 +21,7 @@ export interface BlockConfig {
 }
 export interface EditorBlockBase {
   id: string;
-  type: keyof typeof editorBlocks;
+  type: keyof typeof EditorBlocks;
   config?: BlockConfig;
 }
 
@@ -233,11 +233,11 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
   // INSERT ===================================================================
 
   const insertBlock = (
-    type?: typeof editorBlocks[keyof typeof editorBlocks],
+    type?: typeof EditorBlocks[keyof typeof EditorBlocks],
     options?: { to?: "before" | "after" },
   ) => {
     const { to } = options ?? {};
-    const newBlock = { id: getUniqueId(12), type: type || editorBlocks.PARA };
+    const newBlock = { id: getUniqueId(12), type: type || EditorBlocks.PARA };
     const newBlocks = [];
     if (data?.length) {
       const targetBlockId = selection?.startBlock;
@@ -437,17 +437,17 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     // if processed here, then prevent input [issue: others won't be able to listen to input event]
 
     // delete -----------------------------------------------------------------
-    if (e.inputType === inputTypes.delete.CONTENT_BACKWARD) {
+    if (e.inputType === InputTypes.delete.CONTENT_BACKWARD) {
 
-    } else if (e.inputType === inputTypes.delete.CONTENT_FORWARD) {
+    } else if (e.inputType === InputTypes.delete.CONTENT_FORWARD) {
 
-    } else if (e.inputType === inputTypes.delete.WORD_BACKWARD) {
+    } else if (e.inputType === InputTypes.delete.WORD_BACKWARD) {
 
-    } else if (e.inputType === inputTypes.delete.WORD_FORWARD) {
+    } else if (e.inputType === InputTypes.delete.WORD_FORWARD) {
 
     }
     // insert -----------------------------------------------------------------
-    else if (e.inputType === inputTypes.insert.TEXT) {
+    else if (e.inputType === InputTypes.insert.TEXT) {
       if (e.data) {
         insertText(e.data);
         e.preventDefault();

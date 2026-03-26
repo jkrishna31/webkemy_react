@@ -2,7 +2,7 @@
 
 import { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
 
-import { Keys } from "@/constants/keys.const";
+import { Keys } from "@/lib/constants/keys";
 
 import styles from "./SplitHandle.module.scss";
 

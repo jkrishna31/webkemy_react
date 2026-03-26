@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef } from "react";
 
-import { edges } from "@/constants/general.const";
 import { useScrollActions, useScrollDir, useScrollMargin, useScrollXEdge } from "@/data/stores";
+import { Edges } from "@/lib/constants/position";
 
 const WindowScrollManager = () => {
   const { updateStore: updateScrollStore } = useScrollActions();
@@ -24,15 +24,15 @@ const WindowScrollManager = () => {
     const dy = lastScrollCoords.current - window.scrollY;
     lastScrollCoords.current = Math.abs(window.scrollY);
     if (dy >= 0) {
-      dir = edges.TOP;
+      dir = Edges.TOP;
     } else if (dy < 0) {
-      dir = edges.BOTTOM;
+      dir = Edges.BOTTOM;
     }
-    if (isBottom && xEdge !== edges.BOTTOM) {
-      updateScrollStore("xEdge", edges.BOTTOM);
+    if (isBottom && xEdge !== Edges.BOTTOM) {
+      updateScrollStore("xEdge", Edges.BOTTOM);
     }
-    if (isTop && xEdge !== edges.TOP) {
-      updateScrollStore("xEdge", edges.TOP);
+    if (isTop && xEdge !== Edges.TOP) {
+      updateScrollStore("xEdge", Edges.TOP);
     }
     if (scrollDir !== dir) {
       updateScrollStore("dir", dir);

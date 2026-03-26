@@ -1,8 +1,8 @@
 import { ComponentProps, ReactNode } from "react";
 
-import { characters } from "@/constants/characters.const";
 import { Button } from "@/lib/components/elements/butttons";
 import { Divider } from "@/lib/components/elements/Divider";
+import { Characters } from "@/lib/constants/characters";
 import CheckmarkBadgeIcon from "@/lib/svgs/icons/CheckmarkBadgeIcon";
 import StarIcon from "@/lib/svgs/icons/StarIcon";
 import { Color } from "@/lib/types/general.types";
@@ -43,7 +43,7 @@ const PricingCard = ({
         <Button variant="solid" className={styles.cta}>{"Get "}{planName}</Button>
         <p className={styles.trial}>{"Start "}<span>{"Free 1 Month"}</span>{" Trial"}</p>
         <Divider
-          label={<p style={{ fontSize: "2.2rem" }}>{characters.PENTAGRAM} {characters.PENTAGRAM} {characters.PENTAGRAM}</p>}
+          label={<p style={{ fontSize: "2.2rem" }}>{Characters.PENTAGRAM} {Characters.PENTAGRAM} {Characters.PENTAGRAM}</p>}
           labelAlignment="center"
           className={styles.divider}
         />

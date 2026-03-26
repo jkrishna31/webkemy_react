@@ -1,4 +1,4 @@
-export const CONTINENTS = {
+export const Continents = {
   Africa: [
     "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde",
     "Cameroon", "Central African Republic", "Chad", "Comoros", "Congo", "Democratic Republic of the Congo",
@@ -37,7 +37,7 @@ export const CONTINENTS = {
   ],
 };
 
-export const COUNTRIES = {
+export const Countries = {
   "Afghanistan": { iso3: "AFG", code: "004", flag: "🇦🇫", },
   "Albania": { iso3: "ALB", code: "008", flag: "🇦🇱", },
   "Algeria": { iso3: "DZA", code: "012", flag: "🇩🇿", },

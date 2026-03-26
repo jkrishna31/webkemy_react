@@ -2,12 +2,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps, MouseEvent } from "react";
 
-import { characters } from "@/constants/characters.const";
 import { AudioPlayer } from "@/lib/components/elements/AudioPlayer";
 import { Button } from "@/lib/components/elements/butttons";
 import { ChatControls } from "@/lib/components/elements/chat/ChatItem";
 import { Progress } from "@/lib/components/elements/Progress";
 import { VideoPreview } from "@/lib/components/elements/VideoPlayer";
+import { Characters } from "@/lib/constants/characters";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
 import DownloadIcon from "@/lib/svgs/icons/DownloadIcon";
 import { formatSize } from "@/lib/utils/format";
@@ -159,7 +159,7 @@ const ChatMedia = ({
                   <p className={styles.filename}>{item.name}</p>
                   <p className={styles.meta}>
                     <span className={styles.size}>{formatSize(item.size ?? 0)}</span>
-                    <span className={styles.separator}>{characters.BULLET}</span>
+                    <span className={styles.separator}>{Characters.BULLET}</span>
                     <span className={styles.type}>{item.type}</span>
                   </p>
                 </Link>

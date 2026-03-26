@@ -1,6 +1,6 @@
 import { MetadataRoute } from "next";
 
-import { THEME_BG_DARK } from "@/constants/colors.const";
+import { THEME_BG_DARK } from "@/constants/app.const";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {

@@ -5,7 +5,6 @@ import Link from "next/link";
 import { ComponentProps, useState } from "react";
 
 import { SearchForm } from "@/components/common/forms";
-import { edges, SOURCE_CODE } from "@/constants/general.const";
 import { useAppMenu, useLayoutActions, useScrollDir, useSearchActions, useSearchMenu } from "@/data/stores";
 import { Avatar } from "@/lib/components/elements/Avatar";
 import { Header } from "@/lib/components/elements/Header";
@@ -19,7 +18,9 @@ import { classes } from "@/lib/utils/style";
 
 const AppSearchMobile = dynamic(() => import("@/components/common/general/AppSearchMobile/AppSearchMobile"), { ssr: false });
 
+import { SOURCE_CODE } from "@/constants/app.const";
 import { DrawerBody } from "@/lib/components/elements/Drawer";
+import { Edges } from "@/lib/constants/position";
 
 import { AppMenu, LangSelector, ThemeSelector } from "..";
 import styles from "./AppHeader.module.scss";
@@ -55,7 +56,7 @@ const AppHeader = ({
 
     return (
         <>
-            <Header visible={scrollDir === edges.TOP} className={styles.header}>
+            <Header visible={scrollDir === Edges.TOP} className={styles.header}>
                 <div className={styles.wrapper}>
                     <Link href="/" className={styles.logo_container} title="Elselog Home" aria-label="App Logo (Webkemy)">
                         <AppLogo className={styles.header_app_logo} />
