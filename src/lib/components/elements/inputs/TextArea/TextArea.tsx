@@ -19,7 +19,6 @@ export interface TextAreaProps extends ComponentProps<"textarea"> {
     onInput?: (event: FormEvent<HTMLTextAreaElement>) => void;
     multiline?: boolean;
     maxRows?: number;
-    onValueChange?: (value: string) => void;
 }
 
 const TextArea = ({

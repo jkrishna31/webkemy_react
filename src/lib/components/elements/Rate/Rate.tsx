@@ -4,13 +4,13 @@ import { ComponentProps, Fragment, ReactNode, useEffect, useEffectEvent, useId, 
 
 import StarIcon from "@/lib/svgs/icons/StarIcon";
 import { SVG } from "@/lib/svgs/misc";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Rate.module.scss";
 
 export interface RateProps extends ComponentProps<"fieldset"> {
-  color?: Color;
+  color?: TColor;
   value?: number;
   defaultValue?: number;
   min?: number;

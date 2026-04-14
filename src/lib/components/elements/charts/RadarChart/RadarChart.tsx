@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
 
 import { radarChartData } from "@/data/dummy/radarChartData";
-import ccStyles from "@/lib/styles/classes/chart.module.scss";
+import ccStyles from "@/lib/styles/modules/chart.module.scss";
 import { IMargins } from "@/lib/utils/chart";
 
 import styles from "./RadarChart.module.scss";

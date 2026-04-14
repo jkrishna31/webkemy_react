@@ -5,10 +5,9 @@ import { classes } from "@/lib/utils/style";
 import styles from "./GeneralInput.module.scss";
 
 export interface GeneralInputProps extends ComponentProps<"input"> {
-    onValueChange?: (value: string | number | Date) => void;
 }
 
-const GeneralInput = ({ onValueChange, className, ...props }: GeneralInputProps) => {
+const GeneralInput = ({ className, ...props }: GeneralInputProps) => {
     return (
         <input
             className={classes(styles.input, className)}

@@ -5,3 +5,14 @@ export type RequireOnly<T, K extends keyof T> =
 // enforce atleast one is present
 export type AtLeastOne<T, Keys extends keyof T = keyof T> =
   Partial<T> & { [K in Keys]: Required<Pick<T, K>> }[Keys];
+
+export type DirectKeys<T> = T extends object ? keyof T : never;
+
+export type LeafPrimitive = | string | number | boolean | bigint | symbol | null | undefined;
+export type LeafValues<T> = T extends object ? { [K in keyof T]: LeafValues<T[K]> }[keyof T] : T;
+
+export type IsPlainObject<T> =
+  T extends Function ? false :
+  T extends Array<any> ? true :
+  T extends object ? true :
+  false;

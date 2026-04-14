@@ -1,12 +1,12 @@
 import { ComponentProps } from "react";
 
-import { Orientation } from "@/lib/types/general.types";
+import { TOrientation } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Slider.module.scss";
 
 export interface SliderProps extends ComponentProps<"input"> {
-  orientation?: Orientation;
+  orientation?: TOrientation;
   variant?: "tube" | "rod";
   wrapperClass?: string;
   showFill?: boolean;

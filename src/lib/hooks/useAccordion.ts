@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export function useAccordion<T extends string | number>(mode: "single" | "multiple", defaultActive?: Array<T>) {
-  const [activeSections, setActiveSections] = useState<Array<number | string>>(defaultActive ?? []);
+  const [activeSections, setActiveSections] = useState<Array<T>>(defaultActive ?? []);
 
   const updateAccordion = (key: T) => {
     setActiveSections(currActiveSec => {

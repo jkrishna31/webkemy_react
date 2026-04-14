@@ -4,7 +4,7 @@ import * as d3 from "d3";
 import { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
 
 import { cc5 } from "@/data/dummy/chartColors";
-import ccStyles from "@/lib/styles/classes/chart.module.scss";
+import ccStyles from "@/lib/styles/modules/chart.module.scss";
 import { addBasicFocus, getTooltipAnchor, IMargins, updateBasicFocus } from "@/lib/utils/chart";
 
 import styles from "./PackedCircles.module.scss";

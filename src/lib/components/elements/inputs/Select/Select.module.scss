@@ -8,7 +8,7 @@
 
 .input {
     width: 100%;
-    height: 4rem;
+    height: auto;
     border-radius: .4rem;
     padding-block: 1rem;
     padding-left: 1rem;
@@ -26,11 +26,11 @@
 }
 
 .dd_btn {
+    align-self: stretch;
     flex-shrink: 0;
     min-width: 3.4rem;
-    min-height: 4rem;
     width: fit-content;
-    height: 100%;
+    height: auto;
     color: var(--fg-s);
     outline-offset: -.2rem;
 

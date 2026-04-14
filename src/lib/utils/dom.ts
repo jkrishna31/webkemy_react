@@ -11,13 +11,13 @@ export const calculateRenderPosition = (
   targetBoundingRect: DOMRect,
   options: {
     placement: Exclude<LayoutPosition, "center">;
-    alignment: LayoutPosition;
-    offset: number;
+    alignment?: LayoutPosition;
+    anchorMargin: number;
+    viewportMargin?: number;
     overlap?: boolean | "prefer";
-
   }
 ) => {
-  const { placement, alignment, offset = 8, overlap } = options;
+  const { placement, alignment, anchorMargin = 0, overlap, viewportMargin = 0 } = options;
 
   const vw = window.innerWidth;
   const vh = window.innerHeight;
@@ -29,132 +29,188 @@ export const calculateRenderPosition = (
     right?: number;
     maxHeight?: number | string;
     maxWidth?: number | string;
+    placement?: LayoutPosition;
+    alignment?: LayoutPosition;
   } = {
-    top: offset,
-    left: offset,
+    top: viewportMargin,
+    left: viewportMargin,
   };
 
-  if (!placement || placement === "left" || placement === "right") {
-    const _leftSpace = Math.floor(anchorBoundingRect.x + (overlap ? anchorBoundingRect.width : 0) - offset - (overlap ? 0 : offset));
-    const _rightSpace = Math.floor(vw - anchorBoundingRect.x - (overlap ? 0 : anchorBoundingRect.width) - offset - (overlap ? 0 : offset));
-    const _topSpace = Math.floor(anchorBoundingRect.y - offset);
-    const _bottomSpace = Math.floor(vh - anchorBoundingRect.y - anchorBoundingRect.height - offset);
+  const totalAxialMargin = viewportMargin + anchorMargin;
 
-    const isCenterAlignPossible = ((_topSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset))
-      && ((_bottomSpace + anchorBoundingRect.height / 2) >= (targetBoundingRect.height / 2 + offset));
-    const isTopAlignPossible = _bottomSpace >= (targetBoundingRect.height + offset);
-    const isBottomAlignPossible = _topSpace >= (targetBoundingRect.height + offset);
+  const _leftSpace = Math.floor(anchorBoundingRect.x);
+  const _rightSpace = Math.floor(vw - anchorBoundingRect.x - anchorBoundingRect.width);
+  const _topSpace = Math.floor(anchorBoundingRect.y);
+  const _bottomSpace = Math.floor(vh - anchorBoundingRect.y - anchorBoundingRect.height);
 
-    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
-      || (alignment === "top" && isTopAlignPossible ? "top" : null)
-      || (alignment === "bottom" && isBottomAlignPossible ? "bottom" : null)
-      || (isCenterAlignPossible ? "center" : null)
-      || (isBottomAlignPossible ? "bottom" : null)
-      || (isTopAlignPossible ? "top" : null);
+  if (!placement || placement === "top" || placement === "bottom") {
+    // finalize alignnment [left, right, center]
+    const isLeftAlignPossible = _rightSpace + anchorBoundingRect.width - viewportMargin >= targetBoundingRect.width;
+    const isRightAlignPossible = _leftSpace + anchorBoundingRect.width - viewportMargin >= targetBoundingRect.width;
+
+    let finalAlignment: "left" | "right" | "center" | undefined;
+
+    if (alignment === "left" && isLeftAlignPossible) finalAlignment = "left";
+    else if (alignment === "right" && isRightAlignPossible) finalAlignment = "right";
+    else if (isRightAlignPossible) finalAlignment = "right";
+    else if (isLeftAlignPossible) finalAlignment = "left";
+    else {
+      if (_leftSpace >= (targetBoundingRect.width / 2 - viewportMargin) && _rightSpace >= (targetBoundingRect.width / 2 - viewportMargin)) {
+        finalAlignment = "center";
+      }
+    }
 
     switch (finalAlignment) {
-      case "top": {
-        position.top = anchorBoundingRect.y;
+      case "left":
+        position.left = anchorBoundingRect.x;
         break;
-      }
-      case "center": {
-        position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+      case "right":
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width - targetBoundingRect.width;
         break;
-      }
-      case "bottom": {
-        position.top = anchorBoundingRect.y + anchorBoundingRect.height - targetBoundingRect.height;
+      case "center":
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width / 2 - targetBoundingRect.width / 2;
         break;
-      }
-      default: {
-        position.top = offset;
-        position.maxHeight = overlap ? `calc(100vh - ${offset * 2}` : `${_bottomSpace >= _topSpace ? _bottomSpace : _topSpace}px`;
-      }
+      default:
+        position.left = viewportMargin;
+        position.maxWidth = `calc(100vw - ${viewportMargin * 2}px)`;
     }
 
-    const isLeftPlacementPossible = _leftSpace >= targetBoundingRect.width;
-    const isRightPlacementPossible = _rightSpace >= targetBoundingRect.width;
+    // finalize placement [top, bottom, center]
+    const isTopPlacementPossible = (_topSpace - totalAxialMargin) >= targetBoundingRect.height;
+    const isBottomPlacementPossible = (_bottomSpace - totalAxialMargin) >= targetBoundingRect.height;
 
-    const finalPlacement = (placement === "left" && isLeftPlacementPossible ? "left" : null)
-      || (placement === "right" && isRightPlacementPossible ? "right" : null)
-      || (isLeftPlacementPossible ? "left" : null)
-      || (isRightPlacementPossible ? "right" : null);
+    let finalPlacement: "top" | "bottom" | "center" | undefined;
+    let withOverlap: boolean | undefined;
+
+    if (placement === "top" && isTopPlacementPossible) finalPlacement = "top";
+    else if (placement === "bottom" && isBottomPlacementPossible) finalPlacement = "bottom";
+    else if (isBottomPlacementPossible) finalPlacement = "bottom";
+    else if (isTopPlacementPossible) finalPlacement = "top";
+
+    if (!finalPlacement) {
+      // const _newTopSpace = _topSpace + anchorBoundingRect.height;
+      // const _newBottomSpace = _bottomSpace + anchorBoundingRect.width;
+
+      // const isTopPlacementPossible = (_newTopSpace - totalAxialMargin) >= targetBoundingRect.height;
+      // const isBottomPlacementPossible = (_newBottomSpace - totalAxialMargin) >= targetBoundingRect.height;
+
+      // if (placement === "top" && isTopPlacementPossible) finalPlacement = "top";
+      // else if (placement === "bottom" && isBottomPlacementPossible) finalPlacement = "bottom";
+      // else if (isBottomPlacementPossible) finalPlacement = "bottom";
+      // else if (isTopPlacementPossible) finalPlacement = "top";
+
+      // if (isTopPlacementPossible || isBottomPlacementPossible) withOverlap = true;
+
+      const isCenterPlacementPossible = (_topSpace + anchorBoundingRect.height / 2 - viewportMargin) >= targetBoundingRect.height / 2 && (_bottomSpace + anchorBoundingRect.height / 2 - viewportMargin) >= targetBoundingRect.height / 2;
+
+      if (isCenterPlacementPossible) finalPlacement = "center";
+    }
 
     switch (finalPlacement) {
-      case "left": {
-        position.left = anchorBoundingRect.x - offset - targetBoundingRect.width;
+      case "top":
+        position.top = anchorBoundingRect.y - targetBoundingRect.height + (withOverlap ? anchorBoundingRect.height : -anchorMargin);
+        position.maxHeight = `${_topSpace + (withOverlap ? (anchorBoundingRect.height - viewportMargin) : -totalAxialMargin)}px`;
         break;
-      }
-      case "right": {
-        position.left = anchorBoundingRect.x + anchorBoundingRect.width + offset;
+      case "bottom":
+        position.top = anchorBoundingRect.y + (withOverlap ? 0 : (anchorBoundingRect.height + anchorMargin));
+        position.maxHeight = `${_bottomSpace + (withOverlap ? (anchorBoundingRect.height - viewportMargin) : -totalAxialMargin)}px`;
         break;
-      }
-      default: {
-        position.left = (_leftSpace >= _rightSpace) ? (anchorBoundingRect.x - offset - targetBoundingRect.width) : offset;
-      }
+      case "center":
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
+        break;
+      default:
+        position.top = viewportMargin;
+        position.maxHeight = `calc(100vh - ${viewportMargin * 2}px)`;
     }
-    position.maxWidth = overlap ? `calc(100vw - ${offset * 2}px)` : `${(_leftSpace >= _rightSpace) ? _leftSpace : _rightSpace}px`;
+
+    position.placement = finalPlacement;
+    position.alignment = finalAlignment;
 
     return position;
   }
 
-  if (!placement || placement === "top" || placement === "bottom") {
-    const _topSpace = Math.floor(anchorBoundingRect.y + (overlap ? anchorBoundingRect.height : 0) - offset - (overlap ? 0 : offset));
-    const _bottomSpace = Math.floor(vh - anchorBoundingRect.y - (overlap ? 0 : anchorBoundingRect.height) - offset - (overlap ? 0 : offset));
-    const _leftSpace = Math.floor(anchorBoundingRect.x + (alignment === "right" ? anchorBoundingRect.width : 0) - offset);
-    const _rightSpace = Math.floor(vw - anchorBoundingRect.x - (alignment === "left" ? 0 : anchorBoundingRect.width) - offset);
+  if (!placement || placement === "left" || placement === "right") {
+    // finalize alignnment [top, bottom, center]
+    const isTopAlignPossible = _bottomSpace + anchorBoundingRect.height - viewportMargin >= targetBoundingRect.height;
+    const isBottomAlignPossible = _topSpace + anchorBoundingRect.height - viewportMargin >= targetBoundingRect.height;
 
-    const isCenterAlignPossible = ((_leftSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset)) && ((_rightSpace + anchorBoundingRect.width / 2) >= (targetBoundingRect.width / 2 + offset));
-    const isLeftAlignPossible = _rightSpace >= (targetBoundingRect.width + offset);
-    const isRightAlignPossible = _leftSpace >= (targetBoundingRect.width + offset);
+    let finalAlignment: "top" | "bottom" | "center" | undefined;
 
-    const finalAlignment = (alignment === "center" && isCenterAlignPossible ? "center" : null)
-      || (alignment === "left" && isLeftAlignPossible ? "left" : null)
-      || (alignment === "right" && isRightAlignPossible ? "right" : null)
-      || (isCenterAlignPossible ? "center" : null)
-      || (isLeftAlignPossible ? "left" : null)
-      || (isRightAlignPossible ? "right" : null);
+    if (alignment === "top" && isTopAlignPossible) finalAlignment = "top";
+    else if (alignment === "bottom" && isBottomAlignPossible) finalAlignment = "bottom";
+    else if (isBottomAlignPossible) finalAlignment = "bottom";
+    else if (isTopAlignPossible) finalAlignment = "top";
+    else {
+      if (_topSpace >= (targetBoundingRect.height / 2 + viewportMargin) && _bottomSpace >= (targetBoundingRect.height / 2 + viewportMargin)) {
+        finalAlignment = "center";
+      }
+    }
 
     switch (finalAlignment) {
-      case "left": {
-        position.left = anchorBoundingRect.x;
+      case "top":
+        position.top = anchorBoundingRect.y;
         break;
-      }
-      case "center": {
-        position.left = anchorBoundingRect.x + anchorBoundingRect.width / 2 - targetBoundingRect.width / 2;
+      case "bottom":
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height - targetBoundingRect.height;
         break;
-      }
-      case "right": {
-        position.left = anchorBoundingRect.x + anchorBoundingRect.width - targetBoundingRect.width;
+      case "center":
+        position.top = anchorBoundingRect.y + anchorBoundingRect.height / 2 - targetBoundingRect.height / 2;
         break;
-      }
-      default: {
-        position.left = offset;
-        position.maxWidth = `calc(100vw - ${offset * 2}px)`;
-      }
+      default:
+        position.top = viewportMargin;
+        position.maxHeight = `calc(100vh - ${viewportMargin * 2}px)`;
     }
 
-    const isTopPlacementPossible = _topSpace >= targetBoundingRect.height;
-    const isBottomPlacementPossible = _bottomSpace >= targetBoundingRect.height;
+    // finalize placement [left, right, center]
+    const isLeftPlacementPossible = (_leftSpace - totalAxialMargin) >= targetBoundingRect.width;
+    const isRightPlacementPossible = (_rightSpace - totalAxialMargin) >= targetBoundingRect.width;
 
-    const finalPlacement = (placement === "top" && isTopPlacementPossible ? "top" : null)
-      || (placement === "bottom" && isBottomPlacementPossible ? "bottom" : null)
-      || (isTopPlacementPossible ? "top" : null)
-      || (isBottomPlacementPossible ? "bottom" : null);
+    let finalPlacement: "left" | "right" | "center" | undefined;
+    let withOverlap: boolean | undefined;
+
+    if (placement === "left" && isLeftPlacementPossible) finalPlacement = "left";
+    else if (placement === "right" && isRightPlacementPossible) finalPlacement = "right";
+    else if (isRightPlacementPossible) finalPlacement = "right";
+    else if (isLeftPlacementPossible) finalPlacement = "left";
+
+    if (!finalPlacement) {
+      // const _newLeftSpace = _leftSpace + anchorBoundingRect.width;
+      // const _newRightSpace = _rightSpace + anchorBoundingRect.width;
+
+      // const isLeftPlacementPossible = (_newLeftSpace - totalAxialMargin) >= targetBoundingRect.width;
+      // const isRightPlacementPossible = (_newRightSpace - totalAxialMargin) >= targetBoundingRect.width;
+
+      // if (placement === "left" && isLeftPlacementPossible) finalPlacement = "left";
+      // else if (placement === "right" && isRightPlacementPossible) finalPlacement = "right";
+      // else if (isRightPlacementPossible) finalPlacement = "right";
+      // else if (isLeftPlacementPossible) finalPlacement = "left";
+
+      // if (isLeftPlacementPossible || isRightPlacementPossible) withOverlap = true;
+
+      const isCenterPlacementPossible = (_leftSpace + anchorBoundingRect.width / 2 - viewportMargin) >= targetBoundingRect.width / 2 && (_rightSpace + anchorBoundingRect.width / 2 - viewportMargin) >= targetBoundingRect.width / 2;
+
+      if (isCenterPlacementPossible) finalPlacement = "center";
+    }
 
     switch (finalPlacement) {
-      case "top": {
-        position.top = anchorBoundingRect.y - offset - targetBoundingRect.height;
+      case "left":
+        position.left = anchorBoundingRect.x - targetBoundingRect.width + (withOverlap ? anchorBoundingRect.width : -anchorMargin);
+        position.maxWidth = `${_leftSpace + (withOverlap ? (anchorBoundingRect.width - viewportMargin) : -totalAxialMargin)}px`;
         break;
-      }
-      case "bottom": {
-        position.top = anchorBoundingRect.y + anchorBoundingRect.height + offset;
+      case "right":
+        position.left = anchorBoundingRect.x + (withOverlap ? 0 : (anchorBoundingRect.width + anchorMargin));
+        position.maxWidth = `${_rightSpace + (withOverlap ? (anchorBoundingRect.width - viewportMargin) : -totalAxialMargin)}px`;
         break;
-      }
-      default: {
-        position.top = (_bottomSpace >= _topSpace) ? (anchorBoundingRect.y + anchorBoundingRect.height + offset) : offset;
-      }
+      case "center":
+        position.left = anchorBoundingRect.x + anchorBoundingRect.width / 2 - targetBoundingRect.width / 2;
+        break;
+      default:
+        position.left = viewportMargin;
+        position.maxWidth = `calc(100vw - ${viewportMargin * 2}px)`;
     }
-    position.maxHeight = overlap ? `calc(100vh - ${offset * 2})` : `${(_bottomSpace >= _topSpace) ? _bottomSpace : _topSpace}px`;
+
+    position.placement = finalPlacement;
+    position.alignment = finalAlignment;
 
     return position;
   }

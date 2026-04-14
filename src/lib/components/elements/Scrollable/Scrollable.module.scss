@@ -2,6 +2,12 @@
   position: relative;
 }
 
+.hint {
+  --left-hint: 0rem;
+  --right-hint: 0rem;
+  mask-image: linear-gradient(to right, transparent, var(--bg-p) var(--left-hint), var(--bg-p) calc(100% - var(--right-hint)), transparent);
+}
+
 .container {
   overflow: auto;
   overscroll-behavior: contain;

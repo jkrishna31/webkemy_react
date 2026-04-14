@@ -1,13 +1,15 @@
 "use client";
 
-import { ComponentProps, useRef } from "react";
+import { ComponentProps, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { Overlay } from "@/components/common/containers";
+import { Button } from "@/lib/components/elements/butttons";
+import { Overlay } from "@/lib/components/elements/Overlay";
 import { Positions } from "@/lib/constants/position";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useKey } from "@/lib/hooks/useKey";
 import { useMounted } from "@/lib/hooks/useMounted";
+import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Modal.module.scss";
@@ -28,10 +30,12 @@ export interface ModalProps extends ComponentProps<"div"> {
     overlay?: boolean;
     onClose?: () => void;
     unmountOnClose?: boolean;
+    closeonEsc?: boolean | "capture";
 }
 
 const Modal = ({
-    pos, overlay, onClose, unmountOnClose, children, className,
+    pos, overlay, onClose, unmountOnClose, closeonEsc = "capture",
+    children, className,
     ...props
 }: ModalProps) => {
     // set aria-hidden and inert to true for .page element
@@ -41,7 +45,7 @@ const Modal = ({
 
     useFocusTrap(ref, true);
 
-    useKey(onClose as any, ["Escape"], "keydown", { capture: true });
+    useKey(closeonEsc ? onClose : undefined, ["Escape"], "keydown", { capture: closeonEsc === "capture" });
 
     if (!isMounted) return;
 
@@ -59,5 +63,46 @@ const Modal = ({
         </>
     ), document.body);
 };
+
+const Header = ({
+    titleText, onClose,
+    className, children,
+    ...restProps
+}: {
+    titleText?: ReactNode;
+    onClose?: () => void;
+} & ComponentProps<"div">) => {
+    return (
+        <div className={classes(styles.header, className)} {...restProps}>
+            {!!titleText && <h3 className={styles.title}>{titleText}</h3>}
+            {children}
+            {!!onClose && (
+                <Button variant="muted" className={styles.close_btn}>
+                    <CrossIcon />
+                </Button>
+            )}
+        </div>
+    );
+};
+
+const Body = ({ className, children, ...restProps }: ComponentProps<"div">) => {
+    return (
+        <div className={classes(styles.body, className)} {...restProps}>
+            {children}
+        </div>
+    );
+};
+
+const Footer = ({ className, children, ...restProps }: ComponentProps<"div">) => {
+    return (
+        <div className={classes(styles.footer, className)} {...restProps}>
+            {children}
+        </div>
+    );
+};
+
+Modal.Header = Header;
+Modal.Body = Body;
+Modal.Footer = Footer;
 
 export default Modal;

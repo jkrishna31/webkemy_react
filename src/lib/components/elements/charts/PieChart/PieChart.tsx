@@ -4,8 +4,8 @@ import * as d3 from "d3";
 import { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
 
 import { cc1 } from "@/data/dummy/chartColors";
-import ccStyles from "@/lib/styles/classes/chart.module.scss";
-import { formatNumber } from "@/lib/utils/format";
+import ccStyles from "@/lib/styles/modules/chart.module.scss";
+import { formatNumber } from "@/lib/utils/number";
 import { debounce } from "@/lib/utils/rateLimit";
 
 import styles from "./PieChart.module.scss";

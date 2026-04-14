@@ -1,31 +1,101 @@
 "use client";
 
-import { useState } from "react";
-
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/components/elements/Badge";
-import { Tree } from "@/lib/components/elements/Tree";
+import { Tree, TreeNode } from "@/lib/components/elements/Tree";
+import { useAccordion } from "@/lib/hooks/useAccordion";
 import FileIcon from "@/lib/svgs/icons/FileIcon";
 import FolderIcon from "@/lib/svgs/icons/FolderIcon";
 import FolderOpenIcon from "@/lib/svgs/icons/FolderOpenIcon";
-import { getUniqueId } from "@/lib/utils/crypto";
 
 import styles from "./page.module.scss";
 
-const virtualIds = Array.from({ length: 2000 }).map((_, idx) => `${idx}-${getUniqueId(6)}`);
+
+type TNode = TreeNode<TNode>;
+
+const dummyData: TreeNode<TNode>[] = [
+  {
+    id: "components",
+    label: "Components",
+    children: [
+      {
+        id: "general",
+        label: "general",
+        children: [
+          {
+            id: "calendar_widget",
+            label: "CalendarWidget",
+            children: [
+              {
+                id: "cwtsx",
+                label: "CalendarWidget.tsx",
+              },
+              {
+                id: "cwscss",
+                label: "CalendarWidget.module.scss",
+              },
+              {
+                id: "cwi",
+                label: "index.ts",
+              },
+            ],
+          },
+          {
+            id: "gi",
+            label: "index.ts",
+          },
+        ],
+      },
+      {
+        id: "icons",
+        label: "icons",
+        children: [
+          {
+            id: "cdi",
+            label: "ChevronDownIcon.tsx",
+          },
+          {
+            id: "ai",
+            label: "AddIcon.tsx",
+          },
+          {
+            id: "anei",
+            label: "ArrowNorthEastIcon.tsx",
+          },
+          {
+            id: "hi",
+            label: "HomeIcon.tsx",
+          },
+          {
+            id: "ii",
+            label: "index.ts",
+          },
+        ],
+      },
+      {
+        id: "ci",
+        label: "index.ts",
+      },
+    ],
+  },
+  {
+    id: "pages",
+    label: "Pages",
+    children: [
+      {
+        id: "cup",
+        label: "contact_us_page.tsx",
+      },
+      {
+        id: "ppp",
+        label: "privacy_policy_page.tsx",
+      },
+    ],
+  },
+];
 
 const Page = () => {
-  const [activeTreeSection, setActiveTreeSection] = useState<string[]>([]);
-
-  const updateActiveTreeSection = (id: string, type?: "open" | "close") => {
-    setActiveTreeSection(currATS => {
-      if (currATS.includes(id)) {
-        return [...currATS.filter(item => item !== id)];
-      } else {
-        return [...currATS, id];
-      }
-    });
-  };
+  const { activeSections, updateAccordion } = useAccordion<string>("multiple");
 
   const renderIcon = (type: "file" | "folder", open?: boolean) => {
     if (type === "file") {
@@ -43,20 +113,17 @@ const Page = () => {
     );
   };
 
-  const renderTreeNode = (
-    id: string, label: string, type: "file" | "folder", open?: boolean,
-    children?: number,
-  ) => {
+  const renderNode = (node: TNode, options?: { isExpanded?: boolean; depth?: number; }) => {
+    const isFolder = node.children?.length;
     return (
       <div
         className="flex items-center gap-[.6rem] py-[.6rem] px-[.8rem] border-solid border-[.1rem] border-transparent hover:border-[var(--border-s)] rounded-[.4rem]"
-        onClick={type === "folder" ? () => updateActiveTreeSection(id) : undefined}
       >
-        {renderIcon(type, open)}
-        {label}
+        {renderIcon(isFolder ? "folder" : "file", options?.isExpanded)}
+        {node.label}
         {
-          children ? (
-            <Badge float={null}>{children}</Badge>
+          node.children?.length ? (
+            <Badge float={null}>{node.children.length}</Badge>
           ) : null
         }
       </div>
@@ -69,121 +136,11 @@ const Page = () => {
 
       <Tree
         className={styles.tree}
-        expandedIds={activeTreeSection}
+        expandedIds={activeSections}
         renderWhileClosed={false}
-        tree={[
-          {
-            id: virtualIds[0],
-            render: (open) => renderTreeNode(
-              virtualIds[0], "components", "folder", open,
-            ),
-            onExpand: (id) => updateActiveTreeSection(id),
-            children: [
-              {
-                id: virtualIds[1],
-                render: (open) => renderTreeNode(
-                  virtualIds[1], "general", "folder", open,
-                ),
-                onExpand: (id) => updateActiveTreeSection(id),
-                children: [
-                  {
-                    id: virtualIds[2],
-                    render: (open) => renderTreeNode(
-                      virtualIds[2], "CalendarWidget", "folder", open, 2
-                    ),
-                    onExpand: (id) => updateActiveTreeSection(id),
-                    children: [
-                      {
-                        id: virtualIds[8],
-                        render: renderTreeNode(
-                          virtualIds[8], "CalendarWidget.tsx", "file",
-                        ),
-                      },
-                      {
-                        id: virtualIds[9],
-                        render: renderTreeNode(
-                          virtualIds[9], "CalendarWidget.module.scss", "file",
-                        ),
-                      },
-                    ]
-                  },
-                  {
-                    id: virtualIds[3],
-                    render: renderTreeNode(
-                      virtualIds[3], "index.ts", "file",
-                    ),
-                  },
-                ]
-              },
-              {
-                id: virtualIds[10],
-                render: (open) => renderTreeNode(
-                  virtualIds[10], "icons", "folder", open, 5
-                ),
-                onExpand: (id) => updateActiveTreeSection(id),
-                children: [
-                  {
-                    id: virtualIds[11],
-                    render: renderTreeNode(
-                      virtualIds[11], "ChevronDownIcon.tsx", "file",
-                    ),
-                  },
-                  {
-                    id: virtualIds[12],
-                    render: renderTreeNode(
-                      virtualIds[12], "AddIcon.tsx", "file",
-                    ),
-                  },
-                  {
-                    id: virtualIds[13],
-                    render: renderTreeNode(
-                      virtualIds[13], "ArrowNorthEastIcon.tsx", "file",
-                    ),
-                  },
-                  {
-                    id: virtualIds[14],
-                    render: renderTreeNode(
-                      virtualIds[14], "HomeIcon.tsx", "file",
-                    ),
-                  },
-                  {
-                    id: virtualIds[15],
-                    render: renderTreeNode(
-                      virtualIds[15], "index.ts", "file",
-                    ),
-                  },
-                ],
-              },
-              {
-                id: virtualIds[4],
-                render: renderTreeNode(
-                  virtualIds[4], "index.ts", "file",
-                ),
-              },
-            ],
-          },
-          {
-            id: virtualIds[5],
-            render: (open) => renderTreeNode(
-              virtualIds[5], "pages", "folder", open, 2
-            ),
-            onExpand: (id) => updateActiveTreeSection(id),
-            children: [
-              {
-                id: virtualIds[6],
-                render: renderTreeNode(
-                  virtualIds[6], "contact_us_page.tsx", "file",
-                ),
-              },
-              {
-                id: virtualIds[7],
-                render: renderTreeNode(
-                  virtualIds[7], "privacy_policy_page.tsx", "file",
-                ),
-              },
-            ]
-          }
-        ]}
+        onNodeExpand={updateAccordion}
+        renderNode={renderNode}
+        tree={dummyData}
       />
     </main>
   );

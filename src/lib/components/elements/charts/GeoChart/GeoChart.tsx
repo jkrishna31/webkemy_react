@@ -3,7 +3,7 @@
 import * as d3 from "d3";
 import { FC, HTMLProps, useCallback, useEffect, useRef } from "react";
 
-import ccStyles from "@/lib/styles/classes/chart.module.scss";
+import ccStyles from "@/lib/styles/modules/chart.module.scss";
 import { IAxes, IMargins } from "@/lib/utils/chart";
 
 import styles from "./GeoChart.module.scss";

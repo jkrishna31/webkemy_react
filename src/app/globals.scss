@@ -2,15 +2,17 @@
 @use "@/lib/styles/colors_dark" as *;
 @use "@/lib/styles/variables";
 @use "@/lib/styles/reset";
-@use "@/lib/styles/common";
+@use "@/lib/styles/general";
+@use "@/lib/styles/components/skeleton";
+@use "@/lib/styles/components/input";
 
 // @import "tailwindcss";
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  @include colors_light;
-}
+// :root {
+//   interpolate-size: allow-keywords;
+// }
 
 @media (prefers-color-scheme: dark) {
   :root {

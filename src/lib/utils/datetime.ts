@@ -279,3 +279,13 @@ export const getTimeParts = (input = new Date()) => {
 
     return [ampm, hours12, minutes, seconds, ms];
 };
+
+export const getFormattedTime = (values: { [key in TimeField]?: number }) => {
+    let formattedTime = "";
+    if (values.hour) {
+        formattedTime += values.hour.toString().padStart(2, "0") + ":";
+    }
+    formattedTime += values.minute?.toString().padStart(2, "0") + ":";
+    formattedTime += values.second?.toString().padStart(2, "0");
+    return formattedTime;
+};

@@ -25,6 +25,7 @@ export interface PopoverProps extends ComponentProps<"div"> {
   closeOnOutsideClick?: boolean | "capture";
   lockScroll?: boolean;
   anchorMargin?: number;
+  viewportMargin?: number;
   usePortal?: boolean;
   useTransform?: boolean;
   closeOnEsc?: boolean | "capture";
@@ -38,8 +39,9 @@ const Popover = ({
   anchor,
   coords,
   placement = "bottom",
-  alignment = "center",
+  alignment,
   anchorMargin = 8,
+  viewportMargin = 8,
   isTooltip,
   className,
   children,
@@ -113,7 +115,7 @@ const Popover = ({
 
       const { top, left, maxHeight, maxWidth } = calculateRenderPosition(
         anchorBoundingRect, popoverBoundingRect,
-        { placement, alignment, offset: anchorMargin, overlap },
+        { placement, alignment, anchorMargin, overlap, viewportMargin },
       );
 
       if (maxHeight) elem.style.setProperty("--popover-max-height", String(maxHeight));
@@ -133,7 +135,7 @@ const Popover = ({
         requestAnimationFrame(() => elem.style.setProperty("--popover-transition-dur", ".2s"));
       });
     });
-  }, [alignment, anchor, anchorMargin, coords, overlap, placement, useTransform]);
+  }, [alignment, anchor, anchorMargin, coords, overlap, placement, useTransform, viewportMargin]);
 
   useFocusTrap(popoverRef, trapFocus && !isTooltip);
 
@@ -260,7 +262,7 @@ const Popover = ({
     ? createPortal((
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.popover, styles[animation], className)}
+        className={classes(styles.popover, styles[animation], className, "popover")}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}
@@ -272,7 +274,7 @@ const Popover = ({
     : (
       <div
         ref={mergeRefs(popoverRef, ref)}
-        className={classes(styles.popover, styles[animation], className)}
+        className={classes(styles.popover, styles[animation], className, "popover")}
         data-id={popoverId}
         data-popover={isTooltip ? "tooltip" : ""}
         tabIndex={-1}

@@ -3,5 +3,4 @@ export * from "./FrontendObservability";
 export * from "./KeyboardManager";
 export * from "./NotificationManager";
 export * from "./PageSetup";
-export * from "./PreferenceManager";
 export * from "./SearchManager";

@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, useEffect, useRef, useState } from "react";
+import { ComponentProps, CSSProperties, useEffect, useRef, useState } from "react";
 
 import { useWindowSize } from "@/data/stores";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";
@@ -17,6 +17,7 @@ export interface ScrollableProps extends ComponentProps<"div"> {
   vertical?: boolean
   scrollStep?: number
   rootClass?: string
+  withControls?: boolean
 }
 
 const Scrollable = ({
@@ -27,6 +28,7 @@ const Scrollable = ({
   vertical,
   scrollStep = 100,
   ref,
+  withControls = true,
   ...props
 }: ScrollableProps) => {
   const windowSize = useWindowSize();
@@ -80,9 +82,15 @@ const Scrollable = ({
   }, [updateScrollArea, windowSize]);
 
   return (
-    <div className={classes(styles.wrapper, rootClass)}>
+    <div
+      className={classes(styles.wrapper, !withControls && styles.hint, rootClass)}
+      style={{
+        "--left-hint": `${hasXScroll[0] ? 4 : 0}rem`,
+        "--right-hint": `${hasXScroll[1] ? 4 : 0}rem`,
+      } as CSSProperties}
+    >
       {
-        hasXScroll[0] ? (
+        (withControls && hasXScroll[0]) ? (
           <button
             className={classes(styles.scroll_btn, styles.btn_left, "scroll_btn")}
             onClick={() => performScroll("left")}
@@ -103,7 +111,7 @@ const Scrollable = ({
         {children}
       </div>
       {
-        hasXScroll[1] ? (
+        (withControls && hasXScroll[1]) ? (
           <button
             className={classes(styles.scroll_btn, styles.btn_right, "scroll_btn")}
             onClick={() => performScroll("right")}

@@ -3,7 +3,7 @@ import { ComponentProps, ReactNode, useState } from "react";
 import { Button } from "@/lib/components/elements/butttons";
 import { Chip } from "@/lib/components/elements/Chip";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./KanbanColumn.module.scss";
@@ -11,7 +11,7 @@ import styles from "./KanbanColumn.module.scss";
 export interface KanbanColProps extends ComponentProps<"div"> {
   colKey?: string;
   layout?: "horizontal" | "vertical";
-  color?: Color;
+  color?: TColor;
   name?: ReactNode;
   count?: number;
   header?: ReactNode | null;

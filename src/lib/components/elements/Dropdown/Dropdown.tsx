@@ -5,8 +5,8 @@ import { ComponentProps, ReactNode, useEffect, useEffectEvent, useState } from "
 import { Button, Variant } from "@/lib/components/elements/butttons";
 import { Popover } from "@/lib/components/elements/Popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
-import ExpandSolidIcon from "@/lib/svgs/icons/ExpandSolidIcon";
 import ExpandVerticalIcon from "@/lib/svgs/icons/ExpandVerticalIcon";
+import { TColor } from "@/lib/types/general";
 import { LayoutPosition } from "@/lib/utils/dom";
 import { classes } from "@/lib/utils/style";
 
@@ -22,12 +22,14 @@ export interface DropdownProps extends ComponentProps<"div"> {
   placement?: Exclude<LayoutPosition, "center">;
   alignment?: LayoutPosition;
   triggerVariant?: Variant;
+  triggerColor?: TColor;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }
 
 const Dropdown = ({
-  open = false, onOpenChange, dropdown, hintIcon, rootClass, triggerClass, dropdownClass, placement, alignment, triggerVariant,
+  open = false, onOpenChange, dropdown, hintIcon, placement, alignment, triggerVariant, triggerColor,
+  rootClass, triggerClass, dropdownClass,
   className, children,
   ...restProps
 }: DropdownProps) => {
@@ -63,6 +65,7 @@ const Dropdown = ({
         onClick={() => updateDropdownState()}
         aria-pressed={restProps["aria-pressed"]}
         variant={triggerVariant}
+        color={triggerColor}
       >
         {children}
         {

@@ -6,7 +6,7 @@ import { ComponentProps, useEffect, useEffectEvent, useState } from "react";
 import { Button } from "@/lib/components/elements/butttons";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import { hasDOM } from "@/lib/utils/dom";
-import { formatSize } from "@/lib/utils/format";
+import { formatSize } from "@/lib/utils/size";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./FilesPreview.module.scss";

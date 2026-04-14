@@ -2,7 +2,6 @@
 
 import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
-import emojisJSON from "@/data/json/emojis.json";
 import { Dropdown } from "@/lib/components/elements/Dropdown";
 import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
@@ -13,6 +12,7 @@ import { Tabs } from "@/lib/components/elements/Tabs";
 import { SkinTonesChars } from "@/lib/constants/colors";
 import { Keys } from "@/lib/constants/keys";
 import { categories, categoriesOrder } from "@/lib/data/emojis";
+import emojisJSON from "@/lib/data/emojis.json";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import { useThrottledCallback } from "@/lib/hooks/useThrottledCallback";

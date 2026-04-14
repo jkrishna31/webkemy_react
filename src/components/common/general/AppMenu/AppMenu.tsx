@@ -68,6 +68,7 @@ import StarIcon from "@/lib/svgs/icons/StarIcon";
 import TableIcon from "@/lib/svgs/icons/TableIcon";
 import TabsIcon from "@/lib/svgs/icons/TabsIcon";
 import TagIcon from "@/lib/svgs/icons/TagIcon";
+import TextBoxIcon from "@/lib/svgs/icons/TextBoxIcon";
 import TextIcon from "@/lib/svgs/icons/TextIcon";
 import TextIcon3 from "@/lib/svgs/icons/TextIcon3";
 import ToggleOnIcon from "@/lib/svgs/icons/ToggleOnIcon";
@@ -157,7 +158,7 @@ export const menuItems = [
                 key: "textarea",
                 href: "/components/textarea",
                 primary: "Textarea",
-                icon: <TextIcon />,
+                icon: <TextBoxIcon />,
             },
             {
                 key: "tags-input",
@@ -415,10 +416,9 @@ export const menuItems = [
             },
             // {
             //     key: "data-table",
-            //     href: "#",
+            //     href: "/components/data-table",
             //     primary: "Data Table",
             //     icon: <TableIcon />,
-            //     disabled: true,
             // },
             {
                 key: "timeline",

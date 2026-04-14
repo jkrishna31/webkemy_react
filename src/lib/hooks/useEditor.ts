@@ -2,7 +2,7 @@ import { RefObject, useCallback, useEffect, useEffectEvent, useLayoutEffect, use
 
 import { EditorBlocks, InputTypes } from "@/lib/constants/editor";
 import { Keys } from "@/lib/constants/keys";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { getUniqueId } from "@/lib/utils/crypto";
 import { deepClone } from "@/lib/utils/object";
 
@@ -75,7 +75,7 @@ export interface QuoteBlock {
 export interface BoxBlock {
   title?: string;
   content?: BlockChild[];
-  color?: Color;
+  color?: TColor;
 }
 
 export interface EmbedBlock {

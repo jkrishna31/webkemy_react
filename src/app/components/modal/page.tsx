@@ -4,9 +4,8 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/components/elements/butttons";
-import { Modal, ModalHeader } from "@/lib/components/elements/Modal";
+import { Modal } from "@/lib/components/elements/Modal";
 import { Positions } from "@/lib/constants/position";
-import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 
 import styles from "./page.module.scss";
 
@@ -32,14 +31,8 @@ const Page = () => {
       {
         open ? (
           <Modal pos={open} onClose={handleClose} overlay>
-            <ModalHeader titleText="Dummy Title" className={styles.header}>
-              <button className={styles.close_btn} onClick={handleClose} autoFocus>
-                <CrossIcon />
-              </button>
-            </ModalHeader>
-            <div className={styles.content}>
-              {"Welcome!"}
-            </div>
+            <Modal.Header titleText="Dummy Title" className={styles.header} onClose={handleClose} />
+            <div className={styles.content}>{"Welcome!"}</div>
           </Modal>
         ) : null
       }

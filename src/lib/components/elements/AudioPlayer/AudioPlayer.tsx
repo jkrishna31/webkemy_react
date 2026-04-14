@@ -13,8 +13,7 @@ import PauseIcon from "@/lib/svgs/icons/PauseIcon";
 import PlayIcon from "@/lib/svgs/icons/PlayIcon";
 import VolumeHighIcon from "@/lib/svgs/icons/VolumeHighIcon";
 import VolumenMuteIcon from "@/lib/svgs/icons/VolumenMuteIcon";
-import { breakdownTime, TimeField } from "@/lib/utils/datetime";
-import { getFormattedTime } from "@/lib/utils/format";
+import { breakdownTime, getFormattedTime, TimeField } from "@/lib/utils/datetime";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./AudioPlayer.module.scss";

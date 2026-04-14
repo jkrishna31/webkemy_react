@@ -33,7 +33,7 @@ const Breadcrumb = ({
                     <li key={crumb.key} className={styles.list_item}>
                         {crumb.render}
                         {
-                            crumb.link ? (
+                            !!crumb.link && (
                                 <Link
                                     href={crumb.link}
                                     data-active={crumb.active}
@@ -44,10 +44,10 @@ const Breadcrumb = ({
                                 >
                                     {crumb.label}
                                 </Link>
-                            ) : null
+                            )
                         }
                         {
-                            crumb.onClick ? (
+                            !!crumb.onClick && (
                                 <button
                                     onClick={crumb.onClick}
                                     data-active={crumb.active}
@@ -58,7 +58,19 @@ const Breadcrumb = ({
                                 >
                                     {crumb.label}
                                 </button>
-                            ) : null
+                            )
+                        }
+                        {
+                            (!crumb.link && !crumb.onClick) && (
+                                <p
+                                    data-active={crumb.active}
+                                    data-disabled={crumb.disabled}
+                                    className={styles.item}
+                                    aria-current={crumb.active}
+                                >
+                                    {crumb.label}
+                                </p>
+                            )
                         }
                         {
                             crumb.loading ? (

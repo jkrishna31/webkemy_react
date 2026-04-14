@@ -3,7 +3,7 @@
 import { ComponentProps, ReactNode } from "react";
 
 import { Block } from "@/lib/components/elements/editor";
-import docStyles from "@/lib/styles/classes/doc.module.scss";
+import docStyles from "@/lib/styles/modules/doc.module.scss";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Editor.module.scss";

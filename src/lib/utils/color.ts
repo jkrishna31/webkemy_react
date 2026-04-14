@@ -1,4 +1,8 @@
+import { ESC_HEX } from "@/lib/constants/ansi";
+
 export type ColorFormat = "hex" | "rgb" | "hsl" | "oklch" | "hsv";
+
+export const getANSIEscSeq = (val: number | string | (number | string)[]) => `${ESC_HEX}[${Array.isArray(val) ? val.join(";") : val}m`;
 
 export const stringifyColor = (values: (number | undefined)[], format: ColorFormat, alpha?: boolean) => {
   const alphaModifier = alpha ? "a" : "";

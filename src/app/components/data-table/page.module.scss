@@ -1,0 +1,57 @@
+.main {
+
+  .table {
+    overflow: auto;
+    position: relative;
+    max-width: 100%;
+    max-height: calc(100vh - var(--h-header) - 4rem);
+
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    column-gap: .4rem;
+  }
+
+  .th {
+    padding: 1rem;
+    border-top-left-radius: .6rem;
+    border-top-right-radius: .6rem;
+    background-color: var(--bg-s);
+    color: var(--fg-s);
+    font-weight: 500;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+
+    svg {
+      width: 1.6rem;
+      height: 1.6rem;
+      stroke-width: .2rem;
+    }
+  }
+
+  .first_th,
+  .last_th {
+    z-index: 1;
+  }
+
+  .first_th,
+  .first_td {
+    position: sticky;
+    left: 0;
+  }
+
+  .last_th,
+  .last_td {
+    position: sticky;
+    right: 0;
+  }
+
+  .td {
+    padding: .8rem 1rem;
+    background-color: var(--bg-t);
+    white-space: nowrap;
+  }
+}

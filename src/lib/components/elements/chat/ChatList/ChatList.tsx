@@ -156,8 +156,8 @@ const ChatList = ({
     if (msgElem && msgId) {
       e.preventDefault();
       let coords: number[] = [];
-      if ((e as any).pageX != undefined && (e as any).pageY != undefined) coords = [(e as any).pageX, (e as any).pageY];
-      else if (typeof TouchEvent !== "undefined" && e instanceof TouchEvent) coords = [e.touches[0].pageX, e.touches[0].pageY];
+      if ((e as any).clientX != undefined && (e as any).clientY != undefined) coords = [(e as any).clientX, (e as any).clientY];
+      else if (typeof TouchEvent !== "undefined" && e instanceof TouchEvent) coords = [e.touches[0].clientX, e.touches[0].clientY];
       handleChatSelection(msgId);
       setShowOptionsFor({ element: msgElem as HTMLElement, coords: [...coords] });
     }
@@ -354,7 +354,6 @@ const ChatList = ({
             showEmojiPicker ? styles.emoji_popover : styles.all_options_popover,
             !showEmojiPicker && isMobile && !showAllOptions && styles.mobile_popover,
           )}
-          trapFocus
           closeOnEsc
           overlap
         >

@@ -17,14 +17,14 @@ import { KanbanDragCtx, useKanban } from "@/lib/hooks/useKanban";
 import ChevronDownIcon from "@/lib/svgs/icons/ChevronDownIcon";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./page.module.scss";
 
 const defaultColOrder = ["backlog", "inProgress", "prRaised", "qaTesting", "done"];
 
-const defaultCols: { [key: string]: { id: string; name: string; items: number; color: Color } } = {
+const defaultCols: { [key: string]: { id: string; name: string; items: number; color: TColor } } = {
   backlog: {
     id: "backlog",
     name: "Backlog",
@@ -85,7 +85,7 @@ const defaultUsers: { [key: string]: { id: string; name: string; profile: string
   },
 };
 
-const defaultTags: { [key: string]: Color } = {
+const defaultTags: { [key: string]: TColor } = {
   Setup: "red",
   Docs: "orange",
   UI: "yellow",
@@ -299,7 +299,7 @@ const Page = () => {
                           {!isCollapsed && (
                             <>
                               {defaultCols[colKey].name}
-                              <Chip className={styles.chip} color={defaultCols[colKey].color as Color} label={colItems.length} />
+                              <Chip className={styles.chip} color={defaultCols[colKey].color as TColor} label={colItems.length} />
                             </>
                           )}
                           <Button
@@ -370,7 +370,7 @@ const Page = () => {
                                       data-dragging-over={dragging === "item" && dragTargetCol === colKey && (!colItems.length || isColCollapsed) && !!isDraggingItemBelongsThisUser}
                                     >
                                       <div className={styles.collapsed_details}>
-                                        <Chip className={styles.chip} color={defaultCols[colKey].color as Color} label={colItems.length} />
+                                        <Chip className={styles.chip} color={defaultCols[colKey].color as TColor} label={colItems.length} />
                                         <p>{defaultCols[colKey].name}</p>
                                       </div>
                                     </td>
@@ -453,7 +453,7 @@ const Page = () => {
                   )}
                   <KanbanColumn
                     colKey={col.id}
-                    color={col.color as Color}
+                    color={col.color as TColor}
                     name={col.name}
                     count={colItems.length ?? 0}
                     collapsed={isCollapsed}

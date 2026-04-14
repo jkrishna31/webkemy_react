@@ -23,9 +23,34 @@ export const EditorBlocks = {
   MARKDOWN: "markdown",
 } as const;
 
+export const TextStyles = {
+  BOLD: "bold",
+  ITALIC: "italic",
+  UNDERLINE: "underline",
+  STRIKE_THROUGH: "strike_through",
+  LINK: "link",
+  INLINE_CODE: "inline_code",
+  INLINE_IMG: "inline_img",
+  HIGHLIGHT: "highlight",
+  SUBSCRIPT: "subscript",
+  SUPERSCRIPT: "superscript",
+
+  COLOR: "color",
+  BACKGROUND: "background",
+
+  FONT_FAMILY: "font_family",
+  FONT_SIZE: "font_size",
+  LETTER_CASE: "letter_case",
+  LINE_HEIGHT: "line_height",
+  TEXT_ALIGN: "text_align",
+  LETTER_SPACE: "letter_space",
+  WORD_SPACE: "word_space",
+};
+
 export const EditorTools = {
   UNDO: "undo",
   REDO: "redo",
+
   BOLD: "bold",
   ITALIC: "italic",
   UNDERLINE: "underline",
@@ -37,7 +62,9 @@ export const EditorTools = {
   HIGHLIGHT: "highlight",
   SUBSCRIPT: "subscript",
   SUPERSCRIPT: "superscript",
+
   MENTION: "mention",
+
   INDENT: "indent",
   CONVERT: "convert",
   COPY_LINK: "copy_link",
@@ -54,8 +81,9 @@ export const EditorTools = {
   LINE_HEIGHT: "line_height",
   TEXT_ALIGN: "text_align",
   SPACING: "spacing",
-  LETTER_SPACING: "letter_spacing",
-  WORD_SPACING: "word_spacing",
+  LETTER_SPACE: "letter_space",
+  WORD_SPACE: "word_space",
+
   TOGGLE_CASE: "case_toggle",
   LOWERCASE: "case_lower",
   UPPERCASE: "case_upper",

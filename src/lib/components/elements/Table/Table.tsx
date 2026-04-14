@@ -129,17 +129,17 @@ const TableCell = <T extends ElementType = "th">({
             />
           ) : null
         }
-        {resizable && (
-          <button
-            aria-label="Resize Column"
-            title="Resize Column"
-            data-resize={colKey}
-            className={styles.resize_handle}
-          // style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
-          >
-          </button>
-        )}
       </div>
+      {resizable && (
+        <button
+          aria-label="Resize Column"
+          title="Resize Column"
+          data-resize={colKey}
+          className={styles.resize_handle}
+        // style={{ "--zi-resize-handle": rootCols.length * 2 } as React.CSSProperties}
+        >
+        </button>
+      )}
     </Element>
   );
 };

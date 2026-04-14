@@ -9,8 +9,8 @@ export type InputItemProps<T extends ElementType> = {
     as?: T
 } & ComponentProps<T>;
 
-const InputItem = <T extends ElementType>({
-    inline = false, as = "div",
+const InputItem = <T extends ElementType = "div">({
+    as = "div", inline = false,
     children, className,
     ...props
 }: InputItemProps<T>) => {

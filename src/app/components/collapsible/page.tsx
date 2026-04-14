@@ -29,7 +29,12 @@ const Page = () => {
           {"Collapsible Summary"}
           <ChevronRightIcon />
         </button>
-        <CollapsiblePanel open={open} className={styles.details} id="details">
+        <CollapsiblePanel
+          open={open}
+          className={styles.details}
+          id="details"
+          renderWhileClosed={false}
+        >
           <div>
             <p>{"Details:"}</p>
             <p>

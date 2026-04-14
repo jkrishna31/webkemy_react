@@ -5,7 +5,7 @@ import { Divider } from "@/lib/components/elements/Divider";
 import { Characters } from "@/lib/constants/characters";
 import CheckmarkBadgeIcon from "@/lib/svgs/icons/CheckmarkBadgeIcon";
 import StarIcon from "@/lib/svgs/icons/StarIcon";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./PricingCard.module.scss";
@@ -18,7 +18,7 @@ export interface PricingCardProps extends ComponentProps<"div"> {
   ogPrice?: number;
   currency: string;
   billed: string;
-  color?: Color;
+  color?: TColor;
   special?: boolean;
 }
 

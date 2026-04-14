@@ -2,11 +2,11 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import { Themes } from "@/lib/constants/general";
-import { LangType, ThemeType } from "@/lib/types/general.types";
+import { TLang, TTheme } from "@/lib/types/general";
 
 export interface PreferenceStore {
-    theme: ThemeType
-    lang: LangType
+    theme: TTheme
+    lang: TLang
     actions: {
         setTheme: any
         setLang: any
@@ -20,8 +20,8 @@ const usePreferenceStore = create<PreferenceStore>()(persist((set) => ({
     theme: Themes.SYSTEM,
     lang: "english",
     actions: {
-        setTheme: (theme: ThemeType) => set((state) => ({ ...state, theme: theme })),
-        setLang: (lang: LangType) => set((state) => ({ ...state, lang: lang })),
+        setTheme: (theme: TTheme) => set((state) => ({ ...state, theme: theme })),
+        setLang: (lang: TLang) => set((state) => ({ ...state, lang: lang })),
         setPreference: (key: string, value: boolean) => set(
             (state) => ({ ...state, [key]: value })
         ),

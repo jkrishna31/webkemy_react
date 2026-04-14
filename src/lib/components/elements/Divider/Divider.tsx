@@ -1,12 +1,12 @@
 import { ComponentProps, ReactNode } from "react";
 
-import { Orientation } from "@/lib/types/general.types";
+import { TOrientation } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Divider.module.scss";
 
 export interface DividerProps extends ComponentProps<"hr"> {
-  orientation?: Orientation;
+  orientation?: TOrientation;
   label?: ReactNode;
   labelAlignment?: "left" | "right" | "center";
 }

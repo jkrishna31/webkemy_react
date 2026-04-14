@@ -10,7 +10,7 @@ import { VideoPreview } from "@/lib/components/elements/VideoPlayer";
 import { Characters } from "@/lib/constants/characters";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
 import DownloadIcon from "@/lib/svgs/icons/DownloadIcon";
-import { formatSize } from "@/lib/utils/format";
+import { formatSize } from "@/lib/utils/size";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./ChatMedia.module.scss";
@@ -128,46 +128,52 @@ const ChatMedia = ({
       {!!others.length && (
         <div className={styles.others}>
           {others.map(item => (
-            <div key={item.id} className={styles.other_item_wrapper}>
-              <div
-                key={item.id}
-                data-id={item.id}
-                className={styles.other_item}
-              >
-                <div className={styles.controls}>
-                  {item.status === "uploading" && (
-                    <Progress variant="circular" thickness={12} className={styles.other_progress} />
-                  )}
-                  {item.status === "failed" && (
-                    <Button variant="muted" color="red" className={styles.retry_file_btn} aria-label="Retry" title="Retry">
-                      <ClockwiseIcon />
-                    </Button>
-                  )}
-                  {!item.status && (
-                    <Button<"a">
-                      as="a"
-                      href={item.src ?? "#"}
-                      variant="muted"
-                      className={styles.dl_file_btn}
-                      download={item.src ?? "#"}
-                    >
-                      <DownloadIcon />
-                    </Button>
-                  )}
-                </div>
-                <Link href={item.src ?? "#"} target="_blank" className={styles.details}>
-                  <p className={styles.filename}>{item.name}</p>
-                  <p className={styles.meta}>
-                    <span className={styles.size}>{formatSize(item.size ?? 0)}</span>
-                    <span className={styles.separator}>{Characters.BULLET}</span>
-                    <span className={styles.type}>{item.type}</span>
-                  </p>
-                </Link>
-              </div>
-            </div>
+            <FileItem key={item.id} media={item} />
           ))}
         </div>
       )}
+    </div>
+  );
+};
+
+const FileItem = ({ media }: { media: MediaItem }) => {
+  return (
+    <div key={media.id} className={styles.other_item_wrapper}>
+      <div
+        key={media.id}
+        data-id={media.id}
+        className={styles.other_item}
+      >
+        <div className={styles.controls}>
+          {media.status === "uploading" && (
+            <Progress variant="circular" thickness={12} className={styles.other_progress} />
+          )}
+          {media.status === "failed" && (
+            <Button variant="muted" color="red" className={styles.retry_file_btn} aria-label="Retry" title="Retry">
+              <ClockwiseIcon />
+            </Button>
+          )}
+          {!media.status && (
+            <Button<"a">
+              as="a"
+              href={media.src ?? "#"}
+              variant="muted"
+              className={styles.dl_file_btn}
+              download={media.src ?? "#"}
+            >
+              <DownloadIcon />
+            </Button>
+          )}
+        </div>
+        <Link href={media.src ?? "#"} target="_blank" className={styles.details}>
+          <p className={styles.filename}>{media.name}</p>
+          <p className={styles.meta}>
+            <span className={styles.size}>{formatSize(media.size ?? 0)}</span>
+            <span className={styles.separator}>{Characters.BULLET}</span>
+            <span className={styles.type}>{media.type}</span>
+          </p>
+        </Link>
+      </div>
     </div>
   );
 };

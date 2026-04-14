@@ -23,7 +23,7 @@ import DeleteIcon from "@/lib/svgs/icons/DeleteIcon";
 import EditIcon from "@/lib/svgs/icons/EditIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { findRecursive } from "@/lib/utils/array";
 import { formatDate } from "@/lib/utils/datetime";
 import { deepClone } from "@/lib/utils/object";
@@ -51,7 +51,7 @@ const defaultColsData: {
   actions: { name: "Actions" },
 };
 
-const statusColorMap: { [key in string]: Color } = {
+const statusColorMap: { [key in string]: TColor } = {
   "active": "green",
   "inactive": "purple",
   "rejected": "red",

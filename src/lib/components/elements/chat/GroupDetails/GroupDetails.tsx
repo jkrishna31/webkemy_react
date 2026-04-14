@@ -29,6 +29,10 @@ const GroupDetails = ({
 }: GroupDetailsProps) => {
   const { values, setFieldValue } = useForm<{
     name: string;
+    address?: {
+      streetAddress?: string;
+      zipCode?: number;
+    }
     description?: string;
     guidelines?: string;
     profile?: FileList | FileMeta[];

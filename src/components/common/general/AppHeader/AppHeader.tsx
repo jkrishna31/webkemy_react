@@ -19,7 +19,6 @@ import { classes } from "@/lib/utils/style";
 const AppSearchMobile = dynamic(() => import("@/components/common/general/AppSearchMobile/AppSearchMobile"), { ssr: false });
 
 import { SOURCE_CODE } from "@/constants/app.const";
-import { DrawerBody } from "@/lib/components/elements/Drawer";
 import { Edges } from "@/lib/constants/position";
 
 import { AppMenu, LangSelector, ThemeSelector } from "..";
@@ -95,21 +94,19 @@ const AppHeader = ({
                         onMicClick={() => setSearch("active", "audio")}
                         onClose={() => setOpenAppSearch(!openAppSearch)}
                     >
-                        <DrawerBody>
-                            <ul style={{ paddingInline: "2rem 1rem" }}>
-                                {
-                                    history.map((item, idx) => (
-                                        <li className={styles.history_item} key={idx}>
-                                            <HistoryIcon className={styles.history_icon} />
-                                            <span className={styles.query}>{item}</span>
-                                            <button className={styles.delete_btn}>
-                                                <CrossIcon className={styles.delete_icon} />
-                                            </button>
-                                        </li>
-                                    ))
-                                }
-                            </ul>
-                        </DrawerBody>
+                        <ul style={{ paddingInline: "2rem 1rem" }}>
+                            {
+                                history.map((item, idx) => (
+                                    <li className={styles.history_item} key={idx}>
+                                        <HistoryIcon className={styles.history_icon} />
+                                        <span className={styles.query}>{item}</span>
+                                        <button className={styles.delete_btn}>
+                                            <CrossIcon className={styles.delete_icon} />
+                                        </button>
+                                    </li>
+                                ))
+                            }
+                        </ul>
                     </AppSearchMobile>
                     <div className={styles.hrc}>
                         <button

@@ -2,7 +2,6 @@
 
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
 
-import { Overlay } from "@/components/common/containers";
 import { dummyChats, groupDetails } from "@/data/dummy/chatData";
 import { Avatar } from "@/lib/components/elements/Avatar";
 import { ChatComposer, ChatList, ChatQuoteCard, GroupDetails, GroupSettings, MembersPanel, PinnedBanner, PinnedPanel, SearchPanel, SharedPanel, StarredPanel, ThreadsPanel } from "@/lib/components/elements/chat";
@@ -11,6 +10,7 @@ import { Divider } from "@/lib/components/elements/Divider";
 import { Item } from "@/lib/components/elements/Item";
 import { ItemList } from "@/lib/components/elements/ItemList";
 import { MediaGallery } from "@/lib/components/elements/MediaGallery";
+import { Overlay } from "@/lib/components/elements/Overlay";
 import { Popover } from "@/lib/components/elements/Popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";

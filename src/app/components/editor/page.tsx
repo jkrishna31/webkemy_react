@@ -17,6 +17,7 @@ import BlockquoteIcon from "@/lib/svgs/icons/BlockquoteIcon";
 import BoldIcon from "@/lib/svgs/icons/BoldIcon";
 import ChecklistIcon from "@/lib/svgs/icons/ChecklistIcon";
 import ColorPaletteIcon from "@/lib/svgs/icons/ColorPaletteIcon";
+import CommentIcon from "@/lib/svgs/icons/CommentIcon";
 import CopyLinkIcon from "@/lib/svgs/icons/CopyLinkIcon";
 import DeleteIcon from "@/lib/svgs/icons/DeleteIcon";
 import DividerIcon from "@/lib/svgs/icons/DividerIcon";
@@ -346,6 +347,11 @@ const toolOptions = [
       type: "popover",
       name: "Find & Replace", key: "find_replace",
       render: <SearchReplaceIcon className={styles.icon} />,
+    },
+    {
+      type: "popover",
+      name: "Comment", key: "comment",
+      render: <CommentIcon className={styles.icon} />,
     },
     {
       type: "popover",

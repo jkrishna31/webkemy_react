@@ -1,41 +1,51 @@
-import { ComponentProps, ReactNode } from "react";
+import Link from "next/link";
+import { ComponentProps, ElementType, ReactNode } from "react";
 
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
-import { Color } from "@/lib/types/general.types";
+import PlusIcon from "@/lib/svgs/icons/PlusIcon";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Chip.module.scss";
 
-export interface ChipProps extends ComponentProps<"div"> {
+export type ChipProps<T extends ElementType> = {
+  as?: T;
   intensity?: "full" | "mid" | "low";
   variant?: "solid" | "outlined" | "muted";
-  color?: Color;
+  color?: TColor;
   onRemove?: () => void;
+  onAdd?: () => void;
   label?: ReactNode;
-}
+} & ComponentProps<T>;
 
-const Chip = ({
-  onRemove, label, color, variant = "outlined", intensity,
+const Chip = <T extends ElementType = "div">({
+  as = "div",
+  onRemove, onAdd, label, color, variant = "outlined", intensity,
   children, className,
   ...props
-}: ChipProps) => {
+}: ChipProps<T>) => {
+  const isLink = "href" in props && typeof props.href === "string";
+  const Tag = isLink ? Link : as;
+
   return (
-    <div
-      className={classes(styles.chip, styles[variant], !onRemove && styles.static, className)}
+    <Tag
+      className={classes(styles.chip, styles[variant], (!onRemove && !onAdd) && styles.static, className)}
       data-color={color}
       data-intensity={intensity}
-      data-removable={!!onRemove}
       {...props}
     >
       {children ?? <span>{label}</span>}
-      {
-        onRemove ? (
-          <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove">
-            <CrossIcon className={styles.cross_icon} />
-          </button>
-        ) : null
-      }
-    </div>
+      {!!onRemove && (
+        <button type="button" className={styles.del_btn} onClick={onRemove} title="Remove" aria-label="Remove">
+          <CrossIcon />
+        </button>
+      )}
+      {!!onAdd && (
+        <button type="button" className={styles.add_btn} onClick={onAdd} title="Add" aria-label="Add">
+          <PlusIcon />
+        </button>
+      )}
+    </Tag>
   );
 };
 

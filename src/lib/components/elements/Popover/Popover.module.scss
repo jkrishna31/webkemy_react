@@ -7,6 +7,8 @@
   --popover-left-shift: 0;
   --popover-top-shift: 0;
   --popover-transition-dur: 0;
+  --slide-dir: -1;
+  --slide-margin: 1rem;
 
   contain: content;
   position: fixed;
@@ -17,7 +19,7 @@
   max-height: var(--popover-max-height);
   z-index: var(--zi-drawer);
   transition-duration: var(--popover-transition-dur);
-  transition-property: transform;
+  transition-property: transform, opacity;
   transition-timing-function: ease;
   transform: translate3d(var(--popover-left-shift), var(--popover-top-shift), 0);
 
@@ -47,6 +49,6 @@
 @keyframes slide {
   from {
     opacity: 0;
-    transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) - 1rem), 0);
+    transform: translate3d(var(--popover-left-shift), calc(var(--popover-top-shift) + calc(var(--slide-dir) * var(--slide-margin))), 0);
   }
 }

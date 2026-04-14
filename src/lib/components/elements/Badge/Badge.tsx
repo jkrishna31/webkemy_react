@@ -1,12 +1,12 @@
 import { ComponentProps } from "react";
 
-import { Color } from "@/lib/types/general.types";
+import { TColor } from "@/lib/types/general";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Badge.module.scss";
 
 export interface BadgeProps extends ComponentProps<"div"> {
-  color?: Color;
+  color?: TColor;
   animate?: "ripple";
   float?: "tl" | "tr" | "bl" | "br" | null;
 }
