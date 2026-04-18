@@ -1,5 +1,5 @@
 import { Button } from "@/lib/components/elements/butttons";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 import AppLogo from "@/lib/svgs/logos/AppLogo";
 import CornerFoldShape from "@/lib/svgs/misc/CornerFoldShape";
 import { classes } from "@/lib/utils/style";

@@ -1,9 +1,9 @@
 import { PageSetup } from "@/components/managers";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
 import { Radio } from "@/lib/components/elements/inputs/Radio";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";
 
@@ -15,20 +15,20 @@ const page = () => {
       <InputItem className={styles.wrapper}>
         <Text<"label"> as="label" htmlFor="input_1">{"Label 1"}</Text>
         <InputFieldWrapper>
-          <GeneralInput id="input_1" />
+          <Input id="input_1" />
         </InputFieldWrapper>
       </InputItem>
 
       <InputItem inline className={styles.wrapper}>
         <Text<"label"> as="label" htmlFor="input_2" inline>{"Label 2"}</Text>
         <InputFieldWrapper>
-          <GeneralInput id="input_2" />
+          <Input id="input_2" />
         </InputFieldWrapper>
       </InputItem>
 
       <InputItem inline className={styles.wrapper}>
         <InputFieldWrapper>
-          <GeneralInput aria-label="input_3" />
+          <Input aria-label="input_3" />
         </InputFieldWrapper>
         <Text<"label"> as="label" inline>{"Label 3"}</Text>
       </InputItem>

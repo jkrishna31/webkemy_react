@@ -1,0 +1,41 @@
+import { ComponentProps } from "react";
+
+import { PricingCard } from "@/lib/components/blocks/pricing-plans";
+import { classes } from "@/lib/utils/style";
+
+import styles from "./PricingPlans.module.scss";
+
+export interface PricingPlansProps extends ComponentProps<"div"> {
+  plans: any[];
+  billed: "month" | "year";
+}
+
+export const PricingPlans = ({
+  plans, billed,
+  className,
+  ...restProps
+}: PricingPlansProps) => {
+  return (
+    <div className={classes(styles.wrapper, className)} {...restProps}>
+      {
+        plans.map(plan => (
+          <PricingCard
+            key={plan.id}
+            className={styles[plan.id]}
+            {...plan}
+            billed={billed}
+            color={
+              plan.id === "pro" ?
+                "blue" :
+                // plan.id === "genius" ?
+                //   "red" :
+                //   "green"
+                undefined
+            }
+            special={plan.id === "pro"}
+          />
+        ))
+      }
+    </div>
+  );
+};

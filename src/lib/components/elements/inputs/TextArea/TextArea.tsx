@@ -71,7 +71,6 @@ const TextArea = ({
         <textarea
             name={id}
             id={id}
-            // value={value}
             onInput={handleInput}
             className={classes(styles.input, className)}
             ref={mergeRefs(_ref, ref)}

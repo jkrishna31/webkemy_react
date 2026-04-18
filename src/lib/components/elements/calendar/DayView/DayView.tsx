@@ -4,7 +4,7 @@ import { ComponentProps, CSSProperties, useCallback, useEffect, useRef, useState
 
 import { useCalendarActions } from "@/data/stores";
 import { CalendarEvent, EventBadge } from "@/lib/components/elements/calendar/EventBadge";
-import { Resizable, Resizers } from "@/lib/components/elements/Resizable";
+import { Resizable, Resizers } from "@/lib/components/elements/resizable";
 import { weekDays, weekDaysOrder } from "@/lib/data/datetime";
 import { useCurrentDateTime } from "@/lib/hooks/useCurrentTime";
 import { getRelativeMonth, getTimeParts } from "@/lib/utils/datetime";

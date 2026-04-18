@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { testimonialsData } from "@/data/dummy/testimonialsData";
-import { Testimonials } from "@/lib/components/blocks/Testimonials";
+import { Testimonials } from "@/lib/components/blocks/testimonials";
 
 import styles from "./page.module.scss";
 

@@ -1,0 +1,132 @@
+.overlay {
+    z-index: var(--zi-menu);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 30rem;
+    max-height: calc(100% - 6rem);
+
+    background: var(--bg-p);
+    border: 1px solid var(--border-t);
+    border-radius: .8rem;
+
+    position: fixed;
+    z-index: var(--zi-menu);
+
+    overflow: auto;
+}
+
+.center {
+    top: 50%;
+    left: 50%;
+    transform: translate3d(-50%, -50%, 0);
+    animation: center-faded-slide-in 300ms ease;
+}
+
+.bc {
+    bottom: 2rem;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    animation: bottom-faded-slide-in 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.tc {
+    top: 4rem;
+    left: 50%;
+    transform: translate3d(-50%, 0, 0);
+    animation: top-faded-slide-in 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+@keyframes center-faded-slide-in {
+    from {
+        transform: translate3d(-50%, calc(-50% + 1.6rem), 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(-50%, -50%, 0);
+        opacity: 1;
+    }
+}
+
+@keyframes bottom-faded-slide-in {
+    from {
+        transform: translate3d(-50%, 50%, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+        opacity: 100%;
+    }
+}
+
+@keyframes top-faded-slide-in {
+    from {
+        transform: translate3d(-50%, -10%, 0);
+        opacity: 0;
+    }
+
+    to {
+        transform: translate3d(-50%, 0, 0);
+        opacity: 100%;
+    }
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: .8rem;
+    padding-inline: 2rem 1rem;
+
+    .title {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--fg-p);
+    }
+
+    .close_btn {
+        --btn-bgc: transparent;
+        --btn-fgc: var(--fg-s);
+        min-height: fit-content;
+        padding: .6rem;
+
+        svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            stroke-width: .175rem;
+        }
+    }
+}
+
+.body {
+    padding-inline: 2rem;
+    min-height: 0;
+    overflow: auto;
+}
+
+.footer {
+    padding-inline: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+
+@media screen and (max-width: 768px) {
+    .header {
+        .title {
+            font-size: 1.6rem;
+        }
+    }
+}
+
+
+@media screen and (min-width: 768px) {
+    .wrapper {
+        box-shadow: var(--shadow-p) 0px -1px 20px 0px;
+    }
+}

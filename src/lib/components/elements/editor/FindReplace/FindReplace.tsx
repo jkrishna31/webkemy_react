@@ -2,12 +2,12 @@
 
 import { ComponentProps, useState } from "react";
 
-import { Badge } from "@/lib/components/elements/Badge";
+import { Badge } from "@/lib/components/elements/badge";
 import { Button } from "@/lib/components/elements/butttons";
 import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import DownArrowIcon from "@/lib/svgs/icons/DownArrowIcon";
@@ -47,7 +47,7 @@ const FindReplace = ({
     <div className={classes(styles.wrapper, className)}>
       <div className={styles.row}>
         <InputFieldWrapper>
-          <GeneralInput
+          <Input
             placeholder="Search"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -122,7 +122,7 @@ const FindReplace = ({
         <div className={styles.controls_panel}>
           <div className={styles.row}>
             <InputFieldWrapper>
-              <GeneralInput
+              <Input
                 placeholder="Replace With"
                 value={replaceWith}
                 onChange={(e) => setReplaceWith(e.target.value)}

@@ -1,12 +1,12 @@
 import { useState } from "react";
 
-import { AudioPlayer } from "@/lib/components/elements/AudioPlayer";
+import { AudioPlayer } from "@/lib/components/elements/audio-player";
 import { Button } from "@/lib/components/elements/butttons";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
-import { ImageViewer } from "@/lib/components/elements/ImageViewer";
-import { Lightbox } from "@/lib/components/elements/Lightbox";
-import { PDFViewer } from "@/lib/components/elements/PDFViewer";
-import { VideoPlayer } from "@/lib/components/elements/VideoPlayer";
+import { ImageViewer } from "@/lib/components/elements/image-viewer";
+import { Lightbox } from "@/lib/components/elements/lightbox";
+import { PDFViewer } from "@/lib/components/elements/pdf-viewer";
+import { VideoPlayer } from "@/lib/components/elements/video-player";
 
 import styles from "./MediaViewer.module.scss";
 

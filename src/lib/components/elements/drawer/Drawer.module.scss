@@ -1,0 +1,130 @@
+.overlay {
+    z-index: calc(var(--zi-drawer) - 1);
+}
+
+.container {
+    position: fixed;
+    z-index: var(--zi-drawer);
+
+    background-color: var(--bg-p);
+    color: var(--fg-p);
+
+    bottom: 0;
+    left: 50%;
+    transform: translate3d(-50%, 110%, 0);
+    height: calc(100% - var(--h-header) - 2rem);
+
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+
+    border: 1px solid var(--border-t);
+    border-bottom: none;
+
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    pointer-events: initial;
+
+    &.open {
+        transform: translate3d(-50%, 0, 0);
+        animation: move-in 500ms cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+
+@keyframes move-in {
+    0% {
+        opacity: 0;
+        transform: translate3d(-50%, 4rem, 0);
+    }
+
+    100% {
+        transform: translate3d(-50%, 0, 0);
+        // transform: translate3d(-50%, -50%, 0);
+        opacity: 1;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .container {
+        width: 100%;
+        height: calc(100%);
+        border-radius: 0;
+        border: none;
+        transition: none;
+    }
+
+    .overlay {
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+.header {
+    padding: .8rem;
+    border-bottom: 1px solid var(--border-t);
+
+    display: flex;
+    align-items: center;
+    gap: 1.6rem;
+    justify-content: space-between;
+
+    .title {
+        font-size: 1.8rem;
+        font-weight: 500;
+        color: var(--fg-p);
+    }
+
+    .header_left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: .6rem 1rem;
+    }
+
+    .close_btn {
+        --btn-bgc: transparent;
+        --btn-fgc: var(--fg-s);
+        min-height: fit-content;
+        padding: .6rem;
+
+        svg {
+            width: 2.2rem;
+            height: 2.2rem;
+            stroke-width: .175rem;
+        }
+    }
+}
+
+.body {
+    flex: 1;
+    overflow: auto;
+    overscroll-behavior-y: contain;
+}
+
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1rem;
+    border-top: 1px solid var(--border-t);
+}
+
+
+@media screen and (min-width: 768px) {
+    .container {
+        box-shadow: var(--shadow-p) 0px -1px 30px 0px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: .8rem;
+        gap: 1rem;
+
+        .title {
+            font-size: 1.6rem;
+        }
+    }
+}

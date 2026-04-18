@@ -1,7 +1,7 @@
 import Link from "next/link";
 
-import { menuItems } from "@/components/common/general";
-import { Text } from "@/lib/components/elements/Text";
+import { menuItems } from "@/components/common/app";
+import { Text } from "@/lib/components/elements/text";
 
 import styles from "./ComponentsPage.module.scss";
 
@@ -20,7 +20,7 @@ const ComponentsPage = () => {
                 group.menu.map((item: any) => item.disabled ? null : (
                   <Link href={item.href} key={item.key}>
                     {item.icon}
-                    {item.primary}
+                    {item.label}
                   </Link>
                 ))
               }

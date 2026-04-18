@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { InfiniteScrollBanner } from "@/lib/components/elements/InfiniteScrollBanner";
+import { Marquee } from "@/lib/components/elements/marquee";
 import { Amex, ApplePay, Bitcoin, DinersClub, Discover, GooglePay, Jcb, Mastercard, Paypal, Sepa, Stripe, Visa } from "@/lib/svgs/payments";
 
 import styles from "./page.module.scss";
@@ -24,37 +24,37 @@ const page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="banner" />
 
-      <InfiniteScrollBanner className={styles.banner}>
+      <Marquee className={styles.banner}>
         {
           bannerItems.map((item, idx) => (
             <li key={idx} style={{ contain: "content" }}>{item.render}</li>
           ))
         }
-      </InfiniteScrollBanner>
-      <InfiniteScrollBanner className={styles.banner} direction="right">
+      </Marquee>
+      <Marquee className={styles.banner} direction="right">
         {
           bannerItems.map((item, idx) => (
             <li key={idx} style={{ contain: "content" }}>{item.render}</li>
           ))
         }
-      </InfiniteScrollBanner>
+      </Marquee>
 
       <div style={{ display: "flex", gap: "2rem" }}>
-        <InfiniteScrollBanner className={styles.banner_vertical} direction="up">
+        <Marquee className={styles.banner_vertical} direction="up">
           {
             bannerItems.map((item, idx) => (
               <li key={idx} style={{ contain: "content" }}>{item.render}</li>
             ))
           }
-        </InfiniteScrollBanner>
+        </Marquee>
 
-        <InfiniteScrollBanner className={styles.banner_vertical} direction="down">
+        <Marquee className={styles.banner_vertical} direction="down">
           {
             bannerItems.map((item, idx) => (
               <li key={idx} style={{ contain: "content" }}>{item.render}</li>
             ))
           }
-        </InfiniteScrollBanner>
+        </Marquee>
       </div>
     </main>
   );

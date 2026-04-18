@@ -1,4 +1,4 @@
-@use '@/lib/styles/mixins/general' as *;
+@use '@/lib/styles/mixins/line-clamp' as *;
 
 .wrapper {
   width: 14rem;
@@ -87,7 +87,7 @@
   .datetime {
     font-size: 1.4rem;
     font-weight: 500;
-    @include line_clamp(1);
+    @include line-clamp(1);
   }
 
   .datetime {
@@ -116,7 +116,7 @@
     font-size: 1.3rem;
     font-weight: 500;
     opacity: 0;
-    @include line_clamp(1);
+    @include line-clamp(1);
   }
 
   .user_avatar {

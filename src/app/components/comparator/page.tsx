@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Comparator, ComparatorItem } from "@/lib/components/elements/Comparator";
+import { Comparator, ComparatorItem } from "@/lib/components/elements/comparator";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./page.module.scss";

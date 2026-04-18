@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Divider } from "@/lib/components/elements/Divider";
+import { Divider } from "@/lib/components/elements/divider";
 
 const Page = () => {
   return (

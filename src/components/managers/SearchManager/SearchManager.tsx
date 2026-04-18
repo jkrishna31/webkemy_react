@@ -1,8 +1,8 @@
 "use client";
 
-import { AudioListener } from "@/components/common/general";
+import { AudioListener } from "@/components/common/app";
 import { useSearchActions, useSearchActive } from "@/data/stores";
-import { Modal } from "@/lib/components/elements/Modal";
+import { Modal } from "@/lib/components/elements/modal";
 import { Positions } from "@/lib/constants/position";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 

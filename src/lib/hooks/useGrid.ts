@@ -1,6 +1,6 @@
 import { RefObject, useCallback, useLayoutEffect, useMemo, useState } from "react";
 
-import { Resizers } from "@/lib/components/elements/Resizable";
+import { Resizers } from "@/lib/components/elements/resizable";
 import { Edges } from "@/lib/constants/position";
 import { deepClone } from "@/lib/utils/object";
 

@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { AppHeader } from "@/components/common/general";
+import { AppHeader } from "@/components/common/app";
 import { ClientSetup } from "@/components/managers";
 import { classes } from "@/lib/utils/style";
 

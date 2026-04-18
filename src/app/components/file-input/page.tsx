@@ -2,7 +2,7 @@
 
 
 import { PageSetup } from "@/components/managers";
-import { FilesPreview } from "@/lib/components/elements/FilesPreview";
+import { FilesPreview } from "@/lib/components/elements/files-preview";
 import { FileInput } from "@/lib/components/elements/inputs/FileInput";
 import { useFiles } from "@/lib/hooks/useFiles";
 

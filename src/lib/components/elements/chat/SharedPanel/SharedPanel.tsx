@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { useState } from "react";
 
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
 import { GalleryItem } from "@/lib/components/elements/chat/GalleryItem";
 import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";
-import { CollapsiblePanel } from "@/lib/components/elements/CollapsiblePanel";
-import { Table } from "@/lib/components/elements/Table";
+import { CollapsiblePanel } from "@/lib/components/elements/collapsible-panel";
+import { Table } from "@/lib/components/elements/table";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";

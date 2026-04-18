@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/components/elements/butttons";
-import { Modal } from "@/lib/components/elements/Modal";
+import { Modal } from "@/lib/components/elements/modal";
 import { Positions } from "@/lib/constants/position";
 
 import styles from "./page.module.scss";
@@ -31,7 +31,7 @@ const Page = () => {
       {
         open ? (
           <Modal pos={open} onClose={handleClose} overlay>
-            <Modal.Header titleText="Dummy Title" className={styles.header} onClose={handleClose} />
+            <Modal.Header title="Dummy Title" className={styles.header} onClose={handleClose} />
             <div className={styles.content}>{"Welcome!"}</div>
           </Modal>
         ) : null

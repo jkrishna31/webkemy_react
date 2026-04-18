@@ -4,9 +4,8 @@ import { ComponentProps, useEffect, useState } from "react";
 
 import { Button } from "@/lib/components/elements/butttons";
 import { MonthView } from "@/lib/components/elements/calendar/MonthView";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { months, monthsOrder } from "@/lib/data/datetime";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
@@ -128,7 +127,7 @@ const DatePicker = ({
                   monthsOptions.map(item => (
                     <Item
                       key={item.value}
-                      primary={item.label}
+                      label={item.label}
                       onClick={() => updateDateField(item.value as number, "month")}
                       selected={item.value === activeMonth - 1}
                     />
@@ -146,7 +145,7 @@ const DatePicker = ({
                   Array.from({ length: 10 }).map((_, idx: number) => ({ label: `${2020 + idx}`, value: 2020 + idx })).map(item => (
                     <Item
                       key={item.value}
-                      primary={item.label}
+                      label={item.label}
                       selected={item.value === activeYear}
                       onClick={() => updateDateField(item.value as number, "year")}
                     />

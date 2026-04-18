@@ -8,7 +8,7 @@ import CopyIcon from "@/lib/svgs/icons/CopyIcon";
 import WrapOffIcon from "@/lib/svgs/icons/WrapOffIcon";
 import WrapOnIcon from "@/lib/svgs/icons/WrapOnIcon";
 import { copyToClipboard } from "@/lib/utils/client";
-import { getUniqueId } from "@/lib/utils/crypto";
+import { generateId } from "@/lib/utils/crypto";
 import { classes } from "@/lib/utils/style";
 
 import cStyles from "../block.module.scss";
@@ -24,14 +24,14 @@ const RenderCode = ({ block, ...props }: any) => {
     copyToClipboard(codeToCopy)
       .then(() => {
         addToast({
-          id: getUniqueId(),
+          id: generateId(),
           message: "Copied to Clipboard!",
           timeout: 3000,
         });
       })
       .catch(() => {
         addToast({
-          id: getUniqueId(),
+          id: generateId(),
           message: "Failed to copy!",
           timeout: 3000,
           type: "error",

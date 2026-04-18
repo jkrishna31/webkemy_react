@@ -1,11 +1,10 @@
-import { SearchForm } from "@/components/common/forms";
 import { dummyMembers } from "@/data/dummy/chatData";
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { SearchForm } from "@/lib/components/blocks/search-form";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Table } from "@/lib/components/elements/Table";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { Table } from "@/lib/components/elements/table";
 import CopyIcon from "@/lib/svgs/icons/CopyIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
@@ -68,9 +67,9 @@ const MembersPanel = ({
                     triggerClass={styles.role_trigger}
                     dropdown={
                       <ItemList>
-                        <Item scope="list" primary="Owner" selected={item.role === "owner"} />
-                        <Item scope="list" primary="Admin" selected={item.role === "admin"} />
-                        <Item scope="list" primary="Member" selected={item.role === "member"} />
+                        <Item label="Owner" selected={item.role === "owner"} />
+                        <Item label="Admin" selected={item.role === "admin"} />
+                        <Item label="Member" selected={item.role === "member"} />
                       </ItemList>
                     }
                   >

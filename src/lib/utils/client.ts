@@ -118,11 +118,8 @@ export const paste = (event: ClipboardEvent) => {
     // });
 };
 
-export const share = (data?: ShareData) => {
-    if (hasNativeShare()) {
-        return navigator.share(data);
-    }
-    return Promise.resolve(-1);
+export const share = async (data?: ShareData) => {
+    return await navigator.share(data);
 };
 
 export const setAppBadge = (num: number) => {

@@ -2,7 +2,7 @@
 
 import { ComponentProps, useRef } from "react";
 
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
 import { classes } from "@/lib/utils/style";
 
@@ -40,7 +40,7 @@ const OtpInput = ({
       <input aria-hidden className={styles.hidden_input} type="hidden" {...restProps} />
       {Array.from({ length: length }).map((_, idx) => (
         <InputFieldWrapper key={idx} className={styles.input_wrapper}>
-          <GeneralInput
+          <Input
             maxLength={1} type={type} aria-setsize={length} aria-posinset={idx}
             tabIndex={-1}
           />

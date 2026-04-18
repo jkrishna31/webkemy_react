@@ -2,8 +2,8 @@
 
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/components/elements/Badge";
-import { Chip } from "@/lib/components/elements/Chip";
+import { Badge } from "@/lib/components/elements/badge";
+import { Chip } from "@/lib/components/elements/chip";
 
 import styles from "./page.module.scss";
 

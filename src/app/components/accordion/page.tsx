@@ -3,7 +3,7 @@
 import { ReactNode } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { CollapsiblePanel } from "@/lib/components/elements/CollapsiblePanel";
+import { CollapsiblePanel } from "@/lib/components/elements/collapsible-panel";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
 

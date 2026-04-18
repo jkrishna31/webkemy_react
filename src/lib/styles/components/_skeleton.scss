@@ -15,26 +15,27 @@
   }
 
   &::before {
-    background-color: var(--bg-t);
+    background-color: var(--bg-q);
   }
 
   &::after {
     transform: translate3d(-100%, 0, 0);
     background-image: linear-gradient(to right,
-        rgba(rgb(139, 139, 139), 0) 0,
-        rgba(rgb(139, 139, 139), 0.15) 20%,
-        rgba(rgb(139, 139, 139), 0.3) 60%,
-        rgba(rgb(139, 139, 139), 0));
-    animation: shimmer 2s linear infinite;
+        rgba(rgb(90, 91, 92), 0) 0,
+        rgba(rgb(90, 91, 92), 0.15) 20%,
+        rgba(rgb(90, 91, 92), 0.3) 60%,
+        rgba(rgb(90, 91, 92), 0));
+    animation: shimmer linear infinite;
+    animation-duration: 2s;
   }
 
   @media (prefers-color-scheme: light) {
     &::after {
       background-image: linear-gradient(90deg,
-          rgba(#777c81, 0) 0,
-          rgba(#777c81, 0.15) 20%,
-          rgba(#777c81, 0.3) 60%,
-          rgba(#777c81, 0));
+          rgba(rgb(150, 154, 159), 0) 0,
+          rgba(rgb(150, 154, 159), 0.15) 20%,
+          rgba(rgb(150, 154, 159), 0.3) 60%,
+          rgba(rgb(150, 154, 159), 0));
     }
   }
 

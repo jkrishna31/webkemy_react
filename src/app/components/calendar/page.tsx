@@ -7,7 +7,7 @@ import { PageSetup } from "@/components/managers";
 import { allEvents } from "@/data/dummy/calendarEvents";
 import { useCalendarActions } from "@/data/stores";
 import { CalendarBody, CalendarHeader, CalendarWrapper } from "@/lib/components/elements/calendar";
-import { Drawer } from "@/lib/components/elements/Drawer";
+import { Drawer } from "@/lib/components/elements/drawer";
 import CalendarPlusIcon from "@/lib/svgs/icons/CalendarPlusIcon";
 
 import styles from "./page.module.scss";
@@ -39,7 +39,7 @@ const Page = () => {
           >
             <Drawer.Header
               icon={<CalendarPlusIcon className={styles.form_icon} />}
-              titleText="New Event" onClose={() => setShowEventForm(false)}
+              title="New Event" onClose={() => setShowEventForm(false)}
             />
             <Drawer.Body>
               <EventForm onCancel={() => setShowEventForm(false)} />

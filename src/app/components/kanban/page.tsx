@@ -4,14 +4,13 @@ import { Fragment, RefObject, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { kanbanData } from "@/data/dummy/kanbanData";
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
-import { Chip } from "@/lib/components/elements/Chip";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Kanban, KanbanColumn, KanbanItem } from "@/lib/components/elements/Kanban";
-import { Tabs } from "@/lib/components/elements/Tabs";
+import { Chip } from "@/lib/components/elements/chip";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Kanban, KanbanColumn, KanbanItem } from "@/lib/components/elements/kanban";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { Tabs } from "@/lib/components/elements/tabs";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import { KanbanDragCtx, useKanban } from "@/lib/hooks/useKanban";
 import ChevronDownIcon from "@/lib/svgs/icons/ChevronDownIcon";
@@ -251,8 +250,7 @@ const Page = () => {
             <ItemList>
               {variant === "separate" && (
                 <Item
-                  primary={layout === "horizontal" ? "Vertical Layout" : "Horizontal Layout"}
-                  scope="list"
+                  label={layout === "horizontal" ? "Vertical Layout" : "Horizontal Layout"}
                   onClick={() => {
                     setShowKanbanOptions(false);
                     setLayout(layout === "horizontal" ? "vertical" : "horizontal");
@@ -260,8 +258,7 @@ const Page = () => {
                 />
               )}
               <Item
-                primary={variant === "separate" ? "Combined View" : "Separate View"}
-                scope="list"
+                label={variant === "separate" ? "Combined View" : "Separate View"}
                 onClick={() => {
                   setShowKanbanOptions(false);
                   setVariant(variant === "combined" ? "separate" : "combined");

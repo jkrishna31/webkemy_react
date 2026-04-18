@@ -2,7 +2,7 @@
 
 import { ComponentProps } from "react";
 
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import MinusIcon from "@/lib/svgs/icons/MinusIcon";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style";
@@ -52,7 +52,7 @@ const NumberInput = ({
           </button>
         ) : null
       }
-      <GeneralInput
+      <Input
         type="number"
         inputMode="decimal"
         value={String(value)}

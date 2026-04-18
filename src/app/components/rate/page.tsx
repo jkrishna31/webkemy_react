@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Rate } from "@/lib/components/elements/Rate";
+import { Rate } from "@/lib/components/elements/rate";
 import CircleIcon from "@/lib/svgs/icons/CircleIcon";
 import DiamondIcon from "@/lib/svgs/icons/DiamondIcon";
 import EmojiAngryIcon from "@/lib/svgs/icons/EmojiAngryIcon";

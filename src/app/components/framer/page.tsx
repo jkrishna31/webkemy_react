@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Framer } from "@/lib/components/elements/Framer";
+import { Framer } from "@/lib/components/elements/framer";
 import TriangleWarningIcon from "@/lib/svgs/icons/TriangleWarningIcon";
 
 import styles from "./page.module.scss";

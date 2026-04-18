@@ -1,5 +1,5 @@
-import { SearchForm } from "@/components/common/forms";
 import { dummyChats } from "@/data/dummy/chatData";
+import { SearchForm } from "@/lib/components/blocks/search-form";
 import { ChatCard } from "@/lib/components/elements/chat/ChatCard";
 
 import styles from "./StarredPanel.module.scss";

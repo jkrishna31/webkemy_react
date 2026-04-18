@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { ComponentProps, MouseEvent } from "react";
 
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
 import { ChatMedia } from "@/lib/components/elements/chat/ChatMedia";
 import { ChatQuoteCard } from "@/lib/components/elements/chat/ChatQuoteCard";
 import { QuickActions } from "@/lib/components/elements/chat/QuickActions";
 import { Reactions } from "@/lib/components/elements/chat/Reactions";
 import { RepliesBtn } from "@/lib/components/elements/chat/RepliesBtn";
-import { Progress } from "@/lib/components/elements/Progress";
+import { Progress } from "@/lib/components/elements/progress";
 import BotMessageIcon from "@/lib/svgs/icons/BotMessageIcon";
 import CheckMarkIcon from "@/lib/svgs/icons/CheckMarkIcon";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
@@ -132,7 +132,7 @@ const ChatItem = ({
                 {
                   chat.content?.map((item: { id: string; content: string; media: any[]; status?: string; quoted?: any }, idx: number) => {
                     const _isSelected = isSelected(item.id);
-                    const isTruncated = item.content.length > 500; // && not expanded
+                    const isTruncated = (item.content?.length ?? 0) > 500; // && not expanded
                     return (
                       <div
                         key={idx}

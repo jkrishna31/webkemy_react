@@ -1,11 +1,15 @@
 export const Socials = {
+  GITHUB: "github",
   LINKEDIN: "linkedin",
   TWITTER: "twitter",
-  GITHUB: "github",
+  BLUESKY: "bluesky",
   FACEBOOK: "facebook",
   INSTAGRAM: "instagram",
   YOUTUBE: "youtube",
   REDDIT: "reddit",
+  STACKOVERFLOW: "stackoverflow",
+  WEBSITE: "website",
+  EMAIL: "email",
 } as const;
 
 export const Env = {

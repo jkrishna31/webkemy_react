@@ -3,7 +3,7 @@
 import { useRef } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { DynamicGrid, GridItem } from "@/lib/components/elements/DynamicGrid";
+import { DynamicGrid, GridItem } from "@/lib/components/elements/dynamic-grid";
 import { useGrid } from "@/lib/hooks/useGrid";
 
 import styles from "./page.module.scss";

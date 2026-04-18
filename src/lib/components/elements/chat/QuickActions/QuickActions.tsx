@@ -1,7 +1,7 @@
 import { ComponentProps, MouseEvent } from "react";
 
 import { Button } from "@/lib/components/elements/butttons";
-import { Divider } from "@/lib/components/elements/Divider";
+import { Divider } from "@/lib/components/elements/divider";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import { classes } from "@/lib/utils/style";

@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { EmojiPicker } from "@/lib/components/elements/EmojiPicker";
+import { EmojiPicker } from "@/lib/components/elements/emoji-picker";
 
 import styles from "./page.module.scss";
 

@@ -4,7 +4,7 @@
 import { PageSetup } from "@/components/managers";
 import { ToastType, useToastActions } from "@/data/stores";
 import { Button } from "@/lib/components/elements/butttons";
-import { getUniqueId } from "@/lib/utils/crypto";
+import { generateId } from "@/lib/utils/crypto";
 
 import styles from "./page.module.scss";
 
@@ -12,7 +12,7 @@ const Page = () => {
   const toastActions = useToastActions();
 
   const addToast = (type?: ToastType) => {
-    const id = getUniqueId(4);
+    const id = generateId(4);
     toastActions.addToast({
       id: id,
       message: "Dummy Toast: " + id + ". Auto closes after 5s.",

@@ -2,10 +2,8 @@
 
 import { useState } from "react";
 
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemGroup } from "@/lib/components/elements/ItemGroup";
-import { ItemList } from "@/lib/components/elements/ItemList";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Item, ItemGroup, ItemList } from "@/lib/components/elements/list-item";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style";
 
@@ -44,7 +42,6 @@ const BlockSelector = ({
                                         group.menu?.map((item: any) => (
                                             <Item<"button">
                                                 as="button"
-                                                scope="list"
                                                 {...item}
                                                 key={item.key}
                                                 onClick={() => {

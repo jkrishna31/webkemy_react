@@ -3,7 +3,7 @@
 import { ComponentProps, useEffect, useState } from "react";
 
 import { Button } from "@/lib/components/elements/butttons";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import EyeClosedIcon from "@/lib/svgs/icons/EyeClosedIcon";
@@ -39,7 +39,7 @@ const PasswordInput = ({
 
   return (
     <InputFieldWrapper className={classes(styles.wrapper, className)} style={style}>
-      <GeneralInput
+      <Input
         placeholder={placeholder}
         onInput={(e) => {
           hide();

@@ -2,13 +2,12 @@
 
 import { CSSProperties, useCallback, useMemo, useState } from "react";
 
-import { Dropdown } from "@/lib/components/elements/Dropdown";
+import { Dropdown } from "@/lib/components/elements/dropdown";
 import { HueSlider } from "@/lib/components/elements/inputs/ColorPicker/HueSlider";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { Slider } from "@/lib/components/elements/inputs/Slider";
 import { Slider2D } from "@/lib/components/elements/inputs/Slider2D";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { ColorFormat, hsvToHex, hsvToHsl, hsvToRgb, stringifyColor } from "@/lib/utils/color";
 import { classes } from "@/lib/utils/style";
 
@@ -103,7 +102,7 @@ const ColorPicker = () => {
                 colorFormatOpts.map(item => (
                   <Item
                     key={item.value}
-                    primary={item.label}
+                    label={item.label}
                     onClick={() => {
                       setSelectedFormat(item.value as ColorFormat);
                       setOpenFormatSelector(false);
@@ -119,7 +118,7 @@ const ColorPicker = () => {
         >
           {colorFormatOpts.find(item => item.value === selectedFormat)?.label}
         </Dropdown>
-        <GeneralInput
+        <Input
           value={stringifyColor(colorInSelectedFormat, selectedFormat, true)}
           onInput={(e) => { }}
           className={styles.color_input}

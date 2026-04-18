@@ -1,9 +1,9 @@
 import { Button } from "@/lib/components/elements/butttons";
 import { FileInput, FileMeta } from "@/lib/components/elements/inputs/FileInput";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
 import { TextArea } from "@/lib/components/elements/inputs/TextArea";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 import { useForm } from "@/lib/hooks/useForm";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import DeleteIcon from "@/lib/svgs/icons/DeleteIcon";
@@ -63,7 +63,7 @@ const GroupDetails = ({
 
       <InputItem>
         <Text<"label"> as="label">{"Name"}</Text>
-        <GeneralInput value={values.name} onInput={e => setFieldValue(["name"], (e.target as HTMLInputElement).value)} />
+        <Input value={values.name} onInput={e => setFieldValue(["name"], (e.target as HTMLInputElement).value)} />
       </InputItem>
 
       <InputItem>

@@ -1,5 +1,5 @@
 import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
-import { Table } from "@/lib/components/elements/Table";
+import { Table } from "@/lib/components/elements/table";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./GroupSettings.module.scss";

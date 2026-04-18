@@ -1,9 +1,9 @@
 import { PageSetup } from "@/components/managers";
-import { Resizable } from "@/lib/components/elements/Resizable";
+import { Resizable, Resizers } from "@/lib/components/elements/resizable";
 
 import styles from "./page.module.scss";
 
-const resizers = ["l", "r", "t", "b", "tl", "br", "bl", "tr"];
+const resizers: Resizers[] = ["l", "r", "t", "b", "tl", "br", "bl", "tr"];
 
 const Page = () => {
   return (

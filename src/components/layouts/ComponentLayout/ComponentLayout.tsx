@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { AppSidebar } from "@/components/common/general";
+import { AppSidebar } from "@/components/common/app";
 import { AppLayout } from "@/components/layouts";
 import { classes } from "@/lib/utils/style";
 

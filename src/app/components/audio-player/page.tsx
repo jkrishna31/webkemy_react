@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { AudioPlayer } from "@/lib/components/elements/AudioPlayer";
+import { AudioPlayer } from "@/lib/components/elements/audio-player";
 
 import styles from "./page.module.scss";
 

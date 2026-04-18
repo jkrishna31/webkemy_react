@@ -3,15 +3,14 @@
 import { ComponentProps, useCallback, useEffect, useRef, useState } from "react";
 
 import { dummyChats, groupDetails } from "@/data/dummy/chatData";
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { ChatComposer, ChatList, ChatQuoteCard, GroupDetails, GroupSettings, MembersPanel, PinnedBanner, PinnedPanel, SearchPanel, SharedPanel, StarredPanel, ThreadsPanel } from "@/lib/components/elements/chat";
 import { ThreadPanel } from "@/lib/components/elements/chat/ThreadPanel";
-import { Divider } from "@/lib/components/elements/Divider";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { MediaGallery } from "@/lib/components/elements/MediaGallery";
-import { Overlay } from "@/lib/components/elements/Overlay";
-import { Popover } from "@/lib/components/elements/Popover";
+import { Divider } from "@/lib/components/elements/divider";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { MediaGallery } from "@/lib/components/elements/media-gallery";
+import { Overlay } from "@/lib/components/elements/overlay";
+import { Popover } from "@/lib/components/elements/popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";
 import BellOffIcon from "@/lib/svgs/icons/BellOffIcon";
@@ -31,7 +30,7 @@ import SearchIcon from "@/lib/svgs/icons/SearchIcon";
 import SpoolIcon from "@/lib/svgs/icons/SpoolIcon";
 import StarIcon from "@/lib/svgs/icons/StarIcon";
 import UsersIcon from "@/lib/svgs/icons/UsersIcon";
-import { getUniqueId } from "@/lib/utils/crypto";
+import { generateId } from "@/lib/utils/crypto";
 import { compareDateByPrecision } from "@/lib/utils/datetime";
 import { classes } from "@/lib/utils/style";
 
@@ -68,7 +67,7 @@ const ChatContainer = ({
     const timestamp = new Date().toUTCString();
     setChats(currChats => {
       const newChat: any = {
-        id: getUniqueId(4),
+        id: generateId(4),
         author: {
           id: "me",
           name: "Julia V. Gambuto",
@@ -295,48 +294,41 @@ const ChatContainer = ({
         >
           <ItemList>
             <Item
-              scope="list"
               icon={<CircleInfoIcon />}
-              primary="Group Details"
+              label="Group Details"
               onClick={() => handleOptionClick("details")}
             />
             <Item
-              scope="list"
               icon={<UsersIcon />}
-              primary="Manage Members"
+              label="Manage Members"
               onClick={() => handleOptionClick("members")}
             />
             <Item
-              scope="list"
               icon={<GearIcon />}
-              primary="Group Settings"
+              label="Group Settings"
               onClick={() => handleOptionClick("settings")}
             />
 
             <Divider style={{ marginBlock: ".4rem" }} />
 
             <Item
-              scope="list"
               icon={<BellOffIcon />}
-              primary="Mute"
+              label="Mute"
               onClick={() => handleOptionClick("mute")}
             />
             <Item
-              scope="list"
               icon={<DeleteIcon />}
-              primary="Delete Chat"
+              label="Delete Chat"
               onClick={() => handleOptionClick("delete_chat")}
             />
             <Item
-              scope="list"
               icon={<LogoutIcon />}
-              primary="Leave"
+              label="Leave"
               onClick={() => handleOptionClick("leave")}
             />
             <Item
-              scope="list"
               icon={<ProhibitedIcon />}
-              primary="Block"
+              label="Block"
               onClick={() => handleOptionClick("block")}
             />
           </ItemList>
@@ -350,11 +342,11 @@ const ChatContainer = ({
           className={styles.popover}
         >
           <ItemList>
-            <Item primary="Search" scope="list" icon={<SearchIcon />} onClick={() => handleOptionClick("search")} />
-            <Item primary="Pinned" scope="list" icon={<PinIcon />} onClick={() => handleOptionClick("pinned")} />
-            <Item primary="Starred" scope="list" icon={<StarIcon />} onClick={() => handleOptionClick("starred")} />
-            <Item primary="Threads" scope="list" icon={<SpoolIcon />} onClick={() => handleOptionClick("threads")} />
-            <Item primary="Shared" scope="list" icon={<FolderIcon />} onClick={() => handleOptionClick("shared")} />
+            <Item label="Search" icon={<SearchIcon />} onClick={() => handleOptionClick("search")} />
+            <Item label="Pinned" icon={<PinIcon />} onClick={() => handleOptionClick("pinned")} />
+            <Item label="Starred" icon={<StarIcon />} onClick={() => handleOptionClick("starred")} />
+            <Item label="Threads" icon={<SpoolIcon />} onClick={() => handleOptionClick("threads")} />
+            <Item label="Shared" icon={<FolderIcon />} onClick={() => handleOptionClick("shared")} />
           </ItemList>
         </Popover>
       )}

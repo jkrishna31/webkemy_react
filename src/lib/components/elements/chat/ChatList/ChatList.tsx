@@ -5,10 +5,9 @@ import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useEffec
 import { ChatSection } from "@/lib/components/elements/chat/ChatSection";
 import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";
 import { QuickActions } from "@/lib/components/elements/chat/QuickActions";
-import { EmojiPicker } from "@/lib/components/elements/EmojiPicker";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Popover } from "@/lib/components/elements/Popover";
+import { EmojiPicker } from "@/lib/components/elements/emoji-picker";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { Popover } from "@/lib/components/elements/popover";
 import { useScroll } from "@/lib/hooks/useScroll";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 import ChevronsDownIcon from "@/lib/svgs/icons/ChevronsDownIcon";
@@ -269,16 +268,16 @@ const ChatList = ({
         <ItemList>
           {defaultOptions.slice(0, -1).map(item => (
             <Item<"button">
-              key={item.id} as="button" scope="list"
-              primary={item.label} icon={item.icon}
+              key={item.id} as="button"
+              label={item.label} icon={item.icon}
               onClick={() => handleMenuClick(item.id)}
             />
           ))}
           {
             otherOptions.map(item => (
               <Item<"button">
-                key={item.id} as="button" scope="list"
-                primary={item.label} icon={item.icon}
+                key={item.id} as="button"
+                label={item.label} icon={item.icon}
                 onClick={() => handleMenuClick(item.id)}
                 disabled={item.disabled}
               />

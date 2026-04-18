@@ -1,4 +1,4 @@
-@use '@/lib/styles/mixins/general' as *;
+@use '@/lib/styles/mixins/line-clamp' as *;
 
 .wrapper {
   display: flex;
@@ -22,7 +22,7 @@
   p {
     font-size: 1.5rem;
     color: var(--fg-s);
-    @include line_clamp(1);
+    @include line-clamp(1);
 
     &:hover {
       color: var(--fg-p-alt);

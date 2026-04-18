@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Virtualizer } from "@/lib/components/elements/Virtualizer";
+import { Virtualizer } from "@/lib/components/elements/virtualizer";
 
 import styles from "./page.module.scss";
 

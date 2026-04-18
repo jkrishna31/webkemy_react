@@ -1,7 +1,7 @@
 import { ComponentProps, Fragment, MouseEvent } from "react";
 
 import { ChatItem } from "@/lib/components/elements/chat/ChatItem";
-import { Divider } from "@/lib/components/elements/Divider";
+import { Divider } from "@/lib/components/elements/divider";
 import { compareDateByPrecision, formatDate } from "@/lib/utils/datetime";
 import { classes } from "@/lib/utils/style";
 

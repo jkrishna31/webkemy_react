@@ -4,9 +4,8 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { SOURCE_CODE } from "@/constants/app.const";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { months, monthsOrder } from "@/lib/data/datetime";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import PopoverLeftIcon from "@/lib/svgs/icons/PopoverLeftIcon";
@@ -32,7 +31,7 @@ const Page = () => {
               monthsOrder.map(key => (
                 <Item
                   key={key}
-                  primary={months[key].label}
+                  label={months[key].label}
                   selected={selected === key}
                   onClick={() => {
                     setSelected(key);
@@ -52,23 +51,23 @@ const Page = () => {
           <ItemList>
             <Item<"a">
               as="a" href="/components"
-              primary="All Components"
+              label="All Components"
               icon={<PuzzleIcon />}
             />
             <Item<"a">
               as="a" href="/components/dropdown"
-              primary="Dropdown"
+              label="Dropdown"
               icon={<PopoverLeftIcon />}
               disabled
             />
             <Item<"a">
               as="a" href="/components/popover"
-              primary="Popover"
+              label="Popover"
               icon={<PopoverLeftIcon />}
             />
             <Item<"a">
               as="a" href={SOURCE_CODE}
-              primary="Source Code"
+              label="Source Code"
               icon={<GithubLogo />}
             />
           </ItemList>

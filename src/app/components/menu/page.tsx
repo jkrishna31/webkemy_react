@@ -3,11 +3,10 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/components/elements/Badge";
+import { Badge } from "@/lib/components/elements/badge";
 import { Button } from "@/lib/components/elements/butttons";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemGroup } from "@/lib/components/elements/ItemGroup";
-import { Menu } from "@/lib/components/elements/Menu";
+import { Item, ItemGroup } from "@/lib/components/elements/list-item";
+import { Menu } from "@/lib/components/elements/menu";
 import CircleIcon from "@/lib/svgs/icons/CircleIcon";
 import ConeIcon from "@/lib/svgs/icons/ConeIcon";
 import CylinderIcon from "@/lib/svgs/icons/CylinderIcon";
@@ -51,7 +50,7 @@ const Page = () => {
         <Item
           as="button"
           icon={<CircleIcon className={styles.icon} />}
-          primary="Circle"
+          label="Circle"
           badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" style={{ marginLeft: "auto", zIndex: 1 }}>{"NEW"}</Badge>}
           minimized={!open}
           data-tooltip="Circle"
@@ -61,7 +60,7 @@ const Page = () => {
         <Item
           as="button"
           icon={<RectangleVerticalIcon className={styles.icon} />}
-          primary="Rectangle"
+          label="Rectangle"
           data-tooltip="Rectangle"
           minimized={!open}
           aria-current={activeItem === "2"}
@@ -76,7 +75,7 @@ const Page = () => {
             <Item
               as="button"
               icon={<TriangleIcon className={styles.icon} />}
-              primary="Triangle"
+              label="Triangle"
               data-tooltip="Triangle"
               badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="blue" style={{ marginLeft: "auto" }}>{"37"}</Badge>}
               minimized={!open}
@@ -89,7 +88,7 @@ const Page = () => {
             <Item
               as="button"
               icon={<PentagonIcon className={styles.icon} />}
-              primary="Equilateral Triangle"
+              label="Equilateral Triangle"
               data-tooltip="Equilateral Triangle"
               minimized={!open}
               aria-current={activeItem === "4"}
@@ -104,7 +103,7 @@ const Page = () => {
                 <Item
                   as="button"
                   icon={<ConeIcon className={styles.icon} />}
-                  primary="Isosceles Triangle"
+                  label="Isosceles Triangle"
                   data-tooltip="Isosceles Triangle"
                   minimized={!open}
                   aria-current={activeItem === "-5"}
@@ -116,7 +115,7 @@ const Page = () => {
                 <Item
                   as="button"
                   icon={<HexagonIcon className={styles.icon} />}
-                  primary="Hexagon"
+                  label="Hexagon"
                   data-tooltip="Hexagon"
                   badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="green" animate="ripple" style={{ marginLeft: "auto" }} />}
                   minimized={!open}
@@ -126,7 +125,7 @@ const Page = () => {
                 <Item
                   as="button"
                   icon={<OctagonIcon className={styles.icon} />}
-                  primary="Octagon"
+                  label="Octagon"
                   data-tooltip="Octagon"
                   minimized={!open}
                   aria-current={activeItem === "6"}
@@ -137,7 +136,7 @@ const Page = () => {
             <Item
               as="button"
               icon={<CylinderIcon className={styles.icon} />}
-              primary="Scalene Triangle"
+              label="Scalene Triangle"
               data-tooltip="Scalene Triangle"
               badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="yellow" style={{ marginLeft: "auto" }}>{"66"}</Badge>}
               minimized={!open}
@@ -149,9 +148,9 @@ const Page = () => {
         <Item
           as="button"
           icon={<StarIcon className={styles.icon} />}
-          primary="Star"
+          label="Star"
           data-tooltip="Star"
-          secondary="Lorem Ipsum Dolor Sit"
+          description="Lorem Ipsum Dolor Sit"
           minimized={!open}
           aria-current={activeItem === "8"}
           onClick={() => setActiveItem("8")}
@@ -159,7 +158,7 @@ const Page = () => {
         <Item
           as="button"
           icon={<DiamondIcon className={styles.icon} />}
-          primary="Diamond"
+          label="Diamond"
           data-tooltip="Diamond"
           minimized={!open}
           aria-current={activeItem === "9"}
@@ -168,7 +167,7 @@ const Page = () => {
         <Item
           as="button"
           icon={<SquareIcon className={styles.icon} />}
-          primary="Square"
+          label="Square"
           data-tooltip="Square"
           badge={(minimized: boolean) => <Badge float={minimized ? "tr" : null} color="red" animate="ripple" style={{ marginLeft: "auto" }} />}
           minimized={!open}

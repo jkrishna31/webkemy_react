@@ -1,5 +1,5 @@
 // NOTE: prefer direct import
-export * from "./NetworkManager";
-export * from "./ToastManager";
-export * from "./WindowResizeManager";
-export * from "./WindowScrollManager";
+export * from "./network-manager";
+export * from "./toast-manager";
+export * from "./window-resize-manager";
+export * from "./window-scroll-manager";

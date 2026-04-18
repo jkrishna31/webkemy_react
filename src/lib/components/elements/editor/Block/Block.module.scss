@@ -1,4 +1,4 @@
-@use '@/lib/styles/mixins/general' as *;
+@use '@/lib/styles/mixins/line-clamp' as *;
 
 .block {
   margin-bottom: 3rem;
@@ -15,7 +15,7 @@
   pointer-events: none;
   touch-action: none;
   color: var(--fg-t);
-  // @include line_clamp(1);
+  // @include line-clamp(1);
 }
 
 

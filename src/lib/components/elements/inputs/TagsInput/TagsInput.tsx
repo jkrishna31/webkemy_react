@@ -3,7 +3,7 @@
 import { ComponentProps, useRef } from "react";
 
 import { Button } from "@/lib/components/elements/butttons";
-import { Chip } from "@/lib/components/elements/Chip";
+import { Chip } from "@/lib/components/elements/chip";
 import { useKey } from "@/lib/hooks/useKey";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 import { classes } from "@/lib/utils/style";

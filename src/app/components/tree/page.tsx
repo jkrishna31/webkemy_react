@@ -1,8 +1,8 @@
 "use client";
 
 import { PageSetup } from "@/components/managers";
-import { Badge } from "@/lib/components/elements/Badge";
-import { Tree, TreeNode } from "@/lib/components/elements/Tree";
+import { Badge } from "@/lib/components/elements/badge";
+import { Tree, TreeNode } from "@/lib/components/elements/tree";
 import { useAccordion } from "@/lib/hooks/useAccordion";
 import FileIcon from "@/lib/svgs/icons/FileIcon";
 import FolderIcon from "@/lib/svgs/icons/FolderIcon";

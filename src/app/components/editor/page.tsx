@@ -4,9 +4,9 @@ import { useCallback, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { BlockSelector, Editor, FindReplace, ToolSelector } from "@/lib/components/elements/editor";
-import { Popover } from "@/lib/components/elements/Popover";
-import { Tabs } from "@/lib/components/elements/Tabs";
-import { Text } from "@/lib/components/elements/Text";
+import { Popover } from "@/lib/components/elements/popover";
+import { Tabs } from "@/lib/components/elements/tabs";
+import { Text } from "@/lib/components/elements/text";
 import { EditorBlocks, EditorTools } from "@/lib/constants/editor";
 import { useEditor } from "@/lib/hooks/useEditor";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
@@ -140,23 +140,23 @@ const blockOptions = [
     collapsible: false,
     className: styles.block_group,
     menu: [
-      { key: EditorBlocks.PARA, primary: "Paragraph", icon: <PilcrowIcon /> },
-      { key: EditorBlocks.H1, primary: "Heading 1", icon: <Heading1Icon />, },
-      { key: EditorBlocks.H2, primary: "Heading 2", icon: <Heading2Icon />, },
-      { key: EditorBlocks.H3, primary: "Heading 3", icon: <Heading3Icon /> },
-      { key: EditorBlocks.H4, primary: "Heading 4", icon: <Heading4Icon />, },
-      // { key: EditorBlocks.H5, primary: "Heading 5", icon: <Heading5Icon />, },
-      // { key: EditorBlocks.H6, primary: "Heading 6", icon: <Heading6Icon />, },
-      { key: EditorBlocks.ORDERED_LIST, primary: "Ordered List", icon: <OrderedListIcon /> },
-      { key: EditorBlocks.UNORDERED_LIST, primary: "Unordered List", icon: <UnorderedListIcon /> },
-      { key: EditorBlocks.CHECK_LIST, primary: "Check List", icon: <ChecklistIcon /> },
-      { key: EditorBlocks.CODE, primary: "Code", icon: <BlockCodeIcon /> },
-      { key: EditorBlocks.IMAGE, primary: "Image", icon: <ImageIcon /> },
-      { key: EditorBlocks.TABLE, primary: "Table", icon: <TableIcon /> },
-      { key: EditorBlocks.DIVIDER, primary: "Divider", icon: <DividerIcon /> },
-      { key: EditorBlocks.COLLAPSIBLE, primary: "Collapsible", icon: <PanelTopCloseIcon /> },
-      { key: EditorBlocks.QUOTE, primary: "Quote", icon: <BlockquoteIcon /> },
-      { key: EditorBlocks.NOTE, primary: "Note", icon: <NoteIcon /> },
+      { key: EditorBlocks.PARA, label: "Paragraph", icon: <PilcrowIcon /> },
+      { key: EditorBlocks.H1, label: "Heading 1", icon: <Heading1Icon />, },
+      { key: EditorBlocks.H2, label: "Heading 2", icon: <Heading2Icon />, },
+      { key: EditorBlocks.H3, label: "Heading 3", icon: <Heading3Icon /> },
+      { key: EditorBlocks.H4, label: "Heading 4", icon: <Heading4Icon />, },
+      // { key: EditorBlocks.H5, label: "Heading 5", icon: <Heading5Icon />, },
+      // { key: EditorBlocks.H6, label: "Heading 6", icon: <Heading6Icon />, },
+      { key: EditorBlocks.ORDERED_LIST, label: "Ordered List", icon: <OrderedListIcon /> },
+      { key: EditorBlocks.UNORDERED_LIST, label: "Unordered List", icon: <UnorderedListIcon /> },
+      { key: EditorBlocks.CHECK_LIST, label: "Check List", icon: <ChecklistIcon /> },
+      { key: EditorBlocks.CODE, label: "Code", icon: <BlockCodeIcon /> },
+      { key: EditorBlocks.IMAGE, label: "Image", icon: <ImageIcon /> },
+      { key: EditorBlocks.TABLE, label: "Table", icon: <TableIcon /> },
+      { key: EditorBlocks.DIVIDER, label: "Divider", icon: <DividerIcon /> },
+      { key: EditorBlocks.COLLAPSIBLE, label: "Collapsible", icon: <PanelTopCloseIcon /> },
+      { key: EditorBlocks.QUOTE, label: "Quote", icon: <BlockquoteIcon /> },
+      { key: EditorBlocks.NOTE, label: "Note", icon: <NoteIcon /> },
     ],
   },
   {
@@ -165,10 +165,10 @@ const blockOptions = [
     collapsible: false,
     className: styles.block_group,
     menu: [
-      { key: EditorBlocks.YOUTUBE, primary: "Youtube", icon: <EmbedYoutubeIcon /> },
-      { key: EditorBlocks.GITHUB, primary: "Github Gist", icon: <EmbedGithubIcon /> },
-      { key: EditorBlocks.CODEPEN, primary: "CodePen", icon: <EmbedCodepenIcon /> },
-      { key: EditorBlocks.CODESANDBOX, primary: "CodeSandbox", icon: <EmbedCSBIcon /> }
+      { key: EditorBlocks.YOUTUBE, label: "Youtube", icon: <EmbedYoutubeIcon /> },
+      { key: EditorBlocks.GITHUB, label: "Github Gist", icon: <EmbedGithubIcon /> },
+      { key: EditorBlocks.CODEPEN, label: "CodePen", icon: <EmbedCodepenIcon /> },
+      { key: EditorBlocks.CODESANDBOX, label: "CodeSandbox", icon: <EmbedCSBIcon /> }
     ],
   },
 ];

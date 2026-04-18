@@ -3,10 +3,8 @@
 import { ComponentProps, CSSProperties, ReactNode, useEffect, useMemo, useRef, useState } from "react";
 
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemGroup } from "@/lib/components/elements/ItemGroup";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Popover } from "@/lib/components/elements/Popover";
+import { Item, ItemGroup, ItemList } from "@/lib/components/elements/list-item";
+import { Popover } from "@/lib/components/elements/popover";
 import { Keys } from "@/lib/constants/keys";
 import CheckMarkIcon from "@/lib/svgs/icons/CheckMarkIcon";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
@@ -119,7 +117,7 @@ const Select = ({
             handleSelect(undefined, highlightedIdx);
     };
 
-    // TODO: variant combobox (+ Add "<query>")
+    // TODO: variant combobox (+ Add "<query>"; Enter to add query, Backspace to remove from)
     // TODO: opening/closing in accordance with focus
     // TODO: selected value display for single select
 
@@ -151,7 +149,7 @@ const Select = ({
                             as="div"
                             key={String(item.value)}
                             icon={item.icon}
-                            primary={(item as any)[labelKey]}
+                            label={(item as any)[labelKey]}
                             badge={isSelected ? <CheckMarkIcon className={styles.mark} /> : undefined}
                             onClick={() => handleSelect(item)}
                             role="option"

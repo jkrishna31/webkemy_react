@@ -3,7 +3,7 @@ import { RefObject, useCallback, useEffect, useEffectEvent, useLayoutEffect, use
 import { EditorBlocks, InputTypes } from "@/lib/constants/editor";
 import { Keys } from "@/lib/constants/keys";
 import { TColor } from "@/lib/types/general";
-import { getUniqueId } from "@/lib/utils/crypto";
+import { generateId } from "@/lib/utils/crypto";
 import { deepClone } from "@/lib/utils/object";
 
 export type CaretActionDir = "backward" | "forward";
@@ -237,7 +237,7 @@ export function useEditor(ref: RefObject<HTMLDivElement | null>, initialContent?
     options?: { to?: "before" | "after" },
   ) => {
     const { to } = options ?? {};
-    const newBlock = { id: getUniqueId(12), type: type || EditorBlocks.PARA };
+    const newBlock = { id: generateId(12), type: type || EditorBlocks.PARA };
     const newBlocks = [];
     if (data?.length) {
       const targetBlockId = selection?.startBlock;

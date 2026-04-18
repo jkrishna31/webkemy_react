@@ -1,4 +1,4 @@
-@mixin backdrop-support {
+@mixin supports-backdrop {
   @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
     @content;
   }

@@ -1,11 +1,10 @@
 import { ComponentProps, ReactNode } from "react";
 
 import { useActiveDay, useActiveMonth, useActiveWeek, useActiveYear, useCalendarActions, useCalendarMode, useShowOutsideDays, useTimeFormat, useWeekDayStart } from "@/data/stores";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
+import { Dropdown } from "@/lib/components/elements/dropdown";
 import { NumberInput } from "@/lib/components/elements/inputs/NumberInput";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Tabs } from "@/lib/components/elements/Tabs";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { Tabs } from "@/lib/components/elements/tabs";
 import { months, monthsOrder } from "@/lib/data/datetime";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
@@ -116,7 +115,7 @@ const CalendarHeader = ({
                     })).map(item => (
                       <Item
                         key={item.value}
-                        primary={item.label}
+                        label={item.label}
                         onClick={() => setField("activeDay", (item.value as number))}
                         selected={item.value === activeDay}
                       />
@@ -140,7 +139,7 @@ const CalendarHeader = ({
                     })).map(item => (
                       <Item
                         key={item.value}
-                        primary={item.label}
+                        label={item.label}
                         onClick={() => setField("activeWeek", item.value as number)}
                         selected={item.value === activeWeek}
                       />
@@ -162,7 +161,7 @@ const CalendarHeader = ({
                     monthsOptions.map(item => (
                       <Item
                         key={item.value}
-                        primary={item.label}
+                        label={item.label}
                         onClick={() => setField("activeMonth", item.value)}
                         selected={item.value === activeMonth}
                       />
@@ -202,7 +201,7 @@ const CalendarHeader = ({
             <ItemList>
               {
                 calendarMoreOpts.map(item => (
-                  <Item<"button"> as="button" key={item.label} primary={item.label} onClick={item.onClick} />
+                  <Item<"button"> as="button" key={item.label} label={item.label} onClick={item.onClick} />
                 ))
               }
             </ItemList>

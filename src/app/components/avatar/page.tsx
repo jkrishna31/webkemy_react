@@ -1,6 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Avatar } from "@/lib/components/elements/Avatar";
-import { AvatarList } from "@/lib/components/elements/AvatarList";
+import { Avatar, AvatarList } from "@/lib/components/elements/avatar";
 
 import styles from "./page.module.scss";
 

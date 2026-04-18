@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from "react";
 
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
 import { RepliesBtn } from "@/lib/components/elements/chat/RepliesBtn";
 import BotMessageIcon from "@/lib/svgs/icons/BotMessageIcon";

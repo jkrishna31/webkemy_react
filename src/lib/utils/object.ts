@@ -13,19 +13,37 @@ export const deepFlatten = (arr: any[]): any[] => {
   );
 };
 
-export const deepClone = (obj: any) => {
-  if (obj === null) {
-    return null;
+export const deepClone = <T>(obj: T, seen = new WeakMap()): T => {
+  // todo: argument to determine whether to update a particular field of not (will receive key/value and the path to it)
+  // todo: can also return some value to update for example while cloning need to handle id field separately
+
+  if (obj === null || typeof obj !== "object") {
+    return obj;
   }
-  const clone = { ...obj };
-  Object.keys(clone).forEach((key) => (
-    clone[key] = typeof obj[key] === "object" ? deepClone(obj[key]) : obj[key]
-  ));
-  return Array.isArray(obj) && obj.length ?
-    (clone.length = obj.length) && Array.from(clone) :
-    Array.isArray(obj) ?
-      Array.from(obj) :
-      clone;
+
+  if (seen.has(obj as any)) {
+    return seen.get(obj as any);
+  }
+
+  if (Array.isArray(obj)) {
+    const arr: any[] = [];
+    seen.set(obj as any, arr);
+    for (const item of obj) {
+      arr.push(deepClone(item, seen));
+    }
+    return arr as T;
+  }
+
+  const clone: any = {};
+  seen.set(obj as any, clone);
+
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      clone[key] = deepClone((obj as any)[key], seen);
+    }
+  }
+
+  return clone;
 };
 
 export const deepFreeze = <T extends object>(obj: T) => {

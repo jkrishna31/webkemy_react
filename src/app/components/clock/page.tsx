@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Clock } from "@/lib/components/elements/Clock";
+import { Clock } from "@/lib/components/elements/clock";
 
 const page = () => {
   return (

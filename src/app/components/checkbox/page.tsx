@@ -1,7 +1,7 @@
 import { PageSetup } from "@/components/managers";
 import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";
 

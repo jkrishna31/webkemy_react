@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Avatar } from "@/lib/components/elements/Avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Button } from "@/lib/components/elements/butttons";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
 import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";

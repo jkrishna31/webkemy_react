@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { VideoPlayer } from "@/lib/components/elements/VideoPlayer";
+import { VideoPlayer } from "@/lib/components/elements/video-player";
 
 import styles from "./page.module.scss";
 

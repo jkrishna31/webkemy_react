@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Breadcrumb, type Crumb } from "@/lib/components/elements/Breadcrumb";
+import { Breadcrumb, type Crumb } from "@/lib/components/elements/breadcrumb";
 
 import styles from "./page.module.scss";
 

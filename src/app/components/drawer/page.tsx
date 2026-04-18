@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Button } from "@/lib/components/elements/butttons";
-import { Drawer } from "@/lib/components/elements/Drawer";
+import { Drawer } from "@/lib/components/elements/drawer";
 
 import styles from "./page.module.scss";
 
@@ -26,7 +26,7 @@ const Page = () => {
             className={styles.drawer}
           >
             <Drawer.Header
-              titleText="Drawer Title"
+              title="Drawer Title"
               onClose={() => setOpen(false)}
             >
 

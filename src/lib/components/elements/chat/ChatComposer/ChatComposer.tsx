@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef, RefObject, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
-import { EmojiPicker } from "@/lib/components/elements/EmojiPicker";
-import { FilesPreview } from "@/lib/components/elements/FilesPreview";
+import { EmojiPicker } from "@/lib/components/elements/emoji-picker";
+import { FilesPreview } from "@/lib/components/elements/files-preview";
 import { FileInput } from "@/lib/components/elements/inputs/FileInput";
 import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
 import { TextArea } from "@/lib/components/elements/inputs/TextArea";
-import { Popover } from "@/lib/components/elements/Popover";
+import { Popover } from "@/lib/components/elements/popover";
 import { Keys } from "@/lib/constants/keys";
 import { useFiles } from "@/lib/hooks/useFiles";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
@@ -37,9 +37,11 @@ const ChatComposer = ({
   const handleFileInput = (e: any) => setFilelist(e.target.files);
 
   const handleSubmit = useCallback((value?: string) => {
-    onSend?.(value);
-    setQuery(undefined);
-    inputRef.current?.focus();
+    if (value?.trim().length) {
+      onSend?.(value);
+      setQuery(undefined);
+      inputRef.current?.focus();
+    }
   }, [onSend]);
 
   const handleKeyDown = useEffectEvent((e: KeyboardEvent) => {

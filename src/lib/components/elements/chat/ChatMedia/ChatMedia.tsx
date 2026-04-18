@@ -2,11 +2,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { ComponentProps, MouseEvent } from "react";
 
-import { AudioPlayer } from "@/lib/components/elements/AudioPlayer";
+import { AudioPlayer } from "@/lib/components/elements/audio-player";
 import { Button } from "@/lib/components/elements/butttons";
 import { ChatControls } from "@/lib/components/elements/chat/ChatItem";
-import { Progress } from "@/lib/components/elements/Progress";
-import { VideoPreview } from "@/lib/components/elements/VideoPlayer";
+import { Progress } from "@/lib/components/elements/progress";
+import { VideoPreview } from "@/lib/components/elements/video-preview";
 import { Characters } from "@/lib/constants/characters";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
 import DownloadIcon from "@/lib/svgs/icons/DownloadIcon";

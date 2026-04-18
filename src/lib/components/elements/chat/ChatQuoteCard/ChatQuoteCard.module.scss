@@ -1,4 +1,4 @@
-@use '@/lib/styles/mixins/general' as *;
+@use '@/lib/styles/mixins/line-clamp' as *;
 
 .wrapper {
   --chat-card-bg: var(--bg-t);
@@ -39,7 +39,7 @@
 
   .quoted_msg {
     font-size: 1.5rem;
-    @include line_clamp(1);
+    @include line-clamp(1);
   }
 
   .cancel_btn {

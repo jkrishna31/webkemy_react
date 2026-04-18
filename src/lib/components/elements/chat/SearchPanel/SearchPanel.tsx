@@ -1,13 +1,12 @@
 import { useState } from "react";
 
-import { SearchForm } from "@/components/common/forms";
-import { Badge } from "@/lib/components/elements/Badge";
+import { SearchForm } from "@/lib/components/blocks/search-form";
+import { Badge } from "@/lib/components/elements/badge";
 import { Button } from "@/lib/components/elements/butttons";
-import { Divider } from "@/lib/components/elements/Divider";
-import { Dropdown } from "@/lib/components/elements/Dropdown";
-import { Item } from "@/lib/components/elements/Item";
-import { ItemList } from "@/lib/components/elements/ItemList";
-import { Scrollable } from "@/lib/components/elements/Scrollable";
+import { Divider } from "@/lib/components/elements/divider";
+import { Dropdown } from "@/lib/components/elements/dropdown";
+import { Item, ItemList } from "@/lib/components/elements/list-item";
+import { Scrollable } from "@/lib/components/elements/scrollable";
 
 import styles from "./SearchPanel.module.scss";
 
@@ -40,13 +39,13 @@ const SearchPanel = ({
           <Dropdown
             dropdown={
               <ItemList>
-                <Item scope="list" primary="Last 7 days" />
-                <Item scope="list" primary="Last 15 days" />
-                <Item scope="list" primary="Last 1 month" />
-                <Item scope="list" primary="Last 3 month" />
-                <Item scope="list" primary="Last 6 month" />
+                <Item label="Last 7 days" />
+                <Item label="Last 15 days" />
+                <Item label="Last 1 month" />
+                <Item label="Last 3 month" />
+                <Item label="Last 6 month" />
                 <Divider style={{ marginBlock: ".2rem" }} />
-                <Item scope="list" primary="Custom Range" />
+                <Item label="Custom Range" />
               </ItemList>
             }
             triggerClass={styles.filter_trigger}
@@ -76,13 +75,13 @@ const SearchPanel = ({
           <Dropdown
             dropdown={
               <ItemList>
-                <Item scope="list" primary="Any file" />
-                <Item scope="list" primary="PDF" />
-                <Item scope="list" primary="Image" />
-                <Item scope="list" primary="Video" />
-                <Item scope="list" primary="Audio" />
-                <Item scope="list" primary="Presentation" />
-                <Item scope="list" primary="Spreadsheet" />
+                <Item label="Any file" />
+                <Item label="PDF" />
+                <Item label="Image" />
+                <Item label="Video" />
+                <Item label="Audio" />
+                <Item label="Presentation" />
+                <Item label="Spreadsheet" />
               </ItemList>
             }
             triggerClass={styles.filter_trigger}

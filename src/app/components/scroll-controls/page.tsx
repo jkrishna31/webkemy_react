@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Scrollable } from "@/lib/components/elements/Scrollable";
+import { Scrollable } from "@/lib/components/elements/scrollable";
 
 import styles from "./page.module.scss";
 

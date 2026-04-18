@@ -5,8 +5,8 @@ import { useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
 import { Switch } from "@/lib/components/elements/inputs/Switch";
-import { Text } from "@/lib/components/elements/Text";
-import { Timeline } from "@/lib/components/elements/Timeline";
+import { Text } from "@/lib/components/elements/text";
+import { Timeline } from "@/lib/components/elements/timeline";
 
 import styles from "./page.module.scss";
 

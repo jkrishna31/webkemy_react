@@ -1,4 +1,4 @@
-@use '@/lib/styles/mixins/general' as *;
+@use '@/lib/styles/mixins/line-clamp' as *;
 
 .badge {
   display: flex;
@@ -26,17 +26,17 @@
 }
 
 .lc p {
-  @include line_clamp(1);
+  @include line-clamp(1);
   margin-bottom: .2rem
 }
 
 .time_wrapper {
-  @include line_clamp(1);
+  @include line-clamp(1);
   color: var(--fg-s);
 }
 
 .badge[data-clamp="true"] {
-  @include line_clamp(1);
+  @include line-clamp(1);
 }
 
 .badge:hover {

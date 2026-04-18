@@ -6,7 +6,7 @@ export type TSplitLayout = string | { key: string; children?: TSplitLayout[] };
 export type TSplitSection = { size: number; min?: number; max?: number; };
 
 export function useSplitter(layout: TSplitLayout[], initialData?: { [key: string]: TSplitSection }) {
-  const [sections, setSections] = useState<{ [key: string]: TSplitSection } | undefined>(initialData);
+  const [sections, setSections] = useState<{ [key: string]: TSplitSection }>(initialData ?? {});
 
   const getSectionSize = useCallback((key: string) => {
     return sections?.[key]?.size ?? 100;
@@ -49,7 +49,7 @@ export function useSplitter(layout: TSplitLayout[], initialData?: { [key: string
     for (let i = 0; i < splitter.length; i++) {
       const sec = splitter[i];
       const key = typeof sec === "string" ? sec : sec.key;
-      if (!newSections[key]) newSections[key] = {};
+      if (!newSections[key]) (newSections as any)[key] = {};
       newSections[key].size = ratio[i];
     }
 

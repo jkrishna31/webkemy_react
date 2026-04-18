@@ -3,14 +3,14 @@
 import { ComponentProps, useState } from "react";
 
 import { DateInput } from "@/lib/components/elements/inputs/DateInput";
-import { GeneralInput } from "@/lib/components/elements/inputs/GeneralInput";
+import { Input } from "@/lib/components/elements/inputs/Input";
 import { InputItem } from "@/lib/components/elements/inputs/InputItem";
 import { Select } from "@/lib/components/elements/inputs/Select";
 import { Switch } from "@/lib/components/elements/inputs/Switch";
 import { TagsInput } from "@/lib/components/elements/inputs/TagsInput";
 import { TextArea } from "@/lib/components/elements/inputs/TextArea";
 import { TimeInput } from "@/lib/components/elements/inputs/TimeInput";
-import { Text } from "@/lib/components/elements/Text";
+import { Text } from "@/lib/components/elements/text";
 import { weekDays, weekDaysOrder } from "@/lib/data/datetime";
 import { classes } from "@/lib/utils/style";
 
@@ -73,7 +73,7 @@ const EventForm = ({
     <form className={styles.form}>
       <InputItem>
         <Text<"label"> as="label" htmlFor="title">{"Title"}</Text>
-        <GeneralInput id="title" />
+        <Input id="title" />
       </InputItem>
 
       <InputItem>
@@ -149,7 +149,7 @@ const EventForm = ({
         <Text<"label"> as="label" inline htmlFor="all_day">{"All Day"}</Text>
       </InputItem>
 
-      {/* repeat - daily, weekly (which weekday - mo, tu, ...), monthly (which day) */}
+      {/* todo: repeat - daily, weekly (which weekday - mo, tu, ...), monthly (which day) */}
 
       <FormControls onCancel={onCancel} />
     </form>

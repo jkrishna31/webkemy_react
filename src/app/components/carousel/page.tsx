@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Carousel, Slide } from "@/lib/components/elements/Carousel";
+import { Carousel, Slide } from "@/lib/components/elements/carousel";
 
 import styles from "./page.module.scss";
 
