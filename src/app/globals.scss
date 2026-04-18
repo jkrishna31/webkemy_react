@@ -10,9 +10,9 @@
 @tailwind components;
 @tailwind utilities;
 
-// :root {
-//   interpolate-size: allow-keywords;
-// }
+:root {
+  @include colors_light;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
