@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Chip } from "@/lib/components/elements/chip";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import { TColor } from "@/lib/types/general";
@@ -21,7 +21,7 @@ export interface KanbanColProps extends ComponentProps<"div"> {
   isDraggingOver?: boolean;
 }
 
-const KanbanColumn = ({
+export const KanbanColumn = ({
   colKey, layout = "horizontal", color, name, count, header, footer, collapsed, onCollapseChange, isDraggingOver,
   children, className,
   ...restProps
@@ -68,5 +68,3 @@ const KanbanColumn = ({
     </div>
   );
 };
-
-export default KanbanColumn;

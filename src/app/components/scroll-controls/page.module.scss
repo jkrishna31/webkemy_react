@@ -1,17 +1,16 @@
-.list {
+.scrollable {
   width: auto;
   max-width: min(100%, 60rem);
   height: auto;
   max-height: fit-content;
   flex-shrink: 0;
   min-width: 0;
-  display: flex;
-}
 
-.scrollable {
-  display: flex;
-  gap: .8rem;
-  height: fit-content;
+  &>div {
+    display: flex;
+    gap: .8rem;
+    height: fit-content;
+  }
 }
 
 .item {

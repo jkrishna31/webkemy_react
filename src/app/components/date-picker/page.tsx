@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { DatePicker } from "@/lib/components/elements/calendar";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { Switch } from "@/lib/components/elements/switch";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";

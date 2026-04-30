@@ -3,8 +3,8 @@
 import { ComponentProps, MouseEvent, ReactNode, useCallback, useEffect, useRef, useState } from "react";
 
 import { Dropdown } from "@/lib/components/elements/dropdown";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { Popover } from "@/lib/components/elements/popover";
 import { Tabs } from "@/lib/components/elements/tabs";
@@ -31,7 +31,7 @@ import { classes } from "@/lib/utils/style";
 import styles from "./EmojiPicker.module.scss";
 
 export interface EmojiPickerProps extends ComponentProps<"div"> {
-  onEmojiSelect?: () => void
+  onEmojiSelect?: () => void;
 }
 
 const skinToneOptions = SkinTonesChars.map((sk, idx) => ({ label: sk, value: idx }));
@@ -245,7 +245,7 @@ export const EmojiPicker = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.search_wrapper}>
-        <InputFieldWrapper className={styles.search_input_wrapper}>
+        <InputItem.FieldWrapper className={styles.search_input_wrapper}>
           <Input
             placeholder="Search"
             className={styles.search_input}
@@ -269,7 +269,7 @@ export const EmojiPicker = ({
           >
             <SearchIcon className={styles.search_icon} />
           </button>
-        </InputFieldWrapper>
+        </InputItem.FieldWrapper>
         <Dropdown
           open={openSkinTonePicker}
           onOpenChange={setOpenSkinTonePicker}

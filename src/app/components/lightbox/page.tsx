@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";
 
 import styles from "./page.module.scss";

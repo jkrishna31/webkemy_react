@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Chip } from "@/lib/components/elements/chip";
-import { Select } from "@/lib/components/elements/inputs/Select";
+import { Select } from "@/lib/components/elements/select";
 
 import styles from "./page.module.scss";
 

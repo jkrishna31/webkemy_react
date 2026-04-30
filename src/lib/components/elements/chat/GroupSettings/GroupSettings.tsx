@@ -1,4 +1,4 @@
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
+import { Checkbox } from "@/lib/components/elements/checkbox";
 import { Table } from "@/lib/components/elements/table";
 import { classes } from "@/lib/utils/style";
 

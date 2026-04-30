@@ -206,6 +206,30 @@
   outline-offset: -.3rem;
   min-width: var(--col-width);
 
+  .sort_btn {
+    --btn-fgc: var(--fg-s-alt);
+    --btn-bgc: transparent;
+    padding: .5rem;
+    border-radius: .6rem;
+    opacity: 0;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      stroke-width: .175rem;
+    }
+
+    &[aria-pressed="true"] {
+      opacity: 1;
+      --btn-fgc: var(--blue-1);
+    }
+
+    &:hover,
+    &:focus-visible {
+      opacity: 1;
+    }
+  }
+
   &:first-child {
     border-top-left-radius: .8rem;
   }
@@ -219,7 +243,13 @@
   }
 
   &:hover {
+
     .resize_handle::after {
+      transform: none;
+    }
+
+    .resize_handle::after,
+    .sort_btn {
       opacity: 1;
     }
   }
@@ -274,30 +304,32 @@
   position: absolute;
   top: 0;
   right: 0;
-  transform: translate3d(0%, 0, 0);
   width: 1rem;
   height: 100%;
   cursor: ew-resize;
   flex-shrink: 0;
   touch-action: none;
   outline-offset: -.3rem;
+  display: grid;
+  place-items: center;
   z-index: var(--zi-resize-handle);
 
   transition: opacity .3s ease;
 
   &::after {
     content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate3d(-50%, -50%, 0);
+    // position: absolute;
+    // top: 50%;
+    // left: 50%;
+    transform-origin: center, center;
+    transform: scaleY(.7);
     width: .6rem;
     height: 60%;
     border: .15rem solid var(--border-p);
     background-color: var(--ghost-1);
     border-radius: var(--br-pill);
     opacity: 0;
-    transition-property: opacity, border, background;
+    transition-property: opacity, border, background, transform;
     transition-duration: .3s;
     transition-timing-function: ease;
   }
@@ -307,6 +339,7 @@
   &.active_handle {
     &::after {
       opacity: 1;
+      transform: none;
       border-color: var(--blue-1);
       background-color: var(--blue-1-10);
     }

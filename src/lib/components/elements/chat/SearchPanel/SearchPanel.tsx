@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { SearchForm } from "@/lib/components/blocks/search-form";
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Divider } from "@/lib/components/elements/divider";
 import { Dropdown } from "@/lib/components/elements/dropdown";
 import { Item, ItemList } from "@/lib/components/elements/list-item";

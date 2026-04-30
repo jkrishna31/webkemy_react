@@ -52,13 +52,12 @@ export const calculateRenderPosition = (
 
     if (alignment === "left" && isLeftAlignPossible) finalAlignment = "left";
     else if (alignment === "right" && isRightAlignPossible) finalAlignment = "right";
-    else if (isRightAlignPossible) finalAlignment = "right";
+    else if (
+      _leftSpace >= (targetBoundingRect.width / 2 - viewportMargin) &&
+      _rightSpace >= (targetBoundingRect.width / 2 - viewportMargin)
+    ) finalAlignment = "center";
     else if (isLeftAlignPossible) finalAlignment = "left";
-    else {
-      if (_leftSpace >= (targetBoundingRect.width / 2 - viewportMargin) && _rightSpace >= (targetBoundingRect.width / 2 - viewportMargin)) {
-        finalAlignment = "center";
-      }
-    }
+    else if (isRightAlignPossible) finalAlignment = "right";
 
     switch (finalAlignment) {
       case "left":
@@ -123,8 +122,8 @@ export const calculateRenderPosition = (
         position.maxHeight = `calc(100vh - ${viewportMargin * 2}px)`;
     }
 
-    position.placement = finalPlacement;
     position.alignment = finalAlignment;
+    position.placement = finalPlacement;
 
     return position;
   }
@@ -138,13 +137,12 @@ export const calculateRenderPosition = (
 
     if (alignment === "top" && isTopAlignPossible) finalAlignment = "top";
     else if (alignment === "bottom" && isBottomAlignPossible) finalAlignment = "bottom";
-    else if (isBottomAlignPossible) finalAlignment = "bottom";
+    else if (
+      _topSpace >= (targetBoundingRect.height / 2 + viewportMargin) &&
+      _bottomSpace >= (targetBoundingRect.height / 2 + viewportMargin)
+    ) finalAlignment = "center";
     else if (isTopAlignPossible) finalAlignment = "top";
-    else {
-      if (_topSpace >= (targetBoundingRect.height / 2 + viewportMargin) && _bottomSpace >= (targetBoundingRect.height / 2 + viewportMargin)) {
-        finalAlignment = "center";
-      }
-    }
+    else if (isBottomAlignPossible) finalAlignment = "bottom";
 
     switch (finalAlignment) {
       case "top":
@@ -209,8 +207,8 @@ export const calculateRenderPosition = (
         position.maxWidth = `calc(100vw - ${viewportMargin * 2}px)`;
     }
 
-    position.placement = finalPlacement;
     position.alignment = finalAlignment;
+    position.placement = finalPlacement;
 
     return position;
   }

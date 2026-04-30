@@ -1,4 +1,4 @@
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 
 import styles from "./ThreadPanel.module.scss";
 

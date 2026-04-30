@@ -2,7 +2,7 @@ import Image from "next/image";
 import { ComponentProps, MouseEvent } from "react";
 
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { ChatMedia } from "@/lib/components/elements/chat/ChatMedia";
 import { ChatQuoteCard } from "@/lib/components/elements/chat/ChatQuoteCard";
 import { QuickActions } from "@/lib/components/elements/chat/QuickActions";

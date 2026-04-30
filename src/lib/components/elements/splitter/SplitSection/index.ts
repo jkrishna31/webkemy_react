@@ -1,2 +1,1 @@
-export type * from "./SplitSection";
-export { default as SplitSection } from "./SplitSection";
+export * from "./SplitSection";

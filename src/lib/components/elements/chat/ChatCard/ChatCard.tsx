@@ -1,7 +1,7 @@
 import { ComponentProps, ReactNode } from "react";
 
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { RepliesBtn } from "@/lib/components/elements/chat/RepliesBtn";
 import BotMessageIcon from "@/lib/svgs/icons/BotMessageIcon";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";

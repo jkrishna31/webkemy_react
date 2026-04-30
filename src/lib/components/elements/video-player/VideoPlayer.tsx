@@ -4,10 +4,10 @@ import { ComponentProps, useCallback, useEffect, useMemo, useState } from "react
 
 import { useToastActions } from "@/data/stores";
 import { Dropdown } from "@/lib/components/elements/dropdown";
-import { Slider } from "@/lib/components/elements/inputs/Slider";
 import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { DotsLoader } from "@/lib/components/elements/loaders";
 import { PaceControl } from "@/lib/components/elements/pace-control";
+import { Slider } from "@/lib/components/elements/slider";
 import { VolumeControl } from "@/lib/components/elements/volume-control";
 import { useDebouncedCallback } from "@/lib/hooks/useDebouncedCallback";
 import { useElementRef } from "@/lib/hooks/useElementRef";

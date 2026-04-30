@@ -1,0 +1,144 @@
+.wrapper {
+  --hue: 0;
+  --saturation: 100%;
+  --lightness: 50%;
+  --alpha: 100%;
+  --active-hsl: hsl(var(--hue), var(--saturation), var(--lightness));
+  --active-hsla: hsla(var(--hue), var(--saturation), var(--lightness), var(--alpha));
+  --color-area-size: 24rem;
+  display: grid;
+  grid-template-rows: auto auto;
+  width: calc(var(--color-area-size) + 2.8rem + 2rem);
+
+  .color_area {
+    --handle-width: 1.6rem;
+    --handle-height: 1.6rem;
+
+    width: var(--color-area-size, 24rem);
+    height: var(--color-area-size, 24rem);
+
+    forced-color-adjust: none;
+    background: linear-gradient(to top, black, transparent), linear-gradient(to right, rgb(255, 255, 255), transparent), hsl(var(--hue), 100%, 50%);
+  }
+
+  .area_thumb {
+    border-width: .2rem;
+    border-color: var(--light-p);
+    border-radius: 50%;
+    background-color: var(--active-hsl);
+    box-shadow: 0 0 .1rem var(--shadow-s);
+  }
+
+  .color_input {
+    padding: .6rem;
+    font-size: 1.4rem;
+  }
+
+  .controls {
+    width: auto;
+    display: flex;
+    gap: 1.4rem;
+  }
+
+  .slider {
+    height: var(--color-area-size, 24rem);
+  }
+
+  .opacity_slider {
+    direction: rtl;
+    background-color: var(--fg-t);
+    background-image: linear-gradient(to top, transparent, var(--active-hsl)), repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)), repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+    background-position: 0 0, 0 0, 4px 4px;
+    background-size: auto, 8px 8px, 8px 8px;
+
+    &::-webkit-slider-thumb,
+    &:hover::-webkit-slider-thumb,
+    &:focus::-webkit-slider-thumb {
+      background-color: var(--active-hsla);
+      background-image: var(--active-hsla),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+      background-position: 0 0, 0 0, 4px 4px;
+      background-size: auto, 8px 8px, 8px 8px;
+    }
+
+    &::-moz-range-thumb,
+    &:hover::-moz-range-thumb,
+    &:focus::-moz-range-thumb {
+      background-color: var(--active-hsla);
+      background-image: var(--active-hsla),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, transparent 25%, transparent 75%, var(--bg-s) 75%, var(--bg-s)),
+        repeating-linear-gradient(45deg, var(--bg-s) 25%, var(--fg-t) 25%, var(--fg-t) 75%, var(--bg-s) 75%, var(--bg-s));
+      background-position: 0 0, 0 0, 4px 4px;
+      background-size: auto, 8px 8px, 8px 8px;
+    }
+  }
+
+  .opacity_slider {
+    &[aria-orientation="vertical"] {
+      width: 1rem !important;
+      border-radius: var(--br-pill);
+
+      &::-webkit-slider-thumb {
+        width: 1.6rem;
+        height: 1.6rem;
+      }
+
+      &::-moz-range-thumb {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+
+      &:focus {
+        &::-webkit-slider-thumb {
+          border-color: var(--fg-p);
+        }
+
+        &::-moz-range-thumb {
+          border-color: var(--fg-p);
+        }
+      }
+    }
+
+    &::-webkit-slider-thumb {
+      border-radius: 50%;
+      border-width: .2rem;
+      border-color: var(--fg-p);
+    }
+
+    &::-moz-range-thumb {
+      border-radius: 50%;
+      border-width: .2rem;
+      border-color: var(--fg-p);
+    }
+  }
+
+  .active_color {
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 50%;
+    border: .1rem solid var(--border-s);
+    background-color: var(--active-hsla);
+    flex-shrink: 0;
+  }
+
+  .result {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    margin-top: 1.2rem;
+  }
+
+  .format_selector {
+    font-size: 1.5rem;
+    padding: .4rem .8rem .4rem 1rem;
+    min-height: 3rem;
+    gap: .2rem;
+
+    & svg {
+      width: 1.8rem;
+      height: 1.8rem;
+    }
+  }
+}

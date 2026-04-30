@@ -1,7 +1,7 @@
 import { FormEvent, ReactNode } from "react";
 
 import { SearchForm } from "@/lib/components/blocks/search-form";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Drawer } from "@/lib/components/elements/drawer";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";

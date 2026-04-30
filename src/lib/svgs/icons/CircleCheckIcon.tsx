@@ -2,26 +2,10 @@ import { SVGProps } from "@/lib/types/prop";
 
 const CircleCheckIcon = (props: SVGProps) => {
     return (
-        <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 26 26"
-            version="1.1"
-            width="26"
-            height="26"
-            style={{ fill: "currentColor", fillOpacity: 1 }}
-
-            {...props}
-        >
-            <g transform="translate(-3,-3)">
-                <path
-
-                    d="m 15,21 a 1,1 0 0 1 -0.71,-0.29 l -4,-4 a 1.0040916,1.0040916 0 0 1 1.42,-1.42 l 3.29,3.3 6.29,-6.3 a 1.0040916,1.0040916 0 0 1 1.42,1.42 l -7,7 A 1,1 0 0 1 15,21 Z"
-                />
-                <path
-                    d="M 16,29 A 13,13 0 1 1 29,16 13,13 0 0 1 16,29 Z M 16,5 A 11,11 0 1 0 27,16 11,11 0 0 0 16,5 Z"
-                />
-            </g>
-        </svg>
+        // <!-- Icon from Huge Icons by Hugeicons - undefined -->
+        // <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" {...props}><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10s10-4.477 10-10Z" /><path strokeLinecap="round" strokeLinejoin="round" d="M8 12.75s1.6.912 2.4 2.25c0 0 2.4-5.25 5.6-7" /></svg>
+        // <!-- Icon from Huge Icons by Hugeicons - undefined -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.5" {...props}><path d="M17 3.338A9.95 9.95 0 0 0 12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10q-.002-1.03-.2-2" /><path strokeLinejoin="round" d="M8 12.5s1.5 0 3.5 3.5c0 0 5.559-9.167 10.5-11" /></svg>
     );
 };
 

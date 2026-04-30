@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { CSSProperties, useEffect, useEffectEvent, useRef, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
-import { HueSlider } from "@/lib/components/elements/inputs/ColorPicker";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { Slider } from "@/lib/components/elements/inputs/Slider";
+import { HueSlider } from "@/lib/components/elements/color-picker";
+import { Input } from "@/lib/components/elements/input";
 import { Popover } from "@/lib/components/elements/popover";
+import { Slider } from "@/lib/components/elements/slider";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
 import CounterClockwiseIcon from "@/lib/svgs/icons/CounterClockwiseIcon";
 import FlipHorizontalIcon from "@/lib/svgs/icons/FlipHorizontalIcon";

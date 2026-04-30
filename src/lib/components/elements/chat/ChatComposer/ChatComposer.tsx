@@ -1,11 +1,11 @@
 import { ComponentPropsWithoutRef, RefObject, useCallback, useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { EmojiPicker } from "@/lib/components/elements/emoji-picker";
+import { FileInput } from "@/lib/components/elements/file-input";
 import { FilesPreview } from "@/lib/components/elements/files-preview";
-import { FileInput } from "@/lib/components/elements/inputs/FileInput";
-import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
-import { TextArea } from "@/lib/components/elements/inputs/TextArea";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Popover } from "@/lib/components/elements/popover";
+import { TextArea } from "@/lib/components/elements/textarea";
 import { Keys } from "@/lib/constants/keys";
 import { useFiles } from "@/lib/hooks/useFiles";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
@@ -64,7 +64,7 @@ const ChatComposer = ({
       className={classes(styles.wrapper, className)}
       {...restProps}
     >
-      <InputFieldWrapper className={styles.wrapper_inner}>
+      <InputItem.FieldWrapper className={styles.wrapper_inner}>
         {children}
         <FilesPreview
           files={Array.from(filelist?.length ? filelist : [])}
@@ -119,7 +119,7 @@ const ChatComposer = ({
             <SendIcon />
           </button>
         </div>
-      </InputFieldWrapper>
+      </InputItem.FieldWrapper>
       {emojiPickerAnchor ? (
         <Popover
           anchor={emojiPickerAnchor}

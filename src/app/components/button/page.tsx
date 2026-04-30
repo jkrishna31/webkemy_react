@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 
 import styles from "./page.module.scss";
 

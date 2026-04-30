@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Slider } from "@/lib/components/elements/inputs/Slider";
+import { Slider } from "@/lib/components/elements/slider";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";

@@ -2,8 +2,8 @@
 
 import { ComponentProps, useEffect, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
-import { MonthView } from "@/lib/components/elements/calendar/MonthView";
+import { Button } from "@/lib/components/elements/buttton";
+import { MonthView } from "@/lib/components/elements/calendar/month-view";
 import { Dropdown } from "@/lib/components/elements/dropdown";
 import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { months, monthsOrder } from "@/lib/data/datetime";

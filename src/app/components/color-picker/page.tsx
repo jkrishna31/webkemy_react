@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { ColorPicker } from "@/lib/components/elements/inputs/ColorPicker";
+import { ColorPicker } from "@/lib/components/elements/color-picker";
 
 import styles from "./page.module.scss";
 

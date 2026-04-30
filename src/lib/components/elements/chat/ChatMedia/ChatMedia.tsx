@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ComponentProps, MouseEvent } from "react";
 
 import { AudioPlayer } from "@/lib/components/elements/audio-player";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { ChatControls } from "@/lib/components/elements/chat/ChatItem";
 import { Progress } from "@/lib/components/elements/progress";
 import { VideoPreview } from "@/lib/components/elements/video-preview";

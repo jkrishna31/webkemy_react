@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Input } from "@/lib/components/elements/inputs/Input";
+import { Input } from "@/lib/components/elements/input";
 
 import styles from "./page.module.scss";
 

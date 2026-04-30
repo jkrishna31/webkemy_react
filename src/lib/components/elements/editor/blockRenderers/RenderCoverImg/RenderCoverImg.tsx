@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 
 import styles from "./RenderCoverImg.module.scss";

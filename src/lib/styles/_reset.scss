@@ -154,6 +154,10 @@ svg {
   display: block;
 }
 
+svg {
+  flex-shrink: 0;
+}
+
 ::selection {
   background: var(--bg-selection);
   color: var(--fg-selection);

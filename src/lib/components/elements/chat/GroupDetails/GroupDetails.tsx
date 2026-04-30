@@ -1,9 +1,9 @@
-import { Button } from "@/lib/components/elements/butttons";
-import { FileInput, FileMeta } from "@/lib/components/elements/inputs/FileInput";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { TextArea } from "@/lib/components/elements/inputs/TextArea";
+import { Button } from "@/lib/components/elements/buttton";
+import { FileInput, FileMeta } from "@/lib/components/elements/file-input";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Text } from "@/lib/components/elements/text";
+import { TextArea } from "@/lib/components/elements/textarea";
 import { useForm } from "@/lib/hooks/useForm";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import DeleteIcon from "@/lib/svgs/icons/DeleteIcon";

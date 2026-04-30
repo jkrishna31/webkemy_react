@@ -20,4 +20,29 @@
     border-radius: 50%;
     object-fit: cover;
   }
+
+  .placeholder {
+    width: 70%;
+    height: 70%;
+    stroke-width: .175rem;
+  }
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  &>[data-avatar="true"]:not(:nth-of-type(1)) {
+    margin-left: -2rem;
+  }
+
+  &>[data-avatar="true"]:hover {
+    z-index: 1;
+  }
+
+}
+
+.expandable:hover [data-avatar="true"] {
+  margin-left: 0;
 }

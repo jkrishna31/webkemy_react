@@ -1,6 +1,6 @@
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import BellIcon from "@/lib/svgs/icons/BellIcon";
 
 import styles from "./page.module.scss";

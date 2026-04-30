@@ -1,6 +1,6 @@
 import { ComponentProps, ReactNode } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Divider } from "@/lib/components/elements/divider";
 import { Characters } from "@/lib/constants/characters";
 import CheckmarkBadgeIcon from "@/lib/svgs/icons/CheckmarkBadgeIcon";

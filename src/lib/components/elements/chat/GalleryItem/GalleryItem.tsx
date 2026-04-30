@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
+import { Checkbox } from "@/lib/components/elements/checkbox";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";
 import PlayIcon from "@/lib/svgs/icons/PlayIcon";
 import { breakdownTime, formatDate, formatTime } from "@/lib/utils/datetime";

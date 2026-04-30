@@ -5,7 +5,7 @@ import { Fragment, RefObject, useRef, useState } from "react";
 import { PageSetup } from "@/components/managers";
 import { kanbanData } from "@/data/dummy/kanbanData";
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Chip } from "@/lib/components/elements/chip";
 import { Dropdown } from "@/lib/components/elements/dropdown";
 import { Kanban, KanbanColumn, KanbanItem } from "@/lib/components/elements/kanban";

@@ -2,11 +2,11 @@
 
 import { ComponentProps, useMemo, useRef, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Dropdown } from "@/lib/components/elements/dropdown";
-import { Slider } from "@/lib/components/elements/inputs/Slider";
 import { DotsLoader } from "@/lib/components/elements/loaders";
 import { PaceControl } from "@/lib/components/elements/pace-control";
+import { Slider } from "@/lib/components/elements/slider";
 import { VolumeControl } from "@/lib/components/elements/volume-control";
 import { useMediaPlayer } from "@/lib/hooks/useMediaPlayer";
 import PauseIcon from "@/lib/svgs/icons/PauseIcon";
@@ -25,7 +25,7 @@ export interface AudioPlayerProps extends ComponentProps<"audio"> {
   allowPaceControl?: boolean;
 }
 
-const AudioPlayer = ({
+export const AudioPlayer = ({
   allowVolumeControl = true, allowPaceControl = true,
   children, sources, rootClass,
   ...props
@@ -134,5 +134,3 @@ const AudioPlayer = ({
     </div>
   );
 };
-
-export default AudioPlayer;

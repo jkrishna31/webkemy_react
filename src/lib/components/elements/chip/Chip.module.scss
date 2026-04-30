@@ -6,8 +6,9 @@
 
   width: fit-content;
   height: fit-content;
+  flex-shrink: 0;
   color: var(--chip-fgc);
-  background-color: var(--chip-bgc);
+  background: var(--chip-bgc);
   border-radius: .4rem;
   display: flex;
   align-items: center;
@@ -72,11 +73,48 @@
   }
 }
 
-// .solid {}
+.solid {
+  --chip-fgc: var(--bg-p);
+
+  &[data-color="red"] {
+    --chip-bc: var(--red-1);
+    --chip-bgc: var(--red-1);
+  }
+
+  &[data-color="orange"] {
+    --chip-bc: var(--orange-2);
+    --chip-bgc: var(--orange-2);
+  }
+
+  &[data-color="green"] {
+    --chip-bc: var(--green-1);
+    --chip-bgc: var(--green-1);
+  }
+
+  &[data-color="blue"] {
+    --chip-bc: var(--blue-1);
+    --chip-bgc: var(--blue-1);
+  }
+
+  &[data-color="yellow"] {
+    --chip-bc: var(--yellow-1);
+    --chip-bgc: var(--yellow-1);
+  }
+
+  &[data-color="purple"] {
+    --chip-bc: var(--purple-1);
+    --chip-bgc: var(--purple-1);
+  }
+
+  &[data-color="pink"] {
+    --chip-bc: var(--pink-1);
+    --chip-bgc: var(--pink-1);
+  }
+}
 
 .outlined {
   &[data-color="gray"] {
-    --chip-bc: var(--fg-s-alt);
+    --chip-bc: var(--fg-s);
     --chip-bgc: var(--gray-8-30);
     --chip-separator-bgc: var(--gray-8-50);
 
@@ -223,7 +261,7 @@
     &:hover,
     &:focus-visible {
       color: var(--bg-p);
-      background-color: var(--chip-fgc);
+      background: var(--chip-fgc);
     }
   }
 }

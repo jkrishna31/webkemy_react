@@ -2,8 +2,8 @@
 
 import { ComponentProps, useEffectEvent, useLayoutEffect, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
-import { NumberInput } from "@/lib/components/elements/inputs/NumberInput";
+import { Button } from "@/lib/components/elements/buttton";
+import { NumberInput } from "@/lib/components/elements/number-input";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
 import EllipsisHIcon from "@/lib/svgs/icons/EllipsisHIcon";

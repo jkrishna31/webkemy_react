@@ -2,14 +2,14 @@ import { useState } from "react";
 
 import { SearchForm } from "@/lib/components/blocks/search-form";
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
 import { GalleryItem } from "@/lib/components/elements/chat/GalleryItem";
 import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";
+import { Checkbox } from "@/lib/components/elements/checkbox";
 import { CollapsiblePanel } from "@/lib/components/elements/collapsible-panel";
 import { Divider } from "@/lib/components/elements/divider";
 import { Dropdown } from "@/lib/components/elements/dropdown";
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
 import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { Popover } from "@/lib/components/elements/popover";
 import { Scrollable } from "@/lib/components/elements/scrollable";

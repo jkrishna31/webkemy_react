@@ -13,7 +13,7 @@ export interface KanbanItemProps extends ComponentProps<"div"> {
   layout?: "horizontal" | "vertical";
 }
 
-const KanbanItem = ({
+export const KanbanItem = ({
   itemKey, isDraggingOver, layout = "horizontal",
   className, children,
   ...restProps
@@ -34,5 +34,3 @@ const KanbanItem = ({
     </>
   );
 };
-
-export default KanbanItem;

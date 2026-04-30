@@ -22,7 +22,7 @@ export const PreviewMessage = ({ message }: { message: string }) => {
   );
 };
 
-const Chatbot = () => {
+export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [previews, setPreviews] = useState<string[]>([]);
 
@@ -83,5 +83,3 @@ const Chatbot = () => {
     </div>
   );
 };
-
-export default Chatbot;

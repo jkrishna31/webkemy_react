@@ -1,7 +1,7 @@
 import { LangSelector } from "@/components/common/app/LangSelector";
 import { ThemeSelector } from "@/components/common/app/ThemeSelector";
 import { useActivePage, useLayoutActions } from "@/data/stores";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Item, ItemGroup } from "@/lib/components/elements/list-item";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 import AppNotificationIcon from "@/lib/svgs/icons/AppNotificationIcon";

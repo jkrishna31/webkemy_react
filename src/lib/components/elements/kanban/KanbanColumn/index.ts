@@ -1,2 +1,1 @@
-export type * from "./KanbanColumn";
-export { default as KanbanColumn } from "./KanbanColumn";
+export * from "./KanbanColumn";

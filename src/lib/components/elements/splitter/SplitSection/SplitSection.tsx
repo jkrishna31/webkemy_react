@@ -8,7 +8,7 @@ export interface SplitSectionProps extends ComponentProps<"div"> {
   size?: number
 }
 
-const SplitSection = ({
+export const SplitSection = ({
   size,
   children, className, style,
   ...props
@@ -27,5 +27,3 @@ const SplitSection = ({
     </div>
   );
 };
-
-export default SplitSection;

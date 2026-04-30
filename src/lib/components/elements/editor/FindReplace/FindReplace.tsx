@@ -3,10 +3,10 @@
 import { ComponentProps, useState } from "react";
 
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
+import { Button } from "@/lib/components/elements/buttton";
+import { Checkbox } from "@/lib/components/elements/checkbox";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Text } from "@/lib/components/elements/text";
 import ChevronLeftIcon from "@/lib/svgs/icons/ChevronLeftIcon";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
@@ -46,7 +46,7 @@ const FindReplace = ({
   return (
     <div className={classes(styles.wrapper, className)}>
       <div className={styles.row}>
-        <InputFieldWrapper>
+        <InputItem.FieldWrapper>
           <Input
             placeholder="Search"
             value={search}
@@ -96,7 +96,7 @@ const FindReplace = ({
           >
             <ChevronLeftIcon />
           </Button>
-        </InputFieldWrapper>
+        </InputItem.FieldWrapper>
       </div>
       {!!showFilters && (
         <div className={styles.filters}>
@@ -121,7 +121,7 @@ const FindReplace = ({
       {!!showReplace && (
         <div className={styles.controls_panel}>
           <div className={styles.row}>
-            <InputFieldWrapper>
+            <InputItem.FieldWrapper>
               <Input
                 placeholder="Replace With"
                 value={replaceWith}
@@ -137,7 +137,7 @@ const FindReplace = ({
               >
                 <LetterCaseToggleIcon />
               </Button>
-            </InputFieldWrapper>
+            </InputItem.FieldWrapper>
             {!!replaceWith.length && (
               <div className={styles.split_btns}>
                 <Button

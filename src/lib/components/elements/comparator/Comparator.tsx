@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { Slider2D } from "@/lib/components/elements/inputs/Slider2D";
+import { Slider2D } from "@/lib/components/elements/slider-2d";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Comparator.module.scss";

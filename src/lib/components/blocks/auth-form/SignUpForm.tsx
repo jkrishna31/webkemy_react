@@ -1,11 +1,10 @@
 import Link from "next/link";
 
 import { AuthProviders } from "@/lib/components/blocks/auth-form";
-import { Button } from "@/lib/components/elements/butttons";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { InputMetaWrapper } from "@/lib/components/elements/inputs/InputMetaWrapper";
-import { PasswordInput } from "@/lib/components/elements/inputs/PasswordInput";
+import { Button } from "@/lib/components/elements/buttton";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { PasswordInput } from "@/lib/components/elements/password-input";
 import { Text } from "@/lib/components/elements/text";
 import CircleInfoIcon from "@/lib/svgs/icons/CircleInfoIcon";
 
@@ -27,12 +26,12 @@ export const SignUpForm = () => {
         </InputItem>
 
         <InputItem>
-          <InputMetaWrapper>
+          <InputItem.MetaWrapper>
             <Text<"label"> as="label">{"Password *"}</Text>
             <button type="button" className={styles.info_btn}>
               <CircleInfoIcon />
             </button>
-          </InputMetaWrapper>
+          </InputItem.MetaWrapper>
           <PasswordInput />
         </InputItem>
 

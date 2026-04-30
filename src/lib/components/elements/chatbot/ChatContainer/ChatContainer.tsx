@@ -42,7 +42,7 @@ export interface ChatContainerProps extends ComponentProps<"div"> {
   onClose: any;
 }
 
-const ChatContainer = ({
+export const ChatContainer = ({
   onClose,
 }: ChatContainerProps) => {
   const [chats, setChats] = useState<any[]>(dummyChats);
@@ -353,5 +353,3 @@ const ChatContainer = ({
     </>
   );
 };
-
-export default ChatContainer;

@@ -3,7 +3,7 @@
 import { ComponentProps, ReactNode, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Overlay } from "@/lib/components/elements/overlay";
 import { Positions } from "@/lib/constants/position";
 import { useFocusTrap } from "@/lib/hooks/useFocusTrap";

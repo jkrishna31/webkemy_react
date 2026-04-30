@@ -1,6 +1,6 @@
-import { Button } from "@/lib/components/elements/butttons";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
+import { Button } from "@/lib/components/elements/buttton";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./AuthForm.module.scss";

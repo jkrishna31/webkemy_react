@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { useToastActions } from "@/data/stores";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import CopyIcon from "@/lib/svgs/icons/CopyIcon";
 import WrapOffIcon from "@/lib/svgs/icons/WrapOffIcon";
 import WrapOnIcon from "@/lib/svgs/icons/WrapOnIcon";

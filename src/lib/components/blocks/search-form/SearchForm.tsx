@@ -2,8 +2,8 @@
 
 import { ComponentProps, FormEvent, ReactNode } from "react";
 
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
 import { Popover } from "@/lib/components/elements/popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
@@ -24,7 +24,7 @@ export interface SearchFormProps extends ComponentProps<"form"> {
     dropdown?: ReactNode;
 }
 
-const SearchForm = ({
+export const SearchForm = ({
     placeholder = "Search (Ctrl+K)",
     dropdown,
     query,
@@ -45,7 +45,7 @@ const SearchForm = ({
             role="search"
             {...restProps}
         >
-            <InputFieldWrapper
+            <InputItem.FieldWrapper
                 ref={inputRef}
                 className={classes(styles.input_wrapper)}
             >
@@ -79,7 +79,7 @@ const SearchForm = ({
                 >
                     <SearchIcon />
                 </button>
-            </InputFieldWrapper>
+            </InputItem.FieldWrapper>
             {!!(dropdown && anchor) && (
                 <Popover
                     anchor={anchor}
@@ -107,5 +107,3 @@ const SearchForm = ({
         </form>
     );
 };
-
-export default SearchForm;

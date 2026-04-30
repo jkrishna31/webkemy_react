@@ -22,6 +22,7 @@
 
   --transform-x: 0;
   --transform-y: 0;
+  --handle-color: var(--border-p-alt);
 
   transform: translate3d(var(--transform-x), var(--transform-y), 0);
 
@@ -30,10 +31,14 @@
     position: absolute;
     border-radius: var(--br-pill);
     background: var(--bg-t);
-    border: .15rem solid var(--blue-1);
-    transition-property: opacity, background, border, transform;
+    border: .15rem solid var(--handle-color);
+    transition-property: opacity, background, border, transform, color;
     transition-timing-function: ease;
     transition-duration: .2s;
+  }
+
+  &[data-active="true"] {
+    --handle-color: var(--blue-1);
   }
 
   &:hover,

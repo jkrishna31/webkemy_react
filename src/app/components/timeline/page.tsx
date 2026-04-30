@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { Switch } from "@/lib/components/elements/switch";
 import { Text } from "@/lib/components/elements/text";
 import { Timeline } from "@/lib/components/elements/timeline";
 

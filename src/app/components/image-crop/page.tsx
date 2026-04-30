@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { ImageCrop } from "@/lib/components/elements/image-crop";
 import ClockwiseIcon from "@/lib/svgs/icons/ClockwiseIcon";
 import CounterClockwiseIcon from "@/lib/svgs/icons/CounterClockwiseIcon";

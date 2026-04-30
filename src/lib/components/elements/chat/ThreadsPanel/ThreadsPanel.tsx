@@ -1,6 +1,6 @@
 import { dummyChats } from "@/data/dummy/chatData";
 import { SearchForm } from "@/lib/components/blocks/search-form";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { ChatCard } from "@/lib/components/elements/chat/ChatCard";
 
 import styles from "./ThreadsPanel.module.scss";

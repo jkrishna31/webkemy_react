@@ -1,17 +1,63 @@
 .wrapper {
+  --scrollable-hc: var(--bg-p);
   position: relative;
-}
-
-.hint {
-  --left-hint: 0rem;
-  --right-hint: 0rem;
-  mask-image: linear-gradient(to right, transparent, var(--bg-p) var(--left-hint), var(--bg-p) calc(100% - var(--right-hint)), transparent);
+  flex-shrink: 0;
+  // min-width: 0;
+  // flex: 1;
 }
 
 .container {
   overflow: auto;
   overscroll-behavior: contain;
-  contain: content;
+  // flex-shrink: 0;
+  // contain: constent;
+}
+
+.hint {
+  --left-hint: 0rem;
+  --right-hint: 0rem;
+
+  // mask-image: linear-gradient(to right, transparent, var(--scrollable-hc) var(--left-hint), var(--scrollable-hc) calc(100% - var(--right-hint)), transparent);
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 4rem;
+    z-index: 1;
+    pointer-events: none;
+    touch-action: none;
+    background: transparent;
+    transition: all .15s linear;
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(to right, var(--scrollable-hc), transparent);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(to right, transparent, var(--scrollable-hc));
+    transform-origin: right;
+    transform: scaleX(0);
+  }
+
+  &.has_left {
+    &::before {
+      transform: none;
+    }
+  }
+
+  &.has_right {
+    &::after {
+      transform: none;
+    }
+  }
 }
 
 .scroll_btn {
@@ -21,8 +67,14 @@
   color: var(--fg-s);
   flex-shrink: 0;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   outline-offset: -.3rem;
+  opacity: 0;
+  transform: scaleX(0);
+
+  transition-duration: .2s;
+  transition-timing-function: ease;
+  transition-property: transform, opacity;
 
   &:hover {
     color: var(--fg-p);
@@ -33,16 +85,23 @@
   top: 0;
   left: 0;
   padding-inline: .6rem 1.6rem;
-  background: linear-gradient(to right, var(--bg-p) 75%, transparent);
-  animation: fil .4s ease;
+  background: linear-gradient(to right, var(--scrollable-hc) 75%, transparent);
+  transform-origin: left;
+  // animation: fil .4s ease;
 }
 
 .btn_right {
   top: 0;
   right: 0;
   padding-inline: 1.6rem .6rem;
-  background: linear-gradient(to left, var(--bg-p) 75%, transparent);
-  animation: fir .4s ease;
+  background: linear-gradient(to left, var(--scrollable-hc) 75%, transparent);
+  transform-origin: right;
+  // animation: fir .4s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: none;
 }
 
 .scroll_icon {

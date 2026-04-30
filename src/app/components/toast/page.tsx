@@ -3,7 +3,7 @@
 
 import { PageSetup } from "@/components/managers";
 import { ToastType, useToastActions } from "@/data/stores";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { generateId } from "@/lib/utils/crypto";
 
 import styles from "./page.module.scss";

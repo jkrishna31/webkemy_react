@@ -1,7 +1,7 @@
 import { Fragment } from "react/jsx-runtime";
 
 import { PageSetup } from "@/components/managers";
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
+import { Checkbox } from "@/lib/components/elements/checkbox";
 import SortIcon from "@/lib/svgs/icons/SortIcon";
 import { classes } from "@/lib/utils/style";
 

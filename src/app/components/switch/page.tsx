@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { Switch } from "@/lib/components/elements/switch";
 
 import styles from "./page.module.scss";
 

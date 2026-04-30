@@ -72,21 +72,6 @@
     color: var(--fg-s-alt);
   }
 
-  .link_input_wrapper {
-    flex-direction: column;
-  }
-
-  .link_input {
-    height: fit-content !important;
-    padding: 1.2rem 1rem !important;
-
-    &:last-of-type {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-      border-top: .1rem solid var(--border-s) !important;
-    }
-  }
-
   .block_group {
     background-color: var(--bg-s) !important;
   }
@@ -136,10 +121,6 @@
       width: 100%;
       border-radius: 0;
       border: none;
-    }
-
-    .link_input {
-      font-size: 1.4rem !important;
     }
 
     .icon {

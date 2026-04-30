@@ -1,7 +1,7 @@
 import { dummyMembers } from "@/data/dummy/chatData";
 import { SearchForm } from "@/lib/components/blocks/search-form";
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Dropdown } from "@/lib/components/elements/dropdown";
 import { Item, ItemList } from "@/lib/components/elements/list-item";
 import { Table } from "@/lib/components/elements/table";

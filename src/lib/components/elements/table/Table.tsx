@@ -2,7 +2,10 @@
 
 import { ComponentProps, ElementType, Fragment, ReactNode, useEffect, useRef, useState } from "react";
 
-import { SortBtn } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
+import DownArrowIcon from "@/lib/svgs/icons/DownArrowIcon";
+import SortIcon from "@/lib/svgs/icons/SortIcon";
+import UpArrowIcon from "@/lib/svgs/icons/UpArrowIcon";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./Table.module.scss";
@@ -115,18 +118,28 @@ const TableCell = <T extends ElementType = "th">({
         "--col-width": width ? `${width}px` : "inherit",
         zIndex: zIndex,
       }}
-      draggable={draggable || sortable}
+      draggable={draggable}
       tabIndex={draggable ? 0 : undefined}
     >
       <div className={classes(as === "th" && styles.hcell_container)}>
         {children}
         {
           sortable ? (
-            <SortBtn
-              sort={sort}
-              onClick={() => onSort?.(colKey)}
+            <Button
+              variant="muted"
               className={styles.sort_btn}
-            />
+              onClick={() => onSort?.(colKey)}
+              aria-pressed={!!sort}
+              aria-sort={sort ? sort === "+" ? "ascending" : "descending" : "none"}
+            >
+              {
+                sort === "+"
+                  ? <DownArrowIcon />
+                  : sort === "-"
+                    ? <UpArrowIcon />
+                    : <SortIcon />
+              }
+            </Button>
           ) : null
         }
       </div>
@@ -222,5 +235,3 @@ Table.Header = TableHeader;
 Table.Cell = TableCell;
 Table.Body = TableBody;
 Table.Footer = TableFooter;
-
-export default Table;

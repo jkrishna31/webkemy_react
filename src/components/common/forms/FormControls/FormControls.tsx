@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { classes } from "@/lib/utils/style";
 
 import styles from "./FormControls.module.scss";

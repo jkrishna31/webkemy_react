@@ -2,7 +2,7 @@
 
 import { ComponentProps, useEffect, useEffectEvent, useState } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { useMediaStream } from "@/lib/hooks/useMediaStream";
 import MicIcon from "@/lib/svgs/icons/MicIcon";
 import { hasDOM } from "@/lib/utils/dom";

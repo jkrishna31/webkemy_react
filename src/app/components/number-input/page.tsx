@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { NumberInput } from "@/lib/components/elements/inputs/NumberInput";
+import { NumberInput } from "@/lib/components/elements/number-input";
 
 import styles from "./page.module.scss";
 

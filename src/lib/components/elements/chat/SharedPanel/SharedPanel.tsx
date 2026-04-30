@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { Avatar } from "@/lib/components/elements/avatar";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
 import { GalleryItem } from "@/lib/components/elements/chat/GalleryItem";
 import { MediaViewer } from "@/lib/components/elements/chat/MediaViewer";

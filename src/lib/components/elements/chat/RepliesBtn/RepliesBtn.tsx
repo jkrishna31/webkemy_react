@@ -1,4 +1,4 @@
-import { Button, ButtonProps } from "@/lib/components/elements/butttons";
+import { Button, ButtonProps } from "@/lib/components/elements/buttton";
 import { Characters } from "@/lib/constants/characters";
 import ReplyIcon from "@/lib/svgs/icons/ReplyIcon";
 import { classes } from "@/lib/utils/style";

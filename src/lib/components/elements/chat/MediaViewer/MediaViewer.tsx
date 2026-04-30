@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import { AudioPlayer } from "@/lib/components/elements/audio-player";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { MediaItem } from "@/lib/components/elements/chat/ChatMedia";
 import { ImageViewer } from "@/lib/components/elements/image-viewer";
 import { Lightbox } from "@/lib/components/elements/lightbox";

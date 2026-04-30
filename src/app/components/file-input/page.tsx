@@ -2,8 +2,8 @@
 
 
 import { PageSetup } from "@/components/managers";
+import { FileInput } from "@/lib/components/elements/file-input";
 import { FilesPreview } from "@/lib/components/elements/files-preview";
-import { FileInput } from "@/lib/components/elements/inputs/FileInput";
 import { useFiles } from "@/lib/hooks/useFiles";
 
 import styles from "./page.module.scss";

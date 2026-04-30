@@ -2,7 +2,7 @@
 
 import { useCallback, useState } from "react";
 
-import { FileMeta } from "@/lib/components/elements/inputs/FileInput";
+import { FileMeta } from "@/lib/components/elements/file-input";
 import { deepClone } from "@/lib/utils/object";
 
 export type ObjPath<T> = T extends object

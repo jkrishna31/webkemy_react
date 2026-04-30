@@ -12,18 +12,15 @@ import { classes } from "@/lib/utils/style";
 
 import styles from "./Scrollable.module.scss";
 
-
 export interface ScrollableProps extends ComponentProps<"div"> {
   vertical?: boolean
   scrollStep?: number
-  rootClass?: string
   withControls?: boolean
 }
 
 export const Scrollable = ({
   children,
   className,
-  rootClass,
   id,
   vertical,
   scrollStep = 100,
@@ -83,16 +80,22 @@ export const Scrollable = ({
 
   return (
     <div
-      className={classes(styles.wrapper, !withControls && styles.hint, rootClass)}
-      style={{
-        "--left-hint": `${hasXScroll[0] ? 4 : 0}rem`,
-        "--right-hint": `${hasXScroll[1] ? 4 : 0}rem`,
-      } as CSSProperties}
+      className={classes(
+        styles.wrapper,
+        !withControls && styles.hint,
+        !withControls && hasXScroll[0] && styles.has_left,
+        !withControls && hasXScroll[1] && styles.has_right,
+        className
+      )}
+    // style={{
+    //   "--left-hint": `${hasXScroll[0] ? 4 : 0}rem`,
+    //   "--right-hint": `${hasXScroll[1] ? 4 : 0}rem`,
+    // } as CSSProperties}
     >
       {
-        (withControls && hasXScroll[0]) ? (
+        !!withControls && (
           <button
-            className={classes(styles.scroll_btn, styles.btn_left, "scroll_btn")}
+            className={classes(styles.scroll_btn, styles.btn_left, hasXScroll[0] && styles.visible, "scroll_btn")}
             onClick={() => performScroll("left")}
             aria-label="Scroll Left"
             title="Scroll Left"
@@ -100,20 +103,20 @@ export const Scrollable = ({
           >
             <ChevronLeftIcon className={styles.scroll_icon} />
           </button>
-        ) : null
+        )
       }
       <div
         {...props}
         id={id}
-        className={classes("scroll_invisible", styles.container, className)}
+        className={classes("scroll_invisible", styles.container)}
         ref={mergeRefs(listRef, ref)}
       >
         {children}
       </div>
       {
-        (withControls && hasXScroll[1]) ? (
+        !!withControls && (
           <button
-            className={classes(styles.scroll_btn, styles.btn_right, "scroll_btn")}
+            className={classes(styles.scroll_btn, styles.btn_right, hasXScroll[1] && styles.visible, "scroll_btn")}
             onClick={() => performScroll("right")}
             aria-label="Scroll Right"
             title="Scroll Right"
@@ -121,7 +124,7 @@ export const Scrollable = ({
           >
             <ChevronRightIcon className={styles.scroll_icon} />
           </button>
-        ) : null
+        )
       }
     </div>
   );

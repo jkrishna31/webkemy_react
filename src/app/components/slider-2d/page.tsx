@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
-import { Slider2D } from "@/lib/components/elements/inputs/Slider2D";
+import { Slider2D } from "@/lib/components/elements/slider-2d";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";

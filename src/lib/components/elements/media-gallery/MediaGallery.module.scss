@@ -22,9 +22,9 @@
     }
 
     .filter_btn svg {
-      width: 1.8rem;
-      height: 1.8rem;
-      stroke-width: .175rem;
+      width: 2rem;
+      height: 2rem;
+      // stroke-width: .175rem;
     }
 
     .more_btn svg {
@@ -34,10 +34,13 @@
   }
 
   .filters {
-    display: flex;
-    align-items: center;
-    gap: .4rem;
     margin-bottom: 1.6rem;
+
+    &>div {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
 
     .filter_trigger {
       padding-block: .6rem;

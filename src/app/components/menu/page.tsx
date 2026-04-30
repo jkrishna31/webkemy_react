@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import { Item, ItemGroup } from "@/lib/components/elements/list-item";
 import { Menu } from "@/lib/components/elements/menu";
 import CircleIcon from "@/lib/svgs/icons/CircleIcon";

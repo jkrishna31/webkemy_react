@@ -1,6 +1,6 @@
 import { MouseEvent } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import AddEmojiIcon from "@/lib/svgs/icons/AddEmojiIcon";
 
 import styles from "./Reactions.module.scss";

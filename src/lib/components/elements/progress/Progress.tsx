@@ -1,8 +1,8 @@
 import { ComponentProps, CSSProperties } from "react";
 
-import { CircularProgress } from "@/lib/components/elements/progress";
 import { classes } from "@/lib/utils/style";
 
+import { CircularProgress } from "./CircularProgress";
 import styles from "./Progress.module.scss";
 
 export interface ProgressProps extends ComponentProps<"progress"> {

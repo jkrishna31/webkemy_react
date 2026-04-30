@@ -26,17 +26,13 @@ const page = () => {
         <SkeletonLoader<"p">
           as="p"
           loading
-          style={{ width: "fit-content", height: "fit-content", borderRadius: "var(--br-pill)", padding: ".2rem" }}
-        >
-          {"John Doe (Developer)"}
-        </SkeletonLoader>
+          style={{ width: "140px", height: "22px", borderRadius: "var(--br-pill)", padding: ".2rem" }}
+        />
         <SkeletonLoader<"p">
           as="p"
           loading
-          style={{ height: "fit-content", borderRadius: ".4rem", padding: ".2rem" }}
-        >
-          {"Lorem ipsum dolor sit amet, inventore."}
-        </SkeletonLoader>
+          style={{ width: "100%", minWidth: "260px", height: "22px", borderRadius: ".4rem", padding: ".2rem" }}
+        />
       </div>
     </main>
   );

@@ -1,5 +1,5 @@
-import { Button } from "@/lib/components/elements/butttons";
-import { Slider } from "@/lib/components/elements/inputs/Slider";
+import { Button } from "@/lib/components/elements/buttton";
+import { Slider } from "@/lib/components/elements/slider";
 import MinusIcon from "@/lib/svgs/icons/MinusIcon";
 import PlusIcon from "@/lib/svgs/icons/PlusIcon";
 

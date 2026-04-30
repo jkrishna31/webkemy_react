@@ -20,7 +20,7 @@ export type ChipProps<T extends ElementType> = {
 
 export const Chip = <T extends ElementType = "div">({
   as = "div",
-  onRemove, onAdd, label, color, variant = "outlined", intensity,
+  onRemove, onAdd, label, color = "gray", variant = "outlined", intensity,
   children, className,
   ...props
 }: ChipProps<T>) => {

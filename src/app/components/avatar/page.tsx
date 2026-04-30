@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { Avatar, AvatarList } from "@/lib/components/elements/avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 
 import styles from "./page.module.scss";
 
@@ -10,7 +10,7 @@ const page = () => {
 
       <Avatar src="https://images.unsplash.com/photo-1527203561188-dae1bc1a417f?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NzR8fHByb2ZpbGV8ZW58MHx8MHx8fDA%3D" alt="avatar" />
 
-      <AvatarList
+      <Avatar.List
         avatars={[
           {
             id: "1",

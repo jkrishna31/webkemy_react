@@ -5,12 +5,12 @@ import { useEffect, useEffectEvent, useRef, useState } from "react";
 
 import { PageSetup } from "@/components/managers";
 import { tableData } from "@/data/dummy/tableData";
-import { Avatar, AvatarList } from "@/lib/components/elements/avatar";
+import { Avatar } from "@/lib/components/elements/avatar";
 import { Badge } from "@/lib/components/elements/badge";
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
+import { Checkbox } from "@/lib/components/elements/checkbox";
 import { Chip } from "@/lib/components/elements/chip";
 import { CollapsiblePanel } from "@/lib/components/elements/collapsible-panel";
-import { Checkbox } from "@/lib/components/elements/inputs/Checkbox";
 import { SkeletonLoader } from "@/lib/components/elements/loaders";
 import { Rate } from "@/lib/components/elements/rate";
 import { Table } from "@/lib/components/elements/table";
@@ -308,7 +308,7 @@ const Page = () => {
     },
     peers: (rowData: any) => {
       return rowData.peers?.length ? (
-        <AvatarList
+        <Avatar.List
           expandable={false}
           avatars={rowData.peers?.map((avatar: any) => (
             {

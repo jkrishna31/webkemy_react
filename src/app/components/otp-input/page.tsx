@@ -1,5 +1,5 @@
 import { PageSetup } from "@/components/managers";
-import { OtpInput } from "@/lib/components/elements/inputs/OtpInput";
+import { OtpInput } from "@/lib/components/elements/otp-input";
 
 const Page = () => {
   return (

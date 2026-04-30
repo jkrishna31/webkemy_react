@@ -4,11 +4,11 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { AuthProviders } from "@/lib/components/blocks/auth-form";
-import { Button } from "@/lib/components/elements/butttons";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { PasswordInput } from "@/lib/components/elements/inputs/PasswordInput";
-import { Switch } from "@/lib/components/elements/inputs/Switch";
+import { Button } from "@/lib/components/elements/buttton";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { PasswordInput } from "@/lib/components/elements/password-input";
+import { Switch } from "@/lib/components/elements/switch";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./AuthForm.module.scss";

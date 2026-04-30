@@ -1,6 +1,6 @@
 import { ComponentProps } from "react";
 
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import CrossIcon from "@/lib/svgs/icons/CrossIcon";
 import QuoteIcon from "@/lib/svgs/icons/QuoteIcon";
 import { classes } from "@/lib/utils/style";

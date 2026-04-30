@@ -2,7 +2,7 @@
 
 import { ComponentProps, ReactNode, useEffect, useEffectEvent, useState } from "react";
 
-import { Button, Variant } from "@/lib/components/elements/butttons";
+import { Button, Variant } from "@/lib/components/elements/buttton";
 import { Popover } from "@/lib/components/elements/popover";
 import { useElementRef } from "@/lib/hooks/useElementRef";
 import ExpandVerticalIcon from "@/lib/svgs/icons/ExpandVerticalIcon";

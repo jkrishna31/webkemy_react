@@ -1,8 +1,7 @@
 import { PageSetup } from "@/components/managers";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputFieldWrapper } from "@/lib/components/elements/inputs/InputFieldWrapper";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { Radio } from "@/lib/components/elements/inputs/Radio";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { Radio } from "@/lib/components/elements/radio";
 import { Text } from "@/lib/components/elements/text";
 
 import styles from "./page.module.scss";
@@ -14,22 +13,22 @@ const page = () => {
 
       <InputItem className={styles.wrapper}>
         <Text<"label"> as="label" htmlFor="input_1">{"Label 1"}</Text>
-        <InputFieldWrapper>
+        <InputItem.FieldWrapper>
           <Input id="input_1" />
-        </InputFieldWrapper>
+        </InputItem.FieldWrapper>
       </InputItem>
 
       <InputItem inline className={styles.wrapper}>
         <Text<"label"> as="label" htmlFor="input_2" inline>{"Label 2"}</Text>
-        <InputFieldWrapper>
+        <InputItem.FieldWrapper>
           <Input id="input_2" />
-        </InputFieldWrapper>
+        </InputItem.FieldWrapper>
       </InputItem>
 
       <InputItem inline className={styles.wrapper}>
-        <InputFieldWrapper>
+        <InputItem.FieldWrapper>
           <Input aria-label="input_3" />
-        </InputFieldWrapper>
+        </InputItem.FieldWrapper>
         <Text<"label"> as="label" inline>{"Label 3"}</Text>
       </InputItem>
 

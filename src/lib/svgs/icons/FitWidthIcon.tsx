@@ -1,0 +1,10 @@
+import { SVGProps } from "@/lib/types/prop";
+
+const FitWidthIcon = (props: SVGProps) => {
+  return (
+    // <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" {...props}><path d="M3 12h7L7 9m0 6l3-3m11 0h-7l3-3m0 6l-3-3M9 6V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1M9 18v1a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-1" /></svg>
+  );
+};
+
+export default FitWidthIcon;

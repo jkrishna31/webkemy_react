@@ -6,7 +6,7 @@ export interface KanbanTableProps extends ComponentProps<"table"> {
 
 }
 
-const KanbanTable = ({
+export const KanbanTable = ({
   className, children,
   ...restProps
 }: KanbanTableProps) => {
@@ -27,5 +27,3 @@ const KanbanTable = ({
     </table>
   );
 };
-
-export default KanbanTable;

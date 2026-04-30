@@ -8,7 +8,7 @@ const Page = () => {
     <main className={styles.main}>
       <PageSetup pageKey="scroll-controls" />
 
-      <Scrollable rootClass={styles.list} className={styles.scrollable}>
+      <Scrollable className={styles.scrollable}>
         {
           Array.from({ length: 15 }).map((_, idx) => (
             <div className={styles.item} key={idx}>{idx + 1}</div>

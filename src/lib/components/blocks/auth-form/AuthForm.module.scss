@@ -24,12 +24,15 @@
   }
 
   .info_btn {
-    width: 2rem;
-    height: 2rem;
     color: var(--fg-t);
     margin-bottom: .7rem;
     margin-left: .5rem;
     stroke-width: .2rem;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+    }
 
     &:hover {
       color: var(--fg-p-alt);

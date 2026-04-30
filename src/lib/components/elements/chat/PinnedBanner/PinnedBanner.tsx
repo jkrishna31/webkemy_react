@@ -1,4 +1,4 @@
-import { Button } from "@/lib/components/elements/butttons";
+import { Button } from "@/lib/components/elements/buttton";
 import ChevronRightIcon from "@/lib/svgs/icons/ChevronRightIcon";
 import PinIcon from "@/lib/svgs/icons/PinIcon";
 

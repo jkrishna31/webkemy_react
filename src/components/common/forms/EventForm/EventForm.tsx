@@ -2,15 +2,15 @@
 
 import { ComponentProps, useState } from "react";
 
-import { DateInput } from "@/lib/components/elements/inputs/DateInput";
-import { Input } from "@/lib/components/elements/inputs/Input";
-import { InputItem } from "@/lib/components/elements/inputs/InputItem";
-import { Select } from "@/lib/components/elements/inputs/Select";
-import { Switch } from "@/lib/components/elements/inputs/Switch";
-import { TagsInput } from "@/lib/components/elements/inputs/TagsInput";
-import { TextArea } from "@/lib/components/elements/inputs/TextArea";
-import { TimeInput } from "@/lib/components/elements/inputs/TimeInput";
+import { DateInput } from "@/lib/components/elements/date-input";
+import { Input } from "@/lib/components/elements/input";
+import { InputItem } from "@/lib/components/elements/input-item";
+import { Select } from "@/lib/components/elements/select";
+import { Switch } from "@/lib/components/elements/switch";
+import { TagsInput } from "@/lib/components/elements/tags-input";
 import { Text } from "@/lib/components/elements/text";
+import { TextArea } from "@/lib/components/elements/textarea";
+import { TimeInput } from "@/lib/components/elements/time-input";
 import { weekDays, weekDaysOrder } from "@/lib/data/datetime";
 import { classes } from "@/lib/utils/style";
 

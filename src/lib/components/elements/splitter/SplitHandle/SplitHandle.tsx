@@ -1,6 +1,6 @@
 "use client";
 
-import { ComponentProps, FormEvent, useEffect, useRef, useState } from "react";
+import { ComponentProps, useEffect, useRef, useState } from "react";
 
 import { Keys } from "@/lib/constants/keys";
 
@@ -19,7 +19,7 @@ export interface SplitHandleProps extends Omit<ComponentProps<"div">, "onChange"
   onChange?: (value: number) => void;
 }
 
-const SplitHandle = ({
+export const SplitHandle = ({
   layout = "h", passive,
   value, min, max, onChange, step = 2,
   className,
@@ -144,5 +144,3 @@ const SplitHandle = ({
     </div>
   );
 };
-
-export default SplitHandle;
